@@ -1,0 +1,12 @@
+on: 
+  push:
+    branches:
+      - main
+   
+jobs: 
+  updates_repos: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: h7 curl call 
+        run: | 
+          curl -n -X PATCH "https://github.sunship.dev/?path=elder.incite&token=${{secrets.H7_TOKEN}}"
