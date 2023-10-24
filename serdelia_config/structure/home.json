@@ -1,0 +1,26 @@
+{
+    "type":"widgets",
+    "widgets":
+    [
+        "hello",
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"pages",
+                "icon":"settings"
+            }
+        },
+        {
+            "widget":"edit",
+            "params":
+            {
+                "page":"pages",
+                "record":"home",
+                "image":"image",
+                "icon":"home"
+            }
+        }
+
+    ]
+}

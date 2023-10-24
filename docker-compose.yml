@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+    deploy:
+        container_name: uhomvc8-php-apache-01
+        environment:
+            - DOMAIN
+            - PAT
+            - SQL_HOST
+            - SQL_USER
+            - SQL_PASS
+            - SQL_BASE
+            - CLIENT_PASSWORD_SALT
+            - CLIENT_KEY1
+            - CLIENT_KEY2
+            - SMTP_SERVER
+            - SMTP_PORT
+            - SMTP_SECURE
+            - SMTP_LOGIN
+            - SMTP_PASS
+            - SMTP_NAME
+            - S3_HOST
+            - S3_FOLDER
+            - S3_KEY
+            - S3_SECRET
+            - S3_BUCKET
+            - S3_REGION
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                PAT: $PAT
+        ports:
+            - 80:80

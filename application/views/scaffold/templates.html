@@ -1,0 +1,11 @@
+{% set templates = [
+    'lightbox',
+    'player-captions',
+    'player'
+] %}
+
+{% for file in templates %}
+    <script type="text/twig" id="tmpl-{{file}}">
+    {{- source('templates/' ~ file ~ '.html') -}}
+    </script>
+{% endfor %}

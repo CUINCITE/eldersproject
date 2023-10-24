@@ -1,0 +1,20 @@
+<If "%{REMOTE_ADDR} != '127.0.0.1' && %{REMOTE_ADDR} != '::1' && %{HTTP_HOST} != 'ooh.sunship.dev'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
+<If "%{HTTP_HOST} == 'ooh.sunship.dev'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /home/huncwot7/domains/ooh.sunship.dev/public_html/.htpasswd
+Require valid-user
+AddHandler application/x-httpd-php81 php
+</If>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)? index.php?page=$1 [QSA]
+
+DirectoryIndex index.php index.html

@@ -1,0 +1,67 @@
+{
+    "table": "pages",
+    "label_PL":
+    {
+        "page":"Strony",
+        "edit":"{% if not title %}Nowa strona{% else %}{{title}}{% endif %}"
+    },
+    "label_EN":
+    {
+        "page":"Pages",
+        "edit":"{% if not title %}New Page{% else %}{{title}}{% endif %}"
+    },
+    "order": "title_PL",
+    "temp-back":
+    {
+        "edit":"home"
+    },
+    "buttons_edit":
+    [
+        {"label_PL":"Moduły","label_EN":"Modules","type":"page","icon":"reorder","page":"pages_modules,%id%"},
+        {"type":"plugin","plugin":"preview","params":{"url":"/{{url}}?preview=true"  }}
+    ],
+
+    "fields" :
+    [
+        { "label_PL" : "Tytuł","label_EN":"Title", "field": "title:lang", "list": true,"hr":true  ,
+            "help":{
+                "text_PL":"W tym miejscu można ustawić metadane, które będą widoczne w wyniakch Google czy Facebooka.<br>Kliknij <em>Moduły</em> aby treść edytować stronę.",
+                "text_EN":"Here you can set metadata visible when page is shared on social media or visible in Google results.<br>Click <em>Modules</em> to edit page content.",
+                "size":"full"
+            }
+        },
+        { "label_PL":"Opis","label_EN" : "Description", "field": "description:lang","type":"text"},
+        { "label" : "Id", "field": "slug","aauth":"scaffold","on_demand":true  },
+        { "label" : "Url", "field": "url", "list": true,"aauth":"scaffold","on_demand":true },
+        
+        {   "field": "uid","type":"uid","list":"read"    },
+        {   "label_PL": "Obrazek do sharowania (1200x630)",
+            "label_EN": "Sharing image (1200x630)",
+            "hr":true,
+            "type": "image",
+            "field":"image",
+            "folder": "/public/upload/og",
+            "folder_preview": "thumb",
+            
+            "filename": "%uid%",
+            "images":
+            [
+              {  "folder" : "original","label":"Original image" },
+              {  "folder" : "medium","label":"Resized image","width":1200,"height":630,"crop":true }
+              
+            ]
+        },     
+        
+        {"label":"Type","field":"type","type":"select","hr":true,"default":"Page",
+            "auth":"structure",
+            "options":
+            [
+                {"value":"Page"},
+                {"value":"Home"},
+                {"value":"LightboxPage"}
+            ]
+        },
+
+        { "label" : "Publish", "field": "active", "type":"boolean", "list": "edit","hr":true,"auth":"structure" }
+    ]
+}

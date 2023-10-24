@@ -1,0 +1,58 @@
+{
+    "table": "client_users",
+    "label_PL":"Użytkownicy",
+    "label_EN":"Users",
+    "order":"!date",
+    "model":
+    {
+                "fields":["name","surname","email"],
+                "label":"{{name}} {{surname}} {% if email %}({{email}}){% endif %}"
+    },
+    "buttons_edit":
+    [
+        {"type":"plugin","plugin":"client_users_anonimize","hhidden":true }
+    ],
+
+    "fields" :
+    [
+    	{ "field":"date","type":"datetime","label_PL":"Data dołączenia","label_EN":"Registration date","list":true,"default":"{{now}}"},
+        { "field":"surname","label_PL":"Nazwisko","label_EN":"Last name","list":true,"hash":"cc8","search":true},
+        { "field":"name","label_PL":"Imię","label_EN":"First name","list":true,"hash":"x#d","search":true},
+        { "field":"email","label":"E-mail","list":true,"hash":"d9d","search":true},
+        { "field":"lang","label_PL":"Język","label_EN":"Language","list":true,"type":"select"},
+        {"label":"Newsletter","field":"newsletter","type":"boolean"},
+        {"field":"salt","hidden":true},
+        
+        {"field":"uid","type":"uid","list":"read"},
+        {   
+            "label_PL": "Zdjęcie",
+            "label_EN": "Portrait",
+            "type": "image",
+            "field":"image",
+            "folder": "/public/upload/users",
+            "list":{"xposition_after":"","width":50,"height":50},
+            "images":
+            [
+                {  "folder" : "thumb",   "width":180, "height":180,"cut":true,"label_PL":"Miniatura","label_EN":"Thumbnail" }
+            ]
+        },
+
+        {"field":"google_id","label":"Google id","edit":false},
+        {"field":"facebook_id","label":"Facebook id","edit":false},
+        {"field":"epuap_id","hash":"s7z","label":"Epuap ID","edit":false},
+
+        { "field":"gdpr_expiration_date","type":"date","label_PL":"Data końcowa zgody RODO","label_EN":"RODO expiration date"},
+        { "field":"status","label":"Status","type":"select","hr":true,"edit":false,
+            "options":
+            [
+                {"label":"Zgłoszony","value":"submitted"},
+                {"label":"Anulowany","value":"disabled"},
+                {"label":"Aktywny","value":"confirmed"},
+                {"label":"Zanonimizowany","value":"anonimized"}
+            ],
+            "list":{"html":"<span class='badge badge-{% if value=='confirmed' %}success{% else %}secondary{% endif %}'>{{label}}</span>"}
+        }
+        
+        
+    ]
+}

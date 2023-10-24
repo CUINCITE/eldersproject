@@ -1,0 +1,8 @@
+<article {% if type=='Home' %}data-page="Page" data-home{% else %}data-page="{{type}}"{% endif %} data-title="{{title}}" data-alternate='{{langs|json_encode|raw}}' {% if serdelia_page_id %}data-serdelia-page-id="{{serdelia_page_id}}"{% endif %}>
+<h1 class="sr-only">{{title}}</h1>
+  {% for m in modules %}
+  {% include 'modules/m_'~m.type.slug~'.html' with m %}
+{% endfor %}
+</article>
+<!-- offscreen lightbox data -->
+{% if lightbox %}<aside data-lightbox-json='{{lightbox|json_encode}}'></aside>{% endif %}

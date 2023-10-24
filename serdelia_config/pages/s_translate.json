@@ -1,0 +1,10 @@
+{
+    "table": "s_translate",
+    "order": "slug",
+    "fields" :
+    [
+        { "label" : "Slug", "field": "slug", "xtype": "order", "list": true },
+        { "label" : "PL", "field": "label_PL", "list": true },
+        { "label" : "EN", "field": "label_EN", "list": true }
+    ]
+}

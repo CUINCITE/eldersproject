@@ -1,0 +1,19 @@
+{% if not is_ajax %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+{% endif %}
+
+<article>
+    {% for module in modules %}
+        {% include 'modules/'~module.type~'.html' with module %}
+    {% endfor %}
+</article>
+
+{% if not is_ajax %}
+    </body>
+    </html>
+{% endif %}

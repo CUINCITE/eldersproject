@@ -1,0 +1,16 @@
+{
+    "fields" :
+    [
+
+      {   
+         "field":"label:lang","label":"Nagłówek"
+      },
+      {   
+           "field":"text:lang","type":"html","label":"Tekst"
+        }
+
+        
+
+
+   ]
+}

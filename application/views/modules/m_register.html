@@ -1,0 +1,18 @@
+<section class="jumbotron text-center">
+    <div class="container">
+      
+        <h2  class="text-center">Rejestracja</h2><br>
+        <form method="POST" action="/pl/api/register" class="form-signin">
+        	<input name="token" type="hidden" value="">
+          <input type="text" name="register_name" class="form-control first" placeholder="Imię" autofocus required>
+          <input type="text" name="register_surname" class="form-control first" placeholder="Nazwisko" autofocus required>
+          <input type="text" name="register_login" class="form-control first" placeholder="Twój login" autofocus required>
+        	<input type="password" name="register_password" class="form-control last" placeholder="Hasło" required>
+            <input type="password" name="register_password_confirm" class="form-control last" placeholder="Powtórz hasło" required>
+        <button name="login_submit" class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj się</button>
+    </form>
+    <br><br>
+    <p>Masz juz konto? <a href="/pl/login">Zaloguj się</a></p>
+
+    </div>
+  </section>

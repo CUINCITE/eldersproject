@@ -1,0 +1,25 @@
+<section class="jumbotron text-center">
+    <div class="container">
+
+        <h2 class="text-center">Profil</h2><br>
+        <form method="POST" action="/pl/api/profile" class="form-signin">
+            <input name="token" type="hidden" value="">
+            <input type="text" name="profile_name" class="form-control first" value="{{user.name}}" placeholder="Imię" autofocus required>
+            <input type="text" name="profile_surname" class="form-control first"  value="{{user.surname}}" placeholder="Nazwisko" autofocus
+                required>
+            <button name="login_submit" class="btn btn-lg btn-primary btn-block" type="submit">Aktualizuj dane</button>
+        </form>
+        <br><br><br>
+        <h2 class="text-center">Zmiana hasła</h2><br>
+        <form method="POST" action="/pl/api/password_change" class="form-signin">
+            <input name="token" type="hidden" value="">
+            <input type="password" name="profile_password" class="form-control last" placeholder="Hasło aktualne" required>
+            <input type="password" name="profile_password_new" class="form-control last" placeholder="Nowe hasło" required>
+            <input type="password" name="profile_password_new_confirm" class="form-control last"
+                placeholder="Powtórz nowe hasło" required>
+            <button name="login_submit" class="btn btn-lg btn-primary btn-block" type="submit">Zarejestruj się</button>
+        </form>
+
+
+    </div>
+</section>

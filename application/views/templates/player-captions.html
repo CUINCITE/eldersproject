@@ -1,0 +1,6 @@
+{% if tracks %}
+<li class="cc__item is-active"><span>Off</span></li>
+{% for track in tracks %}
+<li class="cc__item" data-index="{{loop.index0}}"><span>{{track.label}}</span></li>
+{% endfor %}
+{% endif %}

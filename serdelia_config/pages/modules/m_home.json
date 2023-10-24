@@ -1,0 +1,24 @@
+{
+    "fields" :
+    [
+
+        {   
+            "tab_PL":"Zdjęcie",
+            "tab_EN":"Image",
+            "type": "image",
+            "field":"image",
+            "folder": "/public/upload/modules",
+            "images":
+            [
+                {  "folder" : "thumb",   "width":320, "height":180,"label":"Thumbnail" },
+                {  "folder" : "desktop", "width":1280,"height":800,"label":"Desktop","retina":true},
+                {  "folder" : "hd", "width":1920,"height":1200,"label":"HD","retina":true},
+                {  "folder" : "mobile", "width":375,"height":768,"label":"Mobile","retina":true,"cropp":true}
+            ]
+        }
+
+        
+
+
+   ]
+}

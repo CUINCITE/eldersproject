@@ -1,0 +1,9 @@
+{
+    "title": "Lorem ipsum dolor sit amet",
+    "modules": [
+      {
+        "type": "text",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
+    ]
+  }

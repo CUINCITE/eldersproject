@@ -1,0 +1,27 @@
+<meta charset="utf-8">    
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{head.title}}</title>
+<meta name="description" content="{{head.description}}">
+<meta http-equiv=”content-language” content="{{lang}}">
+
+<meta property="og:description" content="{{head.description}}">
+<meta property="og:title" content="{{head.title}}">
+{% if head.image and head.image.width %}
+<meta property="og:image" content="{{head.http}}{{head.image.src}}">
+<meta property="og:image:width" content="{{head.image.width}}" />
+<meta property="og:image:height" content="{{head.image.height}}" />
+{% elseif head.image  %}
+<meta property="og:image" content="{{head.image.src}}">
+{% endif %}
+<meta property="og:url" content="{{head.http}}{{head.url}}">
+<meta property="og:type" content="website" />
+
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="{{head.title}}" />
+<meta property="twitter:description" content="{{head.description}}" />
+<meta property="twitter:image" content="{{head.http}}{{head.image.src}}" />
+<meta property="twitter:url" content="{{head.http}}{{head.url}}" />
+
+<meta property="fb:app_id" content="266818357002385" />
+<!-- <meta property="fb:app_id" content="{{head.fb_app_id}}" />     -->

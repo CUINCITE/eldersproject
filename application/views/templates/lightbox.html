@@ -1,0 +1,88 @@
+<div class="lightbox__wrap">
+    <ul class="lightbox__list js-list">
+        {% spaceless %}
+
+
+        {% for item in items %}
+        <li class="lightbox__item{% if item.vimeo or item.video %} lightbox__item--video{% endif %} js-item" data-lightbox-path="{{item.url}}">
+
+            {% set type = item.vimeo or item.video ? 'video' : item.audio ? 'audio' : item.image ? 'image' : '' %}
+            <div class="lightbox__share" data-component="Share">
+                <button class="button button--square button--small js-share-btn"><span class="sr-only">share</span><svg class="sprite-share"><use xlink:href="#sprite-share"></use></svg></button>
+                <div class="share__wrap js-share-wrap">
+                    <div class="share__list js-share-list">
+                        <a class="share__link" href="{{item.share.url_facebook}}" target="_blank" data-share="facebook"><span class="sr-only">share on facebook</span><svg class="sprite-facebook"><use xlink:href="#sprite-facebook"></use></svg></a><!--
+                        --><a class="share__link" href="{{item.share.url_twitter}}" data-share="twitter"><span class="sr-only">share on twitter</span><svg class="sprite-twitter"><use xlink:href="#sprite-twitter"></use></svg></a><!--
+                        --><a class="share__link" href="{{item.share.url_pinterest}}" data-share="pinterest"><span class="sr-only">share on pinterest</span><svg class="sprite-pinterest"><use xlink:href="#sprite-pinterest"></use></svg></a>
+                    </div>
+                </div>
+            </div>
+            <figure class="lightbox__{{type}}">
+
+                {% if item.vimeo %}
+                <div class="player player--vimeo" data-component="VimeoCustom" data-options='{{ item.vimeo|json_encode() }}'></div>
+                {% endif %}
+
+
+                {% if item.video %}
+                <div class="player player--video" data-component="Video" data-options='{{ item.video|json_encode() }}'>
+                    {% if item.instant %}
+                    <video playsinline src="{{ item.video.src }}" poster="{{ item.video.poster }}" preload="none" controls></video>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+
+                {% if item.audio %}
+                <div class="player player--audio" data-component="Audio" data-options='{{ item.audio|json_encode() }}'>
+                    <audio src="{{ item.audio.src }}"></audio>
+                </div>
+                {% endif %}
+
+
+                {% if item.image %}
+                <img data-src="{{ item.image.src }}" alt="" {% if item.image.width %} width="{{item.image.width}}" height="{{item.image.height}}"{% endif %}{% if item.image.big %} data-big="{{item.image.big.src}}" data-big-height="{{item.image.big.height}}" data-big-width="{{item.image.big.width}}" data-big-scale="{{item.image.big.scale?:1.2}}"{% endif %}{% if item.image.deepzoom %} data-deepzoom="{{item.image.deepzoom}}"{% endif %}>
+                {% endif %}
+
+
+                {% if item.title or item.subtitle %}<figcaption>
+                    <div class="caption__head">
+                        <div class="caption__title">{{item.title}}</div>
+                        <div class="caption__subtitle">{{item.subtitle}}</div>
+                        {% if item.text %}
+                            <div class="caption__toggle js-caption-toggle"><button><i class="icon-arr"></i></button></div>
+                        {% endif %}
+                    </div>
+                    {% if item.text %}
+                    <div class="caption__text">
+                        <hr>
+                        {{item.text}}
+                    </div>
+                    {% endif %}
+                </figcaption>{% endif %}
+
+            </figure>
+            <div class="lightbox__label">
+                <p>{{item.label}}</p>
+            </div> 
+        </li>
+        {% endfor %}
+
+
+        {% endspaceless %}
+    </ul>
+</div>
+
+
+
+{% if items|length > 1 %}<div class="lightbox__count js-count">00/00</div>{% endif %}
+<div class="lightbox__caption caption js-caption"></div>
+
+<button class="lightbox__prev button button--square button--small js-prev is-disabled"><i class="icon-prev"></i></button>
+<button class="lightbox__next button button--square button--small js-next is-disabled"><i class="icon-next"></i></button>
+
+<a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
+    <span class="button button--square button--white button--small">
+        <i class="icon-close"></i>
+    </span>
+</a>

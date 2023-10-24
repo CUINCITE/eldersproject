@@ -1,0 +1,31 @@
+{
+    "table": "pages",
+    "fields" :
+    [
+        { "label" : "Identyfikator", "field": "slug", "list": true },
+        { "label" : "Url", "field": "url", "list": true },
+        { "label" : "Tytuł (dla google)", "field": "title:lang", "list": true },
+        { "label" : "Opis (dla google)", "field": "description:lang","type":"text" },
+        
+        {   "field": "uid","type":"uid","list":"read"    },
+        {"label":"Typ","field":"type","type":"select","hr":true},
+      
+        {   "label": "Sharing image","hr":true,
+          "type": "image",
+          "field":"image",
+          "folder": "/public/upload/og",
+          "folder_preview": "thumb",
+          
+          "filename": "%uid%",
+          "images":
+          [
+            {  "folder" : "original","label":"original" },
+            {  "folder" : "medium","label":"sharing","width":1200,"height":630,"crop":true }
+            
+          ]
+      },     
+          
+
+        { "label" : "active", "field": "active", "type":"boolean", "list": "edit" }
+    ]
+}

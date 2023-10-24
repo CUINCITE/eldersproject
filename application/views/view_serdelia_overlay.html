@@ -1,0 +1,23 @@
+{% if serdelia_id and serdelia_type=='standard' %}
+<div class="serdelia-module-overlay {% if loop.index is divisible by (2) %}serdelia-module-overlay-invert{% endif %}" data-serdelia-id="{{serdelia_id}}" data-serdelia-model="{{serdelia_model}}">
+    {% if not active %}
+        <div class="serdelia-module-overlay-bg-inactive"></div>
+        <div class="serdelia-module-overlay-inactive-buttons"><span>Moduł nieaktywny</span></div>
+    {% endif %}
+    <div class="serdelia-module-overlay-hover">        
+        {% if active %}<div class="serdelia-module-overlay-bg"></div>{% endif %}
+        <div class="serdelia-module-overlay-buttons {% if not active %} serdelia-module-overlay-buttons-inactive{% endif %}">
+            <span class="serdelia-module-edit">{% if lang=='pl' %}Edycja{% else %}Edit{% endif %}</span>
+            {% if active %}<span class="serdelia-module-active serdelia-module-deactive">{% if lang=='pl' %}Dezaktywuj{% else %}Deactivate{% endif %}</span>
+            {% else %}<span class="serdelia-module-active">{% if lang=='pl' %}Aktywuj{% else %}Active{% endif %}</span>{% endif %}
+            <span class="serdelia-module-remove">{% if active %}Remove{% else %}Usuń{% endif %}</span>
+        </div>
+    </div>
+</div>
+{% elseif serdelia_id and serdelia_type=='pro' %}
+<div class="serdelia-module-overlay {% if loop.index is divisible by (2) %}serdelia-module-overlay-invert{% endif %} serdelia-module-edit-pro serdelia-pro-wrapper-narrow" {% if serdelia_pro_type!='page' %}data-serdelia-id="{{serdelia_id}}"{% endif %} data-serdelia-model="{{serdelia_model}}">
+    <div class="serdelia-module-overlay-hover">        
+        <div class="serdelia-module-overlay-bg"></div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,124 @@
+{
+    "table": "pages_modules",
+    "order": "level",
+    "label": "Moduły strony",
+    "backUrl": "edit/pages/%1%",
+    "filters": {
+        "parent": "%1%"
+    },
+    "plugins_record": [
+        {
+            "label": "Podgląd",
+            "icon": "eye-open",
+            "plugin": "preview",
+            "type": "serdelia",
+            "params": {
+                "url": "/pl/%url%?preview=true"
+            }
+        }
+    ],
+    "fields": [
+        {
+            "field": "level",
+            "type": "order",
+            "list": true
+        },
+        {
+            "label": "Opis modułu",
+            "list": true,
+            "field": "description"
+        },
+        {"field":"sublabel"},
+        {"field":"url"},
+        {
+            "label": "Typ",
+            "field": "type",
+            "list": true,
+            "type": "select",
+            "source": {
+                "table": "s_pages_modules",
+                "fields": [
+                    "label",
+                    "slug"
+                ],
+                "label": "%label%"
+            }
+        },
+        {
+            "label": "Active",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit"
+        },
+        {
+            "field": "label:lang"
+        },
+        {
+            "field": "text:lang"
+        },
+        {
+            "field": "params"
+        },
+        {
+            "label": "Zdjęcie",
+            "type": "image",
+            "field": "image",
+            "folder": "/public/upload/modules",
+            "list": true,
+            "images": [
+                {
+                    "folder": "mobile",
+                    "width": 375,
+                    "height": 375,
+                    "label": "Mobile",
+                    "retina": true
+                },
+                {
+                    "folder": "desktop",
+                    "width": 820,
+                    "height": 532,
+                    "label": "Desktop",
+                    "retina": true
+                }
+            ]
+        },
+        {   
+            "label": "Image",
+            "type": "image",
+            "field":"image",
+            "folder": "/public/upload/modules",
+            "images":
+            [
+                {  "folder" : "desktop", "width":1280,"height":800,"label":"Desktop","retina":true},
+                {  "folder" : "hd", "width":1920,"height":1200,"label":"HD","retina":true},
+                {  "folder" : "mobile", "width":375,"height":1024,"label":"Mobile","retina":true,"crop":true}
+            ]
+        },
+
+         {   
+            "label": "Video w tle",
+            "type": "video",
+            "field":"video",
+            "folder": "/public/upload/modules/video",
+            "list":true,
+            "images":
+            [
+                {  "folder" : "desktop", "width":1280,"height":800,"label":"Desktop"},
+                {  "folder" : "mobile", "width":375,"height":375,"label":"Mobile","retina":true}                
+            ]
+        }        ,
+
+        {   
+            "label": "Mobile MP4 Video",
+            "type": "video",
+            "field":"video_mobile",
+            "folder": "/public/upload/modules/video_mobile",
+            "list":true,
+            "images":
+            [
+                {  "folder" : "mobile", "width":375,"height":375,"label":"Mobile","retina":true}                
+            ]
+        } 
+
+    ]
+}
