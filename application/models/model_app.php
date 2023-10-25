@@ -22,6 +22,7 @@ class model_app extends _uho_model
     //============================================================================================
     public function init()
     {
+        
         if ($this->checkSerdeliaEdit()) {
             $preview = _uho_fx::getGet('preview');
             $this->serdelia_edit = ($preview == 'serdelia_edit');
@@ -55,9 +56,7 @@ class model_app extends _uho_model
 
             // uncomment for multi-lang sites
             $this->dict['lang'] = $this->lang;
-            $this->dict['translate'] = $this->dictLoad('s_translate');
-            foreach ($this->dict['translate'] as $k => $v)
-                $this->dict['translate'][$k] = $v['label'];
+            
 
 
             $_SESSION['dict'] = $this->dict;
@@ -116,19 +115,7 @@ class model_app extends _uho_model
         if (isset($r[$key])) $r = $r[$key];
         return $r;
     }
-    //============================================================================================
-    public function getTranslate()
-    {
-        return $_SESSION['dict']['translate'];
-    }
-    //============================================================================================
-    public function getTranslated($key, $szewce = true)
-    {
-        $s = @$_SESSION['dict']['translate'][$key];
-        if ($s && $this->lang == 'pl' && $szewce) $s = _uho_fx::szewce($s);
-        elseif (!$s) $s=$key;
-        return $s;
-    }
+
     //============================================================================================
     public function getClient()
     {

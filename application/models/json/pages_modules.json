@@ -87,6 +87,7 @@
             "type": "image",
             "field":"image",
             "folder": "/public/upload/modules",
+            "settings":{"webp":true},
             "images":
             [
                 {  "folder" : "desktop", "width":1280,"height":800,"label":"Desktop","retina":true},
@@ -120,5 +121,6 @@
             ]
         } 
 
+        
     ]
 }

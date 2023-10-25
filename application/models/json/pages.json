@@ -4,8 +4,8 @@
     [
         { "label" : "Identyfikator", "field": "slug", "list": true },
         { "label" : "Url", "field": "url", "list": true },
-        { "label" : "Tytuł (dla google)", "field": "title", "list": true },
-        { "label" : "Opis (dla google)", "field": "description","type":"text" },
+        { "label" : "Title (Google)", "field": "title", "list": true },
+        { "label" : "Description (Google)", "field": "description","type":"text" },
         
         {   "field": "uid","type":"uid","list":"read"    },
         {"label":"Typ","field":"type","type":"select","hr":true},
@@ -24,7 +24,9 @@
             
           ]
       },     
-          
+      {
+        "field":"params","label":"Params"
+    },
 
         { "label" : "active", "field": "active", "type":"boolean", "list": "edit" }
     ]
