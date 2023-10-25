@@ -7,18 +7,33 @@
             "widget":"page",
             "params":
             {
-                "page":"pages",
-                "icon":"settings"
+                "page":"interviews",
+                "icon":"videocam",
+                "image":"image"
             }
         },
         {
-            "widget":"edit",
+            "widget":"page",
+            "params":
+            {
+                "page":"interviewers",
+                "icon":"emoji-people"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"topics",
+                "icon":"topic"
+            }
+        },
+        {
+            "widget":"page",
             "params":
             {
                 "page":"pages",
-                "record":"home",
-                "image":"image",
-                "icon":"home"
+                "icon":"article "
             }
         }
 

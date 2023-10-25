@@ -1,15 +1,10 @@
 {
     "table": "pages_modules",
     "order": "level",
-    "label_PL":
-    {
-        "page":"Moduły strony",
-        "edit":"{% if not title %}Nowy moduł{% else %}{{title}}{% endif %}"
-    },
     "label_EN":
     {
         "page":"Page modules",
-        "edit":"{% if not title %}New module{% else %}{{title}}{% endif %}"
+        "edit":"{% if not type %}New module{% else %}Module: <em>{{type.label}}</em>{% endif %}"
     },
     "filters": {
         "parent": "%1%"
@@ -18,7 +13,7 @@
     [
         {
             "type":"preview",
-            "iframe":"/pl/serdelia-preview-%1%"
+            "iframe":"/serdelia-preview-%1%"
         },
         {
             "type":"list"

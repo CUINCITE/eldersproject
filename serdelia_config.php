@@ -2,8 +2,8 @@
 
 $cfg=
 [
-	'languages' => [ 'pl','en' ],
-	'languages_url' => true,
+	'languages' => [ 'en' ],
+	'languages_url' => false,
 	'projects' =>
 	[
 		  ['name'=>'Website','folder'=>'/serdelia_config']

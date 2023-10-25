@@ -2,8 +2,8 @@
 
 $cfg= array(
 		'application_class' =>			     'app',
-		'application_languages' =>		   	 ['pl','en'],
-		'application_languages_url' =>	 	 true,
+		'application_languages' =>		   	 ['en'],
+		'application_languages_url' =>	 	 false,
 		'application_replace' => 		     array(),
 		'application_url_prefix' =>'',
 		'application_public_path' =>	    '/public',

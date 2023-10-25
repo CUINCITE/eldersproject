@@ -1,16 +1,11 @@
 {
     "table": "pages",
-    "label_PL":
-    {
-        "page":"Strony",
-        "edit":"{% if not title %}Nowa strona{% else %}{{title}}{% endif %}"
-    },
     "label_EN":
     {
         "page":"Pages",
-        "edit":"{% if not title %}New Page{% else %}{{title}}{% endif %}"
+        "edit":"{% if not title %}New Page{% else %}Page: <em>{{title}}</em>{% endif %}"
     },
-    "order": "title_PL",
+    "order": "title",
     "temp-back":
     {
         "edit":"home"
@@ -23,16 +18,15 @@
 
     "fields" :
     [
-        { "label_PL" : "Tytuł","label_EN":"Title", "field": "title:lang", "list": true,"hr":true  ,
+        { "label_EN":"Title", "field": "title", "list": true,"hr":true  ,
             "help":{
-                "text_PL":"W tym miejscu można ustawić metadane, które będą widoczne w wyniakch Google czy Facebooka.<br>Kliknij <em>Moduły</em> aby treść edytować stronę.",
                 "text_EN":"Here you can set metadata visible when page is shared on social media or visible in Google results.<br>Click <em>Modules</em> to edit page content.",
                 "size":"full"
             }
         },
-        { "label_PL":"Opis","label_EN" : "Description", "field": "description:lang","type":"text"},
-        { "label" : "Id", "field": "slug","aauth":"scaffold","on_demand":true  },
         { "label" : "Url", "field": "url", "list": true,"aauth":"scaffold","on_demand":true },
+        { "label_PL":"Opis","label_EN" : "Description", "field": "description","type":"text"},
+        { "label" : "Id", "field": "slug","aauth":"scaffold","on_demand":true  },
         
         {   "field": "uid","type":"uid","list":"read"    },
         {   "label_PL": "Obrazek do sharowania (1200x630)",
@@ -61,7 +55,10 @@
                 {"value":"LightboxPage"}
             ]
         },
+        {
+            "field":"params","label":"Params"
+        },
 
-        { "label" : "Publish", "field": "active", "type":"boolean", "list": "edit","hr":true,"auth":"structure" }
+        { "label" : "Publish", "field": "active", "type":"boolean", "list": "edit","hr":true }
     ]
 }

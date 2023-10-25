@@ -4,8 +4,8 @@
     [
         { "label" : "Identyfikator", "field": "slug", "list": true },
         { "label" : "Url", "field": "url", "list": true },
-        { "label" : "Tytuł (dla google)", "field": "title:lang", "list": true },
-        { "label" : "Opis (dla google)", "field": "description:lang","type":"text" },
+        { "label" : "Tytuł (dla google)", "field": "title", "list": true },
+        { "label" : "Opis (dla google)", "field": "description","type":"text" },
         
         {   "field": "uid","type":"uid","list":"read"    },
         {"label":"Typ","field":"type","type":"select","hr":true},

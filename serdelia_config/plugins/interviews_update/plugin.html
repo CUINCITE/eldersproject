@@ -1,0 +1,12 @@
+{% if errors %}
+<div class="alert alert-danger">
+	{% for item in errors %}{{item}}<br>{% endfor %}
+	
+</div><br><hr><br>
+{% endif %}
+{% if success %}
+<div class="alert alert-success">
+	{% for item in success %}{{item}}<br>{% endfor %}
+	
+</div><br><hr><br>
+{% endif %}

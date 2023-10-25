@@ -1,65 +1,48 @@
 [
     {
         "id"   : "system",
-        "label": "Administrator systemowy",
-        "models":["settings","admins_monitoring_logs","admins_stats","converter_query","api_users","admins_emails"]
+        "label": "System admin",
+        "models":["settings"]
     },
     {
-        "id"   : "surveys",
-        "label": "Ankiety",
-        "models":["surveys","surveys_questions"]
+        "id"   : "interviews",
+        "label": "Interviews",
+        "models":["interviews","sessions","clips"]
     },
     {
-        "id"   : "docs",
-        "label": "Dokumentacja",
-        "models":["documents"]
+        "id"   : "indexes",
+        "label": "Source indexes",
+        "models":["events","events_index","locations","locations_index","organizations","organizations_index",
+                    "people","people_index"
+                ]
     },
     {
-        "id"   : "contacts",
-        "label": "Kontakty, zgłoszenia, moderacja",
-        "models":["users_contacts","users_objects_alerts","users_objects_edit","users_violation_tours","users_violation_objects"]
+        "id"   : "news",
+        "label": "News",
+        "models":["news"]
     },
     {
-        "id"   : "collections",
-        "label": "Kolekcje",
-        "models":["collections"]
+        "id"   : "pages",
+        "label": "Pages",
+        "models":["pages","pages_modules"]
     },
     {
-        "id"   : "moderator",
-        "label": "Moderator",
-        "models":["users_objects_edit","tours"]
+        "id"   : "staff",
+        "label": "Staff",
+        "models":["staff"]
     },
     {
-        "id"   : "newsletter",
-        "label": "Newsletter",
-        "models":["client_newsletter_issues"]
+        "id"   : "timeline",
+        "label": "Timeline",
+        "models":["timeline"]
     },
     {
-        "id"   : "objects",
-        "label": "Obiekty",
-        "models":["objects"]
-    },
-    {
-        "id"   : "projects",
-        "label": "Projekty",
-        "models":["projects"]
-    },
-    {
-        "id"   : "content",
-        "label": "Teksty, konkursy",
-        "models":["custom_pages","custom_pages_modules","featured_objects","pages_modules_simple"]
-    },
-    {
-        "id"   : "tours",
-        "label": "Wycieczki",
-        "models":["tours","tours_objects_page"]
-    },
-    {
-        "id"   : "dict",
-        "label": "Słowniki"
+        "id"   : "topics",
+        "label": "Topics",
+        "models":["topics"]
     },
     {
         "id"   : "scaffold",
-        "label": "Struktura serwisu"
+        "label": "Website structure"
     }
 ]

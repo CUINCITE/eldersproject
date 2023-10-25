@@ -1,5 +1,7 @@
 <?php
 
+if (!getenv('DOMAIN')) exit('ENV.DOMAIN undefined');
+
 $cfg_domains = [
 
 	getenv('DOMAIN') =>
@@ -26,11 +28,13 @@ $cfg_domains = [
 		],
 		's3'=>
 		[
-			'key'=>'',
-			'secret'=>'',
-			'bucket'=>'',
-			'region'=>'eu-central-1'
-		]
+			'host' =>	getenv('S3_HOST'),
+			'key' =>	getenv('S3_KEY'),
+			'secret' =>	getenv('S3_SECRET'),
+			'bucket' =>	getenv('S3_BUCKET'),
+			'region' =>	getenv('S3_REGION'),
+			'folder' =>	getenv('S3_FOLDER'),
+			'cache' => '/cache/s3.files'			]
 	]
 ];
 

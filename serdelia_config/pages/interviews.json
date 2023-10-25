@@ -1,0 +1,226 @@
+{
+    "table": "interviews",
+    "label": {
+        "page": "Interviews",
+        "edit": "{% if not name %}New interview{% else %}Interview: <em>{{name}}</em>{% endif %}"
+    },
+    "layout":
+    {
+        "type":"grid",
+        "count":100,
+        "html":"{{html.image|raw}}{{html.name}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+    },
+    
+
+    "model":{"label":"{{narrators}}"},
+    "order": "name",
+    "buttons_page":
+    [
+        {
+            "label":"Update Index",
+            "icon":"index",
+            "hhidden":true,
+            "plugin":"interviews_update"
+        },
+        {"plugin":"refresh"}
+    ],
+    "buttons_edit":
+    [
+        {
+            "plugin":"api_single",
+            "label":"Encode transcripts",
+            "icon":"refresh",
+            "temp-hidden":true,
+            "params":{
+                "url":"/api/interview_import?type=cms&interview={{id}}"
+            }
+        },
+        {
+            "label":"Interview auto-update",
+            "type":"plugin",
+            "plugin":"interview_update",
+            "hidden":true,
+            "on_update":true
+        },
+        
+        {"label":"Sessions","type":"page","icon":"reorder","page":"sessions,%id%"},
+        {
+            "type": "plugin",
+            "plugin": "preview",
+            "params": {
+                "url": "/interviews/{{slug}}?preview=true"
+            }
+        },
+        
+        {
+            "label":"Indexes",
+            "icon":"index",
+            "hidden":true,
+            "plugin":"interview_indexes"
+        }
+        
+    ],
+    "fields": [
+        {
+            "tab":"Interview",
+            "label": "Narrators",
+            "field": "narrators",
+            "required": true,
+            "type":"elements",
+            "source":
+            {
+                "model":"narrators"
+            }
+        },
+        {
+            "label": "Narrators (full text)",
+            "edit":false,
+            "hidden":true,
+            "field": "name",
+            "list":true,
+            "auto": {
+                "pattern": "{% for item in narrators %}{{item.surname}}, {{item.name}}{% endfor %}"
+            }
+        },
+
+        {
+            "hr":true,
+            "label":"Interviewers",
+            "field":"interviewer",
+            "type":"elements",
+            "source":
+            {
+                "model":"interviewers"
+            }
+        },
+        {
+            "label":"Interviewers (full text)",
+            "field":"interviewer_name",
+            "hidden":true,
+            "edit":false,
+            "auto": {
+                "pattern": "{% for i in interviewer %}{% if loop.index>1 %}, {% endif %}{{interviewer[0].first_name}} {{interviewer[0].last_name}}{% endfor %}"
+            }
+        },
+
+        
+    {   
+        "tab":"Image",
+        "label": "Thumbnail",
+        "hr":true,
+        "type": "image",
+        "field":"image",
+        "folder": "/public/upload/interviews",
+        "folder_preview": "thumb",
+        "list": {
+            "temp-position_after": "",
+            "height": 110,
+            "temp-layout": "cover",
+            "src_blank": "blank169.png"
+        },
+        "filename": "%uid%",
+        "settings":{"webp":true},
+        "images":
+        [
+          {  "folder" : "original","label":"Original image" },
+          {  "folder" : "desktop","label":"Desktop","width":520,"height":292,"crop":true,"retina":true },
+          {  "folder" : "mobile","label":"Mobile","width":320,"height":180,"crop":true,"retina":true },
+          {  "folder" : "square","label":"Square","width":512,"height":512,"crop":true }
+          
+        ]
+    },   
+    {   "field": "uid","type":"uid","list":"read"    ,"search":true,"label":"UID"},
+        
+        {
+            "tab":"Metadata",
+            "field":"topics",
+            "label":"Topics",
+            "type":"checkboxes",
+            "settings":{"small":true},
+            "source":
+            {
+                "model":"topics"
+            }
+        },
+
+        
+        {
+            "hr":true,
+            "field":"summary",
+            "type":"html",
+            "label":"Interview Summary"
+        },
+        {
+            "field":"preface",
+            "type":"html",
+            "label":"Preface"
+        },
+        {
+            "field":"citation",
+            "type":"text",
+            "label":"Citation",
+            "settings":{"rows":5}
+        },
+        {
+            "field":"duration","label":"Duration (seconds)"
+        },
+        {
+            "tab":"Download",
+            "field": "PDF",
+            "label": "PDF",
+            "type": "file",
+            "extension":"pdf",
+            "folder":"/public/upload/interviews/transcripts"
+        },
+        {
+            "field":"pdf_size",
+            "label":"PDF Size"
+        },
+        {
+            "tab":"Index",
+            "field":"contents",
+            "label":"Contents",
+            "type":"table",
+            "settings":{"header":["Time","Label"]}
+        },
+        {
+            "tab":"Status",
+            "label": "Url",
+            "field": "slug",
+            "on_demand": true,
+            "auto": {
+                "on_null": true,
+                "unique": true,
+                "url": true,
+                "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
+            }
+        },
+        
+        {
+            "field":"incite_id","label":"Incite ID","list":true,
+            "settings":{"code":true}
+        },
+        {
+            "hr":true,
+            "field":"status_media","label":"Status (media)",
+            "type": "boolean","list":"read","search":true
+        },
+        {
+            
+            "field":"status_transcripts",
+            "label":"Status (transcripts)",
+            "type": "boolean","list":"read","search":true
+        },
+        {
+            "label": "Publish",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit",
+            "search":true,
+            "hr": true
+        }
+
+
+
+    ]
+}

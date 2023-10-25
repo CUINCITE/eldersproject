@@ -1,38 +1,10 @@
 [
     {
-        "label"   : "Admistrator systemowy",
+        "label"   : "System admin",
         "label_welcome":"",
         "auth":
         {
             "system":3
-        }
-    },
-    {
-        "label"   : "Edytor danych merytorycznych",
-        "label_welcome":"",
-        "auth":
-        {
-            "objects":3,
-            "tours":3,
-            "collections":3
-        }
-    },
-    {
-        "label"   : "Moderator",
-        "label_welcome":"",
-        "auth":
-        {
-            "moderator":3
-        }
-    },
-    {
-        "label"   : "Zarządzanie danymi od użytkowników",
-        "label_welcome":"",
-        "auth":
-        {
-            "surveys":3,
-            "contacts":3,
-            "newsletter":3
         }
     }
 ]

@@ -1,0 +1,133 @@
+{
+    "table": "interviewers",
+    "label": {
+        "page": "Interviewers",
+        "edit": "{% if not last_name %}New person{% else %}Interviewers: <em>{{first_name}} {{last_name}}</em>{% endif %}"
+    },
+    "xlayout": {
+        "type": "grid",
+        "count": 100,
+        "html": "{{html.image|raw}}{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div>"
+    },
+    "model": {
+        "label": "{{last_name}}, {{first_name}}"
+    },
+    "buttons_edit":
+    [
+        {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }}
+    ],
+    "buttons_page":
+    [
+        {"plugin":"refresh"}
+    ],
+    "order": "last_name,first_name",
+    
+    "fields": [
+        {
+            "tab": "Info",
+            "label": "First name",
+            "list": true,
+            "field": "first_name",
+            "required": true
+        },
+        {
+            "label": "Last name",
+            "list": true,
+            "field": "last_name",
+            "required": true
+        },
+        {
+            "label": "Position",
+            "list": true,
+            "field": "position",
+            "type":"text",
+            "settings":{"rows":2}
+        },
+        
+        {
+            "label": "Url",
+            "field": "slug",
+            "on_demand": true,
+            "auto": {
+                "on_null": true,
+                "unique": true,
+                "url": true,
+                "pattern": "{{first_name}} {{last_name}}"
+            }
+        },
+        {
+            "label": "Publish",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit",
+            "hr": true
+        },
+        {
+            "tab": "Texts",
+            "field": "lead",
+            "type": "text",
+            "label": "Lead",
+            "settings": {
+                "rows": 5
+            }
+        },
+        {
+            "field": "text",
+            "type": "html",
+            "label": "Copy"
+        },
+        
+        {
+            "field": "uid",
+            "type": "uid",
+            "list": "read"
+        },
+        {
+            "tab":"Image",
+            "label": "Cover",
+            "type": "image",
+            "field": "image",
+            "extensions":["png"],
+            "settings":{"webp":true},
+            "folder": "/public/upload/interviewers",
+            
+            "temp-list": {
+                "height": 140,
+                "folder": "desktop_x2",
+                "temp-layout": "cover",
+                "src_blank": "blank.png"
+            },
+            "filename": "%uid%",
+            "images": [
+                {
+                    "folder": "original",
+                    "label": "Original image"
+                },
+                {
+                    "folder": "desktop",
+                    "label": "Desktop",
+                    "width": 120,
+                    "height": 120,
+                    "crop": true,
+                    "retina": true
+                },
+                {
+                    "folder": "mobile",
+                    "label": "Mobile",
+                    "width": 120,
+                    "height": 120,
+                    "crop": true,
+                    "retina": true
+                }
+            ]
+        },
+        {
+            "field":"alt","label":"ALT"
+        },
+
+        {
+            "field": "image_author",
+            "label": "Photo author"
+        }
+    ]
+}

@@ -1,34 +1,82 @@
 [
     {
-        "label_PL":"Struktura","label_EN":"Structure", "submenu":
-        [
-            { "label": "Menu", "page":"menu",
-               "submenu":
-               [
-                {"label_PL":"Menu główne","label_EN":"Main menu","auth":"scaffold","page":"menu,main"},
-                {"label_PL":"Stopka","label_EN":"Footer","auth":"scaffold","page":"menu,footer"},
-                {"label_PL":"Kanały społecznościowe","label_EN":"Social channels","auth":"scaffold","page":"menu,social"}
-               ]
+        "label": "Structure",
+        "submenu": [
+            {
+                "label": "Menu",
+                "page": "menu",
+                "submenu": [
+                    {
+                        "label": "Main menu",
+                        "auth": "scaffold",
+                        "page": "menu,main"
+                    },
+                    {
+                        "label": "Footer",
+                        "auth": "scaffold",
+                        "page": "menu,footer"
+                    },
+                    {
+                        "label": "Social channels",
+                        "auth": "scaffold",
+                        "page": "menu,social"
+                    }
+                ]
             },
-            { "label_EN":"Translate","label_PL": "Tłumaczenia", "page":"s_translate"},
-            { "label_EN":"Pages","label_PL": "Strony", "page":"pages"}
+            {
+                "label": "Pages",
+                "page": "pages"
+            }
         ]
     },
     {
-        "label_PL":"Użytkownicy","label_EN":"Users",
+        "label":"Interviews",
+        "submenu":[
+            {"label":"Interviews","page":"interviews"},
+            {},
+            {"label":"Narrators","page":"narrators"},
+            {"label":"Interviewers","page":"interviewers"},            
+            {},
+            {"label":"Sessions","page":"sessions_raw"},
+            {"label":"Narrators Categories","page":"narrators_categories"}
+            
+        ]
+        
+    },    
+    {
+        "label":"Topics",
+        "page":"topics"
+    },
+    {
+        "label":"About page",
         "submenu":
         [
-            {"label_EN":"Users","page":"client_users","label_PL":"Zarejestrowani użytkownicy"},
-            {"label_EN":"Mailing templates","page":"client_mailing","label_PL":"Szablony do mailingu"}
+            {
+                "label":"FAQ",
+                "page":"faq"
+            },
+            {
+                "label":"Logotypes",
+                "page":"logotypes"
+            }
         ]
     },
-       {   "label":"Admin" ,"submenu":
-        [
-            {"label_PL":"Edytorzy","label_EN":"CMS Users","page":"cms_users"},
-            {"label_PL":"Log zdarzeń","label_EN":"Action Log","page":"cms_users_logs"},
-            {"label_PL":"Log logowań","label_EN":"Logins Log","page":"cms_users_logs_logins"}
+    
+    {
+        "label": "Admin",
+        "submenu": [
+            {
+                "label": "CMS Users",
+                "page": "cms_users"
+            },
+            {
+                "label": "Action Log",
+                "page": "cms_users_logs"
+            },
+            {
+                "label": "Logins Log",
+                "page": "cms_users_logs_logins"
+            }
         ]
-    
-    
     }
 ]

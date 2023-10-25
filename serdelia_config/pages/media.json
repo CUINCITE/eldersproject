@@ -10,6 +10,10 @@
         { "label" : "Model", "field": "model", "list": true },
         { "label" : "Model Id", "field": "model_id", "list": true },
         { "label" : "Model Id Nr", "field": "model_id_order", "list": true },
+        {"field":"caption"},
+        {"field":"alt"},
+        {"field":"vimeo"},
+        {"field":"vimeo_sources"},
         {"field":"uid","type":"uid"},
         {   
             "type": "image",
@@ -22,10 +26,17 @@
             "images":
             [
                 {  "folder" : "original","label":"original" },
-                {  "folder" : "mobile", "height":180 ,"label":"Mobile" },
-                {  "folder" : "desktop", "width":740,"height":555, "label":"Desktop" }
+                {  "folder" : "mobile", "width":350,"height":180 ,"label":"Mobile","retina":true },
+                {  "folder" : "desktop", "width":740,"height":560, "label":"Desktop","retina":true }
               ]
-        }
+        },
+        {
+            "field":"width","type":"integer"
+        },
+        {
+            "field":"height","type":"integer"
+        },
+        {"field":"duration"}
 
     ]
 }

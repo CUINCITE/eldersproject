@@ -4,8 +4,8 @@
 $cfg=array(
 
 		'application_url_prefix'=>'serdelia',
-		'application_languages' => ['pl','en'],
-		'application_languages_url'=>true,
+		'application_languages' => ['en'],
+		'application_languages_url'=>false,
 		'clients'=>
 		[
 			'password_salt'      =>  getenv('CLIENT_PASSWORD_SALT'),  	// password salt
@@ -21,7 +21,7 @@ $cfg=array(
 			'logotype'       =>	  true,
 			
 			'serdelia_base_url'       =>  "/serdelia/",           		//  folder with serdelia CORE files
-    		'serdelia_languages_url'  =>	true,                        //  put language string in serdelia URL      		
+    		'serdelia_languages_url'  =>	false,                        //  put language string in serdelia URL      		
     		
     		'serdelia_keys'=>[
 				getenv('CLIENT_KEY1'),
@@ -32,8 +32,7 @@ $cfg=array(
 
 			'app_languages' 			=> 
 				[
-					['suffix'=>'_PL','label'=>"Polski",'shortcut'=>"PL"],
-					['suffix'=>'_EN','label'=>"English",'shortcut'=>"EN"]
+					
 				]
 			]
 		

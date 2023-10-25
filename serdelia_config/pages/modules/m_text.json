@@ -3,10 +3,10 @@
     [
 
       {   
-         "field":"label:lang","label":"Nagłówek"
+         "field":"label","label":"Nagłówek"
       },
       {   
-           "field":"text:lang","type":"html","label":"Tekst"
+           "field":"text","type":"html","label":"Tekst"
         }
 
         

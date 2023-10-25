@@ -1,8 +1,6 @@
 <?php                               
 
 require_once('model_app.php');
-//require(root_url.'/serdelia/shared/uho_thumb.php');
-
 
 class model_app_api extends model_app
 {
@@ -10,26 +8,8 @@ class model_app_api extends model_app
 	public $cfg;
   public $modal_success,$modal_error;
 
-  //------------------------------------------------------
-  private function cacheKill($dir='cache')
-  {
-    if ($dir)
-    {
-          $dir=rtrim($_SERVER['DOCUMENT_ROOT'],'/').'/'.trim($dir,'/');
-          //ini_set('memory_limit', '256M');
-          $scan=@scandir($dir);
-          if ($scan)
-          foreach ($scan as $item)
-          {
-              $path_parts = pathinfo($item);
-              if ($item == '.' || $item == '..' || $path_parts['extension']!='cache') continue;
-              unlink($dir.DIRECTORY_SEPARATOR.$item);
-          } 
-        }
-  }
-    //==================================================================================
 
-	public function getApi($action,$object,$url,$params,$get)
+	public function getApi($action,$object,$url,$params,$cfg)
 	{
 
     $this->modal_success=[
@@ -56,33 +36,68 @@ class model_app_api extends model_app
 		switch ($action)
 		{
 
+
       //-------------------------------------------------------
-      case "login":  
-      case "profile":  
-      case "register":
-      case "password_change":
-      case "password_reset":
-      case "password_set":
-  
-        require_once ("api/model_app_api_".$action.".php");
-        $class = 'model_app_api_'.$action;
-        $class= new $class($this,null);
-        $result=$class->rest($method,$params);
-        $this->cacheKill();
+      case "newsletter":
+        if ($this->captcha(@$params['token']))
+        {
+          require_once ("api/model_app_api_".$action.".php");
+          $class = 'model_app_api_'.$action;
+          $class= new $class($this,null);
+          $result=$class->rest($method,$params);
+          $this->cache_kill();
+        } else $result=['result'=>false,'message'=>'<span>Sorry!</span><span>ReCaptcha falied, try again.</span>'];
         break;
-  
+
+        case "interview":
+        case "playlist":
+        case "search":
+        case "download":
+        case "fav":        
+        case "temp":
+        case "interview_import":
+        //  case "interview_import2":
+          
+          require_once ("api/model_app_api_".$action.".php");
+          $class = 'model_app_api_'.$action;
+          $class= new $class($this,null);
+          $result=$class->rest($method,$params);
+          
+          
+          break;        
+
+          case "s3cache":
+          if (!empty($cfg['s3']))
+          {
+            require_once ("api/model_app_api_".$action.".php");
+            $class = 'model_app_api_'.$action;
+            $class= new $class($this,null);
+            $result=$class->rest($method,$cfg['s3']);
+          }
+          
+          break;        
+
+          case "map":
+          
+          require_once ("api/model_app_api_".$action.".php");
+          $class = 'model_app_api_'.$action;
+          $class= new $class($this,null);
+          $result=$class->rest($method,$params,$url);
+          
+          break;        
+        /*
+        case "index_converter":
+          require_once ("api/model_app_api_".$action.".php");
+          $class = 'model_app_api_'.$action;
+          $class= new $class($this,null);
+          $result=$class->rest($method,$params['action'],$params);
+          break;*/
+          
         case "cache_kill":
-        $this->cacheKill();
+        $this->cache_kill();
         $result=['result'=>true];
         
         break;
-      //-------------------------------------------------------
-      case "newsletter_add":
-      $result=$this->client->newsletterAdd($params['email'],true,$this->http_server.'/'.$this->lang.'/newsletter-potwierdzenie/%key%');
-      $result['title']=$this->getTranslated('newsletter_dziekujemy');
-      if ($result['mailing']) $result['message']=$this->getTranslated('newsletter_dziekujemy_potwierdz');
-        else $result['message']=$this->getTranslated('dziekujemy'.'.');
-      break;
 
       //-------------------------------------------------------
 
@@ -92,7 +107,8 @@ class model_app_api extends model_app
 			break;
 		}
 
-    if (!$result) $result=['result'=>false];
+    if (empty($result) || !$result) $result=['result'=>false];
+    
 		return $result;
 
 	}
@@ -101,9 +117,12 @@ class model_app_api extends model_app
   public function captcha($captcha)
   {
     if (!$captcha) return;
-    $secret="6LfxzIYUAAAAAEh2mH4CIZmJ0fTuBUAVR7cvAvl9";
+    $secret=$this->getApiKeys('google_recaptcha');
+    if (!$secret) return;
+    
+    
     $data = array(
-        'secret' => $secret,
+        'secret' => $secret['secret'],
         'response' => $captcha
     );
 
@@ -118,5 +137,23 @@ class model_app_api extends model_app
     if(intval($responseKeys["success"]) == 1) return true;
 
   }
+
+  //------------------------------------------------------
+  private function cache_kill($dir='cache')
+  {
+    if ($dir)
+    {
+          $dir=rtrim($_SERVER['DOCUMENT_ROOT'],'/').'/'.trim($dir,'/');
+          $scan=@scandir($dir);
+          if ($scan)
+          foreach ($scan as $item)
+          {
+              $path_parts = pathinfo($item);
+              if ($item == '.' || $item == '..' || $path_parts['extension']!='cache') continue;
+              unlink($dir.DIRECTORY_SEPARATOR.$item);
+          } 
+        }
+  }
+
 
 }

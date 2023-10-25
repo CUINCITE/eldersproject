@@ -51,10 +51,10 @@
             "list": "edit"
         },
         {
-            "field": "label:lang"
+            "field": "label"
         },
         {
-            "field": "text:lang"
+            "field": "text"
         },
         {
             "field": "params"
