@@ -7,11 +7,15 @@
     <body>
 {% endif %}
 
+{% include 'scaffold/menu.html' %}
+
 <article>
     {% for module in modules %}
         {% include 'modules/'~module.type~'.html' with module %}
     {% endfor %}
 </article>
+
+{% include 'scaffold/footer.html' %}
 
 {% if not is_ajax %}
     </body>
