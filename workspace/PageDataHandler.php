@@ -6,6 +6,8 @@ class PageDataHandler
     public $pages_path = '/workspace/data/pages/';
     public $modules_path = '/workspace/data/modules/';
 
+    public $scaffold_path = '/workspace/data/scaffold/';
+
     public function getUri()
     {
 
@@ -48,6 +50,8 @@ class PageDataHandler
         {
             $page_data['title'] = ucfirst($page_name);
         }
+
+        $page_data['scaffold'] = $this->getScaffold();
     
         return $page_data;
 
@@ -77,6 +81,7 @@ class PageDataHandler
         }
 
         $page_data['modules'] = $modules;
+
         return $page_data;
     }
 
@@ -115,6 +120,28 @@ class PageDataHandler
             $page_labels[] = $item;
         }
         return ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+    }
+
+    public function getScaffold() : array
+    {
+        $scaffold_dir = $_SERVER['DOCUMENT_ROOT'] . $this->scaffold_path;
+
+        $scaffold = array_diff(scandir($scaffold_dir), array('..', '.'));
+        $scaffold_items = [];
+        foreach ($scaffold as $scaffold_item) {
+
+            // get key
+            $item_name = pathinfo($scaffold_item, PATHINFO_FILENAME);
+
+            //get values
+            $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->scaffold_path . $scaffold_item;
+            $scaffold_item_data = $this->getJsonData($filepath);
+
+            $scaffold_items[$item_name] = $scaffold_item_data;
+        }
+
+        return $scaffold_items;
+
     }
 
 }
