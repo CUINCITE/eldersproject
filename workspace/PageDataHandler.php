@@ -52,6 +52,7 @@ class PageDataHandler
         }
 
         $page_data['scaffold'] = $this->getScaffold();
+        $page_data = $this->updateImages($page_data);
     
         return $page_data;
 
@@ -75,6 +76,10 @@ class PageDataHandler
                 if (!isset($module[$key])) {
                     $module[$key] = $value;
                 }
+            }
+
+            if (isset($module['repeat'])) {
+                $module = $this->repeatItems($module);
             }
 
             $modules[$k] = $module;
@@ -141,7 +146,62 @@ class PageDataHandler
         }
 
         return $scaffold_items;
+    }
 
+    public function repeatItems($data)
+    {
+        foreach ($data['repeat'] as $key=>$number) {
+            if (!empty($data[$key])) {
+                $items = $data[$key];
+
+                $number_of_repeats = $number - count($items);
+
+                if ($number_of_repeats > 0) {
+                    for ($i=0; $i<=$number_of_repeats; $i++) {
+                        $items[] = $items[rand(0, count($items)-1)];
+                    }
+                }
+            }
+            $data[$key] = $items;
+        }
+       return $data;
+    }
+
+    public function updateImages($array) {
+        foreach ($array as $key => &$value) {
+            if (is_array($value)) {
+                $value = $this->updateImages($value);
+            } else {
+                if ($key === 'image') {
+                    if (is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $value)) {
+                        $value = $this->getRandomImage($_SERVER['DOCUMENT_ROOT'] . '/' . $value);
+                    }
+
+                    $value = $this->simulatePictureTag($value);
+                }
+            }
+        }
+        return $array;
+    }
+
+    function getRandomImage($directory) {
+        $directory = rtrim($directory, '/');
+        $files = glob($directory . '/*.*');
+        $file = array_rand($files);
+        $file_path = $files[$file];
+        $web_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file_path);
+        return str_replace('\\', '/', $web_path);
+    }
+
+    function simulatePictureTag($path) {
+        return [
+            'mobile' => $path,
+            'mobile_x2' => $path,
+            'desktop' => $path,
+            'desktop_x2' => $path,
+            'hd' => $path,
+            'hd_x2' => $path,
+        ];
     }
 
 }
