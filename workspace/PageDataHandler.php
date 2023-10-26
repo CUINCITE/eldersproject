@@ -9,6 +9,7 @@ class PageDataHandler
     public $modules_path = '/workspace/data/modules/';
 
     public $scaffold_path = '/workspace/data/scaffold/';
+    private $image_dirs = [];
 
     public function getUri()
     {
@@ -175,8 +176,27 @@ class PageDataHandler
                 $value = $this->updateImages($value);
             } else {
                 if ($key === 'image') {
-                    if (is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $value)) {
-                        $value = $this->getRandomImage($_SERVER['DOCUMENT_ROOT'] . '/' . $value);
+                    $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
+
+                    // Check if the directory has already been detected
+                    if (isset($this->image_dirs[$image_path])) {
+                        $image_dir = $this->image_dirs[$image_path];
+                    } else {
+                        // Check for the directory in multiple locations
+                        if (is_dir($image_path)) {
+                            $image_dir = $image_path;
+                        } elseif (is_dir(dirname($image_path) . '/images')) {
+                            $image_dir = dirname($image_path) . '/images';
+                        } elseif (is_dir(dirname(dirname($image_path)) . '/images')) {
+                            $image_dir = dirname(dirname($image_path)) . '/images';
+                        }
+
+                        // Cache the directory
+                        $this->image_dirs[$image_path] = $image_dir;
+                    }
+
+                    if (!empty($image_dir)) {
+                        $value = $this->getRandomImage($image_dir);
                     }
 
                     $value = $this->simulatePictureTag($value);
