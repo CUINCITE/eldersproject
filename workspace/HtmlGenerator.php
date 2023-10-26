@@ -1,5 +1,7 @@
 <?php
 
+namespace Workspace;
+
 class HtmlGenerator
 {   
     public $debug;
