@@ -192,7 +192,9 @@ class PageDataHandler
                         }
 
                         // Cache the directory
-                        $this->image_dirs[$image_path] = $image_dir;
+                        if (!empty($image_dir)) {
+                            $this->image_dirs[$image_path] = $image_dir;
+                        }
                     }
 
                     if (!empty($image_dir)) {
