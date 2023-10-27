@@ -18,7 +18,7 @@ class serdelia_plugin_interview_update
         $success=[];
         $params=$this->params;
 
-        /*
+        
         $this->cms->setFilesDecache(false);
         $this->parent->orm->setFilesDecache(false);
 
@@ -51,44 +51,8 @@ class serdelia_plugin_interview_update
         ];
         
         $this->cms->putJsonModel('interviews',$val,['id'=>$record['id']]);
-        //exit('!'.$this->parent->apporm->getLastError());
-        $clips=$this->cms->getJsonModel('clips',['interview'=>$params['record']],false,'time_from');
         
-        // index from clips
-
-        if ($clips)
-        {
-            $i=[];
-            //print_r($clips);
-            foreach ($clips as $k=>$v)
-            if ($v['time_to'])
-            {
-                $i[]=[$v['time_from'],$v['label']];
-            }
-            
-            $this->cms->putJsonModel('interviews',
-                ['contents'=>$i],
-                ['id'=>$record['id']]);
-            
-        }
-
-
-
-        // image update
-
-        if (!_uho_fx::file_exists($record['image']['original']))
-        {
-            $i=false;
-            foreach ($items as $k=>$v)
-            if (!$i)
-            {
-                $i=true;
-                $result = $this->parent->imageResizeModel($params['page'], 'image', $record, $v['image']['original']);
-                if ($result['result']) $success[]='Image imported';
-                else $errors[]='Error converting - '.$result['message'];
-    
-            }            
-        }
+        
         
         $duration=0;
         foreach ($items as $k=>$v)
@@ -116,7 +80,7 @@ class serdelia_plugin_interview_update
         $data=['result'=>true,'success'=>$success,'errors'=>$errors,'updated'=>count($items)];
 
         return $data;
-        */        
+        
     }
 
 

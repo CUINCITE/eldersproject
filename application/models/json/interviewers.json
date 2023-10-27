@@ -12,6 +12,10 @@
     "model": {
         "label": "{{last_name}}, {{first_name}}"
     },
+    "url":{
+        "type":"collection",
+        "slug":"%slug%"
+    },
     "buttons_edit":
     [
         {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }}
@@ -23,6 +27,7 @@
     "order": "last_name,first_name",
     
     "fields": [
+        {"field":"label"},
         {
             "tab": "Info",
             "label": "First name",
@@ -35,13 +40,6 @@
             "list": true,
             "field": "last_name",
             "required": true
-        },
-        {
-            "field":"label",
-            "edit":false,
-            "auto": {
-                "pattern": "{{first_name}} {{last_name}}"
-            }
         },
         {
             "label": "Position",

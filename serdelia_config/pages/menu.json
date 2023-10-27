@@ -5,7 +5,7 @@
     "fields" :
     [
         { "label" : "Order", "field": "nr", "type": "order", "list": "order" },
-        { "label" : "Label", "field": "label:lang", "list": true },
+        { "label" : "Label", "field": "label", "list": true },
         { "label" : "Class", "field": "class" },
         { "label" : "Url","field":"url","on_demand":true },
         { "label" : "Publish", "field": "active", "type": "boolean", "list": "edit" }
