@@ -48,7 +48,7 @@
             "type":"text",
             "settings":{"rows":2}
         },
-        
+        {"field":"amount"},
         {
             "label": "Url",
             "field": "slug",

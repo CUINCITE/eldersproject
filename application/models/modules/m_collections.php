@@ -11,7 +11,7 @@ class model_app_pages_modules_collections extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-        $m['items']=$this->parent->getJsonModel('interviewers',['active'=>1],false,'label');
+        $m['items']=$this->parent->getJsonModel('interviewers',['active'=>1],false,'last_name');
 		return $m;
 	}
 

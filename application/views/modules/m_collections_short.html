@@ -3,7 +3,7 @@
       <h2>Collections</h2>
       <ol>
         {% for item in items %}      
-        <li><a href="{{item.url}}">{{item.label}}</a></li>
+        <li><a href="{{item.url}}">{{item.label}} ({{item.amount}})</a></li>
         {% endfor %}
       </ol>
     </div>
