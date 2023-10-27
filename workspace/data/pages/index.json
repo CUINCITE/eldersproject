@@ -8,6 +8,9 @@
         "class": [
           "bold"
         ]
+      },
+      {
+        "type": "events_grid"
       }
     ]
   }

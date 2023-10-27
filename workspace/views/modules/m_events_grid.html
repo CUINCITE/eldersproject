@@ -1,0 +1,8 @@
+{{ label }}
+
+{{ sublabel }}
+
+{% for item in items %}
+    {{ item.label }}
+    <img src="{{ item.image.desktop }}" alt="{{ item.alt }}" />
+{% endfor %}

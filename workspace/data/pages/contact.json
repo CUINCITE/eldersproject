@@ -1,0 +1,34 @@
+{
+  "modules": [
+      {
+          "type": "text",
+          "content": "About page"
+      },
+      {
+          "type": "image",
+          "url": "https://example.com/image.jpg"
+      },
+      {
+          "type": "hero",
+          "title": "Welcome to our website!",
+          "subtitle": "Learn more about our products and services."
+      },
+      {
+          "type": "slider",
+          "slides": [
+              {
+                  "image": "https://example.com/slide1.jpg",
+                  "caption": "Slide 1"
+              },
+              {
+                  "image": "https://example.com/slide2.jpg",
+                  "caption": "Slide 2"
+              },
+              {
+                  "image": "https://example.com/slide3.jpg",
+                  "caption": "Slide 3"
+              }
+          ]
+      }
+  ]
+}

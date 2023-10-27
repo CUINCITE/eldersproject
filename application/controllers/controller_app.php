@@ -100,7 +100,7 @@ class controller_app extends _uho_controller
                         case "collection":
                             $v='collections/'.$v['slug'];
                         break;
-                        case "interviews":
+                        case "interview":
                             $v='interviews/'.$v['slug'];
                         break;
 

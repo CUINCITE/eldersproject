@@ -11,7 +11,7 @@
 
 <article>
     {% for module in modules %}
-        {% include 'modules/'~module.type~'.html' with module %}
+        {% include 'modules/m_'~module.type~'.html' with module %}
     {% endfor %}
 </article>
 

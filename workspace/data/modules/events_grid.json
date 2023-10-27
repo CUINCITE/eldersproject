@@ -3,13 +3,13 @@
   "sublabel": "This is a subtitle",
   "items": [
     {
-      "label": "Event 1",
-      "image": "src/images/tiles",
-      "date": "2018-01-01"
+      "label": "Event",
+      "image": "src/images/",
+      "date": "2018-01-01",
+      "alt": "This is an alt text"
     }
   ],
   "repeat": {
-    "items": 10,
-    "elements": 30
+    "items": 10
   }
 }

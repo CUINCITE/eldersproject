@@ -1,5 +1,7 @@
 <?php
 
+namespace Workspace;
+
 class PageDataHandler
 {
 
@@ -7,6 +9,7 @@ class PageDataHandler
     public $modules_path = '/workspace/data/modules/';
 
     public $scaffold_path = '/workspace/data/scaffold/';
+    private $image_dirs = [];
 
     public function getUri()
     {
@@ -52,6 +55,7 @@ class PageDataHandler
         }
 
         $page_data['scaffold'] = $this->getScaffold();
+        $page_data = $this->updateImages($page_data);
     
         return $page_data;
 
@@ -75,6 +79,10 @@ class PageDataHandler
                 if (!isset($module[$key])) {
                     $module[$key] = $value;
                 }
+            }
+
+            if (isset($module['repeat'])) {
+                $module = $this->repeatItems($module);
             }
 
             $modules[$k] = $module;
@@ -141,7 +149,83 @@ class PageDataHandler
         }
 
         return $scaffold_items;
+    }
 
+    public function repeatItems($data)
+    {
+        foreach ($data['repeat'] as $key=>$number) {
+            if (!empty($data[$key])) {
+                $items = $data[$key];
+
+                $number_of_repeats = $number - count($items);
+
+                if ($number_of_repeats > 0) {
+                    for ($i=0; $i<=$number_of_repeats; $i++) {
+                        $items[] = $items[rand(0, count($items)-1)];
+                    }
+                }
+            }
+            $data[$key] = $items;
+        }
+       return $data;
+    }
+
+    public function updateImages($array) {
+        foreach ($array as $key => &$value) {
+            if (is_array($value)) {
+                $value = $this->updateImages($value);
+            } else {
+                if ($key === 'image') {
+                    $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
+
+                    // Check if the directory has already been detected
+                    if (isset($this->image_dirs[$image_path])) {
+                        $image_dir = $this->image_dirs[$image_path];
+                    } else {
+                        // Check for the directory in multiple locations
+                        if (is_dir($image_path)) {
+                            $image_dir = $image_path;
+                        } elseif (is_dir(dirname($image_path) . '/images')) {
+                            $image_dir = dirname($image_path) . '/images';
+                        } elseif (is_dir(dirname(dirname($image_path)) . '/images')) {
+                            $image_dir = dirname(dirname($image_path)) . '/images';
+                        }
+
+                        // Cache the directory
+                        if (!empty($image_dir)) {
+                            $this->image_dirs[$image_path] = $image_dir;
+                        }
+                    }
+
+                    if (!empty($image_dir)) {
+                        $value = $this->getRandomImage($image_dir);
+                    }
+
+                    $value = $this->simulatePictureTag($value);
+                }
+            }
+        }
+        return $array;
+    }
+
+    function getRandomImage($directory) {
+        $directory = rtrim($directory, '/');
+        $files = glob($directory . '/*.*');
+        $file = array_rand($files);
+        $file_path = $files[$file];
+        $web_path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $file_path);
+        return str_replace('\\', '/', $web_path);
+    }
+
+    function simulatePictureTag($path) {
+        return [
+            'mobile' => $path,
+            'mobile_x2' => $path,
+            'desktop' => $path,
+            'desktop_x2' => $path,
+            'hd' => $path,
+            'hd_x2' => $path,
+        ];
     }
 
 }

@@ -11,8 +11,11 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
+        //exit($url[1].'!');
         $m['item']=$this->parent->getJsonModel('interviewers',['active'=>1,'slug'=>$url[1]],true);
         if (!$m['item']) unset($m);
+        $m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
+        
 		return $m;
 	}
 

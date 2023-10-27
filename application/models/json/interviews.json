@@ -2,7 +2,7 @@
     "table": "interviews",
     "label": {
         "page": "Interviews",
-        "edit": "{% if not name %}New interview{% else %}Interview: <em>{{name}}</em>{% endif %}"
+        "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
     },
     "layout":
     {
@@ -16,7 +16,7 @@
     },
 
     "model":{"label":"{{narrators}}"},
-    "order": "name",
+    "order": "label",
     "buttons_page":
     [
         {
