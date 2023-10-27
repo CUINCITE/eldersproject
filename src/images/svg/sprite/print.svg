@@ -1,0 +1,7 @@
+<svg width="22px" height="16px" viewBox="0 0 22 16">
+	<polygon points="21,6 19,6 19,7 21,7 21,15 1,15 1,7 3,7 3,6 1,6 0,6 0,7 0,15 0,16 1,16 21,16 22,16 22,15 22,7 22,6"/>
+	<rect x="3" y="12" width="1" height="1"/>
+	<rect x="5" y="12" width="1" height="1"/>
+	<rect x="7" y="12" width="1" height="1"/>
+	<path d="M17,9V1V0h-1H6H5v1v8H3v1h2h1h10h1h2V9H17z M6,9V1h10v8H6z"/>
+</svg>

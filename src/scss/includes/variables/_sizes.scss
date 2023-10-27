@@ -1,0 +1,19 @@
+$size-design: 1280px;
+
+$size-hd: 1800px;
+$size-desktop: 1024px;
+$size-tablet: 660px;
+$size-min: 320px;
+
+$size-laptop-height: 640px;
+
+$margin: 22px;
+$mobile: 24px;
+
+$header-height: 78px;
+$header-height-m: 34px;
+
+
+$full-height: calc(#{var(--app-height)} - #{var(--header-height)});
+$full-height-m: calc(#{var(--app-height)} - #{var(--header-height)});
+$hero-bottom-space: ((100vw - get-grid-vw(12) - vw(6)) / 2);

@@ -1,0 +1,74 @@
+
+.livesearch {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+
+    * {
+        pointer-events: none;
+    }
+
+
+    ul,
+    li {
+        width: 100%;
+    }
+
+    li {
+        height: vw(39px);
+        @include flex(row, flex-start, center);
+        position: relative;
+        background-color: $color-blue-dark-3;
+        transition: background-color 0.3s $ease-custom;
+        margin-top: -1px;
+
+        &:first-of-type::before {
+            content: "";
+            background-color: $color-blue-dark-3;
+            width: 100%;
+            height: 50%;
+            @include full();
+            top: -10px;
+            transition: background-color 0.3s $ease-custom; 
+        }
+
+        &:last-of-type {
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        button {
+            color: $color-primary;
+            opacity: 0.5;
+            font-weight: 400;
+            @include font-size(22, 26);
+            position: relative;
+            z-index: 1;
+            @include full();
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            padding: 0 46px;
+            transition: opacity 0.3s $ease-custom; 
+            pointer-events: auto;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            height: 44px;
+        }
+
+
+        @include hover {
+            
+            &, &::before {
+                background-color: darken($color-blue-dark-3, 5%);
+            }
+
+            button {
+                opacity: 1;
+            }
+        }
+    }
+}

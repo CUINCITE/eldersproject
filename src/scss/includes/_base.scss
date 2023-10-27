@@ -1,0 +1,224 @@
+/*------------------------------------*\
+    #BASE
+\*------------------------------------*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+:root {
+    --app-height: 100vh;
+}
+
+html {
+    background-color: $color-bg;
+    position: relative;
+    height: 100%;
+    font-size: $base-font-size;
+
+    @include breakpoint(desktop) {
+        font-size: vw($base-font-size);
+    }
+
+    @include breakpoint(hd) {
+        font-size: $base-font-size * $size-hd / $size-design;
+    }
+}
+
+body {
+    background: $color-bg;
+    line-height: 150%;
+    text-align: left;
+}
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+
+
+body,
+input,
+textarea,
+button,
+select,
+code,
+pre,
+svg text {
+    @include font-family(text, 400);
+    font-size: inherit;
+    color: $color-text;
+    -webkit-font-smoothing: antialiased;
+}
+
+input,
+textarea,
+button,
+select,
+svg text {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    background: none;
+    border-radius: 0;
+    border: none;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+
+button,
+select,
+label {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: $color-transparent;
+    transition: color $time-fast $easing;
+
+    // span {
+    //     position: relative;
+
+    //     &::after {
+    //         content: "";
+    //         position: absolute;
+    //         bottom: -3px;
+    //         left: 0;
+    //         width: 100%;
+    //         height: 1px;
+    //         background: currentColor;
+    //         transform: scaleX(0);
+    //         transform-origin: 100% 50%;
+    //         transition: transform .25s ease-out .1s;
+    //     }
+    // }
+
+    // @include hover {
+
+    //     span::after {
+    //         transform: scaleX(1);
+    //         transform-origin: 0% 50%;
+    //     }
+    // }
+}
+
+b,
+strong {
+    font-weight: 700;
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+svg {
+    vertical-align: middle;
+}
+
+mark {
+    background-color: transparent;
+}
+
+hr {
+    display: block;
+    border: none;
+    background: none;
+    margin: 0;
+}
+
+sup {
+    vertical-align: super;
+    font-size: 70%;
+}
+
+*:focus {
+    outline: none;
+}
+
+::selection {
+    background: $color-select-bg;
+    color: $color-select-text;
+    text-shadow: none;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+textarea {
+    resize: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.sr-only,
+.screen-reader-text {
+    @extend %visually-hidden;
+}
+
+
+.visually-hidden,
+%visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: none;
+    clip: rect(0 0 0 0);
+}
+
+.mapboxgl-control-container {
+    display: none;
+}
+
+.module-ie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-bg;
+    transform-origin: 100% 100%;
+    display: none;
+
+    .ie & {
+        @include flex(column, center, center);
+    }
+
+    strong {
+        @include font-size(26, 26);
+        margin-bottom: 20px;
+    }
+}
+
+
+[aria-hidden="true"] {
+    display: none;
+}
+
+.grecaptcha-badge {
+    opacity: 0;
+    pointer-events: none;
+}

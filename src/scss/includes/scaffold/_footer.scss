@@ -1,0 +1,7 @@
+
+
+.footer {
+
+    position: relative;
+    @include z-index(footer);
+}

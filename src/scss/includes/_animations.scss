@@ -1,0 +1,64 @@
+/*------------------------------------*\
+    #ANIMATIONS
+\*------------------------------------*/
+
+@keyframes blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+@keyframes ripple {
+    0% { opacity: 0; transform: scale(.5); }
+    35% { opacity: 1; }
+    65% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes dot {
+    0% { opacity: 0; transform: translateX(35px); }
+    30% { opacity: 1; }
+    65% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(0); }
+}
+
+
+@keyframes fade-out {
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(359deg); }
+}
+
+
+@keyframes pulse {
+    0% { transform: scale3d(1, 1, 1); }
+    50% { transform: scale3d(1.1, 1.1, 1.1); }
+    100% { transform: scale3d(1, 1, 1); }
+}
+
+@keyframes up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes draw-loader {
+    from { stroke-dashoffset: 182px * 3; }
+    to { stroke-dashoffset: 182px; }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

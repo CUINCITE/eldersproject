@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": true,
+        "noEmitOnError": true,
+        "esModuleInterop": true,
+        "types" : ["node"],
+        "resolveJsonModule": true,
+		"forceConsistentCasingInFileNames": false,
+		"baseUrl": "src/ts",
+		"paths": {
+			"./*": ["/*"]
+		}
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

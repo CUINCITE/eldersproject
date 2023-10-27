@@ -1,0 +1,55 @@
+
+// number of columns:
+$grid-columns: (
+    phone: 2,
+    tablet: 12,
+    desktop: 12,
+    hd: 12
+);
+
+// spaces between columns
+$grid-gutter: (
+    phone: 8px,
+    tablet: 16px,
+    desktop: 12px,
+    hd: 45px
+);
+
+// column widths
+$grid-column: (
+    phone: 74px,
+    tablet: 60px,
+    desktop: 60px,
+    hd: 60px
+);
+
+// space around first and last column
+$grid-offset: (
+    phone: 28px,
+    tablet: 28px,
+    desktop: 30px,
+    hd: 30px
+);
+
+// default pairs
+$grid-tablet-pairs: (
+    1: 1,
+    2: 4,
+    3: 4,
+    4: 4,
+    5: 4,
+    8: 8,
+    10: 8,
+    12: 8,
+);
+
+$grid-phone-pairs: (
+    1: 1,
+    2: 2,
+    3: 4,
+    4: 4,
+    5: 4,
+    8: 4,
+    10: 4,
+    12: 4,
+);

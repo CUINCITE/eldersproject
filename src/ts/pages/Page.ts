@@ -1,0 +1,187 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable max-classes-per-file */
+import { gsap } from 'gsap/dist/gsap';
+import { Handler } from '../Handler';
+import { IBreakpoint } from '../Breakpoint';
+import { Component } from '../components/Component';
+import { components } from '../Classes';
+
+
+export class PageEvents {
+    public static readonly PROGRESS: string = 'progress';
+    public static readonly COMPLETE: string = 'complete';
+    public static readonly CHANGE: string = 'append';
+}
+
+
+
+export class Page extends Handler {
+
+    public components: Array<Component>;
+
+
+
+    // eslint-disable-next-line no-unused-vars
+    constructor(protected view: HTMLElement, options?) {
+        super();
+        this.view.style.opacity = '0';
+
+        this.components = [];
+        this.buildComponents(this.view.parentNode.querySelectorAll('[data-component]'));
+    }
+
+
+
+    /**
+     * preload necessary assets:
+     * @return {Promise<boolean>} loading images promise
+     */
+    public preload(): Promise<void> {
+        return new Promise<void>(resolve => {
+            this.trigger(PageEvents.COMPLETE);
+            resolve();
+        });
+    }
+
+
+
+    /**
+     * check if any Component can be changed after onState
+     * @return {boolean} returns true when one of the components
+     * takes action in onState function call
+     */
+    public onState(): boolean {
+        let changed: boolean = !!false;
+
+        for (let i = 0; i < this.components.length; i += 1) {
+            const component = this.components[i];
+            const componentChanged: boolean = component.onState();
+            if (!changed && !!componentChanged) {
+                changed = true;
+            }
+        }
+
+        return changed;
+    }
+
+
+
+    /**
+     * page entering animation
+     * @param {number} delay animation delay
+     */
+    public animateIn(delay?: number): Promise<void> {
+        return new Promise(resolve => {
+            for (let i = 0; i < this.components.length; i += 1) {
+                this.components[i].animateIn(i, delay);
+            }
+
+            gsap.to(this.view, {
+                duration: 0.3,
+                opacity: 1,
+                onComplete: () => resolve()
+            });
+        });
+    }
+
+
+
+    /**
+     * page exit animation
+     * (called after new content is loaded and before is rendered)
+     * @return {Promise<boolean>} animation promise
+     */
+    public animateOut(): Promise<void> {
+        // animation of the page:
+        const pageAnimationPromise = new Promise<void>(resolve => {
+            gsap.to(this.view, {
+                duration: 0.2,
+                onComplete: (): void => {
+                    document.body.scrollTop = 0;
+                },
+                opacity: 0,
+            });
+            resolve();
+        });
+
+        // animations of all components:
+        const componentAnimations: Promise<void>[] = this.components.map(obj => obj.animateOut());
+
+        // return one promise waiting for all animations:
+        return new Promise<void>(resolve => {
+            const allPromises: Promise<void>[] = componentAnimations.concat(pageAnimationPromise);
+
+            Promise.all<void>(allPromises).then(() => {
+                resolve();
+            });
+        });
+    }
+
+
+
+    /**
+     * resize handler
+     * @param {[type]} wdt        window width
+     * @param {[type]} hgt        window height
+     * @param {[type]} breakpoint IBreakpoint object
+     */
+    // eslint-disable-next-line no-unused-vars
+    public resize(wdt: number, hgt: number, breakpoint: IBreakpoint, bpChanged?: boolean): void {
+        this.components.forEach(item => {
+            item.resize(wdt, hgt);
+        });
+    }
+
+
+
+    /**
+     * cleanup when closing Page
+     */
+    public destroy(): void {
+        this.components.forEach(item => item.destroy());
+        this.components = [];
+        this.view = null;
+        super.destroy();
+    }
+
+
+
+    protected buildComponents(componentsList: NodeList): void {
+        this.components = [];
+
+        this.components = [...componentsList].map(el => {
+            const element = <HTMLElement>el;
+            const name = element.dataset.component;
+            if (name !== undefined && components[name]) {
+                let options: Object;
+                if (element.dataset.options) {
+                    options = JSON.parse(element.dataset.options);
+                }
+                const component = new components[name](element, options);
+                return component;
+            }
+            window.console.warn('There is no `%s` component!', name);
+        }).filter(Boolean);
+    }
+
+
+
+    private onComponentChange = (el): void => {
+        this.buildComponents(el.querySelectorAll('[data-component]'));
+        this.trigger(PageEvents.CHANGE, el);
+    };
+
+
+
+    // short call
+    // eslint-disable-next-line no-unused-vars
+    private callAll(fn: string, ...args): void {
+        for (let i = 0; i < this.components.length; i += 1) {
+            const component = this.components[i];
+            if (typeof component[fn] === 'function') {
+                component[fn](...args);
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+.button {
+    background: $color-gray;
+    color: $color-bg;
+    padding: 0 18px;
+    display: inline-block;
+    transition: background $time-fast ease-out, color $time-fast ease-out;
+
+    &--outline {
+        border: 1px solid currentColor;
+        background: transparent;
+        color: $color-text;
+    }
+
+    @include hover {
+        @extend %button-hover;
+
+        &.button--outline {
+            background: $color-text;
+            color: $color-bg;
+        }
+    }
+}
+
+%button-hover {
+    background: $color-gray;
+    color: $color-white;
+}

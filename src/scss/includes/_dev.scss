@@ -1,0 +1,22 @@
+/* stylelint-disable */
+
+// grid
+.test-grid {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+
+    #test-grid:checked ~ & { display: block; .grid { outline: 1px dotted pink; } }
+
+    .grid { height: 100%; white-space: nowrap; }
+
+    .grid-1 {
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQIW2NkgAJGEP1JJNUHAAVHAboRzMkCAAAAAElFTkSuQmCC");
+        height: 100%;
+    }
+}
