@@ -4,7 +4,7 @@
     "fields" :
     [
         { "label" : "Kolejność", "field": "nr", "type": "order", "list": true },
-        { "label" : "Tekst", "field": "label:lang", "list": true },
+        { "label" : "Tekst", "field": "label", "list": true },
         { "label" : "Url","field":"url","on_demand":true },
         {"field":"class"},
         { "label" : "Publikacja", "field": "active", "type": "boolean", "list": "edit" }

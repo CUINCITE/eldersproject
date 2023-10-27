@@ -14,15 +14,9 @@ class model_app_api extends model_app
 
     $this->modal_success=[
       'result'=>true,
-      'title'=>$this->getTranslated('api_thank_you'),
-      'message'=>'',
-      'button_title'=>$this->getTranslated('api_back_to_homepage'),
-      'button_login'=>false,
-      'button_href'=>'/'.$this->lang,
     ];
     $this->modal_error=[
-      'result'=>false,
-      'message'=>$this->getTranslated('client_system_error')
+      'result'=>false
     ];
 
 		$data=array('result'=>false,'message'=>'Invalid action: ['.$action.']');
@@ -49,14 +43,7 @@ class model_app_api extends model_app
         } else $result=['result'=>false,'message'=>'<span>Sorry!</span><span>ReCaptcha falied, try again.</span>'];
         break;
 
-        case "interview":
-        case "playlist":
-        case "search":
-        case "download":
-        case "fav":        
-        case "temp":
-        case "interview_import":
-        //  case "interview_import2":
+        case "import":
           
           require_once ("api/model_app_api_".$action.".php");
           $class = 'model_app_api_'.$action;
@@ -74,6 +61,8 @@ class model_app_api extends model_app
             $class= new $class($this,null);
             $result=$class->rest($method,$cfg['s3']);
           }
+
+          
           
           break;        
 

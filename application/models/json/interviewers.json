@@ -12,10 +12,13 @@
     "model": {
         "label": "{{last_name}}, {{first_name}}"
     },
+    "url":{
+        "type":"collection",
+        "slug":"%slug%"
+    },
     "buttons_edit":
     [
-        {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }},
-        {"type":"plugin","plugin":"interviewer_update","label":"Update" }
+        {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }}
     ],
     "buttons_page":
     [
@@ -24,6 +27,7 @@
     "order": "last_name,first_name",
     
     "fields": [
+        {"field":"label"},
         {
             "tab": "Info",
             "label": "First name",
@@ -38,24 +42,13 @@
             "required": true
         },
         {
-            "field":"label",
-            "edit":false,
-            "auto": {
-                "pattern": "{{first_name}} {{last_name}}"
-            }
-        },
-        {
             "label": "Position",
+            "list": true,
             "field": "position",
             "type":"text",
             "settings":{"rows":2}
         },
-        {
-            "label": "Interviews Amount",
-            "field": "amount",            
-            "list":true
-        },
-        
+        {"field":"amount"},
         {
             "label": "Url",
             "field": "slug",

@@ -7,7 +7,7 @@
         "page": "Sessions",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
     },
-    "layout-temp":
+    "layout":
     {
         "type":"grid",
         "count":100,
@@ -66,11 +66,17 @@
             "required": true,
             "type": "date"
         },
-        
+        {
+            "field":"interviewer","label":"Interviewer","type":"select",
+            "source":
+            {
+                "model":"staff","list":true
+            }
+        },
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "temp-list":true,
+            "list":true,
             "settings":{"code":true}
         },
         {
@@ -83,12 +89,12 @@
         },
         {
             "field":"parent","type":"select","hidden":true,
-            "label":"Interview",
             "edit":false,
             "source":
             {
                 "model":"interviews"
-            }
+            },
+            "list":true
         },
         {
             "field": "uid",
@@ -99,7 +105,7 @@
             "label": "Screenshot",
             "hr": true,
             "type": "image",
-            "temp-list":true,
+            "list":true,
             "field": "image",
             "folder": "/public/upload/sessions",
             "folder_preview": "thumb",
@@ -179,9 +185,6 @@
             "extension":"mp3",
             "folder":"/public/upload/sessions/audio"
         },
-        {
-            "field":"filename","label":"WAV filename"
-        },
         
         
         {
@@ -206,6 +209,9 @@
             "type":"text",
             "label":"Transcript data with Tags",
             "settings":{"style":"json","wide":true,"rows":20}
+        },
+        {
+            "field":"filename","label":"WAV filename"
         }
     ]
 }

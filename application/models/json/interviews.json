@@ -4,13 +4,16 @@
         "page": "Interviews",
         "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
     },
-    "layout-temp":
+    "layout":
     {
         "type":"grid",
         "count":100,
-        "html":"{{html.image|raw}}{{html.label}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+        "html":"{{html.image|raw}}{{html.name}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
     },
-    
+    "url":{
+        "type":"interview",
+        "slug":"%slug%"
+    },
 
     "model":{"label":"{{narrators}}"},
     "order": "label",
@@ -51,6 +54,7 @@
                 "url": "/interviews/{{slug}}?preview=true"
             }
         },
+        
         
         {
             "label":"Indexes",
@@ -102,11 +106,6 @@
                 "pattern": "{% for i in interviewer %}{% if loop.index>1 %}, {% endif %}{{interviewer[0].first_name}} {{interviewer[0].last_name}}{% endfor %}"
             }
         },
-        {
-            "hr":true,
-            "field":"locations","label":"Location",
-            "edit":false
-        },
 
         
     {   
@@ -117,7 +116,7 @@
         "field":"image",
         "folder": "/public/upload/interviews",
         "folder_preview": "thumb",
-        "temp-list": {
+        "list": {
             "temp-position_after": "",
             "height": 110,
             "temp-layout": "cover",
@@ -202,7 +201,7 @@
         },
         
         {
-            "field":"incite_id","label":"Incite ID","temp-list":true,
+            "field":"incite_id","label":"Incite ID","list":true,
             "settings":{"code":true}
         },
         {
@@ -216,6 +215,7 @@
             "label":"Status (transcripts)",
             "type": "boolean","list":"read","search":true
         },
+        {"field":"locations"},
         {
             "label": "Publish",
             "field": "active",

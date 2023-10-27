@@ -1,0 +1,17 @@
+<section class="jumbotron text-center">
+    <div class="container">
+      <h2>Interviews</h2>
+      <ol>
+        {% for item in items %}      
+        <li>
+          <a href="{{item.url}}">{{item.label}}</a>
+          <br>{{item.interviewers[0].label}} Collection
+          <br>{{item.locations}}
+          <br>
+          <br><em>{{item.summary}}</em>
+          <br><br>
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>

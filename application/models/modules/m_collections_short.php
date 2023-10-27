@@ -1,6 +1,6 @@
 <?php
 
-class model_app_pages_modules_password_reset_set extends model_app_pages_modules
+class model_app_pages_modules_collections_short extends model_app_pages_modules
 {
 
 	function __construct($parent,$settings)
@@ -11,7 +11,7 @@ class model_app_pages_modules_password_reset_set extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-        $m['key']=$url[1];
+        $m['items']=$this->parent->getJsonModel('interviewers',['active'=>1],false,'label');
 		return $m;
 	}
 

@@ -97,6 +97,13 @@ class controller_app extends _uho_controller
                         $type='hash';
                         break;
 
+                        case "collection":
+                            $v='collections/'.$v['slug'];
+                        break;
+                        case "interview":
+                            $v='interviews/'.$v['slug'];
+                        break;
+
 
 
                     }

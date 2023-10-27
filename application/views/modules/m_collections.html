@@ -1,0 +1,10 @@
+<section class="jumbotron text-center">
+    <div class="container">
+      <h2>Collections</h2>
+      <ol>
+        {% for item in items %}      
+        <li><a href="{{item.url}}">{{item.label}} ({{item.amount}})</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>
