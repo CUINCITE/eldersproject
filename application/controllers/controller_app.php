@@ -65,9 +65,9 @@ class controller_app extends _uho_controller
                         case "url_now":
                         $getNew=@$vv['get'];
                         if (!$getNew) $getNew=[];
-                        if ($vv['setlang']) $getNew['setlang']='true';
+                        if (@$vv['setlang']) $getNew['setlang']='true';
 
-                        if ($getNew) $v=$this->route->getUrlNow(false,'[all]',$getNew,@$v['get_remove'],$vv['lang']);
+                        if ($getNew) $v=$this->route->getUrlNow(false,'[all]',$getNew,@$v['get_remove'],@$vv['lang']);
                             else $v=$this->route->getUrlNow(false,null,null,null,$vv['lang']);
 
                         $v=rtrim($v,'/');

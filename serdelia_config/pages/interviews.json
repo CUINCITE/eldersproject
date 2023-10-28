@@ -93,10 +93,17 @@
         {
             "label":"Interviewers (full text)",
             "field":"interviewer_name",
-            "hidden":true,
             "edit":false,
             "auto": {
-                "pattern": "{% for i in interviewer %}{% if loop.index>1 %}, {% endif %}{{interviewer[0].first_name}} {{interviewer[0].last_name}}{% endfor %}"
+                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name}} {{interviewer.last_name}}{% endfor %}"
+            }
+        },
+        {
+            "label":"Interviewers (full text, sort)",
+            "field":"interviewer_name_sort",
+            "edit":false,
+            "auto": {
+                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
             }
         },
         {

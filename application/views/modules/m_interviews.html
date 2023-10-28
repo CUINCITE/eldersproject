@@ -24,26 +24,21 @@
       <table class="table">
         <thead>
         <tr style="background:white">
-          <td>Sort</td>
-          <td>Collection</td>
-          <td>Locations</td>
+          <td><a href="{{sort.url_narrator}}">Narrator {{sort.arrow_narrator}}</a></td>
+          <td><a href="{{sort.url_collections}}">Collections {{sort.arrow_collections}}</a></td>
+          <td><a href="{{sort.url_locations}}">Locations {{sort.arrow_locations}}</a></td>
         </tr>
       </thead>
       <tbody>
-        {% for item in items %}      
-        <tr>          
-          <a href="{{item.url}}">
-            <td>{{item.label}}</td>
+        {% for item in items %}              
+        <tr>                    
+            <td><a href="{{item.url}}">{{item.label}}</a></td>
             <td>{{item.interviewers[0].label}} Collection</td>
             <td>{{item.locations}}</td>
-            {#<br>
-            <br><em>{{item.summary}}</em>
-            <br><br>#}
-          </a>
         </tr>
-        {% endfor %}
+      {% endfor %}
       </tbody>
-      </table>>
+      </table>
       {% else %}
         <h3>No items matching selected criteria.</h3>
       {% endif %}

@@ -34,12 +34,74 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 		}
 
 		/*
+			Sort
+		*/
+		$sort=@$this->settings['get']['sort'];		
+		if (!$sort) $sort='narrators';
+		if ($sort[0]=='!') { $desc=true; $sort=substr($sort,1); } else $desc=false;
+		
+		$m['sort']=[];
+		$m['sort']['url_narrator']=$this->getSort('narrators',$sort,$desc);
+		$m['sort']['url_locations']=$this->getSort('locations',$sort,$desc);
+		$m['sort']['url_collections']=$this->getSort('collections',$sort,$desc);
+		
+		$sort_model='label_sort';
+
+		switch ($sort)
+		{
+			case "narrators":
+				$sort_model='label_sort';
+				$m['sort']['arrow_narrator']='↓';
+				if ($desc)
+				{
+					$sort_model.=' DESC';
+					$m['sort']['arrow_narrator']='↑';
+				}
+			break;
+			case "collections":
+				$sort_model='interviewer_name';
+				$m['sort']['arrow_collections']='↓';
+				if ($desc)
+				{
+					$sort_model.=' DESC';
+					$m['sort']['arrow_collections']='↑';
+				}
+			break;
+			case "locations":
+				$sort_model='locations';
+				$m['sort']['arrow_locations']='↓';
+				if ($desc)
+				{
+					$sort_model.=' DESC';
+					$m['sort']['arrow_locations']='↑';
+				}
+			break;
+		}
+
+		
+		
+
+		/*
 			Get Interviews
 		*/
 
-        $m['items']=$this->parent->getJsonModel('interviews',$filters,false,'label');
+        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model);
         
 		return $m;
+	}
+
+	private function getSort($item,$sort_now,$desc_now)
+	{
+		
+		if ($item==$sort_now)
+		{			
+			$sort=$sort_now;
+			if (!$desc_now) $sort='!'.$sort;
+		}
+			else $sort=$item;
+
+		$url=['type'=>'url_now','get'=>['sort'=>$sort]];
+		return $url;
 	}
 
 	private function filterUpdate($items,$filters)
