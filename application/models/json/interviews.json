@@ -216,6 +216,8 @@
             "type": "boolean","list":"read","search":true
         },
         {"field":"locations"},
+        {"field":"interviewer_location"},
+        {"field":"narrator_location"},
         {
             "label": "Publish",
             "field": "active",

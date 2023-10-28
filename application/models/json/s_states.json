@@ -1,0 +1,9 @@
+{
+    "table": "s_states",
+    "order": "label",
+    "fields" :
+    [
+        {"field":"label"},
+        {"field":"slug"}
+    ]
+}

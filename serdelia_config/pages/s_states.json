@@ -1,0 +1,10 @@
+{
+    "table": "s_states",
+    "order": "label",
+    "model":{"label":"{{label}} ({{slug}})"},
+    "fields" :
+    [
+        {"field":"label"},
+        {"field":"slug"}
+    ]
+}

@@ -1,8 +1,6 @@
 {
     "table": "sessions",
-    "filters": {
-        "parent": "%1%"
-    },
+    
     "label": {
         "page": "Sessions",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
@@ -82,6 +80,14 @@
         {
             "field":"narrator_location",
             "label":"Location (narrator)"
+        },
+        {
+            "field":"narrator_state",
+            "type":"select",
+            "source":
+            {
+                "model":"s_states"
+            }
         },
         {
             "field":"interviewer_location",

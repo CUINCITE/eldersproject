@@ -78,6 +78,14 @@
             "label":"Location (narrator)"
         },
         {
+            "field":"narrators_state","label":"Narrators state",
+            "type":"select",
+            "source":
+            {
+                "model":"s_states"
+            }
+        },
+        {
             "field":"interviewer_location",
             "label":"Location (interviewer)"
         },

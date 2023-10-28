@@ -104,10 +104,16 @@
         },
         {
             "hr":true,
-            "field":"locations","label":"Location",
-            "edit":false
+            "field":"locations","label":"Location"
         },
-
+        {
+            "field":"narrators_states","label":"Narrators states",
+            "type":"elements",
+            "source":
+            {
+                "model":"s_states"
+            }
+        },
         
     {   
         "tab":"Image",

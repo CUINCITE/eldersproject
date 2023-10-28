@@ -16,12 +16,56 @@ class model_app_api_import
 
 	public function rest($method, $params)
 	{
-        $action='interviews';
+        //$action='interviews';
         //$action='narrators';
         //$action='sessions';
+        $action='states_allocate';
 
         switch ($action)
         {
+            case "states_allocate":
+                $states=$this->parent->getJsonModel('s_states');
+                $sessions=$this->parent->query('SELECT id,narrator_location FROM sessions WHERE narrator_location!=""');
+                foreach ($sessions as $k=>$v)
+                {
+                    $vv=explode(',',$v['narrator_location']);
+                    $state=trim(array_pop($vv));
+                    if ($state && strlen($state)==2)
+                    {
+                        $i=_uho_fx::array_filter($states,'slug',$state,['first'=>true]);
+                        if ($i)
+                        {
+                            $r=$this->parent->putJsonModel('sessions',['narrator_state'=>$i['id']],['id'=>$v['id']]);
+                            if (!$r) exit('error');
+                        } else echo('not found='.$vv[1].' ');
+                    }
+                }                
+                exit('!');
+
+                break;
+            case "states_add":
+                $s=[];$ss=[];
+                $states=$this->parent->query('SELECT id,narrator_location FROM sessions WHERE narrator_location!=""');
+                foreach ($states as $k=>$v)
+                {
+                    $v=explode(';',$v['narrator_location']);
+                    foreach ($v as $kk=>$vv)
+                    {
+                        $vv=trim($vv);
+                        if ($vv)
+                        {
+                            $ss[$vv]=1;
+                            $vv=explode(',',$vv);
+                        }
+                        $vv=@trim($vv[1]);
+                        if (strlen($vv)==2) $s[$vv]=1;
+                    }                    
+                }
+                
+                $this->parent->queryOut('TRUNCATE TABLE s_states');
+                foreach ($s as $k=>$v)
+                    $this->parent->postJsonModel('s_states',['slug'=>$k,'active'=>1]);
+                break;
             case "narrators":
             
             $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/csv/interviews.csv',';');
