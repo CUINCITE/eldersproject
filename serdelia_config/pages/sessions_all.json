@@ -12,6 +12,16 @@
         "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
     },
     "order": "nr",
+    "buttons_page":
+    [
+        {
+            "label":"Update Index",
+            "icon":"index",
+            "hhidden":true,
+            "plugin":"interviews_update"
+        },
+        {"plugin":"refresh"}
+    ],
     "buttons_edit": [
         {
             "hhidden": true,
