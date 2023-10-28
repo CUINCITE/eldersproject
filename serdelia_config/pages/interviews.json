@@ -12,7 +12,7 @@
     },
     
 
-    "model":{"label":"{{narrators}}"},
+    "model":{"label":"{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"},
     "order": "label",
     "buttons_page":
     [
