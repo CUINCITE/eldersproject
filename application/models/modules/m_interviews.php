@@ -59,7 +59,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 				}
 			break;
 			case "collections":
-				$sort_model='interviewer_name';
+				$sort_model='interviewer_name_sort';
 				$m['sort']['arrow_collections']='↓';
 				if ($desc)
 				{

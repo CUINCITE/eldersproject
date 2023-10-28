@@ -19,7 +19,7 @@
             "field":"interviewer_name"
         },
 
-        
+        {"field":"interviewer_name_sort"},
         
         {
             "tab":"Metadata",
