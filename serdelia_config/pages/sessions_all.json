@@ -1,6 +1,6 @@
 {
     "table": "sessions",
-    "disable":["add","remove","edit"],
+    "disable":["add","remove"],
     "label": {
         "page": "Sessions",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
