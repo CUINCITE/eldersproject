@@ -14,29 +14,7 @@
         "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
     },
     "order": "nr",
-    "buttons_edit": [
-        {
-            "hhidden": true,
-            "plugin": "import_cover",
-            "label": "Import from Vimeo",
-            "params": {
-                
-                "type": "vimeo",
-                "field_mp4": "vimeo_source",
-                "field_poster": "image",
-                "field_vimeo": "vimeo_id",
-                "field_duration":"duration",
-                "field_vtt":"subtitles"
-            }
-        },
-        {
-            "plugin":"api_single",
-            "label":"Encode transcript",
-            "icon":"refresh",
-            "params":{
-                "url":"/api/interview_import?type=cms&session={{id}}"
-            }
-        },
+    "buttons_edit": [        
         {
             "label":"Helper",
             "plugin":"session_update",
@@ -79,7 +57,8 @@
             "list":true
         },
         {
-            "field":"narrator_state","label":"Narrators state",
+            "field":"narrator_state",
+            "label":"Location (narrator) State",
             "type":"select",
             "source":
             {
@@ -92,7 +71,8 @@
             "list":true
         },
         {
-            "field":"parent","type":"select","hidden":true,
+            "field":"parent","type":"select",
+            "hidden":true,
             "label":"Interview",
             "edit":false,
             "source":
@@ -105,38 +85,7 @@
             "type": "uid",
             "list": "read"
         },
-        {
-            "label": "Screenshot",
-            "hr": true,
-            "type": "image",
-            "temp-list":true,
-            "field": "image",
-            "folder": "/public/upload/sessions",
-            "folder_preview": "thumb",
-            "filename": "%uid%",
-            "images": [
-                {
-                    "folder": "original",
-                    "label": "Original image"
-                },
-                {
-                    "folder": "desktop",
-                    "label": "Resized image",
-                    "width": 640,
-                    "height": 360,
-                    "crop": true,
-                    "retina": true
-                },
-                {
-                    "folder": "mobile",
-                    "label": "Resized image",
-                    "width": 320,
-                    "height": 180,
-                    "crop": true,
-                    "retina": true
-                }
-            ]
-        },
+        
         {
             "label":"Languages","type":"checkboxes",
             "field":"languages",
@@ -159,20 +108,7 @@
         {
             "field":"duration",
             "label":"Duration (seconds)"
-        },
-        {
-            "header":"Video",
-            "field": "vimeo_id",
-            "label": "Vimeo ID",
-            "settings":{"code":true},
-            "hr": true
-        },
-        
-        {
-            "field": "vimeo_source",
-            "label": "Vimeo Source",
-            "type": "json"
-        },
+        },        
         {
             "field": "subtitles",
             "label": "Subtitles (VTT)",
@@ -181,8 +117,6 @@
             "folder":"/public/upload/sessions/subtitles"
         },
         {
-            "header":"Audio",
-            "hr":true,
             "field": "audio",
             "label": "Audio file (MP3)",
             "type": "file",
@@ -208,14 +142,6 @@
             "type": "file",
             "extension":"docx",
             "folder":"/public/upload/sessions/transcripts"
-        },
-        {
-            "tab":"Transcript with Tags",
-            "field":"transcript_tags",
-            "edit":false,
-            "type":"text",
-            "label":"Transcript data with Tags",
-            "settings":{"style":"json","wide":true,"rows":20}
         }
     ]
 }

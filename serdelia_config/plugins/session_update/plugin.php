@@ -27,6 +27,7 @@ class serdelia_plugin_session_update
         $duration=0;
         foreach ($items as $k=>$v)
             $duration+=$v['duration'];
+
         /*
             states
         */
@@ -37,9 +38,23 @@ class serdelia_plugin_session_update
             $states[]=$v['narrator_state']['id'];
         
         /*
+            locations
+        */
+        $locations=[];
+        foreach ($items as $k=>$v)
+        if ($v['narrator_location'])
+            $locations[]=$v['narrator_location'];
+        $locations=array_unique($locations);
+        $locations=implode(', ',$locations);
+        
+        /*
             save
         */
-        $data=['duration'=>$duration,'narrators_states'=>$states];
+        $data=[
+            'duration'=>$duration,
+            'locations'=>$locations,
+            'narrators_states'=>$states
+        ];
         
             $this->cms->putJsonModel('interviews',
                 $data,
