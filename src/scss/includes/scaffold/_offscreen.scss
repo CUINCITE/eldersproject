@@ -1,0 +1,11 @@
+/*------------------------------------*\
+    #OFFSCREEN
+\*------------------------------------*/
+
+.offscreen {
+    @include full(fixed);
+    @include z-index(offscreen);
+    background: $color-bg;
+    display: none;
+}
+

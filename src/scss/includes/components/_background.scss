@@ -1,0 +1,8 @@
+.background {
+    @include full;
+
+    &__img {
+        @include full;
+        object-fit: cover;
+    }
+}

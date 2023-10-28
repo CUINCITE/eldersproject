@@ -1,0 +1,11 @@
+.menu {
+    @include flex(row, flex-start, flex-start);
+    flex-direction: column;
+    @include z-index(menu);
+    position: fixed;
+    right: 100px;
+    display: none;
+    opacity: 0;
+
+
+}

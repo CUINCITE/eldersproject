@@ -1,0 +1,12 @@
+.map {
+
+
+    &__wrap {
+        width: 100%;
+        height: var(--app-height);
+
+        @include breakpoint(not-desktop) {
+            height: calc(var(--app-height) * .56);
+        }
+    }
+}

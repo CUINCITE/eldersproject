@@ -1,0 +1,58 @@
+{
+    "paths": {
+        "sass": {
+            "main": "src/scss/main.scss",
+            "critical": "src/scss/critical.scss",
+            "dest": "public/theme"
+        },
+        "styles": {
+            "main": ["src/scss/**/*.scss", "!src/scss/critical.scss"],
+            "critical": ["src/scss/critical.scss"]
+        },
+        "critical": {
+            "app": "application/views/scaffold",
+            "workspace": "workspace/includes"
+        },
+        "scripts": {
+            "ts": "src/ts/**/*.ts",
+            "mainTs": "src/ts/Site.ts",
+            "definitions": "src/ts/**/*.d.ts",
+            "plugins": "src/js/plugins/*.js",
+            "libs": [
+                "node_modules/screenfull/dist/screenfull.js",
+                "node_modules/twig/twig.min.js"
+            ],
+            "dest": "public/theme"
+        },
+        "images": {
+            "source": "src/images/*.+(jpg|png|gif|jpeg)",
+            "dest": "public/theme/images"
+        },
+        "tinypng": {
+            "files": "src/images-compressed/**/*.+(jpg|png|gif)",
+            "folder": "src/images-compressed"
+        },
+        "svg": {
+            "inline": "src/images/svg/inline/*.svg",
+            "nomin":  "src/images/svg/nomin/*.svg",
+            "sprite":  "src/images/svg/sprite/*.svg",
+            "dest":   "public/theme/images/svg",
+            "app":   "application/views/svg"
+        },
+        "fonts": {
+            "source": "src/fonts/**/*",
+            "dest": "public/theme/fonts"
+        },
+        "mapdata": {
+            "source": "src/mapdata/*",
+            "dest": "public/theme/mapdata"
+        },
+        "favicons": {
+            "source": "src/favicons/**/*",
+            "dest": "public/theme/favicons"
+        },
+        "json": ["workspace/**/*.json"],
+        "html": ["index.php", "index.html", "workspace/**/*.html", "workspace/**/*.json", "workspace/**/*.php", "application/views/**/*.html"]
+    },
+    "proxyURL": "http://elder.lh"
+}

@@ -1,0 +1,198 @@
+.player {
+
+
+    &__bar {
+        position: absolute;
+        top: 100%;
+        transform: translateY(0);
+        transform-origin: center bottom;
+        transition: transform ($time * 2) $easing;
+        width: 100%;
+        // overflow: hidden;
+        height: $bar-height;
+        z-index: 1;
+
+        @include breakpoint(phone) {
+            display: none;
+            transform: translateY(0) !important;
+        }
+
+        &::before,
+        &::after {
+            @include full;
+            content: "";
+            display: block;
+            background: rgba($bar-color, $bar-opacity);
+        }
+
+        &::before { display: none; } // displayed for playlist bg
+
+
+        .player.has-playlist & {
+            &::before { display: block; width: 20%; width: 318px; }
+            &::after { left: calc(20% + 2px); left: 320px; }
+
+            @include breakpoint(tablet) {
+                &::before { width: 258px; }
+                &::after { left: 260px; }
+            }
+        }
+
+
+        .player--audio & {
+            position: relative;
+            top: auto;
+        }
+    }
+
+
+
+    &__controls {
+        display: table;
+        width: 80%;
+        height: inherit;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+
+        > * {
+            height: inherit;
+            display: table-cell;
+            position: relative;
+            cursor: pointer;
+            vertical-align: middle;
+            padding: 0 10px;
+            width: 1px;
+            transition: width $time-fast $easing, padding $time-fast $easing, opacity $time-fast $easing;
+            overflow: hidden;
+
+            // &:first-child { padding-left: 20px; }
+            // &:last-child { padding-right: 20px; }
+        }
+
+
+
+        .player.has-playlist & {
+            margin-right: 0;
+            width: calc(100% - 320px);
+
+            @include breakpoint(tablet) {
+                width: calc(100% - 260px);
+            }
+        }
+    }
+
+
+
+    &__playpause {
+        opacity: $button-opacity;
+        width: 40px;
+
+        @include hover { opacity: 1; }
+    }
+
+
+
+    &__full {
+        width: 50px;
+        opacity: $button-opacity;
+
+        @include hover { opacity: 1; }
+
+        .player--audio & { display: none; }
+    }
+
+
+
+    &__prev,
+    &__next {
+
+        &::after {
+            content: "";
+            display: block;
+            border-width: 1px 1px 0 0;
+            border-color: currentColor;
+            border-style: solid;
+            width: 9px;
+            height: 9px;
+            opacity: $button-opacity;
+        }
+    }
+
+    &__prev::after { transform: rotate(-135deg); }
+    &__next::after { transform: rotate(45deg); }
+
+
+
+    &__time {
+        @include font-size(12, 40);
+        font-weight: 300;
+        cursor: default;
+        width: 70px; // must have static width to avoid jumping while time is changing
+        white-space: nowrap;
+        text-align: center;
+        color: $color-white;
+
+        em { font-style: normal; }
+        strong { font-weight: 300; }
+
+        @include breakpoint(desktop) { line-height: 44px; }
+
+        &:nth-last-child(2) {
+            padding-right: 0;
+            width: 60px;
+        }
+    }
+
+
+    &__scrubber-wrap { width: auto; }
+
+
+    &__scrubber {
+        position: relative;
+        height: 100%;
+        opacity: $scrubber-opacity;
+
+        &::before {
+            background: $scrubber-color;
+            content: "";
+            height: $scrubber-height;
+            top: 50%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            opacity: 0.1;
+            transform: translate(0, -#{$scrubber-height * 0.5});
+        }
+
+        > div {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: $scrubber-height;
+            width: 0%;
+            transition: $time-fast $easing;
+            transform: translate(0, -#{$scrubber-height * 0.5});
+        }
+    }
+
+
+
+    &__loaded {
+        background: $loaded-color;
+        opacity: $loaded-opacity;
+    }
+
+
+
+    &__progress {
+        background: $progress-color;
+        opacity: $progress-opacity;
+    }
+
+
+    .player:not(.has-cc) &__cc {
+        display: none;
+    }
+}

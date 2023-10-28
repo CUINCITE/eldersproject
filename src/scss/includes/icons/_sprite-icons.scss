@@ -1,0 +1,40 @@
+
+/* stylelint-disable */
+$sprites: (
+    calendar: (23, 22),
+    instagram: (16, 16),
+    facebook: (9, 18),
+    youtube: (17, 13),
+    twitter: (18, 15),
+    message: (16, 15),
+    linkedin: (16, 16),
+    share: (18, 16),
+    link: (19, 19),
+    print: (22, 16),
+    pin: (14, 22),
+    warn: (19, 16),
+);
+
+[class^=sprite-] {
+    fill: currentColor;
+    position: relative;
+    html.windows & { top: -2px; }
+}
+
+
+@each $sprite-label, $sprite-params in $sprites {
+    .sprite-#{$sprite-label} {
+        width: #{nth($sprite-params, 1)}px;
+        height: #{nth($sprite-params, 2)}px;
+    }
+}
+
+
+a,
+button {
+    @include hover {
+        @each $sprite-label, $sprite-params in $sprites {
+            .sprite-#{$sprite-label} { @extend %sprite-#{$sprite-label}-hover !optional; }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+{
+  "customSyntax": "postcss",
+  "plugins": [
+    "stylelint-selector-bem-pattern"
+  ],
+  "rules": {
+    "plugin/selector-bem-pattern": {
+      "componentName": "[A-Z]+",
+      "componentSelectors": {
+        "initial": "^\\.{componentName}(?:-[a-z]+)?$",
+        "combined": "^\\.combined-{componentName}-[a-z]+$"
+      },
+      "utilitySelectors": "^\\.util-[a-z]+$"
+    },
+    "at-rule-no-vendor-prefix": true,
+    "at-rule-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignoreAtRules": ["include", "import"]
+    }],
+    "block-no-empty": true,
+    "block-closing-brace-empty-line-before": "never",
+    "comment-empty-line-before": "always",
+    "custom-property-empty-line-before": [ "always", {
+      "except": [
+        "after-custom-property",
+        "first-nested"
+      ]
+    }],
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-colon-space-after": "always",
+    "declaration-colon-space-before": "never",
+    "font-weight-notation": "numeric",
+    "function-comma-space-after": "always",
+    "function-parentheses-space-inside": "never",
+    "function-url-quotes": "always",
+    "indentation": 4,
+    "max-empty-lines": 3,
+    "media-feature-colon-space-after": "always",
+    "media-feature-colon-space-before": "never",
+    "media-feature-name-no-vendor-prefix": true,
+    "media-feature-parentheses-space-inside": "never",
+    "no-duplicate-selectors": true,
+    "number-leading-zero": "never",
+    "rule-empty-line-before": ["always-multi-line"],
+    "selector-attribute-brackets-space-inside": "never",
+    "selector-attribute-operator-space-after": "never",
+    "selector-attribute-quotes": "always",
+    "selector-combinator-space-after": "always",
+    "selector-no-vendor-prefix": true,
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "selector-pseudo-element-colon-notation": "double",
+    "string-quotes": "double",
+    "value-list-comma-newline-after": "always-multi-line",
+    "value-list-comma-space-after": "always-single-line",
+    "value-list-comma-space-before": "never",
+    "value-list-max-empty-lines": 0,
+    "value-no-vendor-prefix": true
+  }
+}

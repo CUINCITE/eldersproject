@@ -1,0 +1,13 @@
+.module {
+
+    // common
+
+    &--full-height {
+        height: var(--app-height);
+
+        .grid,
+        [class*="grid-"] {
+            height: 100%;
+        }
+    }
+}

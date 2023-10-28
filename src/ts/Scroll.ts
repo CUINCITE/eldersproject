@@ -1,0 +1,212 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Component } from './components/Component';
+import { browser } from './Site';
+import { getAnimation as getAnimation } from './Animate';
+import { animations, scrolls } from './animations/all';
+
+interface IScrollData {
+    el: HTMLElement;
+    type: string;
+    delay?: number;
+    component?: Component;
+}
+
+interface IParallaxData {
+    el: HTMLElement;
+    parallax: number,
+    delay?: number;
+    component?: Component;
+}
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+
+export default class Scroll {
+
+    public static matchMedia: any = null;
+
+    private static enabled: boolean = true;
+    private static scrollCache: {[key: string]: number} = {};
+
+
+    public static resize(): void {
+        ScrollTrigger.refresh();
+    };
+
+
+    public static enable(): void {
+        Scroll.enabled = true;
+    }
+
+
+    public static disable(): void {
+        Scroll.enabled = false;
+    }
+
+
+    public static start(): void {
+        window.addEventListener('scroll', Scroll.onScroll);
+    }
+
+
+    public static stop(): void {
+        window.removeEventListener('scroll', Scroll.onScroll);
+    }
+
+
+
+    public static resetScrollCache(pathname): void {
+        Scroll.scrollCache[pathname] = 0;
+    }
+
+
+    private static onScroll = () => {
+        if (!Scroll.enabled) { return; }
+        Scroll.scrollCache[window.location.pathname] = window.scrollY;
+    };
+
+
+
+    public static scrollTo = async ({ el, y, duration = 1, ease = 'power3.out', offsetY = 0 }: {
+        el?: HTMLElement | string;
+		offsetY?: number;
+		duration?: number;
+		ease?: string;
+		y?: number;
+    }): Promise<void> => new Promise(resolve => {
+        gsap.to(window, {
+            scrollTo: {
+                y: y ?? el,
+                x: 0,
+                offsetY,
+            },
+            duration,
+            ease,
+            onComplete: () => resolve(),
+        });
+    });
+
+
+
+    public static scrollToTop = async (fast?: boolean): Promise<void> => {
+        await Scroll.scrollTo({
+            y: 0,
+            el: '[data-page]',
+            duration: fast ? 0 : 2,
+        });
+    };
+
+
+
+    public static scrollToCached(): void {
+        const y = Scroll.scrollCache[window.location.pathname] || 0;
+        Scroll.scrollTo({ y, duration: 0 });
+    }
+
+
+
+    public async load(): Promise<void> {
+        (ScrollTrigger as any).clearScrollMemory('manual');
+        this.bindHashClick();
+        this.setup();
+        Scroll.resize();
+    }
+
+
+
+    public setup(): void {
+
+        console.log('scroll setup', gsap.version)
+
+        if (browser.safari) { return; }
+
+        Scroll.matchMedia = (gsap as any).matchMedia();
+        Scroll.matchMedia.add('(min-width: 1024px)', () => {
+
+
+            // general animations:
+            [...document.querySelectorAll('[data-animation]')]
+            .map((el: HTMLElement) => <IScrollData>{
+                el,
+                type: el.dataset.animation,
+                delay: parseInt(el.dataset.delay, 10) || 0,
+            }).forEach((item: IScrollData) => {
+                if (animations[item.type]) {
+                    ScrollTrigger.create({
+                        trigger: item.el,
+                        toggleActions: 'play pause resume reset',
+                        animation: getAnimation(item.type, item.el, item.delay || 0)
+                    });
+                } else {
+                    console.warn(`animation type "${item.type}" does not exist`, item.el);
+                }
+            });
+
+
+            // custom animations:
+            [...document.querySelectorAll('[data-scroll]')]
+            .map((el: HTMLElement) => <IScrollData>{
+                el,
+                type: el.dataset.scroll,
+                delay: parseInt(el.dataset.delay, 10) || 0
+            }).forEach((item: IScrollData) => {
+                if (scrolls[item.type]) {
+                    scrolls[item.type](item.el, item.delay);
+                } else {
+                    console.warn(`scroll type "${item.type}" does not exist`, item.el);
+                }
+            });
+
+
+            // parallaxes:
+            [...document.querySelectorAll('[data-parallax]')]
+            .map((el: HTMLElement) => <IParallaxData> {
+                el,
+                parallax: parseInt(el.dataset.parallax, 10),
+                delay: el.dataset.delay || 0
+            }).forEach((item: IParallaxData) => {
+                gsap.fromTo(item.el, {
+                    y: -item.parallax * window.innerWidth / 1280
+                }, {
+                    y: () => item.parallax * window.innerWidth / 1280,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: item.el,
+                        scrub: true,
+                    }
+                });
+            });
+        });
+    };
+
+
+
+    public revertAnimations(): void {
+        Scroll.matchMedia?.revert();
+    };
+
+
+
+    private bindHashClick(): void {
+        document.querySelectorAll('a[href^="#"]:not(a[href="#"])').forEach((el: HTMLAnchorElement) => {
+            el.addEventListener('click', this.onHashClickHandler);
+        });
+    };
+
+
+
+    private onHashClickHandler = e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const hash = (e.currentTarget as HTMLAnchorElement).hash;
+        const target = document.querySelector(hash) as HTMLElement;
+
+        target
+            ? Scroll.scrollTo({ el: target })
+            : console.warn('There is no %s element', hash);
+    }
+}
