@@ -32,19 +32,19 @@ class serdelia_plugin_interview_update
 
         $status_transcripts=0;
         $status_video=0;
+        /*
         if ($items)
         {
             $status_video=1;
             $status_transcripts=1;
             foreach ($items as $k=>$v)
-            {
-                
+            {                
                 $status_transcripts=($status_transcripts && strlen($v['transcript_tags'])>100);
                 $status_video=($status_video && !empty($v['vimeo_source']));
             }
             
         }
-
+*/
         $val=[
             'status_transcripts'=>intval($status_transcripts),
             'status_video'=>intval($status_video)

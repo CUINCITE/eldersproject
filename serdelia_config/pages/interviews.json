@@ -62,11 +62,21 @@
         {
             "label": "Narrators (full text)",
             "edit":false,
-            "hidden":true,
+            "hhidden":true,
             "field": "label",
             "list":true,
             "auto": {
-                "pattern": "{% for item in narrators %}{{item.surname}}, {{item.name}}{% endfor %}"
+                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
+            }
+        },
+        {
+            "label": "Narrators (full text, sort)",
+            "edit":false,
+            "hhidden":true,
+            "field": "label_sort",
+            "list":true,
+            "auto": {
+                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
             }
         },
 

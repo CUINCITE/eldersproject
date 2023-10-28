@@ -55,7 +55,7 @@
             }
         },
         
-        
+        {"field":"label_sort"},
         {
             "label":"Indexes",
             "icon":"index",
@@ -218,6 +218,15 @@
         {"field":"locations"},
         {"field":"interviewer_location"},
         {"field":"narrator_location"},
+        {
+            "field":"narrators_states","label":"Narrators states",
+            "type":"elements",
+            "source":
+            {
+                "model":"s_states"
+            }
+        },
+        
         {
             "label": "Publish",
             "field": "active",

@@ -88,20 +88,16 @@
             "list": "read"
         },
         {
+            "field":"locations"
+        },
+        {
             "tab":"Image",
             "label": "Cover",
             "type": "image",
             "field": "image",
-            "extensions":["png"],
             "settings":{"webp":true},
             "folder": "/public/upload/interviewers",
             
-            "temp-list": {
-                "height": 140,
-                "folder": "desktop_x2",
-                "temp-layout": "cover",
-                "src_blank": "blank.png"
-            },
             "filename": "%uid%",
             "images": [
                 {

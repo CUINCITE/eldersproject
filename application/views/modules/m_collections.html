@@ -1,9 +1,15 @@
 <section class="jumbotron text-center">
     <div class="container">
       <h2>Collections</h2>
-      <ol>
+        <h4>{{text}}</h4>
+        
         {% for item in items %}      
-        <li><a href="{{item.url}}">{{item.label}} ({{item.amount}})</a></li>
+        <hr>
+        <p>{{loop.index}}.
+          {% if item.image.mobile %}<img height=50 src="{{item.image.mobile}}" style="margin:20px">{% endif %}
+          <a href="{{item.url}}">{{item.label}} ({{item.amount}})</a>
+        <br><small>{{item.locations}}</small></p
+        <p>{{item.lead}}</p>
         {% endfor %}
       </ol>
     </div>
