@@ -37,7 +37,7 @@
             {"label":"Narrators","page":"narrators"},
             {"label":"Interviewers","page":"interviewers"},            
             {},
-            {"label":"Sessions","page":"sessions_raw"},
+            {"label":"Sessions (all)","page":"sessions_all"},
             {"label":"Narrators Categories","page":"narrators_categories"}
             
         ]

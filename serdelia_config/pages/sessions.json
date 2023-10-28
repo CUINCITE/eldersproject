@@ -41,7 +41,7 @@
             "label":"Helper",
             "plugin":"session_update",
             "on_update":true,
-            "hidden":true
+            "temp-hidden":true
         },
         {
             "type": "plugin",
@@ -75,10 +75,11 @@
         },
         {
             "field":"narrator_location",
-            "label":"Location (narrator)"
+            "label":"Location (narrator)",
+            "list":true
         },
         {
-            "field":"narrators_state","label":"Narrators state",
+            "field":"narrator_state","label":"Narrators state",
             "type":"select",
             "source":
             {
@@ -87,7 +88,8 @@
         },
         {
             "field":"interviewer_location",
-            "label":"Location (interviewer)"
+            "label":"Location (interviewer)",
+            "list":true
         },
         {
             "field":"parent","type":"select","hidden":true,

@@ -1,11 +1,11 @@
 {
     "table": "sessions",
-
+    "disable":["add","remove","edit"],
     "label": {
         "page": "Sessions",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
     },
-    "layout":
+    "layout-temp":
     {
         "type":"grid",
         "count":100,
@@ -28,8 +28,25 @@
             }
         },
         {
+            "plugin":"api_single",
+            "label":"Encode transcript",
+            "icon":"refresh",
+            "params":{
+                "url":"/api/interview_import?type=cms&session={{id}}"
+            }
+        },
+        {
             "label":"Helper",
-            "plugin":"session_update"
+            "plugin":"session_update",
+            "on_update":true,
+            "temp-hidden":true
+        },
+        {
+            "type": "plugin",
+            "plugin": "preview",
+            "params": {
+                "url": "/interviews/{{parent.slug}}?preview=true"
+            }
         }
     ],
     "fields": [
@@ -47,34 +64,40 @@
             "required": true,
             "type": "date"
         },
-        {
-            "field":"interviewer","label":"Interviewer","type":"select",
-            "source":
-            {
-                "model":"staff","list":true
-            }
-        },
+        
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "list":true
+            "temp-list":true,
+            "settings":{"code":true}
         },
         {
             "field":"narrator_location",
-            "label":"Location (narrator)"
+            "label":"Location (narrator)",
+            "list":true
+        },
+        {
+            "field":"narrator_state","label":"Narrators state",
+            "type":"select",
+            "source":
+            {
+                "model":"s_states"
+            }
         },
         {
             "field":"interviewer_location",
-            "label":"Location (interviewer)"
+            "label":"Location (interviewer)",
+            "list":true
         },
         {
             "field":"parent","type":"select","hidden":true,
+            "label":"Interview",
+            "list":true,
             "edit":false,
             "source":
             {
                 "model":"interviews"
-            },
-            "list":true
+            }
         },
         {
             "field": "uid",
@@ -85,7 +108,7 @@
             "label": "Screenshot",
             "hr": true,
             "type": "image",
-            "list":true,
+            "temp-list":true,
             "field": "image",
             "folder": "/public/upload/sessions",
             "folder_preview": "thumb",
@@ -114,15 +137,36 @@
             ]
         },
         {
-            "tab":"Video",
-            "field": "vimeo_id",
-            "label": "Vimeo ID",
+            "label":"Languages","type":"checkboxes",
+            "field":"languages",
+            "source":
+            {
+                "model":"s_languages"
+            }
+        },
+        {
+            "label": "Publish",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit",
             "hr": true
+        },
+        {
+            "tab":"Media","field":"media","type":"select",
+            "label":"Media type"
         },
         {
             "field":"duration",
             "label":"Duration (seconds)"
         },
+        {
+            "header":"Video",
+            "field": "vimeo_id",
+            "label": "Vimeo ID",
+            "settings":{"code":true},
+            "hr": true
+        },
+        
         {
             "field": "vimeo_source",
             "label": "Vimeo Source",
@@ -136,26 +180,41 @@
             "folder":"/public/upload/sessions/subtitles"
         },
         {
-            "label": "Publish",
-            "field": "active",
-            "type": "boolean",
-            "list": "edit",
-            "hr": true
+            "header":"Audio",
+            "hr":true,
+            "field": "audio",
+            "label": "Audio file (MP3)",
+            "type": "file",
+            "extension":"mp3",
+            "folder":"/public/upload/sessions/audio"
         },
+        {
+            "field":"filename","label":"WAV filename"
+        },
+        
+        
         {
             "tab":"Transcript",
             "field":"transcript",
             "type":"text",
+            "edit":false,            
             "label":"Transcript data",
             "settings":{"style":"json","wide":true,"rows":20}
         },
         {
-            "field":"narrator_state","label":"Narrators state",
-            "type":"select",
-            "source":
-            {
-                "model":"s_states"
-            }
+            "field": "doc",
+            "label": "DOCX Transcript file",
+            "type": "file",
+            "extension":"docx",
+            "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "tab":"Transcript with Tags",
+            "field":"transcript_tags",
+            "edit":false,
+            "type":"text",
+            "label":"Transcript data with Tags",
+            "settings":{"style":"json","wide":true,"rows":20}
         }
     ]
 }
