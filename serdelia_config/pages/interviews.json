@@ -13,7 +13,7 @@
     
 
     "model":{"label":"{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"},
-    "order": "label",
+    "order": "label_sort",
     "buttons_page":
     [
         
@@ -64,14 +64,15 @@
             "edit":false,
             "hhidden":true,
             "field": "label",
-            "list":true,
+            
             "auto": {
                 "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
             }
         },
         {
-            "label": "Narrators (full text, sort)",
+            "label": {"page":"Narrator","edit":"Narrators (full text, sort)"},
             "edit":false,
+            "search":true,
             "hhidden":true,
             "field": "label_sort",
             "list":true,
@@ -99,8 +100,9 @@
             }
         },
         {
-            "label":"Interviewers (full text, sort)",
+            "label":{"edit":"Interviewers (full text, sort)","page":"Collection"},
             "field":"interviewer_name_sort",
+            "list":true,
             "edit":false,
             "auto": {
                 "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
@@ -138,12 +140,6 @@
         "field":"image",
         "folder": "/public/upload/interviews",
         "folder_preview": "thumb",
-        "temp-list": {
-            "temp-position_after": "",
-            "height": 110,
-            "temp-layout": "cover",
-            "src_blank": "blank169.png"
-        },
         "filename": "%uid%",
         "settings":{"webp":true},
         "images":
@@ -212,14 +208,17 @@
         },
         {
             "hr":true,
+            "list":true,
             "field":"status_media","label":"Status (media)",
-            "type": "boolean","list":"read","search":true
+            "type": "boolean",
+            "search":true
         },
         {
-            
+            "list":true,
             "field":"status_transcripts",
             "label":"Status (transcripts)",
-            "type": "boolean","list":"read","search":true
+            "type": "boolean",
+            "search":true
         },
         {
             "label": "Publish",

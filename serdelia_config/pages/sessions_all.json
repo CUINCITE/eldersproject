@@ -2,7 +2,7 @@
     "table": "sessions",
     "disable":["add","remove"],
     "label": {
-        "page": "Sessions",
+        "page": "Sessions (All)",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
     },
     "layout-temp":
@@ -11,13 +11,13 @@
         "count":100,
         "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
     },
-    "order": "nr",
+    "order": "parent,nr",
     "buttons_page":
     [
         {
             "label":"Update Index",
             "icon":"index",
-            "hhidden":true,
+            "hidden":true,
             "plugin":"interviews_update"
         },
         {"plugin":"refresh"}
@@ -41,6 +41,17 @@
     "fields": [
         {
             "tab":"Info",
+            "field":"parent","type":"select","edit":false,
+            "label":"Interview",
+            "list":true,
+            "edit":false,
+            "source":
+            {
+                "model":"interviews_list"
+            }
+        },
+        {
+            
             "label": "Session nr",
             "list": true,
             "field": "nr",
@@ -78,16 +89,7 @@
             "label":"Location (interviewer)",
             "list":true
         },
-        {
-            "field":"parent","type":"select","hidden":true,
-            "label":"Interview",
-            "list":true,
-            "edit":false,
-            "source":
-            {
-                "model":"interviews"
-            }
-        },
+        
         {
             "field": "uid",
             "type": "uid",

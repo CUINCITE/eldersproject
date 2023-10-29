@@ -27,8 +27,7 @@
         {
             "label": "Occupation",
             "hr":true,
-            "field": "occupation",
-            "list":true
+            "field": "occupation"            
         },
         {
             "field":"bio","label":"Brief Bio","type":"text",
