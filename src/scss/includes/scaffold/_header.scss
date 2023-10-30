@@ -6,4 +6,15 @@
     top: 0;
     left: 0;
     width: 100%;
+    background-color: var(--color-box);
+    padding: vw(13) vw(6);
+
+
+    &__logo {
+        width: 100%;
+        margin-top: vw(13);
+        display: block;
+
+        svg { width: 100%; height: auto; }
+    }
 }
