@@ -162,36 +162,24 @@ class PageController
     public function updateImages($array) {
         foreach ($array as $key => &$value) {
             if (is_array($value)) {
+                // Recursively update image paths in nested arrays.
                 $value = $this->updateImages($value);
-            } else {
-                if ($key === 'image') {
-                    $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
-
-                    // Check if the directory has already been detected
-                    if (isset($this->image_dirs[$image_path])) {
-                        $image_dir = $this->image_dirs[$image_path];
-                    } else {
-                        // Check for the directory in multiple locations
-                        if (is_dir($image_path)) {
-                            $image_dir = $image_path;
-                        } elseif (is_dir(dirname($image_path) . '/images')) {
-                            $image_dir = dirname($image_path) . '/images';
-                        } elseif (is_dir(dirname(dirname($image_path)) . '/images')) {
-                            $image_dir = dirname(dirname($image_path)) . '/images';
-                        }
-
-                        // Cache the directory
-                        if (!empty($image_dir)) {
-                            $this->image_dirs[$image_path] = $image_dir;
-                        }
-                    }
-
-                    if (!empty($image_dir)) {
-                        $value = $this->getRandomImage($image_dir);
-                    }
-
-                    $value = $this->simulatePictureTag($value);
+            } elseif ($key === 'image') {
+                // Update image path and simulate picture tag.
+                $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
+    
+                // Cache the image directory to avoid redundant file system checks.
+                if (!isset($this->image_dirs[$image_path]) && is_dir($image_path)) {
+                    $this->image_dirs[$image_path] = $image_path;
                 }
+    
+                $image_dir = $this->image_dirs[$image_path] ?? null;
+    
+                if (!empty($image_dir)) {
+                    $value = $this->getRandomImage($image_dir);
+                }
+    
+                $value = $this->simulatePictureTag($value);
             }
         }
         return $array;
