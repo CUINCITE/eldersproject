@@ -1,16 +1,4 @@
 {
-    "title": "Lorem ipsum dolor sit amet",
-    "modules": [
-      {
-        "type": "text",
-        "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-        "class": [
-          "bold"
-        ]
-      },
-      {
-        "type": "events_grid"
-      }
-    ]
-  }
+  "title": "Homepage",
+  "modules": []
+}
