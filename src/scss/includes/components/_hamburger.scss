@@ -1,13 +1,8 @@
 .hamburger {
-    @include z-index(hamburger);
-    position: absolute;
-    right: 45px - 5px;
-    top: 32px - 5px;
-    width: 47px + 10px;
-    height: 21px + 10px;
     padding: 5px;
     @include flex(column);
     overflow: hidden;
+    gap: vw(3);
 
     @include breakpoint(not-desktop) {
         top: 22px;

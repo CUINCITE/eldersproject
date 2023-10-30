@@ -1,7 +1,22 @@
-
-
 .footer {
-
-    position: relative;
     @include z-index(footer);
+    @include font-size(10, 13.5);
+    grid-area: footer;
+    text-transform: uppercase;
+
+    & > * { background-color: var(--color-box); }
+
+
+
+    &__links {
+        @include flex(row, flex-start, center);
+        gap: vw(24);
+        padding: vw(56) 0 vw(19);
+    }
+
+
+
+    &__copy {
+        padding: vw(409) 0 vw(19);
+    }
 }

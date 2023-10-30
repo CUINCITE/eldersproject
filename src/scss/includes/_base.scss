@@ -14,7 +14,6 @@
 }
 
 html {
-    background-color: $color-bg;
     position: relative;
     height: 100%;
     font-size: $base-font-size;
@@ -29,14 +28,32 @@ html {
 }
 
 body {
-    background: $color-bg;
+    background: var(--color-bg);
     line-height: 150%;
     text-align: left;
+    min-height: 100vh;
+    color: var(--color-text);
+
+    display: grid;
+    grid-template-columns: 1fr vw(123);
+    grid-template-areas:
+    'main header'
+    'footer header';
+    gap: 1px;
+    align-content: space-between;
+
+
 }
 
 body,
 html {
     overflow-x: hidden;
+}
+
+
+.wrapper {
+    grid-area: main;
+    position: relative;
 }
 
 
@@ -83,31 +100,6 @@ a {
     text-decoration: none;
     -webkit-tap-highlight-color: $color-transparent;
     transition: color $time-fast $easing;
-
-    // span {
-    //     position: relative;
-
-    //     &::after {
-    //         content: "";
-    //         position: absolute;
-    //         bottom: -3px;
-    //         left: 0;
-    //         width: 100%;
-    //         height: 1px;
-    //         background: currentColor;
-    //         transform: scaleX(0);
-    //         transform-origin: 100% 50%;
-    //         transition: transform .25s ease-out .1s;
-    //     }
-    // }
-
-    // @include hover {
-
-    //     span::after {
-    //         transform: scaleX(1);
-    //         transform-origin: 0% 50%;
-    //     }
-    // }
 }
 
 b,
@@ -191,26 +183,6 @@ ul {
 
 .mapboxgl-control-container {
     display: none;
-}
-
-.module-ie {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: $color-bg;
-    transform-origin: 100% 100%;
-    display: none;
-
-    .ie & {
-        @include flex(column, center, center);
-    }
-
-    strong {
-        @include font-size(26, 26);
-        margin-bottom: 20px;
-    }
 }
 
 
