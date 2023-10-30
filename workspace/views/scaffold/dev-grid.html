@@ -1,0 +1,37 @@
+<div class="test-grid" id="test-grid">
+    <div class="grid">
+        {% for i in 1..12 %}
+            <div class="grid-1"></div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.addEventListener('keyup', function (e) {
+        if ((e.keyCode || e.which) === 71) document.getElementById('test-grid').classList.toggle('is-shown');
+    });
+</script>
+<style>
+    .test-grid {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 10;
+        display: block;
+    }
+
+    .test-grid:not(.is-shown) {
+        display: none;
+    }
+
+    .test-grid .grid {
+        height: 100%;
+    }
+
+    .test-grid .grid-1 {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVQIW2NkgAJGEP1JJNUHAAVHAboRzMkCAAAAAElFTkSuQmCC');
+        height: 100%;
+    }
+</style>
