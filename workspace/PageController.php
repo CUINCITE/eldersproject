@@ -1,8 +1,9 @@
 <?php
 
 namespace Workspace;
+require_once 'HtmlRenderer.php';
 
-class PageDataHandler
+class PageController
 {
 
     public $pages_path = '/workspace/data/pages/';
@@ -11,16 +12,8 @@ class PageDataHandler
     public $scaffold_path = '/workspace/data/scaffold/';
     private $image_dirs = [];
 
-    public function getUri()
-    {
-
-        $uri = $_SERVER['REQUEST_URI'];
-        $uri = str_replace('/workspace', '', $uri);
-        $uri = parse_url($uri, PHP_URL_PATH);
-        $uri = trim($uri, '/');
-        $uri = strtolower($uri);
-
-        return $uri;
+    public function getIndexPage() {
+        return $this->getPageData('index');
     }
 
     public function fileExists($filepath)
@@ -28,16 +21,10 @@ class PageDataHandler
         return file_exists($filepath);
     }
 
-    public function getPageData() : array
+    public function getPageData($page_name)
     {
-        $page_name = $this->getUri();
-
-        if ($page_name == '') {
-            $page_name = 'index';
-        }
-        
-        if ($page_name == 'all') {
-            return $this->getAllPages();
+        if (substr($page_name, 0, 1) === '/') {
+            $page_name = substr($page_name, 1);
         }
     
         $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->pages_path . $page_name.'.json';
@@ -56,8 +43,8 @@ class PageDataHandler
 
         $page_data['scaffold'] = $this->getScaffold();
         $page_data = $this->updateImages($page_data);
-    
-        return $page_data;
+
+        $this->renderPage($page_data);
 
     }
 
@@ -127,7 +114,9 @@ class PageDataHandler
             $item['url'] = str_replace('.json', '', '/'.$page);
             $page_labels[] = $item;
         }
-        return ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+
+        $page_data = ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+        return $this->renderPage($page_data);
     }
 
     public function getScaffold() : array
@@ -226,6 +215,11 @@ class PageDataHandler
             'hd' => $path,
             'hd_x2' => $path,
         ];
+    }
+
+    public function renderPage($pageData) {
+        $view = new HtmlRenderer();
+        $view->render($pageData);
     }
 
 }
