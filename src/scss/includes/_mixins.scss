@@ -116,4 +116,34 @@ $line-height: 1.4;
     // letter-spacing: $spacing * 1px;
     letter-spacing: strip-units($spacing) / strip-units($font-size) * 1em;
 }
+
+
+@mixin hoverable-link {
+    overflow: hidden;
+    position: relative;
+
+    & > span {
+        display: inline-block;
+
+
+        span {
+            display: inline-block;
+
+
+            &:last-of-type {
+                position: absolute;
+                bottom: 100%;
+                left: 0;
+            }
+        }
+    }
+
+
+    @include hover {
+        & > span {
+            animation: hover-link .4s $ease-in-out forwards;
+        }
+    }
+
+}
 /* stylelint-enable */

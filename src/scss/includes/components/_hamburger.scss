@@ -9,11 +9,6 @@
         right: $mobile;
 
         transition: transform $time-fast $ease-custom;
-
-        .is-scrolling-down & {
-            transition-duration: $time;
-            transform: translateY(-61px);
-        }
     }
 
     @include hover {
