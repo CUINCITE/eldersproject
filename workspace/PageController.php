@@ -100,7 +100,7 @@ class PageController
         ];
     }
 
-    public function getAllPages() : array 
+    public function getAllPages()
     {
         $pages_dir = $_SERVER['DOCUMENT_ROOT'] . $this->pages_path;
 
