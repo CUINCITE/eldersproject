@@ -1,17 +1,46 @@
 <section class="jumbotron text-center">
     <div class="container">
       <h2>Interviews</h2>
-      <ol>
-        {% for item in items %}      
-        <li>
-          <a href="{{item.url}}">{{item.label}}</a>
-          <br>{{item.interviewers[0].label}} Collection
-          <br>{{item.locations}}
-          <br>
-          <br><em>{{item.summary}}</em>
-          <br><br>
-        </li>
-        {% endfor %}
-      </ol>
+      <h3>{{text}}</h3>
+      <hr>
+      <form>
+        <label>Collection:</label>
+        <select name="collection"><option value="">-- select --</option>
+          {% for item in collection %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
+        </select>
+        <label>Theme:</label>
+        <select name="theme"><option value="">-- select --</option>
+          {% for item in theme %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
+        </select>
+        <label>Location:</label>
+        <select name="state"><option value="">-- select --</option>
+          {% for item in state %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
+        </select>
+        <input  type="submit" value="Filter">
+      </form>
+      <hr>
+      {% if items %}
+      <h4>Results: {{items|length}}</h4><br>
+      <table class="table">
+        <thead>
+        <tr style="background:white">
+          <td><a href="{{sort.url_narrator}}">Narrator {{sort.arrow_narrator}}</a></td>
+          <td><a href="{{sort.url_collections}}">Collections {{sort.arrow_collections}}</a></td>
+          <td><a href="{{sort.url_locations}}">Locations {{sort.arrow_locations}}</a></td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}              
+        <tr>                    
+            <td><a href="{{item.url}}">{{item.label}}</a></td>
+            <td>{{item.interviewers[0].label}} Collection</td>
+            <td>{{item.locations}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+      {% else %}
+        <h3>No items matching selected criteria.</h3>
+      {% endif %}
     </div>
   </section>

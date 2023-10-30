@@ -13,7 +13,7 @@ class model_app_pages_modules_interview extends model_app_pages_modules
 	{
         //exit($url[1].'!');
         $m['item']=$this->parent->getJsonModel('interviews',['active'=>1,'slug'=>$url[1]],true);
-        if (!$m['item']) unset($m); else
+        if (!$m['item']) $m=null; else
 		{
 			$m['sessions']=$this->parent->getJsonModel('sessions',['active'=>1,'parent'=>$m['item']['id']],false,'nr');
 			$date1=$m['sessions'][0]['date'];

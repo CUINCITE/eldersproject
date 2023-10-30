@@ -42,20 +42,23 @@ class model_app extends _uho_model
 
         $this->orm->setLogErrors(true);
 
-        /* uncoment for mysql caching
+        
         $this->sql->cacheSet('7g!',
             [
                 'users','users_newsletter'
             ]);
-        */
+        
 
         if (!strpos($_SERVER['HTTP_HOST'], '.lh') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true) {
             $this->dict = $_SESSION['dict'];
         } else {
             $this->dict = array();
-
+            $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
+            $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
+            $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
+            
             // uncomment for multi-lang sites
-            $this->dict['lang'] = $this->lang;
+            //$this->dict['lang'] = $this->lang;
             
 
 

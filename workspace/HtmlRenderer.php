@@ -1,8 +1,9 @@
 <?php
 
 namespace Workspace;
+require_once 'HtmlUpdater.php';
 
-class HtmlGenerator
+class HtmlRenderer
 {   
     public $debug;
     private $twig;
@@ -21,13 +22,30 @@ class HtmlGenerator
         $this->base_template = $this->twig->load('base.twig');
     }
 
-    public function generateHtml($page_data)
+    public function render($page_data)
     {
         if ($this->isAjax()) {
             $page_data['is_ajax'] = true;
         }
 
         $html = $this->base_template->render($page_data);
+        $html = $this->updateHtml($html);
+
+        session_start();
+        error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+        ob_start();
+
+        echo $html;
+
+        $length = ob_get_length();
+        header('Content-Length: '.$length."\r\n");
+        header('Accept-Ranges: bytes'."\r\n");
+        ob_end_flush();
+    }
+
+    public function updateHtml($html) {
+        $htmlUpdater = new HtmlUpdater($html);
+        $html = $htmlUpdater->updateHtml();
         return $html;
     }
 

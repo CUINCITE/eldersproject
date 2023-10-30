@@ -1,12 +1,16 @@
 <section class="jumbotron text-center">
     <div class="container">
-      <h2>Collection: {{item.label}} ({{items|length}})</h2>
+      <h2>Collection: {{item.label}}
+        <br>{{items|length}} Interviews
+      </h2>
+      <h4>{{item.lead}}</h4>
       <hr>
+      <h3>Interviews from the collection:</h3>
       {% for item in items %}      
         <ol>
           <a href="{{item.url}}">{{item.label}}</a>
-          <br>{{item.locations}}
-          
+          <br><small>{{item.locations}}</small>
+          <p>{{item.summary}}</p>
         </ol>
         {% endfor %}
       

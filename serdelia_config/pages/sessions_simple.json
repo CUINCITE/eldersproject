@@ -148,6 +148,14 @@
             "type":"text",
             "label":"Transcript data",
             "settings":{"style":"json","wide":true,"rows":20}
+        },
+        {
+            "field":"narrator_state","label":"Narrators state",
+            "type":"select",
+            "source":
+            {
+                "model":"s_states"
+            }
         }
     ]
 }

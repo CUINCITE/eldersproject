@@ -1,13 +1,13 @@
 {
     "table": "interviewers",
     "label": {
-        "page": "Interviewers",
+        "page": "Interviewers (Collections)",
         "edit": "{% if not last_name %}New person{% else %}Interviewers: <em>{{first_name}} {{last_name}}</em>{% endif %}"
     },
-    "xlayout": {
+    "layout": {
         "type": "grid",
         "count": 100,
-        "html": "{{html.image|raw}}{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div>"
+        "html": "{{html.image|raw}}<br>{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div><br><span class='badge badge-secondary'>{{html.amount}}</span>"
     },
     "model": {
         "label": "{{last_name}}, {{first_name}}"
@@ -40,19 +40,15 @@
         {
             "field":"label",
             "edit":false,
+            "hidden":true,
             "auto": {
                 "pattern": "{{first_name}} {{last_name}}"
             }
-        },
-        {
-            "label": "Position",
-            "field": "position",
-            "type":"text",
-            "settings":{"rows":2}
-        },
+        },        
         {
             "label": "Interviews Amount",
             "field": "amount",            
+            "edit":false,
             "list":true
         },
         
@@ -84,6 +80,14 @@
             }
         },
         {
+            "field": "locations",
+            "type": "text",
+            "label": "Locations",
+            "settings": {
+                "rows": 3
+            }
+        },
+        {
             "field": "text",
             "type": "html",
             "label": "Copy"
@@ -99,11 +103,10 @@
             "label": "Cover",
             "type": "image",
             "field": "image",
-            "extensions":["png"],
             "settings":{"webp":true},
             "folder": "/public/upload/interviewers",
             
-            "temp-list": {
+            "list": {
                 "height": 140,
                 "folder": "desktop_x2",
                 "temp-layout": "cover",
@@ -118,16 +121,16 @@
                 {
                     "folder": "desktop",
                     "label": "Desktop",
-                    "width": 120,
-                    "height": 120,
+                    "width": 800,
+                    "height": 800,
                     "crop": true,
                     "retina": true
                 },
                 {
                     "folder": "mobile",
                     "label": "Mobile",
-                    "width": 120,
-                    "height": 120,
+                    "width": 375,
+                    "height": 375,
                     "crop": true,
                     "retina": true
                 }

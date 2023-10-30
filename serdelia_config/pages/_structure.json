@@ -1,12 +1,10 @@
 {
-    "models":
-    {
-
+    "models": {
         "pages": [
-                        "pages_modules"
-                     ]
-        
-
-
+            "pages_modules"
+        ],
+        "interviews": [
+            "sessions"
+        ]
     }
 }

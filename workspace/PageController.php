@@ -1,8 +1,9 @@
 <?php
 
 namespace Workspace;
+require_once 'HtmlRenderer.php';
 
-class PageDataHandler
+class PageController
 {
 
     public $pages_path = '/workspace/data/pages/';
@@ -11,16 +12,8 @@ class PageDataHandler
     public $scaffold_path = '/workspace/data/scaffold/';
     private $image_dirs = [];
 
-    public function getUri()
-    {
-
-        $uri = $_SERVER['REQUEST_URI'];
-        $uri = str_replace('/workspace', '', $uri);
-        $uri = parse_url($uri, PHP_URL_PATH);
-        $uri = trim($uri, '/');
-        $uri = strtolower($uri);
-
-        return $uri;
+    public function getIndexPage() {
+        return $this->getPageData('index');
     }
 
     public function fileExists($filepath)
@@ -28,16 +21,10 @@ class PageDataHandler
         return file_exists($filepath);
     }
 
-    public function getPageData() : array
+    public function getPageData($page_name)
     {
-        $page_name = $this->getUri();
-
-        if ($page_name == '') {
-            $page_name = 'index';
-        }
-        
-        if ($page_name == 'all') {
-            return $this->getAllPages();
+        if (substr($page_name, 0, 1) === '/') {
+            $page_name = substr($page_name, 1);
         }
     
         $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->pages_path . $page_name.'.json';
@@ -56,8 +43,8 @@ class PageDataHandler
 
         $page_data['scaffold'] = $this->getScaffold();
         $page_data = $this->updateImages($page_data);
-    
-        return $page_data;
+
+        $this->renderPage($page_data);
 
     }
 
@@ -113,7 +100,7 @@ class PageDataHandler
         ];
     }
 
-    public function getAllPages() : array 
+    public function getAllPages()
     {
         $pages_dir = $_SERVER['DOCUMENT_ROOT'] . $this->pages_path;
 
@@ -127,7 +114,9 @@ class PageDataHandler
             $item['url'] = str_replace('.json', '', '/'.$page);
             $page_labels[] = $item;
         }
-        return ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+
+        $page_data = ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+        return $this->renderPage($page_data);
     }
 
     public function getScaffold() : array
@@ -173,36 +162,24 @@ class PageDataHandler
     public function updateImages($array) {
         foreach ($array as $key => &$value) {
             if (is_array($value)) {
+                // Recursively update image paths in nested arrays.
                 $value = $this->updateImages($value);
-            } else {
-                if ($key === 'image') {
-                    $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
-
-                    // Check if the directory has already been detected
-                    if (isset($this->image_dirs[$image_path])) {
-                        $image_dir = $this->image_dirs[$image_path];
-                    } else {
-                        // Check for the directory in multiple locations
-                        if (is_dir($image_path)) {
-                            $image_dir = $image_path;
-                        } elseif (is_dir(dirname($image_path) . '/images')) {
-                            $image_dir = dirname($image_path) . '/images';
-                        } elseif (is_dir(dirname(dirname($image_path)) . '/images')) {
-                            $image_dir = dirname(dirname($image_path)) . '/images';
-                        }
-
-                        // Cache the directory
-                        if (!empty($image_dir)) {
-                            $this->image_dirs[$image_path] = $image_dir;
-                        }
-                    }
-
-                    if (!empty($image_dir)) {
-                        $value = $this->getRandomImage($image_dir);
-                    }
-
-                    $value = $this->simulatePictureTag($value);
+            } elseif ($key === 'image') {
+                // Update image path and simulate picture tag.
+                $image_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $value;
+    
+                // Cache the image directory to avoid redundant file system checks.
+                if (!isset($this->image_dirs[$image_path]) && is_dir($image_path)) {
+                    $this->image_dirs[$image_path] = $image_path;
                 }
+    
+                $image_dir = $this->image_dirs[$image_path] ?? null;
+    
+                if (!empty($image_dir)) {
+                    $value = $this->getRandomImage($image_dir);
+                }
+    
+                $value = $this->simulatePictureTag($value);
             }
         }
         return $array;
@@ -226,6 +203,11 @@ class PageDataHandler
             'hd' => $path,
             'hd_x2' => $path,
         ];
+    }
+
+    public function renderPage($pageData) {
+        $view = new HtmlRenderer();
+        $view->render($pageData);
     }
 
 }

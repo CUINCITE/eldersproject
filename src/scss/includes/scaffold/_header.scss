@@ -1,10 +1,7 @@
 
 .header {
-
     @include z-index(header);
-    position: fixed;
-    top: 0;
-    left: 0;
+    grid-area: header;
     width: 100%;
     background-color: var(--color-box);
     padding: vw(13) vw(6);

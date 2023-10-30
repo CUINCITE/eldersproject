@@ -1,0 +1,43 @@
+{
+    "table": "interviews",
+    "model": {
+        "label": "{{label_sort}}"
+    },
+    "order": "label_sort",
+    "fields": [
+        {
+            "label": "Narrators (full text)",
+            "field": "label"
+        },
+        {
+            "field": "label_sort"
+        },
+        {
+            "label": "Interviewers (full text)",
+            "field": "interviewer_name"
+        },
+        {
+            "field": "interviewer_name_sort"
+        },
+        {
+            "tab": "Status",
+            "label": "Url",
+            "field": "slug",
+            "on_demand": true,
+            "auto": {
+                "on_null": true,
+                "unique": true,
+                "url": true,
+                "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
+            }
+        },
+        {
+            "label": "Publish",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit",
+            "search": true,
+            "hr": true
+        }
+    ]
+}

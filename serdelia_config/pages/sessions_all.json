@@ -1,10 +1,8 @@
 {
     "table": "sessions",
-    "filters": {
-        "parent": "%1%"
-    },
+    "disable":["add","remove"],
     "label": {
-        "page": "Sessions",
+        "page": "Sessions (All)",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
     },
     "layout-temp":
@@ -13,13 +11,24 @@
         "count":100,
         "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
     },
-    "order": "nr",
+    "order": "parent,nr",
+    "buttons_page":
+    [
+        {
+            "label":"Update Index",
+            "icon":"index",
+            "hidden":true,
+            "plugin":"interviews_update"
+        },
+        {"plugin":"refresh"}
+    ],
     "buttons_edit": [        
         {
             "label":"Helper",
             "plugin":"session_update",
             "on_update":true,
-            "temp-hidden":true
+            "temp-hidden":true,
+            "type":"plugin"
         },
         {
             "type": "plugin",
@@ -32,6 +41,17 @@
     "fields": [
         {
             "tab":"Info",
+            "field":"parent","type":"select","edit":false,
+            "label":"Interview",
+            "list":true,
+            "edit":false,
+            "source":
+            {
+                "model":"interviews_list"
+            }
+        },
+        {
+            
             "label": "Session nr",
             "list": true,
             "field": "nr",
@@ -57,8 +77,7 @@
             "list":true
         },
         {
-            "field":"narrator_state",
-            "label":"Location (narrator) State",
+            "field":"narrator_state","label":"Narrators state",
             "type":"select",
             "source":
             {
@@ -70,22 +89,44 @@
             "label":"Location (interviewer)",
             "list":true
         },
-        {
-            "field":"parent","type":"select",
-            "hidden":true,
-            "label":"Interview",
-            "edit":false,
-            "source":
-            {
-                "model":"interviews"
-            }
-        },
+        
         {
             "field": "uid",
             "type": "uid",
             "list": "read"
         },
-        
+        {
+            "label": "Screenshot",
+            "hr": true,
+            "type": "image",
+            "temp-list":true,
+            "field": "image",
+            "folder": "/public/upload/sessions",
+            "folder_preview": "thumb",
+            "filename": "%uid%",
+            "images": [
+                {
+                    "folder": "original",
+                    "label": "Original image"
+                },
+                {
+                    "folder": "desktop",
+                    "label": "Resized image",
+                    "width": 640,
+                    "height": 360,
+                    "crop": true,
+                    "retina": true
+                },
+                {
+                    "folder": "mobile",
+                    "label": "Resized image",
+                    "width": 320,
+                    "height": 180,
+                    "crop": true,
+                    "retina": true
+                }
+            ]
+        },
         {
             "label":"Languages","type":"checkboxes",
             "field":"languages",
@@ -108,7 +149,20 @@
         {
             "field":"duration",
             "label":"Duration (seconds)"
-        },        
+        },
+        {
+            "header":"Video",
+            "field": "vimeo_id",
+            "label": "Vimeo ID",
+            "settings":{"code":true},
+            "hr": true
+        },
+        
+        {
+            "field": "vimeo_source",
+            "label": "Vimeo Source",
+            "type": "json"
+        },
         {
             "field": "subtitles",
             "label": "Subtitles (VTT)",
@@ -117,6 +171,8 @@
             "folder":"/public/upload/sessions/subtitles"
         },
         {
+            "header":"Audio",
+            "hr":true,
             "field": "audio",
             "label": "Audio file (MP3)",
             "type": "file",
@@ -142,6 +198,14 @@
             "type": "file",
             "extension":"docx",
             "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "tab":"Transcript with Tags",
+            "field":"transcript_tags",
+            "edit":false,
+            "type":"text",
+            "label":"Transcript data with Tags",
+            "settings":{"style":"json","wide":true,"rows":20}
         }
     ]
 }

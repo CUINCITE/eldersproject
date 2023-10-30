@@ -12,29 +12,16 @@
     },
     
 
-    "model":{"label":"{{narrators}}"},
-    "order": "label",
+    "model":{"label":"{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"},
+    "order": "label_sort",
     "buttons_page":
     [
-        {
-            "label":"Update Index",
-            "icon":"index",
-            "hhidden":true,
-            "plugin":"interviews_update"
-        },
+        
         {"plugin":"refresh"}
     ],
     "buttons_edit":
     [
-        {
-            "plugin":"api_single",
-            "label":"Encode transcripts",
-            "icon":"refresh",
-            "temp-hidden":true,
-            "params":{
-                "url":"/api/interview_import?type=cms&interview={{id}}"
-            }
-        },
+        
         {
             "label":"Interview auto-update",
             "type":"plugin",
@@ -75,11 +62,22 @@
         {
             "label": "Narrators (full text)",
             "edit":false,
-            "ghidden":true,
+            "hhidden":true,
             "field": "label",
+            
+            "auto": {
+                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
+            }
+        },
+        {
+            "label": {"page":"Narrator","edit":"Narrators (full text, sort)"},
+            "edit":false,
+            "search":true,
+            "hhidden":true,
+            "field": "label_sort",
             "list":true,
             "auto": {
-                "pattern": "{% for item in narrators %}{{item.surname}}, {{item.name}}{% endfor %}"
+                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
             }
         },
 
@@ -96,33 +94,52 @@
         {
             "label":"Interviewers (full text)",
             "field":"interviewer_name",
-            "hidden":true,
             "edit":false,
             "auto": {
-                "pattern": "{% for i in interviewer %}{% if loop.index>1 %}, {% endif %}{{interviewer[0].first_name}} {{interviewer[0].last_name}}{% endfor %}"
+                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name}} {{interviewer.last_name}}{% endfor %}"
+            }
+        },
+        {
+            "label":{"edit":"Interviewers (full text, sort)","page":"Collection"},
+            "field":"interviewer_name_sort",
+            "list":true,
+            "edit":false,
+            "auto": {
+                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
             }
         },
         {
             "hr":true,
-            "field":"locations","label":"Location",
-            "edit":false
+            "field":"locations","label":"Location"
         },
-
+        {
+            "tab":"Filters",
+            "field":"narrators_states","label":"Narrators states",
+            "type":"elements",
+            "source":
+            {
+                "model":"s_states"
+            }
+        },
+        {
+            "field":"topics",
+            "label":"Topics",
+            "type":"checkboxes",
+            "settings":{"small":true},
+            "source":
+            {
+                "model":"topics"
+            }
+        },
         
     {   
-        "tab":"Image",
+        "tab":"Media",
         "label": "Thumbnail",
         "hr":true,
         "type": "image",
         "field":"image",
         "folder": "/public/upload/interviews",
         "folder_preview": "thumb",
-        "temp-list": {
-            "temp-position_after": "",
-            "height": 110,
-            "temp-layout": "cover",
-            "src_blank": "blank169.png"
-        },
         "filename": "%uid%",
         "settings":{"webp":true},
         "images":
@@ -136,21 +153,11 @@
     },   
     {   "field": "uid","type":"uid","list":"read"    ,"search":true,"label":"UID"},
         
-        {
-            "tab":"Metadata",
-            "field":"topics",
-            "label":"Topics",
-            "type":"checkboxes",
-            "settings":{"small":true},
-            "source":
-            {
-                "model":"topics"
-            }
-        },
+        
 
         
         {
-            "hr":true,
+            "tab":"Copy",
             "field":"summary",
             "type":"html",
             "label":"Interview Summary"
@@ -166,9 +173,7 @@
             "label":"Citation",
             "settings":{"rows":5}
         },
-        {
-            "field":"duration","label":"Duration (seconds)"
-        },
+        
         {
             "tab":"Download",
             "field": "PDF",
@@ -181,13 +186,7 @@
             "field":"pdf_size",
             "label":"PDF Size"
         },
-        {
-            "tab":"Index",
-            "field":"contents",
-            "label":"Contents",
-            "type":"table",
-            "settings":{"header":["Time","Label"]}
-        },
+        
         {
             "tab":"Status",
             "label": "Url",
@@ -200,21 +199,26 @@
                 "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
             }
         },
-        
+        {
+            "field":"duration","label":"Duration (seconds)"
+        },
         {
             "field":"incite_id","label":"Incite ID","temp-list":true,
             "settings":{"code":true}
         },
         {
             "hr":true,
+            "list":true,
             "field":"status_media","label":"Status (media)",
-            "type": "boolean","list":"read","search":true
+            "type": "boolean",
+            "search":true
         },
         {
-            
+            "list":true,
             "field":"status_transcripts",
             "label":"Status (transcripts)",
-            "type": "boolean","list":"read","search":true
+            "type": "boolean",
+            "search":true
         },
         {
             "label": "Publish",
