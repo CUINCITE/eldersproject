@@ -10,6 +10,8 @@ import { Page, PageEvents } from './pages/Page';
 import { Offscreen } from './Offscreen';
 import { Menu } from './Menu';
 import { CSSAnimate } from './widgets/CSSAnimate';
+import { API } from './widgets/Api';
+import { Recaptcha } from './widgets/Recaptcha';
 
 export const local = !!location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
 export const debug = location.search.indexOf('debug') >= 0;
@@ -209,6 +211,8 @@ class Site {
         page.on(PageEvents.CHANGE, this.onPageAppend);
 
         // bind widgets:
+        Recaptcha.bind();
+        API.bind();
         CSSAnimate.bind();
 
         // update links:

@@ -1,5 +1,4 @@
 .footer {
-    @include z-index(footer);
     @include font-size(10, 13.5);
     grid-area: footer;
     text-transform: uppercase;

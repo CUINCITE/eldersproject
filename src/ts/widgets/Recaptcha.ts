@@ -9,7 +9,9 @@ export class Recaptcha {
     private static inputSelector = '[data-recaptcha]';
 
 
-    public static bind(target: HTMLElement): void {
+    public static bind(selector?: any): void {
+        let target = typeof selector === 'undefined' ? document.body : selector;
+
         if (!document.querySelector('[data-recaptchakey]')) { return; }
 
         Recaptcha.SITE_KEY = Recaptcha.SITE_KEY
