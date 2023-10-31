@@ -8,7 +8,6 @@ class PageController
 
     public $pages_path = '/workspace/data/pages/';
     public $modules_path = '/workspace/data/modules/';
-
     public $scaffold_path = '/workspace/data/scaffold/';
     private $image_dirs = [];
 
@@ -30,15 +29,19 @@ class PageController
         $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->pages_path . $page_name.'.json';
 
         if (!$this->fileExists($filepath)) {
-            return $this->get404();
-        }
 
-        $page_data = $this->getJsonData($filepath);
-        $page_data = $this->updateModules($page_data);
-        
-        if (!isset($page_data['title']))
-        {
-            $page_data['title'] = ucfirst($page_name);
+            $page_data = $this->get404();
+
+        } else {
+
+            $page_data = $this->getJsonData($filepath);
+            $page_data = $this->updateModules($page_data);
+            
+            if (!isset($page_data['title']))
+            {
+                $page_data['title'] = ucfirst($page_name);
+            }
+            
         }
 
         $page_data['scaffold'] = $this->getScaffold();
