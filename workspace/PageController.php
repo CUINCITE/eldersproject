@@ -116,7 +116,7 @@ class PageController
         }
 
         $page_data = ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
-        return $this->renderPage($page_data);
+        $this->renderPage($page_data);
     }
 
     public function getScaffold() : array
