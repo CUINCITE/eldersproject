@@ -44,7 +44,9 @@ class PageController
         $page_data['scaffold'] = $this->getScaffold();
         $page_data = $this->updateImages($page_data);
 
-        $this->renderPage($page_data);
+        if (isset($_GET['json'])) {
+            $this->returnJsonResponse($page_data);
+        } else $this->renderPage($page_data);
 
     }
 
@@ -208,6 +210,14 @@ class PageController
     public function renderPage($pageData) {
         $view = new HtmlRenderer();
         $view->render($pageData);
+    }
+
+    public function returnJsonResponse($data) {
+        // Set header to indicate JSON response
+        header('Content-Type: application/json');
+    
+        // Convert data to JSON and print
+        echo json_encode($data);
     }
 
 }
