@@ -1,8 +1,11 @@
 .button {
-    background: $color-gray;
-    color: $color-bg;
-    padding: 0 18px;
-    display: inline-block;
+    @include font-size(50, 1);
+    @include letter-spacing(-1.25, 50);
+    @include flex(row, flex-start, center);
+
+    gap: vw(9);
+    text-transform: uppercase;
+    font-weight: bold;
     transition: background $time-fast ease-out, color $time-fast ease-out;
 
     &--outline {
@@ -12,16 +15,10 @@
     }
 
     @include hover {
-        @extend %button-hover;
-
-        &.button--outline {
-            background: $color-text;
-            color: $color-bg;
-        }
+        // @extend %button-hover;
     }
 }
 
 %button-hover {
-    background: $color-gray;
-    color: $color-white;
+
 }
