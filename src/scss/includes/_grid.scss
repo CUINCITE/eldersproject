@@ -1,3 +1,15 @@
+// css variables could be used in other modules/components
+@each $bp in (phone tablet desktop hd) {
+    @include breakpoint($bp) {
+        $offset-width: map-get($grid-offset, $bp);
+
+        :root {
+            --grid-margin: #{$offset-width};
+        }
+    }
+}
+
+
 .grid {
     --grid-column-start: auto;
     --grid-columns-span: auto;

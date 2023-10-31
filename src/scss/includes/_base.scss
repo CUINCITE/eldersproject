@@ -35,12 +35,13 @@ body {
     color: var(--color-text);
 
     display: grid;
-    grid-template-columns: 1fr vw(123);
+    grid-template-columns: 1fr vw(111);
     grid-template-areas:
     'main header'
+    'newsletter header'
     'footer header';
     gap: 1px;
-    align-content: space-between;
+    align-content: end;
 
 
 }
@@ -68,7 +69,6 @@ pre,
 svg text {
     @include font-family(text, 400);
     font-size: inherit;
-    color: $color-text;
     -webkit-font-smoothing: antialiased;
 }
 
