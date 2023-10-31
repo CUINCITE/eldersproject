@@ -1,0 +1,14 @@
+<div class="ui box">
+    <div class="grid">
+        <div class="col-span-12">
+            <div class="ui__content box">
+                <h3 class="heading">Buttons</h3>
+                {% include "components/c_button.html" %}
+                {% include "components/c_button.html" with { "modifiers": ["simple"] } %}
+                {% include "components/c_button.html" with { "modifiers": ["simple", "reversed"] } %}
+                {% include "components/c_button.html" with { "modifiers": ["lightbox"], "text": "01" } %}
+                {% include "components/c_button.html" with { "modifiers": ["lightbox", "reversed"], "text": "02" } %}
+            </div>
+        </div>
+    </div>
+</div>

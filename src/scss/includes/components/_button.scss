@@ -3,15 +3,36 @@
     @include letter-spacing(-1.25, 50);
     @include flex(row, flex-start, center);
 
+    position: relative;
     gap: vw(9);
     text-transform: uppercase;
     font-weight: bold;
     transition: background $time-fast ease-out, color $time-fast ease-out;
 
-    &--outline {
-        border: 1px solid currentColor;
-        background: transparent;
-        color: $color-text;
+    &--reversed {
+        flex-direction: row-reverse;
+        gap: vw(3);
+    }
+
+
+    &--lightbox {
+        @include font-size(30, 1);
+        letter-spacing: normal;
+
+        // text inside button
+        > span {
+            position: absolute;
+            left: 0;
+            top: vw(23);
+        }
+
+
+        &.button--reversed {
+            .button__arrow { transform: scaleX(-1); }
+            > span { left: auto; right: 0; }
+        }
+
+
     }
 
     @include hover {
