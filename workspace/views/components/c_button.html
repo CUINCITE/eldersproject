@@ -1,8 +1,10 @@
-<button class="button" type="submit">
+<button
+    class="button{% if modifiers %}{% for modifier in modifiers %} button--{{modifier}}{% endfor %}{% endif %}"
+    type="submit">
     <i class="button__arrow icon-btn-arrow">
         <span></span>
         <span></span>
         <span class="triangle"></span>
     </i>
-    {{text}}
+    <span>{{text|default('button')}}</span>
 </button>
