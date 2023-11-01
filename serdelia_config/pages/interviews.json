@@ -134,6 +134,7 @@
         
     {   
         "tab":"Media",
+        "hidden":true,
         "label": "Thumbnail",
         "hr":true,
         "type": "image",
@@ -200,7 +201,7 @@
             }
         },
         {
-            "field":"duration","label":"Duration (seconds)"
+            "field":"duration","label":"Duration (seconds)","edit":false
         },
         {
             "field":"incite_id","label":"Incite ID","temp-list":true,

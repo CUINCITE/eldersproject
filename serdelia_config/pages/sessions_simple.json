@@ -156,6 +156,14 @@
             {
                 "model":"s_states"
             }
+        },
+        {
+            "tab":"Media",
+            "field": "audio",
+            "label": "Audio file (MP3)",
+            "type": "file",
+            "extension":"mp3",
+            "folder":"/public/upload/sessions/audio"
         }
     ]
 }

@@ -5,7 +5,7 @@
     },
     "label": {
         "page": "Sessions",
-        "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
+        "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.label}}, #{{nr}}</em>{% endif %}"
     },
     "layout-temp":
     {
@@ -77,7 +77,7 @@
             "edit":false,
             "source":
             {
-                "model":"interviews"
+                "model":"interviews_list"
             }
         },
         {
@@ -101,22 +101,9 @@
             "list": "edit",
             "hr": true
         },
+        
         {
-            "tab":"Media","field":"media","type":"select",
-            "label":"Media type"
-        },
-        {
-            "field":"duration",
-            "label":"Duration (seconds)"
-        },        
-        {
-            "field": "subtitles",
-            "label": "Subtitles (VTT)",
-            "type": "file",
-            "extension":"vtt",
-            "folder":"/public/upload/sessions/subtitles"
-        },
-        {
+            "tab":"Media",
             "field": "audio",
             "label": "Audio file (MP3)",
             "type": "file",
@@ -124,14 +111,19 @@
             "folder":"/public/upload/sessions/audio"
         },
         {
-            "field":"filename","label":"WAV filename"
+            "field":"duration",
+            "label":"Duration (seconds)",
+            "help":"Clear this field to read duration from from MP3 file"
+        },        
+        {
+            "field":"filename","label":"WAV filename","hidden":true
         },
         
         
         {
             "tab":"Transcript",
             "field":"transcript",
-            "type":"text",
+            "type":"text",            
             "edit":false,            
             "label":"Transcript data",
             "settings":{"style":"json","wide":true,"rows":20}

@@ -1,4 +1,5 @@
 <?php
+use wapmorgan\Mp3Info\Mp3Info;
 
 class serdelia_plugin_session_update
 {
@@ -19,14 +20,35 @@ class serdelia_plugin_session_update
         $params=$this->params;
         
         $session=$this->cms->getJsonModel('sessions_simple',['id'=>$params['record']],true);
+
+        /*
+         get mp3 duration
+        */
+        if (!$session['duration'] && !empty($session['audio']['src']))
+        {
+            require(__DIR__.'/Mp3Info.php');
+            $audio = new Mp3Info($session['audio']['src']);
+            $duration=intval($audio->duration);            
+            if ($duration)
+                $this->cms->putJsonModel('sessions_simple',['duration'=>$duration],['id'=>$session['id']]);
+        }
+
+
         $items=$this->cms->getJsonModel('sessions_simple',['parent'=>$session['parent']['id']]);
 
         /*
-            duration
+            duration of all sessions
         */
         $duration=0;
         foreach ($items as $k=>$v)
             $duration+=$v['duration'];
+
+        /*
+            are all media available?
+        */
+        $media=1;
+        foreach ($items as $k=>$v)
+            if (empty($v['audio']['src'])) $media=0;
 
         /*
             states
@@ -52,6 +74,7 @@ class serdelia_plugin_session_update
         */
         $data=[
             'duration'=>$duration,
+            'status_media'=>$media,
             'locations'=>$locations,
             'narrators_states'=>$states
         ];
