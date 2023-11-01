@@ -6,26 +6,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require 'PageDataHandler.php';
-require 'HtmlGenerator.php';
-require 'HtmlUpdater.php';
+require 'Router.php';
+require 'PageController.php';
 
-$page_data_handler = new \Workspace\PageDataHandler();
-$page_data = $page_data_handler->getPageData();
+$pageController = new \Workspace\PageController();
 
-$html_generator = new \Workspace\HtmlGenerator();
-$html = $html_generator->generateHtml($page_data);
-
-$html_updater = new \Workspace\HtmlUpdater($html);
-$html = $html_updater->updateHtml($html);
-
-session_start();
-error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-ob_start();
-
-echo $html;
-
-$length = ob_get_length();
-header('Content-Length: '.$length."\r\n");
-header('Accept-Ranges: bytes'."\r\n");
-ob_end_flush();
+// Define routes and the response handler for each route
+Router::addRoute('GET', '/', [$pageController, 'getIndexPage']);
+Router::addRoute('GET', '/all', [$pageController, 'getAllPages']);
+Router::addRoute('GET', '/(.*)', [$pageController, 'getPageData']);
+Router::handleRequest();

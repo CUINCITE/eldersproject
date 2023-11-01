@@ -367,6 +367,60 @@
     }
 }
 
+
+.icon-btn-arrow {
+    @include flex(row, flex-start, center);
+
+
+
+    span {
+        background-color: currentColor;
+        display: inline-block;
+
+        &:first-of-type {
+            position: absolute;
+            inset: auto auto 50% 0;
+            width: 1px;
+            height: vw(20);
+
+            .button--simple & { display: none; }
+
+            .button--lightbox & {
+                height: vw(33);
+                transform-origin: center;
+                inset: 0 auto 0 vw(32);
+            }
+        }
+
+
+        &:nth-of-type(2) {
+            width: vw(51);
+            height: 1px;
+
+            .button--lightbox & {
+                width: vw(33);
+            }
+        }
+
+
+        &.triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: vw(19) 0 vw(19) vw(23);
+            border-color: transparent transparent transparent currentColor;
+            background: none;
+
+
+            .button--lightbox & {
+                border-width: vw(16.5) 0 vw(16.5) vw(22);
+                margin-left: vw(3);
+            }
+        }
+    }
+}
+
+
 .icon-more {
     width: 5px;
     height: 8px;

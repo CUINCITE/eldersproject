@@ -23,14 +23,17 @@
 @import "includes/icons/svg-icons";
 @import "includes/icons/sprite-icons";
 
+@import "includes/scaffold/box";
 @import "includes/scaffold/footer";
 @import "includes/scaffold/menu";
 @import "includes/scaffold/header";
 @import "includes/scaffold/offscreen";
+@import "includes/scaffold/newsletter";
 
 /* stylelint-disable-line */
 @import "includes/modules/module";
 @import "includes/modules/map";
+@import "includes/modules/ui";
 
 /* stylelint-disable-line */
 @import "includes/components/background";

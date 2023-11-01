@@ -11,23 +11,23 @@ $grid-columns: (
 $grid-gutter: (
     phone: 8px,
     tablet: 16px,
-    desktop: 12px,
+    desktop: 22px,
     hd: 45px
 );
 
 // column widths
-$grid-column: (
-    phone: 74px,
-    tablet: 60px,
-    desktop: 60px,
-    hd: 60px
-);
+// $grid-column: (
+//     phone: 74px,
+//     tablet: 60px,
+//     desktop: 60px,
+//     hd: 60px
+// );
 
 // space around first and last column
 $grid-offset: (
     phone: 28px,
     tablet: 28px,
-    desktop: 30px,
+    desktop: 20px,
     hd: 30px
 );
 

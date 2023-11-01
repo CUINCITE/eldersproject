@@ -1,4 +1,21 @@
+// css variables could be used in other modules/components
+@each $bp in (phone tablet desktop hd) {
+    @include breakpoint($bp) {
+        $offset-width: map-get($grid-offset, $bp);
+
+        :root {
+            --grid-margin: #{$offset-width};
+        }
+    }
+}
+
+
 .grid {
+    --grid-column-start: auto;
+    --grid-columns-span: auto;
+
+
+
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
 
@@ -23,19 +40,23 @@
     }
 }
 
+
+@include breakpoint(desktop) {
+    div[class*="col-span-"] {
+        grid-column: var(--grid-column-start) / span var(--grid-columns-span);
+    }
+}
+
+
 @for $cols from 1 through map-get($grid-columns, desktop) {
     @each $bp in desktop {
         @include breakpoint($bp) {
             .col-span-#{$cols} {
-                grid-column: span #{$cols} / span #{$cols};
+                --grid-columns-span: #{$cols};
             }
 
             .col-start-#{$cols} {
-                grid-column-start: #{$cols};
-            }
-
-            .col-end-#{$cols} {
-                grid-column-end: #{$cols + 1};
+                --grid-column-start: #{$cols};
             }
         }
     }

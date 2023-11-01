@@ -6,7 +6,7 @@
       },
       {
           "type": "image",
-          "url": "https://example.com/image.jpg"
+          "image": "https://example.com/image.jpg"
       },
       {
           "type": "hero",

@@ -1,0 +1,10 @@
+.ui {
+    padding: vw(40) 0;
+
+
+
+    &__content {
+        @include flex(column, center, flex-start);
+        gap: vw(30);
+    }
+}
