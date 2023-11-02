@@ -59,6 +59,7 @@ Also add these settings to `settings.json`
 "scss.validate": false,
 "stylelint.enable": true,
 "stylelint.config": null,
+"stylelint.validate": ["css", "scss"],
 "trailing-spaces.trimOnSave": true,
 "files.trimTrailingWhitespace": true,
 "files.autoSaveDelay": 200,
