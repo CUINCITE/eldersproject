@@ -6,6 +6,9 @@ $color-dark:        #121316;
 $color-gray:        #444;
 $color-blue:        #1369B2;
 $color-red:         #D54335;
+$color-pink:        #F0B9AD;
+$color-yellow:      #F0BB43;
+$color-purple:      #5E308A;
 
 $background-light-offwhite: #F8F7F7;
 $typography-black: #1B1B1B;
@@ -14,6 +17,7 @@ $color-transparent: rgba(0, 0, 0, 0);
 
 $color-bg: #DCDCDC;
 $color-text: $typography-black;
+$color-text-alt: #ECECEC;
 
 $color-primary: $color-pale;
 
@@ -26,5 +30,9 @@ $color-select-text: $color-pale;
     --color-bg: #{$color-bg};
     --color-box: #{$background-light-offwhite};
     --color-text: #{$color-text};
+    --color-text-alt: #{$color-text-alt};
     --color-red: #{$color-red};
+    --color-pink: #{$color-pink};
+    --color-yellow: #{$color-yellow};
+    --color-purple: #{$color-purple};
 }

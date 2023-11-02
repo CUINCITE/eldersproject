@@ -3,11 +3,20 @@
         <div class="col-span-12">
             <div class="ui__content box">
                 <h3 class="heading">Buttons</h3>
-                {% include "components/c_button.html" %}
-                {% include "components/c_button.html" with { "modifiers": ["simple"] } %}
-                {% include "components/c_button.html" with { "modifiers": ["simple", "reversed"] } %}
-                {% include "components/c_button.html" with { "modifiers": ["lightbox"], "text": "01" } %}
-                {% include "components/c_button.html" with { "modifiers": ["lightbox", "reversed"], "text": "02" } %}
+                <div class="ui__wrap">
+                    {% include "components/c_button.html" %}
+                    {% include "components/c_button.html" with { "modifiers": ["simple"] } %}
+                    {% include "components/c_button.html" with { "modifiers": ["simple", "reversed"] } %}
+                    {% include "components/c_button.html" with { "modifiers": ["lightbox"], "text": "01" } %}
+                    {% include "components/c_button.html" with { "modifiers": ["lightbox", "reversed"], "text": "02" } %}
+                </div>
+            </div>
+            <div class="ui__content box">
+                <h3 class="heading">Stickers</h3>
+                <div class="ui__wrap">
+                    {% include "components/c_sticker.html" with { "text": "Discover More" } %}
+                    {% include "components/c_sticker.html" with { "modifiers": ["yellow"], "text": "Spam? Not us!" } %}
+                </div>
             </div>
         </div>
     </div>
