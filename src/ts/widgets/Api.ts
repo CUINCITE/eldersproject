@@ -321,9 +321,7 @@ export class API {
 
             fetch(url, {
                 method: action,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: dataBody,
             })
                 .then(response => response.json())

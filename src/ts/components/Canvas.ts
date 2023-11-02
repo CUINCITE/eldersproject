@@ -7,6 +7,7 @@ export class Canvas extends Component {
         width: 0,
         height: 0,
     };
+
     private pixelRatio = Math.min(2, Math.floor(window.devicePixelRatio || 1));
     private raf: number;
     private isAnimating = false;

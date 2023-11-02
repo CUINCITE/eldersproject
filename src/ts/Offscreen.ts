@@ -24,9 +24,7 @@ export class Offscreen {
 
         Offscreen.instance = this;
 
-        gsap.set(this.view, {
-            yPercent: 100,
-        });
+        gsap.set(this.view, { yPercent: 100 });
     }
 
 
@@ -58,7 +56,7 @@ export class Offscreen {
 
             return {
                 ...data,
-                items
+                items,
             };
         });
     };

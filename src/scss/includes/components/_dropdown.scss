@@ -1,5 +1,6 @@
 $selection-bgcolor: $color-blue;
 $disabled-opacity: 0.5;
+
 .dropdown {
     position: absolute;
     width: 100%;
@@ -13,7 +14,6 @@ $disabled-opacity: 0.5;
     
 
     &.is-open ~ .form__icon {
-
         svg {
             transform: rotate(180deg);
         }
@@ -103,21 +103,21 @@ $disabled-opacity: 0.5;
                 font-size: 14px;
             }
             
-            .is-open & {color: $color-black;}
+            .is-open & { color: $color-black; }
         }
 
         &.is-selected .results { opacity: 1; }
+
         // &.is-disabled { opacity: $disabled-opacity; }
         // &:last-of-type {padding-bottom: 3px;}
     }
     
     &__button {
         @include flex(row, flex-start, center);
-        @include full();
+        @include full;
         right: auto;
         width: 100%;
         height: vw(40);
-        transition: transform 0.5s $ease-out;
         transform-origin: left;
         cursor: pointer;
         opacity: 0;

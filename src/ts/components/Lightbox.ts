@@ -73,12 +73,12 @@ export class Lightbox extends Component {
             arrowNext: this.view.querySelector('.js-next'),
             close: this.view.querySelector('.js-close'),
             count: this.view.querySelector('.js-count'),
-            items: this.view.querySelectorAll('[data-lightbox-path]')
+            items: this.view.querySelectorAll('[data-lightbox-path]'),
         };
 
         this.settings = {
             currentIndex: 0,
-            total: this.elements.items.length
+            total: this.elements.items.length,
         };
 
         this.cache = [...this.elements.items].map((el, index) => {
@@ -87,7 +87,7 @@ export class Lightbox extends Component {
             return {
                 el,
                 index,
-                path
+                path,
             };
         });
     };

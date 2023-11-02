@@ -1,8 +1,7 @@
-import { browser } from "../Site";
-import { Component } from "./Component";
 import { gsap } from 'gsap/dist/gsap';
-import { breakpoint } from "../Site";
-import { generateUID, parseToTime } from "../Utils";
+import { browser, breakpoint } from '../Site';
+import { Component } from './Component';
+import { generateUID, parseToTime } from '../Utils';
 
 export interface IPlayerSettings {
     autoplay?: boolean;
@@ -51,15 +50,15 @@ export interface IPlayerElements {
 }
 
 export class PlayerEvents {
-    public static END = "end";
-    public static NEXT = "next";
-    public static PREV = "prev";
+    public static END = 'end';
+    public static NEXT = 'next';
+    public static PREV = 'prev';
 }
 
 export class PlayerSize {
-    public static COVER = "cover";
-    public static CONTAIN = "contain";
-    public static AUTO = "auto";
+    public static COVER = 'cover';
+    public static CONTAIN = 'contain';
+    public static AUTO = 'auto';
 }
 
 declare const dataLayer;
@@ -100,7 +99,7 @@ export abstract class Player extends Component {
             hotkeys: true,
         };
 
-        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')))
+        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
 
         // generate unique id:
         this.uid = generateUID();
@@ -111,17 +110,17 @@ export abstract class Player extends Component {
 
         // store the object in the DOM element
         // and in instances array:
-        if (typeof Player.instances === "undefined") {
+        if (typeof Player.instances === 'undefined') {
             Player.instances = [];
         }
         Player.instances.push(this);
 
-        this.view.classList.add("is-initialized");
+        this.view.classList.add('is-initialized');
     }
 
     // pause all instances of Player class:
     static pauseAll(uid?: string): void {
-        Player.instances.forEach((item) => {
+        Player.instances.forEach(item => {
             if (typeof uid === undefined || uid !== item.uid) {
                 item.pause();
             }
@@ -130,7 +129,7 @@ export abstract class Player extends Component {
 
     // pause all instances of Player class inside element:
     static pauseAllIn(selector: string): void {
-        Player.instances.forEach((item) => {
+        Player.instances.forEach(item => {
             if (item.view.closest(selector)) {
                 item.pause();
             }
@@ -153,6 +152,7 @@ export abstract class Player extends Component {
     public hide(): void {
         this.view.style.display = 'none';
     }
+
     public show(): void {
         this.view.style.display = 'block';
     }
@@ -167,12 +167,12 @@ export abstract class Player extends Component {
     }
 
     public turnOn(): void {
-        if (!!this.wasPlaying) {
+        if (this.wasPlaying) {
             this.play();
         }
     }
 
-    //@ts-ignore
+    // @ts-ignore
     public animateIn(): void {
         if (!this.view) { return; }
         this.showPlayerBar();
@@ -191,24 +191,23 @@ export abstract class Player extends Component {
 
     public resize = (): void => {
         if (
-            !this.settings.ratio &&
-            this.settings.width &&
-            this.settings.height
+            !this.settings.ratio
+            && this.settings.width
+            && this.settings.height
         ) {
             this.settings.ratio = this.settings.width / this.settings.height;
         }
 
-        const size = this.settings.size;
-        const mediaRatio =
-            breakpoint.phone && this.settings.ratio_mobile
-                ? this.settings.ratio_mobile
-                : this.settings.ratio;
+        const { size } = this.settings;
+        const mediaRatio = breakpoint.phone && this.settings.ratio_mobile
+            ? this.settings.ratio_mobile
+            : this.settings.ratio;
 
         switch (size) {
             case PlayerSize.AUTO:
                 // console.log({ mediaRatio });
-                this.view.style.paddingTop = 100 / mediaRatio + "%";
-                this.view.classList.add("is-proportional");
+                this.view.style.paddingTop = `${100 / mediaRatio}%`;
+                this.view.classList.add('is-proportional');
                 break;
 
             case PlayerSize.CONTAIN:
@@ -220,15 +219,13 @@ export abstract class Player extends Component {
 
                 let wdt: number;
                 if (size === PlayerSize.CONTAIN) {
-                    wdt =
-                        wrapRatio < mediaRatio
-                            ? wrapWidth
-                            : wrapHeight * mediaRatio;
+                    wdt = wrapRatio < mediaRatio
+                        ? wrapWidth
+                        : wrapHeight * mediaRatio;
                 } else if (size === PlayerSize.COVER) {
-                    wdt =
-                        wrapRatio < mediaRatio
-                            ? wrapHeight * mediaRatio
-                            : wrapWidth;
+                    wdt = wrapRatio < mediaRatio
+                        ? wrapHeight * mediaRatio
+                        : wrapWidth;
                 }
 
                 const hgt = wdt / mediaRatio;
@@ -236,11 +233,11 @@ export abstract class Player extends Component {
                 const marginTop = Math.min(0, (wrapHeight - hgt) * 0.5);
                 // console.log(wdt, hgt);
 
-                this.view.classList.remove("is-proportional");
-                this.view.style.width = wdt + 'px';
-                this.view.style.height = hgt + 'px';
-                this.view.style.marginLeft = marginLeft + 'px';
-                this.view.style.marginTop = marginTop + 'px';
+                this.view.classList.remove('is-proportional');
+                this.view.style.width = `${wdt}px`;
+                this.view.style.height = `${hgt}px`;
+                this.view.style.marginLeft = `${marginLeft}px`;
+                this.view.style.marginTop = `${marginTop}px`;
                 this.view.style.paddingTop = '';
 
                 break;
@@ -263,31 +260,31 @@ export abstract class Player extends Component {
 
     protected buildUI(): void {
         this.controls = {};
-        this.controls.poster = this.view.querySelector(".player__poster");
-        this.controls.title = this.view.querySelector(".player__title");
-        this.controls.playerBar = this.view.querySelector(".player__bar");
-        this.controls.toggleBtn = this.view.querySelector(".player__playpause");
-        this.controls.playBtn = this.view.querySelector(".player__toggle");
-        this.controls.fullBtn = this.view.querySelector(".player__full");
-        this.controls.volume = this.view.querySelector(".player__volume");
-        this.controls.volumeBar = this.view.querySelector(".volume__bar");
-        this.controls.volumeValue = this.view.querySelector(".volume__value");
-        this.controls.volumeButton = this.view.querySelector(".volume__button");
-        this.controls.scrubber = this.view.querySelector(".player__scrubber");
-        this.controls.duration = this.view.querySelector(".player__duration");
-        this.controls.time = this.view.querySelector(".player__played");
-        this.controls.loaded = this.view.querySelector(".player__loaded");
-        this.controls.progress = this.view.querySelector(".player__progress");
-        this.controls.prev = this.view.querySelector(".player__prev");
-        this.controls.next = this.view.querySelector(".player__next");
-        this.controls.captions = this.view.querySelector(".player__captions");
-        this.controls.cc = this.view.querySelector(".player__cc");
+        this.controls.poster = this.view.querySelector('.player__poster');
+        this.controls.title = this.view.querySelector('.player__title');
+        this.controls.playerBar = this.view.querySelector('.player__bar');
+        this.controls.toggleBtn = this.view.querySelector('.player__playpause');
+        this.controls.playBtn = this.view.querySelector('.player__toggle');
+        this.controls.fullBtn = this.view.querySelector('.player__full');
+        this.controls.volume = this.view.querySelector('.player__volume');
+        this.controls.volumeBar = this.view.querySelector('.volume__bar');
+        this.controls.volumeValue = this.view.querySelector('.volume__value');
+        this.controls.volumeButton = this.view.querySelector('.volume__button');
+        this.controls.scrubber = this.view.querySelector('.player__scrubber');
+        this.controls.duration = this.view.querySelector('.player__duration');
+        this.controls.time = this.view.querySelector('.player__played');
+        this.controls.loaded = this.view.querySelector('.player__loaded');
+        this.controls.progress = this.view.querySelector('.player__progress');
+        this.controls.prev = this.view.querySelector('.player__prev');
+        this.controls.next = this.view.querySelector('.player__next');
+        this.controls.captions = this.view.querySelector('.player__captions');
+        this.controls.cc = this.view.querySelector('.player__cc');
 
-        if (!!this.settings.autoplay) {
-            this.view.classList.add("has-autoplay");
+        if (this.settings.autoplay) {
+            this.view.classList.add('has-autoplay');
         }
 
-        this.view.classList.add("has-controls");
+        this.view.classList.add('has-controls');
 
         if (this.settings.muted) {
             this.setVolume(0);
@@ -300,22 +297,22 @@ export abstract class Player extends Component {
     protected bind(): void {
 
         if (this.controls) {
-            this.controls.toggleBtn && this.controls.toggleBtn.addEventListener("click", this.onToggleClick);
-            this.controls.playBtn && this.controls.playBtn.addEventListener("click", this.onToggleClick);
-            this.controls.fullBtn && this.controls.fullBtn.addEventListener("click", this.onFullClick);
-            this.controls.prev && this.controls.prev.addEventListener("click", this.onPrevClick);
-            this.controls.next && this.controls.next.addEventListener("click", this.onNextClick);
-            this.controls.volumeButton && this.controls.volumeButton.addEventListener("click", this.onVolumeButtonClick);
-            this.controls.volumeBar && this.controls.volumeBar.addEventListener("mousedown", this.onVolumeDown)
-            this.controls.volumeBar && this.controls.volumeBar.addEventListener("click", this.onVolumeClick);
-            this.controls.scrubber && this.controls.scrubber.addEventListener("mousedown", this.onScrubberDown)
-            this.controls.scrubber && this.controls.scrubber.addEventListener("click", this.onScrubberClick);
+            this.controls.toggleBtn && this.controls.toggleBtn.addEventListener('click', this.onToggleClick);
+            this.controls.playBtn && this.controls.playBtn.addEventListener('click', this.onToggleClick);
+            this.controls.fullBtn && this.controls.fullBtn.addEventListener('click', this.onFullClick);
+            this.controls.prev && this.controls.prev.addEventListener('click', this.onPrevClick);
+            this.controls.next && this.controls.next.addEventListener('click', this.onNextClick);
+            this.controls.volumeButton && this.controls.volumeButton.addEventListener('click', this.onVolumeButtonClick);
+            this.controls.volumeBar && this.controls.volumeBar.addEventListener('mousedown', this.onVolumeDown);
+            this.controls.volumeBar && this.controls.volumeBar.addEventListener('click', this.onVolumeClick);
+            this.controls.scrubber && this.controls.scrubber.addEventListener('mousedown', this.onScrubberDown);
+            this.controls.scrubber && this.controls.scrubber.addEventListener('click', this.onScrubberClick);
         }
 
-        this.view.addEventListener("mousemove", this.onMouseMove)
-        this.view.addEventListener("mouseup", this.onMouseUp)
-        this.view.addEventListener("mouseleave", this.onMouseLeave)
-        this.view.addEventListener("click", this.onClick);
+        this.view.addEventListener('mousemove', this.onMouseMove);
+        this.view.addEventListener('mouseup', this.onMouseUp);
+        this.view.addEventListener('mouseleave', this.onMouseLeave);
+        this.view.addEventListener('click', this.onClick);
 
         document.addEventListener('keydown', this.onKeyDown);
 
@@ -325,12 +322,12 @@ export abstract class Player extends Component {
     protected unbind(): void {
         if (this.controls) {
             this.controls.toggleBtn && this.controls.toggleBtn.removeEventListener('click', this.onToggleClick);
-            this.controls.playBtn && this.controls.playBtn.removeEventListener("click", this.onToggleClick);
-            this.controls.scrubber && this.controls.scrubber.removeEventListener("mousedown", this.onScrubberDown)
-            this.controls.scrubber && this.controls.scrubber.removeEventListener("click", this.onScrubberClick);
-            this.controls.fullBtn && this.controls.fullBtn.removeEventListener("click", this.onFullClick);
-            this.controls.volumeBar && this.controls.volumeBar.removeEventListener("mousedown", this.onVolumeDown)
-            this.controls.volumeBar && this.controls.volumeBar.removeEventListener("click", this.onVolumeClick);
+            this.controls.playBtn && this.controls.playBtn.removeEventListener('click', this.onToggleClick);
+            this.controls.scrubber && this.controls.scrubber.removeEventListener('mousedown', this.onScrubberDown);
+            this.controls.scrubber && this.controls.scrubber.removeEventListener('click', this.onScrubberClick);
+            this.controls.fullBtn && this.controls.fullBtn.removeEventListener('click', this.onFullClick);
+            this.controls.volumeBar && this.controls.volumeBar.removeEventListener('mousedown', this.onVolumeDown);
+            this.controls.volumeBar && this.controls.volumeBar.removeEventListener('click', this.onVolumeClick);
         }
 
         this.unbindPlayer();
@@ -341,46 +338,46 @@ export abstract class Player extends Component {
     protected onTimeupdate(data?): void {}
 
     protected onCanplay(): void {
-        this.view.classList.add("is-canplay");
-        this.view.classList.remove("is-error");
+        this.view.classList.add('is-canplay');
+        this.view.classList.remove('is-error');
     }
 
     protected onPlay(): void {
-        this.view.classList.add("is-played");
-        this.view.classList.remove("is-ended,is-error");
+        this.view.classList.add('is-played');
+        this.view.classList.remove('is-ended,is-error');
         Player.pauseAll(this.uid);
 
         if (!this.videoHasBeenPlayed && dataLayer) {
             this.videoHasBeenPlayed = true;
-            dataLayer.push({'event': 'video_play', 'value': 'how-gpw-works'});
+            dataLayer.push({ event: 'video_play', value: 'how-gpw-works' });
         }
     }
 
     protected onPlaying(): void {
-        this.view.classList.add("is-playing");
-        this.view.classList.remove("is-loading,is-error");
+        this.view.classList.add('is-playing');
+        this.view.classList.remove('is-loading,is-error');
     }
 
     protected onPause(): void {
-        this.view.classList.remove("is-playing");
+        this.view.classList.remove('is-playing');
     }
 
     protected onWaiting(): void {
-        this.view.classList.remove("is-playing");
-        this.view.classList.add("is-loading");
+        this.view.classList.remove('is-playing');
+        this.view.classList.add('is-loading');
     }
 
     protected onEnd(): void {
-        this.view.classList.remove("is-playing,is-played,is-started");
-        this.view.classList.add("is-ended");
+        this.view.classList.remove('is-playing,is-played,is-started');
+        this.view.classList.add('is-ended');
     }
 
     protected onError(e): void {
         if (this.view && e.target.networkState && e.target.networkState === 3) {
             console.warn(
-                "Can't load media " + (e.target as HTMLMediaElement).src
+                `Can't load media ${(e.target as HTMLMediaElement).src}`,
             );
-            this.view.classList.add("is-error");
+            this.view.classList.add('is-error');
         }
     }
 
@@ -396,7 +393,7 @@ export abstract class Player extends Component {
 
     protected onClick = (e): void => {
         if (
-            e.target.closest(".player__bar")
+            e.target.closest('.player__bar')
         ) {
             e.preventDefault();
             e.stopPropagation();
@@ -421,47 +418,46 @@ export abstract class Player extends Component {
     protected onMouseUp = (e): void => {
         e.stopPropagation();
         e.preventDefault();
-        if (!!this.scrubbing) {
+        if (this.scrubbing) {
             e.stopPropagation();
-            let seek =
-                (e.pageX - this.controls.scrubber.getBoundingClientRect().left) /
-                this.controls.scrubber.clientWidth;
+            const seek = (e.pageX - this.controls.scrubber.getBoundingClientRect().left)
+                / this.controls.scrubber.clientWidth;
             this.seek(seek);
         }
         this.scrubbing = false;
         this.volumeUpdating = false;
-        this.view.classList.remove("is-scrubbing");
+        this.view.classList.remove('is-scrubbing');
     };
 
     protected onMouseLeave = (e): void => {
         this.scrubbing = false;
         this.volumeUpdating = false;
-        this.view.classList.remove("is-scrubbing");
+        this.view.classList.remove('is-scrubbing');
     };
 
     protected onMouseMove = (e): void => {
         e.stopPropagation();
         e.preventDefault();
-        this.view.classList.add("is-mousemove");
+        this.view.classList.add('is-mousemove');
         window.clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
             this.hideBar();
         }, 2000);
 
-        if (!!this.scrubbing) {
+        if (this.scrubbing) {
             e.stopPropagation();
-            let posX = e.pageX - this.controls.scrubber.getBoundingClientRect().left;
-            let width = this.controls.scrubber.clientWidth;
-            let value = Math.max(0, Math.min(1, posX / width));
-            this.controls.progress.style.width = value * 100 + "%";
+            const posX = e.pageX - this.controls.scrubber.getBoundingClientRect().left;
+            const width = this.controls.scrubber.clientWidth;
+            const value = Math.max(0, Math.min(1, posX / width));
+            this.controls.progress.style.width = `${value * 100}%`;
             this.seek(value);
         }
 
-        if (!!this.volumeUpdating) {
+        if (this.volumeUpdating) {
             e.stopPropagation();
-            let posX = e.pageX - this.controls.volumeBar.getBoundingClientRect().left;
-            let width = this.controls.volumeBar.clientWidth;
-            let value = Math.max(0, Math.min(1, posX / width));
+            const posX = e.pageX - this.controls.volumeBar.getBoundingClientRect().left;
+            const width = this.controls.volumeBar.clientWidth;
+            const value = Math.max(0, Math.min(1, posX / width));
             this.setVolume(value);
         }
     };
@@ -469,9 +465,9 @@ export abstract class Player extends Component {
     protected onVolumeClick = (e): void => {
         e.stopPropagation();
 
-        let offset = this.controls.volumeBar.getBoundingClientRect(),
-            valuePos = e.clientX - offset.left,
-            value = valuePos / this.controls.volumeBar.clientWidth;
+        const offset = this.controls.volumeBar.getBoundingClientRect();
+        const valuePos = e.clientX - offset.left;
+        const value = valuePos / this.controls.volumeBar.clientWidth;
 
         this.setVolume(value);
     };
@@ -490,14 +486,13 @@ export abstract class Player extends Component {
     protected onScrubberDown = (e): void => {
         e.stopPropagation();
         this.scrubbing = true;
-        this.view.classList.add("is-scrubbing");
+        this.view.classList.add('is-scrubbing');
     };
 
     protected onScrubberClick = (e): void => {
         e.stopPropagation();
-        let seek =
-            (e.pageX - e.currentTarget.getBoundingClientRect().left) /
-            e.currentTarget.clientWidth;
+        const seek = (e.pageX - e.currentTarget.getBoundingClientRect().left)
+            / e.currentTarget.clientWidth;
         this.seek(seek);
     };
 
@@ -515,18 +510,17 @@ export abstract class Player extends Component {
 
     protected loadPoster(): void {
         if (this.settings.poster) {
-            const poster =
-                !!browser.mobile &&
-                this.settings.poster_mobile &&
-                this.settings.poster_mobile !== ""
-                    ? this.settings.poster_mobile
-                    : this.settings.poster;
+            const poster = !!browser.mobile
+                && this.settings.poster_mobile
+                && this.settings.poster_mobile !== ''
+                ? this.settings.poster_mobile
+                : this.settings.poster;
             if (this.controls && this.controls.poster) {
-                this.controls.poster.style.backgroundImage ="url(" + poster + ")";
+                this.controls.poster.style.backgroundImage = `url(${poster})`;
             }
         }
 
-        this.view.classList.toggle("has-poster", !!this.settings.poster);
+        this.view.classList.toggle('has-poster', !!this.settings.poster);
     }
 
     protected resetTimeline(): void {
@@ -540,7 +534,7 @@ export abstract class Player extends Component {
     protected updateTimeline(
         duration: number,
         buffered?: number,
-        current?: number
+        current?: number,
     ): void {
         if (!duration || !this.controls) {
             return;
@@ -553,36 +547,36 @@ export abstract class Player extends Component {
             this.controls.time.innerText = parseToTime(current || 0);
         }
         if (buffered && this.controls.loaded) {
-            this.controls.loaded.style.width = (Math.max(buffered, current || 0) / duration) * 100 + "%";
+            this.controls.loaded.style.width = `${(Math.max(buffered, current || 0) / duration) * 100}%`;
         }
         if (current) {
-            this.controls.progress.style.width = ((current || 0) / duration) * 100 + "%";
+            this.controls.progress.style.width = `${((current || 0) / duration) * 100}%`;
             this.view.classList.toggle(
-                "is-started",
-                current > this.settings.ready_time
+                'is-started',
+                current > this.settings.ready_time,
             );
         }
     }
 
     protected updateVolume(volume: number): void {
-        this.view.classList.toggle("is-muted", volume < 0.1);
+        this.view.classList.toggle('is-muted', volume < 0.1);
         if (this.controls && this.controls.volumeValue) {
-            this.controls.volumeValue.style.width = volume * 100 + "%";
+            this.controls.volumeValue.style.width = `${volume * 100}%`;
         }
     }
 
     protected showPlayerBar(): void {
         if (!this.view) { return; }
-        this.view.classList.add("show-playerbar");
+        this.view.classList.add('show-playerbar');
         setTimeout(() => {
             if (!this.view) { return; }
-            this.view.classList.remove("show-playerbar");
+            this.view.classList.remove('show-playerbar');
         }, 2500);
     }
 
     protected hideBar(): void {
         // if (!this.controls.playerBar.is(':hover')) {
-        this.view.classList.remove("is-mousemove");
+        this.view.classList.remove('is-mousemove');
         // }
     }
 }

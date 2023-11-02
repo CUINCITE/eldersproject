@@ -1,6 +1,7 @@
-import { Player, IPlayerSettings } from "./Player";
-import { browser } from "../Site";
+import { Player, IPlayerSettings } from './Player';
+import { browser } from '../Site';
 
+// eslint-disable-next-line no-shadow
 export enum MediaState {
     HAVE_NOTHING,
     HAVE_METADATA,
@@ -21,7 +22,7 @@ export class Video extends Player {
 
 
     public preload(): Promise<boolean> {
-        let state = !browser.safari
+        const state = !browser.safari
             ? MediaState.HAVE_ENOUGH_DATA
             : MediaState.HAVE_METADATA;
         return new Promise<boolean>((resolve, reject) => {
@@ -30,7 +31,7 @@ export class Video extends Player {
             } else if (this.media.readyState >= state) {
                 resolve(true);
             } else {
-                this.mediaEl.addEventListener("loadeddata", () => {
+                this.mediaEl.addEventListener('loadeddata', () => {
                     if (this.media.readyState >= state) {
                         resolve(true);
                     }
@@ -43,15 +44,14 @@ export class Video extends Player {
 
     public load(data: IPlayerSettings): Promise<number | {}> {
         return new Promise<boolean>((resolve, reject) => {
-            let src =
-                !!browser.mobile && data.src_mobile && data.src_mobile !== ""
-                    ? data.src_mobile
-                    : data.src;
+            let src = !!browser.mobile && data.src_mobile && data.src_mobile !== ''
+                ? data.src_mobile
+                : data.src;
             src = this.decodeURL(src);
 
             this.media.pause();
             this.media.src = src;
-            this.view.classList.remove("is-ended,is-started,is-played,is-playing");
+            this.view.classList.remove('is-ended,is-started,is-played,is-playing');
             this.media.load();
 
             this.resetTimeline();
@@ -76,7 +76,7 @@ export class Video extends Player {
 
     public animateIn(): void {
         this.isShown = true;
-        if (!!this.settings.autoplay) {
+        if (this.settings.autoplay) {
             this.play();
         }
         super.animateIn();
@@ -98,17 +98,17 @@ export class Video extends Player {
 
         // show poster if autoplay fails:
         setTimeout(() => {
-            this.view.classList.add("should-play");
+            this.view.classList.add('should-play');
         }, 1000);
 
         if (playPromise !== undefined) {
             // tslint:disable-next-line: no-any
             (playPromise as any)
                 .then(() => {
-                    this.view.classList.remove("autoplay-failed");
+                    this.view.classList.remove('autoplay-failed');
                 })
-                .catch((error) => {
-                    this.view.classList.add("autoplay-failed");
+                .catch(error => {
+                    this.view.classList.add('autoplay-failed');
                 });
         }
     }
@@ -135,9 +135,9 @@ export class Video extends Player {
     public unload(): void {
 
         // unload video source:
-        if (!!this.media.src) {
+        if (this.media.src) {
             this.media.pause();
-            this.media.src = "";
+            this.media.src = '';
             this.media.load();
         }
     }
@@ -175,19 +175,19 @@ export class Video extends Player {
 
 
     protected setup(): void {
-        this.mediaEl = this.view.querySelector("audio, video");
+        this.mediaEl = this.view.querySelector('audio, video');
         if (!this.mediaEl) {
             console.error(
-                "Video/Audio component must contain html `<audio>` or `<video>` element"
+                'Video/Audio component must contain html `<audio>` or `<video>` element',
             );
             return;
         }
 
-        this.media = <HTMLVideoElement>this.mediaEl;
-        this.isAudio = this.media.tagName === "AUDIO";
+        this.media = <HTMLVideoElement> this.mediaEl;
+        this.isAudio = this.media.tagName === 'AUDIO';
 
         // make sure ratios are float numbers:
-        this.settings.ratio = parseFloat(this.settings.ratio + "");
+        this.settings.ratio = parseFloat(`${this.settings.ratio}`);
         // this.settings.ratio_mobile = <number>(
         //     parseFloat(this.settings.ratio_mobile + "")
         // );
@@ -201,23 +201,23 @@ export class Video extends Player {
         // }
 
         // rmeove mobile ratio if no mobile src:
-        if (!this.settings.src_mobile || this.settings.src_mobile === "") {
+        if (!this.settings.src_mobile || this.settings.src_mobile === '') {
             // delete this.settings.ratio_mobile;
             delete this.settings.src_mobile;
         }
 
         // mobile src:
         if (
-            !!browser.mobile &&
-            this.settings.src_mobile &&
-            this.settings.src_mobile !== this.media.src
+            !!browser.mobile
+            && this.settings.src_mobile
+            && this.settings.src_mobile !== this.media.src
         ) {
             this.media.src = this.decodeURL(this.settings.src_mobile);
             this.media.load();
         } else if (
-            !browser.mobile &&
-            this.settings.src &&
-            this.settings.src !== this.media.src
+            !browser.mobile
+            && this.settings.src
+            && this.settings.src !== this.media.src
         ) {
             this.media.src = this.decodeURL(this.settings.src);
             this.media.load();
@@ -243,11 +243,11 @@ export class Video extends Player {
         }
 
         // poster:
-        const media = <HTMLVideoElement>this.media;
+        const media = <HTMLVideoElement> this.media;
         if (media.poster && !this.settings.poster) {
             this.settings.poster = media.poster;
             if (this.media.controls) {
-                media.poster = "";
+                media.poster = '';
             }
         }
 
@@ -261,7 +261,7 @@ export class Video extends Player {
         this.bind();
         this.resize();
 
-        if (!!this.settings.autoplay) {
+        if (this.settings.autoplay) {
             // because we need to fire `play()` after `animateIn()`
             this.pause();
         }
@@ -271,7 +271,7 @@ export class Video extends Player {
 
     protected bind(): void {
 
-        this.mediaEl.addEventListener("click", this.onToggleClick);
+        this.mediaEl.addEventListener('click', this.onToggleClick);
         super.bind();
     }
 
@@ -282,20 +282,20 @@ export class Video extends Player {
             this.onLoaded();
         }
 
-        this.mediaEl.addEventListener("loadeddata", () => this.onLoaded())
-        this.mediaEl.addEventListener("loadedmetadata", () => this.onLoaded())
-        this.mediaEl.addEventListener("durationchange", () => this.onDurationChange())
-        this.mediaEl.addEventListener("updateMediaState", () => this.onDurationChange())
-        this.mediaEl.addEventListener("progress", () => this.onProgress())
-        this.mediaEl.addEventListener("updateMediaState", () => this.onProgress())
-        this.mediaEl.addEventListener("timeupdate", () => this.onTimeupdate())
-        this.mediaEl.addEventListener("play", () => this.onPlay())
-        this.mediaEl.addEventListener("canplay", () => this.onCanplay())
-        this.mediaEl.addEventListener("playing", () => this.onPlaying())
-        this.mediaEl.addEventListener("pause", () => this.onPause())
-        this.mediaEl.addEventListener("waiting", () => this.onWaiting())
-        this.mediaEl.addEventListener("ended", () => this.onEnd())
-        this.mediaEl.addEventListener("error", (e) => this.onError(e));
+        this.mediaEl.addEventListener('loadeddata', () => this.onLoaded());
+        this.mediaEl.addEventListener('loadedmetadata', () => this.onLoaded());
+        this.mediaEl.addEventListener('durationchange', () => this.onDurationChange());
+        this.mediaEl.addEventListener('updateMediaState', () => this.onDurationChange());
+        this.mediaEl.addEventListener('progress', () => this.onProgress());
+        this.mediaEl.addEventListener('updateMediaState', () => this.onProgress());
+        this.mediaEl.addEventListener('timeupdate', () => this.onTimeupdate());
+        this.mediaEl.addEventListener('play', () => this.onPlay());
+        this.mediaEl.addEventListener('canplay', () => this.onCanplay());
+        this.mediaEl.addEventListener('playing', () => this.onPlaying());
+        this.mediaEl.addEventListener('pause', () => this.onPause());
+        this.mediaEl.addEventListener('waiting', () => this.onWaiting());
+        this.mediaEl.addEventListener('ended', () => this.onEnd());
+        this.mediaEl.addEventListener('error', e => this.onError(e));
 
         // if (screenfull.isEnabled) {
         //     document.addEventListener(screenfull.raw.fullscreenchange, () => {
@@ -307,20 +307,20 @@ export class Video extends Player {
 
 
     protected unbindPlayer(): void {
-        this.mediaEl.removeEventListener("loadeddata", () => this.onLoaded())
-        this.mediaEl.removeEventListener("loadedmetadata", () => this.onLoaded())
-        this.mediaEl.removeEventListener("durationchange", () => this.onDurationChange())
-        this.mediaEl.removeEventListener("updateMediaState", () => this.onDurationChange())
-        this.mediaEl.removeEventListener("progress", () => this.onProgress())
-        this.mediaEl.removeEventListener("updateMediaState", () => this.onProgress())
-        this.mediaEl.removeEventListener("timeupdate", () => this.onTimeupdate())
-        this.mediaEl.removeEventListener("play", () => this.onPlay())
-        this.mediaEl.removeEventListener("canplay", () => this.onCanplay())
-        this.mediaEl.removeEventListener("playing", () => this.onPlaying())
-        this.mediaEl.removeEventListener("pause", () => this.onPause())
-        this.mediaEl.removeEventListener("waiting", () => this.onWaiting())
-        this.mediaEl.removeEventListener("ended", () => this.onEnd())
-        this.mediaEl.removeEventListener("error", (e) => this.onError(e));
+        this.mediaEl.removeEventListener('loadeddata', () => this.onLoaded());
+        this.mediaEl.removeEventListener('loadedmetadata', () => this.onLoaded());
+        this.mediaEl.removeEventListener('durationchange', () => this.onDurationChange());
+        this.mediaEl.removeEventListener('updateMediaState', () => this.onDurationChange());
+        this.mediaEl.removeEventListener('progress', () => this.onProgress());
+        this.mediaEl.removeEventListener('updateMediaState', () => this.onProgress());
+        this.mediaEl.removeEventListener('timeupdate', () => this.onTimeupdate());
+        this.mediaEl.removeEventListener('play', () => this.onPlay());
+        this.mediaEl.removeEventListener('canplay', () => this.onCanplay());
+        this.mediaEl.removeEventListener('playing', () => this.onPlaying());
+        this.mediaEl.removeEventListener('pause', () => this.onPause());
+        this.mediaEl.removeEventListener('waiting', () => this.onWaiting());
+        this.mediaEl.removeEventListener('ended', () => this.onEnd());
+        this.mediaEl.removeEventListener('error', e => this.onError(e));
     }
 
 
@@ -332,7 +332,7 @@ export class Video extends Player {
 
 
     protected onDurationChange(): void {
-        let duration = this.media.duration;
+        const { duration } = this.media;
         if (!duration) {
             return;
         }
@@ -357,14 +357,14 @@ export class Video extends Player {
 
     private loadCaptions(): void {
         if (this.media.textTracks.length > 0) {
-            this.view.classList.add("has-cc");
+            this.view.classList.add('has-cc');
 
-            this.media.textTracks[0].mode = "showing";
+            this.media.textTracks[0].mode = 'showing';
 
-            let ccTracksData = [];
+            const ccTracksData = [];
             for (let i = 0; i < this.media.textTracks.length; i++) {
                 const track: TextTrack = this.media.textTracks[i];
-                track.mode = "hidden";
+                track.mode = 'hidden';
                 ccTracksData.push({
                     lang: track.language,
                     label: track.label,
@@ -376,21 +376,21 @@ export class Video extends Player {
             //     this.controls.cc.querySelector("li").on("click.cc", this.onCCTrackClick);
             // }, 0);
         } else {
-            this.view.classList.remove("has-cc");
+            this.view.classList.remove('has-cc');
         }
     }
 
     private updateLoadProgress(): void {
-        const buffered = this.media.buffered;
+        const { buffered } = this.media;
         const bufferedTime = buffered && buffered.length ? buffered.end(0) : 0;
         this.updateTimeline(this.media.duration, bufferedTime, null);
     }
 
     private decodeURL(src: string): string {
-        let decode = (s): string => {
+        const decode = (s): string => {
             try {
-                let d = window.atob(s);
-                return /^wq|x@$/g.test(d) ? d.replace(/^wq|x@$/g, "") : s;
+                const d = window.atob(s);
+                return /^wq|x@$/g.test(d) ? d.replace(/^wq|x@$/g, '') : s;
             } catch (e) {
                 return s;
             }

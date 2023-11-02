@@ -27,9 +27,7 @@ export class Expand {
             target.setAttribute('aria-hidden', 'false');
             const hgt = target.children[0].clientHeight;
 
-            gsap.fromTo(target, {
-                height: 0,
-            }, {
+            gsap.fromTo(target, { height: 0 }, {
                 duration: hgt / 400,
                 height: hgt,
                 ease: 'power2.out',
