@@ -1,6 +1,6 @@
 <?php
 
-namespace Workspace;
+namespace Workspace\php;
 
 class Router {
     private static $routes = [];

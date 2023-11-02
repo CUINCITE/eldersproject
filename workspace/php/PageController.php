@@ -1,6 +1,7 @@
 <?php
 
-namespace Workspace;
+namespace Workspace\php;
+
 require_once 'HtmlRenderer.php';
 
 class PageController

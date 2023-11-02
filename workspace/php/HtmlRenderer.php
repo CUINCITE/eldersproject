@@ -1,6 +1,7 @@
 <?php
 
-namespace Workspace;
+namespace Workspace\php;
+
 require_once 'HtmlUpdater.php';
 
 class HtmlRenderer

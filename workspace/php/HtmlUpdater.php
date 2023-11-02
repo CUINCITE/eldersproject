@@ -1,6 +1,6 @@
 <?php
 
-namespace Workspace;
+namespace Workspace\php;
 
 class HtmlUpdater
 {
