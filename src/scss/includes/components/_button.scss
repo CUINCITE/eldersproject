@@ -20,6 +20,7 @@
         letter-spacing: normal;
 
         // text inside button
+
         > span {
             position: absolute;
             left: 0;
@@ -31,8 +32,6 @@
             .button__arrow { transform: scaleX(-1); }
             > span { left: auto; right: 0; }
         }
-
-
     }
 
     @include hover {

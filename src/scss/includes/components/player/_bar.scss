@@ -1,6 +1,4 @@
 .player {
-
-
     &__bar {
         position: absolute;
         top: 100%;
@@ -8,6 +6,7 @@
         transform-origin: center bottom;
         transition: transform ($time * 2) $easing;
         width: 100%;
+
         // overflow: hidden;
         height: $bar-height;
         z-index: 1;
@@ -29,8 +28,8 @@
 
 
         .player.has-playlist & {
-            &::before { display: block; width: 20%; width: 318px; }
-            &::after { left: calc(20% + 2px); left: 320px; }
+            &::before { display: block; width: 318px; }
+            &::after { left: 320px; }
 
             @include breakpoint(tablet) {
                 &::before { width: 258px; }
@@ -107,7 +106,6 @@
 
     &__prev,
     &__next {
-
         &::after {
             content: "";
             display: block;

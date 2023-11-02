@@ -1,6 +1,6 @@
-/*------------------------------------*\
+/* ------------------------------------*\
     #BASE
-\*------------------------------------*/
+\*------------------------------------ */
 
 *,
 *::before,
@@ -36,14 +36,11 @@ body {
 
     display: grid;
     grid-template-columns: 1fr vw(111);
-    grid-template-areas:
-    'main header'
-    'newsletter header'
-    'footer header';
+    grid-template-areas: "main header"
+        "newsletter header"
+        "footer header";
     gap: 1px;
     align-content: end;
-
-
 }
 
 body,
@@ -78,7 +75,7 @@ button,
 select,
 svg text {
     -moz-osx-font-smoothing: grayscale;
-    -webkit-appearance: none;
+    appearance: none;
     -webkit-font-smoothing: antialiased;
     background: none;
     border-radius: 0;

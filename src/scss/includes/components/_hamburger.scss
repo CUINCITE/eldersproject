@@ -12,7 +12,6 @@
     }
 
     @include hover {
-
         .hamburger__line {
             transform: translateX(-7px);
 
@@ -23,7 +22,6 @@
     }
 
     .is-menu-open & {
-
         .hamburger__line {
             transform: translateX(0) translateY(-3px) rotate(45deg);
 
@@ -45,7 +43,7 @@
         display: block;
         height: 1px;
         width: 40px;
-        background: #444444;
+        background: #444;
         margin-left: auto;
         margin-right: 0;
         transition: transform .4s $ease-custom, opacity .2s $ease-custom .1s;

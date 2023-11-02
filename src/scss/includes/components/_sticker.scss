@@ -1,11 +1,14 @@
 .sticker {
+    $self: &;
+
+
+
     --sticker-size: #{vw(111)};
     --sticker-fold-size: 12%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
     --sticker-text-color: var(--color-text-alt);
 
-    $self: &;
 
 
     @include flex;
@@ -53,10 +56,10 @@
         position: absolute;
         height: var(--sticker-size);
         width: var(--sticker-size);
-        left: 0px;
+        left: 0;
         right: 0;
         margin: auto;
-        top: 0px;
+        top: 0;
         overflow: hidden;
     }
 
@@ -93,7 +96,7 @@
 
 
 
-    &__front #{$self}__circle{
+    &__front #{$self}__circle {
         margin-top: calc(var(--sticker-fold-size) * -1);
         background: var(--sticker-bg);
     }

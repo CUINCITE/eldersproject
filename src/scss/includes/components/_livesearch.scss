@@ -28,7 +28,7 @@
             background-color: $color-blue-dark-3;
             width: 100%;
             height: 50%;
-            @include full();
+            @include full;
             top: -10px;
             transition: background-color 0.3s $ease-custom; 
         }
@@ -45,7 +45,7 @@
             @include font-size(22, 26);
             position: relative;
             z-index: 1;
-            @include full();
+            @include full;
             width: 100%;
             height: 100%;
             text-align: left;
@@ -61,7 +61,6 @@
 
 
         @include hover {
-            
             &, &::before {
                 background-color: darken($color-blue-dark-3, 5%);
             }

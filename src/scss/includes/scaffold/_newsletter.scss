@@ -20,9 +20,10 @@
 
 
         // when form has been submitted
+
         .is-completed & {
             opacity: 0.5;
-            pointer-events: none
+            pointer-events: none;
         }
 
 
