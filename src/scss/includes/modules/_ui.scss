@@ -1,10 +1,11 @@
 .ui {
-    padding: vw(40) 0;
+    padding-top: vw(80);
 
 
-
-    &__content {
-        @include flex(column, center, flex-start);
+    &__wrap {
+        @include flex(row, flex-start, center);
+        flex-wrap: wrap;
         gap: vw(30);
+        padding: vw(40) 0;
     }
 }
