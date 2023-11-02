@@ -121,7 +121,8 @@ class PageController
             $page_labels[] = $item;
         }
 
-        $page_data = ['modules' => [['type' => 'all-pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+        $page_data = ['modules' => [['type' => 'all_pages', 'pages' => $page_labels]], 'title' => 'All Pages'];
+        $page_data['scaffold'] = $this->getScaffold();
         $this->renderPage($page_data);
     }
 
