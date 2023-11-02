@@ -8,6 +8,7 @@
     &.is-loading {
         .player__playpause {
             &::before { opacity: 1; }
+
             &::after {
                 border-width: 0 3px;
                 border-color: transparent $button-color;
@@ -84,7 +85,7 @@
 .player--vimeo,
 .player--youtube,
 .player--video {
-    &:not(.is-started):not(.is-vimeo):not(.is-playing).has-controls.has-poster {
+    &:not(.is-started, .is-vimeo, .is-playing).has-controls.has-poster {
         video,
         iframe {
             opacity: 0;
@@ -103,7 +104,7 @@
     }
 
 
-    &.has-autoplay.should-play:not(.is-started):not(.is-ended) .player__poster {
+    &.has-autoplay.should-play:not(.is-started, .is-ended) .player__poster {
         opacity: 1 !important; display: block !important;
     }
 
@@ -117,7 +118,7 @@
     }
 
 
-    &:not(.is-played):not(.is-native) .player__toggle,
+    &:not(.is-played, .is-native) .player__toggle,
     &:not(.is-native).is-ended .player__toggle {
         display: block;
     }
@@ -138,6 +139,7 @@
 
 
     // show playlist:
+
     .modernizr-touchevents &.has-playlist.is-started:not(.is-playing) .playlist,
     &.has-playlist.is-playlist-open .playlist,
     &.has-playlist.is-ended .playlist,
@@ -177,6 +179,7 @@
                     transform: translateY(-20px) rotate(135deg);
                 }
             }
+
             &::after {
                 transform: translateY(-10px) rotate(225deg);
                 opacity: 1;
@@ -187,8 +190,8 @@
 
 
     @include breakpoint(phone) {
-        &.should-play:not(.is-started):not(.is-ended),
-        &:not(.is-playing):not(.is-bgplayer):not(.is-native) {
+        &.should-play:not(.is-started, .is-ended),
+        &:not(.is-playing, .is-bgplayer, .is-native) {
             .player__toggle,
             .player__poster { opacity: 1 !important; display: block !important; }
         }

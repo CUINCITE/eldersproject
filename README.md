@@ -31,3 +31,38 @@ This projects uses Huncwot's SERDELIA6 CMS which needs
 to be symlinked to `/serdeila` folder. Then you need
 to manually create `/serdelia_config/hosts.php` file with
 mySQL credentials based on `/serdelia_config/hosts-example.php`
+
+
+## Linters
+We are using linters. In VSCode add these extensions:
+[EsLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint),
+[Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint),
+[stylelint-plus](https://marketplace.visualstudio.com/items?itemName=hex-ci.stylelint-plus)
+
+Also add these settings to `settings.json`
+```
+"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+"eslint.format.enable": true,
+"eslint.lintTask.enable": true,
+"eslint.alwaysShowStatus": true,
+"eslint.validate": [
+    "javascript",
+    "typescript",
+],
+"editor.formatOnSave": false,
+"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+},
+"css.validate": false,
+"less.validate": false,
+"scss.validate": false,
+"stylelint.enable": true,
+"stylelint.config": null,
+"stylelint.validate": ["css", "scss"],
+"trailing-spaces.trimOnSave": true,
+"files.trimTrailingWhitespace": true,
+"files.autoSaveDelay": 200,
+```
+
+There are also linters fired on `pre-commit` hook. It's made with [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged).

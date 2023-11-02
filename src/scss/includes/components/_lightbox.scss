@@ -1,6 +1,6 @@
-/*------------------------------------*\
+/* ------------------------------------*\
     #LIGHTBOX
-\*------------------------------------*/
+\*------------------------------------ */
 
 
 .lightbox {
@@ -112,9 +112,7 @@
 
 
 
-
     &__list {
-
         .lightbox:not(.has-adapted) {
             position: absolute;
             width: 100%;
@@ -128,14 +126,13 @@
 
 
 
-
     &__item {
         display: flex;
         justify-content: center;
         align-items: center;
 
         &:not(.is-adapted) {
-            @include full();
+            @include full;
         }
 
         figcaption {
@@ -154,11 +151,9 @@
 
 
 
-
     &__video {
         width: 100%;
     }
-
 
 
 
@@ -181,6 +176,7 @@
 
             @include breakpoint(not-desktop) {
                 max-height: 70vh;
+
                 // max-width: calc(100% - 60px);
                 // margin: auto;
             }

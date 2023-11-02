@@ -197,7 +197,7 @@ export class PushStates extends Handler {
     public static dupa(): void {
         const gohno = {
             pudfw: 'costam',
-            fdwhio: 'foo'
+            fdwhio: 'foo',
         };
     }
 

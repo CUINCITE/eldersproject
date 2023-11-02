@@ -80,7 +80,7 @@ export class Page extends Handler {
             gsap.to(this.view, {
                 duration: 0.3,
                 opacity: 1,
-                onComplete: () => resolve()
+                onComplete: () => resolve(),
             });
         });
     }

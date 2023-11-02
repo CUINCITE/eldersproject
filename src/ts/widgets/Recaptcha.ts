@@ -10,7 +10,7 @@ export class Recaptcha {
 
 
     public static bind(selector?: any): void {
-        let target = typeof selector === 'undefined' ? document.body : selector;
+        const target = typeof selector === 'undefined' ? document.body : selector;
 
         if (!document.querySelector('[data-recaptchakey]')) { return; }
 
@@ -22,7 +22,7 @@ export class Recaptcha {
         if (typeof grecaptcha === 'undefined') {
             getScript(
                 `//www.google.com/recaptcha/api.js?render=${Recaptcha.SITE_KEY}`,
-                () => Recaptcha.attach(target.querySelector(Recaptcha.inputSelector))
+                () => Recaptcha.attach(target.querySelector(Recaptcha.inputSelector)),
             );
         } else {
             Recaptcha.attach(target.querySelector(Recaptcha.inputSelector));
