@@ -56,9 +56,7 @@ export class More extends Component {
 
         fetch(url, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'text/html'
-            },
+            headers: { 'Content-Type': 'text/html' },
         })
             .then(response => response.text())
             .then(response => {

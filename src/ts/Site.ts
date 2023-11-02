@@ -13,8 +13,8 @@ import { CSSAnimate } from './widgets/CSSAnimate';
 import { API } from './widgets/Api';
 import { Recaptcha } from './widgets/Recaptcha';
 
-export const local = !!location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
-export const debug = location.search.indexOf('debug') >= 0;
+export const local = !!window.location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
+export const debug = window.location.search.indexOf('debug') >= 0;
 
 export let lang: string;
 export let pixelRatio: number;
@@ -61,7 +61,7 @@ class Site {
         this.menu = new Menu(document.querySelector('.js-menu'));
 
         if (browser.ie) {
-            console.warn('This browser is outdated!')
+            console.warn('This browser is outdated!');
             return;
         }
 
@@ -139,7 +139,7 @@ class Site {
      * called after new html is loaded
      * and old content is animated out:
      */
-    private render = async (): Promise<void> => {
+    private render = async(): Promise<void> => {
         if (this.currentPage) {
             this.currentPage.off();
             this.currentPage.destroy();
@@ -152,7 +152,7 @@ class Site {
         document.body.classList.add('is-rendering');
         PushStates.setTitle();
         this.pushStates.render();
-        await this.setCurrentPage()
+        await this.setCurrentPage();
         this.onPageLoaded();
     };
 
@@ -160,7 +160,7 @@ class Site {
     /**
      * when current page is loaded:
      */
-    private onPageLoaded = async (): Promise<void> => {
+    private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
         this.currentPage.animateIn(0);
         !this.isInitialized && Scroll.scrollToTop(true);

@@ -79,7 +79,7 @@ export class Map extends Component {
     });
 
 
-    private onLoad = async () => {
+    private onLoad = async() => {
 
     };
 }
