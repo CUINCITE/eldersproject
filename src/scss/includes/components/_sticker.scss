@@ -12,7 +12,9 @@
 
 
     @include flex;
+    @include font-family(reclined);
 
+    justify-content: center;
     width: var(--sticker-size);
     height: var(--sticker-size);
     text-align: center;
@@ -20,6 +22,7 @@
     position: relative;
     overflow: hidden;
     backface-visibility: hidden;
+    padding: vw(30);
 
     // to do: refactor this
     * { transition: all $time ease-in-out; }

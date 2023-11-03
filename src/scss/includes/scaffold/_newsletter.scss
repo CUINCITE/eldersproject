@@ -1,7 +1,9 @@
 .newsletter {
     --side-padding: var(--grid-margin);
+    --input-height: #{vw(71)};
 
 
+    @include font-family(compressed);
 
     grid-area: newsletter;
     padding-top: vw(200);
@@ -10,14 +12,24 @@
 
 
 
+    &__wrap {
+        position: relative;
+    }
+
+
+
     &__input {
         @include flex;
 
+        height: var(--input-height);
         background-color: $color-white;
         position: relative;
+        padding: vw(14) 0 vw(7);
         padding-left: var(--side-padding);
         border-top: 1px solid var(--color-bg);
 
+
+        &.is-error { color: var(--color-red); }
 
         // when form has been submitted
 
@@ -28,11 +40,17 @@
 
 
         input {
+            @include font-family(compressed);
             @include font-size(50, 50);
 
+            text-transform: uppercase;
             width: 100%;
             color: currentColor;
             font-weight: bold;
+
+
+            .is-completed & { opacity: 0; }
+
 
 
             &::placeholder {
@@ -57,6 +75,9 @@
         position: absolute;
         inset: auto vw(16) auto auto;
         margin: auto;
+
+
+        .is-completed & { display: none; }
     }
 
 
@@ -65,6 +86,8 @@
         @include font-size(103, 73);
         @include letter-spacing(-3.09, 103);
 
+        position: absolute;
+        inset: auto vw(18) 100% auto;
         font-weight: bold;
         text-align: right;
         text-transform: uppercase;
@@ -73,13 +96,39 @@
 
 
     &__error {
-        position: absolute;
-        inset: 100% vw(16) auto auto;
+        @include font-family(normal);
+        @include font-size(14, 16);
+
+        padding-left: var(--side-padding);
         color: var(--color-red);
+
+        .has-errors & { margin-bottom: vw(7); }
+    }
+
+
+
+    &__message {
+        position: absolute;
+        inset: 0 0 auto var(--side-padding);
+        min-height: var(--input-height);
+        pointer-events: none;
+    }
+
+
+
+    &__sticker {
+        position: absolute;
+        inset: calc(100% - 6px) auto auto 0;
+
+
+        .is-completed & {
+            top: calc(100% - 12px);
+        }
     }
 
 
     legend {
+        @include font-family(normal);
         @include font-size(14, 16);
 
         padding-left: var(--side-padding);
@@ -89,8 +138,21 @@
 
 
     .message {
-        position: absolute;
-        inset: 100% vw(16) auto auto;
-        font-weight: bold;
+        @include font-family(compressed);
+        @include font-size(50, 50);
+
+
+        text-transform: uppercase;
+        max-width: 55%;
+
+
+        p {
+            &:first-of-type {
+                @include flex;
+                padding-top: vw(7);
+                margin-bottom: vw(8);
+                height: var(--input-height);
+            }
+        }
     }
 }
