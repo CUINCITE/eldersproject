@@ -18,6 +18,14 @@
                     {% include "components/c_sticker.html" with { "modifiers": ["yellow"], "text": "Spam? Not us!" } %}
                 </div>
             </div>
+            <div class="ui__content box">
+                <h3 class="heading">Interview boxes</h3>
+                <div class="ui__wrap">
+                    {% include "components/c_interview-box.html" %}
+                    {% include "components/c_interview-box.html" with { "modifiers": ["red"] }  %}
+                    {% include "components/c_interview-box.html" with { "modifiers": ["yellow"] }  %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

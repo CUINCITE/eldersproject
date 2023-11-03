@@ -4,11 +4,16 @@ $color-pale: #E9F5FF;
 
 $color-dark: #121316;
 $color-gray: #444;
-$color-blue: #1369B2;
+$color-grey200: #EAE9E8;
+$color-blue: #1B7DB6;
 $color-red: #D54335;
 $color-pink: #F0B9AD;
 $color-yellow: #F0BB43;
 $color-purple: #5E308A;
+$color-green: #548068;
+$color-dark-green: #016559;
+$color-brown: #B79258;
+$color-orange: #C75B18;
 
 $background-light-offwhite: #F8F7F7;
 $typography-black: #1B1B1B;
@@ -35,4 +40,10 @@ $color-select-text: $color-pale;
     --color-pink: #{$color-pink};
     --color-yellow: #{$color-yellow};
     --color-purple: #{$color-purple};
+    --color-blue: #{$color-blue};
+    --color-green: #{$color-green};
+    --color-dark-green: #{$color-dark-green};
+    --color-brown: #{$color-brown};
+    --color-orange: #{$color-orange};
+    --color-grey200: #{$color-grey200};
 }
