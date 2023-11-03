@@ -49,11 +49,11 @@ export class API {
                         if (!re.test(value) || !value.length) {
                             passed = false;
                             input.parentElement.classList.add('is-error');
-                            message = value.length > 0 ? 'NOT VALID E-MAIL FORMAT' : 'Required field';
-                            input.parentElement.querySelector('.js-error').innerHTML = message;
+                            message = value.length > 0 ? "It seems there's an issue with the email you entered. <br> Please double-check and try again." : 'Required field';
+                            input.closest('fieldset').querySelector('.js-error').innerHTML = message;
                         } else {
                             input.parentElement.classList.remove('is-error');
-                            input.parentElement.querySelector('.js-error').innerHTML = '';
+                            input.closest('fieldset').querySelector('.js-error').innerHTML = '';
                         }
                         break;
 
@@ -155,10 +155,10 @@ export class API {
                             passed = false;
                             input.parentElement.classList.add('is-error');
                             message = value.length > 0 ? 'NOT VALID E-MAIL FORMAT' : 'Required field';
-                            input.parentElement.querySelector('.js-error').innerHTML = message;
+                            input.closest('fieldset').querySelector('.js-error').innerHTML = message;
                         } else {
                             input.parentElement.classList.remove('is-error');
-                            input.parentElement.querySelector('.js-error').innerHTML = '';
+                            input.closest('fieldset').querySelector('.js-error').innerHTML = '';
                         }
                         break;
 

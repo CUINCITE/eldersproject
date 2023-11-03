@@ -388,6 +388,7 @@
 .icon-btn-arrow {
     @include flex(row, flex-start, center);
 
+    margin-top: vw(-6);
 
 
     span {
@@ -396,7 +397,7 @@
 
         &:first-of-type {
             position: absolute;
-            inset: auto auto 50% 0;
+            inset: auto auto calc(50% + #{vw(3)}) 0;
             width: 1px;
             height: vw(20);
 
@@ -405,8 +406,10 @@
             .button--lightbox & {
                 height: vw(33);
                 transform-origin: center;
-                inset: 0 auto 0 vw(32);
+                inset: vw(-6) auto 0 vw(32);
             }
+
+            .button--lightbox.button--reversed & { inset: 0 auto vw(-6) vw(32); }
         }
 
 

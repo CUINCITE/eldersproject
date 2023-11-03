@@ -28,6 +28,9 @@ html {
 }
 
 body {
+    @include font-family(normal, 500);
+    @include font-settings(500, 100);
+
     background: var(--color-bg);
     line-height: 150%;
     text-align: left;
@@ -64,7 +67,7 @@ select,
 code,
 pre,
 svg text {
-    @include font-family(text, 400);
+    // @include font-family(text, 400);
     font-size: inherit;
     -webkit-font-smoothing: antialiased;
 }
@@ -144,8 +147,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 400;
-}
+    @include font-settings(800, 100); }
 
 textarea {
     resize: none;
