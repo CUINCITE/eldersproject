@@ -4,26 +4,33 @@
             <div class="ui__content box">
                 <h3 class="heading">Buttons</h3>
                 <div class="ui__wrap">
-                    {% include "components/c_button.html" %}
-                    {% include "components/c_button.html" with { "modifiers": ["simple"] } %}
-                    {% include "components/c_button.html" with { "modifiers": ["simple", "reversed"] } %}
-                    {% include "components/c_button.html" with { "modifiers": ["lightbox"], "text": "01" } %}
-                    {% include "components/c_button.html" with { "modifiers": ["lightbox", "reversed"], "text": "02" } %}
+                    {% for button in buttons %}
+                        {% include "components/c_button.html" with button %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="ui__content box">
                 <h3 class="heading">Stickers</h3>
                 <div class="ui__wrap">
-                    {% include "components/c_sticker.html" with { "text": "Discover More" } %}
-                    {% include "components/c_sticker.html" with { "modifiers": ["yellow"], "text": "Spam? Not us!" } %}
+                    {% for sticker in stickers %}
+                        {% include "components/c_sticker.html" with sticker %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="ui__content box">
                 <h3 class="heading">Interview boxes</h3>
                 <div class="ui__wrap">
-                    {% include "components/c_interview-box.html" %}
-                    {% include "components/c_interview-box.html" with { "modifiers": ["red"] }  %}
-                    {% include "components/c_interview-box.html" with { "modifiers": ["yellow"] }  %}
+                    {% for box in boxes %}
+                        {% include "components/c_interview-box.html" with box %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="ui__content box">
+                <h3 class="heading">Polaroids</h3>
+                <div class="ui__wrap">
+                    {% for polaroid in polaroids %}
+                        {% include "components/c_polaroid.html" with polaroid %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

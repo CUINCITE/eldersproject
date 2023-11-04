@@ -1,7 +1,60 @@
 {
     "modules": [
         {
-            "type": "ui"
+            "type": "ui",
+            "buttons": [
+                {},
+                { "modifiers": ["simple"] },
+                { "modifiers": ["simple", "reversed"] },
+                {
+                    "modifiers": ["lightbox"],
+                    "text": "01"
+                },
+                {
+                    "modifiers": ["lightbox", "reversed"],
+                    "text": "02"
+                }
+            ],
+            "stickers": [
+                {
+                    "text": "Discover More"
+                },
+                {
+                    "modifiers": ["yellow"],
+                    "text": "Spam? Not us!"
+                }
+            ],
+            "boxes": [
+                {},
+                {
+                    "modifiers": ["red"]
+                },
+                {
+                    "modifiers": ["yellow"]
+                }
+            ],
+            "polaroids": [
+                {
+                    "image": {
+                        "mobile": "/src/images/polaroid-photo.jpg",
+                        "desktop": "/src/images/polaroid-photo.jpg"
+                    }
+                },
+                {
+                    "modifiers": ["square"],
+                    "image": {
+                        "mobile": "/src/images/polaroid-photo.jpg",
+                        "desktop": "/src/images/polaroid-photo.jpg"
+                    }
+                },
+                {
+                    "modifiers": ["horizontal"],
+                    "image": {
+                        "desktop": "/src/images/polaroid-photo.jpg",
+                        "mobile": "/src/images/polaroid-photo.jpg"
+                    }
+                }
+            ]
         }
     ]
 }
