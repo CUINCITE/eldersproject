@@ -1,0 +1,39 @@
+.polaroid {
+    --polaroid-width: #{vw(386)};
+    --polaroid-height: #{vw(471)};
+
+
+    width: var(--polaroid-width);
+    height: var(--polaroid-height);
+    background-color: var(--color-grey200);
+    padding: vw(25) vw(25) vw(37);
+
+
+
+    &--square {
+        // ratio 1
+
+        --polaroid-height: var(--polaroid-width);
+    }
+
+
+
+    &--horizontal {
+        --polaroid-width: #{vw(481)};
+        --polaroid-height: #{vw(366)};
+    }
+
+
+
+    &__image {
+        width: 100%;
+        height: 100%;
+
+
+        picture, img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
