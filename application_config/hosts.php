@@ -20,6 +20,19 @@ $cfg_domains = [
 			'fromEmail' => getenv('SMTP_LOGIN'),
 			'fromName' => getenv('SMTP_NAME')
 		],
+		'api_keys' =>
+        [
+            'ga' => getenv('GOOGLE_ANALYTICS_TAG'),
+            'google_recaptcha' =>
+                [
+                    'public' => getenv('GOOGLE_RECAPTCHA_PUBLIC'),
+                    'secret' => getenv('GOOGLE_RECAPTCHA_SECRET')
+                ],
+            'mailchimp' => [
+                'key' => getenv('MAILCHIMP_KEY'),
+                'list_id' => getenv('MAILCHIMP_LIST_ID')
+            ]
+        ],
 		'clients' =>
 		[
 			'google' => [getenv('GOOGLE_OAUTH_ID'),getenv('GOOGLE_OAUTH_SECRET')],
