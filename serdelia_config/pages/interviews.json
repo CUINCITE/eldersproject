@@ -56,7 +56,8 @@
             "type":"elements",
             "source":
             {
-                "model":"narrators"
+                "model":"narrators",
+                "model_fields":["name","surname"]
             }
         },
         {
@@ -88,7 +89,8 @@
             "type":"elements",
             "source":
             {
-                "model":"interviewers"
+                "model":"interviewers",
+                "model_fields":["first_name","last_name"]
             }
         },
         {
@@ -128,7 +130,8 @@
             "settings":{"small":true},
             "source":
             {
-                "model":"topics"
+                "model":"topics",
+                "model_fields":["label"]
             }
         },
         

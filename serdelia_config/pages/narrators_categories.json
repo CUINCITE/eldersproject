@@ -4,6 +4,12 @@
         "page": "Narrators Categories",
         "edit": "{% if not label %}New Narrator Category{% else %}Narrator Category: <em>{{label}}</em>{% endif %}"
     },
+    "layout":
+    {
+        "type":"grid",            
+        "settings":{"cards":true,"height":100,"width":3}
+
+    },
     
     "model": {
         "label": "{{label}}"
@@ -22,7 +28,7 @@
         {
             "label": "Url",
             "field": "slug",
-            "list":true,
+            
             "on_demand": true,
             "auto": {
                 "on_null": true,

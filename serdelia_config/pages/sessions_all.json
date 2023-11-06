@@ -41,13 +41,14 @@
     "fields": [
         {
             "tab":"Info",
-            "field":"parent","type":"select","edit":false,
+            "field":"parent","type":"select",
             "label":"Interview",
             "list":true,
             "edit":false,
             "source":
             {
-                "model":"interviews_list"
+                "model":"interviews_list",
+                "model_fields":["label_sort"]
             }
         },
         {
