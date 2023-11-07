@@ -5,6 +5,12 @@ AuthUserFile /home/huncwot7/domains/elder.sunship.dev/public_html/.htpasswd
 Require valid-user
 AddHandler application/x-httpd-php81 php
 </If>
+<If "%{HTTP_HOST} == 'elder-stage.us-east-1.elasticbeanstalk.com'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
 
 RewriteEngine On
 Options -Indexes
