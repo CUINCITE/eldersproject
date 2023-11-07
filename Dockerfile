@@ -1,5 +1,5 @@
 FROM php:8.1-apache
-# ARG PAT
+ARG PAT
 ARG DATE
 ARG VERSION
 ARG REVISION
@@ -30,24 +30,24 @@ COPY ./.htaccess_serdelia /var/www/html/.htaccess_serdelia
 COPY ./robots.txt /var/www/html/robots.txt
 
 # UHO8 FRAMEWORK
-# RUN rm -rf ./application/_uho
-# RUN git clone https://git:$PAT@github.com/huncwotdigital/uho8 --branch=master ./application/_uho
+RUN rm -rf ./application/_uho
+RUN git clone https://git:$PAT@github.com/huncwotdigital/uho8 --branch=master ./application/_uho
 RUN mkdir /var/www/html/reports; exit 0
 RUN mkdir /var/www/html/cache; exit 0
 RUN chown www-data /var/www/html/reports
 RUN chown www-data /var/www/html/cache
 
 # SERDELIA8 CMS
-# RUN rm -rf ./serdelia
-# RUN git clone https://git:$PAT@github.com/huncwotdigital/serdelia8 --branch=master ./serdelia
-# RUN mkdir /var/www/html/serdelia/reports; exit 0
-# RUN chown www-data /var/www/html/serdelia/reports
-# RUN ln -s ../../application/_uho ./serdelia/application/_uho
-# RUN mv ./serdelia/temp_to_rename ./serdelia/temp
-# RUN chown -R www-data ./serdelia/temp
+RUN rm -rf ./serdelia
+RUN git clone https://git:$PAT@github.com/huncwotdigital/serdelia8 --branch=master ./serdelia
+RUN mkdir /var/www/html/serdelia/reports; exit 0
+RUN chown www-data /var/www/html/serdelia/reports
+RUN ln -s ../../application/_uho ./serdelia/application/_uho
+RUN mv ./serdelia/temp_to_rename ./serdelia/temp
+RUN chown -R www-data ./serdelia/temp
 
-# RUN rm ./serdelia/.htaccess
-# RUN mv ./.htaccess_serdelia /var/www/html/serdelia/.htaccess
+RUN rm ./serdelia/.htaccess
+RUN mv ./.htaccess_serdelia /var/www/html/serdelia/.htaccess
 
 LABEL org.opencontainers.image.created=$DATE
 LABEL org.opencontainers.image.url="https://github.com/huncwotdigital/uhomvc8"

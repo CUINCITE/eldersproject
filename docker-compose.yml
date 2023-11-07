@@ -5,6 +5,7 @@ services:
         environment:
             - DOMAIN
             - DOMAIN_PROD
+            - PAT
             - SQL_HOST
             - SQL_USER
             - SQL_PASS
@@ -31,5 +32,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                PAT: $PAT
         ports:
             - 80:80
