@@ -30,6 +30,9 @@ _data/*
 serdelia
 serdelia/*
 .env
+dev.env
+stage.env
+prod.env
 
 *.sublime-project
 *.sublime-workspace
