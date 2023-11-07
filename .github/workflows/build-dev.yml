@@ -2,7 +2,9 @@ on:
   push:
     branches:
       - dev
-   
+
+name: Build Dev
+
 jobs: 
   updates_repos: 
     runs-on: ubuntu-latest 

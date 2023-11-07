@@ -4,7 +4,7 @@ on:
       - stage
   workflow_dispatch:
     
-name: Build Website
+name: Build Stage
 
 jobs:
   deploy:
