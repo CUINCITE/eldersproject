@@ -1,3 +1,9 @@
+on:
+  push:
+    branches:
+      - stage
+  workflow_dispatch:
+    
 name: Build Website
 
 jobs:
