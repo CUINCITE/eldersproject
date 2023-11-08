@@ -23,6 +23,11 @@
     src: url("./fonts/Pangram Sans/PPPangramSans-CompressedMediumReclined.woff2") format("woff2");
     font-weight: 500;
 }
+@font-face {
+    font-family: "Pangram Sans Reclined";
+    src: url("./fonts/Pangram Sans/PPPangramSans-SlimMediumReclined.woff2") format("woff2");
+    font-weight: 300;
+}
 
 
 /* stylelint-disable-next-line scss/dollar-variable-first-in-block */

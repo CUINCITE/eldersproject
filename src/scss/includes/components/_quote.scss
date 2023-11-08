@@ -1,0 +1,38 @@
+.quote {
+    @include font-family(compressed);
+    @include font-size(40, 37);
+    @include letter-spacing(-1.2, 40);
+
+
+    text-transform: uppercase;
+    position: relative;
+
+
+    &::before {
+        content: url("/public/theme/images/quote-icon.svg");
+        display: inline-block;
+        margin-bottom: vw(8);
+    }
+
+
+    footer {
+        @include font-family(compact);
+        @include font-size(26, 27);
+        @include letter-spacing(-0.26, 26);
+        @include flex(row, flex-start, center);
+
+        text-transform: none;
+        position: relative;
+        margin-top: vw(9);
+
+
+        &::before {
+            content: "";
+            display: inline-block;
+            width: vw(35);
+            height: 1px;
+            background-color: currentColor;
+            margin-right: vw(15);
+        }
+    }
+}

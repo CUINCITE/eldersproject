@@ -1,0 +1,28 @@
+.heading {
+    @include font-family(compressed);
+    @include font-size(204, 157);
+    @include letter-spacing(-6.12, 204);
+
+    text-transform: uppercase;
+
+
+
+    &--reclined {
+        @include font-family(reclined, 300);
+        @include font-size(204, 175);
+        @include letter-spacing(-10.2, 204);
+    }
+
+
+
+    &--small {
+        @include font-size(30, 28);
+        @include letter-spacing(-0.9, 30);
+        margin-bottom: vw(4);
+
+
+        p + & {
+            margin-top: vw(32);
+        }
+    }
+}
