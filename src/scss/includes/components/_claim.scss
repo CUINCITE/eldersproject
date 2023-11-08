@@ -1,0 +1,8 @@
+.claim {
+    @include font-family(compressed);
+    @include font-size(103, 93);
+    @include letter-spacing(-3.09, 103);
+
+    max-width: 75%;
+    text-transform: uppercase;
+}

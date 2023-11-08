@@ -8,4 +8,11 @@
         gap: vw(30);
         padding: vw(40) 0;
     }
+
+
+
+    &__texts {
+        @include flex(column, center, flex-start);
+        gap: vw(40);
+    }
 }

@@ -1,3 +1,6 @@
-{% include 'components/c_heading.html' with {'size':'big'} %}
-
-{{ label }}
+{% if heading %}
+    {% include 'components/c_heading.html' with { text: heading, small: true } %}
+{% endif %}
+<div class="text {% if large %}text--large{% endif %}">
+    {{text|raw}}
+</div>

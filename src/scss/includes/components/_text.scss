@@ -1,5 +1,14 @@
-
-
 .text {
-    // @include font-family("text", 400);
+    @include font-family(normal, 400);
+    @include font-size(14, 16);
+
+
+    &--large {
+        @include font-size(17, 22);
+    }
+
+
+    p + p {
+        margin-top: vw(22);
+    }
 }

@@ -1,8 +1,29 @@
 <div class="ui box">
     <div class="grid">
         <div class="col-span-12">
+            <div class="ui__content ui__texts box">
+                <h3>Text components</h3>
+                {% include "components/c_heading.html" %}
+                {% include "components/c_claim.html" %}
+                {% include "components/c_heading.html" with { reclined: true } %}
+                <div style="width: 52%">
+                    {% include "components/c_quote.html" %}
+                </div>
+                <div style="width: 252px">
+                    {% include "modules/m_text.html" with {
+                        text: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"
+                    } %}
+                </div>
+                <div style="width: 267px">
+                    {% include "modules/m_text.html" with {
+                        large: true,
+                        heading: "collectively",
+                        text: "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p> <p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+                    } %}
+                </div>
+            </div>
             <div class="ui__content box">
-                <h3 class="heading">Buttons</h3>
+                <h3>Buttons</h3>
                 <div class="ui__wrap">
                     {% for button in buttons %}
                         {% include "components/c_button.html" with button %}
@@ -10,7 +31,7 @@
                 </div>
             </div>
             <div class="ui__content box">
-                <h3 class="heading">Stickers</h3>
+                <h3>Stickers</h3>
                 <div class="ui__wrap">
                     {% for sticker in stickers %}
                         {% include "components/c_sticker.html" with sticker %}
@@ -18,7 +39,7 @@
                 </div>
             </div>
             <div class="ui__content box">
-                <h3 class="heading">Interview boxes</h3>
+                <h3>Interview boxes</h3>
                 <div class="ui__wrap">
                     {% for box in boxes %}
                         {% include "components/c_interview-box.html" with box %}
@@ -26,7 +47,7 @@
                 </div>
             </div>
             <div class="ui__content box">
-                <h3 class="heading">Polaroids</h3>
+                <h3>Polaroids</h3>
                 <div class="ui__wrap">
                     {% for polaroid in polaroids %}
                         {% include "components/c_polaroid.html" with polaroid %}
