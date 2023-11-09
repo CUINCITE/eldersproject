@@ -1,0 +1,68 @@
+.search {
+    --search-height: #{vw(137)};
+
+    @include font-family(compressed);
+    @include font-size(50, 1);
+    @include flex(row, center, flex-end);
+
+    height: var(--search-height);
+    width: 100%;
+
+
+
+    &__content {
+        width: 100%;
+    }
+
+
+
+    &__form {
+        width: 100%;
+        text-align: left;
+    }
+
+
+
+    &__input {
+        position: relative;
+        margin-left: vw(15);
+
+        label {
+            @include font-size(50, 1);
+            @include letter-spacing(-1, 50);
+
+            position: absolute;
+            left: 0;
+            pointer-events: none;
+            transition: opacity .3s $ease-custom;
+            opacity: 0;
+        }
+
+
+        input {
+            @include font-family(compressed);
+            @include font-size(50, 1);
+            @include letter-spacing(-1, 50);
+
+            height: vw(50);
+            width: 100%;
+            text-transform: uppercase;
+
+
+            &:placeholder-shown + label { opacity: 1; }
+            &:focus + label { opacity: 0; }
+        }
+    }
+
+
+
+    &__exit { position: absolute; }
+
+
+
+    &__svg {
+        position: absolute;
+
+        svg { vertical-align: top; }
+    }
+}

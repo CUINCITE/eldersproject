@@ -9,9 +9,6 @@
 }
 
 
-:root {
-    --app-height: 100vh;
-}
 
 html {
     position: relative;
@@ -36,14 +33,6 @@ body {
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
-
-    display: grid;
-    grid-template-columns: 1fr vw(111);
-    grid-template-areas: "main header"
-        "newsletter header"
-        "footer header";
-    gap: 1px;
-    align-content: end;
 }
 
 body,
@@ -53,6 +42,22 @@ html {
 
 
 .wrapper {
+    display: grid;
+    grid-template-columns: 1fr var(--GLOBAL-aside-width);
+    grid-template-areas: "main header"
+        "newsletter header"
+        "footer header";
+    gap: 1px;
+    align-content: end;
+    transition: transform .7s $ease-custom;
+
+    body.has-menu-open & {
+        transform: translateX(calc(var(--GLOBAL-content-width) * -1));
+    }
+}
+
+
+main {
     grid-area: main;
     position: relative;
 }

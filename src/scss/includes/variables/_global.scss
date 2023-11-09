@@ -1,0 +1,5 @@
+:root {
+    --app-height: 100vh;
+    --GLOBAL-aside-width: #{vw(111)};
+    --GLOBAL-content-width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
+}

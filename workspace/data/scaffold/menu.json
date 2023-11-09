@@ -1,10 +1,38 @@
-[
-  {
-    "label": "Home",
-    "url": ""
-  },
-  {
-    "label": "About",
-    "url": "about"
-  }
-]
+{
+  "nav": [
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "Collections",
+      "url": "/collections"
+    },
+    {
+      "label": "Interviews",
+      "url": "/interviews"
+    },
+    {
+      "label": "About",
+      "url": "/about"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Contact",
+      "url": "/contact"
+    },
+    {
+      "label": "Accesibility",
+      "url": "/"
+    },
+    {
+      "label": "Privacy Policy",
+      "url": "/privacy"
+    },
+    {
+      "label": "Terms of Use",
+      "url": "/terms"
+    }
+  ]
+}

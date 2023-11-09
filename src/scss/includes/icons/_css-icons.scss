@@ -1,12 +1,13 @@
 .icon-close {
     display: inline-block;
     position: relative;
-    width: 14px;
-    height: 14px;
+    width: vw(28);
+    height: vw(28);
     vertical-align: middle;
     transform: rotate(0);
     transition: transform $time-fast $easing;
-    top: -1px;
+
+    // top: -1px;
 
     // html.mac & { top: 1px; }
 
@@ -14,12 +15,12 @@
     &::after {
         content: "";
         display: block;
-        width: 20px;
-        height: 2px;
+        width: vw(40);
+        height: 1px;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: -1px -10px;
+        margin: -1px vw(-20);
         background: currentColor;
     }
 

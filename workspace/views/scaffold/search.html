@@ -1,0 +1,20 @@
+<div class="search" id="search">
+    <div class="search__content js-search-content">
+        <!-- data-api-url needs to be updated from backend -->
+        <form class="search__form js-form" action="/search" novalidate autocomplete="off" data-api-url="/api/search">
+            <div class="search__input">
+                <input type="search" name="q" id="search-inp" placeholder=" ">
+                <label for="search-inp">
+                    Search
+                    <span class="sr-only">submit</span>
+                    <span class="search__svg">[[svg::search]]</span>
+                </label>
+            </div>
+            <div class="livesearch js-livesearch"></div>
+        </form>
+        {#<a href="/advanced-search" class="search__advanced-search">
+            <span>Advanced search</span>
+        </a>#}
+        <button class="search__exit js-search-close">[[svg::exit]]</button>
+    </div>
+</div>

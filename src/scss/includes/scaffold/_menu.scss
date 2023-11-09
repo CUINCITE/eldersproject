@@ -1,9 +1,93 @@
+$theme-colors: ("orange", "red", "blue", "pink");
+
 .menu {
     @include flex(row, flex-start, flex-start);
-    flex-direction: column;
     @include z-index(menu);
+
+    flex-direction: column;
     position: fixed;
-    right: 100px;
-    display: none;
-    opacity: 0;
+    inset: 0 auto auto 100%;
+    height: var(--app-height);
+    width: var(--GLOBAL-content-width);
+    background-color: var(--color-black);
+    color: var(--color-grey200);
+    padding-right: var(--GLOBAL-aside-width);
+    counter-reset: menu -1;
+
+
+
+    &__wrap {
+        @include flex(column, flex-end, flex-end);
+
+        text-transform: uppercase;
+        width: 100%;
+        height: 100%;
+        border-right: 1px solid currentColor;
+        text-align: right;
+    }
+
+
+
+    &__nav {
+        @include font-family(compressed);
+        @include font-size(100, 82);
+        @include letter-spacing(-3, 100);
+
+        width: 100%;
+    }
+
+
+
+    &__item {
+        // set colors for arrows & counters
+
+        @for $i from 1 through length($theme-colors) {
+            &:nth-of-type(#{$i}) {
+                --theme-color: var(--color-#{nth($theme-colors, $i)});
+            }
+        }
+
+        border-top: 1px solid currentColor;
+        padding-right: vw(12);
+        padding-top: vw(10);
+
+
+
+        a::before {
+            @include font-family(normal);
+            @include font-size(17, 22);
+            @include letter-spacing(-0.17, 17);
+
+            content: counters(menu, ".", decimal-leading-zero)".";
+            vertical-align: top;
+            counter-increment: menu;
+            color: var(--theme-color);
+            margin-right: vw(4);
+        }
+    }
+
+
+
+    &__footer {
+        @include font-size(10, 16);
+
+        padding-bottom: vw(20);
+        margin-top: auto;
+    }
+
+
+
+    &__link {
+        padding-right: vw(13);
+    }
+
+
+
+    &__close {
+        position: absolute;
+        right: vw(12);
+        top: vw(13);
+        width: vw(28);
+        height: vw(28);
+    }
 }

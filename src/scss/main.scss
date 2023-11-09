@@ -1,3 +1,6 @@
+@import "includes/mixins";
+
+@import "includes/variables/global";
 @import "includes/variables/colors";
 @import "includes/variables/fonts";
 @import "includes/variables/grid";
@@ -6,7 +9,6 @@
 @import "includes/variables/zindex";
 
 /* stylelint-disable-line */
-@import "includes/mixins";
 @import "includes/fonts";
 @import "includes/breakpoints";
 @import "includes/mediaqueries";
@@ -29,6 +31,7 @@
 @import "includes/scaffold/header";
 @import "includes/scaffold/offscreen";
 @import "includes/scaffold/newsletter";
+@import "includes/scaffold/search";
 
 /* stylelint-disable-line */
 @import "includes/modules/module";

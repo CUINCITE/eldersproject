@@ -13,9 +13,11 @@
     <body>
 {% endif %}
 
-{% include "scaffold/header.html" %}
-
     <div class="wrapper" id="wrapper">
+
+        {% include "scaffold/header.html" %}
+        {% include "scaffold/menu.html" %}
+
         <main id="content" class="content">
             <article data-page data-title="{{title}}">
                 {% for module in modules %}
@@ -24,12 +26,12 @@
             </article>
             {% include "scaffold/dev-grid.html" %}
         </main>
+
+        {% include 'scaffold/newsletter.html' %}
+        {% include 'scaffold/footer.html' %}
+        {% include 'scaffold/offscreen.html' %}
+
     </div>
-
-{% include 'scaffold/newsletter.html' %}
-{% include 'scaffold/footer.html' %}
-{% include 'scaffold/offscreen.html' %}
-
 
 {% if not is_ajax %}
     </body>
