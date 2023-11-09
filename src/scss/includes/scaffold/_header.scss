@@ -1,8 +1,12 @@
 
 .header {
     @include z-index(header);
+    @include menuShiftedElement;
+
     grid-area: header;
-    width: 100%;
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: var(--GLOBAL-aside-width);
     background-color: var(--color-box);
     padding: vw(13) vw(6);
 

@@ -13,11 +13,10 @@
     <body>
 {% endif %}
 
+    {% include "scaffold/header.html" %}
+    {% include "scaffold/menu.html" %}
+
     <div class="wrapper" id="wrapper">
-
-        {% include "scaffold/header.html" %}
-        {% include "scaffold/menu.html" %}
-
         <main id="content" class="content">
             <article data-page data-title="{{title}}">
                 {% for module in modules %}

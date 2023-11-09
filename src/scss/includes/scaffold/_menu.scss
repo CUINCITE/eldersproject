@@ -2,16 +2,16 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
 .menu {
     @include flex(row, flex-start, flex-start);
-    @include z-index(menu);
 
     flex-direction: column;
     position: fixed;
-    inset: 0 auto auto 100%;
+    inset: 0;
+    z-index: 0;
     height: var(--app-height);
-    width: var(--GLOBAL-content-width);
+    width: 100%;
     background-color: var(--color-black);
     color: var(--color-grey200);
-    padding-right: var(--GLOBAL-aside-width);
+    padding: 0 var(--GLOBAL-aside-width);
     counter-reset: menu -1;
 
 
