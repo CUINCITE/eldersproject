@@ -1,34 +1,38 @@
 {
   "modules": [
-      {
-          "type": "text",
-          "content": "About page"
-      },
-      {
-          "type": "image",
-          "image": "https://example.com/image.jpg"
-      },
-      {
-          "type": "hero",
-          "title": "Welcome to our website!",
-          "subtitle": "Learn more about our products and services."
-      },
-      {
-          "type": "slider",
-          "slides": [
-              {
-                  "image": "https://example.com/slide1.jpg",
-                  "caption": "Slide 1"
-              },
-              {
-                  "image": "https://example.com/slide2.jpg",
-                  "caption": "Slide 2"
-              },
-              {
-                  "image": "https://example.com/slide3.jpg",
-                  "caption": "Slide 3"
-              }
-          ]
-      }
+        {
+            "type": "heading",
+            "heading": {
+            "align": "right",
+            "text": "Contact"
+            }
+        },
+        {
+            "type": "text-right",
+            "texts": [
+                {
+                    "large": true,
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>"
+                },
+                {
+                    "heading": "Oral Histories Of Our Elders project",
+                    "large": true,
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
+                },
+                {
+                    "heading": "E-mail",
+                    "large": true,
+                    "text": "<a href=''>elder.coordinator@columbia.edu</a>"
+                },
+                {
+                    "heading": "Follow us",
+                    "large": true,
+                    "text": "<a href='' target='_blank'>Instagram</a><a href='' target='_blank'>Twitter</a>"
+                }
+            ]
+        },
+        {
+            "type": "boxes"
+        }
   ]
 }

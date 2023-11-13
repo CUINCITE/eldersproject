@@ -1,6 +1,7 @@
 <h2 class="heading
     {% if reclined %}heading--reclined{% endif %}
-    {% if small %}heading--small{% endif %}"
+    {% if small %}heading--small{% endif %}
+    {% if align %}heading--{{align}}{% endif %}"
 >
 {{text|default("heading")}}
 </h2>

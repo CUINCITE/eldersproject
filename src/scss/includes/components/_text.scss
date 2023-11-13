@@ -1,14 +1,40 @@
 .text {
-    @include font-family(normal, 400);
-    @include font-size(14, 16);
+    @include flex(column, flex-start, flex-start);
+
+    padding: rem(20) rem(11);
 
 
-    &--large {
+    &:has(a) {
+        padding-top: rem(12);
+    }
+
+
+
+    p, a {
+        @include font-family(normal, 400);
+        @include font-size(14, 16);
+        max-width: rem(267);
+    }
+
+
+    &--large p,
+    &--large a {
         @include font-size(17, 22);
     }
 
 
     p + p {
         margin-top: vw(22);
+    }
+
+
+    a {
+        display: inline-block;
+
+        margin-top: rem(3);
+    }
+
+    a + a {
+        margin-top: rem(8);
     }
 }

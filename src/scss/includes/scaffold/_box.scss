@@ -10,9 +10,6 @@
     }
 
 
-    &:first-of-type { padding-top: rem(27); }
-
-
 
     &__wrap {
         @include flex;
