@@ -1,9 +1,130 @@
+$theme-colors: ("orange", "red", "blue", "pink");
+
 .menu {
     @include flex(row, flex-start, flex-start);
+
     flex-direction: column;
-    @include z-index(menu);
     position: fixed;
-    right: 100px;
-    display: none;
-    opacity: 0;
+    inset: 0;
+    z-index: 0;
+    height: var(--app-height);
+    width: 100%;
+    background-color: var(--color-black);
+    color: var(--color-grey200);
+    padding: 0 var(--GLOBAL-aside-width);
+    counter-reset: menu -1;
+
+
+
+    &__wrap {
+        @include flex(column, flex-end, flex-end);
+
+        text-transform: uppercase;
+        width: 100%;
+        height: 100%;
+        border-right: 1px solid var(--color-bg);
+        text-align: right;
+    }
+
+
+
+    &__nav {
+        @include font-family(compressed);
+        @include font-size(100, 82);
+        @include letter-spacing(-3, 100);
+
+        width: 100%;
+    }
+
+
+
+    &__item {
+        // set colors for arrows & counters
+
+        @for $i from 1 through length($theme-colors) {
+            &:nth-of-type(#{$i}) {
+                --theme-color: var(--color-#{nth($theme-colors, $i)});
+            }
+        }
+
+        border-top: 1px solid currentColor;
+        padding-right: rem(12);
+        padding-top: rem(10);
+        overflow: hidden;
+
+
+        a {
+            @include flex(row, flex-end, flex-end);
+            width: 100%;
+
+
+            @include hover {
+                .menu__arrow { opacity: 1; }
+            }
+        }
+    }
+
+
+
+    &__text {
+        position: relative;
+
+
+        &::before {
+            @include font-family(normal);
+            @include font-size(17, 22);
+            @include letter-spacing(-0.17, 17);
+
+            content: counters(menu, ".", decimal-leading-zero)".";
+            position: absolute;
+            inset: 0 100% auto auto;
+            vertical-align: top;
+            counter-increment: menu;
+            color: var(--theme-color);
+            margin-right: rem(4);
+        }
+    }
+
+
+
+    &__arrow {
+        position: relative;
+        margin-bottom: rem(16);
+        margin-right: rem(5);
+        color: var(--theme-color);
+
+        // TEMP - todo animation on icon
+        opacity: 0;
+        transition: opacity .3s $ease-custom;
+    }
+
+
+
+    &__footer {
+        @include font-size(10, 16);
+
+        padding-bottom: vw(20);
+        margin-top: auto;
+
+
+        a { @include hoverable-link; }
+    }
+
+
+
+    &__link {
+        @include flex(column, flex-start, flex-end);
+
+        padding-right: rem(13);
+    }
+
+
+
+    &__close {
+        position: absolute;
+        right: vw(12);
+        top: vw(13);
+        width: vw(28);
+        height: vw(28);
+    }
 }

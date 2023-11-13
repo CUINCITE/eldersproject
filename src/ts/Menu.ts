@@ -1,95 +1,72 @@
-import { gsap } from 'gsap/dist/gsap';
-
 export class Menu {
-    private isAnimating = false;
-
     private isOpen = false;
 
     private elToggle: HTMLElement;
-    private elHeaderLogo: HTMLElement;
-    // eslint-disable-next-line no-undef
-    private elNavItems: NodeListOf<HTMLElement>;
+    private closeBtn: HTMLButtonElement;
+    private wrapEl: HTMLElement;
+    private isAnimating = false;
 
-    private duration = 0.6;
 
     // eslint-disable-next-line no-unused-vars
     constructor(protected view: HTMLElement) {
         this.elToggle = document.querySelector('.js-toggle-menu');
-        this.elNavItems = this.view.querySelectorAll('.js-nav-item');
-        this.elHeaderLogo = document.querySelector('.js-header-logo');
-
+        this.closeBtn = this.view.querySelector('.js-menu-close');
+        this.wrapEl = document.getElementById('wrapper');
 
         this.bind();
     }
 
+
+
     public onState(): void {
-        if (this.isOpen) {
-            this.close();
-        }
+        this.isOpen && this.close();
     }
+
+
 
     private bind(): void {
         this.elToggle && this.elToggle.addEventListener('click', this.onToggle);
+        this.closeBtn && this.closeBtn.addEventListener('click', this.close);
 
-        const elements = [...this.elNavItems, this.elHeaderLogo].filter(el => !!el);
-
-        elements.length > 0 && elements.forEach(el => {
-            el.addEventListener('click', () => {
-                this.close();
-            });
+        // on close menu animation's end (related to whole #content toggle animation) set display: none for menu
+        this.wrapEl.addEventListener('transitionend', () => {
+            this.onAnimationEnd();
         });
-        document.addEventListener('click', this.onClickAnywhere);
     }
 
-    private onToggle = (): void => {
-        if (this.isAnimating) {
-            return;
+
+
+    private onAnimationEnd = (): void => {
+        this.isAnimating = false;
+        if (!this.isOpen) {
+            this.view.style.display = 'none';
         }
-        // eslint-disable-next-line no-unused-expressions
+    };
+
+
+
+    private onToggle = (): void => {
         this.isOpen ? this.close() : this.open();
     };
 
-    private onClickAnywhere = (event: MouseEvent): void => {
-        if (!this.isOpen) {
-            return;
-        }
-        const isClickInside = this.view.contains(<Node>event.target);
-        const isClickHamburger = this.elToggle.contains(<Node>event.target);
 
-        if (!isClickInside && !isClickHamburger) {
-            this.close();
-        }
-    };
 
-    private open(): void {
+    private open = (): void => {
+        if (this.isAnimating) return;
+
         this.isAnimating = true;
         this.isOpen = true;
         this.view.style.display = 'flex';
+        document.body.classList.add('has-menu-open');
+    };
 
 
-        gsap.to(this.view, {
-            opacity: 1,
-            duration: this.duration,
-            ease: 'power2.out',
-            onComplete: () => {
-                this.isAnimating = false;
-            },
-        });
-    }
 
-    private close(): void {
+    private close = (): void => {
+        if (this.isAnimating) return;
+
         this.isAnimating = true;
         this.isOpen = false;
-
-
-        gsap.to(this.view, {
-            opacity: 0,
-            duration: this.duration,
-            ease: 'power2.out',
-            onComplete: () => {
-                this.view.style.display = 'none';
-                this.isAnimating = false;
-            },
-        });
-    }
+        document.body.classList.remove('has-menu-open');
+    };
 }

@@ -127,6 +127,7 @@ $line-height: 1.4;
 @mixin hoverable-link {
     overflow: hidden;
     position: relative;
+    display: inline-block;
 
     & > span {
         display: inline-block;
@@ -151,5 +152,15 @@ $line-height: 1.4;
         }
     }
 
+}
+
+
+
+@mixin menuShiftedElement {
+    transition: transform .7s $ease-custom;
+
+    body.has-menu-open & {
+        transform: translateX(calc(var(--GLOBAL-content-width) * -1));
+    }
 }
 /* stylelint-enable */

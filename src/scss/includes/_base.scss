@@ -9,9 +9,6 @@
 }
 
 
-:root {
-    --app-height: 100vh;
-}
 
 html {
     position: relative;
@@ -31,19 +28,10 @@ body {
     @include font-family(normal, 500);
     @include font-settings(500, 100);
 
-    background: var(--color-bg);
     line-height: 150%;
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
-
-    display: grid;
-    grid-template-columns: 1fr vw(111);
-    grid-template-areas: "main header"
-        "newsletter header"
-        "footer header";
-    gap: 1px;
-    align-content: end;
 }
 
 body,
@@ -53,6 +41,22 @@ html {
 
 
 .wrapper {
+    @include menuShiftedElement;
+
+    position: relative;
+    z-index: 1;
+    background: var(--color-bg);
+    display: grid;
+    grid-template-columns: 1fr var(--GLOBAL-aside-width);
+    grid-template-areas: "main header"
+        "newsletter header"
+        "footer header";
+    gap: 1px;
+    align-content: end;
+}
+
+
+main {
     grid-area: main;
     position: relative;
 }

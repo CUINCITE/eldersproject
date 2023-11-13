@@ -1,12 +1,13 @@
 .icon-close {
     display: inline-block;
     position: relative;
-    width: 14px;
-    height: 14px;
+    width: vw(28);
+    height: vw(28);
     vertical-align: middle;
     transform: rotate(0);
     transition: transform $time-fast $easing;
-    top: -1px;
+
+    // top: -1px;
 
     // html.mac & { top: 1px; }
 
@@ -14,12 +15,12 @@
     &::after {
         content: "";
         display: block;
-        width: 20px;
-        height: 2px;
+        width: vw(40);
+        height: 1px;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: -1px -10px;
+        margin: -1px vw(-20);
         background: currentColor;
     }
 
@@ -384,61 +385,6 @@
     }
 }
 
-
-.icon-btn-arrow {
-    @include flex(row, flex-start, center);
-
-    margin-top: vw(-6);
-
-
-    span {
-        background-color: currentColor;
-        display: inline-block;
-
-        &:first-of-type {
-            position: absolute;
-            inset: auto auto calc(50% + #{vw(3)}) 0;
-            width: 1px;
-            height: vw(20);
-
-            .button--simple & { display: none; }
-
-            .button--lightbox & {
-                height: vw(33);
-                transform-origin: center;
-                inset: vw(-6) auto 0 vw(32);
-            }
-
-            .button--lightbox.button--reversed & { inset: 0 auto vw(-6) vw(32); }
-        }
-
-
-        &:nth-of-type(2) {
-            width: vw(51);
-            height: 1px;
-
-            .button--lightbox & {
-                width: vw(33);
-            }
-        }
-
-
-        &.triangle {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: vw(19) 0 vw(19) vw(23);
-            border-color: transparent transparent transparent currentColor;
-            background: none;
-
-
-            .button--lightbox & {
-                border-width: vw(16.5) 0 vw(16.5) vw(22);
-                margin-left: vw(3);
-            }
-        }
-    }
-}
 
 
 .icon-more {

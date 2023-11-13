@@ -1,5 +1,5 @@
 $color-white: #fff;
-$color-black: #000;
+$color-black: #1B1B1B;
 $color-pale: #E9F5FF;
 
 $color-dark: #121316;
@@ -16,7 +16,7 @@ $color-brown: #B79258;
 $color-orange: #C75B18;
 
 $background-light-offwhite: #F8F7F7;
-$typography-black: #1B1B1B;
+$typography-black: $color-black;
 
 $color-transparent: rgba(0, 0, 0, 0);
 
@@ -46,4 +46,5 @@ $color-select-text: $color-pale;
     --color-brown: #{$color-brown};
     --color-orange: #{$color-orange};
     --color-grey200: #{$color-grey200};
+    --color-black: #{$color-black};
 }
