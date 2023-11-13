@@ -94,8 +94,8 @@ $theme-colors: ("orange", "red", "blue", "pink");
         color: var(--theme-color);
 
         // TEMP - todo animation on icon
-        // opacity: 0;
-        // transition: opacity .3s $ease-custom;
+        opacity: 0;
+        transition: opacity .3s $ease-custom;
     }
 
 
