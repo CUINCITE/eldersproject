@@ -16,4 +16,33 @@
 
         height: 100%;
     }
+
+
+    &--text-right {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background-color: var(--color-bg);
+        }
+
+
+        .box:last-of-type { padding-bottom: rem(67); }
+    }
+
+
+    &--boxes {
+        position: absolute;
+        z-index: 2;
+        inset: vw(216) auto auto 0;
+    }
+
+
+    &:first-of-type .box:first-of-type {
+        padding-top: rem(27);
+    }
 }

@@ -27,6 +27,9 @@
     }
 
 
+    &--right { text-align: right; }
+
+
     .is-404 & {
         margin-bottom: rem(-7);
         padding-right: rem(10);
