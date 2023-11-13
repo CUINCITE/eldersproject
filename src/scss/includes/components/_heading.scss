@@ -25,4 +25,10 @@
             margin-top: vw(32);
         }
     }
+
+
+    .is-404 & {
+        margin-bottom: rem(-7);
+        padding-right: rem(10);
+    }
 }

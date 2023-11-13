@@ -4,7 +4,7 @@
 
 
     --sticker-size: #{vw(111)};
-    --sticker-fold-size: 12%;
+    --sticker-fold-size: 11%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
     --sticker-text-color: var(--color-text-alt);
@@ -12,7 +12,7 @@
 
 
     @include flex;
-    @include font-family(reclined);
+    @include font-family(reclined, 300);
 
     justify-content: center;
     width: var(--sticker-size);
@@ -22,7 +22,7 @@
     position: relative;
     overflow: hidden;
     backface-visibility: hidden;
-    padding: vw(30);
+    padding: vw(30) vw(20);
 
     // to do: refactor this
     * { transition: all $time ease-in-out; }
@@ -35,6 +35,13 @@
     }
 
 
+    &--purple {
+        --sticker-bg: var(--color-purple);
+        --sticker-back-bg: var(--color-green);
+        --sticker-text-color: var(--color-pink);
+    }
+
+
 
     &__text {
         @include font-size(25, 22);
@@ -42,6 +49,15 @@
 
         text-transform: uppercase;
         transform: rotate(-25deg);
+        padding-top: rem(12);
+        padding-right: rem(6);
+
+
+        .is-404 & {
+            @include font-size(23, 19);
+            @include letter-spacing(-1.15, 23);
+            padding-right: rem(8);
+        }
     }
 
 

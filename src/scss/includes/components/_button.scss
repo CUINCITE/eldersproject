@@ -1,7 +1,7 @@
 .button {
     @include font-family(compressed);
     @include font-size(50, 1);
-    @include letter-spacing(-1.25, 50);
+    @include letter-spacing(-1.75, 50);
     @include flex(row, flex-start, center);
 
     position: relative;
@@ -34,6 +34,13 @@
             .button__arrow { transform: scaleX(-1); }
             > span { left: auto; right: 0; }
         }
+    }
+
+
+    span i {
+        @include font-family(reclined, 500);
+        @include letter-spacing(-1.75, 50);
+        padding-left: rem(9);
     }
 
     @include hover {

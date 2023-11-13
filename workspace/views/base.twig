@@ -18,7 +18,7 @@
 
     <div class="wrapper" id="wrapper">
         <main id="content" class="content">
-            <article data-page data-title="{{title}}">
+            <article {% if title is same as ('404') %} data-not-found {% endif %} data-page data-title="{{title}}">
                 {% for module in modules %}
                     {% include 'modules/m_'~module.type~'.html' with module %}
                 {% endfor %}

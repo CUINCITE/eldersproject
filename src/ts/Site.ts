@@ -206,6 +206,9 @@ class Site {
             pageEl = articleEl || contentEl!.firstChild as HTMLElement;
         }
 
+        // set custom classes to body based on <article> parameters
+        document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
+
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);
         this.currentPage = page;

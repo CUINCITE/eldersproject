@@ -11,6 +11,9 @@
     background-color: var(--color-box);
 
 
+    body.is-404 & { display: none; }
+
+
 
     &__wrap {
         position: relative;
