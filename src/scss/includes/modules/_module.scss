@@ -9,4 +9,11 @@
             height: 100%;
         }
     }
+
+
+    &--404 {
+        @include flex(column, space-between, stretch);
+
+        height: 100%;
+    }
 }

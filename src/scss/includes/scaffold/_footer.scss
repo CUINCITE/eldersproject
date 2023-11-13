@@ -3,6 +3,9 @@
     grid-area: footer;
     text-transform: uppercase;
 
+
+    body.is-404 & { display: none; }
+
     & > * { background-color: var(--color-box); }
 
 

@@ -1,4 +1,20 @@
 .box {
     background-color: var(--color-box);
     margin-top: 1px;
+
+
+    .is-404 & {
+        padding-top: rem(14);
+
+        &:last-of-type { flex-grow: 1; }
+    }
+
+
+    &:first-of-type { padding-top: rem(27); }
+
+
+
+    &__wrap {
+        @include flex;
+    }
 }

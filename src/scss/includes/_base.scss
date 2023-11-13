@@ -43,16 +43,18 @@ html {
 .wrapper {
     @include menuShiftedElement;
 
+    min-height: var(--app-height);
     position: relative;
     z-index: 1;
     background: var(--color-bg);
     display: grid;
     grid-template-columns: 1fr var(--GLOBAL-aside-width);
+    grid-template-rows: 1fr;
     grid-template-areas: "main header"
         "newsletter header"
         "footer header";
     gap: 1px;
-    align-content: end;
+    align-content: start;
 }
 
 
@@ -60,6 +62,9 @@ main {
     grid-area: main;
     position: relative;
 }
+
+
+article { height: 100%; }
 
 
 

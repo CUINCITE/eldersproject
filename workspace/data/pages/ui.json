@@ -2,6 +2,9 @@
     "modules": [
         {
             "type": "ui",
+            "claim": {
+                "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed."
+            },
             "buttons": [
                 {},
                 { "modifiers": ["simple"] },
