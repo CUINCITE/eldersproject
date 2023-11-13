@@ -282,3 +282,41 @@ export function parseToTime(sec: number): string {
 export function normalizeUrl(url: string): string {
     return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
 }
+
+
+export const getQueryString = (forms: HTMLFormElement | HTMLFormElement[]): string => {
+
+    const formData = new FormData();
+
+    (Array.isArray(forms) ? forms : [forms])
+        .filter((e, i, a) => a.indexOf(e) === i) // remove duplicates
+        .forEach(form => {
+            new URLSearchParams(new FormData(form) as any)
+                .forEach((value, key) => formData.append(key, value));
+        });
+
+
+    const formParams = new URLSearchParams(formData as any);
+
+    // filter empty values from form
+    const keysForDel = [];
+    formParams.forEach((value, key) => {
+        if (!value) keysForDel.push(key);
+    });
+
+    // remove empty fields from query
+    keysForDel.forEach(key => formParams.delete(key));
+
+    // set new URLSearchParams Object for final converted data
+    const finalFormData: URLSearchParams = new URLSearchParams();
+
+    // when query has same name parameters with different values (eg multi checkboxes), merge values into one key (for URL prettify & backend purposes)
+    formParams.forEach((value, key) => {
+        if (finalFormData.has(key)) {
+            finalFormData.set(key, `${finalFormData.get(key)},${value}`);
+        } else finalFormData.set(key, value);
+    });
+
+
+    return decodeURIComponent(finalFormData.toString());
+};

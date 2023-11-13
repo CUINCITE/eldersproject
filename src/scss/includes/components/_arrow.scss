@@ -1,0 +1,75 @@
+.arrow {
+    @include flex(row, flex-start, center);
+
+    margin-top: rem(-6);
+    position: relative;
+
+
+    span {
+        background-color: currentColor;
+        display: inline-block;
+
+        &:first-of-type {
+            position: absolute;
+            inset: auto auto 50% 0;
+            width: 1px;
+            height: rem(20);
+
+            .button--simple & { display: none; }
+
+            .button--lightbox & {
+                height: rem(33);
+                transform-origin: center;
+                inset: rem(-6) auto 0 rem(32);
+            }
+
+            .button--lightbox.button--reversed & { inset: 0 auto rem(-6) rem(32); }
+        }
+
+
+        &:nth-of-type(2) {
+            width: rem(51);
+            height: 1px;
+
+            .button--lightbox & {
+                width: rem(33);
+            }
+        }
+
+
+        &.triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: rem(19) 0 rem(19) rem(23);
+            border-color: transparent transparent transparent currentColor;
+            background: none;
+
+
+
+            .button--lightbox & {
+                border-width: rem(16.5) 0 rem(16.5) rem(22);
+                margin-left: rem(3);
+            }
+        }
+    }
+
+
+    &--reversed span:first-of-type {
+        inset: 50% auto auto 0;
+    }
+}
+
+a, button {
+    @include hover {
+        .arrow { @extend %arrow-hover; }
+    }
+}
+
+
+%arrow-hover {
+    .triangle {
+        // To Do
+        animation: animation-triangle .6s linear forwards;
+    }
+}

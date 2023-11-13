@@ -1,0 +1,36 @@
+<div class="livesearch__wrap">
+    <ul class="livesearch__list js-livesearch-list">
+        {% if results %}
+        {% for item in results %}
+            <li class="livesearch__item livesearch__item--{{item.category}} js-livesearch-item">
+                <p class="livesearch__category">{{item.label}}</p>
+
+                {% if item.category == "transcripts" %}
+                    {# transcripts with highlighted search phrase #}
+                    <ul>
+                        {% for transcript in item.items %}
+                            <li>
+                                <p>{{ transcript.label }}</p>
+                                <a href="{{ transcript.url }}" class="livesearch__fragment">
+                                    {{transcript.text}}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <ul>
+                        {% for i in item.items %}
+                            <li><a href="{{ i.url }}">{{ i.label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        {% else %}
+            <li class="livesearch__item livesearch__item--empty js-livesearch-item">
+                <p>No results for "{{query}}"</p>
+                <p>Check the spelling or try a different search term.</p>
+            </li>
+        {% endif %}
+    </ul>
+</div>

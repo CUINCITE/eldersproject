@@ -7,6 +7,8 @@
 
     height: var(--search-height);
     width: 100%;
+    position: relative;
+    z-index: 2;
 
 
 
@@ -19,6 +21,7 @@
     &__form {
         width: 100%;
         text-align: left;
+        position: relative;
     }
 
 
@@ -52,6 +55,11 @@
             &:placeholder-shown + label { opacity: 1; }
             &:focus + label { opacity: 0; }
         }
+
+
+        @include hover {
+            .search__svg svg { transform: scale(1.25); }
+        }
     }
 
 
@@ -63,6 +71,30 @@
     &__svg {
         position: absolute;
 
-        svg { vertical-align: top; }
+        svg {
+            vertical-align: top;
+            transition: transform .3s $ease-custom;
+        }
+    }
+
+
+
+    &__clear {
+        @include font-size(14, 10);
+
+        text-transform: uppercase;
+        position: absolute;
+        right: rem(9);
+        bottom: rem(12);
+
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s $ease-custom;
+
+
+        .search.has-value & {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 }

@@ -22,7 +22,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
         text-transform: uppercase;
         width: 100%;
         height: 100%;
-        border-right: 1px solid currentColor;
+        border-right: 1px solid var(--color-bg);
         text-align: right;
     }
 
@@ -48,22 +48,54 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
         border-top: 1px solid currentColor;
-        padding-right: vw(12);
-        padding-top: vw(10);
+        padding-right: rem(12);
+        padding-top: rem(10);
+        overflow: hidden;
+
+
+        a {
+            @include flex(row, flex-end, flex-end);
+            width: 100%;
+
+
+            @include hover {
+                .menu__arrow { opacity: 1; }
+            }
+        }
+    }
 
 
 
-        a::before {
+    &__text {
+        position: relative;
+
+
+        &::before {
             @include font-family(normal);
             @include font-size(17, 22);
             @include letter-spacing(-0.17, 17);
 
             content: counters(menu, ".", decimal-leading-zero)".";
+            position: absolute;
+            inset: 0 100% auto auto;
             vertical-align: top;
             counter-increment: menu;
             color: var(--theme-color);
-            margin-right: vw(4);
+            margin-right: rem(4);
         }
+    }
+
+
+
+    &__arrow {
+        position: relative;
+        margin-bottom: rem(16);
+        margin-right: rem(5);
+        color: var(--theme-color);
+
+        // TEMP - todo animation on icon
+        // opacity: 0;
+        // transition: opacity .3s $ease-custom;
     }
 
 
@@ -73,12 +105,17 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
         padding-bottom: vw(20);
         margin-top: auto;
+
+
+        a { @include hoverable-link; }
     }
 
 
 
     &__link {
-        padding-right: vw(13);
+        @include flex(column, flex-start, flex-end);
+
+        padding-right: rem(13);
     }
 
 

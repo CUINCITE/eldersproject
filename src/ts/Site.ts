@@ -12,6 +12,7 @@ import { Menu } from './Menu';
 import { CSSAnimate } from './widgets/CSSAnimate';
 import { API } from './widgets/Api';
 import { Recaptcha } from './widgets/Recaptcha';
+import { Search } from './Search';
 
 export const local = !!window.location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
 export const debug = window.location.search.indexOf('debug') >= 0;
@@ -32,6 +33,7 @@ class Site {
     private scroll: Scroll;
     private menu: Menu;
     private offscreen: Offscreen;
+    private search: Search;
 
     private isInitialized: boolean = false;
     private resizingTimeout: ReturnType<typeof setTimeout>;
@@ -59,6 +61,7 @@ class Site {
 
         this.offscreen = new Offscreen(document.querySelector('.js-offscreen'));
         this.menu = new Menu(document.querySelector('.js-menu'));
+        this.search = new Search(document.getElementById('search'));
 
         if (browser.ie) {
             console.warn('This browser is outdated!');

@@ -1,73 +1,145 @@
-
 .livesearch {
     position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100%;
+    inset: 100% 0 auto;
+    color: var(--color-black);
 
-    * {
-        pointer-events: none;
+
+
+    &__wrap {
+        height: 0;
+        overflow: hidden auto;
     }
 
 
-    ul,
-    li {
-        width: 100%;
-    }
 
-    li {
-        height: vw(39px);
-        @include flex(row, flex-start, center);
+    &__list {
+        @include flex(column, flex-start, stretch);
+
+        // background: var(--color-bg);
+
+        overflow: hidden;
         position: relative;
-        background-color: $color-blue-dark-3;
-        transition: background-color 0.3s $ease-custom;
-        margin-top: -1px;
+        padding-left: 1px;
+    }
 
-        &:first-of-type::before {
-            content: "";
-            background-color: $color-blue-dark-3;
-            width: 100%;
-            height: 50%;
-            @include full;
-            top: -10px;
-            transition: background-color 0.3s $ease-custom; 
+
+
+    &__category {
+        @include font-family(normal, 400);
+        @include font-size(14, 15);
+
+        padding-bottom: rem(8);
+
+
+        .livesearch__item--transcripts & {
+            padding-bottom: rem(11);
+        }
+    }
+
+
+
+    &__item {
+        background-color: var(--color-box);
+        padding: rem(12) rem(14) rem(47);
+        border: 1px solid var(--color-bg);
+        border-bottom: none;
+        border-right: none;
+
+
+        &:first-of-type { padding-bottom: rem(37); }
+
+
+
+        ul {
+            li {
+                @include font-size(30, 28);
+                @include letter-spacing(-0.9, 30);
+
+                @include breakpoint(phone) {
+                    @include font-size(16, 1);
+                }
+            }
         }
 
-        &:last-of-type {
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-        }
 
-        button {
-            color: $color-primary;
-            opacity: 0.5;
-            font-weight: 400;
-            @include font-size(22, 26);
-            position: relative;
-            z-index: 1;
-            @include full;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            padding: 0 46px;
-            transition: opacity 0.3s $ease-custom; 
-            pointer-events: auto;
+        &--transcripts {
+            ul {
+                li + li {
+                    margin-top: rem(25);
+                }
+
+                p {
+                    @include font-size(30, 28);
+                    margin-bottom: rem(6);
+                    display: inline-block;
+                }
+            }
         }
 
 
-        @include breakpoint(not-desktop) {
-            height: 44px;
+        &--empty {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
+            min-height: vw(128);
+
+            p:last-of-type {
+                @include font-family(normal);
+                @include font-size(14, 18);
+
+                letter-spacing: normal;
+                text-transform: none;
+                margin-top: rem(8);
+            }
         }
+    }
+
+
+
+    &__fragment {
+        @include font-family(normal);
+        @include font-size(14, 18);
+
+        text-transform: none;
+        display: block;
+        transition: background-color .3s $easing;
+        letter-spacing: normal;
 
 
         @include hover {
-            &, &::before {
-                background-color: darken($color-blue-dark-3, 5%);
-            }
+            background-color: $color-white;
+        }
 
-            button {
-                opacity: 1;
-            }
+        // highlighted part
+
+        span {
+            background-color: var(--color-yellow);
+            padding: 1px 3px;
+            border-radius: 30px;
+        }
+    }
+
+
+
+    &__noresults-head {
+        @include font-size(20, 12);
+        @include letter-spacing(-0.6, 20);
+
+        @include breakpoint(phone) {
+            margin-top: rem(10);
+        }
+    }
+
+
+
+    &__noresults-info {
+        @include font-size(13, 18);
+        margin-bottom: rem(12);
+        margin-top: rem(4);
+
+        @include breakpoint(not-phone) {
+            margin-top: rem(10);
+            margin-bottom: rem(-4);
         }
     }
 }
