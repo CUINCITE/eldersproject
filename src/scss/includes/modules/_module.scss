@@ -42,7 +42,7 @@
     }
 
 
-    &:first-of-type .box:first-of-type {
+    &:first-of-type:not(.module--hero) .box:first-of-type {
         padding-top: rem(27);
     }
 }

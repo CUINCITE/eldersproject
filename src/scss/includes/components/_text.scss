@@ -6,6 +6,9 @@
     padding: rem(20) rem(11);
 
 
+    .hero__text & { padding: 0; }
+
+
     &:has(a) {
         padding-top: rem(12);
     }
@@ -19,6 +22,13 @@
 
     &--large {
         @include font-size(17, 22);
+    }
+
+
+    &--short {
+        @include font-size(14, 16);
+
+        p { max-width: rem(252); }
     }
 
 

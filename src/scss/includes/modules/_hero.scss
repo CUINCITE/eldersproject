@@ -1,0 +1,42 @@
+.hero {
+    &__title {
+        @include font-family(compressed);
+        @include font-size(240, 169);
+        @include letter-spacing(-10.8, 240);
+        @include flex(column, flex-start, stretch);
+
+        text-transform: uppercase;
+    }
+
+
+    &__subtitle {
+        @include font-size(20, 31.5);
+        @include letter-spacing(-0.6, 20);
+
+        text-transform: uppercase;
+    }
+
+
+
+    &__line {
+        display: inline-block;
+        padding-top: rem(27);
+        padding-left: rem(13);
+    }
+
+
+
+    &__bottom {
+        @include flex(row, space-between, flex-start);
+
+        padding-top: rem(10);
+        padding-bottom: rem(41);
+    }
+
+
+    i {
+        @include font-family(reclined, 300);
+        @include letter-spacing(-16.8, 240);
+        padding-left: rem(20);
+    }
+}
