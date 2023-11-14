@@ -2,6 +2,15 @@
     "modules": [
         {
             "type": "ui",
+            "headings": [
+                {
+                    "text": "Heading"
+                },
+                {
+                    "reclined": true,
+                    "text": "Heading"
+                }
+            ],
             "claim": {
                 "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed."
             },
