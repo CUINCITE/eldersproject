@@ -1,3 +1,15 @@
+@keyframes polaroid {
+    0% {
+        filter: brightness(300%);
+        opacity: 0;
+    }
+
+    100% {
+        filter: brightness(100%);
+        opacity: 1;
+    }
+}
+
 .polaroid {
     --polaroid-width: #{vw(386)};
     --polaroid-height: #{vw(471)};
@@ -34,6 +46,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+
+        img {
+            opacity: 0;
+        }
+    }
+
+
+    // maybe on scroll later
+    @include hover {
+        img {
+            animation: polaroid 1.5s linear forwards;
         }
     }
 }
