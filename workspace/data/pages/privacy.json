@@ -1,18 +1,18 @@
 {
   "modules": [
     {
-        "type": "text-right",
+        "type": "text_right",
         "mainText": {
         "medium": true,
         "aside": true,
-        "text": "Privacy <br> Policy"
+        "label": "Privacy <br> Policy"
         },
         "texts": [
         {
             "wide": true,
             "heading": {
             "small": true,
-            "text": "Introduction"
+            "label": "Introduction"
             },
             "text": "<p>Our Company ('we', 'us', or 'our') is committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and disclose your personal information when you visit or use our website or services (collectively, 'Services'). Please read this Privacy Policy carefully before using our Services.</p>"
         },
@@ -20,7 +20,7 @@
             "wide": true,
             "heading": {
             "small": true,
-            "text": "Information Collection and Usage"
+            "label": "Information Collection and Usage"
             },
             "text": "<p>We may collect the following types of personal information from you:</p><ul><li>Personal Identifiers: Such as name, email address, mailing address, and phone number.</li><li>Technical Data: Such as IP address, browser type, operating system, device information, and usage data.</li><li>Usage Data: Information about how you interact with our Services, including pages visited, time spent on the website, and other engagement data.</li></ul>"
         },
@@ -32,7 +32,7 @@
             "wide": true,
             "heading": {
             "small": true,
-            "text": "Data Security"
+            "label": "Data Security"
             },
             "text": "<p>We may collect the following types of personal information from you:</p><ul><li>Personal Identifiers: Such as name, email address, mailing address, and phone number.</li><li>Technical Data: Such as IP address, browser type, operating system, device information, and usage data.</li><li>Usage Data: Information about how you interact with our Services, including pages visited, time spent on the website, and other engagement data.</li></ul>"
         },
@@ -44,7 +44,7 @@
             "wide": true,
             "heading": {
             "small": true,
-            "text": "International Data Transfers"
+            "label": "International Data Transfers"
             },
             "text": "<ol><li>We may collect the following types of personal information from you:<ul><li>Personal Identifiers: Such as name, email address, mailing address, and phone number.</li><li>Technical Data: Such as IP address, browser type, operating system, device information, and usage data.</li><li>Usage Data: Information about how you interact with our Services, including pages visited, time spent on the website, and other engagement data.</li></ul><li>We use your personal information for the following purposes:<ul></li><li>To provide and maintain our Services.</li><li>To improve and personalize your experience with our Services.</li><li>To communicate with you, including sending updates, promotional materials, and responding to inquiries. </li><li>To comply with legal obligations and enforce our Terms of Service.</li></ul></li></ol>"
         }

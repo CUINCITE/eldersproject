@@ -1,37 +1,33 @@
 <section class="module module--404">
-  <div class="box">
-    <div class="grid">
-      <div class="col-span-12">
-        <div class="box__wrap">
-          <div class="box__image"></div>
-          <h2 class="heading heading--reclined">
-            404
-          </h2>
+    <div class="box">
+        <div class="grid">
+            <div class="col-span-12">
+                <div class="box__wrap">
+                    <div class="box__image"></div>
+                    {% include "components/c_heading.html" with { reclined: true, text: "404" } %}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="box">
-    <div class="grid">
-      <div class="col-span-12">
-        <div class="claim claim--small ">
-          The page you are looking for could not be found.
-          {% include 'modules/subview_sticker.html' with {label:'Page not found',color:'purple'} %}          
+    <div class="box">
+        <div class="grid">
+            <div class="col-span-12">
+                {% include "components/c_claim.html" with {
+                    small: true,
+                    text: "The page you are looking for could not be found.",
+                    sticker: {
+                        modifiers: ["purple"],
+                        text: "Page not found"
+                    }
+                } %}
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="box">
-    <div class="grid">
-      <div class="col-span-12">
-        <a href=/ class="button">
-          <i class="icon-btn-arrow arrow ">
-            <span></span>
-            <span></span>
-            <span class="triangle"></span>
-          </i> <span>Back to <i>Homepage</i></span>
-        </a>
-      </div>
+    <div class="box">
+        <div class="grid">
+            <div class="col-span-12">
+                {% include "components/c_link.html" with { url: "/workspace", text: "Back to <i>Homepage</i>" } %}
+            </div>
+        </div>
     </div>
-  </div>
 </section>

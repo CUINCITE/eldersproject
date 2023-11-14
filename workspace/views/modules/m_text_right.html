@@ -7,9 +7,13 @@
             </div>
             {% endif %}
             <div class="col-span-6 col-start-7">
-                {% for text in texts %}
-                    {% include "./modules/m_text.html" with text %}
+                {% if texts %}
+                {% for item in texts %}
+                    {% include "./subviews/subview_text.html" with item %}
                 {% endfor %}
+                {% elseif text %}
+                    {% include "./subviews/subview_text.html" with {text:text,wide:true,heading:heading} %}
+                {% endif %}
             </div>
         </div>
     </div>
