@@ -3,9 +3,10 @@
         <div class="col-span-12">
             <div class="ui__content ui__texts box">
                 <h3>Text components</h3>
-                {% include "components/c_heading.html" %}
+                {% for heading in headings %}
+                    {% include "components/c_heading.html" with heading %}
+                {% endfor %}
                 {% include "components/c_claim.html" with claim %}
-                {% include "components/c_heading.html" with { reclined: true } %}
                 <div style="width: 52%">
                     {% include "components/c_quote.html" %}
                 </div>
