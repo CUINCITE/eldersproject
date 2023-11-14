@@ -156,7 +156,8 @@ h3,
 h4,
 h5,
 h6 {
-    @include font-settings(800, 100); }
+    // @include font-settings(800, 100);
+}
 
 textarea {
     resize: none;

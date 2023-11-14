@@ -15,17 +15,26 @@
                     "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>"
                 },
                 {
-                    "heading": "Oral Histories Of Our Elders project",
+                    "heading": {
+                        "small": true,
+                        "text": "Oral Histories Of Our Elders project"
+                    },
                     "large": true,
                     "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
                 },
                 {
-                    "heading": "E-mail",
+                    "heading": {
+                        "small": true,
+                        "text": "E-mail"
+                    },
                     "large": true,
                     "text": "<a href=''>elder.coordinator@columbia.edu</a>"
                 },
                 {
-                    "heading": "Follow us",
+                    "heading": {
+                        "small": true,
+                        "text": "Follow us"
+                    },
                     "large": true,
                     "text": "<a href='' target='_blank'>Instagram</a><a href='' target='_blank'>Twitter</a>"
                 }

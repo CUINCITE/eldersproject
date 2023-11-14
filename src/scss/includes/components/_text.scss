@@ -1,5 +1,7 @@
 .text {
     @include flex(column, flex-start, flex-start);
+    @include font-family(normal, 400);
+    @include font-size(14, 17.5);
 
     padding: rem(20) rem(11);
 
@@ -11,15 +13,26 @@
 
 
     p, a {
-        @include font-family(normal, 400);
-        @include font-size(14, 16);
         max-width: rem(267);
     }
 
 
-    &--large p,
-    &--large a {
+    &--large {
         @include font-size(17, 22);
+    }
+
+
+    &--wide {
+        padding-left: rem(13);
+
+        p, ul, a, ol {
+            max-width: rem(312);
+        }
+
+        & + & {
+            margin-top: rem(10);
+            padding-bottom: rem(4);
+        }
     }
 
 
@@ -36,5 +49,28 @@
 
     a + a {
         margin-top: rem(8);
+    }
+
+
+    ul {
+        list-style-type: square;
+        padding-inline-start: rem(16);
+        margin-top: rem(13);
+
+        li + li {
+            margin-top: rem(12);
+        }
+    }
+
+
+    ol {
+        list-style-type: numeric;
+        padding-inline-start: rem(16);
+
+
+        ul {
+            padding-inline-start: 0;
+            margin-bottom: rem(32);
+        }
     }
 }

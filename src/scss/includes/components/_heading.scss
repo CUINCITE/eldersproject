@@ -15,6 +15,13 @@
 
 
 
+    &--medium {
+        @include font-size(130, 100);
+        @include letter-spacing(-3.9, 130);
+    }
+
+
+
     &--small {
         @include font-size(30, 28);
         @include letter-spacing(-0.9, 30);
@@ -30,8 +37,17 @@
     &--right { text-align: right; }
 
 
+    &--aside {
+        padding-top: rem(27);
+    }
+
+
     .is-404 & {
         margin-bottom: rem(-7);
         padding-right: rem(10);
+    }
+
+    .text--wide & {
+        margin-bottom: rem(15);
     }
 }
