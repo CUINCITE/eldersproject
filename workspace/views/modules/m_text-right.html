@@ -1,6 +1,11 @@
 <section class="module--text-right">
     <div class="box">
         <div class="grid">
+            {% if mainText %}
+            <div class="col-span-6">
+                {% include "./components/c_heading.html" with mainText %}
+            </div>
+            {% endif %}
             <div class="col-span-6 col-start-7">
                 {% for text in texts %}
                     {% include "./modules/m_text.html" with text %}
