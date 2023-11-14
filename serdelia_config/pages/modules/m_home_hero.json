@@ -9,7 +9,7 @@
         {               
             "field":"text",
             "label":"Copy",
-            "type":"text"
+            "type":"html"
         }
 
         

@@ -1,24 +1,25 @@
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md"></div>
-      <div class="col-12 col-md">
-        <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Footer</h5>
-        <ul class="list-unstyled text-small">
-            {% for item in scaffold.footer %}
-            <li><a class="text-muted" href="{{item.url}}">{{item.label}}</a></li>
-        {% endfor %}
-        </ul>
-      </div>
-      <div class="col-6 col-md">
-        <h5>Features</h5>
-        <ul class="list-unstyled text-small">
-            {% for item in scaffold.social %}
-            <li><a class="text-muted" href="{{item.url}}">{{item.label}}</a></li>
-        {% endfor %}
-        </ul>
+<footer class="footer">
+  <div class="footer__top">
+    <div class="grid">
+      <div class="col-span-12">
+        <p class="footer__copy">Copyright {{ 'now' | date('Y') }}</p>
       </div>
     </div>
-  </footer>
+  </div>
+  <div class="footer__bottom box">
+    <div class="grid">
+      <div class="col-span-12">
+        <div class="footer__links">
+          {% for item in scaffold.footer %}
+          <a href="{{item.url}}">
+            <span>
+              <span>{{item.label}}</span>
+              <span>{{item.label}}</span>
+            </span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

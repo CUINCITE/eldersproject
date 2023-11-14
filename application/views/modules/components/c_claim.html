@@ -1,0 +1,8 @@
+<div class="claim {% if small %}claim--small {% endif %}">
+    {{text}}
+    {% if sticker %}
+        <div class="claim__sticker">
+            {% include "./components/c_sticker.html" with sticker %}
+        </div>
+    {% endif %}
+</div>

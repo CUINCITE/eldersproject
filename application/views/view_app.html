@@ -9,7 +9,9 @@
     <link rel="alternate" href="{{item.url}}" hreflang="{{item.lang}}">
     {% endfor %}
 
-    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/public/theme/styles.css?v=0.0.0" />
+    <script src="/public/theme/libs.min.js?v=0.0.0" defer></script>
+    <script src="/public/theme/scripts.min.js?v=0.0.0" defer></script>
     {% if scaffold.serdelia_edit %}<link rel="stylesheet" href="/serdelia/public/uho6_serdelia6/uho6.css">{% endif %}
     
 </head>
@@ -21,17 +23,21 @@
 
     {% include 'scaffold/header.html' %}
 
-    <main id="content" class="content">
-        {{content|raw}}
-    </main>
+    <div class="wrapper" id="wrapper">
+        <main id="content" class="content">
+            {{content|raw}}
+        </main>
+        {% include 'scaffold/newsletter.html' %}
+        {% include 'scaffold/footer.html' %}
+        <div class="offscreen js-offscreen">
+            <div class="lightbox js-lightbox"></div>
+        </div>
+    </div>
 
-    {% include 'scaffold/footer.html' %}
+    
     {% include 'scaffold/templates.html' %}
 
-
-    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
     {% if scaffold.serdelia_edit %}<script src="/serdelia/public/uho6_serdelia6/uho6.js"></script>{% endif %}
-
 
 </body>
 </html>

@@ -1,0 +1,42 @@
+<form class="newsletter" action="json/newsletter.json" data-api='{"beforeCall": "validate", "callback": "onSubscribe"}'>
+    <input type="hidden" data-recaptcha data-recaptchakey="6LcHsOMoAAAAAJgIWp7B-XpDKBGk1_dpVXxXu_IT" name="token"
+        required="required">
+    <fieldset>
+        <legend>Sign up with your email address to receive news and updates.</legend>
+        <div class="newsletter__error js-error"></div>
+        <div class="newsletter__wrap">
+            <h2 class="newsletter__heading">Newsletter:</h2>
+            <div class="newsletter__input">
+                <label for="email" class="sr-only">Enter your e-mail address</label>
+                <input id="email" type="email" name="email" required placeholder="ENTER YOUR E-MAIL ADDRESS">
+                <div class="newsletter__button">
+                    <button class="button" type="submit">
+                        <i class="icon-btn-arrow arrow ">
+                            <span></span>
+                            <span></span>
+                            <span class="triangle"></span>
+                        </i> <span>Send</span>
+                    </button>
+                </div>
+            </div>
+            <div class="newsletter__message">
+                <div class="newsletter__sticker">
+                    <div class="sticker sticker--yellow">
+                        <div class="sticker__layer">
+                            <div class="sticker__front sticker__wrap">
+                                <div class="sticker__circle"></div>
+                            </div>
+                        </div>
+                        <span class="sticker__text">Spam? Not us!</span>
+                        <div class="sticker__layer">
+                            <div class="sticker__back sticker__wrap">
+                                <div class="sticker__circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="js-message message"></div>
+            </div>
+        </div>
+    </fieldset>
+</form>
