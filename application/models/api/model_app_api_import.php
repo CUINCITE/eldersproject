@@ -1,7 +1,11 @@
 <?php
 
 /**
- * Download proxy method
+ * 
+ * 
+ * 1. http://elder.lh/api/import?action=interviews
+ * 2. cms interviews auto-update
+ * 3. http://elder.lh/api/import?action=sessions
  */
 
 class model_app_api_import
@@ -19,7 +23,10 @@ class model_app_api_import
         //$action='interviews';
         //$action='narrators';
         //$action='sessions';
-        $action='states_allocate';
+        //$action='states_allocate';
+        $this->parent->cache_kill();
+        $action=@_uho_fx::getGet('action');
+        if (!$action) return['result'=>false,'message'=>'No Action defined'];
 
         switch ($action)
         {
@@ -100,9 +107,11 @@ class model_app_api_import
                 $interviewers=$this->parent->getJsonModel('interviewers');
                 foreach ($interviewers as $k=>$v) $interviewers[$k]=['id'=>$v['id'],'name'=>$v['first_name'].' '.$v['last_name']];
 
-                $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/csv/interviews.csv',';');
+                $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/_csv/ElderProject_Interview_Data_20231113.csv',';');
+                if (!$items) return['message'=>'CSV not found'];
                 
-                
+                $messages=[];
+
                 foreach ($items as $k=>$v)
                 {
                     $n=[];
@@ -113,50 +122,63 @@ class model_app_api_import
                     foreach ($n as $kk=>$vv)
                     {
                         $id=_uho_fx::array_filter($narrators,'name',$vv,['first'=>true]);
-                        if (!$id) exit('narrator not found='.$vv);
-                        $n[$kk]=$id['id'];
+                        if (!$id)
+                        {
+                            $messages[]='Narrator added: '.$vv;
+                            $name=explode(' ',$vv);
+                            $surname=array_pop($name);
+                            $name=implode(' ',$name);
+                            
+                            $this->parent->postJsonModel('narrators',['name'=>$name,'surname'=>$surname,'uid'=>uniqid(),'active'=>1]);
+                            exit('narrator added')    ;
+                        }
+                        else $n[$kk]=$id['id'];
                     }
-                    $i=[];
-                    if (@$v['Interviewer: Full Name'])  $i[]=$v['Interviewer: Full Name'];
-                    if (@$v['2nd Interviewer: Full Name']) $i[]=$v['2nd Interviewer: Full Name'];
-                    if (@$v['3rd Interviewer: Full Name']) $i[]=$v['3rd Interviewer: Full Name'];
-                    foreach ($i as $kk=>$vv)
+                    if ($id)
                     {
-                        $id=_uho_fx::array_filter($interviewers,'name',$vv,['first'=>true]);
-                        if (!$id) exit('narrator not found='.$vv);
-                        $i[$kk]=$id['id'];
-                    }
+                        $i=[];
+                        if (@$v['Interviewer: Full Name'])  $i[]=$v['Interviewer: Full Name'];
+                        if (@$v['2nd Interviewer: Full Name']) $i[]=$v['2nd Interviewer: Full Name'];
+                        if (@$v['3rd Interviewer: Full Name']) $i[]=$v['3rd Interviewer: Full Name'];
+                        foreach ($i as $kk=>$vv)
+                        {
+                            $id=_uho_fx::array_filter($interviewers,'name',$vv,['first'=>true]);
+                            if (!$id) exit('interviewer not found='.$vv);
+                            $i[$kk]=$id['id'];
+                        }
 
-                    $items[$k]=[
-                        'narrators'=>$n,
-                        'name'=>$name,
-                        'interviewers'=>$i,
-                        'summary'=>$v['Brief Interview Summary'],
-                        'active'=>1
-                    ];
+                        $items[$k]=[
+                            'incite_id'=>$v['Interview ID'],
+                            'narrators'=>$n,
+                            'label'=>$name,
+                            'interviewers'=>$i,
+                            'summary'=>$v['Brief Interview Summary'],
+                            'active'=>1
+                        ];
+                    }
                     
                     
                 }
-
-                $this->parent->queryOut('TRUNCATE TABLE interviews');
+                
                 foreach ($items as $k=>$v)
-                {
-                    $r=$this->parent->postJsonModel('interviews',$v);
+                {                    
+                    $r=$this->parent->putJsonModel('interviews',$v,['label'=>$v['label']]);
                     if (!$r) exit($this->parent->orm->getLastError());
                 }
                 return['count'=>count($items)];
 
                 break;
 
-                case "sessions":
+                case "sessions_old":
 
                     $interviews=$this->parent->getJsonModel('interviews');
                     foreach ($interviews as $k=>$v)
                         $interviews[$k]=['id'=>$v['id'],'name'=>$v['narrators'][0]['name'].' '.$v['narrators'][0]['surname']];
                     
-                    $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/csv/sessions.csv',',');
+                    $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/_csv/ElderProject_Session_Data_20231113.csv',';');
                     foreach ($items as $k=>$v)
                     {
+                        
                         $date=explode('/',$v['Session Date']);
                         if (count($date)==3) $date=$date[2].'-'._uho_fx::dozeruj($date[0],2).'-'._uho_fx::dozeruj($date[1],2);
                             else $date='';
@@ -201,16 +223,67 @@ class model_app_api_import
                             'duration'=>$duration,
                             'filename'=>$v['Media File Name(s)']
                         ];
+                        
                     }
                     
-                    $this->parent->queryOut('TRUNCATE TABLE sessions');
+                    /*$this->parent->queryOut('TRUNCATE TABLE sessions');
                     foreach ($items as $k=>$v)
                     {
                         $r=$this->parent->postJsonModel('sessions',$v);
                         if (!$r) exit($this->parent->orm->getLastError());
-                    }
+                    }*/
 
                     break;
+
+                    case "sessions":
+
+                        
+                        $interviews=$this->parent->getJsonModel('interviews',[],false,null,null,['fields'=>['incite_id','id']]);                        
+                        $items=_uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'].'/_data/_csv/ElderProject_Session_Data_20231113.csv',';');
+                        $i=0;
+
+                        foreach ($items as $k=>$v)
+                        {
+                            
+                            $interview_id=_uho_fx::array_filter($interviews,'incite_id',$v['Interview ID'],['first'=>true]);
+
+                            if (!$interview_id)
+                            {
+                                exit('Sessions Interview not found=['.$v['Interview ID'].']');
+                            }
+                            $interview_id=$interview_id['id'];
+                            
+                            $items[$k]=[
+                                'nr'=>intval(substr($v['Session Name'],8)),
+                                'parent'=>$interview_id,
+                                'acitve'=>1,
+                                'media'=>'audio',
+                                'incite_id'=>$v['Session Info ID'],
+                                //'date'=>$date,
+                                'narrator_location'=>$v['Session Location(s)'],
+                                'interviewer_location'=>$v['Session Location(s)'],
+                                'active'=>1
+                                //'languages'=>$languages,
+                                //'duration'=>$duration,
+                                //'filename'=>$v['Media File Name(s)']
+                            ];
+
+                            $r=$this->parent->putJsonModel('sessions',$items[$k],
+                                [
+                                    'incite_id'=>$items[$k]['incite_id']
+                                ]);
+
+                            if (!$r) exit($this->parent->orm->getLastError());
+
+                            $i++;
+
+                        }
+
+                        
+
+                        return['sessions'=>count($items),'sessions upated'=>$i];
+    
+                        break;
 
         }
 

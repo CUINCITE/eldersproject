@@ -69,7 +69,7 @@
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "temp-list":true,
+            "list":true,
             "settings":{"code":true}
         },
         {

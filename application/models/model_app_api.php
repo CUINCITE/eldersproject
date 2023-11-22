@@ -129,7 +129,7 @@ class model_app_api extends model_app
   }
 
   //------------------------------------------------------
-  private function cache_kill($dir='cache')
+  public function cache_kill($dir='cache')
   {
     if ($dir)
     {
