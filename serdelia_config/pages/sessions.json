@@ -95,11 +95,23 @@
             }
         },
         {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true
+        },
+        {
             "label": "Publish",
             "field": "active",
             "type": "boolean",
-            "list": "edit",
-            "hr": true
+            "list": "edit"            
         },
         
         {

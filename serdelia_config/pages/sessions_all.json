@@ -31,6 +31,15 @@
             "type":"plugin"
         },
         {
+            "label":"Doc2Txt",
+            "plugin":"api_single",            
+            "type":"plugin",
+            "icon":"refresh",
+            "params":{
+                "url":"/api/session_import?session={{id}}"
+            }
+        },
+        {
             "type": "plugin",
             "plugin": "preview",
             "params": {
@@ -135,6 +144,21 @@
             {
                 "model":"s_languages"
             }
+        },
+        {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true,
+            "search":true
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true,
+            "search":true
         },
         {
             "label": "Publish",

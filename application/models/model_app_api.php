@@ -44,6 +44,7 @@ class model_app_api extends model_app
         break;
 
         case "import":
+        case "session_import":
           
           require_once ("api/model_app_api_".$action.".php");
           $class = 'model_app_api_'.$action;

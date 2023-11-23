@@ -143,6 +143,26 @@
             "hr": true
         },
         {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true
+        },
+        {
+            "field": "doc",
+            "label": "DOCX Transcript file",
+            "type": "file",
+            "extension":"docx",
+            "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true
+        },
+        {
             "tab":"Transcript",
             "field":"transcript",
             "type":"text",

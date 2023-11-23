@@ -33,6 +33,11 @@ class serdelia_plugin_session_update
                 $this->cms->putJsonModel('sessions_simple',['duration'=>$duration],['id'=>$session['id']]);
         }
 
+        $this->cms->putJsonModel('sessions_simple',
+        [
+            'status_media'=>empty($session['audio']['src']) ? 0 :1,
+            'status_transcript'=>empty($session['doc']['src']) ? 0 :1,
+        ],['id'=>$session['id']]);
 
         $items=$this->cms->getJsonModel('sessions_simple',['parent'=>$session['parent']['id']]);
 
