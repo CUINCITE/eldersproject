@@ -33,6 +33,7 @@ serdelia/*
 dev.env
 stage.env
 prod.env
+sunship.env
 
 *.sublime-project
 *.sublime-workspace
