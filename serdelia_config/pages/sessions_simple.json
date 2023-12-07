@@ -57,7 +57,8 @@
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "list":true
+            "list":true,
+            "settings":{"case":true,"code":true}
         },
         {
             "field":"narrator_location",

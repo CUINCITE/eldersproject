@@ -202,7 +202,7 @@
         
         {
             "field":"incite_id","label":"Incite ID","list":true,
-            "settings":{"code":true}
+            "settings":{"case":true,"code":true}
         },
         {
             "hr":true,
@@ -224,6 +224,14 @@
             "source":
             {
                 "model":"s_states"
+            }
+        },
+        {
+            "label":"Languages","type":"checkboxes",
+            "field":"languages",
+            "source":
+            {
+                "model":"s_languages"
             }
         },
         

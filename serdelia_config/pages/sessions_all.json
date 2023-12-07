@@ -1,6 +1,6 @@
 {
     "table": "sessions",
-    "disable":["add","remove"],
+    "disable":["add"],
     "label": {
         "page": "Sessions (All)",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
@@ -11,7 +11,7 @@
         "count":100,
         "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
     },
-    "order": "parent,nr",
+    "order": "label_sort",
     "buttons_page":
     [
         {
@@ -49,10 +49,21 @@
     ],
     "fields": [
         {
-            "tab":"Info",
+            "tab":"Session",
+            "field":"label",
+            "label":"Session Name"            
+        },
+        {
+            "field":"label_sort",
+            "label":"Session Name",
+            "list":true,
+            "search":true,
+            "hidden":true
+        },
+        {
             "field":"parent","type":"select",
             "label":"Interview",
-            "list":true,
+            
             "edit":false,
             "source":
             {
@@ -69,7 +80,7 @@
         },
         {
             "label": "Session date",
-            "list": true,
+            
             "field": "date",
             "required": true,
             "type": "date"
@@ -79,12 +90,12 @@
             "label":"Incite Session Id",
             "field":"incite_id",
             "list":true,
-            "settings":{"code":true}
+            "settings":{"case":true,"code":true},
+            "search":true
         },
         {
             "field":"narrator_location",
-            "label":"Location (narrator)",
-            "list":true
+            "label":"Location (narrator)"
         },
         {
             "field":"narrator_state","label":"Narrators state",
@@ -96,8 +107,7 @@
         },
         {
             "field":"interviewer_location",
-            "label":"Location (interviewer)",
-            "list":true
+            "label":"Location (interviewer)"
         },
         
         {
@@ -165,7 +175,7 @@
             "field": "active",
             "type": "boolean",
             "list": "edit",
-            "hr": true
+            "hr": true,"search":true
         },
         {
             "tab":"Media","field":"media","type":"select",
@@ -205,8 +215,9 @@
             "folder":"/public/upload/sessions/audio"
         },
         {
-            "field":"filename","label":"WAV filename"
+            "field":"filename_mp3","label":"MP3 filename"
         },
+        
         
         
         {
@@ -218,10 +229,13 @@
             "settings":{"style":"json","wide":true,"rows":20}
         },
         {
+            "field":"filename_docx","label":"DOCX filename","edit":false
+        },
+        {
             "field": "doc",
             "label": "DOCX Transcript file",
             "type": "file",
-            "extension":"docx",
+            "extension":"docx",            
             "folder":"/public/upload/sessions/transcripts"
         },
         {
