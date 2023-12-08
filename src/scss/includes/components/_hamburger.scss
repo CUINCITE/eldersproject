@@ -11,16 +11,6 @@
         transition: transform $time-fast $ease-custom;
     }
 
-    @include hover {
-        .hamburger__line {
-            transform: translateX(-7px);
-
-            &:nth-of-type(2) {
-                transform: translateX(7px);
-            }
-        }
-    }
-
     .is-menu-open & {
         .hamburger__line {
             transform: translateX(0) translateY(-3px) rotate(45deg);
@@ -54,6 +44,24 @@
             margin-left: 0;
             margin-right: auto;
             opacity: 1;
+        }
+    }
+}
+
+button {
+    @include hover {
+        .hamburger {
+            @extend %hamburger-hover;
+        }
+    }
+}
+
+%hamburger-hover {
+    .hamburger__line {
+        transform: translateX(-7px);
+
+        &:nth-of-type(2) {
+            transform: translateX(7px);
         }
     }
 }
