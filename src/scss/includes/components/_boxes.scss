@@ -1,0 +1,17 @@
+.boxes {
+    &--absolute {
+        position: absolute;
+        z-index: 2;
+        inset: vw(21) auto auto 0;
+    }
+
+
+    &--reversed {
+        text-align: right;
+        padding-bottom: rem(14);
+
+        svg {
+            transform: scaleX(-1);
+        }
+    }
+}

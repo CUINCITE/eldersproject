@@ -36,9 +36,7 @@
 
 
     &--boxes {
-        position: absolute;
-        z-index: 2;
-        inset: vw(216) auto auto 0;
+
     }
 
 
@@ -48,7 +46,13 @@
 
 
     &--home-text {
-        padding-top: rem(235);
+        @include flex(column, flex-end, stretch);
+
+        min-height: vw(391);
+
+        &--link {
+            justify-content: flex-start;
+        }
     }
 
 

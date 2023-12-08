@@ -14,10 +14,8 @@
                     "large": true,
                     "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><h2>Oral Histories Of Our Elders project</h2><p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p><h2>E-mail</h2><a href=''>elder.coordinator@columbia.edu</a><h2>Follow us</h2><a href='' target='_blank'>Instagram</a><a href='' target='_blank'>Twitter</a>"
                 }
-            ]
-        },
-        {
-            "type": "boxes"
+            ],
+            "decor": true
         }
   ]
 }

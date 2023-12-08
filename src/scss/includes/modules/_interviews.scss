@@ -1,4 +1,17 @@
 .interviews {
+    &__heading {
+        @include flex(row, flex-start, flex-start);
+        padding-top: rem(10);
+
+
+        .heading {
+            padding-top: rem(18);
+            margin-bottom: rem(-8);
+        }
+    }
+
+
+
     &__right {
         @include flex(column, space-between, flex-start);
 

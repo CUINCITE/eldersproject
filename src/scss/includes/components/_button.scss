@@ -46,6 +46,11 @@
     @include hover {
         // @extend %button-hover;
     }
+
+
+    .module--home-text & {
+        padding-top: rem(20);
+    }
 }
 
 %button-hover {
