@@ -42,6 +42,7 @@ $cfg_domains = [
 	]
 ];
 
+
 if (getenv('S3_HOST'))
 $cfg_domains[getenv('DOMAIN')]['s3']=
 		[

@@ -5,6 +5,9 @@
       {   
          "field":"label","label":"Header","tab":"Content"
       },
+      {
+         "label":"Header Type","field":"header","type":"select"
+      },
       {   
            "field":"text","type":"html","label":"Copy"
         }

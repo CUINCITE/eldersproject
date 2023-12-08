@@ -49,7 +49,7 @@
             "label":"Incite Session Id",
             "field":"incite_id",
             "list":true,
-            "settings":{"code":true}
+            "settings":{"case":true,"code":true}
         },
         {
             "field":"narrator_location",
@@ -110,6 +110,7 @@
         {
             "label": "Publish",
             "field": "active",
+            "search":true,
             "type": "boolean",
             "list": "edit"            
         },
@@ -122,14 +123,16 @@
             "extension":"mp3",
             "folder":"/public/upload/sessions/audio"
         },
+        
         {
             "field":"duration",
             "label":"Duration (seconds)",
             "help":"Clear this field to read duration from from MP3 file"
         },        
         {
-            "field":"filename","label":"WAV filename","hidden":true
+            "field":"filename_mp3","label":"MP3 filename","edit":false
         },
+        
         
         
         {
@@ -146,6 +149,9 @@
             "type": "file",
             "extension":"docx",
             "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "field":"filename_docx","label":"DOCX filename","edit":false
         }
     ]
 }

@@ -75,7 +75,7 @@
             "label":"Incite Session Id",
             "field":"incite_id",
             "list":true,
-            "settings":{"code":true}
+            "settings":{"case":true,"code":true}
         },
         {
             "field":"narrator_location",
@@ -217,7 +217,25 @@
             "settings":{"style":"json","wide":true,"rows":20}
         },
         {
-            "field":"filename","label":"WAV filename"
+            "field":"filename_mp3","label":"MP3 filename"
+        },
+        {
+            "field":"filename_docx","label":"DOCX filename"
+        },
+        {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true,
+            "search":true
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true,
+            "search":true
         }
     ]
 }

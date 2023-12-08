@@ -70,7 +70,7 @@ class model_app_api_session_import
 			}
 		}
 
-		$this->parent->putJsonModel('sessions',['transcript'=>strip_tags($source),'transcript_tags'=>$source],['id'=>$session['id']]);
+		$this->parent->putJsonModel('sessions',['status_transcript'=>1,'transcript'=>strip_tags($source),'transcript_tags'=>$source],['id'=>$session['id']]);
 		//exit(nl2br($source));
 		return ['result'=>true,'message'=>'Sessions converted to '.$iLines.' lines.'];
 

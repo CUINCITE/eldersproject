@@ -124,6 +124,14 @@
             "label": "Location"
         },
         {
+            "label":"Languages","type":"checkboxes",
+            "field":"languages",
+            "source":
+            {
+                "model":"s_languages"
+            }
+        },
+        {
             "tab": "Filters",
             "field": "narrators_states",
             "label": "Narrators states",
@@ -247,10 +255,10 @@
         {
             "field": "incite_id",
             "label": "Incite ID",
-            "list": true,
-            "settings": {
-                "code": true
-            }
+            "settings":{"case":true,"code":true},
+            "search":true,
+            "list": true
+            
         },
         {
             "hr": true,

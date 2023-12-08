@@ -28,6 +28,7 @@
     ],
     "buttons_page":
     [
+        {"type":"plugn","plugin":"import"},
         {"type":"plugin","plugin":"refresh"}
     ],
 
