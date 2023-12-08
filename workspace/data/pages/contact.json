@@ -4,11 +4,11 @@
             "type": "heading",
             "heading": {
             "align": "right",
-            "text": "Contact"
+            "label": "Contact"
             }
         },
         {
-            "type": "text-right",
+            "type": "text_right",
             "texts": [
                 {
                     "large": true,

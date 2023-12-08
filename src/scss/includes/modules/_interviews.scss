@@ -1,0 +1,96 @@
+.interviews {
+    &__right {
+        @include flex(column, space-between, flex-start);
+
+        height: 100%;
+    }
+
+
+
+    &__item {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 22px;
+        padding: 0 var(--grid-margin);
+        position: relative;
+    }
+
+
+
+    &__name {
+        @include font-family(compressed);
+        @include font-size(50, 38);
+        @include letter-spacing(-1.25, 50);
+
+        padding-top: rem(17);
+        margin-left: rem(-6);
+        text-transform: uppercase;
+    }
+
+
+
+    &__collection {
+        @include font-family(compact);
+        font-weight: 400;
+        @include font-size(17, 12);
+        @include letter-spacing(-0.17, 17);
+        @include font-settings(400, 100);
+        @include flex(row, flex-start, center);
+
+        position: relative;
+        margin-top: rem(3);
+        margin-left: rem(-4);
+
+        &::before {
+            content: "";
+            display: inline-flex;
+            height: 1px;
+            width: rem(19);
+            background-color: currentColor;
+            margin-right: rem(8);
+        }
+    }
+
+
+
+    &__text {
+        @include font-family(normal);
+        @include font-size(14, 16);
+
+        padding-top: rem(15);
+    }
+
+
+
+    &__state {
+        @include font-family(compressed);
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        text-transform: uppercase;
+        padding-bottom: rem(5);
+    }
+
+
+
+    &__box {
+        @include flex(row, flex-end, center);
+
+        &-wrap {
+            border-left: 1px solid var(--color-bg);
+        }
+    }
+
+
+
+    &__link {
+        @include full;
+        z-index: 3;
+
+        @include hover {
+            ~ .interviews__box .interview-box {
+                @extend %box-hover;
+            }
+        }
+    }
+}

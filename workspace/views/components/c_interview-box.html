@@ -1,4 +1,4 @@
-<div class="interview-box{% if modifiers %}{% for modifier in modifiers %} interview-box--{{modifier}}{% endfor %}{% endif %}">
+<div class="interview-box {% if reversed %} interview-box--reversed {% endif %} {% if modifier %} interview-box--{{modifier}}{% endif %}">
     <div class="interview-box__layer"></div>
     <div class="interview-box__layer"></div>
     <div class="interview-box__layer"></div>

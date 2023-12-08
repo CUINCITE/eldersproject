@@ -1,0 +1,39 @@
+<section class="module module--interviews">
+    {% if label %}
+    <div class="box">
+        <div class="grid">
+            <div class="col-span-12">
+                {% include "./components/c_heading.html" with { reclined: true } %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if items %}
+        <div class="interviews">
+            <ul class="interviews__list">
+                {% set modifiers = ['yellow', 'green', 'red'] %}
+                {% for item in items %}
+                    <li class="interviews__item box">
+                        <a href="#" class="interviews__link"><span class="sr-only">Go to interview</span></a>
+                        <div class="interviews__left">
+                            <h3 class="interviews__name">{{item.name}}</h3>
+                            <h4 class="interviews__collection">{{item.collection}} Collection</h4>
+                        </div>
+                        <div class="interviews__right">
+                            <p class="interviews__text">{{item.text}}</p>
+                            <p class="interviews__state">{{item.state}}</p>
+                        </div>
+                        <div class="interviews__box">
+                            <div class="interviews__box-wrap">
+                                {% include "./components/c_interview-box.html" with {
+                                    modifier: modifiers[loop.index % 3],
+                                    reversed: loop.index is even
+                                } %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</section>
