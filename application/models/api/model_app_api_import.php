@@ -35,6 +35,44 @@ class model_app_api_import
         if (!$action) return ['result' => false, 'message' => 'No Action defined'];
 
         switch ($action) {
+
+            case  "locations":
+                $i = 0;
+                $items = $this->parent->query('SELECT id,locations FROM interviews WHERE locations!=""');
+                foreach ($items as $k => $v) {
+                    $id = $v['id'];
+                    $v = explode(';', trim($v['locations']));
+                    $v[0] = trim($v[0]);
+                    if ($v[0] && empty($v[1])) $v = ['narrator_location' => $v[0], 'interviewer_location' => $v[0]];
+                    elseif ($v[0]) $v = ['narrator_location' => $v[0], 'interviewer_location' => trim($v[1])];
+                    else $v = [];
+                    if ($v) {
+                        $i++;
+                        $this->parent->putJsonModel('interviews', $v, ['id' => $id]);
+                    }
+                }
+                return ['result' => true, 'message' => 'Updated interviews: ' . $i];
+
+                break;
+
+                case  "leads":
+                    $i = 0;
+                    $items = $this->parent->query('SELECT id,summary FROM interviews WHERE summary!=""');
+                    
+                    foreach ($items as $k => $v) {
+                        $id = $v['id'];
+                        $v = explode(';', trim($v['summary']));
+                        $v[0] = trim($v[0]);
+                        if ($v[0])
+                        {
+                            $i++;
+                            $v=['lead'=>$v[0].'.'];
+                            $this->parent->putJsonModel('interviews', $v, ['id' => $id]);
+                        }
+                    }
+                    return ['result' => true, 'message' => 'Updated interviews: ' . $i];
+    
+                    break;
                 /*
             case "states_allocate":
                 $states = $this->parent->getJsonModel('s_states');
@@ -137,25 +175,23 @@ class model_app_api_import
                 $n_added = 0;
                 $n_updated = 0;
 
-                $dict_topics=$this->parent->getJsonModel('topics');
-                
+                $dict_topics = $this->parent->getJsonModel('topics');
 
-                foreach ($items as $k => $v)
-                {
 
-                    $topics=explode(';',str_replace('; ',';',$v['Topic(s)']));
-                    
-                    foreach ($topics as $kk=>$vv)
-                    {
-                        $vv=trim($vv);
-                        if ($vv)
-                        {
-                            $vv=_uho_fx::array_filter($dict_topics,'label',$vv,['first'=>true]);
-                            if (!$vv) return['result'=>false,'message'=>'Topic not found: '.$vv];
-                            $topics[$kk]=$vv['id'];
+                foreach ($items as $k => $v) {
+
+                    $topics = explode(';', str_replace('; ', ';', $v['Topic(s)']));
+
+                    foreach ($topics as $kk => $vv) {
+                        $vv = trim($vv);
+                        if ($vv) {
+                            $vv = _uho_fx::array_filter($dict_topics, 'label', $vv, ['first' => true]);
+                            if (!$vv) return ['result' => false, 'message' => 'Topic not found: ' . $vv];
+                            $topics[$kk] = $vv['id'];
                         } else unset($topics[$kk]);
                     }
-                    if (!$topics) $topics=[]; else $topics=array_values($topics);
+                    if (!$topics) $topics = [];
+                    else $topics = array_values($topics);
 
 
                     $n = [];
@@ -230,7 +266,7 @@ class model_app_api_import
                             'languages' => $languages,
                             'interviewers' => $i,
                             'summary' => $v['Brief Interview Summary'],
-                            'topics'=>$topics,
+                            'topics' => $topics,
                             'active' => 1
                         ];
                     } else unset($items[$k]);
@@ -399,62 +435,54 @@ class model_app_api_import
             case "media":
 
                 // get files
-                $dir=$_SERVER['DOCUMENT_ROOT'].'/_data/_files';
-                $files=[];
+                $dir = $_SERVER['DOCUMENT_ROOT'] . '/_data/_files';
+                $files = [];
                 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
                 foreach ($iterator as $file) {
                     if ($file->isDir()) continue;
-                    $path = $files[]=$file->getPathname();
+                    $path = $files[] = $file->getPathname();
                 }
 
                 //get sessions
-                $copy=[];
-                $items=$this->parent->getJsonModel('sessions',[],false,null,null,['fields'=>['id','uid','filename_mp3','filename_docx','audio','doc']]);
-                foreach ($items as $k=>$v)
-                {
-                    if (!$v['uid'])
-                    {
-                        $v['uid']=uniqid();
-                        $this->parent->putJsonModel('sessions',['uid'=>$v['uid']],['id'=>$v['id']]);
+                $copy = [];
+                $items = $this->parent->getJsonModel('sessions', [], false, null, null, ['fields' => ['id', 'uid', 'filename_mp3', 'filename_docx', 'audio', 'doc']]);
+                foreach ($items as $k => $v) {
+                    if (!$v['uid']) {
+                        $v['uid'] = uniqid();
+                        $this->parent->putJsonModel('sessions', ['uid' => $v['uid']], ['id' => $v['id']]);
                     }
-                    if ($v['filename_mp3'])
-                    {
-                        $copy[]=[
-                            $v['filename_mp3'],'/public/upload/sessions/audio/'.$v['uid'].'.mp3'
-                        ];                    
+                    if ($v['filename_mp3']) {
+                        $copy[] = [
+                            $v['filename_mp3'], '/public/upload/sessions/audio/' . $v['uid'] . '.mp3'
+                        ];
                     }
-                    if ($v['filename_docx'])
-                    {
-                        $copy[]=[
-                            $v['filename_docx'],'/public/upload/sessions/transcripts/'.$v['uid'].'.docx'
-                        ];                    
+                    if ($v['filename_docx']) {
+                        $copy[] = [
+                            $v['filename_docx'], '/public/upload/sessions/transcripts/' . $v['uid'] . '.docx'
+                        ];
                     }
                 }
-                $c=0;
-                
-                foreach ($copy as $k=>$v)
-                {
-                    $found=false;
-                    foreach ($files as $kk=>$vv)
-                        if (strpos($vv,$v[0]))
-                        {
-                            $found=true;
-                            $from=$vv;
-                            $to=$_SERVER['DOCUMENT_ROOT'].$v[1];
-                            $s1=@filesize($from); if (!$s1) return['result'=>false,'message'=>'file not found '.$from];
-                            $s2=@filesize($to);
-                            if ($s1!=$s2)
-                            {
+                $c = 0;
+
+                foreach ($copy as $k => $v) {
+                    $found = false;
+                    foreach ($files as $kk => $vv)
+                        if (strpos($vv, $v[0])) {
+                            $found = true;
+                            $from = $vv;
+                            $to = $_SERVER['DOCUMENT_ROOT'] . $v[1];
+                            $s1 = @filesize($from);
+                            if (!$s1) return ['result' => false, 'message' => 'file not found ' . $from];
+                            $s2 = @filesize($to);
+                            if ($s1 != $s2) {
                                 @unlink($to);
-                                $r=@copy($from,$to);
-                                if (!$r) return['result'=>false,'message'=>'Copy failed copied: '.$from.' -> '.$to];
+                                $r = @copy($from, $to);
+                                if (!$r) return ['result' => false, 'message' => 'Copy failed copied: ' . $from . ' -> ' . $to];
                                 $c++;
                             }
-
                         }
-                    
                 }
-                return['result'=>true,'message'=>'Files copied: '.$c];
+                return ['result' => true, 'message' => 'Files copied: ' . $c];
 
                 break;
         }

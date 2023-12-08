@@ -155,6 +155,9 @@
             "label":"Interview Summary"
         },
         {
+            "field":"lead"
+        },
+        {
             "field":"preface",
             "type":"html",
             "label":"Preface"

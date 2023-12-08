@@ -1,0 +1,39 @@
+{
+    "table": "interviews",
+    "url": {
+        "type": "interview",
+        "slug": "%slug%"
+    },
+    "fields": [
+        {
+            "field": "label"
+        },
+        {
+            "field": "interviewer_name"
+        },
+        {
+            "field": "lead"
+        },
+        {
+            "label": "Url",
+            "field": "slug"
+        },
+        {
+            "field": "narrator_location"
+        },
+        {
+            "field":"active",
+            "type": "boolean"
+        },
+        {
+            "field": "narrators",
+            "type":"elements",
+            "source":
+            {
+                "model":"narrators",
+                "model_fields":["occupation"]
+
+            }
+        }
+    ]
+}

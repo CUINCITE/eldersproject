@@ -121,7 +121,16 @@
         {
             "hr": true,
             "field": "locations",
-            "label": "Location"
+            "label": "Location Source",
+            "edit":false
+        },
+        {
+            "field": "narrator_location",
+            "label": "Location (narrator)"
+        },
+        {
+            "field": "interviewer_location",
+            "label": "Location (interviewer)"
         },
         {
             "label":"Languages","type":"checkboxes",
