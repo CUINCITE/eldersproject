@@ -17,7 +17,7 @@
     will-change: transform;
 
 
-    &:nth-child(even) {
+    &--reversed {
         transform: rotate(20deg);
     }
 

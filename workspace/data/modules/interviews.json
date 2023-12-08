@@ -1,0 +1,23 @@
+{
+    "label": "Interviews",
+    "items": [
+        {
+            "name": "Patricia Welch",
+            "collection": "Natalie Diaz",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Houston, TX"
+        },
+        {
+            "name": "C. Njoube Dugas",
+            "collection": "Renée Watson",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "San Antonio, TX"
+        },
+        {
+            "name": "Donna Personna",
+            "collection": "April Reign",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Oakland, CA"
+        }
+    ]
+}

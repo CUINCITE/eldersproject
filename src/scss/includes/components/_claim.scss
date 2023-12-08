@@ -22,7 +22,10 @@
 
     &__sticker {
         position: absolute;
-        left: rem(192);
+        left: 0;
         bottom: calc(100% - #{rem(10)});
+
+
+        .is-404 & { left: rem(192); }
     }
 }

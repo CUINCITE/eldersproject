@@ -28,8 +28,9 @@
         margin-bottom: vw(4);
 
 
-        p + & {
-            margin-top: vw(32);
+        p + &,
+        a + & {
+            margin-top: vw(38);
         }
     }
 

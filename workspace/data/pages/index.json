@@ -7,6 +7,33 @@
                 "short": true,
                 "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"
             }
+        },
+        {
+            "type": "claim",
+            "claim": {
+                "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed.",
+                "sticker": {
+                    "text": "Discover more"
+                }
+            }
+        },
+        {
+            "type": "home_text",
+            "text": {
+                "text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"
+            }
+        },
+        {
+            "type": "interviews",
+            "repeat": {
+                "items": 3
+            }
+        },
+        {
+            "type": "claim",
+            "claim": {
+                "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed."
+            }
         }
     ]
 }
