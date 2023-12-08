@@ -3,8 +3,8 @@
         {
             "type": "heading",
             "heading": {
-            "align": "right",
-            "label": "Contact"
+                "align": "right",
+                "label": "Contact"
             }
         },
         {
@@ -12,31 +12,7 @@
             "texts": [
                 {
                     "large": true,
-                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>"
-                },
-                {
-                    "heading": {
-                        "small": true,
-                        "text": "Oral Histories Of Our Elders project"
-                    },
-                    "large": true,
-                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
-                },
-                {
-                    "heading": {
-                        "small": true,
-                        "text": "E-mail"
-                    },
-                    "large": true,
-                    "text": "<a href=''>elder.coordinator@columbia.edu</a>"
-                },
-                {
-                    "heading": {
-                        "small": true,
-                        "text": "Follow us"
-                    },
-                    "large": true,
-                    "text": "<a href='' target='_blank'>Instagram</a><a href='' target='_blank'>Twitter</a>"
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><h2>Oral Histories Of Our Elders project</h2><p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p><h2>E-mail</h2><a href=''>elder.coordinator@columbia.edu</a><h2>Follow us</h2><a href='' target='_blank'>Instagram</a><a href='' target='_blank'>Twitter</a>"
                 }
             ]
         },

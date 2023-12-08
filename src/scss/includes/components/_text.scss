@@ -9,11 +9,6 @@
     .hero__text & { padding: 0; }
 
 
-    &:has(a) {
-        padding-top: rem(12);
-    }
-
-
 
     p, a {
         max-width: rem(267);
@@ -66,6 +61,11 @@
         list-style-type: square;
         padding-inline-start: rem(16);
         margin-top: rem(13);
+        margin-bottom: rem(32);
+
+        + h2 {
+            margin-top: rem(14);
+        }
 
         li + li {
             margin-top: rem(12);
@@ -82,5 +82,11 @@
             padding-inline-start: 0;
             margin-bottom: rem(32);
         }
+    }
+
+
+    h2 {
+        @extend .heading;
+        @extend .heading--small;
     }
 }
