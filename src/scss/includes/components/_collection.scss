@@ -1,0 +1,100 @@
+.collection {
+    text-align: right;
+
+
+    &--reversed { text-align: left; }
+
+
+
+    &__name {
+        @include font-family(compressed);
+        @include font-size(100, 89);
+        @include letter-spacing(-4, 100);
+
+        text-transform: uppercase;
+        padding: 0 rem(4);
+        padding-top: rem(12);
+    }
+
+
+
+    &__states {
+        @include font-family(compressed);
+        @include font-size(30, 30);
+        @include letter-spacing(-1.05, 30);
+
+        text-transform: uppercase;
+    }
+
+
+
+    &__data {
+        @include flex(column, space-between, flex-end);
+
+        max-width: rem(312);
+        height: auto;
+        padding: rem(11) 0 rem(38);
+        margin-right: -3px;
+
+
+        .collection--reversed & { align-items: flex-start; }
+    }
+
+
+
+    &__wrap {
+        @include flex(row, space-between, stretch);
+
+        min-height: vw(597);
+
+
+        .collection--reversed & {
+            flex-direction: row-reverse;
+        }
+    }
+
+
+
+    &__text {
+        @include font-size(14, 16);
+    }
+
+
+
+    &__image {
+        flex-basis: 50%;
+        border-right: 1px solid var(--color-bg);
+
+
+        .collection--reversed & {
+            border-right: none;
+            border-left: 1px solid var(--color-bg);
+        }
+    }
+
+
+
+    &__button {
+        @include font-family(compressed);
+        @include font-size(50, 35);
+        @include letter-spacing(-1.25, 50);
+        @include flex(column, flex-end, flex-end);
+
+        text-transform: uppercase;
+        margin-top: auto;
+        margin-bottom: rem(10);
+        margin-right: 1px;
+
+
+        .collection--reversed & { align-items: flex-start; }
+    }
+
+
+
+    &__illustration {
+        width: vw(530);
+        height: vw(530);
+        margin-top: vw(-18);
+        margin-left: vw(18);
+    }
+}

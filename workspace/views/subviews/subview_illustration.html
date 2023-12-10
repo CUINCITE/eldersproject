@@ -1,0 +1,8 @@
+<div class="illustration{% if modifier %} illustration--{{modifier}}{% endif %}">
+    <div class="illustration__front">
+        <div class="illustration__image">
+            {% include "./subviews/subview_picture.html" with { image } %}
+        </div>
+    </div>
+    <div class="illustration__back"></div>
+</div>

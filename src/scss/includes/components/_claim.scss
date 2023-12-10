@@ -16,6 +16,9 @@
     }
 
 
+    &--collections { padding-bottom: vw(112); }
+
+
     .is-404 & { padding-bottom: vw(95); }
 
 
@@ -27,5 +30,11 @@
 
 
         .is-404 & { left: rem(192); }
+
+
+        .claim--collections & {
+            position: relative;
+            margin-top: vw(-10);
+        }
     }
 }
