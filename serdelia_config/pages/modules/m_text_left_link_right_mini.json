@@ -1,0 +1,19 @@
+{
+    "fields" :
+    [
+
+      {   
+         "field":"label","label":"Link (text)","tab":"Content"
+      },      
+      {
+        "field":"url","label":"Link (URL)"
+      },
+      {   
+           "field":"text","type":"html","label":"Copy"
+      }
+
+        
+
+
+   ]
+}
