@@ -46,7 +46,13 @@ class model_app_pages_modules
 		if ($m['params'])
 		{
 			$m['params']=array_flip(explode(',',$m['params']));
-			foreach ($m['params'] as $k=>$v) $m['params'][$k]=1;
+			foreach ($m['params'] as $k=>$v)
+			{
+				$v=explode('=',$k);
+				if (empty($v[1])) $v[1]=1;				
+				$m['params'][$v[0]]=$v[1];
+				unset($m['params'][$k]);
+			}
 		}
 
 		$settings=[
