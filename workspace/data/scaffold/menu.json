@@ -2,11 +2,11 @@
   "nav": [
     {
       "label": "Home",
-      "url": "/"
+      "url": "/workspace"
     },
     {
       "label": "Collections",
-      "url": "/collections"
+      "url": "/workspace/collections"
     },
     {
       "label": "Interviews",

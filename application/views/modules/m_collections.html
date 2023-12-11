@@ -1,16 +1,56 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Collections</h2>
-        <h4>{{text}}</h4>
-        
-        {% for item in items %}      
-        <hr>
-        <p>{{loop.index}}.
-          {% if item.image.mobile %}<img height=50 src="{{item.image.mobile}}" style="margin:20px">{% endif %}
-          <a href="{{item.url}}">{{item.label}} ({{item.amount}})</a>
-        <br><small>{{item.locations}}</small></p
-        <p>{{item.lead}}</p>
-        {% endfor %}
-      </ol>
+<section class="module module--collections">
+  <div class="collections">
+    <div class="collections__grid">
+      {% for item in items %}
+      <div class="collections__item collection {% if loop.index is divisible by (2) %}collection--reversed{% endif %}">
+        <div class="box">
+          <div class="grid">
+            <div class="col-span-12">
+              <h2 class="collection__name">{{item.label}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="grid">
+            <div class="col-span-12">
+              <div class="collection__wrap">
+                <div class="collection__image">
+                  <div class="collection__illustration">
+                    <div class="illustration illustration--red">
+                      <div class="illustration__front">
+                        <div class="illustration__image">
+                          <picture>
+                            <source media="(max-width: 1023px)" srcset=",  2x">
+                            <source media="(min-width: 1024px)" srcset="/src/images/de-robertis.png,  2x">
+                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""
+                              class="is-loading">
+                          </picture>
+                        </div>
+                      </div>
+                      <div class="illustration__back"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="collection__data">
+                  <div class="collection__states">Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas
+                    in Texas</div>
+                  <div class="collection__button">
+                    <a href=/workspace/collection-single class="button button--simple button--">
+                      <i class="icon-btn-arrow arrow ">
+                        <span></span>
+                        <span></span>
+                        <span class="triangle"></span>
+                      </i> <span>Explore</span>
+                    </a> <span>{{item.amount}} Interviews</span>
+                  </div>
+                  <div class="collection__text">{{item.lead}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-  </section>
+  </div>
+</section>
