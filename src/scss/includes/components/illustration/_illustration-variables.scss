@@ -1,0 +1,69 @@
+.illustration {
+    &--red {
+        --color-front: var(--color-red);
+        --color-back: var(--color-purple);
+    }
+
+
+
+    &--pink {
+        --color-front: var(--color-pink);
+        --color-back: var(--color-purple);
+    }
+
+
+
+    &--purple {
+        --color-front: var(--color-purple);
+        --color-back: var(--color-yellow);
+    }
+
+
+
+    &--brown {
+        --color-front: var(--color-brown);
+        --color-back: var(--color-purple);
+    }
+
+
+
+    &--green {
+        --color-front: var(--color-green);
+        --color-back: var(--color-red);
+    }
+
+
+
+    &--palegreen {
+        --color-front: var(--color-pale-green);
+        --color-back: var(--color-green);
+    }
+
+
+
+    &--orange {
+        --color-front: var(--color-orange);
+        --color-back: var(--color-purple);
+    }
+
+
+
+    &--darkgreen {
+        --color-front: var(--color-dark-green);
+        --color-back: var(--color-red);
+    }
+
+
+
+    &--paleblue {
+        --color-front: var(--color-pale-blue);
+        --color-back: var(--color-purple);
+    }
+
+
+
+    &--palepurple {
+        --color-front: var(--color-pale-purple);
+        --color-back: var(--color-green);
+    }
+}
