@@ -146,7 +146,7 @@ class model_app_api_import
                 $interviewers = $this->parent->getJsonModel('interviewers');
                 foreach ($interviewers as $k => $v) $interviewers[$k] = ['id' => $v['id'], 'name' => $v['first_name'] . ' ' . $v['last_name']];
 
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Interview_Data_20231130.csv', ',');
+                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Interview_Data_20231211.csv', ',');
                 if (!$items) return ['message' => 'CSV not found'];
 
                 $known_columns = [
@@ -154,7 +154,7 @@ class model_app_api_import
                     'Account: Account Name',        // skip
                     'Interview Name',               // skip
                     'Brief Narrator Bio',           // --> narrator.bio
-                    'Bio summary',                  // --> narrator.occupation
+                    'Bio summary (Byline)',                  // --> narrator.occupation
                     'Brief Interview Summary',      // --> summary
                     'Language of Interview',        // --> languages
                     'Session Count',                //skip
@@ -217,7 +217,7 @@ class model_app_api_import
                                     'surname' => $surname,
                                     'uid' => uniqid(),
                                     'bio' => $v['Brief Narrator Bio'],
-                                    'occupation' => $v['Bio summary'],
+                                    'occupation' => $v['Bio summary (Byline)'],
                                     'active' => 1
                                 ]
                             );
@@ -228,7 +228,7 @@ class model_app_api_import
                                 'narrators',
                                 [
                                     'bio' => $v['Brief Narrator Bio'],
-                                    'occupation' => $v['Bio summary']
+                                    'occupation' => $v['Bio summary (Byline)']
                                 ],
                                 ['id' => $id['id']]
                             );
@@ -348,7 +348,7 @@ class model_app_api_import
             case "sessions":
 
                 $interviews = $this->parent->getJsonModel('interviews', [], false, null, null, ['fields' => ['incite_id', 'id']]);
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Session_Data_20231204.csv', ',');
+                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Session_Data_20231211.csv', ',');
                 $i = 0;
 
                 $known_columns = [

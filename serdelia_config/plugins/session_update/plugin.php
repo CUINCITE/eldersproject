@@ -27,10 +27,14 @@ class serdelia_plugin_session_update
         if (!$session['duration'] && !empty($session['audio']['src']))
         {
             require(__DIR__.'/Mp3Info.php');
-            $audio = new Mp3Info($session['audio']['src']);
-            $duration=intval($audio->duration);            
-            if ($duration)
-                $this->cms->putJsonModel('sessions_simple',['duration'=>$duration],['id'=>$session['id']]);
+            $src=$_SERVER['HTTP_HOST'].explode('?',$session['audio']['src'])[0];
+            if (file_exists($src))
+            {
+                $audio = new Mp3Info($src);
+                $duration=intval($audio->duration);            
+                if ($duration)
+                    $this->cms->putJsonModel('sessions_simple',['duration'=>$duration],['id'=>$session['id']]);
+            }
         }
 
         $this->cms->putJsonModel('sessions_simple',
