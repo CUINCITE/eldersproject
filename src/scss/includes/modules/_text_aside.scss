@@ -1,0 +1,15 @@
+.text_aside {
+
+    &__decorator {
+        @include breakpoint(desktop) {
+            position: absolute;
+            left: 0;
+            bottom: vw(51);
+
+            .module--boxes {
+                inset: unset;
+                bottom: 0;
+            }
+        }
+    }
+}

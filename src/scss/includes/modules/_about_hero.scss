@@ -1,0 +1,31 @@
+.about_hero {
+    display: grid;
+    position: relative;
+
+    @include breakpoint(desktop) {
+        height: var(--app-height);
+        grid-template-rows: auto 1fr;
+    }
+
+    .box {
+        height: calc(100% - 1px);
+
+        > div {
+            height: 100%;
+        }
+    }
+
+    &__cards {
+        position: absolute;
+        
+        @include breakpoint(desktop) {
+            width: vw(927);
+            height: vw(927);
+            max-width: vh(927);
+            max-height: vh(927);
+            rotate: -8deg;
+            top: calc(10vh + 6 * 10px);
+            right: 23.5rem; 
+        }
+    }
+}

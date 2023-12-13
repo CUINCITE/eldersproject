@@ -1,0 +1,336 @@
+{
+  "modules": [
+    {
+        "type": "about_hero",
+        "heading": {
+            "align": "right",
+            "label": "About"
+        },
+        "cards": [
+
+            {
+                "desktop": "caleb_gayle.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "carolina_de_robertis.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "ellery_washington.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "eve_ewing.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "robin_coste_lewis.png",
+                "alt": ""
+            },
+            {
+                "desktop": "j_wortham.png",
+                "alt": ""
+            }
+        ]
+    },
+    {
+        "type": "text_aside",
+        "mainText": {
+            "size": "medium",
+            "aside": true,
+            "label": "I SEE <br> MY LIGHT <br> <i>SHINING</i>"
+            },
+        "decorator": true,
+        "texts": [
+            {
+                "large": true,
+                "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>"
+            },
+            {
+                "large": true,
+                "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p>"
+            },
+            {
+                "large": true,
+                "text": "<p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+            }
+        ]
+    },
+    {
+        "type": "text_aside",
+        "reverse": "true",
+        "mainText": {
+            "size": "smaller",
+            "aside": true,
+            "label": "PARTNERS"
+            },
+        "texts": [
+            {   
+                "large": true,
+                "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>"
+            },
+            {   
+                "large": true,
+                "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p>"
+            },
+            {   
+                "large": true,
+                "text": "<p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+            }
+        ]
+    },
+    {
+        "type": "faq",
+        "title": {
+            "size": "smaller",
+            "aside": true,
+            "label": "FAQ"
+            },
+        "terms": [
+            {
+                "term": {
+                    "huge": true,
+                    "text": "<p>Mi eget mauris pharetra et ultrices neque.</p>"
+                }, 
+                "copy": {
+                    "large": true,
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            },
+            {
+                "term": {
+                    "huge": true,
+                    "text": "<p>Mi eget mauris pharetra et ultrices neque.</p>"
+                }, 
+                "copy": {
+                    "large": true,
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            }
+        ]
+    },
+    {
+        "type": "people",
+        "title": {
+            "size": "smaller",
+            "aside": true,
+            "label": "PEOPLE"
+            },
+        "description": {
+            "large": true,
+            "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>" 
+        },
+        "groups": [{
+            "title": {"size": "small", "label": "Research And <br>Administrative Staff"},
+            "people": [{
+                "name": "Princess Chase", 
+                "title": "Project Manager", 
+                "photo": { 
+                    "image": {   
+                        "desktop": "placeholder_person_1.png",
+                        "alt": ""
+                    },
+                    "modifiers": ["fit", "small_frame"], 
+                    "color": "pink"
+                    }
+                },
+                {
+                    "name": "Cameron Joseph", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_2.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_green"
+                    }
+                },
+                {
+                    "name": "Bridger Howell", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_3.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_purple"
+                    }
+                },
+                {
+                    "name": "Jessie Foley", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_4.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "yellow"
+                    }
+                },
+                {
+                    "name": "Cade Keith", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_5.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "light_blue"
+                    }
+                }
+            ]
+        },
+        {
+            "title": {"size": "small", "label": "Advisory Board"},
+            "people": [{
+                "name": "London Sims", 
+                "title": "Project Manager", 
+                "photo": { 
+                    "image": {   
+                        "desktop": "placeholder_person_6.png",
+                        "alt": ""
+                    },
+                    "modifiers": ["fit", "small_frame"], 
+                    "color": "pale_blue"
+                    }
+                },
+                {
+                    "name": "Bridger Howell", 
+                    "title": "Research and Editorial Assistant", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_7.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "orange"
+                    }
+                },
+                {
+                    "name": "Princess Chase", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_1.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pink"
+                        }
+                    },
+                {
+                    "name": "Bishop Gates", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_2.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "green"
+                    }
+                },
+                {
+                    "name": "Alvin Gillespie", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_5.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "brown"
+                    }
+                },
+                {
+                    "name": "Arlo Lamb", 
+                    "title": "Research and Editorial Assistant", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_4.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "light_blue"
+                    }
+                },
+                {
+                    "name": "Camden Barber", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_3.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_purple"
+                    }
+                }
+            ]
+        }
+    ]
+        
+    },
+    {
+        "type": "collections_images",
+        "heading": {
+            "align": "right",
+            "label": "Collections"
+        },
+        "cards": [
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "caleb_gayle.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "carolina_de_robertis.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "ellery_washington.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "eve_ewing.png",
+                "alt": ""
+            },
+            {
+                "desktop": "j_wortham.png",
+                "alt": ""
+            },
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "caleb_gayle.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "robin_coste_lewis.png",
+                "alt": ""
+            }
+        ],
+        "names": [ "Robin Coste Lewis", "Renée Watson", "Natalie Diaz", "Jenna Wortham", "Eve L. Ewing",
+            "Ellery Washington", "Denise Frohman", "Carolina De Robertis", "Caleb Gayle", "April Reign" 
+        ]
+    }
+  ]
+}

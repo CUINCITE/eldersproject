@@ -8,10 +8,14 @@
 
     .hero__text & { padding: 0; }
 
-
-
+    
     p, a {
         max-width: rem(267);
+    }
+
+    &--huge {
+        @include font-family(compressed, 800);
+        @include font-size(30, 30);
     }
 
 
@@ -37,6 +41,12 @@
         & + & {
             margin-top: rem(10);
             padding-bottom: rem(4);
+        }
+    }
+
+    &--no-padding {
+        @include breakpoint(desktop) {
+            padding-inline-start: 0;
         }
     }
 

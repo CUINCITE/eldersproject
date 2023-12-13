@@ -8,7 +8,7 @@
             "url": "/workspace/collection-single",
             "collection": "red",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -19,7 +19,7 @@
             "url": "/workspace/collection-single",
             "collection": "pink",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -30,7 +30,7 @@
             "url": "/workspace/collection-single",
             "collection": "purple",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -41,7 +41,7 @@
             "url": "/workspace/collection-single",
             "collection": "brown",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -52,7 +52,7 @@
             "url": "/workspace/collection-single",
             "collection": "green",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -63,7 +63,7 @@
             "url": "/workspace/collection-single",
             "collection": "palegreen",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -74,7 +74,7 @@
             "url": "/workspace/collection-single",
             "collection": "orange",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -85,7 +85,7 @@
             "url": "/workspace/collection-single",
             "collection": "darkgreen",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -96,7 +96,7 @@
             "url": "/workspace/collection-single",
             "collection": "paleblue",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         },
         {
@@ -107,7 +107,7 @@
             "url": "/workspace/collection-single",
             "collection": "palepurple",
             "image": {
-                "desktop": "/src/images/de-robertis.png"
+                "desktop": "de-robertis.png"
             }
         }
     ]

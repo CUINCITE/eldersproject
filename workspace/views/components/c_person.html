@@ -1,0 +1,10 @@
+<div class="person">
+    <div class="person__photo person__photo--{{rotation}}">
+        {% include "./components/c_polaroid.html" with person.photo %}
+    </div>
+
+    <div class="person__details">
+        <p class="person__name">{{person.name}}</p>
+        <p class="person__title">{{person.title}}</p>
+    </div>
+</div>

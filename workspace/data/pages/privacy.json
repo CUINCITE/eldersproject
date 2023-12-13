@@ -1,9 +1,9 @@
 {
   "modules": [
     {
-        "type": "text_right",
+        "type": "text_aside",
         "mainText": {
-            "medium": true,
+            "size": "medium",
             "aside": true,
             "label": "Privacy <br> Policy"
         },

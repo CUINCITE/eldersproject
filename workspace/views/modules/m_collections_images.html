@@ -1,0 +1,17 @@
+<section class="module module--collections">
+    <div class="collections_images">
+        {% include "modules/m_heading.html" with { heading: heading } %}
+
+        <div class="box">
+            <div class="col-span-12">
+                <div class="collections_images__names">
+                    {% include "components/c_names.html" with { names: names } %}
+                </div>
+
+                <div class="collections_images__cards">
+                    {% include "components/c_cards.html" with { cards: cards } %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -2,9 +2,8 @@
     @include font-family(compressed);
     @include font-size(204, 157);
     @include letter-spacing(-6.12, 204);
-
     text-transform: uppercase;
-
+    padding-left: unset;
 
 
     &--reclined {
@@ -14,19 +13,29 @@
     }
 
 
-
     &--medium {
         @include font-size(130, 100);
         @include letter-spacing(-3.9, 130);
+
+        i {
+            @include font-family(reclined, 300);
+            @include letter-spacing(-16.8, 240);
+            padding-left: rem(10);
+            font-style: normal;
+        }
     }
 
+    
+    &--smaller {
+        @include font-size(103, 100);
+        @include letter-spacing(-3.09, 103);
+    }
 
 
     &--small {
         @include font-size(30, 28);
         @include letter-spacing(-0.9, 30);
         margin-bottom: vw(4);
-
 
         p + &,
         a + & {

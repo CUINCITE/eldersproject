@@ -1,0 +1,15 @@
+<div class="people_group">
+
+    {% if title %}
+        <div class="people_group__title">
+            {% include "./components/c_heading.html" with title %}
+        </div>
+    {% endif %}
+
+    <div class="people_group__people">
+        {% for person in people %}
+            {% include "./components/c_person.html" with { person: person , rotation: loop.index is even ? "clockwise" : "counter_clockwise" } %}
+        {% endfor %}
+    </div>
+
+</div>

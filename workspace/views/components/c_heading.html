@@ -1,9 +1,9 @@
 <h2 class="heading
-    {% if reclined %}heading--reclined{% endif %}
-    {% if medium %}heading--medium{% endif %}
-    {% if small %}heading--small{% endif %}
-    {% if aside %}heading--aside{% endif %}
-    {% if align %}heading--{{align}}{% endif %}"
+{% if reclined %} heading--reclined{% endif %}
+{% if aside %} heading--aside{% endif %}
+{% if size %} heading--{{size}}{% endif %}
+{% if align %} heading--{{align}}{% endif %}
+{% if modifier %} heading--{{modifier}}{% endif %}"
 >
 {{label|raw}}
 </h2>

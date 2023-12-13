@@ -1,0 +1,20 @@
+.people_group {
+
+    &__title {
+        @include breakpoint(desktop) {
+            margin-top: rem(20);
+            margin-bottom: rem(40);
+        }
+    }
+
+    &__people {
+        display: grid;
+
+        @include breakpoint(desktop) {
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: vw(42);
+            column-gap: map-get($grid-gutter, desktop);
+            margin-bottom: vw(56);
+        }
+    }
+}
