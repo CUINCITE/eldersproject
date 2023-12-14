@@ -1,0 +1,20 @@
+{
+    "fields" :
+    [
+
+      {   
+         "field":"label","label":"Header","tab":"Content","type":"text",
+         "settings":{"rows":3}
+      },
+      {
+         "label":"Header Type","field":"header","type":"select"
+      },
+      {   
+           "field":"text","type":"html","label":"Copy"
+        }
+
+        
+
+
+   ]
+}

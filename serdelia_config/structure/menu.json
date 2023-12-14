@@ -30,38 +30,63 @@
         ]
     },
     {
-        "label":"Interviews",
-        "submenu":[
-            {"label":"Interviews","page":"interviews"},
-            {},
-            {"label":"Narrators","page":"narrators"},
-            {"label":"Interviewers (Collections)","page":"interviewers"},            
-            {},
-            {"label":"Sessions (all)","page":"sessions_all"},
-            {"label":"Narrators Categories","page":"narrators_categories"}
-            
-        ]
-        
-    },    
-    {
-        "label":"Topics",
-        "page":"topics"
-    },
-    {
-        "label":"About page",
-        "submenu":
-        [
+        "label": "Pages",
+        "submenu": [
             {
-                "label":"FAQ",
-                "page":"faq"
-            },
-            {
-                "label":"Logotypes",
-                "page":"logotypes"
+                "label": "About",
+                "submenu": [
+                    {"label":"About page"},
+                    {"label":"FAQ","page":"faq"},
+                    {"label":"People - sections","page":"people_sections"},
+                    {"label":"People - portraits","page":"people"}
+                ]
             }
         ]
     },
-    
+    {
+        "label": "Interviews",
+        "submenu": [
+            {
+                "label": "Interviews",
+                "page": "interviews"
+            },
+            {},
+            {
+                "label": "Narrators",
+                "page": "narrators"
+            },
+            {
+                "label": "Interviewers (Collections)",
+                "page": "interviewers"
+            },
+            {},
+            {
+                "label": "Sessions (all)",
+                "page": "sessions_all"
+            },
+            {
+                "label": "Narrators Categories",
+                "page": "narrators_categories"
+            }
+        ]
+    },
+    {
+        "label": "Topics",
+        "page": "topics"
+    },
+    {
+        "label": "About page",
+        "submenu": [
+            {
+                "label": "FAQ",
+                "page": "faq"
+            },
+            {
+                "label": "Logotypes",
+                "page": "logotypes"
+            }
+        ]
+    },
     {
         "label": "Admin",
         "submenu": [
