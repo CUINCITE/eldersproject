@@ -49,7 +49,8 @@ class model_app extends _uho_model
             ]);
         
 
-        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true) {
+        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && !strpos($_SERVER['HTTP_HOST'], 'sunship.one') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true)
+        {
             $this->dict = $_SESSION['dict'];
         } else {
             $this->dict = array();

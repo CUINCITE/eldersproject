@@ -11,7 +11,7 @@ class model_app_pages_modules_collections_short extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-        $m['items']=$this->parent->getJsonModel('interviewers',['active'=>1],false,'last_name');
+        $m['items']=$this->parent->dictGet('collections');
 		return $m;
 	}
 
