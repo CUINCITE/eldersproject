@@ -16,15 +16,10 @@
               <div class="collection__wrap">
                 <div class="collection__image">
                   <div class="collection__illustration">
-                    <div class="illustration illustration--red">
+                    <div class="illustration illustration--{{item.color}}">
                       <div class="illustration__front">
                         <div class="illustration__image">
-                          <picture>
-                            <source media="(max-width: 1023px)" srcset=",  2x">
-                            <source media="(min-width: 1024px)" srcset="/src/images/de-robertis.png,  2x">
-                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""
-                              class="is-loading">
-                          </picture>
+                          {% include 'subviews/subview_picture.html' with {image:item.image} %}                          
                         </div>
                       </div>
                       <div class="illustration__back"></div>
@@ -35,7 +30,7 @@
                   <div class="collection__states">Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas
                     in Texas</div>
                   <div class="collection__button">
-                    <a href=/workspace/collection-single class="button button--simple button--">
+                    <a href="{{item.url}}" class="button button--simple button--">
                       <i class="icon-btn-arrow arrow ">
                         <span></span>
                         <span></span>
