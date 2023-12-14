@@ -8,6 +8,7 @@ class controller_app extends _uho_controller
 
     public function getData()
     {
+        $this->model->dictInit();
         //$ajax=$this->route->isAjax() || _uho_fx::getGet('partial');
         //if ($ajax) $this->view->renderHtmlRoot=false;
         if (isset($this->cfg['serdelia']['serdelia_keys']))

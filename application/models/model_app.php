@@ -22,8 +22,8 @@ class model_app extends _uho_model
     //============================================================================================
     public function init()
     {
-        
-        if ($this->checkSerdeliaEdit()) {
+        if ($this->checkSerdeliaEdit())
+        {
             $preview = _uho_fx::getGet('preview');
             $this->serdelia_edit = ($preview == 'serdelia_edit');
             if ($preview == 'serdelia_edit') {
@@ -39,34 +39,19 @@ class model_app extends _uho_model
                 $this->serdelia_edit = $preview;
             } elseif (@$_SESSION['serdelia_pro']['type'] == 'pro') $this->serdelia_edit = 'serdelia_edit_pro';
         }
-
+        
         $this->orm->setLogErrors(true);
-
         
         $this->sql->cacheSet('7g!',
             [
                 'users','users_newsletter'
             ]);
+            
         
 
-        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && !strpos($_SERVER['HTTP_HOST'], 'sunship.one') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true)
-        {
-            $this->dict = $_SESSION['dict'];
-        } else {
-            $this->dict = array();
-            $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
-            $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
-            $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
-            
-            // uncomment for multi-lang sites
-            //$this->dict['lang'] = $this->lang;
-            
+        
 
-
-            $_SESSION['dict'] = $this->dict;
-        }
-
-
+/*        
         $this->client = new _uho_client(
             $this->orm,
             [
@@ -93,9 +78,29 @@ class model_app extends _uho_model
                 ]
             ],
             $this->lang
-        );
+        );*/
     }
+    //============================================================================================
+    public function dictInit()
+    {
+        
+        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && !strpos($_SERVER['HTTP_HOST'], 'sunship.one') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true)
+        {
+            $this->dict = $_SESSION['dict'];
+        } else {
+            $this->dict = array();
+            $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
+            $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
+            $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
+            
+            // uncomment for multi-lang sites
+            //$this->dict['lang'] = $this->lang;
+            
 
+
+            $_SESSION['dict'] = $this->dict;
+        }
+    }
     //============================================================================================
     private function dictLoad($table, $filters = null, $order = null)
     {
@@ -123,7 +128,7 @@ class model_app extends _uho_model
     //============================================================================================
     public function getClient()
     {
-        return $this->client->getData();
+        //return $this->client->getData();
     }
     //============================================================================================
     public function set404()
