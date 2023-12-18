@@ -8,7 +8,7 @@ class model_app extends _uho_model
     var $class = 'app';
     public $http_server, $client;
     public $serdelia_edit = false;
-    public $head_title = 'Application Name';   // używane w title i mailingu automatycznym
+    public $head_title = 'I See My Light Shining';
     public $is404 = true;
     var $head = array(
         'image' => '/public/og_image.jpg'
