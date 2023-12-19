@@ -4,5 +4,9 @@
             {% include "./subviews/subview_picture.html" with { image } %}
         </div>
     </div>
-    <div class="illustration__back"></div>
+    <div class="illustration__back">
+        {% for shadow in shadows %}
+            <div class="illustration__shadow illustration__shadow--{{shadow}}"></div>
+        {% endfor %}
+    </div>
 </div>

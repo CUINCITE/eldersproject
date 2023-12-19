@@ -3,11 +3,38 @@
         <div class="box">
             <div class="grid grid--row-start">
                 {% if mainText %}
-                    <div class="col-span-6 col-start-{{reverse ? '7' : '1'}}{{reverse ? '' : ' no-padding'}}">
+                    <div class="text_aside__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
                         {% include "./components/c_heading.html" with mainText %}
+
+                        {% if decor %}
+                            <div class="text_aside__decorator text_aside__decorator--{{decor.type}}{% if decor.modifiers %}{% for modifier in decor.modifiers %} text_aside__decorator--{{modifier}}{% endfor %}{% endif %}{% if reversed %} text_aside__decorator--reversed{% endif %}">
+                                {% if decor.type == "boxes" %}
+                                    {% include "./modules/m_boxes.html" with { reversed: reversed } %}
+                                {% endif %}
+                                {% if decor.type == "illustration" %}
+                                    {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                                {% endif %}
+
+                                {% if decor.type == "photo" %}
+                                        {% include "./components/c_polaroid.html" with decor.photo %}
+                                {% endif %}
+
+                                {% if decor.text %}
+                                    {% include "./subviews/subview_text.html" with decor.text %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% if decor %}
+                            <div class="text_aside__decorator text_aside__decorator--{{decor.type}}{% if reversed %}{% endif %}">
+                                {% if decor.type == "boxes" %}
+                                    {% include "./subviews/subview_boxes.html" with { reversed: reversed } %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endif %}
-                <div class="col-span-6 col-start-{{reverse ? '1' : '7'}}{{reverse ? ' no-padding' : ''}}">
+                <div class="text_aside__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
                     {% if texts %}
                     {% for item in texts %}
                         {% include "./subviews/subview_text.html" with item %}
@@ -16,11 +43,7 @@
                         {% include "./subviews/subview_text.html" with {text:text,wide:true,heading:heading} %}
                     {% endif %}
                 </div>
-                {% if decorator %}
-                    <div class="text_aside__decorator">
-                        {% include "./modules/m_boxes.html"  %}
-                    </div>
-                {% endif %}
+
             </div>
         </div>
     </div>

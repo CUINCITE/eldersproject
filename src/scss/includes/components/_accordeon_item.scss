@@ -18,7 +18,7 @@
 
     @include breakpoint(desktop) {
         padding-top: rem(20);
-        padding-bottom: rem(38);
+        padding-bottom: rem(30);
     }
 
     &.is-closed {
@@ -39,12 +39,17 @@
         transition: height .3s ease-in;
 
         @include breakpoint(desktop) {
-            padding-top: rem(12);
+            padding-top: rem(2);
         }
     } 
 
     &__term {
         transition: .3s color ease;
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include letter-spacing(-1.05, 30);
+        }
 
         svg {
             transition: .3s transform ease;

@@ -9,10 +9,10 @@
 
     .box {
         height: calc(100% - 1px);
+    }
 
-        > div {
-            height: 100%;
-        }
+    .illustration {
+        transform: unset;
     }
 
     &__cards {
@@ -24,8 +24,8 @@
             max-width: vh(927);
             max-height: vh(927);
             rotate: -8deg;
-            top: calc(10vh + 6 * 10px);
-            right: 23.5rem; 
+            top: 10.6%;
+            right: 27.8rem;
         }
     }
 }

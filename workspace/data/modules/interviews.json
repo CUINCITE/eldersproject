@@ -4,21 +4,24 @@
     "items": [
         {
             "name": "Patricia Welch",
-            "collection": "Natalie Diaz",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
-            "state": "Houston, TX"
+            "state": "Houston, TX",
+            "collection": "Natalie Diaz"
         },
         {
             "name": "C. Njoube Dugas",
-            "collection": "Renée Watson",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
-            "state": "San Antonio, TX"
+            "state": "San Antonio, TX",
+            "collection": "Natalie Diaz"
         },
         {
             "name": "Donna Personna",
-            "collection": "April Reign",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
-            "state": "Oakland, CA"
+            "state": "Oakland, CA",
+            "collection": "Natalie Diaz"
         }
     ]
 }

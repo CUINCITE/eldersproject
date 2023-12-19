@@ -1,0 +1,9 @@
+<div class="collection_author{% if size %} collection_author--{{size}}{% endif %}">
+    <h3 class="collection_author__name">{{name|raw}}</h3>
+    {% if collection %}
+        <h4 class="collection_author__collection">{{collection}} Collection</h4>
+    {% endif %}
+    {% if title %}
+        <h4 class="collection_author__title">{{title}}</h4>
+    {% endif %}
+</div>

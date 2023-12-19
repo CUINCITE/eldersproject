@@ -1,0 +1,36 @@
+<section class="module module--collection_hero">
+    <div class="collection_hero">
+        
+            <div class="box">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="collection_hero__author">
+                                {% include "./components/c_collection_author.html" with { 
+                                    name: name,
+                                    size: "huge",
+                                    collection: " ",
+                                    title: "" } %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="collection_hero__cover">
+                    {% include "./subviews/subview_illustration.html" with { shadows: illustration.shadows, image: illustration.image } %}
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="collection_hero__copy no-padding">
+                            {% include "./subviews/subview_text.html" with text %}
+                            {% include "components/c_link.html" with { url: "/workspace/interviews", text: "Go to interviews" } %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</section>

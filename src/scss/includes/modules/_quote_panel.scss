@@ -1,0 +1,27 @@
+.quote_panel {
+
+    &__quote {
+        @include breakpoint(desktop) {
+            padding-top: rem(20);
+            padding-left: rem(9);
+            padding-bottom: rem(138);
+        }
+    }
+
+    &__column {
+        position: relative;
+    }
+
+    &__decorator {
+        position: absolute;
+        z-index: 5;
+
+        &--illustration {
+            @include breakpoint(desktop) {
+                width: vw(240);
+                right: rem(-20);
+                bottom: rem(100);
+            }
+        }
+    }
+}

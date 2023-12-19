@@ -2,7 +2,7 @@
 
     &__title {
         @include breakpoint(desktop) {
-            margin-top: rem(20);
+            margin-top: rem(19);
             margin-bottom: rem(40);
         }
     }

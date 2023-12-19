@@ -1,9 +1,24 @@
 <ul class="names">
-    {% for name in names %}
-        <li class="names__name">
-            <a class="names__link" href="{{name}}">
-                {{name}}
-            </a>
+    {% for author in authors %}
+        <li class="names__name js-accordeon-item is-closed" >
+
+            <div class="names__author">
+                <button class="names__button js-accordeon-button">
+                    <span class='sr-only'>Toggle visibility of the content</span>
+                </button>
+                <span class="names__box">{{author.name}}</span>
+            </div>
+
+            <div class="names__copy js-accordeon-copy">
+                <div class="names__link"> 
+                    {% include "./components/c_link.html" with {
+                        url: "test",
+                        modifiers: ["simple"],
+                        text: "Explore #{author.interviews} interviews"
+                    } %}
+                </div>
+                {% include "./subviews/subview_text.html" with { text: author.copy, heading: false } %}
+            </div>
         </li>
     {% endfor %}
 </ul>

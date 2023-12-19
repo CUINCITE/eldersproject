@@ -4,8 +4,9 @@
         position: relative;
 
         @include breakpoint(desktop) {
-            width: vw(154);
-            height: vw(154);
+            width: vw(155);
+            height: vw(155);
+            translate: 5% 0;
         }
 
         &--clockwise {

@@ -4,7 +4,7 @@
         {
             "type": "home_hero",
             "text": {
-                "short": true,
+                "size": "short",
                 "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"
             }
         },

@@ -11,15 +11,15 @@
 }
 
 $background-colors: (
-    "pale_green": #9AA493,
-    "green": #548068,
-    "light_blue": #BDD5E3,
-    "pale_blue": #5C7B8D,
-    "pale_purple": #776886,
-    "pink": #DBB9B1,
-    "yellow": #EDB548,
-    "orange": #C75B18,
-    "brown": #B79258,
+    "pale_green": $color-pale-green,
+    "green": $color-green,
+    "light_blue": $color-light-blue,
+    "pale_blue": $color-pale-blue,
+    "pale_purple": $color-pale-purple,
+    "pink": $color-pale-pink,
+    "yellow": $color-gold,
+    "orange": $color-orange,
+    "brown": $color-brown,
 );
 
 .polaroid {

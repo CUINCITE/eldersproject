@@ -1,10 +1,7 @@
 import { Component } from './Component';
-import { breakpoint } from '../Site';
 
 
 export class Accordeon extends Component {
-    private isOpen = false;
-
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -14,28 +11,14 @@ export class Accordeon extends Component {
 
     private bind(): void {
         const button = this.view.querySelector('.js-accordeon-button');
-        button && this.view.addEventListener('click', this.onToggleClick);
+        button && button.addEventListener('click', this.onToggleClick);
     }
 
     private onToggleClick = e => {
         e.preventDefault();
         e.stopPropagation();
-        if (!this.isOpen) {
-            this.open();
-        } else {
-            this.close();
-        }
+        this.view.classList.toggle('is-closed');
     };
-
-    private close(): void {
-        this.isOpen = false;
-        this.view.classList.add('is-closed');
-    }
-
-    private open(): void {
-        this.isOpen = true;
-        this.view.classList.remove('is-closed');
-    }
 
     private setHeight(): void {
         const copy: HTMLDivElement = this.view.querySelector('.js-accordeon-copy');
