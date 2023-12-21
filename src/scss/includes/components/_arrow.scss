@@ -23,6 +23,10 @@
                 inset: rem(-6) auto 0 rem(32);
             }
 
+            .button--small & {
+                height: rem(8);
+            }
+
             .button--lightbox.button--reversed & { inset: 0 auto rem(-6) rem(32); }
         }
 
@@ -33,6 +37,11 @@
 
             .button--lightbox & {
                 width: rem(33);
+            }
+
+
+            .button--small & {
+                width: rem(15);
             }
         }
 
@@ -50,6 +59,11 @@
             .button--lightbox & {
                 border-width: rem(16.5) 0 rem(16.5) rem(22);
                 margin-left: rem(3);
+            }
+
+
+            .button--small & {
+                border-width: rem(7) 0 rem(7) rem(9);
             }
         }
     }

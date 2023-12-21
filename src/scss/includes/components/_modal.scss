@@ -1,0 +1,175 @@
+.modal {
+    --checkmark-width: #{rem(23)};
+
+
+
+    background-color: var(--color-black);
+    color: var(--color-box);
+    padding: rem(19) rem(16) rem(24) rem(20);
+    text-align: left;
+    display: none;
+
+
+    &.is-open { display: block; }
+
+
+
+    &__close {
+        position: absolute;
+        inset: rem(18) rem(20) auto auto;
+
+
+        .icon-close {
+            width: rem(14);
+            height: rem(14);
+        }
+    }
+
+
+
+    &__wrap {
+        @include flex(column, flex-start, flex-start);
+    }
+
+
+
+    &__title {
+        @include font-family(compressed);
+        @include font-size(50, 41);
+        @include letter-spacing(-1.25, 50);
+
+        text-transform: uppercase;
+        margin-left: rem(-2);
+    }
+
+
+
+    &__grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        margin-top: rem(56);
+    }
+
+
+
+    &__group {
+        @include flex(column, flex-start, flex-start);
+
+        position: relative;
+        gap: 2px;
+
+
+        &--topics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            align-content: start;
+            grid-auto-flow: column;
+        }
+
+
+        legend {
+            position: absolute;
+            inset: auto auto 100% 0;
+        }
+
+
+        input {
+            position: absolute;
+        }
+    }
+
+
+
+    &__footer {
+        @include flex(row, flex-end, center);
+
+        margin-left: auto;
+        margin-top: rem(58);
+    }
+
+
+
+    &__reset {
+        @include font-family(compressed);
+        @include font-size(20, 17);
+        @include letter-spacing(-0.3, 20);
+
+        text-transform: uppercase;
+        margin-right: rem(14);
+        margin-top: rem(4);
+    }
+
+
+
+    &__submit {
+        @extend %modal-label;
+
+        svg { opacity: 1 !important; }
+    }
+
+
+
+    &__form {
+        width: 100%;
+    }
+
+
+    legend {
+        @include font-size(17, 12);
+
+        text-transform: uppercase;
+        margin-bottom: rem(7);
+    }
+
+
+    label {
+        @extend %modal-label;
+    }
+
+
+    input:checked + label {
+        span { transform: translateX(0); }
+        svg { opacity: 1; }
+    }
+}
+
+
+%modal-label {
+    @include flex(row, flex-start, stretch);
+
+    span {
+        @include font-family(compressed);
+        @include font-size(21.27, 18);
+        @include letter-spacing(-0.638, 21.27);
+
+        height: rem(23);
+        background-color: var(--color-box);
+        color: var(--color-black);
+        text-transform: uppercase;
+        padding: rem(4) rem(3.5) rem(2);
+        transition: transform .3s $ease-custom;
+        transform: translateX(calc(var(--checkmark-width) * -1));
+    }
+
+
+    .checkmark {
+        @include flex(row, center, center);
+
+        flex-shrink: 0;
+        background-color: var(--color-yellow);
+        height: auto;
+        width: var(--checkmark-width);
+    }
+
+
+    svg { opacity: 0; }
+
+
+    @include hover {
+        span {
+            transform: translateX(0);
+        }
+    }
+}

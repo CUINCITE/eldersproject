@@ -1,10 +1,22 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 import { Component } from './components/Component';
 import { browser } from './Site';
 import { getAnimation } from './Animate';
 import { animations, scrolls } from './animations/all';
+
+
+export type ScrollToProps = {
+    el?: HTMLElement;
+    isSmooth?: boolean;
+    offsetY?: number;
+    duration?: number;
+    ease?: string;
+    y?: number;
+    onComplete?: ()=> void;
+}
 
 interface IScrollData {
     el: HTMLElement;
@@ -20,7 +32,7 @@ interface IParallaxData {
     component?: Component;
 }
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
 
@@ -70,9 +82,13 @@ export default class Scroll {
 
 
 
-    public static scrollTo = async({ el, y, duration = 1, ease = 'power3.out', offsetY = 0 }: {
-        el?: HTMLElement | string; offsetY?: number; duration?: number; ease?: string; y?: number;
-    }): Promise<void> => new Promise(resolve => {
+    public static scrollTo = async({
+        el,
+        y,
+        duration = 1,
+        ease = 'none',
+        offsetY = 0,
+    }: ScrollToProps): Promise<void> => new Promise(resolve => {
         gsap.to(window, {
             scrollTo: {
                 y: y ?? el,
@@ -90,7 +106,7 @@ export default class Scroll {
     public static scrollToTop = async(fast?: boolean): Promise<void> => {
         await Scroll.scrollTo({
             y: 0,
-            el: '[data-page]',
+            el: document.querySelector('[data-page]'),
             duration: fast ? 0 : 2,
         });
     };

@@ -1,7 +1,11 @@
 import { Page } from './pages/Page';
-import { Map } from './components/Map';
+import { Load } from './components/Load';
+import { Modal } from './components/Modal';
 
 
-export const components = { Map };
+export const components = {
+    Load,
+    Modal,
+};
 
 export const pages = { Page };
