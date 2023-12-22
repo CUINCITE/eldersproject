@@ -1,0 +1,37 @@
+.filtered {
+    &__list {
+        @include flex(row, flex-start, center);
+
+        gap: rem(16);
+
+
+        &:has(li) {
+            margin-bottom: rem(25);
+        }
+    }
+
+
+
+    &__label {
+        @include font-family(compressed);
+        @include font-size(21, 19);
+        @include letter-spacing(-0.525, 21);
+
+        text-transform: uppercase;
+
+
+        label {
+            @include flex(row, flex-start, center);
+
+            margin-top: rem(12);
+            gap: rem(8);
+        }
+
+
+        .icon-close {
+            top: -1px;
+            width: rem(14);
+            height: rem(14);
+        }
+    }
+}

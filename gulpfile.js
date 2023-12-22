@@ -1,5 +1,3 @@
-
-
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')({
     // eslint-disable-next-line max-len
@@ -96,7 +94,7 @@ function bundle() {
     return (
         bundler
             .bundle()
-            .on('error', function (err) {
+            .on('error', function(err) {
                 fancyLog.error(err);
                 this.emit('end');
             })
@@ -149,9 +147,7 @@ function watchBundle() {
 // Clean
 
 function cleanImages() {
-    return plugins.del([paths.images.dest, paths.svg.dest, paths.svg.app], {
-        force: true
-    });
+    return plugins.del([paths.images.dest, paths.svg.dest, paths.svg.app], { force: true });
 }
 
 function clean() {
@@ -159,10 +155,8 @@ function clean() {
         paths.sass.dest,
         paths.scripts.dest,
         paths.images.dest,
-        paths.fonts.dest
-    ], {
-        force: true
-    });
+        paths.fonts.dest,
+    ], { force: true });
 }
 
 // // Images
@@ -207,8 +201,8 @@ function svgstore() {
         .pipe(plugins.svgmin({
             plugins: [
                 { removeAttrs: { attrs: '(fill|stroke)' } },
-                { addAttributesToSVGElement: { attribute: 'preserveAspectRatio="xMidYMid meet"' } }
-            ]
+                { addAttributesToSVGElement: { attribute: 'preserveAspectRatio="xMidYMid meet"' } },
+            ],
         }))
         .pipe(plugins.rename({ prefix: 'sprite-' }))
         .pipe(plugins.svgstore({ fileName: 'sprite.svg', inlineSvg: true }))
@@ -260,18 +254,16 @@ function bump() {
         .pipe(plugins.replace(/\?v=([^\"]+)/g, `?v=${newVer}`))
         .pipe(gulp.dest('./application/views/'));
 
-    gulp.src(['./workspace/index.html'])
+    gulp.src(['./workspace/views/base.twig'])
         .pipe(plugins.replace(/\?v=([^\"]+)/g, `?v=${newVer}`))
-        .pipe(gulp.dest('./workspace/'));
+        .pipe(gulp.dest('./workspace/views/'));
 
     gulp.src(['./src/scss/main.scss'])
         .pipe(plugins.replace(/Version: (\d+\.\d+\.\d+)/g, `Version: ${newVer}`))
         .pipe(gulp.dest('./src/scss/'));
 
     return gulp.src(['./package.json'])
-        .pipe(plugins.if(argv.release, plugins.bump({
-            version: newVer
-        })))
+        .pipe(plugins.if(argv.release, plugins.bump({ version: newVer })))
         .pipe(gulp.dest('./'));
 }
 
@@ -280,16 +272,12 @@ function bump() {
 function init() {
     gulp.src(['./package.json'])
         .pipe(
-            plugins.bump({
-                version: '0.0.0',
-            }),
+            plugins.bump({ version: '0.0.0' }),
         )
         .pipe(gulp.dest('./'));
 
     // eslint-disable-next-line max-len
-    return plugins.del(['../src/fonts/**/*', '../src/images/favicons/*', '../src/scss/includes/components/*.scss', '../src/scss/includes/scaffold/*.scss', '../src/ts/Site.ts', '../src/ts/components/*.ts'], {
-        force: true,
-    });
+    return plugins.del(['../src/fonts/**/*', '../src/images/favicons/*', '../src/scss/includes/components/*.scss', '../src/scss/includes/scaffold/*.scss', '../src/ts/Site.ts', '../src/ts/components/*.ts'], { force: true });
 }
 
 // Watch
@@ -305,7 +293,7 @@ function watch() {
             proxy: config.proxyURL,
             port: 7000,
             notify: false,
-            files: ['workspace/**/*', 'application/**/*']
+            files: ['workspace/**/*', 'application/**/*'],
         });
     });
     gulp.watch(paths.styles.main, stylesDefault);

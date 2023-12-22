@@ -53,6 +53,15 @@
         padding-right: rem(6);
 
 
+        .sticker--big & {
+            @include font-size(32, 27.5);
+            @include letter-spacing(-0.96, 32);
+
+            transform: rotate(-32deg);
+            padding-top: rem(2);
+        }
+
+
         .is-404 & {
             @include font-size(23, 19);
             @include letter-spacing(-1.15, 23);
