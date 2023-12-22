@@ -61,7 +61,8 @@
                 "type": "illustration",
                 "modifiers": ["medium", "center"],
                 "image": {
-                    "desktop": "megaphone.png"
+                    "desktop": "megaphone.png",
+                    "mobile": "megaphone.png",
                 },
                 "text": {
                     "size": "small",

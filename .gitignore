@@ -34,6 +34,7 @@ dev.env
 stage.env
 prod.env
 sunship.env
+.npmrc
 
 *.sublime-project
 *.sublime-workspace
