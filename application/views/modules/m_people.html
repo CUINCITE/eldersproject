@@ -1,0 +1,51 @@
+{% set colors =['pink','pale_green','pale_purple','yellow','light_blue'] %}
+{% set i_color=-1 %}
+<section class="module module--people">
+    <div class="people">
+        <div class="box">
+            <div class="grid">
+                <div class="col-span-6 no-padding">
+                    <div class="text text--large">
+                        {{text|raw}}
+                    </div>
+                    {% for section in items %}
+                    <div class="people_group">
+                        <div class="people_group__title">
+                            <h2 class="heading heading--small">
+                                {{section.label}}
+                            </h2>
+                        </div>
+                        {% set side=loop.index % 2 %}
+                        <div class="people_group__people">
+                            {% for person in section.people %}
+                            {% set i_color=i_color+1 %}{% if i_color>=colors|length %}{% set i_color=0 %}{% endif %}
+                            {% set side=side+1 %}{% if side==3 %}{% set side=1 %}{% endif %}
+                            <div class="person">
+                                <div class="person__photo {% if side==1 %}person__photo--clockwise{% else %}person__photo--counter_clockwise{% endif %}">
+                                    <div class="polaroid polaroid--fit polaroid--small_frame">
+                                        <div class="polaroid__image polaroid__image--{{colors[i_color]}}">
+                                            {% include 'subviews/subview_picture_thumb.html' with {image:person.image} %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="person__details">
+                                    <p class="person__name">{{person.name}} {{person.surname}}</p>
+                                    <p class="person__title">{{person.function}}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-span-6 col-start-7">
+                    <h2 class="heading heading--aside heading--smaller">{{label}}</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

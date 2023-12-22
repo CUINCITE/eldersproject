@@ -1,0 +1,25 @@
+.cards {
+  width: 100%;
+  height: 100%;
+
+  &__card {
+      width: inherit;
+      height: inherit;
+      position: absolute;
+      transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+      transform-origin: -100% 150%;
+      // $baseHue: random(360);
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          margin: ($i - 1) * -10px;
+          // background: hsl(($i * 130) + $baseHue, 80%, 50%);
+        }
+      }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+};

@@ -1,0 +1,92 @@
+.accordeon_item {
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        width: 100%;
+        background-color: $color-bg;
+
+        @include breakpoint(desktop) {
+            left: map-get($grid-gutter, desktop) / -2;
+            width: calc(100% + (#{map-get($grid-gutter, desktop)} / 2) + #{map-get($grid-offset, desktop)});
+        }
+    }
+
+    @include breakpoint(desktop) {
+        padding-top: rem(20);
+        padding-bottom: rem(30);
+    }
+
+    &.is-closed {
+
+        .accordeon_item__copy {
+            height: 0 !important;
+        }
+    
+        .accordeon_item__term {
+            svg {
+                transform: rotateX(0deg);
+            }
+        }
+    }
+
+    &__copy {
+        overflow: hidden;
+        transition: height .3s ease-in;
+
+        @include breakpoint(desktop) {
+            padding-top: rem(2);
+        }
+    } 
+
+    &__term {
+        transition: .3s color ease;
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include letter-spacing(-1.05, 30);
+        }
+
+        svg {
+            transition: .3s transform ease;
+            transform: rotateX(-180deg);
+        }
+    }
+
+    &__button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        &:focus ~ .accordeon_item__term {                                            
+            color: $color-purple;
+        }
+
+        @include hover {
+            & ~ .accordeon_item__term {                                            
+                color: $color-purple;
+            }
+        }
+    }
+
+    &__arrow {
+        position: absolute;
+        right: 0;
+
+        @include breakpoint(desktop) {
+            top: rem(20);
+            width: rem(22);
+        }
+    }
+
+    .text {
+        padding-block: 0;
+    }
+}
+

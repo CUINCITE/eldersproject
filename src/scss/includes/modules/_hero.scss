@@ -38,5 +38,6 @@
         @include font-family(reclined, 300);
         @include letter-spacing(-16.8, 240);
         padding-left: rem(20);
+        font-style: normal;
     }
 }

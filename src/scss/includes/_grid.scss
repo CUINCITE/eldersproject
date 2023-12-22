@@ -14,9 +14,6 @@
 .grid {
     --grid-column-start: auto;
     --grid-columns-span: auto;
-
-
-
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
 
@@ -38,6 +35,14 @@
 
     &--no-gutter {
         column-gap: 0;
+    }
+
+    &--row-start {
+        @include breakpoint(desktop) {
+            & div {
+                grid-row-start: 1;
+            }
+        }
     }
 }
 

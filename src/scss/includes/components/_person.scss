@@ -1,0 +1,36 @@
+.person {
+
+    &__photo {
+        position: relative;
+
+        @include breakpoint(desktop) {
+            width: vw(155);
+            height: vw(155);
+            translate: 5% 0;
+        }
+
+        &--clockwise {
+            rotate: 8deg;
+        }
+
+        &--counter_clockwise {
+            rotate: -8deg;
+        }
+    }
+
+    &__details {
+        @include breakpoint(desktop) {
+            @include font-size(12, 1.3);
+            margin-top: vw(32);
+            
+        }
+    }
+
+    &__name {
+        @include font-settings(700, 0);
+    }
+
+    &__title {
+        @include font-settings(500, 0);
+    }
+}

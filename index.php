@@ -52,6 +52,14 @@ if ($index['development'])
   ini_set('error_reporting', E_ALL ^ E_NOTICE);
 }
 
+function dd($var, $pre=false)
+{
+  if ($pre) echo('<pre>');
+  var_dump($var);
+  if ($pre) echo('</pre>');
+  die();
+}
+
 // cache handler
 
 if (cache)

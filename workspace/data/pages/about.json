@@ -1,0 +1,335 @@
+{
+  "modules": [
+    {
+        "type": "about_hero",
+        "heading": {
+            "align": "right",
+            "label": "About"
+        },
+        "image": {
+                "desktop": "j_wortham.png",
+                "alt": ""
+            }
+    },
+    {
+        "type": "text_aside",
+        "mainText": {
+            "size": "medium",
+            "aside": true,
+            "label": "I SEE <br> MY LIGHT <br> <i>SHINING</i>"
+            },
+        "decor": {
+            "type": "boxes"
+        },
+        "texts": [
+            {
+                "size": "large",
+                "modifiers": ["aside"],
+                "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+            }
+        ]
+    },
+    {
+        "type": "text_aside",
+        "reversed": "true",
+        "mainText": {
+            "size": "smaller",
+            "aside": true,
+            "label": "PARTNERS"
+            },
+        "texts": [
+            {
+                "size": "large",
+                "modifiers": ["aside"],
+                "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+            }
+        ]
+    },
+    {
+        "type": "faq",
+        "title": {
+            "size": "medium",
+            "aside": true,
+            "label": "FAQ"
+            },
+        "terms": [
+            {
+                "term": {
+                    "size": "huge",
+                    "text": "<p>Mi eget mauris pharetra et ultrices neque.</p>"
+                }, 
+                "copy": {
+                    "size": "large",
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            },
+            {
+                "term": {
+                    "size": "huge",
+                    "text": "<p>Mi eget mauris pharetra et ultrices neque. Lacus sed viverra tellus in hac habitasse platea dictumst vestibulum.</p>"
+                }, 
+                "copy": {
+                    "size": "large",
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            },
+            {
+                "term": {
+                    "size": "huge",
+                    "text": "<p>In vitae turpis massa sed elementum. Augue neque gravida in fermentum et sollicitudin. Malesuada pellentesque elit eget gravida cum sociis.</p>"
+                }, 
+                "copy": {
+                    "size": "large",
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            },
+            {
+                "term": {
+                    "size": "huge",
+                    "text": "<p>Malesuada pellentesque elit eget gravida cum sociis.</p>"
+                }, 
+                "copy": {
+                    "size": "large",
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            },
+            {
+                "term": {
+                    "size": "huge",
+                    "text": "<p>Mi eget mauris pharetra et ultrices neque. Lacus sed viverra tellus in hac habitasse platea dictumst vestibulum.</p>"
+                }, 
+                "copy": {
+                    "size": "large",
+                    "text": "<p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices.</p>"
+                }
+            }
+        ]
+    },
+    {
+        "type": "people",
+        "title": {
+            "size": "smaller",
+            "aside": true,
+            "label": "PEOPLE"
+            },
+        "description": {
+            "size": "large",
+            "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p>" 
+        },
+        "groups": [{
+            "title": {"size": "small", "label": "Research And <br>Administrative Staff"},
+            "people": [{
+                "name": "Princess Chase", 
+                "title": "Project Manager", 
+                "photo": { 
+                    "image": {   
+                        "desktop": "placeholder_person_1.png",
+                        "alt": ""
+                    },
+                    "modifiers": ["fit", "small_frame"], 
+                    "color": "pink"
+                    }
+                },
+                {
+                    "name": "Cameron Joseph", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_2.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_green"
+                    }
+                },
+                {
+                    "name": "Bridger Howell", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_3.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_purple"
+                    }
+                },
+                {
+                    "name": "Jessie Foley", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_4.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "yellow"
+                    }
+                },
+                {
+                    "name": "Cade Keith", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_5.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "light_blue"
+                    }
+                }
+            ]
+        },
+        {
+            "title": {"size": "small", "label": "Advisory Board"},
+            "people": [{
+                "name": "London Sims", 
+                "title": "Project Manager", 
+                "photo": { 
+                    "image": {   
+                        "desktop": "placeholder_person_6.png",
+                        "alt": ""
+                    },
+                    "modifiers": ["fit", "small_frame"], 
+                    "color": "pale_blue"
+                    }
+                },
+                {
+                    "name": "Bridger Howell", 
+                    "title": "Research and Editorial Assistant", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_7.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "orange"
+                    }
+                },
+                {
+                    "name": "Princess Chase", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_1.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pink"
+                        }
+                    },
+                {
+                    "name": "Bishop Gates", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_2.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "green"
+                    }
+                },
+                {
+                    "name": "Alvin Gillespie", 
+                    "title": "Editorial Supervisor", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_5.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "brown"
+                    }
+                },
+                {
+                    "name": "Arlo Lamb", 
+                    "title": "Research and Editorial Assistant", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_4.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "light_blue"
+                    }
+                },
+                {
+                    "name": "Camden Barber", 
+                    "title": "Project Manager", 
+                    "photo": { 
+                        "image": {   
+                            "desktop": "placeholder_person_3.png",
+                            "alt": ""
+                        },
+                        "modifiers": ["fit", "small_frame"], 
+                        "color": "pale_purple"
+                    }
+                }
+            ]
+        }
+    ]
+        
+    },
+    {
+        "type": "collections_images",
+        "heading": {
+            "align": "right",
+            "label": "Collections"
+        },
+        "cards": [
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "caleb_gayle.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "carolina_de_robertis.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "ellery_washington.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "eve_ewing.png",
+                "alt": ""
+            },
+            {
+                "desktop": "j_wortham.png",
+                "alt": ""
+            },
+            {
+                "desktop": "denice_frohman.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "caleb_gayle.png",
+                "alt": ""
+            }, 
+            {
+                "desktop": "robin_coste_lewis.png",
+                "alt": ""
+            }
+        ],
+        "authors": [ {"name": "Robin Coste Lewis", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Renée Watson", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Natalie Diaz", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Jenna Wortham", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Eve L. Ewing", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Ellery Washington", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Denise Frohman", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Carolina De Robertis", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "Caleb Gayle", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
+                    {"name": "April Reign", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."} 
+        ]
+    }
+  ]
+}

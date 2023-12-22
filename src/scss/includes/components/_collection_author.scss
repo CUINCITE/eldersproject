@@ -1,0 +1,73 @@
+.collection_author {
+
+    &--huge {
+
+        .collection_author {
+            &__name {
+                @include font-size(100, 85);
+                @include letter-spacing(-3, 100);
+                margin-bottom: rem(-5);
+                margin-left: 0;
+            }
+
+            &__collection {
+                @include font-size(26, 1.05);
+                @include letter-spacing(-0.26, 26);
+                margin-left: 0;
+
+                &::before {
+                    width: rem(35);
+                    margin-right: rem(16);
+                }
+            }
+        }
+    }
+
+    &__name {
+        @include font-family(compressed);
+        @include font-size(50, 38);
+        @include letter-spacing(-1.25, 50);
+
+        padding-top: rem(17);
+        margin-left: rem(-6);
+        text-transform: uppercase;
+    }
+
+
+    &__collection {
+        @include font-family(compact);
+        @include font-size(17, 12);
+        @include letter-spacing(-0.17, 17);
+        @include font-settings(400, 100);
+        @include flex(row, flex-start, center);
+
+        font-weight: 400;
+        position: relative;
+        margin-top: rem(3);
+        margin-left: rem(-4);
+
+        &::before {
+            content: "";
+            display: inline-flex;
+            height: 1px;
+            width: rem(19);
+            background-color: currentColor;
+            margin-right: rem(8);
+        }
+    }
+
+
+    &__title {
+        @extend .collection_author__collection;
+        @include font-size(17, 1.05);
+
+        @include breakpoint(desktop) {
+            max-width: unset;
+            margin-top: rem(7);
+        }
+        
+        &::before {
+            all: unset;
+        }
+    }
+}

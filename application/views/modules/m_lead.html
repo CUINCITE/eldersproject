@@ -1,23 +1,14 @@
+{% if header=='large' %}{% include 'subviews/subview_header_large.html' %}{% endif %}
 <section class="module module--claim box">
   <div class="grid">
     <div class="col-span-12">
-      <div class="claim ">
+      <div class="claim {% if params.claim %}claim--{{params.claim}}{% endif %}">
         {{text}}
+        {% if params.sticker %}
         <div class="claim__sticker">
-          <div class="sticker">
-            <div class="sticker__layer">
-              <div class="sticker__front sticker__wrap">
-                <div class="sticker__circle"></div>
-              </div>
-            </div>
-            <span class="sticker__text">Discover more</span>
-            <div class="sticker__layer">
-              <div class="sticker__back sticker__wrap">
-                <div class="sticker__circle"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+            {% include 'subviews/subview_sticker.html' with {label:'Discover more'} %}
+        </div>        
+        {% endif %}            
       </div>
     </div>
   </div>

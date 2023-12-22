@@ -14,4 +14,20 @@
     &__wrap {
         @include flex;
     }
+
+    @include breakpoint(desktop) {
+        .text {
+                padding-inline-start: rem(11);
+        }
+    
+        .heading--aside {
+                padding-inline-start: rem(9);
+        }
+
+        .no-padding {
+            .text, .heading--aside {
+                padding-inline-start: rem(0);
+            }
+        }
+    };
 }

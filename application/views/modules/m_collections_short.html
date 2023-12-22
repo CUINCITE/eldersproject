@@ -1,10 +1,67 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Collections</h2>
-      <ol>
-        {% for item in items %}      
-        <li><a href="{{item.url}}">{{item.label}} ({{item.amount}})</a></li>
-        {% endfor %}
-      </ol>
+<section class="module module--collections_images">
+    <div class="collections_images">
+
+
+        <section class="module">
+            <div class="box">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <h2 class="heading heading--right">Collections</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="box collections_images__content">
+            <div class="col-span-1 col-start-2">
+                <div class="collections_images__names" data-component="AccordeonList" data-close-others="true">
+
+                    <ul class="names">
+                        {% for item in items %}
+                            {% if item.image.desktop %}
+                                <li class="names__name js-accordeon-item is-closed">
+
+                                    <div class="names__author">
+                                        <button class="names__button js-accordeon-button">
+                                            <span class="sr-only">Toggle visibility of the content</span>
+                                        </button>
+                                        <span class="names__box">{{ item.label }}</span>
+                                    </div>
+
+                                    <div class="names__copy js-accordeon-copy">
+                                        <div class="names__link">
+
+                                            <a href="{{ item.url }}" class="button button--simple">
+
+                                                {% include "./components/c_arrow_icon.html" %}
+
+                                                <span>Explore the Collection</span>
+                                            </a>
+
+                                        </div>
+                                        <div class="text">
+                                            <p>{{ item.lead }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+                <div class="collections_images__cards">
+                    <ul class="cards">
+                        {% for item in items %}
+                            <li class="cards__card">
+                                {% include "subviews/subview_picture.html" with {image:item.image} %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="collections_images__filler col-start-1 col-span-2"></div>
+        </div>
+
     </div>
-  </section>
+</section>

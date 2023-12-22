@@ -1,0 +1,43 @@
+{
+    "table": "people",
+    "model":{"label":"{{surname}}, {{name}}","image":"image"},
+    "order":"surname,name",
+    "fields": [
+        {
+            "field": "name",
+            "label": "Name",
+            "list":true
+        },
+        {
+            "field": "surname",
+            "label": "Surname",
+            "list":true
+        },
+        {
+            "field": "function",
+            "label": "Function"
+        },
+        {
+            "field": "uid",
+            "label": "Uid","type":"uid","list":"read"
+        },
+        {   
+            "label": "Portrait",
+            "type": "image",
+            "field":"image",
+            "folder": "/public/upload/people",
+            "list":{"xposition_after":"","width":50,"height":50},
+            "extensions":["png"],
+            "images":
+            [
+                {  "folder" : "thumb",   "width":170, "height":170,"cut":true,"label":"Thumbnail","retina":true }
+            ]
+        },
+        {
+            "field": "active",
+            "type": "boolean",
+            "label": "Active",
+            "list": "edit"
+        }        
+    ]
+}

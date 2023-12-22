@@ -18,7 +18,7 @@
     }
 
 
-    &--text-right {
+    &--text-aside {
         position: relative;
 
         &::after {
@@ -32,6 +32,32 @@
 
 
         .box:last-of-type { padding-bottom: rem(67); }
+    }
+
+    &--quote_panel {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background-color: var(--color-bg);
+        }
+    }
+
+    &--faq {
+        position: relative;
+        
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background-color: var(--color-bg);
+        }
     }
 
 
@@ -59,4 +85,5 @@
     &:first-of-type:not(.module--hero) .box:first-of-type {
         padding-top: rem(27);
     }
+    
 }

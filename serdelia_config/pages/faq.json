@@ -1,0 +1,22 @@
+{
+    "table": "faq",
+    "order": "nr",
+    "fields": [
+        {
+            "field": "nr",
+            "type": "order",
+            "list": "order",
+            "label": "Nr"
+        },
+        {
+            "field": "label",
+            "list": true,
+            "label": "Label"
+        },
+        {
+            "field": "text",
+            "type": "html",
+            "label": "Text"
+        }
+    ]
+}

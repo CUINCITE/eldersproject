@@ -6,9 +6,9 @@
     <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
 </picture>{% else %}
 <picture>
-    <source media="(max-width: 1023px)" srcset="{{image.mobile}}, {{image.mobile_x2}} 2x">
-    {% if image.hd %}<source media="(min-width: 1920px)" srcset="{{image.hd}}, {{image.hd_x2}} 2x">{% endif %}
-    <source media="(min-width: 1024px)" srcset="{{image.desktop}}, {{image.desktop_x2}} 2x">
+    <source media="(max-width: 1023px)" srcset="../src/images/{{image.mobile}}, {{image.mobile_x2}} 2x">
+    {% if image.hd %}<source media="(min-width: 1920px)" srcset="../src/images/{{image.hd}}, {{image.hd_x2}} 2x">{% endif %}
+    <source media="(min-width: 1024px)" srcset="../src/images/{{image.desktop}}, {{image.desktop_x2}} 2x">
     <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
 </picture>
 {% endif %}

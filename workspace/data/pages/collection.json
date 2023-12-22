@@ -1,0 +1,158 @@
+{
+    "modules": [
+        {
+            "type": "collection_hero",
+            "name": "Carolina <br>De Robertis",
+            "illustration": {
+                "image": {
+                    "desktop": "carolina_de_robertis.png"
+                },
+                "shadows": ["purple"]
+            },
+            "text": {
+                "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.</p>"
+            }
+        },
+        {
+            "type": "quote_panel",
+            "quote": {
+                "text": "The cohort from whom I'll be gathering stories reflects an incredibly varied range of lived experiences, hailing from trans, lesbian, gay, non-binary, genderqueer, Black, Latinx, AAPI, and Native communities, to name a few. They are activists who blazed trails for queer visibility and rights; they are ordinary people who have lived with extraordinary courage; they are witnesses to history, agents of change, and foreparents of today’s racial and queer justice movements. Their stories are inspiring, and essential to our understanding of who we are and might collectively become.",
+                "author": "Carolina De Robertis"
+            }
+        },
+        {
+            "type": "text_aside",
+            "mainText": {
+                "size": "medium",
+                "aside": true,
+                "label": "All queer inclusion"
+                }, 
+            "decor": {
+                    "type": "photo",
+                    "photo": { 
+                        "image": {   
+                            "desktop": "demonstration_photo.jpg",
+                            "alt": ""
+                        },
+                        "modifiers": ["horizontal"]
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p><b>San Antonio, 05/02/1985</b></p><p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
+                }
+            },
+            "texts": [
+                {
+                    "size": "large",
+                    "modifiers": ["aside"],
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><h2>collectively</h2><p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+                }
+            ]
+        },
+        {
+            "type": "text_aside",
+            "mainText": {
+                "size": "medium",
+                "aside": true,
+                "label": "arts for expression"
+                }, 
+            "reversed": true,
+            "decor": {
+                "type": "illustration",
+                "modifiers": ["medium", "center"],
+                "image": {
+                    "desktop": "megaphone.png"
+                },
+                "text": {
+                    "size": "small",
+                    "text": "<p><b>San Antonio, 05/02/1985</b></p><p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
+                }
+            },
+            "texts": [
+                {
+                    "size": "large",
+                    "modifiers": ["aside"],
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><h2>collectively</h2><p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+                }
+            ]
+        },
+        {
+            "type": "text_aside",
+            "mainText": {
+                "size": "medium",
+                "aside": true,
+                "label": "chosen family"
+                },
+            "decor": {
+                    "type": "photo",
+                    "photo": { 
+                        "image": {   
+                            "desktop": "drag_photo.jpg",
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p><b>San Antonio, 05/02/1985</b></p><p>Eget felis eget nunc lobortis mattis aliquam faucibus.</p>"
+                }
+            },
+            "texts": [
+                {
+                    "size": "large",
+                    "modifiers": ["aside"],
+                    "text": "<p>Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus pellentesque eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.</p><h2>collectively</h2><p>Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Sit amet cursus sit amet dictum. Eu non diam phasellus vestibulum lorem sed risus ultricies. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem fringilla. Enim nec dui nunc mattis enim ut tellus elementum. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Dui accumsan sit amet nulla facilisi morbi tempus. Auctor eu augue ut lectus arcu. Amet consectetur adipiscing elit ut aliquam purus sit. Massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas sed tempus urna et pharetra. Magna etiam tempor orci eu lobortis elementum.</p>"
+                }
+            ]
+        },
+        {
+            "type": "quote_panel",
+            "quote": {
+                "text": "The cohort from whom I'll be gathering stories reflects an incredibly varied range of lived experiences, hailing from trans, lesbian, gay, non-binary, genderqueer, Black, Latinx, AAPI, and Native communities, to name a few. They are activists who blazed trails for queer visibility and rights; they are ordinary people who have lived with extraordinary courage; they are witnesses to history, agents of change, and foreparents of today’s racial and queer justice movements. Their stories are inspiring, and essential to our understanding of who we are and might collectively become.",
+                "author": "Carolina De Robertis"
+            },
+            "decor": {
+                "type": "illustration",
+                "image": {
+                    "desktop": "hand.png"
+                }
+            }
+        },
+        {
+            "type": "interviews",
+            "label": "Interviews",
+            "sticker": "from the collection",
+            "reversed": true,
+            "items": [
+                {
+                    "name": "Achy Obejas",
+                    "title": "Dedicated teacher, long-time Albuquerque resident ",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Galveston, TX",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "Andrés Ozzuna",
+                    "title": "Dedicated teacher, long-time Albuquerque resident",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Houston, TX",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "Ms Billie Cooper",
+                    "title": "Dedicated teacher, long-time Albuquerque resident",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "San Antonio, CA",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "C. Njoube Dugar",
+                    "title": "Dedicated teacher, long-time Albuquerque resident ",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Austin, TX",
+                    "collection": "Natalie Diaz"
+                }
+            ]
+        }
+    ]
+  }

@@ -1,0 +1,50 @@
+.collection_hero {
+    display: grid;
+    position: relative;
+
+    @include breakpoint(desktop) {
+        height: var(--app-height);
+        grid-template-rows: auto 1fr auto;
+    }
+
+    &__author {
+        @include breakpoint(desktop) {
+            padding-bottom: rem(10);
+
+            h3 {
+                padding-top: 0;
+            }
+        }
+    }
+
+    &__cover {
+        @include breakpoint(desktop) {
+            position: absolute;
+            width: vw(626);
+            aspect-ratio: 1/1;
+            right: vw(40);
+            top: 46%;
+            translate: 0 -50%;
+
+            .illustration {
+                transform: rotate(-14.8deg);
+            }
+        }
+    }
+
+    &__copy {
+
+        .text {
+            @include breakpoint(desktop) {
+                @include font-size (14, 1.15);
+            }
+        }
+
+        .button {
+            @include breakpoint(desktop) {
+                margin-bottom: rem(5);
+            }
+        }
+
+    }
+}

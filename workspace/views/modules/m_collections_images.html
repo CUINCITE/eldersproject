@@ -1,0 +1,18 @@
+<section class="module module--collections_images">
+    <div class="collections_images">
+        {% include "modules/m_heading.html" with { heading: heading } %}
+
+        <div class="box collections_images__content">
+                <div class="col-span-1 col-start-2">
+                    <div class="collections_images__names" data-component="AccordeonList" data-close-others="true">
+                        {% include "components/c_names.html" with { names: names } %}
+                    </div>
+
+                    <div class="collections_images__cards">
+                        {% include "components/c_cards.html" with { cards: cards } %}
+                    </div>
+                </div>
+                <div class="collections_images__filler col-start-1 col-span-2"></div>
+        </div>
+    </div>
+</section>

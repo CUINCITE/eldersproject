@@ -1,65 +1,69 @@
 {% set colors=['green','red','yellow'] %}{% set c=random(colors|length) %}
+
 <section class="module module--interviews">
-  <div class="interviews">
-    <div class="box">
-      <div class="grid">
-        <div class="col-span-12">
-          <div class="interviews__heading">
-            <div class="sticker">
-              <div class="sticker__layer">
-                <div class="sticker__front sticker__wrap">
-                  <div class="sticker__circle"></div>
+
+    <div class="interviews">
+        <div class="box">
+            <div class="grid">
+                <div class="col-span-12">
+
+                    <div class="interviews__heading">
+                        {% include 'subviews/subview_sticker.html' with {label:'Featured'} %}
+                        <h2 class="heading heading--reclined">
+                            Interviews
+                        </h2>
+                    </div>
+
                 </div>
-              </div>
-              <span class="sticker__text">Featured</span>
-              <div class="sticker__layer">
-                <div class="sticker__back sticker__wrap">
-                  <div class="sticker__circle"></div>
-                </div>
-              </div>
             </div>
-            <h2 class="heading heading--reclined">
-              Interviews
-            </h2>
-          </div>
         </div>
-      </div>
+
+        <ul class="interviews__list">
+            {% for item in items %}
+                <li class="interviews__item box">
+
+                    <div class="grid">
+                        <a href="{{ item.url }}" class="interviews__link"><span
+                                    class="sr-only">Go to the interview</span></a>
+
+                        <div class="interviews__left col-span-5">
+
+                            <div class="collection_author">
+                                <h3 class="collection_author__name">{{ item.label }}</h3>
+                                <h4 class="collection_author__title">{{ item.narrators[0].occupation }}</h4>
+                            </div>
+
+                            <p class="interviews__state">{{ item.narrator_location }}</p>
+
+                        </div>
+
+                        <div class="interviews__right col-span-3 col-start-7">
+                            <p class="interviews__text"> {{ item.lead }}</p>
+                            <p class="interviews__collection">{{ item.interviewer_name }} Collection</p>
+                        </div>
+
+                        <div class="interviews__box col-span-3 col-start-10">
+                            <div class="interviews__box-wrap">
+
+                                {% set c=c+1 %}{% if c>=colors|length %}{% set c=0 %}{% endif %}
+                                <div class="interviews__box">
+                                    <div class="interviews__box-wrap">
+                                        <div class="interview-box {% if loop.index is divisible by (2) %}interview-box--reversed{% endif %} interview-box--{{ colors[c] }}">
+                                            <div class="interview-box__layer"></div>
+                                            <div class="interview-box__layer"></div>
+                                            <div class="interview-box__layer"></div>
+                                            <p class="interview-box__text">Play <br> Interview</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    <ul class="interviews__list">
-      {% for item in items %}
-      <li class="interviews__item box">
-        <a href="{{item.url}}" class="interviews__link"><span class="sr-only">Go to interview</span></a>
-        <div class="interviews__left">
-          <h3 class="interviews__name">{{item.label}}</h3>
-          
-          <h4 class="interviews__collection">
-            {{item.narrators[0].occupation}}            
-          </h4>
-        </div>
-        <div class="interviews__right">
-          <p class="interviews__text">
-            {{item.lead}}
-          </p>
-          {#<p>
-            <br>{{item.interviewer_name}} Collection
-          </p>#}
-          <p class="interviews__state">
-            {{item.narrator_location}}
-          </p>
-        </div>
-        {% set c=c+1 %}{% if c>=colors|length %}{% set c=0 %}{% endif %}
-        <div class="interviews__box">
-          <div class="interviews__box-wrap">
-            <div class="interview-box {% if loop.index is divisible by (2) %}interview-box--reversed{% endif %} interview-box--{{colors[c]}}">
-              <div class="interview-box__layer"></div>
-              <div class="interview-box__layer"></div>
-              <div class="interview-box__layer"></div>
-              <p class="interview-box__text">Play <br> Interview</p>
-            </div>
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
 </section>

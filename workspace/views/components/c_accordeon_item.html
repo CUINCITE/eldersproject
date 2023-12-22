@@ -1,0 +1,14 @@
+<li class="accordeon_item js-accordeon-item is-closed" data-component="Accordeon">
+    <button class="accordeon_item__button js-accordeon-button">
+        <span class='sr-only'>Toggle visibility of the content</span>
+    </button>
+    <div class="accordeon_item__term">
+        {% include "./subviews/subview_text.html" with term %}
+        <div class="accordeon_item__arrow">
+            [[svg::arrow]]
+        </div>
+    </div>
+    <div class="accordeon_item__copy js-accordeon-copy">
+        {% include "./subviews/subview_text.html" with copy %}
+    </div>
+</li>

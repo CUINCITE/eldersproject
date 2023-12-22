@@ -1,6 +1,6 @@
 .quote {
     @include font-family(compressed);
-    @include font-size(40, 37);
+    @include font-size(40, 37.4);
     @include letter-spacing(-1.2, 40);
 
 
@@ -9,10 +9,18 @@
 
 
     &::before {
-        content: url("/public/theme/images/quote-icon.svg");
+        // content: url("./public/theme/images/svg/quote-icon.svg");
+        content: url("./images/svg/quote-icon.svg");
         display: inline-block;
-        margin-bottom: vw(8);
-    }
+
+
+        @include breakpoint(desktop) {
+            width: rem(29);
+            margin-bottom: rem(4);
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+    } 
 
 
     footer {

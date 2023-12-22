@@ -1,0 +1,21 @@
+<section class="module module--home-text  module--home-text--link  box">
+    <div class="grid">
+        <div class="col-span-9">
+            <a href="{{url}}" class="button">
+                <i class="icon-btn-arrow arrow ">
+                    <span></span>
+                    <span></span>
+                    <span class="triangle"></span>
+                </i> <span>{{label|brackets2tag('i')|raw}}</span>
+            </a>
+        </div>
+        <div class="col-span-3 col-start-10">
+            <div class="text    ">
+                {{text|raw}}
+            </div>
+        </div>
+    </div>
+    {% if params.decor %}
+    <div class="boxes  boxes--reversed">[[svg::boxes]]</div>
+    {% endif %}
+</section>

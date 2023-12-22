@@ -1,0 +1,27 @@
+<section class="module module--quote_panel">
+    <div class="quote_panel">
+        <div class="box">
+            <div class="grid grid--row-start">
+                <div class="quote_panel__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                    {% if decor %}
+                        <div class="quote_panel__decorator quote_panel__decorator--{{decor.type}}{% if reversed %}{% endif %}">
+                            {% if decor.type == "boxes" %}
+                                {% include "./modules/m_boxes.html" with { reversed: reversed } %}
+                            {% endif %}
+                            {% if decor.type == "illustration" %}
+                                {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="quote_panel__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                    <div class="quote_panel__quote">
+                        {% include "./components/c_quote.html" with quote %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,136 @@
+.names {
+
+    &__name {
+        position: relative;
+        border-left: 1px solid $color-bg;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $color-bg;
+        }
+
+
+        &.is-closed {
+
+            .names__copy {
+                height: 0 !important;
+            }
+
+            .names_link {
+                display: none !important;
+            }
+        }
+    }
+
+    &__author { 
+        @include font-family(compressed);
+        cursor: pointer;
+
+        text-align: right;
+        text-transform: uppercase;
+        font-weight: 800;
+        transition: .3s color ease;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 44.5);
+            @include letter-spacing(-2, 50);
+        }
+    }
+
+    &__link {
+
+        .button {
+            @include font-family(compressed);
+            @include font-size(30, 30);
+            @include letter-spacing(-0.75, 30);
+            @include flex(row, flex-end, flex-end);
+    
+            text-transform: uppercase;
+            margin-top: auto;
+
+            @include breakpoint(desktop) {
+                margin-bottom: rem(10);
+                margin-right: rem(11);
+                margin-top: rem(80);
+            }
+
+            &:focus {                                            
+                color: $color-purple;
+            }
+    
+            @include hover {
+                    color: $color-purple;
+            }
+
+            .arrow {
+
+                @include breakpoint(desktop) {
+                    translate: 0 rem(-6);
+                }
+
+
+
+                span.triangle {
+                    @include breakpoint(desktop) {
+                        border-width: rem(11) 0 rem(11) rem(16);
+                    }
+                }
+    
+                span:nth-of-type(2) {
+                    @include breakpoint(desktop) {
+                        width: rem(33);
+                    }
+                }
+            }
+        }
+    }
+
+    &__box {
+        display: inline-block;
+
+        @include breakpoint(desktop) {
+            padding-top: rem(8);
+            padding-right: rem(28);
+        }
+    }
+
+    &__button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        
+        cursor: pointer;
+
+        &:focus ~ .names__box {                                            
+            color: $color-purple;
+        }
+
+        @include hover {
+            & ~ .names__box {                                            
+                color: $color-purple;
+            }
+        }
+    }
+
+    &__copy {
+        @include flex(column, flex-start, flex-end)
+        transition: height .3s ease-in;
+
+
+        @include breakpoint(desktop) {
+            letter-spacing: unset;
+            overflow: hidden;
+            padding-right: rem(17);
+
+            .text {
+                text-align: end;
+
+                p {
+                    max-width: rem(350);
+                }
+            }
+        }
+    }
+}

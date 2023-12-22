@@ -75,18 +75,7 @@
 
 
     &__button {
-        @include font-family(compressed);
-        @include font-size(50, 35);
-        @include letter-spacing(-1.25, 50);
-        @include flex(column, flex-end, flex-end);
-
-        text-transform: uppercase;
-        margin-top: auto;
-        margin-bottom: rem(10);
-        margin-right: 1px;
-
-
-        .collection--reversed & { align-items: flex-start; }
+ 
     }
 
 

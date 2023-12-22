@@ -39,22 +39,22 @@
             "polaroids": [
                 {
                     "image": {
-                        "mobile": "/src/images/polaroid-photo.jpg",
-                        "desktop": "/src/images/polaroid-photo.jpg"
+                        "mobile": "polaroid-photo.jpg",
+                        "desktop": "polaroid-photo.jpg"
                     }
                 },
                 {
                     "modifiers": ["square"],
                     "image": {
-                        "mobile": "/src/images/polaroid-photo.jpg",
-                        "desktop": "/src/images/polaroid-photo.jpg"
+                        "mobile": "polaroid-photo.jpg",
+                        "desktop": "polaroid-photo.jpg"
                     }
                 },
                 {
                     "modifiers": ["horizontal"],
                     "image": {
-                        "desktop": "/src/images/polaroid-photo.jpg",
-                        "mobile": "/src/images/polaroid-photo.jpg"
+                        "desktop": "polaroid-photo.jpg",
+                        "mobile": "polaroid-photo.jpg"
                     }
                 }
             ]

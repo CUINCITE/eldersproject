@@ -1,0 +1,169 @@
+.text_aside {
+
+    &__decorator {
+        position: absolute;
+        z-index: 5;
+
+        &--boxes {
+
+            @include breakpoint(desktop) {
+                left: -1 * map-get($grid-offset, desktop);
+                bottom: calc(#{vw(51)} - #{rem(67)});
+            }
+        }
+
+        &--illustration {
+
+            @include breakpoint(desktop) {
+                right: rem(11);
+                bottom: rem(20); 
+            }
+
+            img {
+                position: absolute;
+
+                @include breakpoint(desktop) {
+                    max-width: unset;
+                    right: rem(-35);
+                    width: vw(240);
+                    bottom: calc(100% + #{rem(16)});
+                }
+            }
+
+            &.text_aside__decorator--medium {
+
+                img {
+                    @include breakpoint(desktop) {
+                        width: vw(493);
+                    }
+                }
+            }
+
+            &.text_aside__decorator--center {
+
+                img {
+                    @include breakpoint(desktop) {
+                        right: unset;
+                        left: 50% !important;
+                        translate: -50% 0;
+                    }
+                }
+            }
+        }
+
+        &--photo {
+
+            @include breakpoint(desktop) {
+                right: rem(11);
+                bottom: rem(20); 
+            }
+
+            .polaroid {
+                position: absolute;
+                
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{vw(368)};
+                    --polaroid-height: #{vw(458)};
+
+                    rotate: 7.5deg;
+                    right: 0;
+                    bottom: calc(100% + #{rem(42)});
+                }
+
+                &--horizontal {
+                    --polaroid-width: #{vw(481)};
+                    --polaroid-height: #{vw(366)};
+
+                    rotate: 12deg;
+                    bottom: calc(100% + #{rem(68)});
+                }
+
+                img {
+                    opacity: 1;
+                }
+            }
+
+        }
+
+        .text {
+            text-align: right;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 1px;
+                background-color: $color-black;
+    
+                @include breakpoint(desktop) {
+                    width: rem(35);
+                }
+            }
+            
+            @include breakpoint(desktop) {
+                @include flex(column, flex-start, flex-end)
+                max-width: rem(182);
+                padding: rem(16) 0 0 0;
+            }
+
+            p + p {
+                margin: 0;
+            }
+
+            b {
+                @include font-settings(700, 0);
+            }
+        }
+
+        &--reversed {
+
+            &.text_aside__decorator--boxes {
+                @include breakpoint(desktop) {
+                    left: unset;
+                    right: -1 * map-get($grid-offset, desktop);
+                }
+            }
+
+            &.text_aside__decorator--illustration {
+
+                @include breakpoint(desktop) {
+                    right: unset;
+                    left: rem(11);
+                }
+
+                img {
+                    position: absolute;
+    
+                    @include breakpoint(desktop) {
+                        right: unset;
+                        left: rem(-35);
+                    }
+                }
+            }
+
+            .text {
+                text-align: left;
+
+                &::before {
+                    right: unset;
+                    left: 0;
+        
+                    @include breakpoint(desktop) {
+                        width: rem(35);
+                    }
+                }
+
+                @include breakpoint(desktop) {
+                    @include flex(column, flex-start, flex-start)
+                }
+            }
+
+        }
+    }
+
+    &__column {
+        position: relative;
+    }
+}

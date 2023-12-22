@@ -48,6 +48,9 @@
             "type":"text",
             "settings":{"rows":2}
         },
+        {
+            "field":"color","label":"color"
+        },
         {"field":"amount"},
         {
             "label": "Url",

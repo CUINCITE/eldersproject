@@ -1,0 +1,65 @@
+.collections_images {
+    position: relative;
+
+    &__cards {
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        
+        @include breakpoint(desktop) {
+            width: vw(585);
+            height: vw(585);
+            max-width: vh(585);
+            max-height: vh(585);
+            rotate: -8deg;
+            top: calc(#{rem(-50)} + 10 * 10px);
+            right: 29rem; 
+        }
+    }
+
+    &__content {
+        position: relative;
+        display: grid;
+
+        @include breakpoint(desktop) {
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 1fr 1fr;
+            min-height: 120lvh;
+        }
+    }
+
+    &__authors {
+        @include breakpoint(desktop) {
+            position: relative;
+            right: 0;
+            width: 50%;
+        }
+
+
+    }
+
+    &__filler {
+        @include breakpoint(desktop) { 
+            border-top: 1px solid $color-bg;
+        }
+    }
+
+    @for $i from 1 through 10 {
+        &__names:has(li:nth-child(#{$i}):focus-within) + &__cards {
+            li:nth-last-child(-n + #{$i - 1}) {
+                transform: rotate(-15deg) translate(-90%, -50%);
+            }
+        }
+
+        &__names:has(li:nth-child(#{$i}):hover) + &__cards {
+
+            li {
+                transform: unset !important;
+            }
+
+            li:nth-last-child(-n + #{$i - 1}) {
+                transform: rotate(-15deg) translate(-90%, -50%) !important;
+            }
+        }
+    };
+}
