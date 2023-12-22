@@ -26,11 +26,11 @@
                 "size": "medium",
                 "aside": true,
                 "label": "All queer inclusion"
-                }, 
+                },
             "decor": {
                     "type": "photo",
-                    "photo": { 
-                        "image": {   
+                    "photo": {
+                        "image": {
                             "desktop": "demonstration_photo.jpg",
                             "alt": ""
                         },
@@ -55,14 +55,14 @@
                 "size": "medium",
                 "aside": true,
                 "label": "arts for expression"
-                }, 
+                },
             "reversed": true,
             "decor": {
                 "type": "illustration",
                 "modifiers": ["medium", "center"],
                 "image": {
                     "desktop": "megaphone.png",
-                    "mobile": "megaphone.png",
+                    "mobile": "megaphone.png"
                 },
                 "text": {
                     "size": "small",
@@ -86,8 +86,8 @@
                 },
             "decor": {
                     "type": "photo",
-                    "photo": { 
-                        "image": {   
+                    "photo": {
+                        "image": {
                             "desktop": "drag_photo.jpg",
                             "alt": ""
                         },
