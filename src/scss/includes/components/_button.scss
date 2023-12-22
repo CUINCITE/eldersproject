@@ -8,7 +8,6 @@
     gap: vw(9);
     text-transform: uppercase;
     font-weight: bold;
-    transition: background $time-fast ease-out, color $time-fast ease-out;
     color: var(--color-text);
 
     &--reversed {
@@ -37,10 +36,20 @@
     }
 
 
+    &--small {
+        @include font-size(20, 16);
+        @include letter-spacing(-0.6, 20);
+
+        --padding: #{rem(3)};
+        gap: vw(2);
+    }
+
+
     span i {
         @include font-family(reclined, 500);
         @include letter-spacing(-1.75, 50);
-        padding-left: rem(9);
+
+        padding-left: var(--padding, rem(9));
     }
 
     @include hover {
@@ -51,6 +60,9 @@
     .module--home-text & {
         padding-top: rem(20);
     }
+
+
+    .interviews--grid & { color: inherit; }
 }
 
 %button-hover {

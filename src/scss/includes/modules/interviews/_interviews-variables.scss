@@ -1,0 +1,18 @@
+// for TILES
+
+.interviews-grid__tile {
+    background-color: var(--tile-bg-color, var(--color-box));
+    color: var(--tile-text-color, var(---color-text));
+
+
+    &--pink {
+        --tile-bg-color: var(--color-pink);
+        --tile-text-color: var(--color-red);
+    }
+
+
+    &--pale-purple {
+        --tile-bg-color: var(--color-pale-purple);
+        --tile-text-color: var(--color-pink);
+    }
+}

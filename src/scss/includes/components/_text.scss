@@ -8,7 +8,12 @@
 
     .hero__text & { padding: 0; }
 
-    
+
+    .text-sticker & {
+        padding: rem(14) rem(20) rem(37) 0;
+    }
+
+
     p, a {
         max-width: rem(267);
     }
@@ -32,7 +37,6 @@
 
         p { max-width: rem(252); }
     }
-
 
 
 

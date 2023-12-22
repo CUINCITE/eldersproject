@@ -1,0 +1,15 @@
+.text-sticker {
+    @include flex(row, flex-start, center);
+
+
+
+    &__wrap {
+        position: relative;
+    }
+
+
+    &__sticker {
+        position: absolute;
+        inset: rem(-70) rem(-75) auto auto;
+    }
+}

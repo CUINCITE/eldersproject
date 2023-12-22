@@ -45,3 +45,4 @@ sunship.env
 .gulp/*
 
 *.code-workspace
+.npmrc

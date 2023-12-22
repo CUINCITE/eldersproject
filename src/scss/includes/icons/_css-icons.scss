@@ -15,12 +15,12 @@
     &::after {
         content: "";
         display: block;
-        width: vw(40);
+        width: 140%;
         height: 1px;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: -1px vw(-20);
+        margin: -1px -70%;
         background: currentColor;
     }
 
@@ -547,6 +547,99 @@
     }
 }
 
+
+.icon-filters {
+    @include flex(column, center, center);
+    color: inherit;
+    gap: 1px;
+    width: 19px;
+    overflow: hidden;
+
+    .row {
+        @include flex(row, center, center);
+
+        transition: transform .3s $ease-custom;
+        width: 100%;
+
+        &:first-of-type {
+            justify-content: flex-start;
+
+            .bar { margin-right: 2px; }
+        }
+
+        &:last-of-type {
+            justify-content: flex-end;
+
+            .bar { margin-left: 2px; }
+        }
+    }
+
+    .line {
+        height: 1px;
+        width: 11px;
+        flex-shrink: 0;
+        background-color: currentColor;
+    }
+
+    .bar {
+        height: 7px;
+        width: 3px;
+        flex-shrink: 0;
+        background-color: currentColor;
+    }
+}
+
+%icon-filters-hover {
+    .row {
+        &:first-of-type { transform: translateX(-7px); }
+        &:last-of-type { transform: translateX(7px); }
+    }
+}
+
+.icon-list {
+    @include flex(column, space-between, stretch);
+
+    color: inherit;
+    gap: 2px;
+
+
+    span {
+        width: 16px;
+        height: 4px;
+        background-color: currentColor;
+        transition: transform .3s $ease-custom;
+    }
+}
+
+%icon-list-hover {
+    span {
+        transform: scaleX(1.2);
+    }
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    color: inherit;
+
+    span {
+        width: 7px;
+        height: 7px;
+        background-color: currentColor;
+        transition: transform .3s $ease-custom;
+    }
+}
+
+%icon-grid-hover {
+    span {
+        &:first-of-type { transform: translate(-1px, -1px); }
+        &:nth-of-type(2) { transform: translate(1px, -1px); }
+        &:nth-of-type(3) { transform: translate(-1px, 1px); }
+        &:last-of-type { transform: translate(1px, 1px); }
+    }
+}
+
 .fa {
     // &.fa-envelope {
     //     transform: translateY(-1px);
@@ -558,7 +651,8 @@
 }
 
 a,
-button {
+button,
+label {
     @include hover {
         .icon-close {
             @extend %icon-close-hover !optional;
@@ -590,6 +684,18 @@ button {
 
         .icon-dropdown {
             @extend %icon-dropdown-hover !optional;
+        }
+
+        .icon-filters {
+            @extend %icon-filters-hover !optional;
+        }
+
+        .icon-list {
+            @extend %icon-list-hover !optional;
+        }
+
+        .icon-grid {
+            @extend %icon-grid-hover !optional;
         }
     }
 }

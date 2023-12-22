@@ -1,0 +1,193 @@
+.interviews-grid {
+    &__letters {
+        @include flex;
+
+        padding-top: rem(36);
+    }
+
+
+
+    &__letter {
+        flex-basis: rem(27);
+        text-align: center;
+
+
+        button {
+            @include flex(row, center, center);
+            @include font-size(17, 17);
+
+            width: 100%;
+            height: rem(24);
+            padding-bottom: rem(4);
+        }
+    }
+
+
+
+    &__tiles {
+        .is-grid-view & {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+
+
+    &__tile {
+        position: relative;
+        padding: 0 var(--grid-margin);
+        min-height: vw(117);
+
+        display: grid;
+        align-content: start;
+        align-items: start;
+        grid-template-columns: 34% 23.5% 17% 1fr;
+        border-bottom: 1px solid var(--color-bg);
+        overflow: hidden;
+
+
+        &--group {
+            @include flex(column, center, center);
+
+            overflow: visible;
+        }
+
+
+        .is-grid-view & {
+            @include flex(column, flex-start, flex-start);
+
+            min-height: vw(236);
+            padding: 0 rem(13);
+
+
+            &:nth-child(3n + 1),
+            &:nth-child(3n + 2) {
+                border-right: 1px solid var(--color-bg);
+            }
+        }
+    }
+
+
+
+    &__header {
+        text-align: right;
+        margin-bottom: rem(35);
+        padding-bottom: rem(10);
+        position: relative;
+
+
+        > button {
+            margin-right: rem(-8);
+        }
+    }
+
+
+
+    &__radios {
+        display: grid;
+        grid-template-columns: 34% 23.5% 17% 1fr;
+        padding-bottom: rem(4);
+
+
+        > div {
+            @include flex(row, flex-start, center);
+        }
+
+
+        label,
+        legend {
+            @include font-size(17, 17.85);
+            @include font-settings(400, 100);
+
+            text-transform: uppercase;
+
+            span {
+                display: inline-block;
+                transition: transform .3s $ease-custom;
+            }
+        }
+
+
+        label {
+            position: relative;
+            padding-top: rem(1);
+
+            i {
+                @include flex(row, center, center);
+
+                position: absolute;
+                inset: auto auto rem(4) 0;
+                overflow: hidden;
+
+
+                svg {
+                    transition: transform .3s $ease-custom;
+                    transform: translateY(100%);
+                }
+            }
+        }
+
+
+        legend {
+            @include font-size(17, 13);
+        }
+
+
+        input:checked + label {
+            @include font-settings(800, 100);
+
+            span {
+                transform: translateX(#{rem(12)});
+            }
+
+            i svg {
+                animation: sort-arrow .3s $ease-custom .2s forwards;
+            }
+        }
+    }
+
+
+
+    &__buttons {
+        @include flex(row, flex-start, center);
+
+        margin: rem(-4) rem(-13) rem(4) auto;
+        gap: rem(4);
+
+
+        button {
+            @include flex(row, center, center);
+
+            width: rem(24);
+            height: rem(24);
+        }
+    }
+
+
+
+    &__form {
+        padding-top: rem(3);
+    }
+
+
+
+    &__modal {
+        position: absolute;
+        inset: 100% calc(var(--grid-margin) * -1) auto;
+        z-index: 4;
+    }
+
+
+
+    &__image {
+        position: absolute;
+        inset: auto var(--grid-margin) auto auto;
+        max-width: rem(256);
+
+
+        .is-grid-view & {
+            inset: auto rem(-10) rem(-20) auto;
+            max-width: rem(225);
+        }
+    }
+}
