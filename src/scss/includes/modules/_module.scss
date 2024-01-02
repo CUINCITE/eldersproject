@@ -125,7 +125,10 @@
     }
 
 
-    &:first-of-type:not(.module--hero) > .box:first-of-type {
+    &:first-of-type:not(.module--hero) > .box:first-of-type,
+
+    // when first module is phone-only, add padding to second's box
+    &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
             padding-top: rem(27);
         }
