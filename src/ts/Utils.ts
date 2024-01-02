@@ -7,17 +7,6 @@ export function generateUID(): string {
 }
 
 
-export function preloadImages(images: string[]): Promise<void[]> {
-    return Promise.all(images.map((image): Promise<void> => new Promise<void>(resolve => {
-        const img = new Image();
-        img.onload = () => resolve();
-        img.onerror = () => resolve();
-        img.onabort = () => resolve();
-        img.src = image;
-        if (img.complete && img.clientHeight > 0) { resolve(); }
-    })));
-}
-
 
 export const debounce = (callback: Function, timeout: number = 300) => {
     let timeoutId = null;

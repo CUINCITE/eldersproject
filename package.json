@@ -64,6 +64,7 @@
         "gulp-watch": "^5.0.1",
         "gulp-webp": "^4.0.1",
         "husky": "^8.0.3",
+        "imagesloaded": "^5.0.0",
         "ip": "^1.1.5",
         "lint-staged": "^12.0.1",
         "lodash": "^4.17.21",
@@ -92,6 +93,7 @@
         "@typescript-eslint/eslint-plugin": "^5.14.0",
         "@typescript-eslint/parser": "^5.14.0",
         "@types/geojson": "^7946.0.8",
+        "@types/imagesloaded": "^4.1.2",
         "@types/mapbox-gl": "^2.4.2"
     }
 }

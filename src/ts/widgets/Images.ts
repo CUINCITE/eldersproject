@@ -1,38 +1,49 @@
-export default class Images {
-    public static bind(selector?: string): void {
-        const target = typeof selector === 'undefined' ? 'body' : selector;
-
-        document.querySelector(target).querySelectorAll('[data-src]').forEach((img): void => {
-            img.setAttribute('src', img.getAttribute('data-src'));
-            img.removeAttribute('data-src');
-        });
-
-        document.querySelector(target).querySelectorAll('[data-srcset]').forEach((img): void => {
-            img.setAttribute('srcset', img.getAttribute('data-srcset'));
-            img.removeAttribute('data-srcset');
-        });
+/// <reference path="../definitions/imagesloaded.d.ts" />
 
 
-        document.querySelector(target).querySelectorAll('img.is-loading').forEach((img: HTMLImageElement) => {
-            img.onload = Images.onLoad;
-            img.onerror = Images.onError;
-            if (img.complete && img.height > 0) {
-                img.classList.remove('is-loading');
-            }
-        });
+export class Images {
 
-        if (document.querySelector(target).querySelectorAll('[data-imagefill]').length > 0) {
-            // tslint:disable-next-line: no-console
-            console.info('Instead of `[data-imagefill]` please use css `object-fit`…');
+
+    /**
+     * preload images
+     * @param {NodeListOf<HTMLImageElement>} imgElements images to preload
+     * @return {Promise<void>} loading images promise
+     */
+    public static preload(imgElements: NodeListOf<HTMLImageElement>): Promise<void> {
+
+        if (!imgElements || !imgElements.length) {
+            return Promise.resolve();
         }
+
+        return new Promise<void>(resolve => {
+            imagesLoaded(imgElements).on('always', () => resolve());
+        });
+
     }
 
-    private static onError = e => {
-        // tslint:disable-next-line: no-consoleZ
-        console.warn(e);
-    };
 
-    private static onLoad = (e): void => {
-        e.target.classList.remove('is-loading');
+    /**
+     * listen to all images loaded event
+     * mark them as loaded
+     */
+    public static bind(): void {
+        imagesLoaded && imagesLoaded(document.body, Images.onLoaded);
+    }
+
+
+    /**
+     * imagesLoaded successful callback
+     */
+    private static onLoaded = instance => {
+
+        [...instance.images].forEach(({ img, isLoaded }) => {
+
+            if (isLoaded) {
+                img.classList.remove('is-loading');
+                img.classList.add('is-loaded');
+                img.closest('figure')?.classList.add('is-loaded');
+                img.closest('.image')?.classList.add('is-loaded');
+            }
+        });
     };
 }

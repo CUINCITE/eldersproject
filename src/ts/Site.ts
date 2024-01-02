@@ -9,8 +9,9 @@ import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
 import { Offscreen } from './Offscreen';
 import { Menu } from './Menu';
-import Widgets from './widgets/All';
 import { Search } from './Search';
+
+import Widgets from './widgets/All';
 
 export const local = !!window.location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
 export const debug = window.location.search.indexOf('debug') >= 0;

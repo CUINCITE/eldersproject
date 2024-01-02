@@ -6,6 +6,7 @@ import { Handler } from '../Handler';
 import { IBreakpoint } from '../Breakpoint';
 import { Component } from '../components/Component';
 import { components } from '../Classes';
+import { Images } from '../widgets/Images';
 
 
 export class PageEvents {
@@ -38,10 +39,10 @@ export class Page extends Handler {
      * @return {Promise<boolean>} loading images promise
      */
     public preload(): Promise<void> {
-        return new Promise<void>(resolve => {
-            this.trigger(PageEvents.COMPLETE);
-            resolve();
-        });
+        return Images.preload(this.view.querySelectorAll('img.preload'))
+            .then(() => {
+                this.trigger(PageEvents.COMPLETE);
+            });
     }
 
 

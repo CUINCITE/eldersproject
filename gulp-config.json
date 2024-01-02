@@ -19,6 +19,7 @@
             "definitions": "src/ts/**/*.d.ts",
             "plugins": "src/js/plugins/*.js",
             "libs": [
+                "node_modules/imagesloaded/imagesloaded.pkgd.min.js",
                 "node_modules/screenfull/dist/screenfull.js",
                 "node_modules/twig/twig.min.js"
             ],
