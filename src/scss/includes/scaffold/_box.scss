@@ -12,11 +12,7 @@
 
 
     &__wrap {
-        @include flex;
-
-        @include breakpoint(phone) {
-            @include flex;
-        }
+        @include flex(row-reverse, flex-start, flex-start);
     }
 
     @include breakpoint(desktop) {

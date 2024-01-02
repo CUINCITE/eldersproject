@@ -1,34 +1,94 @@
 .text_aside {
 
+    @include breakpoint(phone) {
+        position: relative;
+        max-width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
+    }
+
     &__decorator {
-        position: absolute;
         z-index: 5;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+        } 
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+
+            &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                height: 1px;
+                background-color: $color-bg;
+                z-index: -1;
+
+                @each $bp in (tablet, phone) {
+
+                    @include breakpoint($bp) {
+                        left: map-get($grid-gutter, $bp) / -2;
+                        width: calc(100% + (#{map-get($grid-gutter, $bp)} / 2) + #{map-get($grid-offset, $bp)});
+                    }
+                }
+            }
+        }
 
         &--boxes {
 
             @include breakpoint(desktop) {
                 left: -1 * map-get($grid-offset, desktop);
-                bottom: calc(#{vw(51)} - #{rem(67)});
+                bottom: vw(51);
+
+                &.text_aside__decorator--contact {
+                    top: vw(21);
+                    bottom: unset;   
+                }
+            } 
+
+            @include breakpoint(phone) {
+                right: -1 * map-get($grid-offset, phone);
+                padding-bottom: vw(21, phone);
+                padding-inline: map-get($grid-offset, phone);
+                margin-top: rem(-60);
+                text-align: right;
+
+                svg {
+                    scale: -1 1;
+                }
             }
         }
 
         &--illustration {
 
             @include breakpoint(desktop) {
-                right: rem(11);
+                right: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
                 bottom: rem(20); 
             }
 
+            @include breakpoint(phone) {
+                margin-left: map-get($grid-gutter, phone); 
+                padding-bottom: rem(32);
+            }
+ 
             img {
-                position: absolute;
-
+                max-width: unset;
+                
                 @include breakpoint(desktop) {
-                    max-width: unset;
+                    position: absolute;
                     right: rem(-35);
                     width: vw(240);
                     bottom: calc(100% + #{rem(16)});
                 }
+
+                @include breakpoint(phone) {
+                    position: relative;
+                    left: 50%;
+                    translate: -50% vw(-32, phone);
+                    margin-left: -0.5 * map-get($grid-gutter, phone);
+                }
             }
+
 
             &.text_aside__decorator--medium {
 
@@ -36,8 +96,13 @@
                     @include breakpoint(desktop) {
                         width: vw(493);
                     }
+
+                    @include breakpoint(phone) {
+                        width: vw(347, phone);
+                    }
                 }
             }
+            
 
             &.text_aside__decorator--center {
 
@@ -54,28 +119,53 @@
         &--photo {
 
             @include breakpoint(desktop) {
-                right: rem(11);
+                right: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
                 bottom: rem(20); 
             }
 
+            @include breakpoint(phone) {
+                margin-left: map-get($grid-gutter, phone); 
+                padding-bottom: rem(32);
+                padding-top: vw(5, phone);
+            }
+
             .polaroid {
-                position: absolute;
                 
                 @include breakpoint(desktop) {
                     --polaroid-width: #{vw(368)};
                     --polaroid-height: #{vw(458)};
 
+                    position: absolute;
                     rotate: 7.5deg;
                     right: 0;
                     bottom: calc(100% + #{rem(42)});
+
+                    &--horizontal {
+                        --polaroid-width: #{vw(481)};
+                        --polaroid-height: #{vw(366)};
+    
+                        rotate: 12deg;
+                        bottom: calc(100% + #{rem(68)});
+                    }
                 }
 
-                &--horizontal {
-                    --polaroid-width: #{vw(481)};
-                    --polaroid-height: #{vw(366)};
+                @include breakpoint(phone) {
+                    --polaroid-width: #{vw(232, phone)};
+                    --polaroid-height: #{vw(281, phone)};
 
-                    rotate: 12deg;
-                    bottom: calc(100% + #{rem(68)});
+                    position: relative;
+                    left: 50%;
+                    translate: -50% 0;
+                    rotate: -6.5deg;
+                    margin-left: -0.5 * map-get($grid-gutter, phone);
+                    margin-bottom: vw(32, phone);
+
+                    &--horizontal {
+                        --polaroid-width: #{vw(266, phone)};
+                        --polaroid-height: #{vw(190, phone)};
+
+                        rotate: -10deg;
+                    }
                 }
 
                 img {
@@ -86,26 +176,38 @@
         }
 
         .text {
-            text-align: right;
             position: relative;
 
             &::before {
                 content: "";
                 position: absolute;
                 top: 0;
-                right: 0;
+                
                 height: 1px;
                 background-color: $color-black;
     
                 @include breakpoint(desktop) {
                     width: rem(35);
+                    right: 0;
+                }
+
+                @include breakpoint(phone) {
+                    width: rem(35);
+                    left: 0;
                 }
             }
             
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-end)
+
+                text-align: right;
                 max-width: rem(182);
                 padding: rem(16) 0 0 0;
+            }
+
+            @include breakpoint(phone) {
+                padding: rem(16) 0 0 0;
+                max-width: rem(160 + 16);
             }
 
             p + p {
@@ -130,28 +232,31 @@
 
                 @include breakpoint(desktop) {
                     right: unset;
-                    left: rem(11);
+                    left: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
                 }
 
                 img {
-                    position: absolute;
-    
+                    
                     @include breakpoint(desktop) {
                         right: unset;
                         left: rem(-35);
                     }
+
+                    @include breakpoint(phone) {
+                    
+                    }
                 }
             }
-
+ 
             .text {
                 text-align: left;
 
                 &::before {
-                    right: unset;
-                    left: 0;
-        
+                    
                     @include breakpoint(desktop) {
                         width: rem(35);
+                        right: unset;
+                        left: 0;
                     }
                 }
 
@@ -159,11 +264,19 @@
                     @include flex(column, flex-start, flex-start)
                 }
             }
-
         }
     }
 
     &__column {
-        position: relative;
+
+        @include breakpoint(desktop) {
+            position: relative;
+        }
+
+        @include breakpoint(phone) {
+            .text {
+                padding-bottom: 0;
+            }
+        }
     }
 }

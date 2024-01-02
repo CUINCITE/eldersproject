@@ -2,13 +2,27 @@
     display: grid;
     position: relative;
 
+
     @include breakpoint(desktop) {
-        height: var(--app-height);
         grid-template-rows: auto 1fr;
+        height: var(--app-height);
+    }
+
+    @include breakpoint(phone) {
+        grid-template-rows: auto auto 1fr;
+        height: vw(516, phone);
+
+        .heading {
+            margin-block: rem(-2) rem(-24);
+        }
     }
 
     .box {
         height: calc(100% - 1px);
+
+        @include breakpoint(phone) {
+            position: relative;
+        }
     }
 
     .illustration {
@@ -26,6 +40,14 @@
             rotate: -8deg;
             top: 10.6%;
             right: 27.8rem;
+        }
+
+        @include breakpoint(phone) {
+            width: vw(290, phone);
+            height: vw(290, phone);
+            rotate: -7deg;
+            top: 0;
+            left: vw(7, phone);
         }
     }
 }

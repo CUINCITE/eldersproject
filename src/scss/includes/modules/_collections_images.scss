@@ -22,12 +22,12 @@
         display: grid;
 
         @include breakpoint(desktop) {
-            grid-template-rows: auto 1fr;
+            grid-template-rows: auto vw(270); 
             grid-template-columns: 1fr 1fr;
-            min-height: 120lvh;
-        }
-    }
 
+        } 
+    }
+ 
     &__authors {
         @include breakpoint(desktop) {
             position: relative;
@@ -35,7 +35,7 @@
             width: 50%;
         }
 
-
+ 
     }
 
     &__filler {

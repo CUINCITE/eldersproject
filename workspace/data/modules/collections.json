@@ -1,113 +1,123 @@
 {
     "items": [
         {
-            "name": "Robin Coste Lewis",
+            "name": "Robin Coste <br class='desktop-hide'>Lewis",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["purple"],
             "image": {
-                "desktop": "robin_coste_lewis.png"
+                "desktop": "robin_coste_lewis.png",
+                "mobile": "robin_coste_lewis.png"
             }
         },
         {
-            "name": "Carolina De Robertis",
+            "name": "Carolina De <br class='desktop-hide'>Robertis",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["purple"],
             "image": {
-                "desktop": "carolina_de_robertis.png"
+                "desktop": "carolina_de_robertis.png",
+                "mobile": "carolina_de_robertis.png"
             }
         },
         {
-            "name": "Natalie Diaz",
+            "name": "Natalie <br class='desktop-hide'>Diaz",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["yellow"],
             "image": {
-                "desktop": "carolina_de_robertis.png"
+                "desktop": "carolina_de_robertis.png",
+                "mobile": "carolina_de_robertis.png"
             }
         },
         {
-            "name": "Denise Frohman",
+            "name": "Denise <br class='desktop-hide'>Frohman",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["purple"],
             "image": {
-                "desktop": "denice_frohman.png"
+                "desktop": "denice_frohman.png",
+                "mobile": "denice_frohman.png"
             }
         },
         {
-            "name": "Caleb Gayle",
+            "name": "Caleb <br class='desktop-hide'>Gayle",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["red"],
             "image": {
-                "desktop": "caleb_gayle.png"
+                "desktop": "caleb_gayle.png",
+                "mobile": "caleb_gayle.png"
             }
         },
         {
-            "name": "Eve L. Ewing",
+            "name": "Eve L. <br class='desktop-hide'>Ewing",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["green"],
             "image": {
-                "desktop": "eve_ewing.png"
+                "desktop": "eve_ewing.png",
+                "mobile": "eve_ewing.png"
             }
         },
         {
-            "name": "April Reign ",
+            "name": "April <br class='desktop-hide'>Reign ",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["purple"],
             "image": {
-                "desktop": "carolina_de_robertis.png"
+                "desktop": "carolina_de_robertis.png",
+                "mobile": "carolina_de_robertis.png"
             }
         },
         {
-            "name": "Ellery Washington",
+            "name": "Ellery <br class='desktop-hide'>Washington",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["red"],
             "image": {
-                "desktop": "ellery_washington.png"
+                "desktop": "ellery_washington.png",
+                "mobile": "ellery_washington.png"
             }
         },
         {
-            "name": "Renée Watson",
+            "name": "Renée <br class='desktop-hide'>Watson",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["purple"],
             "image": {
-                "desktop": "carolina_de_robertis.png"
+                "desktop": "carolina_de_robertis.png",
+                "mobile": "carolina_de_robertis.png"
             }
         },
         {
-            "name": "Jenna Wortham",
+            "name": "Jenna <br class='desktop-hide'>Wortham",
             "interviews_count": 23,
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
             "shadows": ["green"],
             "image": {
-                "desktop": "j_wortham.png"
+                "desktop": "j_wortham.png",
+                "mobile": "j_wortham.png"
             }
         }
     ]

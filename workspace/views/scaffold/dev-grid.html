@@ -20,6 +20,10 @@
         height: 100vh;
         z-index: 10;
         display: block;
+
+        @media (orientation: portrait) {
+            right: 0;
+        }
     }
 
     .test-grid:not(.is-shown) {

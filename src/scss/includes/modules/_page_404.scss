@@ -1,0 +1,25 @@
+.page_404 {
+
+    &__image {
+        z-index: 1;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+            left: vw(18); 
+            top: vw(-68);
+            width: vw(295);
+            height: vw(295);
+            rotate: -4.85deg;
+            
+        }
+
+        @include breakpoint(phone) {
+            position: relative;
+            width: vw(220, phone);
+            height: vw(220, phone);
+            margin-block: vw(-35, phone) vw(-35, phone);
+            rotate: -4.85deg;
+            right: vw(3, phone);
+        }
+    }
+}

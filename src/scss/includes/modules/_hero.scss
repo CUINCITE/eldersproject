@@ -1,27 +1,74 @@
 .hero {
-    &__title {
-        @include font-family(compressed);
-        @include font-size(240, 169);
-        @include letter-spacing(-10.8, 240);
-        @include flex(column, flex-start, stretch);
 
-        text-transform: uppercase;
+
+
+    &__wrap {
+        position: relative;
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, stretch);
+            min-height: var(--app-height);
+        }
     }
 
 
-    &__subtitle {
-        @include font-size(20, 31.5);
-        @include letter-spacing(-0.6, 20);
+
+    &__title {
+        @include font-family(compressed);
+        @include flex(column, flex-start, stretch);
 
         text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(240, 169);
+            @include letter-spacing(-10.8, 240);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(118.8, 88); 
+            @include letter-spacing(-10.8, 240); 
+        }
+    }
+
+
+
+    &__subtitles {
+        @include breakpoint(phone) {
+            flex-grow: 1;
+            padding-top: rem(7);
+        }
+    }
+
+
+
+    &__subtitle {
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 31.5);
+            @include letter-spacing(-0.6, 20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(15.3, 28.35);
+            @include letter-spacing(-0.459, 15.3);
+        }
     }
 
 
 
     &__line {
         display: inline-block;
-        padding-top: rem(27);
-        padding-left: rem(13);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(27);
+            padding-left: rem(13);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(18);
+            padding-left: rem(13);
+        }
     }
 
 
@@ -29,15 +76,60 @@
     &__bottom {
         @include flex(row, space-between, flex-start);
 
-        padding-top: rem(10);
-        padding-bottom: rem(41);
+        @include breakpoint(desktop) {
+            padding-top: rem(10);
+            padding-bottom: rem(41);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, space-between, flex-start);
+        }
     }
+
+
+
+    &__sticker {
+        position: absolute;
+        z-index: 5;
+
+        @include breakpoint(desktop) {
+            bottom: rem(-23);
+            left: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            bottom: rem(-13);
+            left: rem(18);
+        }
+    }
+
+
+
+    &__logo {
+        @include breakpoint(phone) {
+            
+            svg { 
+                width: vw(80, phone); 
+                margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
+                height: auto; 
+            }
+        }
+    }
+
 
 
     i {
         @include font-family(reclined, 300);
-        @include letter-spacing(-16.8, 240);
-        padding-left: rem(20);
         font-style: normal;
-    }
+
+        @include breakpoint(desktop) {
+            @include letter-spacing(-16.8, 240);
+            padding-left: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include letter-spacing(-8.316, 118.8);
+            padding-left: rem(9);
+        }
+    } 
 }

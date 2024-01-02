@@ -30,8 +30,14 @@ $background-colors: (
     width: var(--polaroid-width);
     height: var(--polaroid-height);
     background-color: var(--color-grey200);
-    padding: vw(25) vw(25) vw(37);
 
+    @include breakpoint(desktop) {
+        padding: vw(25) vw(25) vw(37);
+    }
+
+    @include breakpoint(phone) {
+        padding: vw(18, phone) vw(18, phone) vw(27, phone);
+    }
 
     &--square {
         --polaroid-height: var(--polaroid-width);
@@ -39,8 +45,14 @@ $background-colors: (
 
 
     &--horizontal {
-        --polaroid-width: #{vw(481)};
-        --polaroid-height: #{vw(366)};
+        @include breakpoint(desktop) {
+            --polaroid-width: #{vw(481)};
+            --polaroid-height: #{vw(366)};
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(14, phone) vw(14, phone) vw(18, phone);
+        }
     }
 
 
@@ -62,6 +74,10 @@ $background-colors: (
     &--small_frame {
         @include breakpoint(desktop) {
             padding: vw(10);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(10, phone);
         }
     }
 

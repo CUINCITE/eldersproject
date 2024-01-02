@@ -1,14 +1,22 @@
 .hamburger {
     @include flex(column);
+
     overflow: hidden;
-    gap: vw(3);
-    margin-left: vw(3);
+
+    @include breakpoint(desktop) {
+        gap: vw(3);
+        margin-left: vw(3);
+    }
+
 
     @include breakpoint(not-desktop) {
         top: 22px;
         right: $mobile;
-
         transition: transform $time-fast $ease-custom;
+          
+        @include breakpoint(phone) {
+            gap: 4px;
+        }
     }
 
     .is-menu-open & {
@@ -44,6 +52,10 @@
             margin-left: 0;
             margin-right: auto;
             opacity: 1;
+        }
+
+        @include breakpoint(phone) {
+            width: 32px;
         }
     }
 }

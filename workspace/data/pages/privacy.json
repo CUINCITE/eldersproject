@@ -1,6 +1,9 @@
 {
   "modules": [
     {
+      "type": "logo_box"
+    }, 
+    {
         "type": "text_aside",
         "mainText": {
             "size": "medium",

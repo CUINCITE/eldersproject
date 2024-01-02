@@ -8,7 +8,7 @@
 
     <div class="people_group__people">
         {% for person in people %}
-            {% include "./components/c_person.html" with { person: person , rotation: loop.index is even ? "clockwise" : "counter_clockwise" } %}
+            {% include "./components/c_person.html" with { person: person, reversed: reversed } %}
         {% endfor %}
     </div>
 

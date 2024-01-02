@@ -34,6 +34,7 @@
 @import "includes/scaffold/search";
 
 /* stylelint-disable-line */
+@import "includes/modules/page_404";
 @import "includes/modules/module";
 @import "includes/modules/map";
 @import "includes/modules/ui";
@@ -60,6 +61,7 @@
 @import "includes/components/interview-box";
 @import "includes/components/polaroid";
 @import "includes/components/heading";
+@import "includes/components/logo_box";
 @import "includes/components/accordeon_item";
 @import "includes/components/collection_author";
 @import "includes/components/claim";

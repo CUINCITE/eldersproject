@@ -1,5 +1,5 @@
-<div class="person">
-    <div class="person__photo person__photo--{{rotation}}">
+<div class="person{% if reversed %} person--reversed{% endif %}">
+    <div class="person__photo">
         {% include "./components/c_polaroid.html" with person.photo %}
     </div>
 

@@ -1,18 +1,42 @@
 .button {
     @include font-family(compressed);
-    @include font-size(50, 1);
-    @include letter-spacing(-1.75, 50);
     @include flex(row, flex-start, center);
 
     position: relative;
-    gap: vw(9);
+
     text-transform: uppercase;
     font-weight: bold;
     color: var(--color-text);
 
+    @include breakpoint(desktop) {
+        @include font-size(50, 1);
+        @include letter-spacing(-1.75, 50);
+
+        gap: vw(9);
+    } 
+
+    @include breakpoint(not-desktop) {
+        // @include flex(row-reverse, flex-end, center);
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+    
+            gap: vw(4, phone);
+        }
+    }
+
     &--reversed {
-        flex-direction: row-reverse;
-        gap: vw(3);
+
+        @include breakpoint(desktop) {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &--simple {
+        @include breakpoint(desktop) {
+            justify-content: flex-end;
+        }
     }
 
 
@@ -37,19 +61,41 @@
 
 
     &--small {
-        @include font-size(20, 16);
-        @include letter-spacing(-0.6, 20);
 
-        --padding: #{rem(3)};
-        gap: vw(2);
+        @include breakpoint(desktop) {
+            @include font-size(20, 16);
+            @include letter-spacing(-0.6, 20);
+    
+            --padding: #{rem(3)};
+            gap: vw(2);
+        }
+    }
+
+    &--two_line {
+        @include breakpoint(phone) {
+            margin-bottom: vw(3, phone);
+
+            .arrow {
+                align-self: start;
+                translate: 0 30%;
+            }
+        }
     }
 
 
     span i {
         @include font-family(reclined, 500);
-        @include letter-spacing(-1.75, 50);
+        
+        font-style: normal;
 
-        padding-left: var(--padding, rem(9));
+        @include breakpoint(desktop) {
+            @include letter-spacing(-1.75, 50);
+            padding-left: var(--padding, rem(9));
+        }
+
+        @include breakpoint(phone) {
+            padding-left: rem(3);
+        }
     }
 
     @include hover {
@@ -59,6 +105,10 @@
 
     .module--home-text & {
         padding-top: rem(20);
+
+        @include breakpoint(phone) {
+            padding-top: rem(12);
+        }
     }
 
 

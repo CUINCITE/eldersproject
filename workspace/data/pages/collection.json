@@ -5,7 +5,8 @@
             "name": "Carolina <br>De Robertis",
             "illustration": {
                 "image": {
-                    "desktop": "carolina_de_robertis.png"
+                    "desktop": "carolina_de_robertis.png",
+                    "mobile": "carolina_de_robertis.png"
                 },
                 "shadows": ["purple"]
             },
@@ -32,6 +33,7 @@
                     "photo": {
                         "image": {
                             "desktop": "demonstration_photo.jpg",
+                            "mobile": "demonstration_photo.jpg",
                             "alt": ""
                         },
                         "modifiers": ["horizontal"]
@@ -89,6 +91,7 @@
                     "photo": {
                         "image": {
                             "desktop": "drag_photo.jpg",
+                            "mobile": "drag_photo.jpg",
                             "alt": ""
                         },
                         "modifiers": []
@@ -115,7 +118,8 @@
             "decor": {
                 "type": "illustration",
                 "image": {
-                    "desktop": "hand.png"
+                    "desktop": "hand.png",
+                    "mobile": "hand.png"
                 }
             }
         },

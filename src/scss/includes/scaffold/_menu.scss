@@ -14,7 +14,10 @@ $theme-colors: ("orange", "red", "blue", "pink");
     padding: 0 var(--GLOBAL-aside-width);
     counter-reset: menu -1;
 
-
+    @include breakpoint(phone) {
+        padding: 0;
+        height: 100lvh;
+    }
 
     &__wrap {
         @include flex(column, flex-end, flex-end);
@@ -22,18 +25,36 @@ $theme-colors: ("orange", "red", "blue", "pink");
         text-transform: uppercase;
         width: 100%;
         height: 100%;
-        border-right: 1px solid var(--color-bg);
         text-align: right;
+
+        @include breakpoint(desktop) {
+            border-right: 1px solid var(--color-bg);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-end, flex-start);
+
+            height: var(--app-height);
+            text-align: left;
+        }
     }
 
 
 
     &__nav {
         @include font-family(compressed);
-        @include font-size(100, 82);
-        @include letter-spacing(-3, 100);
 
         width: 100%;
+
+        @include breakpoint(desktop) {
+            @include font-size(100, 82);
+            @include letter-spacing(-3, 100);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(80, 67.2);
+            @include letter-spacing(-2.4, 80);
+        }
     }
 
 
@@ -48,15 +69,27 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
         border-top: 1px solid currentColor;
-        padding-right: rem(12);
-        padding-top: rem(10);
         overflow: hidden;
+
+        @include breakpoint(desktop) {
+            padding-right: rem(12);
+            padding-top: rem(10);
+        }
+
+        @include breakpoint(phone) {
+            padding-left: rem(12);
+            padding-top: rem(11);
+        }
 
 
         a {
             @include flex(row, flex-end, flex-end);
+
             width: 100%;
 
+            @include breakpoint(not-desktop) {
+                @include flex(row, flex-start, flex-start);
+            }
 
             @include hover {
                 .menu__arrow { opacity: 1; }
@@ -68,7 +101,6 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
     &__text {
         position: relative;
-
 
         &::before {
             @include font-family(normal);
@@ -82,6 +114,13 @@ $theme-colors: ("orange", "red", "blue", "pink");
             counter-increment: menu;
             color: var(--theme-color);
             margin-right: rem(4);
+
+            @include breakpoint(phone) {
+                inset: 0 auto 0 100%;
+                margin-top: rem(-4);
+                margin-right: 0;
+                margin-left: rem(8);
+            }
         }
     }
 
@@ -96,6 +135,10 @@ $theme-colors: ("orange", "red", "blue", "pink");
         // TEMP - todo animation on icon
         opacity: 0;
         transition: opacity .3s $ease-custom;
+
+        @include breakpoint(phone) {
+            display: none;
+        }
     }
 
 
@@ -103,9 +146,19 @@ $theme-colors: ("orange", "red", "blue", "pink");
     &__footer {
         @include font-size(10, 16);
 
-        padding-bottom: vw(20);
         margin-top: auto;
 
+        @include breakpoint(desktop) {
+            padding-bottom: vw(20);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+            @include font-size(14, 18.9);
+
+            padding-bottom: vw(25, phone);
+            gap: rem(19);
+        }
 
         a { @include hoverable-link; }
     }
@@ -115,16 +168,38 @@ $theme-colors: ("orange", "red", "blue", "pink");
     &__link {
         @include flex(column, flex-start, flex-end);
 
-        padding-right: rem(13);
+        @include breakpoint(desktop) {
+            padding-right: rem(13);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+            
+            padding-left: rem(16);
+            letter-spacing: unset;
+        }
     }
 
 
 
     &__close {
         position: absolute;
-        right: vw(12);
-        top: vw(13);
-        width: vw(28);
-        height: vw(28);
+
+        @include breakpoint(desktop) {
+            right: vw(12);
+            top: vw(13);
+            width: vw(28);
+            height: vw(28);
+        }
+
+        @include breakpoint(phone) {
+            right: vw(16, phone);
+            top: vw(8, phone);
+            width: vw(14, phone);
+            height: vw(14, phone);
+            z-index: 2;
+ 
+        }
+
     }
 }

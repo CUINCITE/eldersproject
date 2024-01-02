@@ -41,14 +41,14 @@
 
         .button {
             @include font-family(compressed);
-            @include font-size(30, 30);
-            @include letter-spacing(-0.75, 30);
             @include flex(row, flex-end, flex-end);
     
             text-transform: uppercase;
             margin-top: auto;
 
             @include breakpoint(desktop) {
+                @include font-size(30, 30);
+                @include letter-spacing(-0.75, 30);
                 margin-bottom: rem(10);
                 margin-right: rem(11);
                 margin-top: rem(80);
@@ -67,8 +67,6 @@
                 @include breakpoint(desktop) {
                     translate: 0 rem(-6);
                 }
-
-
 
                 span.triangle {
                     @include breakpoint(desktop) {

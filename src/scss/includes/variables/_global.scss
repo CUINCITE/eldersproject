@@ -1,3 +1,8 @@
+@import "includes/mixins";
+@import "includes/variables/sizes";
+@import "includes/breakpoints";
+
+
 :root {
     --app-height: 100vh;
     --GLOBAL-aside-width: #{vw(111)};
@@ -5,5 +10,14 @@
 
     @supports(height: 100lvh) {
         --app-height: 100lvh;
+
+        @include breakpoint(phone) {
+            --app-height: 100svh;
+        }
+    }
+
+    @include breakpoint(phone) {
+        --GLOBAL-aside-width: #{vw(40, phone)};
+        --GLOBAL-content-width: calc(100vw);
     }
 }

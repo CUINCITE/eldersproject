@@ -7,18 +7,25 @@
         position: absolute;
         bottom: 0;
         height: 1px;
-        width: 100%;
         background-color: $color-bg;
 
-        @include breakpoint(desktop) {
-            left: map-get($grid-gutter, desktop) / -2;
-            width: calc(100% + (#{map-get($grid-gutter, desktop)} / 2) + #{map-get($grid-offset, desktop)});
+        @each $bp in (desktop, tablet, phone) {
+
+            @include breakpoint($bp) {
+                left: map-get($grid-gutter, $bp) / -2;
+                width: calc(100% + (#{map-get($grid-gutter, $bp)} / 2) + #{map-get($grid-offset, $bp)});
+            }
         }
     }
 
     @include breakpoint(desktop) {
         padding-top: rem(20);
         padding-bottom: rem(30);
+    }
+
+    @include breakpoint(phone) {
+        padding-top: rem(16);
+        padding-bottom: rem(40);
     }
 
     &.is-closed {
@@ -39,7 +46,11 @@
         transition: height .3s ease-in;
 
         @include breakpoint(desktop) {
-            padding-top: rem(2);
+            padding-top: rem(10);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(8);
         }
     } 
 
@@ -83,10 +94,19 @@
             top: rem(20);
             width: rem(22);
         }
+
+        @include breakpoint(phone) {
+            top: rem(17);
+            width: rem(22);
+        }
     }
 
     .text {
         padding-block: 0;
+
+        @include breakpoint(phone) {
+            max-width: rem(256);
+        }
     }
 }
 

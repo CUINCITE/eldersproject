@@ -1,46 +1,77 @@
 .quote {
     @include font-family(compressed);
-    @include font-size(40, 37.4);
-    @include letter-spacing(-1.2, 40);
-
 
     text-transform: uppercase;
     position: relative;
+
+    @include breakpoint(desktop) {
+        @include font-size(40, 37.4);
+        @include letter-spacing(-1.2, 40);
+    }
+
+    @include breakpoint(phone) {
+        @include font-size(30, 28.2);
+        @include letter-spacing(-0.9, 30);
+    }
 
 
     &::before {
         // content: url("./public/theme/images/svg/quote-icon.svg");
         content: url("./images/svg/quote-icon.svg");
         display: inline-block;
-
+        aspect-ratio: 1/1;
+        overflow: hidden;
 
         @include breakpoint(desktop) {
             width: rem(29);
             margin-bottom: rem(4);
-            aspect-ratio: 1/1;
-            overflow: hidden;
+        }
+
+        @include breakpoint(phone) {
+            width: rem(29);
+            margin-bottom: rem(4);
         }
     } 
 
 
     footer {
         @include font-family(compact);
-        @include font-size(26, 27);
-        @include letter-spacing(-0.26, 26);
         @include flex(row, flex-start, center);
 
         text-transform: none;
         position: relative;
-        margin-top: vw(9);
+
+        @include breakpoint(desktop) {
+            @include font-size(26, 27);
+            @include letter-spacing(-0.26, 26);
+
+            margin-top: rem(9);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 21);
+            @include letter-spacing(-0.2, 20);
+
+            margin-top: vw(20);
+        }
 
 
         &::before {
             content: "";
             display: inline-block;
-            width: vw(35);
             height: 1px;
             background-color: currentColor;
-            margin-right: vw(15);
+
+            @include breakpoint(desktop) {
+                width: rem(35);
+                margin-right: rem(15);
+            }
+
+            @include breakpoint(phone) {
+                width: rem(26);
+                margin-right: rem(10);
+            }
+
         }
     }
 }

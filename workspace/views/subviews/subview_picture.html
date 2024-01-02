@@ -1,12 +1,12 @@
 {% if lazy %}
 <picture class="js-lazy">
-    <source media="(max-width: 1023px)" srcset="data:image/png;base64,aHVuY3dvdA==" data-lazysrcset="{{image.mobile}}, {{image.mobile_x2}} 2x">
-        {% if image.hd %}<source media="(min-width: 1920px)" srcset="data:image/png;base64,aHVuY3dvdA==" data-lazysrcset="{{image.hd}}, {{image.hd_x2}} 2x">{% endif %}
+    {% if image.mobile %}<source media="(max-width: 1023px)" srcset="data:image/png;base64,aHVuY3dvdA==" data-lazysrcset="{{image.mobile}}, {{image.mobile_x2}} 2x">{% endif %}
+    {% if image.hd %}<source media="(min-width: 1920px)" srcset="data:image/png;base64,aHVuY3dvdA==" data-lazysrcset="{{image.hd}}, {{image.hd_x2}} 2x">{% endif %}
     <source media="(min-width: 1024px)" srcset="data:image/png;base64,aHVuY3dvdA==" data-lazysrcset="{{image.desktop}}, {{image.desktop_x2}} 2x">
     <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
 </picture>{% else %}
 <picture>
-    <source media="(max-width: 1023px)" srcset="../src/images/{{image.mobile}}, {{image.mobile_x2}} 2x">
+    {% if image.mobile %}<source media="(max-width: 1023px)" srcset="../src/images/{{image.mobile}}, {{image.mobile_x2}} 2x">{% endif %}
     {% if image.hd %}<source media="(min-width: 1920px)" srcset="../src/images/{{image.hd}}, {{image.hd_x2}} 2x">{% endif %}
     <source media="(min-width: 1024px)" srcset="../src/images/{{image.desktop}}, {{image.desktop_x2}} 2x">
     <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">

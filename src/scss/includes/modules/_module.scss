@@ -15,49 +15,65 @@
         @include flex(column, space-between, stretch);
 
         height: 100%;
+
+        
     }
 
 
     &--text-aside {
         position: relative;
 
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            background-color: var(--color-bg);
+        @include breakpoint(desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                background-color: var(--color-bg);
+            }
         }
 
+        .box:last-of-type { 
+            @include breakpoint(desktop) {
+                padding-bottom: rem(67); 
+            }
+        }
 
-        .box:last-of-type { padding-bottom: rem(67); }
+        @include breakpoint(phone) {
+            max-width: 100%;
+        }
     }
 
     &--quote_panel {
         position: relative;
 
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            background-color: var(--color-bg);
+        @include breakpoint(desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                background-color: var(--color-bg);
+            }
         }
     }
 
     &--faq {
         position: relative;
-        
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            background-color: var(--color-bg);
+
+        @include breakpoint(desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                background-color: var(--color-bg);
+            }
         }
+
     }
 
 
@@ -67,23 +83,59 @@
 
 
     &--claim {
-        padding-top: rem(14);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(14);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(13);
+            padding-bottom: rem(88);
+        }
+
+        &.no_padding_bottom_mobile {
+            @include breakpoint(phone) {
+                padding-top: rem(22);
+            }
+        }
     }
 
 
     &--home-text {
         @include flex(column, flex-end, stretch);
 
-        min-height: vw(391);
+        @include breakpoint(desktop) {
+            min-height: vw(391);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(12) rem(42);
+        }
 
         &--link {
             justify-content: flex-start;
+
+            @include breakpoint(phone) {
+                margin-top: 0 !important;
+
+                .grid {
+                    
+                    & div:first-child {
+                        grid-row-start: 2;
+                    }
+                }
+            }
         }
+
+
     }
 
 
     &:first-of-type:not(.module--hero) .box:first-of-type {
-        padding-top: rem(27);
+        @include breakpoint(desktop) {
+            padding-top: rem(27);
+        }
+
     }
     
 }

@@ -9,16 +9,29 @@
     @include flex;
 
     background-color: var(--interview-bg);
-    width: vw(196);
-    height: vw(196);
     position: relative;
-    transform: rotate(-20deg);
     transition: transform .45s $ease-custom;
     will-change: transform;
 
+    @include breakpoint(desktop) {
+        width: vw(196);
+        height: vw(196);
+        transform: rotate(-20deg);
+    }
+
+    @include breakpoint(phone) {
+        @include flex(row, center, center);
+
+        width: vw(126, phone);
+        height: vw(77, phone);
+        margin-right: -1 * map-get($grid-gutter, phone);
+    }
+
 
     &--reversed {
-        transform: rotate(20deg);
+        @include breakpoint(desktop) {
+            transform: rotate(20deg);
+        }
     }
 
 
@@ -52,41 +65,64 @@
 
         &:first-of-type {
             background-color: var(--interview-first-layer-bg);
-            transform: scale(calc(164 / 196));
         }
 
 
         &:nth-of-type(2) {
             background-color: var(--interview-second-layer-bg);
-            transform: scale(calc(128 / 196));
-            transition-duration: .4s;
         }
 
 
         &:nth-of-type(3) {
             background-color: var(--interview-third-layer-bg);
-            transform: scale(calc(96 / 196));
-            transition-duration: .35s;
+        }
+
+        @include breakpoint(desktop) {
+
+            &:first-of-type {
+                transform: scale(calc(164 / 196));
+            }
+    
+
+            &:nth-of-type(2) {
+                transform: scale(calc(128 / 196));
+                transition-duration: .4s;
+            }
+    
+    
+            &:nth-of-type(3) {
+                transform: scale(calc(96 / 196));
+                transition-duration: .35s;
+            }
         }
     }
 
 
     &__text {
         @include font-family(compressed);
-        @include font-size(50, 38);
-        @include letter-spacing(-1.25, 50);
 
         position: absolute;
         z-index: 2;
-        inset: 0;
-        padding: vw(14) vw(11);
         text-transform: uppercase;
         color: var(--interview-text-color);
-        opacity: 0;
         transition: opacity .4s $ease-custom;
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 38);
+            @include letter-spacing(-1.25, 50);
+
+            padding: vw(14) vw(11);
+            opacity: 0;
+            inset: 0;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 24);
+            @include letter-spacing(-0.75, 30);
+        }
     }
 }
-
+ 
 
 %box-hover {
     transform: rotate(0deg);

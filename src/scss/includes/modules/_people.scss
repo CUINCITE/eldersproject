@@ -1,3 +1,15 @@
 .people {
 
+
+    &__heading {
+        @include breakpoint(phone) {
+            grid-row-start: 1;
+        }
+    }
+
+    .text {
+        @include breakpoint(phone) {
+            padding-block: rem(12) rem(48);
+        }
+    }
 }

@@ -1,25 +1,63 @@
 .claim {
     @include font-family(compressed);
-    @include font-size(103, 93);
-    @include letter-spacing(-3.09, 103);
 
-    max-width: 75%;
     text-transform: uppercase;
     position: relative;
 
+    @include breakpoint(desktop) {
+        @include font-size(103, 93);
+        @include letter-spacing(-3.09, 103);
 
-    &--small {
-        @include font-size(100, 83);
-        @include letter-spacing(-3, 100);
-        max-width: 80%;
-        padding-top: rem(5);
+        max-width: 75%;
     }
 
+    @include breakpoint(phone) {
+        @include font-size(49, 0.855);
+        @include letter-spacing(-1.47, 49);
+    }
 
-    &--collections { padding-bottom: vw(112); }
+    &--small {
+        @include breakpoint(desktop) {
+            @include font-size(100, 83);
+            @include letter-spacing(-3, 100);
+
+            max-width: 80%;
+            padding-top: rem(5);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(49, 0.855);
+            @include letter-spacing(-1.47, 49);
+        }
+    }
+
+    &--no_padding_mobile {
+        @include breakpoint(phone) {
+            padding-bottom: 0;
+        }
+    }
+
+    &--collections {
+
+        @include breakpoint(phone) {
+            .claim__sticker {
+                display: none;
+            }
+        }
 
 
-    .is-404 & { padding-bottom: vw(95); }
+    }
+
+    .is-404 & { 
+
+        @include breakpoint(desktop) {
+            padding-bottom: vw(95); 
+        }
+
+        @include breakpoint(phone) {
+            padding-bottom: vw(145, phone);
+        }
+    }
 
 
 
@@ -27,14 +65,25 @@
         position: absolute;
         left: 0;
         bottom: calc(100% - #{rem(10)});
+        z-index: 2;
 
 
-        .is-404 & { left: rem(192); }
+        .is-404 & { 
+
+            @include breakpoint(desktop) {
+                left: rem(192); 
+            }
+
+            @include breakpoint(phone) { 
+                bottom: calc(100% - #{rem(196)});
+            } 
+
+        }
 
 
         .claim--collections & {
             position: relative;
-            margin-top: vw(-10);
+            margin-top: vw(-27);
         }
     }
 }

@@ -5,6 +5,10 @@
             margin-top: rem(19);
             margin-bottom: rem(40);
         }
+
+        @include breakpoint(phone) {
+            margin-bottom: rem(30);
+        }
     }
 
     &__people {
@@ -12,9 +16,16 @@
 
         @include breakpoint(desktop) {
             grid-template-columns: repeat(3, 1fr);
-            row-gap: vw(42);
             column-gap: map-get($grid-gutter, desktop);
+            row-gap: vw(42);
             margin-bottom: vw(56);
+        }
+
+        @include breakpoint(phone) {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: map-get($grid-gutter, phone);
+            row-gap: vw(30, phone);
+            margin-bottom: vw(48, phone);
         }
     }
 }

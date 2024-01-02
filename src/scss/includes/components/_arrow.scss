@@ -15,6 +15,10 @@
             width: 1px;
             height: rem(20);
 
+            @include breakpoint(phone) {
+                height: rem(10);
+            }
+
             .button--simple & { display: none; }
 
             .button--lightbox & {
@@ -35,6 +39,10 @@
             width: rem(51);
             height: 1px;
 
+            @include breakpoint(phone) {
+                width: rem(22);
+            }
+
             .button--lightbox & {
                 width: rem(33);
             }
@@ -54,7 +62,9 @@
             border-color: transparent transparent transparent currentColor;
             background: none;
 
-
+            @include breakpoint(phone) {
+                border-width: rem(11) 0 rem(11) rem(13);
+            }
 
             .button--lightbox & {
                 border-width: rem(16.5) 0 rem(16.5) rem(22);

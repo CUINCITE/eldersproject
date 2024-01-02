@@ -1,8 +1,8 @@
 .search {
     --search-height: #{vw(137)};
 
+
     @include font-family(compressed);
-    @include font-size(50, 1);
     @include flex(row, center, flex-end);
 
     height: var(--search-height);
@@ -10,7 +10,15 @@
     position: relative;
     z-index: 2;
 
+    @include breakpoint(desktop) {
+        @include font-size(50, 1);
+    }
 
+    @include breakpoint(phone) {
+        --search-height: #{vw(54, phone)};
+
+        @include font-size(40, 37.4);
+    }
 
     &__content {
         width: 100%;
@@ -28,7 +36,16 @@
 
     &__input {
         position: relative;
-        margin-left: vw(15);
+
+        @include breakpoint(desktop) {
+            margin-left: vw(15);
+        }
+
+        @include breakpoint(phone) {
+            margin-left: vw(15, phone);
+
+        }
+        
 
         label {
             @include font-size(50, 1);
@@ -39,21 +56,36 @@
             pointer-events: none;
             transition: opacity .3s $ease-custom;
             opacity: 0;
+
+            @include breakpoint(phone) {
+                @include font-size(40, 37.4);
+                letter-spacing: unset;
+            }
         }
 
 
         input {
             @include font-family(compressed);
-            @include font-size(50, 1);
-            @include letter-spacing(-1, 50);
 
-            height: vw(50);
             width: 100%;
             text-transform: uppercase;
 
-
             &:placeholder-shown + label { opacity: 1; }
             &:focus + label { opacity: 0; }
+
+            @include breakpoint(desktop) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1, 50);
+
+                height: vw(50);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(40, 37.4);
+
+                height: vw(40, phone);
+                width: 66%;
+            }
         }
 
 
@@ -75,21 +107,40 @@
             vertical-align: top;
             transition: transform .3s $ease-custom;
         }
+
+        @include breakpoint(phone) {
+            margin-left: rem(5);
+
+            svg {
+                translate: 0 -20%;
+            }
+        }
     }
 
 
 
     &__clear {
-        @include font-size(14, 10);
+
 
         text-transform: uppercase;
         position: absolute;
-        right: rem(9);
-        bottom: rem(12);
-
         opacity: 0;
         pointer-events: none;
         transition: opacity .3s $ease-custom;
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 10);
+
+            right: rem(9);
+            bottom: rem(12);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(12, 10);
+
+            right: rem(16);
+            bottom: rem(6);
+        }
 
 
         .search.has-value & {

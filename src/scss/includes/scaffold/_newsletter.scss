@@ -6,17 +6,30 @@
     @include font-family(compressed);
 
     grid-area: newsletter;
-    padding-top: vw(200);
     position: relative;
     background-color: var(--color-box);
+
+    @include breakpoint(desktop) {
+        padding-top: vw(200);
+    }
+
+    @include breakpoint(phone) {
+        --input-height: #{vw(45, phone)};
+
+        padding-top: vw(105, phone);
+    }
 
 
     body.is-404 & { display: none; }
 
-
+ 
 
     &__wrap {
         position: relative;
+
+        @include breakpoint(phone) {
+            width: 100%
+        }
     }
 
 
@@ -44,16 +57,22 @@
 
         input {
             @include font-family(compressed);
-            @include font-size(50, 50);
 
             text-transform: uppercase;
             width: 100%;
             color: currentColor;
             font-weight: bold;
 
+            @include breakpoint(desktop) {
+                @include font-size(50, 50);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(20, 20);
+            }
+
 
             .is-completed & { opacity: 0; }
-
 
 
             &::placeholder {
@@ -63,6 +82,14 @@
                 color: currentColor;
                 font-weight: bold;
                 transition: opacity $time-fast;
+
+                @include breakpoint(desktop) {
+                    @include letter-spacing(-1.75, 50);
+                }
+
+                @include breakpoint(phone) {
+                    @include letter-spacing(-0.5, 20);
+                }
             }
 
 
@@ -76,9 +103,19 @@
 
     &__button {
         position: absolute;
-        inset: auto vw(16) auto auto;
         margin: auto;
 
+        @include breakpoint(desktop) {
+            inset: auto vw(16) auto auto;
+        }
+
+        @include breakpoint(phone) {
+            inset: auto vw(8, phone) auto auto;
+
+            .button {
+                // flex-direction: row !important;
+            }
+        }
 
         .is-completed & { display: none; }
     }
@@ -86,14 +123,34 @@
 
 
     &__heading {
-        @include font-size(103, 73);
-        @include letter-spacing(-3.09, 103);
-
         position: absolute;
-        inset: auto vw(18) 100% auto;
         font-weight: bold;
         text-align: right;
         text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(103, 73);
+            @include letter-spacing(-3.09, 103);
+
+            inset: auto vw(18) var(--input-height) auto;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(49, 0.935);
+            @include letter-spacing(-1.47, 49);
+
+            position: relative;
+            text-align: left;
+            inset: auto 100% auto rem(14);
+            order: -1;
+        }
+    }
+
+    &__fields {
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+        }
     }
 
 
@@ -105,7 +162,24 @@
         padding-left: var(--side-padding);
         color: var(--color-red);
 
-        .has-errors & { margin-bottom: vw(7); }
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 16);
+        }
+
+        .has-errors & { 
+            @include breakpoint(desktop) {
+                margin-bottom: vw(7);
+            } 
+
+            @include breakpoint(phone) {
+                margin-bottom: vw(9, phone);
+                
+            }
+        }
     }
 
 
@@ -121,40 +195,78 @@
 
     &__sticker {
         position: absolute;
-        inset: calc(100% - 6px) auto auto 0;
 
+        @include breakpoint(desktop) {
+            inset: calc(100% - 6px) auto auto 0;
+        }
+
+        @include breakpoint(phone) {
+            inset: calc(100% - 4px) auto auto 0;
+        }
 
         .is-completed & {
-            top: calc(100% - 12px);
+            @include breakpoint(desktop) {
+                top: calc(100% - 12px);
+            }
+
+            @include breakpoint(phone) {
+                top: calc(100% - 8px);
+            }
         }
     }
 
 
     legend {
         @include font-family(normal);
-        @include font-size(14, 16);
-
+        
         padding-left: var(--side-padding);
-        margin-bottom: vw(4);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+
+            margin-bottom: vw(4);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 18.9);
+
+            max-width: rem(234);
+            padding-top: vw(3, phone);
+            margin-bottom: vw(6, phone);
+        }
     }
 
 
 
     .message {
         @include font-family(compressed);
-        @include font-size(50, 50);
-
 
         text-transform: uppercase;
         max-width: 55%;
 
+        @include breakpoint(desktop) {
+            @include font-size(50, 50);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 22);
+        }
 
         p {
             &:first-of-type {
                 @include flex;
-                padding-top: vw(7);
-                margin-bottom: vw(8);
+
                 height: var(--input-height);
+
+                @include breakpoint(desktop) {
+                    padding-top: vw(7);
+                    margin-bottom: vw(8);
+                }
+
+                @include breakpoint(phone) {
+                    padding-top: vw(7, phone);
+                    margin-bottom: vw(12, phone);
+                }
             }
         }
     }

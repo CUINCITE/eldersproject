@@ -4,7 +4,20 @@
 
     @include breakpoint(desktop) {
         height: var(--app-height);
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: 1fr auto;
+    }
+
+    &__wrapper {
+        @include breakpoint(desktop) {
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        @include breakpoint(phone) {
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            height: var(--app-height);
+        }
     }
 
     &__author {
@@ -12,16 +25,27 @@
             padding-bottom: rem(10);
 
             h3 {
-                padding-top: 0;
+                // padding-top: 0;
+            }
+        }
+
+        @include breakpoint(phone) {
+            margin-top: rem(17);
+        }
+
+        &_wrapper {
+            @include breakpoint(not-desktop) {
+                margin-top: 0;
             }
         }
     }
 
     &__cover {
+        aspect-ratio: 1/1;
+
         @include breakpoint(desktop) {
             position: absolute;
             width: vw(626);
-            aspect-ratio: 1/1;
             right: vw(40);
             top: 46%;
             translate: 0 -50%;
@@ -30,7 +54,28 @@
                 transform: rotate(-14.8deg);
             }
         }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+
+            .illustration {
+                transform: rotate(-7deg);
+            }
+
+            @include breakpoint(phone) {
+                width: vw(290, phone);
+                left: vw(8, phone);
+            }
+        }
+
+        &_wrapper {
+            @include breakpoint(not-desktop) {
+                grid-row-start: 2;
+            }
+        }
     }
+ 
+
 
     &__copy {
 
@@ -38,11 +83,21 @@
             @include breakpoint(desktop) {
                 @include font-size (14, 1.15);
             }
+
+            @include breakpoint(phone) {
+                padding-block: rem(20);
+            }
         }
 
         .button {
             @include breakpoint(desktop) {
                 margin-bottom: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                @include flex(row, flex-start, center)
+
+                margin-bottom: rem(80);
             }
         }
 

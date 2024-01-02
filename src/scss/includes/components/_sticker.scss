@@ -2,13 +2,11 @@
     $self: &;
 
 
-
     --sticker-size: #{vw(111)};
     --sticker-fold-size: 11%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
     --sticker-text-color: var(--color-text-alt);
-
 
 
     @include flex;
@@ -22,7 +20,16 @@
     position: relative;
     overflow: hidden;
     backface-visibility: hidden;
-    padding: vw(30) vw(20);
+
+    @include breakpoint(desktop) {
+        padding: vw(30) vw(20);
+    }
+
+    @include breakpoint(phone) {
+        --sticker-size: #{vw(83.25, phone)};
+
+        padding: vw(30, phone) vw(20, phone);
+    }
 
     // to do: refactor this
     * { transition: all $time ease-in-out; }
@@ -41,17 +48,38 @@
         --sticker-text-color: var(--color-pink);
     }
 
+    &--long_text {
+        .sticker__text {
+            @include breakpoint(phone) {
+                @include font-size(17, 16.252);
+                @include letter-spacing(-0.051, 17);
+                
+                margin-top: rem(-7);
+            }
+        }
+    }
+
 
 
     &__text {
-        @include font-size(25, 22);
-        @include letter-spacing(-0.75, 25);
-
         text-transform: uppercase;
         transform: rotate(-25deg);
-        padding-top: rem(12);
-        padding-right: rem(6);
 
+        @include breakpoint(desktop) {
+            @include font-size(25, 22);
+            @include letter-spacing(-0.75, 25);
+
+            padding-top: rem(12);
+            padding-right: rem(6);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(18.75, 16.5);
+            @include letter-spacing(-0.0562, 18.75);
+
+            padding-top: rem(12);
+            padding-right: rem(6);
+        }
 
         .sticker--big & {
             @include font-size(32, 27.5);
@@ -63,9 +91,13 @@
 
 
         .is-404 & {
-            @include font-size(23, 19);
-            @include letter-spacing(-1.15, 23);
-            padding-right: rem(8);
+
+            @include breakpoint(desktop) {
+                @include font-size(23, 19);
+                @include letter-spacing(-1.15, 23);
+                
+                padding-right: rem(8);
+            }
         }
     }
 

@@ -5,7 +5,9 @@
             <div class="grid">
                 <div class="col-span-12">
                     <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
-                        {% include "./components/c_sticker.html" with { text: sticker } %}
+                        <div class="interviews__sticker">
+                            {% include "./components/c_sticker.html" with { text: sticker, modifiers: ["long_text"] } %}
+                        </div>        
                         {% include "./components/c_heading.html" with { reclined: true } %}
                     </div>
                 </div>
@@ -24,13 +26,14 @@
                             name: item.name,
                             title: item.title } %}
 
-                            <p class="interviews__state">{{item.state}}</p>
+                            <p class="interviews__state desktop-only">{{item.state|raw}}</p>
                         </div>
                         <div class="interviews__right col-span-3 col-start-7">
                             <p class="interviews__text">{{item.text}}</p>
-                            <p class="interviews__collection">{{item.collection}} collection</p>
+                            <p class="interviews__collection desktop-only">{{item.collection}} collection</p>
                         </div>
                         <div class="interviews__box col-span-3 col-start-10">
+                            <p class="interviews__state desktop-hide">{{item.state|raw}}</p>
                             <div class="interviews__box-wrap">
                                 {% include "./components/c_interview-box.html" with {
                                     modifier: modifiers[loop.index % 3],

@@ -29,6 +29,7 @@ _data
 _data/*
 serdelia
 serdelia/*
+.npmrc
 .env
 dev.env
 stage.env

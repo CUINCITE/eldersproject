@@ -8,6 +8,7 @@
         },
         "image": {
                 "desktop": "j_wortham.png",
+                "mobile": "j_wortham.png",
                 "alt": ""
             }
     },
@@ -15,6 +16,7 @@
         "type": "text_aside",
         "mainText": {
             "size": "medium",
+            "modifiers":["padded"],
             "aside": true,
             "label": "I SEE <br> MY LIGHT <br> <i>SHINING</i>"
             },
@@ -124,6 +126,7 @@
                 "photo": { 
                     "image": {   
                         "desktop": "placeholder_person_1.png",
+                        "mobile": "placeholder_person_1.png",
                         "alt": ""
                     },
                     "modifiers": ["fit", "small_frame"], 
@@ -136,6 +139,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_2.png",
+                            "mobile": "placeholder_person_2.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -148,6 +152,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_3.png",
+                            "mobile": "placeholder_person_3.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -160,6 +165,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_4.png",
+                            "mobile": "placeholder_person_4.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -172,6 +178,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_5.png",
+                            "mobile": "placeholder_person_5.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -182,12 +189,14 @@
         },
         {
             "title": {"size": "small", "label": "Advisory Board"},
+            "reversed": "true",
             "people": [{
                 "name": "London Sims", 
                 "title": "Project Manager", 
                 "photo": { 
                     "image": {   
                         "desktop": "placeholder_person_6.png",
+                        "mobile": "placeholder_person_6.png",
                         "alt": ""
                     },
                     "modifiers": ["fit", "small_frame"], 
@@ -200,6 +209,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_7.png",
+                            "mobile": "placeholder_person_7.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -212,6 +222,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_1.png",
+                            "mobile": "placeholder_person_1.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -224,6 +235,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_2.png",
+                            "mobile": "placeholder_person_2.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -236,6 +248,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_5.png",
+                            "mobile": "placeholder_person_5.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -248,6 +261,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_4.png",
+                            "mobile": "placeholder_person_4.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -260,6 +274,7 @@
                     "photo": { 
                         "image": {   
                             "desktop": "placeholder_person_3.png",
+                            "mobile": "placeholder_person_3.png",
                             "alt": ""
                         },
                         "modifiers": ["fit", "small_frame"], 
@@ -320,15 +335,15 @@
             }
         ],
         "authors": [ {"name": "Robin Coste Lewis", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
-                    {"name": "Renée Watson", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Natalie Diaz", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Jenna Wortham", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Eve L. Ewing", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Ellery Washington", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Denise Frohman", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Carolina De Robertis", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "Caleb Gayle", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."},
-                    {"name": "April Reign", "interviews": 23, "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat."} 
+                    {"name": "Renée Watson", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Natalie Diaz", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Jenna Wortham", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Eve L. Ewing", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Ellery Washington", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Denise Frohman", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Carolina De Robertis", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "Caleb Gayle", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"},
+                    {"name": "April Reign", "interviews": 23, "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.</p>"} 
         ]
     }
   ]

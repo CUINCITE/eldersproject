@@ -57,12 +57,20 @@ html {
         "footer header";
     gap: 1px;
     align-content: start;
+
+    // @include breakpoint(not-desktop) {
+    //     grid-template-columns: 1fr;
+    // }
 }
 
 
 main {
     grid-area: main;
     position: relative;
+
+    @include breakpoint(phone) {
+        
+    }
 }
 
 
@@ -222,5 +230,11 @@ ul {
 .grecaptcha-badge {
     opacity: 0;
     pointer-events: none;
+}
+
+.no_padding_bottom_mobile {
+    @include breakpoint(not-desktop) {
+        padding-bottom: 0 !important;
+    }
 }
 

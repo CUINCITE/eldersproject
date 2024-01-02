@@ -11,17 +11,19 @@
 }
 
 
+
 .grid {
     --grid-column-start: auto;
     --grid-columns-span: auto;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-
+    
     @each $bp in (phone tablet desktop hd) {
         @include breakpoint($bp) {
             $gutter-width: map-get($grid-gutter, $bp);
             $offset-width: map-get($grid-offset, $bp);
 
+            grid-template-columns: repeat(map-get($grid-columns, $bp), minmax(0, 1fr));
             column-gap: $gutter-width;
             margin-left: $offset-width;
             margin-right: $offset-width;
@@ -54,8 +56,15 @@
 }
 
 
+@include breakpoint(phone) {
+    div[class*="col-span-"] {
+        grid-column: var(--grid-column-start) / span var(--grid-columns-span);
+    }
+}
+
+
 @for $cols from 1 through map-get($grid-columns, desktop) {
-    @each $bp in desktop {
+    @each $bp in (desktop) {
         @include breakpoint($bp) {
             .col-span-#{$cols} {
                 --grid-columns-span: #{$cols};
@@ -64,6 +73,6 @@
             .col-start-#{$cols} {
                 --grid-column-start: #{$cols};
             }
-        }
+        } 
     }
 }

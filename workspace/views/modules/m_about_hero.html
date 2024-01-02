@@ -1,6 +1,13 @@
 <section class="module module--about_hero">
     <div class="about_hero">
-        {% include "modules/m_heading.html" with { heading: heading } %}
+
+        <div class="about_hero__logo desktop-hide">
+            {% include "./components/c_logo_box.html" %}
+        </div>
+
+        <div class="about_hero__heading">
+            {% include "modules/m_heading.html" with { heading: heading } %}
+        </div>
 
         <div class="box">
             <div class="about_hero__cards">
@@ -8,5 +15,6 @@
                 {% include "./subviews/subview_illustration.html" with { shadows: ["dark_green", "red", "yellow", "light_blue"], image: image } %}
             </div>
         </div>
+        
     </div>
 </section>
