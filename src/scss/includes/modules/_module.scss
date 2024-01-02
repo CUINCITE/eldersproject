@@ -15,8 +15,6 @@
         @include flex(column, space-between, stretch);
 
         height: 100%;
-
-        
     }
 
 
@@ -34,9 +32,9 @@
             }
         }
 
-        .box:last-of-type { 
+        .box:last-of-type {
             @include breakpoint(desktop) {
-                padding-bottom: rem(67); 
+                padding-bottom: rem(67);
             }
         }
 
@@ -73,7 +71,6 @@
                 background-color: var(--color-bg);
             }
         }
-
     }
 
 
@@ -119,23 +116,18 @@
                 margin-top: 0 !important;
 
                 .grid {
-                    
                     & div:first-child {
                         grid-row-start: 2;
                     }
                 }
             }
         }
-
-
     }
 
 
-    &:first-of-type:not(.module--hero) .box:first-of-type {
+    &:first-of-type:not(.module--hero) > .box:first-of-type {
         @include breakpoint(desktop) {
             padding-top: rem(27);
         }
-
     }
-    
 }

@@ -2,6 +2,7 @@
     display: none; // do not change this!
 }
 
+
 .svg-boxes {
     width: rem(95);
     height: auto;
@@ -12,5 +13,16 @@
     width: rem(24);
     height: auto;
 }
+
+
+.svg-bracket-left,
+.svg-bracket-right {
+    width: rem(5);
+    height: rem(27);
+}
+
+
+.svg-bracket-left { margin-right: rem(5); }
+.svg-bracket-right { margin-left: rem(5); }
 
 

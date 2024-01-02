@@ -1,3 +1,17 @@
 .collections {
+    &__item {
+        border-bottom: 1px solid var(--color-bg);
+        padding: rem(13) 0 rem(29);
+    }
 
+
+
+    &__link {
+        @include font-family(compressed);
+        @include font-size(40, 38);
+        @include letter-spacing(-1, 40);
+
+        text-transform: uppercase;
+        padding: 0 var(--grid-margin);
+    }
 }

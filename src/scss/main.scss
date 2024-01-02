@@ -48,6 +48,8 @@
 @import "includes/modules/people";
 @import "includes/modules/interviews";
 @import "includes/modules/text_aside";
+@import "includes/modules/results";
+
 
 /* stylelint-disable-line */
 @import "includes/components/background";
@@ -76,4 +78,6 @@
 @import "includes/components/modal";
 @import "includes/components/filtered";
 @import "includes/components/text-sticker";
+@import "includes/components/transcripts";
+@import "includes/components/expand";
 

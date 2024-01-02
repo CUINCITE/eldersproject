@@ -9,9 +9,7 @@ import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
 import { Offscreen } from './Offscreen';
 import { Menu } from './Menu';
-import { CSSAnimate } from './widgets/CSSAnimate';
-import { API } from './widgets/Api';
-import { Recaptcha } from './widgets/Recaptcha';
+import Widgets from './widgets/All';
 import { Search } from './Search';
 
 export const local = !!window.location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
@@ -217,9 +215,7 @@ class Site {
         page.on(PageEvents.CHANGE, this.onPageAppend);
 
         // bind widgets:
-        Recaptcha.bind();
-        API.bind();
-        CSSAnimate.bind();
+        Widgets.bind();
 
         // update links:
         this.setActiveLinks();
@@ -235,7 +231,6 @@ class Site {
      */
     private onPageAppend = (el: HTMLElement): void => {
         PushStates.bind(el);
-        CSSAnimate.bind();
         this.scroll.load();
     };
 

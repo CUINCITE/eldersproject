@@ -1,0 +1,17 @@
+<div class="interviews-grid__tile">
+    <a href="#" class="interviews__link"><span class="sr-only">Go to interview</span></a>
+    <div class="interviews__main">
+        <h3 class="interviews__name">{{item.name}}</h3>
+        <p class="interviews__description">{{item.description}}</p>
+    </div>
+    <div class="interviews__locations">
+        {% for item in item.locations %}
+            <span>{{item}}</span>
+        {% endfor %}
+    </div>
+    <h4 class="interviews__collection interviews__collection--grid">{{item.collection}} <br> Collection</h4>
+    <div class="interviews__copy">
+        <p>{{item.copy}}</p>
+        <h3 class="interviews__copy-collection">{{item.collection}} collection</h3>
+    </div>
+</div>

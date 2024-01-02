@@ -1,64 +1,69 @@
-import { gsap } from 'gsap/dist/gsap';
-
 export class Expand {
+
+    public static resize = () => {
+        this.setMaxHeight();
+    };
+
+
+
     public static bind(): void {
-        document.querySelectorAll('[aria-controls]').forEach(element => {
-            element.addEventListener('click', Expand.onAriaControlsClick);
+
+        this.setMaxHeight();
+
+        ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
+            const toggleButton = document.querySelector(`[aria-controls="${element.id}"]`) as HTMLElement;
+            toggleButton?.addEventListener('click', Expand.onAriaControlsClick);
+            // console.log(element, toggleButton);
         });
     }
+
+
+
+    public static unbind = (): void => {
+
+        ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
+            const toggleButton = element.querySelector('[aria-controls]') as HTMLElement;
+
+            toggleButton?.removeEventListener('click', Expand.onAriaControlsClick);
+        });
+    };
+
+
 
     private static onAriaControlsClick = (e: Event): void => {
         e.preventDefault();
         e.stopPropagation();
 
-        const that = e.currentTarget as HTMLElement;
-        const id = that.getAttribute('aria-controls');
-        const isExpanded = that.getAttribute('aria-expanded') === 'true';
-        const target = document.querySelector(`#${id}`) as HTMLElement;
+        const target = e.currentTarget as HTMLElement;
+        const isExpanded = target.getAttribute('aria-expanded') === 'true';
 
-        target.style.position = 'relative';
-        target.style.overflow = 'hidden';
+        isExpanded ? this.collapse(target) : this.expand(target);
+    };
 
-        if (!isExpanded) {
-            // expand:
 
-            target.style.display = 'block';
 
-            target.setAttribute('aria-hidden', 'false');
-            const hgt = target.children[0].clientHeight;
+    private static expand = (target: HTMLElement) => {
+        target.setAttribute('aria-expanded', 'true');
+        target.parentElement.classList.add('is-expanded');
+        (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-expanded-text');
+        document.getElementById(target.getAttribute('aria-controls')).classList.add('is-expanded');
+    };
 
-            gsap.fromTo(target, { height: 0 }, {
-                duration: hgt / 400,
-                height: hgt,
-                ease: 'power2.out',
-                onComplete: (): void => {
-                    that.setAttribute('aria-expanded', 'true');
-                    window.dispatchEvent(new Event('resize'));
-                },
-            });
 
-            if (that.getAttribute('data-aria-less')) {
-                that.querySelector('.js-text').innerHTML = that.getAttribute('data-aria-less');
-            }
-        } else {
-            // collapse:
 
-            const hgt = target.clientHeight;
-            gsap.to(target, {
-                duration: hgt / 400,
-                height: 0,
-                ease: 'power2.out',
-                onComplete: (): void => {
-                    that.setAttribute('aria-expanded', 'false');
-                    target.setAttribute('aria-hidden', 'true');
-                    target.style.display = 'none';
-                    window.dispatchEvent(new Event('resize'));
-                },
-            });
+    private static collapse = (target: HTMLElement) => {
+        target.setAttribute('aria-expanded', 'false');
+        target.parentElement.classList.remove('is-expanded');
+        (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-hidden-text');
+        document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
+    };
 
-            if (that.getAttribute('data-aria-more')) {
-                that.querySelector('.js-text').innerHTML = that.getAttribute('data-aria-more');
-            }
-        }
+
+
+    private static setMaxHeight = () => {
+        ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
+            const { height } = element.children[0].getBoundingClientRect();
+            element.style.maxHeight = `${height}px`;
+        });
     };
 }

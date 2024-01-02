@@ -1,0 +1,60 @@
+.transcripts {
+    &__item {
+        display: grid;
+        grid-template-columns: 34% 66%;
+        align-content: start;
+        padding: 0 var(--grid-margin);
+    }
+
+
+
+    &__label {
+        @include font-family(compressed);
+        @include font-size(40, 38);
+        @include letter-spacing(-1, 40);
+
+        text-transform: uppercase;
+        padding-top: rem(13);
+        padding-bottom: rem(28);
+    }
+
+
+
+    &__elements {
+        @include flex(column, flex-start, flex-start);
+
+        padding-top: rem(24);
+        padding-bottom: rem(18);
+
+
+        &:has(.expand) {
+            padding-top: rem(28);
+            padding-bottom: rem(20);
+        }
+
+
+        ul {
+            @include flex(column, flex-start, flex-start);
+
+            gap: rem(25);
+        }
+
+
+        li {
+            @include font-family(compact);
+            @include font-size(17, 17);
+        }
+
+
+        a {
+            @include font-size(17, 17);
+            @include letter-spacing(-0.17, 17);
+
+            span {
+                background-color: var(--color-yellow);
+                border-radius: rem(30);
+                padding: rem(1) rem(4);
+            }
+        }
+    }
+}

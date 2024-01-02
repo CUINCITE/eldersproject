@@ -27,9 +27,9 @@
                 inset: rem(-6) auto 0 rem(32);
             }
 
-            .button--small & {
-                height: rem(8);
-            }
+            .button--medium & { height: rem(14); }
+
+            .button--small & { height: rem(8); }
 
             .button--lightbox.button--reversed & { inset: 0 auto rem(-6) rem(32); }
         }
@@ -47,10 +47,9 @@
                 width: rem(33);
             }
 
+            .button--medium & { width: rem(35); }
 
-            .button--small & {
-                width: rem(15);
-            }
+            .button--small & { width: rem(15); }
         }
 
 
@@ -74,6 +73,11 @@
 
             .button--small & {
                 border-width: rem(7) 0 rem(7) rem(9);
+            }
+
+
+            .button--medium & {
+                border-width: rem(14) 0 rem(14) rem(16);
             }
         }
     }
