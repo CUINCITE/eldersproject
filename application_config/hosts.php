@@ -10,6 +10,7 @@ $cfg_domains = [
 		'sql_user' =>                                       getenv('SQL_USER'),
 		'sql_pass' =>                                       getenv('SQL_PASS'),
 		'sql_base' =>                                       getenv('SQL_BASE'),
+        'upload_server' =>                                  getenv('UPLOAD_SERVER'),
 		'smtp' =>
 		[
 			'server' => getenv('SMTP_SERVER'),
