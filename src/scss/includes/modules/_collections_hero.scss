@@ -1,0 +1,10 @@
+.collections_hero {
+    display: grid;
+    position: relative;
+
+    @include breakpoint(desktop) {
+        height: var(--app-height);
+        grid-template-rows: auto 1fr;
+    }
+
+}

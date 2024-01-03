@@ -14,24 +14,6 @@
 
         @include breakpoint(not-desktop) {
             position: relative;
-
-            &::after {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 0;
-                height: 1px;
-                background-color: $color-bg;
-                z-index: -1;
-
-                @each $bp in (tablet, phone) {
-
-                    @include breakpoint($bp) {
-                        left: map-get($grid-gutter, $bp) / -2;
-                        width: calc(100% + (#{map-get($grid-gutter, $bp)} / 2) + #{map-get($grid-offset, $bp)});
-                    }
-                }
-            }
         }
 
         &--boxes {
@@ -50,10 +32,14 @@
                 right: -1 * map-get($grid-offset, phone);
                 padding-bottom: vw(21, phone);
                 padding-inline: map-get($grid-offset, phone);
-                margin-top: rem(-60);
+                margin-top: rem(-40);
                 text-align: right;
 
-                svg {
+                &.text_aside__decorator--contact {
+                    margin-top: rem(-35);
+                }
+
+                svg { 
                     scale: -1 1;
                 }
             }
@@ -69,6 +55,24 @@
             @include breakpoint(phone) {
                 margin-left: map-get($grid-gutter, phone); 
                 padding-bottom: rem(32);
+
+                &::after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    height: 1px;
+                    background-color: $color-bg;
+                    z-index: -1;
+    
+                    @each $bp in (tablet, phone) {
+    
+                        @include breakpoint($bp) {
+                            left: map-get($grid-gutter, $bp) * -1;
+                            width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                        }
+                    }
+                } 
             }
  
             img {
@@ -127,6 +131,24 @@
                 margin-left: map-get($grid-gutter, phone); 
                 padding-bottom: rem(32);
                 padding-top: vw(5, phone);
+
+                &::after {
+                    content: ""; 
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    height: 1px;
+                    background-color: $color-bg;
+                    z-index: -1;
+    
+                    @each $bp in (tablet, phone) {
+    
+                        @include breakpoint($bp) {
+                            left: map-get($grid-gutter, $bp) * -1;
+                            width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                        }
+                    }
+                }
             }
 
             .polaroid {

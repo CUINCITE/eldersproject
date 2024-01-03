@@ -29,7 +29,7 @@
             @include font-size(57, 0.775);
             @include letter-spacing(-1.71, 57);
 
-            margin-bottom: rem(8);
+            margin-bottom: rem(6);
         }
     }
 
@@ -52,8 +52,8 @@
             @include letter-spacing(-0.5, 20);
 
             order: -2;
-            margin-top: rem(14);
-            padding-left: rem(2);
+            margin-top: rem(12);
+            padding-left: rem(1);
         }
     }
 
@@ -136,7 +136,7 @@
             @include font-size(14, 18.06);
 
             order: -1;
-            margin-top: rem(17);
+            margin-top: rem(14);
         }
     }
 
@@ -164,7 +164,7 @@
         }
 
         @include breakpoint(phone) {
-            margin-top: rem(18);
+            margin-top: rem(16);
 
             .button {
                 flex-direction: row-reverse;

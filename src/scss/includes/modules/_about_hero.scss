@@ -10,10 +10,10 @@
 
     @include breakpoint(phone) {
         grid-template-rows: auto auto 1fr;
-        height: vw(516, phone);
+        height: vw(512, phone);
 
-        .heading {
-            margin-block: rem(-2) rem(-24);
+        .heading { 
+            margin-block: rem(-23) rem(-24);
         }
     }
 
@@ -43,8 +43,8 @@
         }
 
         @include breakpoint(phone) {
-            width: vw(290, phone);
-            height: vw(290, phone);
+            width: vw(289, phone);
+            height: vw(289, phone);
             rotate: -7deg;
             top: 0;
             left: vw(7, phone);

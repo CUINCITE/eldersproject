@@ -1,32 +1,39 @@
-<section class="module module--404">
-    <div class="box">
+<section class="module module--404 page_404">
+
+    <div class="page_404__logo desktop-hide">
+        {% include "./components/c_logo_box.html" %}
+    </div>
+
+    <div class="box page_404__error">
         <div class="grid">
             <div class="col-span-12">
                 <div class="box__wrap">
-                    <div class="box__image"></div>
+                    <div class="page_404__image">
+                        {% include "subviews/subview_picture.html" with { image: { desktop: "megaphone.png", mobile: "megaphone.png"} } %}
+                    </div>
                     {% include "components/c_heading.html" with { reclined: true, label: "404" } %}
                 </div>
             </div>
         </div>
     </div>
-    <div class="box">
+    <div class="box page_404__text">
         <div class="grid">
             <div class="col-span-12">
                 {% include "components/c_claim.html" with {
                     small: true,
                     text: "The page you are looking for could not be found.",
                     sticker: {
-                        modifiers: ["purple"],
+                        modifiers: ["purple", "long_text"],
                         text: "Page not found"
                     }
                 } %}
             </div>
         </div>
     </div>
-    <div class="box">
+    <div class="box page_404__link">
         <div class="grid">
             <div class="col-span-12">
-                {% include "components/c_link.html" with { url: "/workspace", text: "Back to <i>Homepage</i>" } %}
+                {% include "components/c_link.html" with { url: "/workspace", text: "Back to <i>Homepage</i>", modifiers: ["big"] } %}
             </div>
         </div>
     </div>

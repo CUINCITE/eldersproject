@@ -4,6 +4,7 @@
         "type": "about_hero",
         "heading": {
             "align": "right",
+            "modifiers": ["title"],
             "label": "About"
         },
         "image": {

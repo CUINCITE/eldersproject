@@ -9,7 +9,8 @@
 
     .text {
         @include breakpoint(phone) {
-            padding-block: rem(12) rem(48);
+            padding-block: rem(12) rem(46);     
         }
     }
 }
+ 

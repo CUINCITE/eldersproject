@@ -91,7 +91,7 @@
         },
         {
             "type": "claim",
-            "modifiers": ["no_padding_bottom_mobile"],
+            "modifiers": ["no_padding_bottom_mobile", ""],
             "claim": {
                 "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed."
             }
