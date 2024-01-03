@@ -1,0 +1,17 @@
+<section class="module module--text-with-sticker box">
+    <div class="grid">
+        <div class="col-span-12">
+            <div class="text-sticker">
+                <div class="text-sticker__wrap">
+                    {% include "subviews/subview_text.html" with { text: text, short: true } %}
+                    <div class="text-sticker__sticker">
+                        {% include "components/c_sticker.html" with {
+                            text: label,
+                            modifiers: ['big']
+                        } %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

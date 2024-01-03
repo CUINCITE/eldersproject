@@ -1,46 +1,101 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Interviews</h2>
-      <h3>{{text}}</h3>
-      <hr>
-      <form>
-        <label>Collection:</label>
-        <select name="collection"><option value="">-- select --</option>
-          {% for item in collection %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
-        </select>
-        <label>Theme:</label>
-        <select name="theme"><option value="">-- select --</option>
-          {% for item in theme %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
-        </select>
-        <label>Location:</label>
-        <select name="state"><option value="">-- select --</option>
-          {% for item in state %}<option value="{{item.slug}}"{% if item.selected %} selected{% endif %}>{{item.label}}</option>{% endfor %}
-        </select>
-        <input  type="submit" value="Filter">
-      </form>
-      <hr>
-      {% if items %}
-      <h4>Results: {{items|length}}</h4><br>
-      <table class="table">
-        <thead>
-        <tr style="background:white">
-          <td><a href="{{sort.url_narrator}}">Narrator {{sort.arrow_narrator}}</a></td>
-          <td><a href="{{sort.url_collections}}">Collections {{sort.arrow_collections}}</a></td>
-          <td><a href="{{sort.url_locations}}">Locations {{sort.arrow_locations}}</a></td>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in items %}              
-        <tr>                    
-            <td><a href="{{item.url}}">{{item.label}}</a></td>
-            <td>{{item.interviewers[0].label}} Collection</td>
-            <td>{{item.locations}}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-      </table>
-      {% else %}
-        <h3>No items matching selected criteria.</h3>
-      {% endif %}
+<section class="module module--interviews">
+    <div class="interviews-grid">
+        <div class="interviews-grid__tabs box">
+            <div class="grid">
+                <div class="col-span-12">
+                    <div class="interviews-grid__filtered filtered">
+                        <ul class="filtered__list js-interviews-filtered"></ul>
+                    </div>
+                    <ul class="interviews-grid__letters">
+                        {% set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
+                        {% for letter in letters %}
+                            <li class="interviews-grid__letter">
+                                <button class="js-letter" aria-label="scroll to letter {{ letter }}"
+                                        data-letter="{{ letter }}">{{ letter }}</button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="interviews-grid__filters box">
+            <div class="grid">
+                <div class="col-span-12">
+                    <div class="interviews-grid__form">
+                        <div class="interviews-grid__header">
+                            <button type="button js-modal" aria-controls="modal">
+                                <span class="sr-only">show filters</span>
+                                <i class="icon-filters">
+                                    <span class="row">
+                                        <span class="line"></span>
+                                        <span class="bar"></span>
+                                        <span class="line"></span>
+                                    </span>
+                                    <span class="row">
+                                        <span class="line"></span>
+                                        <span class="bar"></span>
+                                        <span class="line"></span>
+                                    </span>
+                                </i>
+                            </button>
+                            {% include "subviews/subview_interviews_modal.html" %}
+                        </div>
+                        <form action="" data-component="Load"
+                              data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters"}'
+                              class="interviews-grid__form js-interviews-sort">
+                            <fieldset class="interviews-grid__radios">
+                                <legend>Sort by:</legend>
+                                <div>
+                                    <input type="radio" checked name="sort" id="narrators" value="narrators">
+                                    <label for="narrators">
+                                        <i>[[svg::arrow-small]]</i>
+                                        <span>Narrators</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="sort" id="locations" value="locations">
+                                    <label for="locations">
+                                        <i>[[svg::arrow-small]]</i>
+                                        <span>Locations</span>
+                                    </label>
+
+                                </div>
+                                <div>
+                                    <input type="radio" name="sort" id="collections" value="collections">
+                                    <label for="collections">
+                                        <i>[[svg::arrow-small]]</i>
+                                        <span>Collections</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <div class="interviews-grid__buttons">
+                                        <button type="button" aria-label="show grid view" data-view="grid">
+                                            <i class="icon-grid">
+                                                <span></span><span></span><span></span><span></span>
+                                            </i>
+                                        </button>
+                                        <button type="button" aria-label="show list view" data-view="list">
+                                            <i class="icon-list">
+                                                <span></span><span></span><span></span>
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div id="interviews-grid" class="is-list-view">
+                <div class="interviews-grid__tiles interviews interviews--grid">
+                    {% for item in items %}
+                        {% include './subviews/interviews/interviews_tile_' ~ item.type ~ '.html' with item %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
-  </section>
+</section>

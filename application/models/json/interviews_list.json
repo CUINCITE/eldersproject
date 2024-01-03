@@ -32,8 +32,16 @@
                 "model":"topics"
             }
         },
-
-        
+        {
+            "label": "Narrators",
+            "field": "narrators",
+            "required": true,
+            "type":"elements",
+            "source":
+            {
+                "model":"narrators"
+            }
+        },
         {
             "tab":"Status",
             "label": "Url",
@@ -48,6 +56,7 @@
         },
         
         {"field":"locations"},
+        {"field":"summary"},
         {"field":"interviewer_location"},
         {"field":"narrator_location"},
         {

@@ -85,7 +85,11 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			Get Interviews
 		*/
 
-        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model);
+        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, 10);
+        $m['items']= array_map(function($item) {
+            $item['type'] = 'single';
+            return $item;
+        }, $m['items']);
         
 		return $m;
 	}
