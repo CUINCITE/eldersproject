@@ -79,6 +79,16 @@
         }
     }
 
+    &--big {
+
+        @include breakpoint(phone) {
+            @include font-size(40, 50);
+            @include letter-spacing(-1.4, 40);
+
+            gap: vw(6, phone);
+        }
+    }
+
     &--two_line {
         @include breakpoint(phone) {
             margin-bottom: vw(3, phone);
@@ -89,6 +99,7 @@
             }
         }
     }
+
 
 
     span i {

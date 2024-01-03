@@ -4,9 +4,6 @@
 
         .collection_author {
 
-            @include breakpoint(phone) {
-                
-            }
 
             &__name {
 
@@ -121,8 +118,8 @@
             @include font-size(14, 1.05);
             @include letter-spacing(-0.14, 14);
 
-            margin-top: rem(8);
-            margin-bottom: rem(28);
+            margin-top: rem(2);
+            margin-bottom: rem(24);
         }
         
         &::before {

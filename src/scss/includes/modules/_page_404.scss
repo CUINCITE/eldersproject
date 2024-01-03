@@ -1,5 +1,9 @@
 .page_404 {
 
+    @include breakpoint(not-desktop) {
+        @include flex(column, flex-start, stretch);
+    }
+
     &__image {
         z-index: 1;
 
@@ -16,10 +20,25 @@
         @include breakpoint(phone) {
             position: relative;
             width: vw(220, phone);
-            height: vw(220, phone);
+            aspect-ratio: 1/1;
             margin-block: vw(-35, phone) vw(-35, phone);
             rotate: -4.85deg;
-            right: vw(3, phone);
+            right: vw(5, phone);
+            bottom: vw(-15, phone);
+        }
+    }
+
+    &__error {
+        @include breakpoint(phone) {
+            padding-top: vw(6, phone);
+            height: vw(177, phone);
+        }
+    }
+
+    &__link {
+        @include breakpoint(phone) {
+            flex-grow: 1;
+            padding-top: rem(3);
         }
     }
 }

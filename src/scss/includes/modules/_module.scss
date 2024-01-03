@@ -12,9 +12,12 @@
 
 
     &--404 {
-        @include flex(column, space-between, stretch);
 
         height: 100%;
+      
+        @include breakpoint(desktop) {
+            @include flex(column, space-between, stretch);
+        }
     }
 
 
@@ -87,12 +90,13 @@
 
         @include breakpoint(phone) {
             padding-top: rem(13);
-            padding-bottom: rem(88);
+            padding-bottom: rem(92);
         }
 
         &.no_padding_bottom_mobile {
             @include breakpoint(phone) {
                 padding-top: rem(22);
+                margin-bottom: rem(-5);
             }
         }
     }
@@ -106,24 +110,29 @@
         }
 
         @include breakpoint(phone) {
-            padding-block: rem(12) rem(42);
+            padding-block: 0 rem(42);
         }
 
         &--link {
             justify-content: flex-start;
 
             @include breakpoint(phone) {
-                margin-top: 0 !important;
+                margin-top: rem(-17) !important;
 
                 .grid {
                     & div:first-child {
                         grid-row-start: 2;
                     }
                 }
+
+                .button {
+                    padding-top: 0 !important;
+                    line-height: 0.88em;
+                    z-index: 5;
+                }
             }
         }
     }
-
 
     &:first-of-type:not(.module--hero) > .box:first-of-type,
 

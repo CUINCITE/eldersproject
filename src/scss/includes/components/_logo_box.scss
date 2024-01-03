@@ -3,7 +3,7 @@
     @include breakpoint(phone) {
         svg { 
             width: vw(80, phone); 
-            margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
+            margin: vw(13, phone) 0 vw(9, phone) vw(15, phone);
             height: auto; 
         }
     }

@@ -27,8 +27,6 @@
 
     @include breakpoint(phone) {
         --sticker-size: #{vw(83.25, phone)};
-
-        padding: vw(30, phone) vw(20, phone);
     }
 
     // to do: refactor this
@@ -82,11 +80,15 @@
         }
 
         .sticker--big & {
-            @include font-size(32, 27.5);
-            @include letter-spacing(-0.96, 32);
 
-            transform: rotate(-32deg);
-            padding-top: rem(2);
+            @include breakpoint(desktop) {
+                @include font-size(32, 27.5);
+                @include letter-spacing(-0.96, 32);
+    
+                transform: rotate(-32deg);
+                padding-top: rem(2);
+            }
+
         }
 
 

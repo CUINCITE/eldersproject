@@ -119,6 +119,8 @@
         @include breakpoint(phone) {
             @include font-size(30, 24);
             @include letter-spacing(-0.75, 30);
+
+            padding-top: rem(1);
         }
     }
 }

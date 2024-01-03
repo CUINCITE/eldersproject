@@ -25,8 +25,9 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(118.8, 88); 
+            @include font-size(118.8, 85.7); 
             @include letter-spacing(-10.8, 240); 
+            
         }
     }
 
@@ -35,7 +36,7 @@
     &__subtitles {
         @include breakpoint(phone) {
             flex-grow: 1;
-            padding-top: rem(7);
+            // padding-top: rem(4);
         }
     }
 
@@ -52,6 +53,8 @@
         @include breakpoint(phone) {
             @include font-size(15.3, 28.35);
             @include letter-spacing(-0.459, 15.3);
+
+            margin-top: rem(-1);
         }
     }
 
@@ -66,7 +69,7 @@
         }
 
         @include breakpoint(phone) {
-            padding-top: rem(18);
+            padding-top: rem(13);
             padding-left: rem(13);
         }
     }

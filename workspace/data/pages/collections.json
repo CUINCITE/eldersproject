@@ -2,17 +2,11 @@
     "title": "Collections",
     "modules": [
         {
-            "type": "logo_box"
-        },
-        {
-            "type": "heading",
+            "type": "collections_hero",
             "heading": {
                 "align": "right",
                 "label": "Collections"
-            }
-        },
-        {
-            "type": "claim",
+            },
             "claim": {
                 "modifier": "collections",
                 "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus in mollis nunc sed.",

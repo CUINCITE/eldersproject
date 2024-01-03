@@ -15,21 +15,6 @@
     }
 
 
-    &--reclined {
-        @include font-family(reclined, 300);
-
-        @include breakpoint(desktop) {
-            @include font-size(204, 175);
-            @include letter-spacing(-10.2, 204);
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(80, 80);
-            @include letter-spacing(-2.8, 80);
-        }
-    }
-
-
     &--medium {
 
         @include breakpoint(desktop) {
@@ -39,7 +24,7 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(80, 64);
+            @include font-size(80, 67.5);
             @include letter-spacing(-2.4, 80);
         }
 
@@ -112,7 +97,7 @@
             @include font-size(82, 0.84);
             @include letter-spacing(-2.87, 82);
 
-            padding-top: rem(16);
+            padding-top: rem(12);
         }
     }
 
@@ -147,9 +132,39 @@
         }
     }
 
+    &--reclined {
+        @include font-family(reclined, 300);
+
+        @include breakpoint(desktop) {
+            @include font-size(204, 175);
+            @include letter-spacing(-10.2, 204);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(80, 80);
+            @include letter-spacing(-2.8, 80);
+        }
+    }
+
+
     &--padded {
-        padding-top: rem(24);
-        padding-bottom: rem(80);
+        @include breakpoint(desktop) {
+            padding-top: rem(24);
+            padding-bottom: rem(80);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(20);
+            padding-bottom: rem(98);
+        }
+    }
+
+
+    &--title {
+        @include breakpoint(phone) {
+            @include font-size(132, 140.253);
+            @include letter-spacing(-5.94, 132);
+        }     
     }
 
 

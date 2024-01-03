@@ -29,8 +29,8 @@
             @include flex(column, flex-start, flex-start);
 
             @include breakpoint(phone) {
-                gap: vw(28, phone);
-                padding-block: vw(20, phone)
+                gap: rem(19);
+                padding-block: rem(18);
             }
         }
 
@@ -49,7 +49,7 @@
         @include breakpoint(phone) {
             @include font-size(10, 13.5);
 
-            padding: vw(282, phone) 0 vw(14, phone);
+            padding: vw(282, phone) 0 vw(11, phone);
         }
         
     }
