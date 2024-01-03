@@ -1,14 +1,17 @@
 <form class="newsletter" action="json/newsletter.json" data-api='{"beforeCall": "validate", "callback": "onSubscribe"}'>
     <input type="hidden" data-recaptcha data-recaptchakey="6LcHsOMoAAAAAJgIWp7B-XpDKBGk1_dpVXxXu_IT" name="token"
         required="required">
-    <fieldset>
+    <h2 class="newsletter__heading">Newsletter:</h2>
+
+    <fieldset class="newsletter__fields">
         <legend>Sign up with your email address to receive news and updates.</legend>
         <div class="newsletter__error js-error"></div>
+
         <div class="newsletter__wrap">
-            <h2 class="newsletter__heading">Newsletter:</h2>
             <div class="newsletter__input">
                 <label for="email" class="sr-only">Enter your e-mail address</label>
                 <input id="email" type="email" name="email" required placeholder="ENTER YOUR E-MAIL ADDRESS">
+
                 <div class="newsletter__button">
                     <button class="button" type="submit">
                         <i class="icon-btn-arrow arrow ">
@@ -19,6 +22,7 @@
                     </button>
                 </div>
             </div>
+
             <div class="newsletter__message">
                 <div class="newsletter__sticker">
                     <div class="sticker sticker--yellow">

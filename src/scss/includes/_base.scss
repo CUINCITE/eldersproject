@@ -232,9 +232,5 @@ ul {
     pointer-events: none;
 }
 
-.no_padding_bottom_mobile {
-    @include breakpoint(not-desktop) {
-        padding-bottom: 0 !important;
-    }
-}
+
 

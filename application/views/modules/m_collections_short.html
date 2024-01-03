@@ -1,6 +1,5 @@
-<section class="module module--collections_images">
+<section class="module module--collections_images desktop-only">
     <div class="collections_images">
-
 
         <section class="module">
             <div class="box">
@@ -18,7 +17,6 @@
 
                     <ul class="names">
                         {% for item in items %}
-                            {% if item.image.desktop %}
                                 <li class="names__name js-accordeon-item is-closed">
 
                                     <div class="names__author">
@@ -35,7 +33,7 @@
 
                                                 {% include "./components/c_arrow_icon.html" %}
 
-                                                <span>Explore the Collection</span>
+                                                <span>Explore {{ item.interviews }} interviews</span>
                                             </a>
 
                                         </div>
@@ -44,7 +42,6 @@
                                         </div>
                                     </div>
                                 </li>
-                            {% endif %}
                         {% endfor %}
                     </ul>
 
@@ -60,6 +57,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="collections_images__filler col-start-1 col-span-2"></div>
         </div>
 
