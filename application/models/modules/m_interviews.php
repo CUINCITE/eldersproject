@@ -16,6 +16,10 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			FILTERS
 		*/
 
+        $m['filters']['collections'] = $this->parent->getJsonModel('interviewers');
+        $m['filters']['topics'] = $this->parent->getJsonModel('topics');
+        $m['filters']['states'] = $this->parent->getJsonModel('s_states');
+
 		$input=[
 			'collection'=>['collections','interviewers'],
 			'theme'=>['topics','topics'],
