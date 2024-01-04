@@ -31,31 +31,28 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			FILTERS
 		*/
 
-        // filters available to be selected
-        $m['filters']['collections'] = $_SESSION['dict']['collections'];
-        $m['filters']['topics'] = $_SESSION['dict']['topics'];
-        $m['filters']['states'] = $_SESSION['dict']['states'];
-
-
         //filters in the query
 		$input=[
-			'collection'=>['collections','interviewers'],
-			'topic'=>['topics','topics'],
-			'state'=>['states','narrators_states']
+			'collections'=>['collections','interviewers'],
+			'topics'=>['topics','topics'],
+			'states'=>['states','narrators_states']
 		];
 
 		$filters=['active'=>1];
 		foreach ($input as $param=>$dictionaries)
 		{
+            $filter = false;
+
 			if (!empty($this->settings['get'][$param]))
 			{
 				$filter=$this->getModelFilter($dictionaries[0],$this->settings['get'][$param]);
 				if (!empty($filter)) $filters[$dictionaries[1]]=$filter;
 			}
 
-            if (!empty($filter)) $m[$param]=$this->filterUpdate($this->parent->dictGet($dictionaries[0]),$filter);
+            $m[$param]=$this->filterUpdate($this->parent->dictGet($dictionaries[0]),$filter);
 
 		}
+
 
 		/*
 			Sort
@@ -114,8 +111,6 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             }
             return $item;
         }, $m['items']);
-//
-
 
         /*
 			Load more - check if load more items
@@ -148,12 +143,16 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
 	private function filterUpdate($items,$filters)
 	{
-		if ($filters && !is_array($filters)) $filters=explode(',',$filters);
+        if (!$filters) return $items;
+
+		if (!is_array($filters)) $filters=explode(',',$filters);
+
 		if ($filters)
 		{
 			foreach ($items as $k=>$v)
 				$items[$k]['selected']=in_array($v['id'],$filters);
 		}
+
 		return $items;
 	}
 

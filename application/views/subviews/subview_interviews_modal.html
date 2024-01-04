@@ -6,22 +6,22 @@
             <div class="modal__grid">
                 <fieldset class="modal__group">
                     <legend>Collections</legend>
-                    {% for collection in filters.collections %}
-                        <input type="checkbox" name="collection" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}">
+                    {% for collection in collections %}
+                        <input type="checkbox" name="collections" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}"{% if collection.selected %} checked{% endif %}>
                         <label for="collection-{{ collection.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ collection.label }}</span></label>
                     {% endfor %}
                 </fieldset>
                 <fieldset class="modal__group modal__group--topics">
                     <legend>Topics</legend>
-                    {% for topic in filters.topics %}
-                        <input type="checkbox" name="topic" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }}">
+                    {% for topic in topics %}
+                        <input type="checkbox" name="topics" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }}"{% if topic.selected %} checked{% endif %}>
                         <label for="topic-{{ topic.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ topic.label }}</span></label>
                     {% endfor %}
                 </fieldset>
                 <fieldset class="modal__group">
                     <legend>States</legend>
-                    {% for state in filters.states %}
-                        <input type="checkbox" name="state" id="state-{{ state.slug }}" value="{{ state.slug }}" data-name="{{ state.label }}">
+                    {% for state in states %}
+                        <input type="checkbox" name="states" id="state-{{ state.slug }}" value="{{ state.slug }}" data-name="{{ state.label }}"{% if state.selected %} checked{% endif %}>
                         <label for="state-{{ state.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ state.label }}</span></label>
                     {% endfor %}
                 </fieldset>
