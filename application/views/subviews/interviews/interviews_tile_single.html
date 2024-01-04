@@ -5,7 +5,7 @@
         <p class="interviews__description">{{item.narrators.0.occupation}}</p>
     </div>
     <div class="interviews__locations">
-        {% for location in item.narrator_states %}
+        {% for location in item.narrators_states %}
             <span>{{ location.label }}, {{ location.slug }}</span>
         {% endfor %}
     </div>

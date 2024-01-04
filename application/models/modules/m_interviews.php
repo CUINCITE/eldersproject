@@ -109,8 +109,12 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, $numberOfItems]);
         $m['items']= array_map(function($item) {
             $item['type'] = 'single';
+            if (is_array($item['narrators_states'])) {
+                $item['narrators_states'] = array_map("unserialize", array_unique(array_map("serialize", $item['narrators_states'])));
+            }
             return $item;
         }, $m['items']);
+//
 
 
         /*
@@ -119,7 +123,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         $m['load_more'] = false;
 
-        if (count($m['items']) ==  $itemsPerPage) {
+        if (count($m['items']) >=  $itemsPerPage) {
             $startingPage = $page * $itemsPerPage + 1;
             $newItem = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, 1]);
             if ($newItem) $m['load_more'] = $this->getNextPageUri($page);
