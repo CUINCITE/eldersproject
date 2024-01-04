@@ -97,10 +97,13 @@
                 {% if load_more %}
                     <div class="interviews__more">
                         {% include "./components/c_load_more.html" with {
-                            contentSelector: "#interviews-tiles",
-                            infinite: true,
+                            options: {
+                                "contentSelector": "#interviews-tiles",
+                                "infinite": true,
+                                "updateURL": true,
+                            },
                             text: "Load More <i>Interviews</i>",
-                            url: load_more
+                            url: load_more,
                         } %}
                     </div>
                 {% endif %}

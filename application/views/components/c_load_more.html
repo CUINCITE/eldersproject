@@ -1,4 +1,4 @@
-<div data-component="More" data-options='{"contentSelector": "{{contentSelector}}"{% if infinite %}, "infinite": true{% endif %}}'>
+<div data-component="More" data-options='{{options|json_encode()}}'>
     {% include "./components/c_link.html" with {
         modifiers: ["medium"],
         url: url,
