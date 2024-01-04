@@ -5,10 +5,10 @@
       <div class="claim {% if params.claim %}claim--{{params.claim}}{% endif %}">
         {{text}}
         {% if params.sticker %}
-        <div class="claim__sticker">
-            {% include 'subviews/subview_sticker.html' with {label:'Discover more'} %}
-        </div>        
-        {% endif %}            
+          <div class="claim__sticker">
+              {% include 'subviews/subview_sticker.html' with {label:'Discover more'} %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

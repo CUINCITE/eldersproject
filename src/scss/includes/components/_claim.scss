@@ -33,12 +33,6 @@
         }
     }
 
-    &--no_padding_mobile {
-        @include breakpoint(phone) {
-            padding-bottom: 0;
-        }
-    }
-
     &--collections {
 
         @include breakpoint(phone) {

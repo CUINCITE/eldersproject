@@ -8,7 +8,9 @@
                 <div class="col-span-12">
 
                     <div class="interviews__heading">
-                        {% include 'subviews/subview_sticker.html' with {label:'Featured'} %}
+                        <div class="interviews__sticker">
+                            {% include 'subviews/subview_sticker.html' with {label:'Featured', modifier: "long_text"} %}
+                        </div>
                         <h2 class="heading heading--reclined">
                             Interviews
                         </h2>
@@ -23,28 +25,26 @@
                 <li class="interviews__item box">
 
                     <div class="grid">
-                        <a href="{{ item.url }}" class="interviews__link"><span
-                                    class="sr-only">Go to the interview</span></a>
+                        <a href="{{ item.url }}" class="interviews__link">
+                            <span class="sr-only">Go to the interview</span>
+                        </a>
 
                         <div class="interviews__left col-span-5">
-
                             <div class="collection_author">
                                 <h3 class="collection_author__name">{{ item.label }}</h3>
                                 <h4 class="collection_author__title">{{ item.narrators[0].occupation }}</h4>
                             </div>
-
-                            <p class="interviews__state">{{ item.narrator_location }}</p>
-
+                            <p class="interviews__state desktop-only">{{ item.narrator_location }}</p>
                         </div>
 
                         <div class="interviews__right col-span-3 col-start-7">
                             <p class="interviews__text"> {{ item.lead }}</p>
-                            <p class="interviews__collection">{{ item.interviewer_name }} Collection</p>
+                            <p class="interviews__collection desktop-only">{{ item.interviewer_name }} Collection</p>
                         </div>
 
                         <div class="interviews__box col-span-3 col-start-10">
+                            <p class="interviews__state desktop-hide">{{ item.narrator_location }}</p>
                             <div class="interviews__box-wrap">
-
                                 {% set c=c+1 %}{% if c>=colors|length %}{% set c=0 %}{% endif %}
                                 <div class="interviews__box">
                                     <div class="interviews__box-wrap">
@@ -56,10 +56,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
 
                 </li>

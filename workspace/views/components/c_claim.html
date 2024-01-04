@@ -1,4 +1,4 @@
-<div class="claim {% if small %}claim--small {% endif %} {% if modifier %}claim--{{modifier}} {% endif %}">
+<div class="claim{% if small %} claim--small{% endif %}{% if modifier %} claim--{{modifier}}{% endif %}">
     {{text}}
     {% if sticker %}
         <div class="claim__sticker">

@@ -134,6 +134,12 @@
         }
     }
 
+    &--interviews + .module--claim {
+        @include breakpoint(not-desktop) {
+            padding-bottom: 0 !important;
+        }
+    }
+
     &:first-of-type:not(.module--hero) > .box:first-of-type,
 
     // when first module is phone-only, add padding to second's box
