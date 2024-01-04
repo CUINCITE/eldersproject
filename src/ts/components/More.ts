@@ -53,6 +53,7 @@ export class More extends Component {
             this.scrollTrigger = ScrollTrigger.create({
                 trigger: this.view,
                 start: 'bottom bottom',
+                onEnter: () => this.load(),
             });
         }
     }
@@ -106,10 +107,10 @@ export class More extends Component {
 
                 // Update button
                 const id = this.view.getAttribute('id');
-                const newButton: HTMLLinkElement = newDiv.querySelector(id ? `#${id}` : '[data-component="More"]');
+                const newButton: HTMLLinkElement = newDiv.querySelector(id ? `#${id}` : '[data-component="More"] a');
                 const newURL = newButton?.getAttribute('href');
                 if (newButton && newURL !== '') {
-                    this.view.setAttribute('href', newURL);
+                    this.linkEl.setAttribute('href', newURL);
                     this.scrollTrigger?.refresh();
                 } else {
                     this.view.remove();

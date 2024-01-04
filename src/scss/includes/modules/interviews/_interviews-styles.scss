@@ -1,5 +1,4 @@
 .interviews {
-
     &__heading {
         @include flex(row, flex-start, flex-start);
         position: relative;
@@ -11,7 +10,7 @@
         @include breakpoint(phone) {
             padding-top: rem(9);
             margin-block: rem(-3) rem(-6);
-        } 
+        }
 
 
         &--reversed {
@@ -45,7 +44,7 @@
 
     &__sticker {
         @include breakpoint(phone) {
-            position: absolute; 
+            position: absolute;
             bottom: calc(100% - #{rem(22)});
             left: rem(-24);
         }
@@ -59,7 +58,7 @@
 
     &__right {
         @include flex(column, space-between, flex-start);
- 
+
         height: 100%;
     }
 
@@ -112,7 +111,7 @@
 
     &__text {
         @include font-family(normal);
-        
+
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
@@ -122,7 +121,6 @@
         @include breakpoint(phone) {
             @include font-size(12, 16.2);
         }
-
     }
 
 
@@ -151,15 +149,15 @@
 
             .is-grid-view & { display: none; }
         }
-
     }
 
- 
+
 
     &__state {
         @include font-family(reclined);
 
         text-transform: uppercase;
+
         // font-weight: 400;
 
         @include breakpoint(desktop) {
@@ -193,7 +191,6 @@
             @include breakpoint(desktop) {
                 border-left: 1px solid var(--color-bg);
             }
-            
         }
     }
 
@@ -309,5 +306,11 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+    }
+
+
+
+    &__more {
+        padding: rem(16) var(--grid-margin) rem(44);
     }
 }
