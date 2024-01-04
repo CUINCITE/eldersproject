@@ -15,9 +15,17 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			PAGINATION
 		*/
 
-        $items_per_page = 10;
-        $page = !empty($this->settings['get']['page']) ? $this->settings['get']['page'] : 1;
-        if (empty($this->settings['get']['partial'])) $page = 1;
+        $itemsPerPage = 10;
+        $page = 1;
+        $isPartial = (!empty($this->settings['get']['partial']));
+
+        if (!empty($this->settings['get']['page']) && is_numeric($this->settings['get']['page'])) {
+            $page = (int)$this->settings['get']['page'];
+        }
+
+        // startingPage & numberOfItems variables are used in getJsonModel method
+        $startingPage = $isPartial ? $page : 1;
+        $numberOfItems = $isPartial ? $itemsPerPage : $page * $itemsPerPage;
 
 		/*
 			FILTERS
@@ -98,7 +106,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			Get Interviews
 		*/
 
-        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$page, $items_per_page]);
+        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, $numberOfItems]);
         $m['items']= array_map(function($item) {
             $item['type'] = 'single';
             return $item;
@@ -111,10 +119,10 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         $m['load_more'] = false;
 
-        if (count($m['items']) ==  $items_per_page) {
-            $offset = $page * $items_per_page + 1;
-            $new_item = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$offset, 1]);
-            if ($new_item) $m['load_more'] = $this->getNextPageUri($page);
+        if (count($m['items']) ==  $itemsPerPage) {
+            $startingPage = $page * $itemsPerPage + 1;
+            $newItem = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, 1]);
+            if ($newItem) $m['load_more'] = $this->getNextPageUri($page);
         }
         
 		return $m;
@@ -181,7 +189,6 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         return $uri . '?' . http_build_query($params);
     }
-
 
 }
 ?>
