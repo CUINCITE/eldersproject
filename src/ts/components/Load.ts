@@ -45,6 +45,7 @@ export class Load extends Component {
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
 
+        this.updateFiltered();
         this.bind();
     }
 
