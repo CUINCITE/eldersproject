@@ -3,7 +3,7 @@
         <div class="col-span-12">
             <div class="text-sticker">
                 <div class="text-sticker__wrap">
-                    {% include "./subviews/subview_text.html" with { text: text, short: true } %}
+                    {% include "./subviews/subview_text.html" with { text: text, size: 'short' } %}
                     <div class="text-sticker__sticker">
                         {% include "./components/c_sticker.html" with {
                             text: sticker_text,
