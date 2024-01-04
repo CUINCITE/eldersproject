@@ -26,6 +26,7 @@ export class Load extends Component {
     private liveTimeout;
     private viewsButtons: NodeListOf<HTMLButtonElement>;
     private filteredEl: HTMLElement;
+    private resetButton: HTMLButtonElement;
 
 
     constructor(protected view: HTMLElement) {
@@ -41,6 +42,7 @@ export class Load extends Component {
         this.isContentHidden = false;
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
+        this.resetButton = this.view.querySelector('.js-reset');
 
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
@@ -71,6 +73,7 @@ export class Load extends Component {
         }
 
         [...this.viewsButtons].forEach(btn => btn.addEventListener('click', this.onViewBtnClick));
+        this.resetButton && this.resetButton.addEventListener('click', this.onReset);
     }
 
 
@@ -211,5 +214,14 @@ export class Load extends Component {
             // submit needs to be triggered manually for closing modal on submit event
             setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
         }));
+    };
+
+
+
+    private onReset = (e): void => {
+        e.preventDefault();
+        [...this.view.querySelectorAll('input')].forEach(input => {
+            input.checked = false;
+        });
     };
 }
