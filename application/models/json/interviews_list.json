@@ -19,6 +19,8 @@
             "field":"interviewer_name"
         },
 
+        {"field":"label_sort"},
+
         {"field":"interviewer_name_sort"},
         
         {
