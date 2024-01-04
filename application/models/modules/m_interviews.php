@@ -176,7 +176,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     function getNextPageUri($current_page): string
     {
-        $allowedParams = ['page', 'sort', 'collection', 'topic', 'state'];
+        $allowedParams = ['page', 'sort', 'collections', 'topics', 'states'];
 
         $requestUri = $_SERVER['REQUEST_URI'];
         $uri = strtok($requestUri, '?');
