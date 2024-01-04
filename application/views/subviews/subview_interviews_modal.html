@@ -7,7 +7,7 @@
                 <fieldset class="modal__group">
                     <legend>Collections</legend>
                     {% for collection in filters.collections %}
-                        <input type="checkbox" name="collections" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}">
+                        <input type="checkbox" name="collection" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}">
                         <label for="collection-{{ collection.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ collection.label }}</span></label>
                     {% endfor %}
                 </fieldset>
