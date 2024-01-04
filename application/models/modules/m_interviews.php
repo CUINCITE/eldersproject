@@ -16,12 +16,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 		*/
 
         $items_per_page = 10;
-
-        if (isset($this->settings['get']['page'])
-            && is_numeric($this->settings['get']['page']
-            && !empty($this->settings['get']['partial']))) {
-            $page = $this->settings['get']['page'];
-        } else $page = 1;
+        $page = !empty($this->settings['get']['page']) ? $this->settings['get']['page'] : 1;
+        if (empty($this->settings['get']['partial'])) $page = 1;
 
 		/*
 			FILTERS
@@ -41,15 +37,15 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 		];
 
 		$filters=['active'=>1];
-		foreach ($input as $k=>$v)
+		foreach ($input as $param=>$dictionaries)
 		{
-			if (!empty($this->settings['get'][$k]))
+			if (!empty($this->settings['get'][$param]))
 			{
-				$f=$this->getModelFilter($v[0],$this->settings['get'][$k]);
-				if (!empty($f)) $filters[$v[1]]=$f;
+				$filter=$this->getModelFilter($dictionaries[0],$this->settings['get'][$param]);
+				if (!empty($filter)) $filters[$dictionaries[1]]=$filter;
 			}
 
-            if (!empty($f)) $m[$k]=$this->filterUpdate($this->parent->dictGet($v[0]),$f);
+            if (!empty($filter)) $m[$param]=$this->filterUpdate($this->parent->dictGet($dictionaries[0]),$filter);
 
 		}
 
@@ -98,9 +94,6 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			break;
 		}
 
-		
-		
-
 		/*
 			Get Interviews
 		*/
@@ -111,12 +104,18 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             return $item;
         }, $m['items']);
 
+
         /*
-			Load more
+			Load more - check if load more items
 		*/
 
-        $m['load_more'] = $this->getNextPageUri($page);
+        $m['load_more'] = false;
 
+        if (count($m['items']) ==  $items_per_page) {
+            $offset = $page * $items_per_page + 1;
+            $new_item = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$offset, 1]);
+            if ($new_item) $m['load_more'] = $this->getNextPageUri($page);
+        }
         
 		return $m;
 	}
@@ -166,27 +165,20 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     function getNextPageUri($current_page): string
     {
-        // Allowed query parameters
         $allowedParams = ['page', 'sort', 'collection', 'topic', 'state'];
 
-        // Get current URL without query parameters
         $requestUri = $_SERVER['REQUEST_URI'];
         $uri = strtok($requestUri, '?');
 
-        // Parse the query parameters manually
         $queryParams = [];
         if (strpos($requestUri, '?') !== false) {
             parse_str(substr($requestUri, strpos($requestUri, '?') + 1), $queryParams);
         }
 
-        // Filter out unwanted parameters
         $params = array_intersect_key($queryParams, array_flip($allowedParams));
 
-        // Increment page number
         $params['page'] = $current_page + 1;
-        $params['partial'] = true;
 
-        // Build the new URL with updated query parameters
         return $uri . '?' . http_build_query($params);
     }
 

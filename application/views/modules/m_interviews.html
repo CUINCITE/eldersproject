@@ -94,14 +94,16 @@
                         {% include './subviews/interviews/interviews_tile_' ~ item.type ~ '.html' with item %}
                     {% endfor %}
                 </div>
-                <div class="interviews__more">
-                    {% include "./components/c_load_more.html" with {
-                        contentSelector: "#interviews-tiles",
-                        infinite: true,
-                        text: "Load More <i>Interviews</i>",
-                        url: load_more
-                    } %}
-                </div>
+                {% if load_more %}
+                    <div class="interviews__more">
+                        {% include "./components/c_load_more.html" with {
+                            contentSelector: "#interviews-tiles",
+                            infinite: true,
+                            text: "Load More <i>Interviews</i>",
+                            url: load_more
+                        } %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
