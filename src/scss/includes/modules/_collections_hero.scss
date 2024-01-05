@@ -7,4 +7,15 @@
         grid-template-rows: auto 1fr;
     }
 
+    .claim__sticker {
+
+        @include breakpoint(desktop) {
+            position: relative;
+            margin-top: vw(-27);
+        }
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
+    }
 }
