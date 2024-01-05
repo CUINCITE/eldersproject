@@ -169,7 +169,7 @@
 
 
 
-    .is-404 & {
+    .is-404 &, .page_404 & {
 
         @include breakpoint(desktop) {
             margin-bottom: rem(-7);

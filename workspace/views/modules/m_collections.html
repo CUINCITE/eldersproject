@@ -4,27 +4,34 @@
             <div class="collections__grid">
                 {% for item in items %}
                     <div class="collections__grid-item collection {% if loop.index is even %}collection--reversed {% endif %}">
+
                         <div class="box">
                             <div class="grid">
                                 <div class="col-span-12">
+
                                     <div class="collection__image desktop-hide">
                                         <div class="collection__illustration">
                                             {% include "./subviews/subview_illustration.html" with { shadows: item.shadows, image: item.image } %}
                                         </div>
                                     </div>
+
                                     <h2 class="collection__name">{{item.name | raw}}</h2>
+                                    
                                 </div>
                             </div>
                         </div>
+
                         <div class="box">
                             <div class="grid">
                                 <div class="col-span-12">
                                     <div class="collection__wrap">
+
                                         <div class="collection__image desktop-only">
                                             <div class="collection__illustration">
                                                 {% include "./subviews/subview_illustration.html" with { shadows: item.shadows, image: item.image } %}
                                             </div>
                                         </div>
+
                                         <div class="collection__data">
                                             <div class="collection__states">{{item.states}}</div>
                                             <div class="collection__button">
@@ -38,10 +45,12 @@
                                             </div>
                                             <div class="collection__text">{{item.text}}</div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 {% endfor %}
             </div>
