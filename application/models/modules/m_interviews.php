@@ -15,7 +15,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			PAGINATION
 		*/
 
-        $itemsPerPage = 10;
+        $itemsPerPage = 300;
         $page = 1;
         $isPartial = (!empty($this->settings['get']['partial']));
 
