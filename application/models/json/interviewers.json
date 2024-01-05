@@ -125,8 +125,8 @@
                     "retina": true
                 },
                 {
-                    "folder": "hd",
-                    "label": "HD",
+                    "folder": "big",
+                    "label": "Big Tile",
                     "width": 1346,
                     "height": 1346,
                     "crop": true,
