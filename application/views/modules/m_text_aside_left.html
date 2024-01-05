@@ -12,6 +12,31 @@
                         {{text|raw}}                        
                     </div>
                 </div>
+                {% if params.decor %}
+                    <div class="text_aside__decorator text_aside__decorator--reversed{% if params.decor.type %} text_aside__decorator--{{params.decor.type}}{% endif %}{% if params.decor.modifiers %}{% for modifier in params.decor.modifiers %} text_aside__decorator--{{modifier}}{% endfor %}{% endif %}">
+                        
+                        {% if params.decor.type == "boxes" %}
+                            <section class="module module--boxes">
+                                <div class="boxes">[[svg::boxes]]</div>
+                            </section>
+                        {% endif %}
+
+                        {% if params.decor.type == "illustration" %}
+                            {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                        {% endif %}
+
+                        {% if params.decor.type == "photo" %}
+                                {% include "./components/c_polaroid.html" with decor.photo %}
+                        {% endif %}
+
+                        {% if params.decor.text %}
+                            <div class="text text--small">
+                                {{params.decor.text|raw}} 
+                            </div>
+                        {% endif %}
+
+                    </div>
+            {% endif %}
             </div>
         </div>
     </div>

@@ -103,6 +103,7 @@ class Site {
      * resize handler
      */
     private onResize = (isOrientationChanged?: boolean): void => {
+
         const oldBreakpoint = breakpoint ? breakpoint.value : null;
         breakpoint = getBreakpoint();
 

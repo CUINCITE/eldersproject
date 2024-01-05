@@ -2,10 +2,9 @@
     display: grid;
     position: relative;
 
-
     @include breakpoint(desktop) {
         grid-template-rows: auto 1fr;
-        height: var(--app-height);
+        min-height: var(--app-height);
     }
 
     @include breakpoint(phone) {
@@ -13,7 +12,7 @@
         height: vw(512, phone);
 
         .heading { 
-            margin-block: rem(-23) rem(-24);
+            margin-block: rem(-18) rem(-25);
         }
     }
 
