@@ -136,6 +136,14 @@
                     "height": 375,
                     "crop": true,
                     "retina": true
+                },
+                {
+                    "folder": "hd",
+                    "label": "HD",
+                    "width": 1346,
+                    "height": 1346,
+                    "crop": true,
+                    "retina": true
                 }
             ]
         },

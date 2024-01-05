@@ -11,7 +11,8 @@ class model_app_pages_modules_hero_about extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-		$m['items']=$this->parent->dictGet('collections');
+		$collections=$this->parent->dictGet('collections');
+        $m['item'] = $collections[array_rand($collections)];
 		return $m;
 	}
 
