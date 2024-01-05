@@ -112,6 +112,14 @@ class model_app_pages_modules
         return $array;
     }
 
+    function getSeedRandomElement($array) {
+        $date = new DateTime();
+        $seed = $date->getTimestamp();
+        mt_srand($seed);
+        $randomIndex = mt_rand(0, count($array) - 1);
+        return array_values($array)[$randomIndex];
+    }
+
 		
 }
 

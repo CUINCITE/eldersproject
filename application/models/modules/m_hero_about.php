@@ -17,7 +17,7 @@ class model_app_pages_modules_hero_about extends model_app_pages_modules
             return isset($item['image']) && $item['image'] != false;
         });
 
-        $m['item'] = $collections[array_rand($collections)];
+        $m['item'] = $this->getSeedRandomElement($collections);
 
         // this module requires bigger image sizes
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
