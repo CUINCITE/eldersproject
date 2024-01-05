@@ -102,6 +102,24 @@ class model_app_pages_modules
 		$this->m->setLightboxSlug($slug);
 	}
 
+    function copyValues($array, $originalKeyPart, $newKeyPart){
+        foreach($array as $key => $value){
+            if(str_contains($key, $originalKeyPart)){
+                $new_key = str_replace($originalKeyPart, $newKeyPart, $key);
+                $array[$new_key] = $value;
+            }
+        }
+        return $array;
+    }
+
+    function getSeedRandomElement($array) {
+        $today_timestamp = strtotime(date('Y-m-d'));
+        srand($today_timestamp);
+        $keys = array_keys($array);
+        $random_index = rand(0, count($keys) - 1);
+        return $array[$keys[$random_index]];
+    }
+
 		
 }
 
