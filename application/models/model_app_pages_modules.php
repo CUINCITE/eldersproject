@@ -113,11 +113,11 @@ class model_app_pages_modules
     }
 
     function getSeedRandomElement($array) {
-        $date = new DateTime();
-        $seed = $date->getTimestamp();
-        mt_srand($seed);
-        $randomIndex = mt_rand(0, count($array) - 1);
-        return array_values($array)[$randomIndex];
+        $today_timestamp = strtotime(date('Y-m-d'));
+        srand($today_timestamp);
+        $keys = array_keys($array);
+        $random_index = rand(0, count($keys) - 1);
+        return $array[$keys[$random_index]];
     }
 
 		
