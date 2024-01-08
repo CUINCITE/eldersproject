@@ -112,6 +112,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             return $item;
         }, $m['items']);
 
+        dd($m['items']);
+
         /*
 			Load more - check if load more items
 		*/
@@ -180,6 +182,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     function getNextPageUri($current_page): string
     {
+
         $allowedParams = ['page', 'sort', 'collections', 'topics', 'states'];
 
         $requestUri = $_SERVER['REQUEST_URI'];
@@ -197,69 +200,78 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         return $uri . '?' . http_build_query($params);
     }
 
-    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page)
-    {
+    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page) {
 
+        /**
+         * Adds filters to a list of interviews - takes into account today's seed and the current page
+         * @param int $first_index Places the first filter at the specified index
+         * @param int $frequency Places the filters evert X (frequency) elements
+         */
 
-        $topics = array_map(function($topic) {
-            $topic['type'] = 'topic';
-            return $topic;
-        }, $topics);
+        $newItems = []; // Initialize $newItems array
 
-        $states = array_map(function($state) {
-            $state['type'] = 'state';
-            return $state;
-        }, $states);
-
-        $filters = array_merge($topics, $states);
-
-        mt_srand(date('z')); // Seed the random generator with the day of the year
-        shuffle($filters); // Shuffle the array
-
-        $filters = array_filter(
-            $filters,
-            function ($item) {
-                return empty($item['selected']);
-            }
+        // Map topics and states to their respective types
+        $filters = array_merge(
+            array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
+            array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
         );
 
-        // calculate how many $items have been already assigned
-        $offset = 0;
-        $no_of_used_filters = 0;
-        $index_remainder = 0;
+        mt_srand(date('z')); // Different seed each day
+        shuffle($filters); // Shuffle the array
 
+        // Select only unselected filters
+        $filters = array_filter($filters, fn($item) => empty($item['selected']));
+        $filters = array_values($filters);
+
+        // calculate how many $filters have been already assigned and calculate an index at which to
+        // place a new filter if partial
         if ($page > 1) {
             $offset = ($page - 1) * $items_per_page;
             $no_of_used_filters = floor($offset / $frequency);
+
+            if ($first_index) $no_of_used_filters++;
+
             $filters = array_slice($filters, $no_of_used_filters);
-        }
 
-        if ($no_of_used_filters) {
-
-            $countItems  = ($page - 1) * $items_per_page;
-            $countItems = $countItems + $no_of_used_filters;
-
-            $no_of_used_filters = floor(($page - 1) * $items_per_page / $frequency);
-            $positionOfLastFilter = ($frequency * $no_of_used_filters) + ($no_of_used_filters - 1);
-            $index_remainder = $countItems - $positionOfLastFilter - 1;
-            $index_remainder = $frequency - $index_remainder;
-
-        }
-
+            // if at least one filter has been used, calculate the index of the last one
+            if ($no_of_used_filters) {
+                $positionOfLastFilter = ($frequency * $no_of_used_filters) + ($no_of_used_filters - 1);
+                $countItems  = $offset + $no_of_used_filters;
+                $partialIndexOfNextFilter = $frequency - ($countItems - $positionOfLastFilter - 1);
+            }
+        } else $partialIndexOfNextFilter = 0;
 
         $filters_index = 0;
-        for ($i=1; $i<=count($items); $i++) {
-            $newItems[] = $items[$i -1];
 
-            if (($i - $index_remainder) % $frequency == 0 && !empty($filters)) {
-                $newItems[] = $filters[$filters_index];
-                $filters_index++;
+        $modifiers = ['pink', 'pale-purple'];
+
+        foreach ($items as $i => $item) {
+
+            if ($page == 1 && $i == $first_index && !empty($filters[$filters_index])) {
+                $filter = $filters[$filters_index++];
+                $filter['url'] = $this->getFilterUrl($filter);
+                $k = array_rand($modifiers);
+                $filter['modifier'] = $modifiers[$k];
+                $newItems[] = $filter;
+            }
+
+            $newItems[] = $item;
+
+            if (($i+1 - $partialIndexOfNextFilter) % $frequency == 0 && !empty($filters[$filters_index])) {
+                $filter = $filters[$filters_index++];
+                $filter['url'] = $this->getFilterUrl($filter);
+                $k = array_rand($modifiers);
+                $filter['modifier'] = $modifiers[$k];
+                $newItems[] = $filter;
             }
         }
 
         return $newItems;
+    }
 
-
+    private function getFilterUrl($filter)
+    {
+        return ['type' => 'interview_filter', 'slug' => $filter['slug'], 'filter_type' => $filter['filter_type']];
     }
 
 }

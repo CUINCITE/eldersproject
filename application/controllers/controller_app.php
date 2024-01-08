@@ -105,6 +105,10 @@ class controller_app extends _uho_controller
                             $v='interviews/'.$v['slug'];
                         break;
 
+                        case "interview_filter":
+                            $v='interviews?'.$v['filter_type'].'='.$v['slug'];
+                        break;
+
 
 
                     }
