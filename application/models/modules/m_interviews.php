@@ -15,7 +15,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			PAGINATION
 		*/
 
-        $itemsPerPage = 300;
+        $itemsPerPage = 10;
         $page = 1;
         $isPartial = (!empty($this->settings['get']['partial']));
 
@@ -118,11 +118,15 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         $m['load_more'] = false;
 
+        $originalStartingPage = $startingPage;
+
         if (count($m['items']) >=  $itemsPerPage) {
             $startingPage = $page * $itemsPerPage + 1;
             $newItem = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, 1]);
             if ($newItem) $m['load_more'] = $this->getNextPageUri($page);
         }
+
+        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 8, $itemsPerPage, 3, $originalStartingPage);
         
 		return $m;
 	}
@@ -191,6 +195,71 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $params['page'] = $current_page + 1;
 
         return $uri . '?' . http_build_query($params);
+    }
+
+    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page)
+    {
+
+
+        $topics = array_map(function($topic) {
+            $topic['type'] = 'topic';
+            return $topic;
+        }, $topics);
+
+        $states = array_map(function($state) {
+            $state['type'] = 'state';
+            return $state;
+        }, $states);
+
+        $filters = array_merge($topics, $states);
+
+        mt_srand(date('z')); // Seed the random generator with the day of the year
+        shuffle($filters); // Shuffle the array
+
+        $filters = array_filter(
+            $filters,
+            function ($item) {
+                return empty($item['selected']);
+            }
+        );
+
+        // calculate how many $items have been already assigned
+        $offset = 0;
+        $no_of_used_filters = 0;
+        $index_remainder = 0;
+
+        if ($page > 1) {
+            $offset = ($page - 1) * $items_per_page;
+            $no_of_used_filters = floor($offset / $frequency);
+            $filters = array_slice($filters, $no_of_used_filters);
+        }
+
+        if ($no_of_used_filters) {
+
+            $countItems  = ($page - 1) * $items_per_page;
+            $countItems = $countItems + $no_of_used_filters;
+
+            $no_of_used_filters = floor(($page - 1) * $items_per_page / $frequency);
+            $positionOfLastFilter = ($frequency * $no_of_used_filters) + ($no_of_used_filters - 1);
+            $index_remainder = $countItems - $positionOfLastFilter - 1;
+            $index_remainder = $frequency - $index_remainder;
+
+        }
+
+
+        $filters_index = 0;
+        for ($i=1; $i<=count($items); $i++) {
+            $newItems[] = $items[$i -1];
+
+            if (($i - $index_remainder) % $frequency == 0 && !empty($filters)) {
+                $newItems[] = $filters[$filters_index];
+                $filters_index++;
+            }
+        }
+
+        return $newItems;
+
+
     }
 
 }

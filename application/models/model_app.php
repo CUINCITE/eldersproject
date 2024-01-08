@@ -42,7 +42,7 @@ class model_app extends _uho_model
         
         $this->orm->setLogErrors(true);
 
-        if (defined('cache') && cache === true) {
+        if (true) {
             $this->sql->cacheSet('7g!',
                 [
                     'users','users_newsletter'
