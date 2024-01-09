@@ -1,5 +1,6 @@
 {% if header=='large' %}{% include 'subviews/subview_header_large.html' %}{% endif %}
 
 {% set decor = (header == 'standard') ? {} : {'decor': 'boxes'} %}
+{% set modifiers = (header == 'standard') ? ['wide', 'privacy'] : ['aside','contact'] %}
 
-{% include "modules/m_text_aside.html" with {'params': decor, 'hide_label': header == 'large'} %}
+{% include "modules/m_text_aside.html" with {'params': decor, 'hide_label': header == 'large', 'modifiers': modifiers} %}

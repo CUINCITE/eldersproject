@@ -2,6 +2,7 @@
     <div class="text_aside">
         <div class="box">
             <div class="grid grid--row-start">
+
                 {% if not hide_label %}
                     <div class="col-span-6 col-start-1 no-padding">
                         <h2 class="heading heading--aside heading--medium">
@@ -9,8 +10,25 @@
                         </h2>
                     </div>
                 {% endif %}
+
                 <div class="col-span-6 col-start-7">
-                    <div class="text text--large">
+                    <div class="text
+                        {% if modifiers %}
+
+                            {% for modifier in modifiers %}
+                                text--{{ modifier }}
+                            {% endfor %}
+
+                        {% else %}
+
+                            text--large
+
+                        {% endif %}">
+
+                        {% if heading %}
+                            {% include 'components/c_heading.html' with heading %}
+                        {% endif %}
+
                         {{ text|raw }}
                     </div>
                 </div>
