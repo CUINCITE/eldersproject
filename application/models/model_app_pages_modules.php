@@ -17,7 +17,7 @@ class model_app_pages_modules
     	$this->lang=$m->lang;
 
 	}
-	
+
 	// ----------------------------------------------------------------------------------------------------------------
 	// update single module
 	// ----------------------------------------------------------------------------------------------------------------
@@ -41,21 +41,21 @@ class model_app_pages_modules
 		$f_title=$f_label=$filters;
 		$f_label=['label'.$this->lang_add=>['operator'=>'!=','value'=>'']];
 		$f_title=['title'.$this->lang_add=>['operator'=>'!=','value'=>'']];
-		
+
 		// module params
 		if ($m['params'])
 		{
 			$p=explode(',',$m['params']);
 			$m['params']=[];
 			foreach ($p as $k=>$v)
-			{				
+			{
 				$v=explode('=',$v);
 				if (empty($v[1])) $v[1]=1;
 				$m['params'][$v[0]]=$v[1];
 				unset($m['params'][$k]);
 			}
 		}
-		
+
 		$settings=[
 			'f_title'=>$f_title,
 			'f_label'=>$f_label,
@@ -82,7 +82,7 @@ class model_app_pages_modules
         }
 
         $m['module_index'] = $this->iModule - 1;
-		
+
 
 		if (_uho_fx::file_exists('/application/models/modules/m_'.$self.'.php'))
 		{
@@ -92,7 +92,7 @@ class model_app_pages_modules
 			$m=$class->updateModel($m,$url);
 			if ($m && isset($m['og'])) $this->parent->ogSet($m['og']['title'],$m['og']['description'],$m['og']['image']);
 		}
-			
+
 
 
 		return $m;
@@ -126,7 +126,7 @@ class model_app_pages_modules
         return $array[$keys[$random_index]];
     }
 
-		
+
 }
 
 ?>

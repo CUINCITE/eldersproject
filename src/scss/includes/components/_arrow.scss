@@ -5,6 +5,14 @@
     position: relative;
 
 
+    &--vertical {
+        transform: rotate(90deg);
+
+
+        span:first-of-type { display: none; }
+    }
+
+
     span {
         background-color: currentColor;
         display: inline-block;

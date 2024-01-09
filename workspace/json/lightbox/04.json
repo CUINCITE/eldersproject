@@ -1,0 +1,33 @@
+{
+    "url": "/workspace/lightbox/04",
+    "backUrl": "/workspace",
+    "modifier": "",
+    "caption": "<strong>Joy West, MD.</strong>This is a photo of Joy West, taken at Roseland Community Hospital during the Covid pandemic. Selfie.",
+    "slider": [
+        {
+            "image": {
+                "desktop": "/src/images/polaroid-photo.jpg",
+                "mobile": "/src/images/polaroid-photo.jpg"
+            }
+        },
+        {
+            "image": {
+                "desktop": "/src/images/polaroid-photo.jpg",
+                "mobile": "/src/images/polaroid-photo.jpg"
+            }
+        },
+        {
+            "image": {
+                "desktop": "/src/images/polaroid-photo.jpg",
+                "mobile": "/src/images/polaroid-photo.jpg"
+            }
+        }
+    ],
+    "title": "Patricia Welch",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Renée Watson collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Short bio here. Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX"
+}

@@ -1,88 +1,244 @@
-<div class="lightbox__wrap">
-    <ul class="lightbox__list js-list">
-        {% spaceless %}
+{% macro secondsToMinutes(seconds) %}
+
+{% set hours = seconds / 3600 %}
+{% set hours = hours|round(0, 'floor') %}
+{% set hours = hours|number_format %}
+
+{% set minutes = seconds / 60 % 60 %}
+{% set minutes = minutes|round(0, 'floor') %}
+{% set minutes = minutes|number_format %}
+{% set minutes = ('00' ~ minutes)|slice(-2) %}
+
+{% set seconds = seconds % 60 %}
+{% set seconds = seconds|round(0, 'floor') %}
+{% set seconds = seconds|number_format %}
+{% set seconds = ('00' ~ seconds)|slice(-2) %}
+
+{{ hours }}:{{ minutes}}:{{ seconds }}
+
+{% endmacro %}
 
 
-        {% for item in items %}
-        <li class="lightbox__item{% if item.vimeo or item.video %} lightbox__item--video{% endif %} js-item" data-lightbox-path="{{item.url}}">
+{% import _self as macros %}
 
-            {% set type = item.vimeo or item.video ? 'video' : item.audio ? 'audio' : item.image ? 'image' : '' %}
-            <div class="lightbox__share" data-component="Share">
-                <button class="button button--square button--small js-share-btn"><span class="sr-only">share</span><svg class="sprite-share"><use xlink:href="#sprite-share"></use></svg></button>
-                <div class="share__wrap js-share-wrap">
-                    <div class="share__list js-share-list">
-                        <a class="share__link" href="{{item.share.url_facebook}}" target="_blank" data-share="facebook"><span class="sr-only">share on facebook</span><svg class="sprite-facebook"><use xlink:href="#sprite-facebook"></use></svg></a><!--
-                        --><a class="share__link" href="{{item.share.url_twitter}}" data-share="twitter"><span class="sr-only">share on twitter</span><svg class="sprite-twitter"><use xlink:href="#sprite-twitter"></use></svg></a><!--
-                        --><a class="share__link" href="{{item.share.url_pinterest}}" data-share="pinterest"><span class="sr-only">share on pinterest</span><svg class="sprite-pinterest"><use xlink:href="#sprite-pinterest"></use></svg></a>
+
+<li class="lightbox__item lightbox__item--{{modifier}} js-item" data-lightbox-path="{{url}}">
+    <a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
+        <span class="button button--lightbox">
+            <i class="icon-close"></i>
+        </span>
+    </a>
+    <div class="lightbox__grid">
+        <div class="lightbox__header">
+            <div class="lightbox__header-info">
+                <h2 class="lightbox__title">{{title}}</h2>
+                <div class="lightbox__filters">
+                    <div class="lightbox__description">{{description}}</div>
+                    <div class="lightbox__state">[[svg::pin]]{{state}}</div>
+                    {% if tags %}
+                    <ul class="lightbox__tags">
+                        {% for tag in tags %}
+                        <li>{{tag}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="lightbox__footer">
+                    <button class="lightbox__play"><i class="icon-playpause"></i><span>PLAY</span></button>
+                    <div class="lightbox__text">{{text}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="lightbox__illu">
+            {% if collectionUrl %}
+                <a href="{{collectionUrl}}" class="lightbox__collection"><span>{{collection}}</span></a>
+            {% endif %}
+            {% if illu %}
+                <div class="lightbox__picture">
+                    <picture>
+                        <img src="{{illu.desktop}}" alt="">
+                    </picture>
+                </div>
+            {% endif %}
+        </div>
+        <div class="lightbox__main">
+            {% if slider %}
+                <div class="lightbox__slider slider" data-component="LightboxSlider">
+                    <div class="slider__wrap js-slider-wrap">
+                        <div class="slider__slides">
+                            {% for item in slider %}
+                            <div class="lightbox__slide js-slide">
+                                {% if item.image %}
+                                    <!-- components/c_polaroid -->
+                                    <div class="lightbox__slide-image polaroid">
+                                        <figure class="polaroid__image">
+                                            <!-- subview_picture -->
+                                            <picture>
+                                                <source media="(max-width: 1023px)" srcset="{{item.image.desktop}}">
+                                                <source media="(min-width: 1024px)" srcset="{{item.image.mobile}}">
+                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                                            </picture>
+                                        </figure>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        </div>
+                         <div class="slider__arrows">
+                            <button aria-label="go to prev slide" class="button button--lightbox slider__arrow slider__arrow--prev js-slider-prev">
+                            <i class="icon-btn-arrow arrow"><span></span><span></span><span class="triangle"></span></i><span class="js-text">01</span></button>
+                            <button aria-label="go to next slide" class="button button--lightbox button--reversed slider__arrow slider__arrow--next js-slider-next">
+                            <i class="icon-btn-arrow arrow arrow--reversed"><span></span><span></span><span class="triangle"></span></i>
+                            <span class="js-text">02</span></button>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if mainImage %}
+                {% set image = mainImage.image %}
+                {% if mainImage.type == 'polaroid' %}
+                    <div class="lightbox__image lightbox__image--polaroid">
+                        <!-- components/c_polaroid -->
+                        <div class="polaroid {% if mainImage.horizontal %} polaroid--horizontal {% endif %}">
+                            <figure class="polaroid__image">
+                                <!-- subview_picture -->
+                                <picture>
+                                    <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
+                                    <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
+                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                                </picture>
+                            </figure>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="lightbox__image">
+                        <!-- subview_picture -->
+                        <picture>
+                            <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
+                            <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
+                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                        </picture>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if caption %}<div class="lightbox__caption">{{caption}}</div>{% endif %}
+        </div>
+        <div class="lightbox__logo">[[svg::logo]]</div>
+        <ul class="lightbox__buttons" data-component="LightboxNav">
+            <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active">Mementos</button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info">Info</button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript">Transcript</button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads">Downloads</button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related">Related</button></li>
+        </ul>
+    </div>
+    <aside class="lightbox__aside">
+        <div id="lightbox-transcript" data-component="LightboxTranscript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab">
+            <div class="lightbox__tab-content">
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__tab-dot"></div>
+                <div class="transcript">
+                    <div class="transcript__top">
+                        <form class="transcript__search js-transcript-search">
+                            <div class="transcript__input js-transcript-input-wrap">
+                                <span class="transcript__hiddenspan js-transcript-span"></span>
+                                <input type="search" name="transcript" id="" autocomplete="off" placeholder="Search">
+                            </div>
+                            <div class="transcript__nav js-transcript-nav">
+                                <span class="transcript__counters js-transcript-counters"></span>
+                                <button type="button" class="transcript__nav-button transcript__nav-button--prev js-transcript-prev">
+                                    [[svg::lightbox-arrow-small]]
+                                </button>
+                                <button type="button" class="transcript__nav-button transcript__nav-button--next js-transcript-next">
+                                    [[svg::lightbox-arrow-small]]
+                                </button>
+                                <button type="button" class="js-transcript-close"><i class="icon-close"></i></button>
+                            </div>
+                        </form>
+                        {% if transcript and transcript.spanish %}
+                        <button class="transcript__button js-transcript-switch" data-main-lang="english" data-alternate-lang="spanish">Spanish</button>
+                        {% endif %}
+                    </div>
+                    <div class="transcript__wrap js-scrolled">
+                        {% if transcript %}
+                            {% if transcript.english %}
+                                <div class="transcript__lang js-transcript-lang is-active" data-lang="english">
+                                {% for part in transcript.english %}
+                                    <div class="transcript__part {% if loop.index == 2 %} is-current {% endif %}">
+                                        <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                        <div class="transcript__text">{{part[1]}}</div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% if transcript.spanish %}
+                                <div class="transcript__lang js-transcript-lang" data-lang="spanish">
+                                {% for part in transcript.spanish %}
+                                    <div class="transcript__part {% if loop.index == 2 %} is-current {% endif %}">
+                                        <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                        <div class="transcript__text">{{part[1]}}</div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <figure class="lightbox__{{type}}">
-
-                {% if item.vimeo %}
-                <div class="player player--vimeo" data-component="VimeoCustom" data-options='{{ item.vimeo|json_encode() }}'></div>
-                {% endif %}
-
-
-                {% if item.video %}
-                <div class="player player--video" data-component="Video" data-options='{{ item.video|json_encode() }}'>
-                    {% if item.instant %}
-                    <video playsinline src="{{ item.video.src }}" poster="{{ item.video.poster }}" preload="none" controls></video>
-                    {% endif %}
+        </div>
+        <div id="lightbox-info" class="lightbox__tab lightbox__tab--info js-lightbox-tab">
+            <div class="lightbox__tab-content">
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__info">
+                    <div class="lightbox__info-text">{{info}}</div>
                 </div>
-                {% endif %}
-
-
-                {% if item.audio %}
-                <div class="player player--audio" data-component="Audio" data-options='{{ item.audio|json_encode() }}'>
-                    <audio src="{{ item.audio.src }}"></audio>
+            </div>
+        </div>
+        <div id="lightbox-downloads" class="lightbox__tab lightbox__tab--downloads js-lightbox-tab">
+            <div class="lightbox__tab-content">
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__downloads">
+                    <ul class="lightbox__downloads-list">
+                        {% for item in downloads %}
+                            <li>
+                                <a href="{{item.url}}">
+                                    <span class="lightbox__downloads-arrow">
+                                    [[svg::lightbox-arrow-small]]
+                                    </span>
+                                    {{item.name}} <span class="bracket">(</span>{{item.ext}}<span class="bracket">)</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                {% endif %}
-
-
-                {% if item.image %}
-                <img data-src="{{ item.image.src }}" alt="" {% if item.image.width %} width="{{item.image.width}}" height="{{item.image.height}}"{% endif %}{% if item.image.big %} data-big="{{item.image.big.src}}" data-big-height="{{item.image.big.height}}" data-big-width="{{item.image.big.width}}" data-big-scale="{{item.image.big.scale?:1.2}}"{% endif %}{% if item.image.deepzoom %} data-deepzoom="{{item.image.deepzoom}}"{% endif %}>
-                {% endif %}
-
-
-                {% if item.title or item.subtitle %}<figcaption>
-                    <div class="caption__head">
-                        <div class="caption__title">{{item.title}}</div>
-                        <div class="caption__subtitle">{{item.subtitle}}</div>
-                        {% if item.text %}
-                            <div class="caption__toggle js-caption-toggle"><button><i class="icon-arr"></i></button></div>
-                        {% endif %}
-                    </div>
-                    {% if item.text %}
-                    <div class="caption__text">
-                        <hr>
-                        {{item.text}}
-                    </div>
-                    {% endif %}
-                </figcaption>{% endif %}
-
-            </figure>
-            <div class="lightbox__label">
-                <p>{{item.label}}</p>
-            </div> 
-        </li>
-        {% endfor %}
-
-
-        {% endspaceless %}
-    </ul>
-</div>
-
-
-
-{% if items|length > 1 %}<div class="lightbox__count js-count">00/00</div>{% endif %}
-<div class="lightbox__caption caption js-caption"></div>
-
-<button class="lightbox__prev button button--square button--small js-prev is-disabled"><i class="icon-prev"></i></button>
-<button class="lightbox__next button button--square button--small js-next is-disabled"><i class="icon-next"></i></button>
-
-<a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
-    <span class="button button--square button--white button--small">
-        <i class="icon-close"></i>
-    </span>
-</a>
+            </div>
+        </div>
+        <div id="lightbox-related" class="lightbox__tab lightbox__tab--related js-lightbox-tab">
+            <div class="lightbox__tab-content">
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__tab-dot"></div>
+                <div class="lightbox__related">
+                    <ul class="lightbox__related-list">
+                        {% for item in related %}
+                            <li class="lightbox__related-item">
+                                <a class="lightbox__related-link" href="{{item.url}}"></a>
+                                <span class="lightbox__related-arrow">
+                                    <i class="icon-btn-arrow arrow arrow--reversed">
+                                        <span></span>
+                                        <span></span>
+                                        <span class="triangle"></span>
+                                    </i>
+                                </span>
+                                <h3 class="lightbox__related-title">{{item.title}}</h3>
+                                <h4 class="lightbox__related-collection">{{item.collection}}</h4>
+                                <p class="lightbox__related-text">{{item.text}}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+</li>

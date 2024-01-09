@@ -309,3 +309,16 @@ export const getQueryString = (forms: HTMLFormElement | HTMLFormElement[]): stri
 
     return decodeURIComponent(finalFormData.toString());
 };
+
+
+
+export function removeTags(str) {
+    if ((str === null) || (str === '')) return false;
+    // eslint-disable-next-line no-param-reassign
+    str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/ig, '');
+}

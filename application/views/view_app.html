@@ -4,7 +4,7 @@
 <head>
     {% include 'scaffold/meta.html' %}
     {% include 'scaffold/favicons.html' %}
-    
+
     {% for item in scaffold.langs_alternate %}
     <link rel="alternate" href="{{item.url}}" hreflang="{{item.lang}}">
     {% endfor %}
@@ -13,7 +13,7 @@
     <script src="/public/theme/libs.min.js?v=0.0.1" defer></script>
     <script src="/public/theme/scripts.min.js?v=0.0.1" defer></script>
     {% if scaffold.serdelia_edit %}<link rel="stylesheet" href="/serdelia/public/uho6_serdelia6/uho6.css">{% endif %}
-    
+
 </head>
 
 <body class="is-not-ready">
@@ -38,13 +38,12 @@
 
         </main>
         {% include 'scaffold/newsletter.html' %}
-        {% include 'scaffold/footer.html' %}
-        <div class="offscreen js-offscreen">
-            <div class="lightbox js-lightbox"></div>
-        </div>
     </div>
 
-    
+    {% include 'scaffold/footer.html' %}
+
+    <div id="lightbox" class="lightbox js-lightbox"></div>
+
     {% include 'scaffold/templates.html' %}
 
     {% if scaffold.serdelia_edit %}<script src="/serdelia/public/uho6_serdelia6/uho6.js"></script>{% endif %}

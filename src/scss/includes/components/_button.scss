@@ -42,6 +42,7 @@
     &--lightbox {
         @include font-size(30, 1);
         letter-spacing: normal;
+        color: inherit;
 
         // text inside button
 

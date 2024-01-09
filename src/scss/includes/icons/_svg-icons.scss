@@ -26,3 +26,18 @@
 .svg-bracket-right { margin-left: rem(5); }
 
 
+.svg-pin {
+    width: rem(12);
+    height: rem(16);
+
+    path { fill: currentColor; }
+}
+
+
+.svg-lightbox-arrow-small {
+    width: rem(14);
+    height: rem(23);
+
+    path:first-of-type { stroke: currentColor; }
+    path:last-of-type { fill: currentColor; }
+}

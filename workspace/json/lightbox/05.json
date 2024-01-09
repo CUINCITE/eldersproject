@@ -1,0 +1,19 @@
+{
+    "url": "/workspace/lightbox/05",
+    "backUrl": "/workspace",
+    "modifier": "orange",
+    "mainImage": {
+        "type": "polaroid",
+        "image": {
+            "desktop": "http://assets.huncwot.net/deepzoom.jpg",
+            "mobile": "http://assets.huncwot.net/deepzoom.jpg"
+        }
+    },
+    "title": "Fresh “Lev” White",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Natalie Diaz Collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Short bio here. Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX"
+}
