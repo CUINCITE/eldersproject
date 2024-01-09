@@ -15,7 +15,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 			PAGINATION
 		*/
 
-        $itemsPerPage = 10;
+        $itemsPerPage = 300;
         $page = 1;
         $isPartial = (!empty($this->settings['get']['partial']));
 
@@ -126,7 +126,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             if ($newItem) $m['load_more'] = $this->getNextPageUri($page);
         }
 
-        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 8, $itemsPerPage, 3, $originalStartingPage);
+        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $originalStartingPage);
         
 		return $m;
 	}
