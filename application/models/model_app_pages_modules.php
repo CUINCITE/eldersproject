@@ -76,6 +76,9 @@ class model_app_pages_modules
 
 
 		];
+
+        $m['module_index'] = $this->iModule;
+        $this->iModule++;
 		
 
 		if (_uho_fx::file_exists('/application/models/modules/m_'.$self.'.php'))

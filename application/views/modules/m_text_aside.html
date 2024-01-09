@@ -37,8 +37,8 @@
 
                     {% if params.decor %} text_aside__decorator--{{ params.decor }}{% endif %}
 
-                    {% if params.decor.modifiers %}
-                        {% for modifier in params.decor.modifiers %} text_aside__decorator--{{ modifier }}
+                    {% if decor_modifiers %}
+                        {% for modifier in decor_modifiers %} text_aside__decorator--{{ modifier }}
                         {% endfor %}
                     {% endif %}">
 
