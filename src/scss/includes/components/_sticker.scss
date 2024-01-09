@@ -92,7 +92,7 @@
         }
 
 
-        .is-404 & {
+        .is-404 &, .page_404 & {
 
             @include breakpoint(desktop) {
                 @include font-size(23, 19);

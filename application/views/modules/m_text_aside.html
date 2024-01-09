@@ -4,14 +4,14 @@
             <div class="grid grid--row-start">
 
                 {% if not hide_label %}
-                    <div class="col-span-6 col-start-1 no-padding">
+                    <div class="col-span-6 text_aside__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
                         <h2 class="heading heading--aside heading--medium">
                             {{ label|nl2br|brackets2tag('i')|raw }}
                         </h2>
                     </div>
                 {% endif %}
 
-                <div class="col-span-6 col-start-7">
+                <div class="text_aside__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
                     <div class="text
                         {% if modifiers %}
 

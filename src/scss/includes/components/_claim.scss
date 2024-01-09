@@ -33,18 +33,9 @@
         }
     }
 
-    &--collections {
-
-        @include breakpoint(phone) {
-            .claim__sticker {
-                display: none;
-            }
-        }
 
 
-    }
-
-    .is-404 & { 
+    .is-404 &, .page_404 & { 
 
         @include breakpoint(desktop) {
             padding-bottom: vw(95); 
@@ -64,7 +55,7 @@
         z-index: 2;
 
 
-        .is-404 & { 
+        .is-404 &, .page_404 & { 
 
             @include breakpoint(desktop) {
                 left: rem(192); 
@@ -73,13 +64,6 @@
             @include breakpoint(phone) { 
                 bottom: calc(100% - #{rem(205)});
             } 
-
-        }
-
-
-        .claim--collections & {
-            position: relative;
-            margin-top: vw(-27);
         }
     }
 }
