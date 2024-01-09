@@ -64,6 +64,16 @@
         border-color: transparent transparent transparent currentColor;
         transition: all $time-fast linear;
     }
+
+
+    .lightbox & {
+        top: rem(-2);
+
+        &::after {
+            height: rem(40);
+            border-width: rem(20) 0 rem(20) rem(36);
+        }
+    }
 }
 
 %icon-playpause-active::after {
@@ -371,8 +381,6 @@
         transition: transform $time $easing;
         backface-visibility: hidden;
     }
-
-
 }
 
 %icon-arrow-hover {

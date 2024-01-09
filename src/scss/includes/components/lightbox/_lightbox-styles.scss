@@ -1,0 +1,629 @@
+/* ------------------------------------*\
+    #LIGHTBOX
+\*------------------------------------ */
+
+
+.lightbox {
+    --aside-width: #{vw(123)};
+
+
+    @include full(fixed);
+    @include z-index(offscreen);
+    
+    color: $color-white;
+    display: block;
+
+
+    &__wrap {
+        @include v-center;
+
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+
+
+    &__grid {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        gap: 1px;
+        grid-template: "header illu logo" rem(195) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
+    }
+
+
+
+    &__header {
+        @include flex(row, space-between, flex-start);
+
+        grid-area: header;
+        background: var(--main-body-color);
+        padding-top: rem(12);
+        padding-left: var(--grid-margin);
+    }
+
+
+
+    &__logo {
+        @include flex(column, flex-end, center);
+
+        grid-area: logo;
+        background: var(--aside-body-color);
+        padding: 0 rem(4);
+        color: var(--aside-text-color);
+
+
+        svg {
+            width: 100%;
+            height: auto;
+
+            path { fill: currentColor; }
+        }
+    }
+
+
+
+    &__illu {
+        grid-area: illu;
+        background: var(--main-body-color);
+        position: relative;
+    }
+
+
+
+    &__picture {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        transition: opacity .3s $ease-custom;
+        pointer-events: none;
+
+
+        picture {
+            background: var(--main-body-color);
+            position: absolute;
+            inset: 0;
+            animation: lightbox-illu 6s linear infinite;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+
+
+    &__collection {
+        @include font-family(compressed);
+        @include font-size(29, 26);
+        @include letter-spacing(-0.58, 29);
+
+        text-transform: uppercase;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        padding: rem(15) rem(12);
+
+
+        @include hover {
+            & + .lightbox__picture { opacity: 0; }
+            & + .lightbox__picture picture { animation: none; opacity: 0; }
+        }
+    }
+
+
+
+    &__buttons {
+        grid-area: buttons;
+        background: var(--aside-body-color);
+        padding-top: rem(20);
+
+        li { text-align: center; }
+    }
+
+
+
+    &__button {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--alt-text-color);
+
+        &.is-active { color: var(--aside-text-color); }
+
+
+        &--mementos { @include font-size(29, 17); @include letter-spacing(-0.87, 29); }
+        &--info { @include font-size(69, 55); @include letter-spacing(-2.07, 69); }
+        &--transcript { @include font-size(26, 26); @include letter-spacing(-0.78, 26); }
+        &--downloads { @include font-size(25, 26); @include letter-spacing(-0.75, 25); }
+        &--related { @include font-size(38, 31); @include letter-spacing(-0.76, 38); }
+    }
+
+
+
+    &__main {
+        @include flex(row, center, center);
+
+        grid-area: main;
+        background: var(--main-body-color);
+        position: relative;
+    }
+
+
+
+    &__filters {
+        @include flex(row, flex-start, center);
+
+        margin-top: rem(-4);
+    }
+
+
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        margin: rem(13);
+        color: var(--aside-text-color);
+    }
+
+
+
+    &__count {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        pointer-events: none;
+        transition: transform $time $easing;
+
+        body.is-zoomed & {
+            transform: translateY(calc(100% + 22px));
+        }
+    }
+
+
+
+    &__caption {
+        @include font-size(12, 15.6);
+
+        position: absolute;
+        bottom: rem(20);
+        right: rem(58);
+        max-width: rem(226);
+        color: var(--color-black);
+        padding-top: rem(18);
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 0;
+            width: rem(51);
+            height: 1px;
+            background-color: currentColor;
+        }
+
+        strong {
+            @include font-settings(700, 100);
+
+            display: block;
+            margin-bottom: 2px;
+        }
+    }
+
+
+
+    &__item {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--main-text-color);
+    }
+
+
+
+    &__image {
+        margin-bottom: auto;
+        padding-top: rem(24);
+
+
+        @include breakpoint(not-desktop) {
+            margin-bottom: auto;
+        }
+
+
+        &--polaroid {
+            height: 100%;
+            transform: rotate(-7.5deg);
+        }
+
+
+
+        img {
+            width: 100%;
+            object-fit: contain;
+
+            @include breakpoint(desktop) {
+                height: 100%;
+            }
+
+            @include breakpoint(not-desktop) {
+                max-height: 70vh;
+
+                // max-width: calc(100% - 60px);
+                // margin: auto;
+            }
+
+            @include breakpoint(tablet) {
+                max-height: 70vh;
+            }
+        }
+    }
+
+
+
+    &__title {
+        @include font-family(compressed);
+        @include font-size(118, 100);
+        @include letter-spacing(-3.54, 118);
+
+        text-transform: uppercase;
+        margin-left: rem(-5);
+    }
+
+
+
+    &__description {
+        @include font-family(compact);
+        @include font-size(18, 18);
+        @include letter-spacing(-0.18, 18);
+
+        position: relative;
+        margin-right: rem(16);
+
+        &::before {
+            content: "";
+            width: rem(35);
+            height: 1px;
+            display: inline-block;
+            background-color: currentColor;
+            vertical-align: middle;
+            margin-right: rem(14);
+            margin-top: rem(-3);
+        }
+    }
+
+
+
+    &__tags {
+        @include flex(row, flex-start, center);
+        @include font-family(compressed);
+
+        gap: rem(3);
+        text-transform: uppercase;
+        margin-left: rem(14);
+
+
+        li {
+            @include font-size(17.727, 13.636);
+            @include letter-spacing(-0.532, 17.727);
+
+            background-color: var(--main-text-color);
+            color: var(--main-body-color);
+            height: rem(19);
+            padding: rem(5) rem(3) 0;
+        }
+    }
+
+
+
+    &__state {
+        @include font-family(reclined);
+        @include font-size(17, 19);
+        @include letter-spacing(0.54, 17);
+        @include flex(row, flex-start, center);
+
+        text-transform: uppercase;
+        margin-top: rem(2);
+
+
+        svg {
+            margin-top: rem(-4);
+            margin-right: rem(5);
+        }
+    }
+
+
+
+    &__text {
+        @include font-size(12, 16);
+
+        max-width: rem(480);
+        margin-top: rem(-1);
+        margin-left: rem(15);
+    }
+
+
+
+    &__aside {
+        position: absolute;
+        inset: auto var(--GLOBAL-aside-width) 0 0;
+        z-index: 3;
+        margin: auto;
+        width: vw(749);
+    }
+
+
+
+    &__tab {
+        position: absolute;
+        inset: auto 0 0;
+        min-height: 65vh;
+        max-height: 80vh;
+        background-color: var(--color-grey200);
+        color: var(--color-black);
+        pointer-events: none;
+        display: none;
+
+
+        &.is-visible {
+            display: flex;
+            pointer-events: all;
+        }
+
+
+        &-content {
+            height: auto;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 1px auto 0 var(--aside-width);
+                width: 1px;
+                background-color: var(--theme-color);
+            }
+        }
+
+
+        &-dot {
+            position: absolute;
+            width: rem(20);
+            height: rem(20);
+            background-color: var(--theme-color);
+            border-radius: 50%;
+            left: rem(12);
+
+
+            &:first-of-type {
+                top: rem(60);
+            }
+
+            // sometimes not visible on screen and that's ok!
+
+            &:nth-of-type(2) {
+                top: rem(489);
+            }
+        }
+    }
+
+
+
+    &__info {
+        @include flex(column, flex-start, flex-end);
+
+        padding-left: var(--aside-width);
+        height: 100%;
+        overflow-y: auto;
+
+
+        &-text {
+            padding: rem(53) rem(143) rem(25) rem(25);
+
+
+            h3 {
+                @include font-family(compressed);
+                @include font-size(30, 1);
+                @include letter-spacing(-0.6, 30);
+
+                text-transform: uppercase;
+            }
+
+
+            p {
+                @include font-family(normal, 300);
+                @include font-settings(200, 100);
+                @include font-size(18, 27);
+                @include letter-spacing(0.04, 18);
+
+                font-feature-settings: "ss02" on;
+                margin-top: rem(8);
+            }
+
+
+            p + h3 {
+                margin-top: rem(40);
+            }
+        }
+    }
+
+
+
+    &__downloads {
+        @include flex(column, flex-start, flex-end);
+
+        padding-left: var(--aside-width);
+        height: 100%;
+        overflow-y: auto;
+
+
+        &-list {
+            @include flex(column, flex-start, flex-start);
+
+            width: 100%;
+            padding: rem(47) rem(143) 0 rem(14);
+
+
+            a {
+                @include font-family(compressed);
+                @include font-size(30, 1);
+                @include letter-spacing(-1.05, 30);
+                @include flex(row, flex-start, flex-start);
+
+                text-transform: uppercase;
+                margin-bottom: rem(13);
+            }
+        }
+
+
+        &-arrow {
+            padding-top: 1px;
+            margin-right: rem(8);
+
+            svg { vertical-align: top; }
+        }
+    }
+
+
+
+    &__related {
+        @include flex(column, flex-start, flex-end);
+
+        padding-left: var(--aside-width);
+        height: 100%;
+        overflow-y: auto;
+
+
+        &-list {
+            @include flex(column, flex-start, flex-start);
+
+            width: 100%;
+            padding-top: rem(34);
+        }
+
+
+        &-item {
+            display: grid;
+            grid-template: "title text" auto "collection text" 1fr / 1fr 1fr;
+            align-content: start;
+            padding: rem(19) rem(48) rem(40) rem(25);
+            position: relative;
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                z-index: 2;
+                inset: 0 0 auto auto;
+                width: calc(100% + var(--aside-width));
+                height: 1px;
+                background-color: var(--color-grey300);
+            }
+
+
+            &:first-of-type::before { content: none; }
+        }
+
+
+        &-title {
+            @include font-family(compressed);
+            @include font-size(40, 38);
+            @include letter-spacing(-1, 40);
+
+            text-transform: uppercase;
+            grid-area: title;
+            padding-top: rem(7);
+        }
+
+
+        &-collection {
+            @include font-family(compact, 400);
+            @include font-size(17, 1);
+            @include letter-spacing(-0.17, 17);
+
+            margin-top: rem(10);
+            grid-area: collection;
+            font-feature-settings: "ss03" on;
+
+            &::before {
+                content: "";
+                height: 1px;
+                display: inline-block;
+                width: rem(19);
+                background-color: currentColor;
+                vertical-align: middle;
+                margin-right: rem(8);
+            }
+        }
+
+
+        &-text {
+            @include font-family(normal, 300);
+            @include font-settings(200, 100);
+            @include font-size(18, 27.3);
+            @include letter-spacing(0.1, 18);
+
+            grid-area: text;
+        }
+
+
+        &-arrow {
+            position: absolute;
+            inset: rem(28) 100% auto auto;
+            margin-right: rem(7);
+
+            // TEMP - todo animation on icon
+            opacity: 0;
+            transition: opacity .3s $ease-custom;
+        }
+
+
+        &-link {
+            @include full;
+
+            @include hover {
+                ~ .lightbox__related-arrow {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+
+
+    &__slide {
+        grid-column: 1 / -2;
+        grid-row: 1 / -1;
+        display: none;
+    }
+
+
+
+    &__footer {
+        @include flex(row, flex-start, center);
+    }
+
+
+
+    &__play {
+        @include font-family(compressed);
+        @include font-size(62, 60);
+        @include letter-spacing(-1.24, 62);
+
+        text-transform: uppercase;
+        margin-top: rem(4);
+
+
+        span {
+            margin-left: rem(13);
+        }
+    }
+}
+

@@ -1,0 +1,97 @@
+{
+    "url": "/workspace/lightbox/01",
+    "backUrl": "/workspace",
+    "modifier": "pale-purple",
+    "illu": {
+        "desktop": "/workspace/images/lightbox-illu.png"
+    },
+    "mainImage": {
+        "type": "polaroid",
+        "image": {
+            "desktop": "https://assets.huncwot.net/wip/R-etnografia-G-wikimedia2.jpg",
+            "mobile": "https://assets.huncwot.net/wip/R-etnografia-G-wikimedia2.jpg"
+        }
+    },
+    "title": "Joan Benoit",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Natalie Diaz Collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Short bio here. Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX",
+    "transcript": {
+        "english":  [
+            [
+                0,
+                "<strong>Renée Watson:</strong> Okay, so I’m here with Tupili Lea [E.] Arellano. Thank you so much for opening your home and time to this work together; it is such a gift and honor. Can you please tell me your name and who you are?"
+            ],
+            [
+                28,
+                "<strong>Joan Benoit:</strong> My name is Tupili Lea Espinosa Arellano, and I am a seventy-year-old indigenous elder. My tribal families are Mayo and Meshika [phonetic] and Rarámuri, and one of my tía [aunt] says we have Apache, and right now, that’s what I’m saying that,—the tribal family that I carry in my DNA [deoxyribonucleic acid], and what else? I’m an elder, and I’ve been a social justice activist from a very early age. And the first time I went to the streets was 1968 to fight against the Vietnam War that we were waging, and I was very active since then. And that was in Silver City, New Mexico, a very small, conservative town, but there were people that just said, “You’re coming with us,” so. And I was already calling out in my family the things that were not okay, which is a form of activism."
+            ],
+            [
+                98,
+                "<strong>Renée:</strong> Thank you, and when and where were you born?"
+            ],
+            [
+                130,
+                "<strong>Renée Watson:</strong> Okay, so I’m here with Tupili Lea [E.] Arellano. Thank you so much for opening your home and time to this work together; it is such a gift and honor. Can you please tell me your name and who you are?"
+            ],
+            [
+                188,
+                "<strong>Renée Watson:</strong> Okay, so I’m here with Tupili Lea [E.] Arellano. Thank you so much for opening your home and time to this work together; it is such a gift and honor. Can you please tell me your name and who you are?"
+            ]
+        ],
+        "spanish": [
+            [
+                0,
+                "<strong>Renée Watson:</strong> Bueno, estoy aquí con Tupili Lea [E.] Arellano. Muchas gracias por abrir tu hogar y tu tiempo para trabajar juntos; es un verdadero regalo y un honor. ¿Podrías decirme tu nombre y quién eres?"
+            ],
+            [
+                28,
+                "<strong>Joan Benoit:</strong> Mi nombre es Tupili Lea Espinosa Arellano, y soy una anciana indígena de setenta años. Mis familias tribales son Mayo y Meshika [fonético] y Rarámuri, y una de mis tías dice que tenemos Apache, y eso es lo que estoy diciendo ahora, la familia tribal que llevo en mi ADN [ácido desoxirribonucleico], ¿y qué más? Soy una anciana y he sido activista por la justicia social desde muy joven. La primera vez que salí a las calles fue en 1968 para luchar contra la Guerra de Vietnam que estábamos librando, y he sido muy activa desde entonces. Y eso fue en Silver City, Nuevo México, un pueblo muy pequeño y conservador, pero había gente que simplemente decía: 'Vienes con nosotros', así que. Y ya estaba señalando en mi familia las cosas que no estaban bien, lo cual es una forma de activismo."
+            ],
+            [
+                98,
+                "<strong>Renée:</strong> Thank you, and when and where were you born?"
+            ],
+            [
+                130,
+                "<strong>Renée Watson:</strong> Okay, so I’m here with Tupili Lea [E.] Arellano. Thank you so much for opening your home and time to this work together; it is such a gift and honor. Can you please tell me your name and who you are?"
+            ],
+            [
+                188,
+                "<strong>Renée Watson:</strong> Okay, so I’m here with Tupili Lea [E.] Arellano. Thank you so much for opening your home and time to this work together; it is such a gift and honor. Can you please tell me your name and who you are?"
+            ]
+        ]
+    },
+    "info": "<h3>narrator bio</h3><p>Eget mauris pharetra et ultrices neque ornare aenean euismod. Ac odio tempor orci dapibus ultrices in iaculis nunc sed. Vitae suscipit tellus mauris a diam maecenas sed enim. Mollis nunc sed id semper risus in hendrerit. Penatibus et magnis dis parturient montes nascetur. Ornare arcu odio ut sem. Ullamcorper sit amet risus nullam eget felis. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Eget nullam non nisi est sit amet. Sapien pellentesque habitant morbi tristique senectus et netus et malesuada. Auctor augue mauris augue neque gravida in. Nunc eget lorem dolor sed. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant.</p><h3>Interview summary</h3><p>Sit amet volutpat consequat mauris nunc congue. Orci nulla pellentesque dignissim enim. Integer eget aliquet nibh praesent tristique magna sit. Est velit egestas dui id ornare arcu odio ut sem. Viverra adipiscing at in tellus integer feugiat scelerisque varius morbi. Sed ullamcorper morbi tincidunt ornare massa eget. Viverra aliquet eget sit amet tellus. Scelerisque purus semper eget duis at tellus at urna. Id nibh tortor id aliquet lectus proin nibh nisl. Lacus sed viverra tellus in. Nunc sed id semper risus in. Ultricies mi eget mauris pharetra et. Ipsum nunc aliquet bibendum enim facilisis gravida.</p>",
+    "downloads": [
+        {
+            "url": "",
+            "name": "Transcript",
+            "ext": "PDF",
+            "filename": ""
+        },
+        {
+            "url": "",
+            "name": "Summary",
+            "ext": "PDF",
+            "filename": ""
+        }
+    ],
+    "related": [
+        {
+            "url": "",
+            "title": "Patricia Welch",
+            "collection": "Natalie Diaz Collection",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque."
+        },
+        {
+            "url": "",
+            "title": "C. Njoube Dugas",
+            "collection": "Natalie Diaz Collection",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque."
+        }
+    ]
+}

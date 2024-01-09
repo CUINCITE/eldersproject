@@ -7,9 +7,9 @@ import { IBrowser, getBrowser } from './Browser';
 import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
-import { Offscreen } from './Offscreen';
 import { Menu } from './Menu';
 import { Search } from './Search';
+import { Lightbox } from './components/Lightbox/Lightbox';
 
 import Widgets from './widgets/All';
 
@@ -31,7 +31,7 @@ class Site {
     private pushStates: PushStates;
     private scroll: Scroll;
     private menu: Menu;
-    private offscreen: Offscreen;
+    private lightbox: Lightbox;
     private search: Search;
 
     private isInitialized: boolean = false;
@@ -58,7 +58,7 @@ class Site {
 
         this.scroll = new Scroll();
 
-        this.offscreen = new Offscreen(document.querySelector('.js-offscreen'));
+        this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
         this.search = new Search(document.getElementById('search'));
 
@@ -126,10 +126,10 @@ class Site {
     private onState = () => {
         const isRendered = this.pushStates.isRendered();
         const pageChangedState = this.currentPage.onState();
-        const offscreenOnstate = this.offscreen.onState();
+        const lightboxChangedState = this.lightbox.onState(isRendered);
         this.menu?.onState();
 
-        if (!isRendered && !pageChangedState && !offscreenOnstate) {
+        if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
                 this.pushStates.load(),
                 this.currentPage.animateOut(),
@@ -222,7 +222,7 @@ class Site {
         // update links:
         this.setActiveLinks();
 
-        this.offscreen?.reload();
+        this.lightbox?.check();
 
         return page.preload();
     }

@@ -174,7 +174,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
         @include breakpoint(phone) {
             @include flex(column, flex-start, flex-start);
-            
+
             padding-left: rem(16);
             letter-spacing: unset;
         }
@@ -198,8 +198,6 @@ $theme-colors: ("orange", "red", "blue", "pink");
             width: vw(14, phone);
             height: vw(14, phone);
             z-index: 2;
- 
         }
-
     }
 }

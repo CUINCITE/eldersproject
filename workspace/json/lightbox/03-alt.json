@@ -1,0 +1,19 @@
+{
+    "url": "/workspace/lightbox/03-alt",
+    "backUrl": "/workspace",
+    "modifier": "green",
+    "mainImage": {
+        "type": "polaroid",
+        "horizontal": true,
+        "image": {
+            "desktop": "/src/images/lightbox-patricia.png"
+        }
+    },
+    "title": "Patricia Welch",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Renée Watson collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Short bio here. Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX"
+}

@@ -1,0 +1,20 @@
+{
+    "url": "/workspace/lightbox/02",
+    "backUrl": "/workspace",
+    "modifier": "pink",
+    "noIllu": true,
+    "mainImage": {
+        "type": "",
+        "image": {
+            "desktop": "/src/images/lightbox-fresh.png",
+            "mobile": "/src/images/lightbox-fresh.png"
+        }
+    },
+    "title": "Fresh “Lev” White",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Carolina De Robertis Collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "New Pascua Reservation, Tucson, AZ"
+}
