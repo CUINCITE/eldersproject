@@ -2,20 +2,47 @@
     <div class="text_aside">
         <div class="box">
             <div class="grid grid--row-start">
-                <div class="text_aside__column col-span-6 col-start-1 no-padding">
-                    <h2 class="heading heading--aside heading--medium">
-                        {{label|nl2br|brackets2tag('i')|raw}}
-                    </h2>
-                </div>
-                <div class="text_aside__column col-span-6 col-start-7">
-                    <div class="text text--large">
-                        {{text|raw}}
+
+                {% if not hide_label %}
+                    <div class="col-span-6 text_aside__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                        <h2 class="heading heading--aside heading--medium">
+                            {{ label|nl2br|brackets2tag('i')|raw }}
+                        </h2>
+                    </div>
+                {% endif %}
+
+                <div class="text_aside__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                    <div class="text
+                        {% if modifiers %}
+
+                            {% for modifier in modifiers %}
+                                text--{{ modifier }}
+                            {% endfor %}
+
+                        {% else %}
+
+                            text--large
+
+                        {% endif %}">
+
+                        {% if heading %}
+                            {% include 'components/c_heading.html' with heading %}
+                        {% endif %}
+
+                        {{ text|raw }}
                     </div>
                 </div>
                 {% if params.decor %}
-                    <div class="text_aside__decorator{% if params.decor.type %} text_aside__decorator--{{params.decor.type}}{% endif %}{% if params.decor.modifiers %}{% for modifier in params.decor.modifiers %} text_aside__decorator--{{modifier}}{% endfor %}{% endif %}">
+                    <div class="text_aside__decorator{% if reversed %} text_aside__decorator--reversed{% endif %}
 
-                        {% if params.decor.type == "boxes" %}
+                    {% if params.decor %} text_aside__decorator--{{ params.decor }}{% endif %}
+
+                    {% if decor_modifiers %}
+                        {% for modifier in decor_modifiers %} text_aside__decorator--{{ modifier }}
+                        {% endfor %}
+                    {% endif %}">
+
+                        {% if params.decor == "boxes" %}
                             <section class="module module--boxes">
                                 <div class="boxes">[[svg::boxes]]</div>
                             </section>
@@ -26,15 +53,15 @@
                         {% endif %}
 
                         {% if params.decor.type == "photo" %}
-                                {% include "./components/c_polaroid.html" with decor.photo %}
+                            {% include "./components/c_polaroid.html" with decor.photo %}
                         {% endif %}
 
                         {% if params.decor.text %}
                             <div class="text text--small">
-                                {{params.decor.text|raw}} 
+                                {{ params.decor.text|raw }}
                             </div>
                         {% endif %}
-                        
+
                     </div>
                 {% endif %}
             </div>

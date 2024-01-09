@@ -17,7 +17,6 @@
         "type": "text_aside",
         "mainText": {
             "size": "medium",
-            "modifiers":["padded"],
             "aside": true,
             "label": "I SEE <br> MY LIGHT <br> <i>SHINING</i>"
             },

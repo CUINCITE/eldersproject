@@ -146,8 +146,7 @@
         }
     }
 
-
-    &--padded {
+    .module--about_hero + .module--text-aside & {
         @include breakpoint(desktop) {
             padding-top: rem(24);
             padding-bottom: rem(80);

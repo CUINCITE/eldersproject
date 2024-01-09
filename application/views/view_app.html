@@ -25,7 +25,17 @@
 
     <div class="wrapper" id="wrapper">
         <main id="content" class="content">
+
+            {% if not hide_mobile_logo %}
+
+                <section class="module module--logo_box desktop-hide">
+                    {% include "components/c_logo_box.html" %}
+                </section>
+
+            {% endif %}
+
             {{content|raw}}
+
         </main>
         {% include 'scaffold/newsletter.html' %}
         {% include 'scaffold/footer.html' %}
