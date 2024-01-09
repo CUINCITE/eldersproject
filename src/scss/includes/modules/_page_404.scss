@@ -29,6 +29,11 @@
     }
 
     &__error {
+
+        // @include breakpoint(desktop) {
+        //     padding-top: rem(28);
+        // }
+
         @include breakpoint(phone) {
             padding-top: vw(6, phone);
             height: vw(177, phone);
