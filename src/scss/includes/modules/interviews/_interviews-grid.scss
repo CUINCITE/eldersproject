@@ -37,7 +37,6 @@
         position: relative;
         padding: 0 var(--grid-margin);
         min-height: vw(117);
-
         display: grid;
         align-content: start;
         align-items: start;
@@ -161,6 +160,26 @@
             width: rem(24);
             height: rem(24);
         }
+    }
+
+
+
+    &__controls {
+        z-index: 1;
+        border-bottom: 1px solid $color-bg;
+    }
+
+
+
+    &__interviews {
+        margin-top: 0;
+    }
+
+
+
+    &__filters {
+        margin-top: 0;
+        border-top: 1px solid $color-bg;
     }
 
 

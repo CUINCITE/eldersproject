@@ -67,10 +67,6 @@ html {
 main {
     grid-area: main;
     position: relative;
-
-    @include breakpoint(phone) {
-        
-    }
 }
 
 
@@ -231,6 +227,5 @@ ul {
     opacity: 0;
     pointer-events: none;
 }
-
 
 
