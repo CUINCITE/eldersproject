@@ -42,7 +42,7 @@ class model_app extends _uho_model
         
         $this->orm->setLogErrors(true);
 
-        if (true) {
+        if (cache or $_SERVER['REQUEST_URI'] === '/interviews') {
             $this->sql->cacheSet('7g!',
                 [
                     'users','users_newsletter'

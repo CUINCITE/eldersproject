@@ -77,7 +77,7 @@ class model_app_pages_modules
 
 		];
 
-        if (empty($m['type']['slug'] && in_array($m['type']['slug'], ['hero_home', 'hero_about']) && $this->iModule == 0)) {
+        if (empty($m['type']['slug'] && in_array($m['type']['slug'], ['hero_home', 'hero_about', 'hero_collections']) && $this->iModule == 0)) {
             $this->parent->hide_mobile_logo = true;
         }
 
