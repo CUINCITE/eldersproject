@@ -1,3 +1,7 @@
+<section class="module module--logo_box desktop-hide">
+    {% include "components/c_logo_box.html" %}
+</section>
+
 {% if header=='large' %}{% include 'subviews/subview_header_large.html' %}{% endif %}
 
 {% set decor = (header == 'standard') ? {} : {'decor': 'boxes'} %}
