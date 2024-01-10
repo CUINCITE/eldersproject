@@ -133,7 +133,7 @@ export default class Scroll {
 
         console.log('scroll setup', gsap.version);
 
-        if (browser.safari) { return; }
+        // if (browser.safari) { return; }
 
         Scroll.matchMedia = (gsap as any).matchMedia();
         Scroll.matchMedia.add('(min-width: 1024px)', () => {
