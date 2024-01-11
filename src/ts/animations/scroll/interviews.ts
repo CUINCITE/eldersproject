@@ -16,6 +16,7 @@ export const interviews = el => {
             pinSpacing: false,
             start: 'top top',
             end: () => `bottom ${controls.offsetHeight + moreInterviewsHeight}px`,
+            onToggle: self => el.classList.toggle('is-pinned', self.isActive),
             invalidateOnRefresh: true,
         },
     });

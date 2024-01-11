@@ -1,4 +1,6 @@
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Scroll from '../Scroll';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
 import { PushStates } from '../PushStates';
@@ -9,6 +11,7 @@ interface ILoadSettings {
     extra?: string; // additional form to parse
     total?: string; // updating total value on filters' change
     filtered?: string; // show filtered items' list
+    scrollTo?: string; // scroll to given element when reloading filters
 }
 
 
@@ -128,8 +131,10 @@ export class Load extends Component {
         this.isPending = true;
         this.view.classList.add('is-pending');
         PushStates.changePath(url, true);
+        ScrollTrigger.refresh();
 
         if (this.settings.filtered) this.updateFiltered();
+        if (this.settings.scrollTo) this.scrollToContainer();
 
         // eslint-disable-next-line consistent-return
         return fetch(url, {
@@ -159,6 +164,8 @@ export class Load extends Component {
             })
             .finally(() => {
                 this.view.classList.remove('is-pending');
+                ScrollTrigger.refresh();
+
                 setTimeout(() => {
                     this.isPending = false;
                 }, 250);
@@ -214,6 +221,21 @@ export class Load extends Component {
             // submit needs to be triggered manually for closing modal on submit event
             setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
         }));
+    };
+
+
+
+    private scrollToContainer = (): void => {
+        const elem = document.querySelector(this.settings.scrollTo) as HTMLElement;
+        if (!elem) {
+            console.error(`element ${this.settings.scrollTo} doesn't exist!`);
+            return;
+        }
+
+        Scroll.scrollTo({
+            el: elem,
+            duration: 1,
+        });
     };
 
 

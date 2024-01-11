@@ -3,6 +3,10 @@
         @include flex;
 
         padding-top: rem(36);
+        transition: padding-top .25s $ease-custom;
+
+
+        .is-pinned & { padding-top: rem(13); }
     }
 
 
@@ -20,6 +24,12 @@
             height: rem(24);
             padding-bottom: rem(4);
         }
+    }
+
+
+
+    &__tabs {
+        background-color: var(--color-box);
     }
 
 
@@ -73,6 +83,13 @@
         margin-bottom: rem(35);
         padding-bottom: rem(10);
         position: relative;
+        transition: margin-bottom .25s $ease-custom, padding-bottom .25s $ease-custom;
+
+
+        .is-pinned & {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
 
 
         > button {
@@ -99,6 +116,13 @@
             @include font-settings(400, 100);
 
             text-transform: uppercase;
+            transition: opacity .3s $ease-custom;
+
+
+            body:has(.is-grid-view) & {
+                opacity: 0;
+                pointer-events: none;
+            }
 
             span {
                 display: inline-block;
@@ -167,7 +191,9 @@
     &__controls {
         position: relative;
         z-index: 4;
-        border-bottom: 1px solid $color-bg;
+
+        // trick for proper scrolltrigger's pin
+        height: auto !important;
     }
 
 
@@ -181,6 +207,7 @@
     &__filters {
         margin-top: 0;
         border-top: 1px solid $color-bg;
+        border-bottom: 1px solid $color-bg;
     }
 
 
@@ -209,5 +236,10 @@
             inset: auto rem(-10) rem(-20) auto;
             max-width: rem(225);
         }
+    }
+
+
+    .pin-spacer {
+        background-color: var(--color-box);
     }
 }
