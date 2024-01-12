@@ -7,6 +7,8 @@ import { Modal } from './components/Modal';
 import { More } from './components/More';
 import { Accordeon } from './components/Accordeon';
 import { AccordeonList } from './components/AccordeonList';
+import { Player } from './components/Player';
+import { Video } from './components/Video';
 
 export const components = {
     Accordeon,
@@ -14,6 +16,8 @@ export const components = {
     Load,
     Modal,
     More,
+    Player,
+    Video,
     LightboxNav,
     LightboxTranscript,
     LightboxSlider,

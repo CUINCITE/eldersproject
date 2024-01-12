@@ -30,6 +30,53 @@
 .svg-bracket-right { margin-left: rem(5); }
 
 
+.svg-prevnext {
+    width: rem(34);
+    height: rem(42);
+
+    path, rect { fill: currentColor; }
+}
+
+
+.svg-play {
+    width: rem(37);
+    height: rem(43);
+
+
+    path, rect { fill: currentColor; }
+
+
+    g {
+        transition: opacity .25s $ease-custom;
+
+
+        &.pause {
+            opacity: 0;
+
+
+            .is-playing & { opacity: 1; }
+        }
+
+
+        &.play {
+            opacity: 1;
+
+
+            .is-playing & { opacity: 0; }
+        }
+    }
+}
+
+
+.svg-rewind {
+    width: rem(30);
+    height: rem(25);
+
+    path:first-of-type { stroke: currentColor; stroke-width: 2.25; }
+    path:last-of-type { fill: currentColor; }
+}
+
+
 .svg-pin {
     width: rem(12);
     height: rem(16);
@@ -44,4 +91,16 @@
 
     path:first-of-type { stroke: currentColor; }
     path:last-of-type { fill: currentColor; }
+}
+
+
+.svg-arrow-player-small {
+    width: rem(8);
+    height: rem(14);
+}
+
+
+.svg-arrow-oblique {
+    width: rem(12);
+    height: rem(12);
 }

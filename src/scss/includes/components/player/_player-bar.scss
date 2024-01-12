@@ -1,0 +1,266 @@
+.player {
+    &__bar {
+        position: absolute;
+        top: 100%;
+        transform-origin: center bottom;
+
+        // transition: transform ($time * 2) $easing;
+        width: 100%;
+        display: grid;
+        grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
+        z-index: 1;
+        background-color: $bar-color;
+        transform: translateX(100%);
+        pointer-events: all;
+
+
+        .player--audio & {
+            position: relative;
+            top: auto;
+            flex-grow: 1;
+            will-change: transform;
+        }
+    }
+
+
+
+    &__controls {
+        display: grid;
+        grid-template-columns: 34.5% 1fr 25%;
+        padding: 0 rem(8) 0 rem(13);
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+
+        > * {
+            height: inherit;
+            position: relative;
+            transition: width $time-fast $easing, padding $time-fast $easing, opacity $time-fast $easing;
+            overflow: hidden;
+        }
+    }
+
+
+
+    &__playpause {
+        margin: 0 rem(7);
+
+        @include hover { opacity: 1; }
+    }
+
+
+
+    &__full {
+        width: 50px;
+        opacity: $button-opacity;
+
+        @include hover { opacity: 1; }
+
+        .player--audio & { display: none; }
+    }
+
+
+
+    &__next,
+    &__rewind {
+        svg {
+            transform: scaleX(-1);
+        }
+    }
+
+
+
+    &__rewind,
+    &__forward {
+        span {
+            @include font-family(compressed);
+            @include font-size(17.727, 14);
+            @include letter-spacing(-0.177, 17.727);
+
+            position: absolute;
+            padding-top: rem(8);
+        }
+
+
+        svg {
+            transition: transform .25s $ease-custom;
+        }
+    }
+
+
+
+    &__rewind {
+        svg {
+            margin-top: rem(-3);
+            margin-left: rem(-2);
+        }
+    }
+
+
+
+    &__forward {
+        svg {
+            margin-top: rem(-3);
+            margin-right: rem(-2);
+        }
+    }
+
+
+
+    &__time {
+        @include font-family(compressed);
+        @include font-size(62, 60);
+        @include letter-spacing(-1.24, 62);
+        @include flex(row, flex-start, flex-end);
+
+        gap: rem(9);
+        white-space: nowrap;
+        text-align: center;
+        margin-top: rem(5);
+
+        em {
+            font-style: normal;
+        }
+    }
+
+
+
+    &__more {
+        @extend %player-small-button;
+
+        gap: rem(2);
+        padding-bottom: rem(10);
+
+
+        svg {
+            margin-bottom: rem(3);
+        }
+    }
+
+
+
+    &__minimize {
+        @extend %player-small-button;
+
+        gap: rem(4);
+        padding-top: rem(9);
+
+
+        svg {
+            margin-bottom: rem(3);
+        }
+    }
+
+
+
+    &__header {
+        position: relative;
+        border-bottom: 1px solid #404040;
+    }
+
+
+
+    &__title {
+        @include font-size(16, 18);
+        @include font-family(normal);
+        @include font-settings(900, 900);
+        @include flex(row, center, center);
+
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        text-align: center;
+        text-transform: uppercase;
+
+        padding-left: 9.5%; // visually centered, like .player__buttons
+        padding-top: rem(4);
+    }
+
+
+
+    &__buttons {
+        @include flex(row, center, stretch);
+
+        > button {
+            @include flex(row, center, center);
+
+            aspect-ratio: 1;
+
+
+            @include hover {
+                color: var(--color-white);
+            }
+        }
+    }
+
+
+
+    &__scrubber-wrap {
+        height: 100%;
+        width: auto;
+    }
+
+
+
+    &__scrubber {
+        position: relative;
+        height: 100%;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            height: $scrubber-height;
+            top: 50%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            opacity: 0.1;
+            transform: translate(0, -#{$scrubber-height * 0.5});
+        }
+
+        > div {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: $scrubber-height;
+            width: 0%;
+            transition: all $time-fast $easing;
+            transform: translate(0, -#{$scrubber-height * 0.5});
+        }
+    }
+
+
+
+    &__loaded {
+        background: $loaded-color;
+        opacity: $loaded-opacity;
+    }
+
+
+
+    &__progress {
+        background: $progress-color;
+        opacity: $progress-opacity;
+    }
+
+
+    .player:not(.has-cc) &__cc {
+        display: none;
+    }
+}
+
+
+%player-small-button {
+    @include font-family(compressed);
+    @include font-size(17.727, 13.636);
+    @include letter-spacing(-0.532, 17.727);
+    @include flex(row, flex-start, flex-end);
+
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity .25s $ease-custom;
+}

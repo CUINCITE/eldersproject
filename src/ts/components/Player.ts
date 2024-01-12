@@ -1,7 +1,9 @@
-import { gsap } from 'gsap/dist/gsap';
-import { browser, breakpoint } from '../Site';
+import gsap from 'gsap';
+import { getBrowser } from '../Browser';
 import { Component } from './Component';
+import { getBreakpoint } from '../Breakpoint';
 import { generateUID, parseToTime } from '../Utils';
+import { TemplateNames, Templates } from '../templates/Templates';
 
 export interface IPlayerSettings {
     autoplay?: boolean;
@@ -47,6 +49,8 @@ export interface IPlayerElements {
     volumeValue?: HTMLElement;
     captions?: HTMLElement;
     cc?: HTMLElement;
+    thumbnail?: HTMLElement;
+    minimize?: HTMLElement;
 }
 
 export class PlayerEvents {
@@ -61,12 +65,27 @@ export class PlayerSize {
     public static AUTO = 'auto';
 }
 
-declare const dataLayer;
-
 export abstract class Player extends Component {
     public static instances: Array<Player> = [];
 
     // public playlist: Playlist;
+    // pause all instances of Player class:
+    static pauseAll(uid?: string): void {
+        Player.instances.forEach(item => {
+            if (typeof uid === 'undefined' || uid !== item.uid) {
+                item.pause();
+            }
+        });
+    }
+
+    // pause all instances of Player class inside element:
+    static pauseAllIn(selector: string): void {
+        Player.instances.forEach(item => {
+            if (item.view.closest(selector)) {
+                item.pause();
+            }
+        });
+    }
 
     protected uid: string;
     protected mediaEl: HTMLElement;
@@ -79,7 +98,7 @@ export abstract class Player extends Component {
 
     private timeout;
     private wasPlaying: boolean;
-    private videoHasBeenPlayed = false;
+
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -99,7 +118,7 @@ export abstract class Player extends Component {
             hotkeys: true,
         };
 
-        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
+        this.settings = Object.assign(this.settings, JSON.parse(this.view.dataset.options));
 
         // generate unique id:
         this.uid = generateUID();
@@ -118,23 +137,7 @@ export abstract class Player extends Component {
         this.view.classList.add('is-initialized');
     }
 
-    // pause all instances of Player class:
-    static pauseAll(uid?: string): void {
-        Player.instances.forEach(item => {
-            if (typeof uid === undefined || uid !== item.uid) {
-                item.pause();
-            }
-        });
-    }
 
-    // pause all instances of Player class inside element:
-    static pauseAllIn(selector: string): void {
-        Player.instances.forEach(item => {
-            if (item.view.closest(selector)) {
-                item.pause();
-            }
-        });
-    }
 
     public abstract play(): void;
     public abstract pause(): void;
@@ -199,7 +202,7 @@ export abstract class Player extends Component {
         }
 
         const { size } = this.settings;
-        const mediaRatio = breakpoint.phone && this.settings.ratio_mobile
+        const mediaRatio = getBreakpoint().phone && this.settings.ratio_mobile
             ? this.settings.ratio_mobile
             : this.settings.ratio;
 
@@ -255,10 +258,16 @@ export abstract class Player extends Component {
     protected toggleFullscreen(): void {
         if (screenfull.isEnabled) {
             screenfull.toggle(this.view);
+            this.view.classList.toggle('is-fullscreen', !screenfull.isFullscreen);
         }
     }
 
     protected buildUI(): void {
+        const template = Templates.get(TemplateNames.PLAYER);
+        const html = template.render({});
+
+        this.view.insertAdjacentHTML('beforeend', html);
+
         this.controls = {};
         this.controls.poster = this.view.querySelector('.player__poster');
         this.controls.title = this.view.querySelector('.player__title');
@@ -312,7 +321,7 @@ export abstract class Player extends Component {
         this.view.addEventListener('mousemove', this.onMouseMove);
         this.view.addEventListener('mouseup', this.onMouseUp);
         this.view.addEventListener('mouseleave', this.onMouseLeave);
-        this.view.addEventListener('click', this.onClick);
+        // this.view.addEventListener("click", this.onClick);
 
         document.addEventListener('keydown', this.onKeyDown);
 
@@ -344,18 +353,13 @@ export abstract class Player extends Component {
 
     protected onPlay(): void {
         this.view.classList.add('is-played');
-        this.view.classList.remove('is-ended,is-error');
+        this.view.classList.remove('is-ended', 'is-error');
         Player.pauseAll(this.uid);
-
-        if (!this.videoHasBeenPlayed && dataLayer) {
-            this.videoHasBeenPlayed = true;
-            dataLayer.push({ event: 'video_play', value: 'how-gpw-works' });
-        }
     }
 
     protected onPlaying(): void {
         this.view.classList.add('is-playing');
-        this.view.classList.remove('is-loading,is-error');
+        this.view.classList.remove('is-loading', 'is-error');
     }
 
     protected onPause(): void {
@@ -368,7 +372,7 @@ export abstract class Player extends Component {
     }
 
     protected onEnd(): void {
-        this.view.classList.remove('is-playing,is-played,is-started');
+        this.view.classList.remove('is-playing', 'is-played', 'is-started');
         this.view.classList.add('is-ended');
     }
 
@@ -392,15 +396,13 @@ export abstract class Player extends Component {
     };
 
     protected onClick = (e): void => {
-        if (
-            e.target.closest('.player__bar')
-        ) {
+        const player = e.currentTarget as HTMLElement;
+
+        if (player.querySelector('.player__bar')) {
             e.preventDefault();
             e.stopPropagation();
             this.toggle();
         }
-
-
     };
 
     protected onKeyDown = (e: KeyboardEvent): void | boolean => {
@@ -510,7 +512,7 @@ export abstract class Player extends Component {
 
     protected loadPoster(): void {
         if (this.settings.poster) {
-            const poster = !!browser.mobile
+            const poster = !!getBrowser().mobile
                 && this.settings.poster_mobile
                 && this.settings.poster_mobile !== ''
                 ? this.settings.poster_mobile

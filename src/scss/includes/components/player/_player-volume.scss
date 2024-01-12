@@ -1,0 +1,19 @@
+.volume {
+    @include flex(column, space-between, flex-end);
+
+    position: relative;
+    text-align: left;
+    padding-bottom: rem(6);
+
+
+
+    &__button {
+        height: 100%;
+        aspect-ratio: 1;
+
+        svg {
+            position: relative;
+            top: -2px;
+        }
+    }
+}

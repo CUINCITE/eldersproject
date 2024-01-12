@@ -650,6 +650,37 @@
     }
 }
 
+
+.icon-volume {
+    @include flex(row, center, flex-end);
+
+    height: rem(30);
+    gap: rem(2);
+
+    span {
+        width: rem(5);
+        background-color: currentColor;
+        height: 100%;
+        transition: height .25s $ease-custom, opacity .25s $ease-custom;
+        will-change: height, opacity;
+
+
+        @for $i from 1 through 5 {
+            &:nth-child(#{$i}) {
+                height: calc(4 * #{$i}px);
+            }
+        }
+    }
+
+
+    .is-muted & {
+        span {
+            height: rem(6);
+            opacity: 0.5;
+        }
+    }
+}
+
 .fa {
     // &.fa-envelope {
     //     transform: translateY(-1px);

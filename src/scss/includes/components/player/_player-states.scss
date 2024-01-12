@@ -1,6 +1,6 @@
 .player {
 
-    &.is-muted .svg-volume { @extend %svg-volume-muted; }
+    &.is-muted .svg-volume { @extend %svg-volume-muted !optional; }
     &.is-started .player__toggle { display: none; }
 
 
@@ -197,7 +197,7 @@
         }
 
         &.is-playlist-open .playlist {
-            border-bottom: 1px solid $color-line;
+            border-bottom: 1px solid currentColor;
         }
 
         &.is-playlist-open .playlist__wrap {

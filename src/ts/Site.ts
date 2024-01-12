@@ -9,6 +9,7 @@ import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
 import { Menu } from './Menu';
 import { Search } from './Search';
+import { AudioPlayer } from './components/AudioPlayer';
 import { Lightbox } from './components/Lightbox/Lightbox';
 
 import Widgets from './widgets/All';
@@ -33,6 +34,7 @@ class Site {
     private menu: Menu;
     private lightbox: Lightbox;
     private search: Search;
+    private audioPlayer: AudioPlayer;
 
     private isInitialized: boolean = false;
     private resizingTimeout: ReturnType<typeof setTimeout>;
@@ -61,6 +63,8 @@ class Site {
         this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
         this.search = new Search(document.getElementById('search'));
+
+        this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
 
         if (browser.ie) {
             console.warn('This browser is outdated!');

@@ -78,6 +78,18 @@
 }
 
 
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+
+@keyframes cassette {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
 @keyframes lightbox-illu {
     0% { opacity: 0; }
     25% { opacity: 0; }
