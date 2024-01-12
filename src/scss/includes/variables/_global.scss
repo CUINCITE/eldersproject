@@ -11,13 +11,20 @@
     @supports(height: 100lvh) {
         --app-height: 100lvh;
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             --app-height: 100svh;
         }
     }
 
-    @include breakpoint(phone) {
-        --GLOBAL-aside-width: #{vw(40, phone)};
-        --GLOBAL-content-width: calc(100vw);
+    @include breakpoint(not-desktop) {
+        --GLOBAL-content-width: 100vw;
+
+        @include breakpoint(tablet) {
+            --GLOBAL-aside-width: #{vw(80, tablet)};
+        }
+
+        @include breakpoint(phone) {
+            --GLOBAL-aside-width: #{vw(40, phone)};
+        }
     }
 }

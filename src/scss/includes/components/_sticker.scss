@@ -25,8 +25,16 @@
         padding: vw(30) vw(20);
     }
 
+    @include breakpoint(tablet) {
+        --sticker-size: #{vw(120, tablet)};
+
+        padding: vw(10, tablet) vw(20, tablet);
+    }
+
     @include breakpoint(phone) {
         --sticker-size: #{vw(83.25, phone)};
+
+
     }
 
     // to do: refactor this
@@ -69,6 +77,14 @@
 
             padding-top: rem(12);
             padding-right: rem(6);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(24, 0.9);
+            @include letter-spacing(-0.0862, 24);
+
+            padding-top: rem(6);
+            padding-right: rem(2);
         }
 
         @include breakpoint(phone) {

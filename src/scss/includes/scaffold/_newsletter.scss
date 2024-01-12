@@ -13,6 +13,12 @@
         padding-top: vw(200);
     }
 
+    @include breakpoint(tablet) {
+        --input-height: #{vw(65, tablet)};
+
+        padding-top: vw(164, tablet);
+    }
+
     @include breakpoint(phone) {
         --input-height: #{vw(45, phone)};
 
@@ -27,7 +33,8 @@
     &__wrap {
         position: relative;
 
-        @include breakpoint(phone) {
+
+        @include breakpoint(not-desktop) {
             width: 100%
         }
     }
@@ -65,6 +72,11 @@
 
             @include breakpoint(desktop) {
                 @include font-size(50, 50);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(40, 1);
+            
             }
 
             @include breakpoint(phone) {
@@ -109,6 +121,14 @@
             inset: auto vw(16) auto auto;
         }
 
+        @include breakpoint(tablet) {
+            inset: auto rem(26) auto auto;
+
+            .button {
+                margin-top: rem(1);
+            }
+        }
+
         @include breakpoint(phone) {
             inset: auto rem(9) auto auto;
 
@@ -135,20 +155,31 @@
             inset: auto vw(18) var(--input-height) auto;
         }
 
-        @include breakpoint(phone) {
-            @include font-size(49, 0.935);
-            @include letter-spacing(-1.47, 49);
-
+        @include breakpoint(not-desktop) {
             position: relative;
             text-align: left;
-            inset: auto 100% auto rem(14);
             order: -1;
+
+            @include breakpoint(tablet) {
+                @include font-size(60, 0.935);
+                @include letter-spacing(-1.57, 60);
+
+
+                inset: auto 100% auto rem(26);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(49, 0.935);
+                @include letter-spacing(-1.47, 49);
+
+                inset: auto 100% auto rem(14);
+            }
         }
     }
 
     &__fields {
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             @include flex(column, flex-start, flex-start);
         }
     }
@@ -166,6 +197,10 @@
             @include font-size(14, 16);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(14, 16);
+        }
+
         @include breakpoint(phone) {
             @include font-size(14, 16);
         }
@@ -174,6 +209,11 @@
             @include breakpoint(desktop) {
                 margin-bottom: vw(7);
             } 
+
+            @include breakpoint(tablet) {
+                margin-bottom: vw(9, tablet);
+            
+            }
 
             @include breakpoint(phone) {
                 margin-bottom: vw(9, phone);
@@ -200,6 +240,11 @@
             inset: calc(100% - 6px) auto auto 0;
         }
 
+        @include breakpoint(tablet) {
+            inset: calc(100% - #{rem(5)}) auto auto 0;
+            z-index: 5;
+        }
+
         @include breakpoint(phone) {
             inset: calc(100% - #{rem(3)}) auto auto 0;
             z-index: 5;
@@ -207,6 +252,10 @@
 
         .is-completed & {
             @include breakpoint(desktop) {
+                top: calc(100% - 12px);
+            }
+
+            @include breakpoint(tablet) {
                 top: calc(100% - 12px);
             }
 
@@ -226,6 +275,13 @@
             @include font-size(14, 16);
 
             margin-bottom: vw(4);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 1.1);
+
+            padding-top: vw(4, tablet) ;
+            margin-bottom: vw(8, tablet) ;
         }
 
         @include breakpoint(phone) {

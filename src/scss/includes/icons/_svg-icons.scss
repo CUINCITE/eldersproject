@@ -12,6 +12,10 @@
 .svg-search {
     width: rem(24);
     height: auto;
+
+    @include breakpoint(tablet) {
+        width: rem(32);
+    }
 }
 
 

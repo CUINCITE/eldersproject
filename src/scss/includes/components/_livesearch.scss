@@ -45,6 +45,10 @@
         border-bottom: none;
         border-right: none;
 
+        @include breakpoint(tablet) {
+            padding-left: map-get($grid-offset, tablet);
+        }
+
 
         &:first-of-type { padding-bottom: rem(37); }
 

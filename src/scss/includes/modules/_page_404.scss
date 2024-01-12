@@ -6,25 +6,31 @@
 
     &__image {
         z-index: 1;
+        aspect-ratio: 1/1;
 
         @include breakpoint(desktop) {
             position: absolute;
             left: vw(18); 
             top: vw(-68);
             width: vw(295);
-            height: vw(295);
             rotate: -4.85deg;
-            
         }
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             position: relative;
-            width: vw(220, phone);
-            aspect-ratio: 1/1;
-            margin-block: vw(-35, phone) vw(-35, phone);
-            rotate: -4.85deg;
-            right: vw(5, phone);
-            bottom: vw(-15, phone);
+
+            @include breakpoint(tablet) {
+                width: vw(500, tablet);
+                top: vw(-68, tablet);
+            }
+    
+            @include breakpoint(phone) {
+                width: vw(220, phone);
+                margin-block: vw(-35, phone) vw(-35, phone);
+                rotate: -4.85deg;
+                right: vw(5, phone);
+                bottom: vw(-15, phone);
+            }
         }
     }
 
@@ -33,6 +39,11 @@
         // @include breakpoint(desktop) {
         //     padding-top: rem(28);
         // }
+      
+        @include breakpoint(tablet) {
+            padding-top: vw(20, tablet);
+            height: vw(390, tablet);
+        }
 
         @include breakpoint(phone) {
             padding-top: vw(6, phone);
@@ -41,9 +52,16 @@
     }
 
     &__link {
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             flex-grow: 1;
-            padding-top: rem(3);
+
+            @include breakpoint(tablet) {
+                padding-top: rem(20);
+            }
+        
+            @include breakpoint(phone) {
+                padding-top: rem(3);
+            }
         }
     }
 }

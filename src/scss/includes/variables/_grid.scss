@@ -2,7 +2,7 @@
 // number of columns:
 $grid-columns: (
     phone: 1,
-    tablet: 12,
+    tablet: 8,
     desktop: 12,
     hd: 12
 );
@@ -34,12 +34,16 @@ $grid-offset: (
 // default pairs
 $grid-tablet-pairs: (
     1: 1,
-    2: 4,
+    2: 2,
     3: 4,
     4: 4,
     5: 4,
-    8: 8,
+    6: 6,
+    7: 6,
+    8: 6,
+    9: 8,
     10: 8,
+    11: 8,
     12: 8,
 );
 

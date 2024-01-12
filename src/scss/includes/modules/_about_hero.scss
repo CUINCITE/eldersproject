@@ -7,19 +7,32 @@
         min-height: var(--app-height);
     }
 
-    @include breakpoint(phone) {
+    @include breakpoint(not-desktop) {
         grid-template-rows: auto auto 1fr;
-        height: vw(512, phone);
 
-        .heading { 
-            margin-block: rem(-18) rem(-25);
+        @include breakpoint(tablet) { 
+            min-height: var(--app-height);
+
+            .heading { 
+                padding-block: rem(15);
+            }
+        }
+
+        @include breakpoint(phone) {
+            height: vw(512, phone);
+    
+            .heading { 
+                margin-block: rem(-18) rem(-25);
+            }
         }
     }
+
+
 
     .box {
         height: calc(100% - 1px);
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             position: relative;
         }
     }
@@ -40,6 +53,14 @@
             top: 10.6%;
             right: 27.8rem;
         }
+
+        @include breakpoint(tablet) {
+            width: vw(620, tablet);
+            aspect-ratio: 1/1;
+            rotate: -7deg; 
+            top: 0; 
+            left: vw(-8, tablet);
+        } 
 
         @include breakpoint(phone) {
             width: vw(289, phone);

@@ -35,6 +35,10 @@ $background-colors: (
         padding: vw(25) vw(25) vw(37);
     }
 
+    @include breakpoint(tablet) {
+        padding: vw(18, tablet) vw(18, tablet) vw(27, tablet);
+    }
+
     @include breakpoint(phone) {
         padding: vw(18, phone) vw(18, phone) vw(27, phone);
     }
@@ -48,6 +52,10 @@ $background-colors: (
         @include breakpoint(desktop) {
             --polaroid-width: #{vw(481)};
             --polaroid-height: #{vw(366)};
+        }
+
+        @include breakpoint(tablet) {
+        
         }
 
         @include breakpoint(phone) {
@@ -74,6 +82,11 @@ $background-colors: (
     &--small_frame {
         @include breakpoint(desktop) {
             padding: vw(10);
+        }
+
+        @include breakpoint(tablet) {
+            padding: vw(10, tablet);
+        
         }
 
         @include breakpoint(phone) {

@@ -1,6 +1,6 @@
 .text_aside {
 
-    @include breakpoint(phone) {
+    @include breakpoint(not-desktop) {
         position: relative;
         max-width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
     }
@@ -26,7 +26,23 @@
                     top: vw(21);
                     bottom: unset;   
                 }
-            } 
+            }
+
+            @include breakpoint(tablet) {
+                right: -1 * map-get($grid-offset, tablet);
+                padding-bottom: vw(32, tablet);
+                padding-inline: map-get($grid-offset, tablet);
+                margin-top: rem(-20);
+                text-align: right;
+
+                &.text_aside__decorator--contact {
+                    margin-top: rem(-35);
+                }
+
+                svg { 
+                    scale: -1 1;
+                }
+            }
 
             @include breakpoint(phone) {
                 right: -1 * map-get($grid-offset, phone);
@@ -205,7 +221,6 @@
                 content: "";
                 position: absolute;
                 top: 0;
-                
                 height: 1px;
                 background-color: $color-black;
     
@@ -294,6 +309,11 @@
 
         @include breakpoint(desktop) {
             position: relative;
+        }
+
+        @include breakpoint(tablet) {
+            position: relative;
+            grid-column: 1 / span 8 !important;
         }
 
         @include breakpoint(phone) {

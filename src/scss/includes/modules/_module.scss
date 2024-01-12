@@ -88,12 +88,29 @@
             padding-top: rem(14);
         }
 
+        @include breakpoint(tablet) {
+            padding-top: rem(18);
+            padding-bottom: rem(92);
+
+            
+            .grid {
+                div {
+                    grid-column: span 6;
+                }
+            }
+        }
+
         @include breakpoint(phone) {
             padding-top: rem(13);
             padding-bottom: rem(92);
         }
 
         &.no_padding_bottom_mobile {
+            @include breakpoint(tablet) {
+                padding-top: rem(22);
+                margin-bottom: rem(-5);
+            }
+
             @include breakpoint(phone) {
                 padding-top: rem(22);
                 margin-bottom: rem(-5);
@@ -109,6 +126,26 @@
             min-height: vw(391);
         }
 
+        @include breakpoint(tablet) {
+            padding-block: 0 rem(42);
+
+            .grid {
+                div {
+                    grid-column: 3 / span 6;
+                }
+
+                .text {
+                    padding-top: rem(40);
+                }
+            }
+
+
+
+            .boxes {
+                margin-top: rem(-130);
+            }
+        }
+
         @include breakpoint(phone) {
             padding-block: 0 rem(42);
         }
@@ -116,8 +153,8 @@
         &--link {
             justify-content: flex-start;
 
-            @include breakpoint(phone) {
-                margin-top: rem(-17) !important;
+            @include breakpoint(not-desktop) {
+                margin-top: 0 !important;
 
                 .grid {
                     & div:first-child {

@@ -22,6 +22,12 @@
 }
 
 
+@function trim-font($line-height, $trim-value: $font-trim) {
+
+    @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+}
+
+
 @function vh($size, $bp: desktop) {
     $layouts: (
         desktop: 720,

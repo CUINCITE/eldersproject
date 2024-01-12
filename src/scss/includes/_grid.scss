@@ -48,31 +48,33 @@
     }
 }
 
-
-@include breakpoint(desktop) {
-    div[class*="col-span-"] {
-        grid-column: var(--grid-column-start) / span var(--grid-columns-span);
-    }
-}
-
-
-@include breakpoint(phone) {
-    div[class*="col-span-"] {
-        grid-column: var(--grid-column-start) / span var(--grid-columns-span);
-    }
+@each $bp in (desktop, tablet, phone) {
+    @include breakpoint($bp) {
+        div[class*="col-span-"] {
+            grid-column: var(--grid-column-start) / span var(--grid-columns-span);
+        }
+    }    
 }
 
 
 @for $cols from 1 through map-get($grid-columns, desktop) {
-    @each $bp in (desktop) {
-        @include breakpoint($bp) {
-            .col-span-#{$cols} {
-                --grid-columns-span: #{$cols};
-            }
+    @include breakpoint(desktop) {
+        .col-span-#{$cols} {
+            --grid-columns-span: #{$cols};
+        }
 
-            .col-start-#{$cols} {
-                --grid-column-start: #{$cols};
-            }
-        } 
-    }
+        .col-start-#{$cols} {
+            --grid-column-start: #{$cols};
+        }
+    }  
+
+    @include breakpoint(tablet) {
+        .col-span-#{$cols} {
+            --grid-columns-span: #{map-get($grid-tablet-pairs, $cols)};
+        }
+
+        .col-start-#{$cols} {
+            --grid-column-start: #{map-get($grid-tablet-pairs, $cols)};
+        }
+    } 
 }

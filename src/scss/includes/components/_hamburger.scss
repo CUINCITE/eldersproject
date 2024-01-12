@@ -13,6 +13,11 @@
         top: 22px;
         right: $mobile;
         transition: transform $time-fast $ease-custom;
+
+        @include breakpoint(tablet) {
+            width: 100%;
+            gap: 8px;
+        }
           
         @include breakpoint(phone) {
             gap: 4px;
@@ -53,6 +58,10 @@
             margin-right: auto;
             opacity: 1;
         }
+
+        @include breakpoint(tablet) {
+            width: 100%;
+        };
 
         @include breakpoint(phone) {
             width: 32px;

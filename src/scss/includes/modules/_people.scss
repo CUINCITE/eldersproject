@@ -2,15 +2,30 @@
 
 
     &__heading {
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             grid-row-start: 1;
+            
+            @include breakpoint(tablet) {
+                grid-column: 1 / span 8 !important;
+                position: relative;
+            }
+        }
+    }
+
+    &__photos {
+        @include breakpoint(tablet) {
+            grid-column: 1 / span 6 !important;
         }
     }
 
     .text {
+
+        @include breakpoint(tablet) {
+            padding-block: rem(15) rem(46);     
+        }
+
         @include breakpoint(phone) {
             padding-block: rem(12) rem(46);     
         }
     }
 }
- 

@@ -5,11 +5,11 @@
     &__wrap {
         position: relative;
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             @include flex(column, flex-start, stretch);
             min-height: var(--app-height);
         }
-    }
+    }  
 
 
 
@@ -24,19 +24,22 @@
             @include letter-spacing(-10.8, 240);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(220, .72); 
+            @include letter-spacing(-9.5, 220); 
+        }
+
         @include breakpoint(phone) {
             @include font-size(118.8, 85.7); 
             @include letter-spacing(-10.8, 240); 
-            
         }
     }
 
 
 
     &__subtitles {
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             flex-grow: 1;
-            // padding-top: rem(4);
         }
     }
 
@@ -48,6 +51,13 @@
         @include breakpoint(desktop) {
             @include font-size(20, 31.5);
             @include letter-spacing(-0.6, 20);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(28, 1);
+            @include letter-spacing(-0.9, 28); 
+
+            padding-top: rem(14);
         }
 
         @include breakpoint(phone) {
@@ -66,6 +76,11 @@
         @include breakpoint(desktop) {
             padding-top: rem(27);
             padding-left: rem(13);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(30);
+            padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(8)});
         }
 
         @include breakpoint(phone) {
@@ -100,6 +115,11 @@
             left: rem(20);
         }
 
+        @include breakpoint(tablet) {
+            bottom: rem(-13);
+            left: rem(18);
+        }
+
         @include breakpoint(phone) {
             bottom: rem(-13);
             left: rem(18);
@@ -121,17 +141,33 @@
 
 
 
+    &__text {
+        @include breakpoint(tablet) {
+            grid-column: 3 / span 6;
+        }
+    }
+
+
+
     i {
         @include font-family(reclined, 300);
         font-style: normal;
 
         @include breakpoint(desktop) {
             @include letter-spacing(-16.8, 240);
+
             padding-left: rem(20);
+        }
+
+        @include breakpoint(tablet) {
+            @include letter-spacing(-16.8, 240);
+
+            padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(9)});
         }
 
         @include breakpoint(phone) {
             @include letter-spacing(-8.316, 118.8);
+
             padding-left: rem(9);
         }
     } 

@@ -19,13 +19,23 @@
         transform: rotate(-20deg);
     }
 
-    @include breakpoint(phone) {
+    @include breakpoint(not-desktop) {
         @include flex(row, center, center);
 
-        width: vw(126, phone);
-        height: vw(77, phone);
-        margin-right: -1 * map-get($grid-gutter, phone);
+        @include breakpoint(tablet) {
+            width: vw(186, tablet);
+            height: vw(100, tablet);
+            margin-right: -1 * map-get($grid-offset, tablet);
+        }
+
+        @include breakpoint(phone) {
+            width: vw(126, phone);
+            height: vw(77, phone);
+            margin-right: -1 * map-get($grid-gutter, phone);
+        }
     }
+
+
 
 
     &--reversed {
@@ -114,6 +124,13 @@
             padding: vw(14) vw(11);
             opacity: 0;
             inset: 0;
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 32);
+            @include letter-spacing(-0.75, 30);
+
+            padding-top: rem(1);
         }
 
         @include breakpoint(phone) {

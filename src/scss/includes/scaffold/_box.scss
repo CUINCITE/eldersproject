@@ -18,11 +18,11 @@
 
     @include breakpoint(desktop) {
         .text {
-                padding-inline-start: rem(11);
+            padding-inline-start: rem(11);
         }
     
         .heading--aside {
-                padding-inline-start: rem(9);
+            padding-inline-start: rem(9);
         }
 
         .no-padding {

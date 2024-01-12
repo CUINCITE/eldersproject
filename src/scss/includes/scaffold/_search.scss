@@ -14,6 +14,12 @@
         @include font-size(50, 1);
     }
 
+    @include breakpoint(tablet) {
+        --search-height: #{vw(95, tablet)};
+    
+        @include font-size(60, 37.4);
+    }
+
     @include breakpoint(phone) {
         --search-height: #{vw(54, phone)};
 
@@ -41,21 +47,31 @@
             margin-left: vw(15);
         }
 
+        @include breakpoint(tablet) {
+            margin-left: map-get($grid-offset, tablet);
+        }
+
         @include breakpoint(phone) {
             margin-left: vw(15, phone);
-
         }
         
 
         label {
-            @include font-size(50, 1);
-            @include letter-spacing(-1, 50);
-
             position: absolute;
             left: 0;
             pointer-events: none;
             transition: opacity .3s $ease-custom;
             opacity: 0;
+
+            @include breakpoint(desktop) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1, 50);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(60, 1);
+                @include letter-spacing(-1, 60);
+            }
 
             @include breakpoint(phone) {
                 @include font-size(40, 37.4);
@@ -133,6 +149,13 @@
 
             right: rem(9);
             bottom: rem(12);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(18, 0.9);
+
+            right: map-get($grid-offset, tablet);
+            bottom: rem(14);
         }
 
         @include breakpoint(phone) {

@@ -14,7 +14,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
     padding: 0 var(--GLOBAL-aside-width);
     counter-reset: menu -1;
 
-    @include breakpoint(phone) {
+    @include breakpoint(not-desktop) {
         padding: 0;
         height: 100lvh;
     }
@@ -31,7 +31,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
             border-right: 1px solid var(--color-bg);
         }
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             @include flex(column, flex-end, flex-start);
 
             height: var(--app-height);
@@ -49,6 +49,11 @@ $theme-colors: ("orange", "red", "blue", "pink");
         @include breakpoint(desktop) {
             @include font-size(100, 82);
             @include letter-spacing(-3, 100);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(120, 0.9);
+            @include letter-spacing(-3.3, 120);
         }
 
         @include breakpoint(phone) {
@@ -74,6 +79,11 @@ $theme-colors: ("orange", "red", "blue", "pink");
         @include breakpoint(desktop) {
             padding-right: rem(12);
             padding-top: rem(10);
+        }
+
+        @include breakpoint(tablet) {
+            padding-left: map-get($grid-offset, tablet);
+            padding-top: rem(14);
         }
 
         @include breakpoint(phone) {
@@ -115,7 +125,20 @@ $theme-colors: ("orange", "red", "blue", "pink");
             color: var(--theme-color);
             margin-right: rem(4);
 
+            @include breakpoint(tablet) {
+                @include font-size(22, 1.1);
+                @include letter-spacing(-0.22, 22);
+
+                inset: 0 auto 0 100%;
+                margin-top: rem(-1);
+                margin-right: 0;
+                margin-left: rem(8);
+            }
+
             @include breakpoint(phone) {
+                @include font-size(17, 22);
+                @include letter-spacing(-0.17, 17);
+
                 inset: 0 auto 0 100%;
                 margin-top: rem(-4);
                 margin-right: 0;
@@ -136,7 +159,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
         opacity: 0;
         transition: opacity .3s $ease-custom;
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             display: none;
         }
     }
@@ -144,20 +167,30 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
 
     &__footer {
-        @include font-size(10, 16);
-
         margin-top: auto;
 
         @include breakpoint(desktop) {
+            @include font-size(10, 16);
+
             padding-bottom: vw(20);
         }
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             @include flex(column, flex-start, flex-start);
-            @include font-size(14, 18.9);
+        
+            @include breakpoint(tablet) {
+                @include font-size(20, 1.1);
 
-            padding-bottom: vw(25, phone);
-            gap: rem(19);
+                padding-bottom: vw(36, tablet);
+                gap: rem(32);
+            }
+    
+            @include breakpoint(phone) {
+                @include font-size(14, 18.9);
+    
+                padding-bottom: vw(25, phone);
+                gap: rem(19);
+            }
         }
 
         a { @include hoverable-link; }
@@ -172,11 +205,17 @@ $theme-colors: ("orange", "red", "blue", "pink");
             padding-right: rem(13);
         }
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             @include flex(column, flex-start, flex-start);
 
-            padding-left: rem(16);
-            letter-spacing: unset;
+            @include breakpoint(tablet) {
+                padding-left: map-get($grid-offset, tablet);
+            }
+
+            @include breakpoint(phone) {
+                padding-left: rem(16);
+                letter-spacing: unset;
+            }
         }
     }
 
@@ -192,12 +231,22 @@ $theme-colors: ("orange", "red", "blue", "pink");
             height: vw(28);
         }
 
-        @include breakpoint(phone) {
-            right: vw(16, phone);
-            top: vw(8, phone);
-            width: vw(14, phone);
-            height: vw(14, phone);
+        @include breakpoint(not-desktop) {
             z-index: 2;
+
+            @include breakpoint(tablet) {
+                right: map-get($grid-offset, tablet);
+                top: vw(16, tablet);
+                width: vw(20, tablet);
+                height: vw(20, tablet);
+            }
+
+            @include breakpoint(phone) {
+                right: vw(16, phone);
+                top: vw(8, phone);
+                width: vw(14, phone);
+                height: vw(14, phone);
+            }
         }
     }
 }

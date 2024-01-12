@@ -21,49 +21,60 @@
             position: absolute;
             inset: auto auto 50% 0;
             width: 1px;
-            height: rem(20);
+
+            @include breakpoint(desktop) {
+                height: rem(20);
+            }
+
+            @include breakpoint(tablet) {
+                height: rem(14);
+            }
 
             @include breakpoint(phone) {
                 height: rem(10);
             }
 
-            .button--simple & { display: none; }
+            .button--simple & { 
+                display: none; 
+            }
 
             .button--lightbox & {
                 height: rem(33);
-                transform-origin: center;
                 inset: rem(-6) auto 0 rem(32);
+                transform-origin: center;
             }
 
             .button--small & {
-
                 @include breakpoint(desktop) {
                     height: rem(8);
                 }
-
             }
           
             .button--medium & { 
-              
                 @include breakpoint(desktop) {
                     height: rem(14);
                 }
             }
 
             .button--big & {
-
                 @include breakpoint(phone) {
                     height: rem(14);
                 }
             }
 
-            .button--lightbox.button--reversed & { inset: 0 auto rem(-6) rem(32); }
+            .button--lightbox.button--reversed & { 
+                inset: 0 auto rem(-6) rem(32); 
+            }
         }
 
 
         &:nth-of-type(2) {
             width: rem(51);
             height: 1px;
+
+            @include breakpoint(tablet) {
+                width: rem(32);
+            }
 
             @include breakpoint(phone) {
                 width: rem(22);
@@ -73,14 +84,19 @@
                 width: rem(33);
             }
 
-            .button--medium & { width: rem(35); }
+            .button--medium & { 
+                @include breakpoint(desktop) {
+                    width: rem(35); 
+                }
+            }
 
             .button--small & {
-                width: rem(15);
+                @include breakpoint(desktop) {
+                    width: rem(15);
+                }
             }
 
             .button--big & {
-
                 @include breakpoint(phone) {
                     width: rem(35);
                 }
@@ -99,43 +115,49 @@
                 border-width: rem(19) 0 rem(19) rem(23);
             }
 
+            @include breakpoint(tablet) {
+                border-width: rem(14) 0 rem(14) rem(17); 
+            }
+
             @include breakpoint(phone) {
                 border-width: rem(11) 0 rem(11) rem(13);
             }
 
-            .button--lightbox & {
 
+            .button--lightbox & {
                 @include breakpoint(desktop) {
                     border-width: rem(16.5) 0 rem(16.5) rem(22);
                     margin-left: rem(3);
                 }
-
             }
 
-            .button--small & {
 
+            .button--small & {
                 @include breakpoint(desktop) {
                     border-width: rem(7) 0 rem(7) rem(9);
                 }
 
+                @include breakpoint(tablet) {
+                    border-width: rem(1) 0 rem(9) rem(12);
+                }
+
                 @include breakpoint(phone) {
                     border-width: rem(7) 0 rem(7) rem(9);
                 }
-                
             }
 
-            .button--big & {
 
+            .button--big & {
                 @include breakpoint(phone) {
                     border-width: rem(14) 0 rem(14) rem(16);
                 }
-
-
             }
 
 
             .button--medium & {
-                border-width: rem(14) 0 rem(14) rem(16);
+                @include breakpoint(desktop) {
+                    border-width: rem(14) 0 rem(14) rem(16);
+                }
             }
         }
     }

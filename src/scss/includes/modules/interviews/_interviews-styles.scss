@@ -23,12 +23,20 @@
             }
 
             .interviews__sticker {
-                @include breakpoint(phone) {
+                @include breakpoint(not-desktop) {
                     left: unset;
                     bottom: unset;
-                    right: rem(-5);
-                    top: calc(100% - #{rem(24)});
                     z-index: 5;
+
+                    @include breakpoint(tablet) {
+                        right: rem(-5);
+                        top: calc(100% - #{rem(24)});
+                    }
+
+                    @include breakpoint(phone) {
+                        right: rem(-5);
+                        top: calc(100% - #{rem(24)});
+                    }
                 }
             }
         }
@@ -39,32 +47,45 @@
                 padding-top: rem(18);
                 margin-bottom: rem(-8);
             }
+
+            @include breakpoint(tablet) {
+                padding-block: rem(12);
+            }
         }
     }
 
     &__sticker {
-        @include breakpoint(phone) {
+
+        @include breakpoint(not-desktop) {
             position: absolute;
-            bottom: calc(100% - #{rem(22)});
-            left: rem(-24);
+
+            @include breakpoint(tablet) {
+                bottom: calc(100% - #{rem(22)});
+                left: rem(-24);
+            }
+    
+            @include breakpoint(phone) {
+                bottom: calc(100% - #{rem(22)});
+                left: rem(-24);
+            }
         }
     }
 
-    &__left {
+    &__left, &__right {
         @include flex(column, space-between, flex-start);
 
         height: 100%;
+
+        @include breakpoint(tablet) {
+            grid-column: 1 / span 6 !important;
+        }
     }
 
-    &__right {
-        @include flex(column, space-between, flex-start);
-
-        height: 100%;
-    }
 
 
     &__item {
         position: relative;
+
 
         // display: grid;
         // grid-template-columns: 2fr 1fr 1fr;
@@ -118,6 +139,10 @@
             padding-top: rem(15);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(16, 18);
+        }
+
         @include breakpoint(phone) {
             @include font-size(12, 16.2);
         }
@@ -167,6 +192,15 @@
             padding-bottom: rem(17);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(24, 15.5);
+            @include letter-spacing(-0.525, 24);
+
+            padding-left: 0.1em;
+            padding-top: rem(3);
+            grid-column: span 6;
+        }
+
         @include breakpoint(phone) {
             @include font-size(17, 15.5);
             @include letter-spacing(-0.425, 17);
@@ -181,9 +215,18 @@
     &__box {
         @include flex(row, flex-end, center);
 
+        @include breakpoint(tablet) {
+            grid-column: 1 / span 8 !important;
+            margin-top: rem(18);
+            display: grid;
+            align-items: start;
+            grid-template-columns: repeat(map-get($grid-columns, tablet), minmax(0, 1fr));
+            column-gap: map-get($grid-gutter, tablet);
+
+        }
+
         @include breakpoint(phone) {
             @include flex(row, space-between, flex-start);
-
             margin-top: vw(8, phone);
         }
 

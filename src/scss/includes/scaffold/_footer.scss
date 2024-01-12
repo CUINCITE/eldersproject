@@ -6,11 +6,15 @@
         @include font-size(10, 13.5);
     }
 
+    @include breakpoint(tablet) {
+        @include font-size(15, 1);
+    }
+
     @include breakpoint(phone) {
         @include font-size(14, 18.9);
     }
 
-
+    
     body.is-404 & { display: none; }
 
     & > * { background-color: var(--color-box); }
@@ -25,13 +29,16 @@
             padding: vw(56) 0 vw(19);
         }
 
-        @include breakpoint(not-desktop) {
-            @include flex(column, flex-start, flex-start);
+        @include breakpoint(tablet) {
+            @include flex(row, space-between, center);
+            padding-block: rem(22);
+        }
 
-            @include breakpoint(phone) {
-                gap: rem(19);
-                padding-block: rem(18);
-            }
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+            
+            gap: rem(19);
+            padding-block: rem(14);
         }
 
 
@@ -46,11 +53,16 @@
             padding: vw(409) 0 vw(19);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(11, 1);
+
+            padding: vw(160, tablet) 0 vw(20, tablet);
+        }
+
         @include breakpoint(phone) {
             @include font-size(10, 13.5);
 
             padding: vw(282, phone) 0 vw(11, phone);
         }
-        
     }
 }

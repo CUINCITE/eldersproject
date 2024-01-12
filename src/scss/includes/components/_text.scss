@@ -8,6 +8,13 @@
         padding: rem(20) rem(11);
     }
 
+    @include breakpoint(tablet) {
+        @include font-size(17, 1.3);
+
+        padding-top: rem(20);
+        padding-bottom: rem(20);
+    }
+
     @include breakpoint(phone) {
         @include font-size(17, 1.3);
 
@@ -19,6 +26,10 @@
     .hero__text & {
         @include breakpoint(desktop) {
             padding: 0;
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: rem(14) rem(68);
         }
 
         @include breakpoint(phone) {
@@ -39,6 +50,10 @@
             max-width: rem(267);
         }
 
+        @include breakpoint(tablet) {
+            max-width: rem(480);
+        }
+
         @include breakpoint(phone) {
             max-width: rem(301);
         }
@@ -52,6 +67,13 @@
             @include font-size(30, 30);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(30, 1);
+            @include letter-spacing(-1.05, 30);
+
+            margin-block: trim-font(1);
+        }
+
         @include breakpoint(phone) {
             @include font-size(30, 28.2);
             @include letter-spacing(-1.05, 30);
@@ -63,6 +85,10 @@
             @include font-size(17, 22.1);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(17, 1.3);
+        }
+
         @include breakpoint(phone) {
             @include font-size(17, 1.3);
         }
@@ -70,6 +96,10 @@
 
     &--small {
         @include breakpoint(desktop) {
+            @include font-size(12, 1.3);
+        }
+
+        @include breakpoint(tablet) {
             @include font-size(12, 1.3);
         }
 
@@ -111,6 +141,22 @@
             }
         }
 
+        @include breakpoint(tablet) {
+            padding-top: rem(20);
+
+            p, ul, a, ol {
+                max-width: rem(480);
+            }
+
+            h2 + p {
+                margin-top: rem(12);
+            }
+
+            p + h2 {
+                margin-top: rem(56);
+            }
+        }
+
         @include breakpoint(phone) {
             @include font-size(14, 19.9);
 
@@ -128,6 +174,10 @@
 
     &--aside {
 
+        @include breakpoint(tablet) {
+            margin-bottom: rem(60);
+        }
+
         @include breakpoint(phone) {
             margin-bottom: rem(60);
         }
@@ -137,6 +187,11 @@
 
             @include breakpoint(desktop) {
                 margin-top: rem(32) !important;
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(32) !important;
+                margin-bottom: rem(5);
             }
 
             @include breakpoint(phone) {
@@ -162,6 +217,8 @@
 
     &--privacy {
         @include breakpoint(phone) {
+            padding-bottom: rem(64) !important;
+
             h2 {
                 max-width: 20ch;
             }
@@ -212,6 +269,20 @@
             }
         }
 
+        @include breakpoint(tablet) {
+            padding-inline-start: rem(16);
+            margin-top: rem(6);
+            margin-bottom: rem(28);
+
+            & + h2 {
+                margin-top: rem(14);
+            }
+
+            li + li {
+                margin-top: rem(2);
+            }
+        }
+
         @include breakpoint(phone) {
             padding-inline-start: rem(16);
             margin-top: rem(6);
@@ -240,9 +311,17 @@
             }
         }
 
-        @include breakpoint(phone) {
+        @include breakpoint(tablet) {
             padding-inline-start: rem(16);
 
+            ul {
+                padding-inline-start: 0;
+                margin-bottom: rem(16);
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-inline-start: rem(16);
 
             ul {
                 padding-inline-start: 0;

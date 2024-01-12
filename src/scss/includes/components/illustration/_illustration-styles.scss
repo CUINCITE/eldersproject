@@ -1,6 +1,6 @@
 $shadow-sizes: (
     desktop: 11,
-    tablet: 5,
+    tablet: 9,
     phone: 5,
 );
 
@@ -9,8 +9,6 @@ $shadow-sizes: (
     height: 100%;
     position: relative;
     transform: rotate(-14.5deg);
-
-
 
     &__front {
         position: relative;

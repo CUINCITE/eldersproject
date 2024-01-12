@@ -1,2 +1,16 @@
 .faq {
+
+    &__heading {
+        @include breakpoint(tablet) {
+            grid-column: span 8 !important;
+            position: relative;
+        }
+    }
+
+    
+    &__content {
+        @include breakpoint(tablet) {
+            grid-column: span 8 !important;
+        }
+    }
 }

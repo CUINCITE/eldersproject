@@ -20,7 +20,14 @@
         @include breakpoint(desktop) {
             @include font-size(130, 100);
             @include letter-spacing(-3.9, 130);
+
             padding-top: rem(47);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(140, 0.8);
+            @include letter-spacing(-6.5, 140);
+            margin-block: trim-font(0.8); 
         }
 
         @include breakpoint(phone) {
@@ -39,9 +46,15 @@
                 padding-left: rem(10);
             }
 
+            @include breakpoint(tablet) {
+                @include letter-spacing(-10, 140);
+
+                padding-left: rem(10);
+            }
+
             @include breakpoint(phone) {
                 @include letter-spacing(-6, 80);
-
+     
                 padding-left: rem(5); 
             } 
         }
@@ -54,6 +67,15 @@
             @include font-size(103, 100);
             @include letter-spacing(-3.09, 103);
         }
+
+        @include breakpoint(tablet) {
+            @include font-size(140, 0.8);
+            @include letter-spacing(-6.5, 140); 
+
+            margin-block: trim-font(0.8); 
+        }
+
+
 
         @include breakpoint(phone) {
             @include font-size(80, 67.2);
@@ -69,7 +91,13 @@
         @include breakpoint(desktop) {
             @include font-size(30, 28);
             @include letter-spacing(-0.9, 30);
+
             margin-bottom: vw(4);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(30, 28);
+            @include letter-spacing(-0.9, 30);
         }
 
         @include breakpoint(phone) {
@@ -93,6 +121,14 @@
             text-align: right; 
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(142, 1);
+            @include letter-spacing(-3.57, 103);
+
+            margin-block: trim-font(1);
+            padding-block: rem(20);
+        }
+
         @include breakpoint(phone) {
             @include font-size(82, 0.84);
             @include letter-spacing(-2.87, 82);
@@ -108,7 +144,6 @@
         }
 
         @include breakpoint(not-desktop) {
-            position: relative;
             z-index: 1;
 
             &::before {
@@ -117,16 +152,27 @@
                 position: absolute;
                 height: 1px;
                 background-color: $color-bg;
-                bottom: 0;
+                bottom: -1px;
                 z-index: -1;
+            }
+
+            @include breakpoint(tablet) {
+                padding-block: rem(20);
+
+                &::before {
+                    width: calc(100% + 2 * #{map-get($grid-offset, tablet)});
+                    left: -1 * map-get($grid-offset, tablet);
+                    z-index: unset;
+                }
             }
 
             @include breakpoint(phone) {
                 padding-block: rem(13) rem(2);
+                position: relative;
 
                 &::before {
-                    width: calc(100% + 2 * #{map-get($grid-gutter, phone)});
-                    left: -1 * map-get($grid-gutter, phone);
+                    width: calc(100% + 2 * #{map-get($grid-offset, phone)});
+                    left: -1 * map-get($grid-offset, phone);
                 }
             }
         }
@@ -138,6 +184,13 @@
         @include breakpoint(desktop) {
             @include font-size(204, 175);
             @include letter-spacing(-10.2, 204);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(140, 1);
+            @include letter-spacing(-6.5, 140);
+
+            margin-block: trim-font(1); 
         }
 
         @include breakpoint(phone) {
@@ -152,6 +205,11 @@
             padding-bottom: rem(80);
         }
 
+        @include breakpoint(tablet) {
+            padding-top: rem(20);
+            padding-bottom: rem(98);
+        }
+
         @include breakpoint(phone) {
             padding-top: rem(20);
             padding-bottom: rem(98);
@@ -160,6 +218,14 @@
 
 
     &--title {
+ 
+        @include breakpoint(tablet) {
+            @include font-size(230, 1);
+            @include letter-spacing(-5.94, 132);
+
+            margin-block: trim-font(1); 
+        }
+
         @include breakpoint(phone) {
             @include font-size(132, 140.253);
             @include letter-spacing(-5.94, 132);

@@ -2,10 +2,10 @@
     <div class="faq">
         <div class="box">
             <div class="grid">
-                <div class="col-span-6 no-padding">
+                <div class="faq__heading col-span-6 no-padding">
                     {% include "./components/c_heading.html" with title %}
                 </div>
-                <div class="col-span-6 col-start-7">
+                <div class="faq__content col-span-6 col-start-7">
                     <ul class="faq__accordeon" >
                         {% for term in terms %}
                             {% include "./components/c_accordeon_item.html" with term %}

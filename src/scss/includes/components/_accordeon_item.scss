@@ -1,7 +1,7 @@
 $grid-line-offsets: (
     desktop: 2,
-    tablet: 1,
-    phone: 1,
+    tablet: strip-units(map-get($grid-gutter, tablet)) / strip-units(map-get($grid-offset, tablet)),
+    phone: strip-units(map-get($grid-gutter, phone)) / strip-units(map-get($grid-offset, phone)),
 );
 
 .accordeon_item {
@@ -29,6 +29,11 @@ $grid-line-offsets: (
         padding-bottom: rem(30);
     }
 
+    @include breakpoint(tablet) {
+        padding-top: rem(20);
+        padding-bottom: rem(40);
+    }
+
     @include breakpoint(phone) {
         padding-top: rem(16);
         padding-bottom: rem(40);
@@ -53,6 +58,10 @@ $grid-line-offsets: (
 
         @include breakpoint(desktop) {
             padding-top: rem(10);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(15);
         }
 
         @include breakpoint(phone) {
@@ -110,6 +119,11 @@ $grid-line-offsets: (
             width: rem(22);
         }
 
+        @include breakpoint(tablet) {
+            top: rem(20);
+            width: rem(22); 
+        }
+
         @include breakpoint(phone) {
             top: rem(17);
             width: rem(22);
@@ -118,6 +132,10 @@ $grid-line-offsets: (
 
     .text {
         padding-block: 0;
+
+        @include breakpoint(tablet) {
+            max-width: rem(480);
+        }
 
         @include breakpoint(phone) {
             max-width: rem(256);
