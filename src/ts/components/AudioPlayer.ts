@@ -64,7 +64,7 @@ export class AudioPlayer extends Video {
         gsap.to(this.controls.playerBar, {
             xPercent: 0,
             duration: 1,
-            ease: 'power2.out',
+            ease: 'power3.inOut',
             onComplete: () => {
                 this.setTitleInCassette(this.audioTitle.innerText);
                 this.isExpanded = false;
@@ -78,7 +78,7 @@ export class AudioPlayer extends Video {
         gsap.to(this.controls.playerBar, {
             xPercent: -100,
             duration: 1,
-            ease: 'power2.out',
+            ease: 'power3.inOut',
             onStart: () => {
                 this.setTitleInCassette(this.isPaused() ? AudioPlayerStatesText.PAUSED : AudioPlayerStatesText.PLAYING);
             },
