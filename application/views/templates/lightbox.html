@@ -23,11 +23,6 @@
 
 
 <li class="lightbox__item lightbox__item--{{modifier}} js-item" data-lightbox-path="{{url}}">
-    <a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
-        <span class="button button--lightbox">
-            <i class="icon-close"></i>
-        </span>
-    </a>
     <div class="lightbox__grid">
         <div class="lightbox__header">
             <div class="lightbox__header-info">
@@ -62,6 +57,7 @@
             {% endif %}
         </div>
         <div class="lightbox__main">
+            <div class="lightbox__main-bg"></div>
             {% if slider %}
                 <div class="lightbox__slider slider" data-component="LightboxSlider">
                     <div class="slider__wrap js-slider-wrap">
@@ -123,7 +119,14 @@
             {% endif %}
             {% if caption %}<div class="lightbox__caption">{{caption}}</div>{% endif %}
         </div>
-        <div class="lightbox__logo">[[svg::logo]]</div>
+        <div class="lightbox__logo">
+            <a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
+                <span class="button button--lightbox">
+                    <i class="icon-close"></i>
+                </span>
+            </a>
+            [[svg::logo]]
+        </div>
         <ul class="lightbox__buttons" data-component="LightboxNav">
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active">Mementos</button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info">Info</button></li>

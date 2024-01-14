@@ -1,0 +1,133 @@
+.lightbox {
+    --easing: cubic-bezier(0, 0, 1, 1);
+    --distance: 150vh;
+
+    &.is-showing {
+        --easing: cubic-bezier(.31, .79, .55, .9);
+        --animation-time: .4s;
+    }
+
+    &.is-closing {
+        --easing: cubic-bezier(.65, .1, .3, .6);
+        --animation-time: 1s;
+    }
+
+
+
+    &__logo {
+        @include z-index(logo, $lightbox-elements);
+
+        transition: transform var(--animation-time) var(--easing);
+        transform-origin: left top;
+        transform: translateX(100%);
+
+        .is-showing & {
+            transform: translateX(0);
+            transition-delay: .4s;
+        }
+
+        .is-closing & {
+            transform: translate(0, var(--distance)) rotate(25deg);
+            transition-delay: 0s;
+        }
+    }
+
+
+
+    &__illu {
+        transition: transform var(--animation-time) var(--easing);
+        transform-origin: left top;
+        transform: translateY(-100%);
+
+
+        .is-showing & {
+            transform: translateY(0);
+            transition-delay: .15s;
+        }
+
+        .is-closing & {
+            transform: translate(0, var(--distance)) rotate(25deg);
+            transition-delay: 0s;
+        }
+    }
+
+
+
+    &__main-bg {
+        transition: transform var(--animation-time) var(--easing);
+        transform-origin: right bottom;
+
+        transform: translateY(100%);
+
+
+        .is-showing & {
+            transform: translateY(0);
+        }
+
+        .is-closing & {
+            --animation-time: .75s;
+
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-15deg);
+        }
+    }
+
+
+
+    &__image {
+        transition: transform var(--animation-time) var(--easing);
+
+        transform: translateY(100%) rotate(-7.5deg);
+
+
+        .is-showing & {
+            transform: translateY(0) rotate(-7.5deg);
+            transition-delay: .15s;
+        }
+
+        .is-closing & {
+            --animation-time: 1s;
+
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-25deg);
+            transition-delay: 0s;
+        }
+    }
+
+
+
+    &__header {
+        transition: transform var(--animation-time) var(--easing);
+        transform-origin: right bottom;
+        transform: translateY(-100%);
+
+
+        .is-showing & {
+            transform: translateY(0);
+            transition-delay: .25s;
+        }
+
+        .is-closing & {
+            transform: translate(0, var(--distance)) rotate(-35deg);
+            transition-delay: 0s;
+        }
+    }
+
+
+
+    &__buttons {
+        @include z-index(buttons, $lightbox-elements);
+
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateX(100%);
+
+
+        .is-showing & {
+            transform: translateX(0);
+            transition-delay: .4s;
+        }
+
+        .is-closing & {
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
+            transition-delay: 0s;
+        }
+    }
+}

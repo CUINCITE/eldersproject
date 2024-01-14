@@ -1,5 +1,8 @@
 /* stylelint-disable custom-property-empty-line-before */
 
+// z-index order
+$lightbox-elements: buttons, footer, menu, hamburger, logo;
+
 // lightbox variables for color/collection palletes
 
 .lightbox {
@@ -20,6 +23,10 @@
 
     // for tabs' dots & details
     --theme-color: var(--color-red, red);
+
+
+    --aside-width: #{vw(123)};
+    --lightbox-top-height: #{rem(195)};
 
 
     &__item {

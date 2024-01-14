@@ -4,12 +4,9 @@
 
 
 .lightbox {
-    --aside-width: #{vw(123)};
-
-
     @include full(fixed);
     @include z-index(offscreen);
-    
+
     color: $color-white;
     display: block;
 
@@ -30,7 +27,7 @@
         height: 100%;
         display: grid;
         gap: 1px;
-        grid-template: "header illu logo" rem(195) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
+        grid-template: "header illu logo" var(--lightbox-top-height) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
     }
 
 
@@ -151,8 +148,13 @@
         @include flex(row, center, center);
 
         grid-area: main;
-        background: var(--main-body-color);
         position: relative;
+
+
+        &-bg {
+            @include full;
+            background: var(--main-body-color);
+        }
     }
 
 

@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { PushStates } from '../PushStates';
 import { getBrowser } from '../Browser';
 import { Component } from './Component';
 import { getBreakpoint } from '../Breakpoint';
@@ -301,6 +302,9 @@ export abstract class Player extends Component {
 
         // poster
         this.loadPoster();
+
+
+        PushStates.bind(this.view);
     }
 
     protected bind(): void {

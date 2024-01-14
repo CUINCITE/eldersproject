@@ -20,6 +20,9 @@ export class Lightbox {
         this.view = document.getElementById('lightbox');
 
         this.hide(true);
+
+
+        this.bind();
     }
 
 
@@ -79,7 +82,22 @@ export class Lightbox {
         const html = template.render(data);
         this.view.innerHTML = html;
 
+        PushStates.bind(this.view);
+
         this.buildComponents(this.view.querySelectorAll('[data-component]'));
+    };
+
+
+
+    private bind = (): void => {
+        document.addEventListener('keydown', this.onKeyDown);
+    };
+
+
+
+    private onKeyDown = (e): void => {
+        // ONLY for testing
+        if (e.key === 'r') this.shown ? this.hide() : this.show();
     };
 
 
@@ -152,11 +170,19 @@ export class Lightbox {
             }
 
             this.animating = true;
+            this.view.classList.add('is-closing');
             gsap.to(this.view, {
-                duration: !fast ? 0.8 : 0,
-                yPercent: 100,
-                ease: 'expo.inOut',
+                duration: fast ? 0 : 0.01,
+                opacity: 0,
+
+                // CONNECTED WITH CSS - .is-closing
+                delay: fast ? 0 : 1,
+                ease: 'none',
+                onStart: () => {
+                    this.view.classList.remove('is-showing');
+                },
                 onComplete: (): void => {
+                    this.view.style.display = 'none';
                     this.shown = false;
                     this.animating = false;
                     resolve();
@@ -166,16 +192,22 @@ export class Lightbox {
     }
 
 
-    private show(fast?: boolean): void {
+    private show(): void {
 
         if (this.shown) { return; }
 
         this.shown = true;
 
         gsap.to(this.view, {
-            duration: !fast ? 1 : 0,
-            yPercent: 0,
-            ease: 'expo.out',
+            duration: 0.3,
+            opacity: 1,
+            ease: 'none',
+            onStart: () => {
+                this.view.classList.remove('is-closing');
+                this.view.style.display = 'block';
+            },
+            // that class runs CSS animation
+            onComplete: () => this.view.classList.add('is-showing'),
         });
     }
 
