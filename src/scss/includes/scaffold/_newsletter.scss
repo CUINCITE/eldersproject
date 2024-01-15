@@ -2,7 +2,7 @@
     --side-padding: var(--grid-margin);
     --input-height: #{vw(71)};
 
-
+    @include z-index(newsletter);
     @include font-family(compressed);
 
     grid-area: newsletter;
@@ -28,14 +28,14 @@
 
     body.is-404 & { display: none; }
 
- 
+
 
     &__wrap {
         position: relative;
 
 
         @include breakpoint(not-desktop) {
-            width: 100%
+            width: 100%;
         }
     }
 
@@ -76,7 +76,6 @@
 
             @include breakpoint(tablet) {
                 @include font-size(40, 1);
-            
             }
 
             @include breakpoint(phone) {
@@ -205,19 +204,17 @@
             @include font-size(14, 16);
         }
 
-        .has-errors & { 
+        .has-errors & {
             @include breakpoint(desktop) {
                 margin-bottom: vw(7);
-            } 
+            }
 
             @include breakpoint(tablet) {
                 margin-bottom: vw(9, tablet);
-            
             }
 
             @include breakpoint(phone) {
                 margin-bottom: vw(9, phone);
-                
             }
         }
     }
@@ -268,7 +265,7 @@
 
     legend {
         @include font-family(normal);
-        
+
         padding-left: var(--side-padding);
 
         @include breakpoint(desktop) {
