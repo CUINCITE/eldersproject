@@ -3,8 +3,8 @@
     --distance: 150vh;
 
     &.is-showing {
-        --easing: cubic-bezier(.31, .79, .55, .9);
-        --animation-time: .4s;
+        --easing: cubic-bezier(.2, .75, .4, .95);
+        --animation-time: .65s;
     }
 
     &.is-closing {
@@ -14,20 +14,43 @@
 
 
 
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-box);
+        transition: opacity .1s linear;
+        opacity: 0;
+
+
+        .is-showing & {
+            opacity: 1;
+            transition-delay: .9s;
+        }
+
+
+        .is-closing & {
+            transition-delay: 0s;
+            opacity: 0;
+        }
+    }
+
+
+
     &__logo {
         @include z-index(logo, $lightbox-elements);
 
         transition: transform var(--animation-time) var(--easing);
         transform-origin: left top;
-        transform: translateX(100%);
+        transform: translateY(100vh);
 
         .is-showing & {
-            transform: translateX(0);
-            transition-delay: .4s;
+            transform: translateY(0);
+            transition-delay: .1s;
         }
 
         .is-closing & {
             transform: translate(0, var(--distance)) rotate(25deg);
+
             transition-delay: 0s;
         }
     }
@@ -37,16 +60,17 @@
     &__illu {
         transition: transform var(--animation-time) var(--easing);
         transform-origin: left top;
-        transform: translateY(-100%);
+        transform: translateY(100vh);
 
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .15s;
+            transition-delay: .05s;
         }
 
         .is-closing & {
             transform: translate(0, var(--distance)) rotate(25deg);
+
             transition-delay: 0s;
         }
     }
@@ -62,12 +86,14 @@
 
         .is-showing & {
             transform: translateY(0);
+            transition-delay: .15s;
         }
 
         .is-closing & {
             --animation-time: .75s;
 
             transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-15deg);
+            transition-delay: 0s;
         }
     }
 
@@ -76,16 +102,20 @@
     &__image {
         transition: transform var(--animation-time) var(--easing);
 
-        transform: translateY(100%) rotate(-7.5deg);
+        transform: translateY(100%) rotate(25deg);
 
 
         .is-showing & {
+            --easing: cubic-bezier(.15, .8, .2, .95);
+            --animation-time: .75s;
+
             transform: translateY(0) rotate(-7.5deg);
-            transition-delay: .15s;
+            transition-delay: .55s;
         }
 
         .is-closing & {
-            --animation-time: 1s;
+            --animation-time: .55s;
+            --easing: cubic-bezier(.65, .1, .3, .6);
 
             transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-25deg);
             transition-delay: 0s;
@@ -97,17 +127,19 @@
     &__header {
         transition: transform var(--animation-time) var(--easing);
         transform-origin: right bottom;
-        transform: translateY(-100%);
+        transform: translateY(100vh);
 
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .25s;
+
+            // transition-delay: .25s;
         }
 
         .is-closing & {
             transform: translate(0, var(--distance)) rotate(-35deg);
-            transition-delay: 0s;
+
+            // transition-delay: 0s;
         }
     }
 
@@ -117,17 +149,54 @@
         @include z-index(buttons, $lightbox-elements);
 
         transition: transform var(--animation-time) var(--easing);
-        transform: translateX(100%);
+        transform: translateY(100%);
 
 
         .is-showing & {
-            transform: translateX(0);
-            transition-delay: .4s;
+            transform: translateY(0);
+            transition-delay: .25s;
         }
 
         .is-closing & {
             transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
             transition-delay: 0s;
+        }
+
+
+
+        @for $i from 1 through 5 {
+            li:nth-of-type(#{$i}) span {
+                transition-delay: calc(.75s + 0.075 * #{$i}s);
+            }
+        }
+
+
+        button {
+            span {
+                display: inline-block;
+                transition: transform var(--animation-time) var(--easing);
+                transform: translateX(120%);
+
+
+                .is-showing & {
+                    transform: translateX(0);
+                }
+            }
+        }
+    }
+
+
+
+    &__close {
+        --animation-time: .25s;
+
+        transition: opacity var(--animation-time) var(--easing);
+        opacity: 0;
+
+
+        .is-showing & {
+            opacity: 1;
+            transition-delay: .9s;
         }
     }
 }

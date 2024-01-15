@@ -23,6 +23,7 @@
 
 
 <li class="lightbox__item lightbox__item--{{modifier}} js-item" data-lightbox-path="{{url}}">
+    <div class="lightbox__overlay"></div>
     <div class="lightbox__grid">
         <div class="lightbox__header">
             <div class="lightbox__header-info">
@@ -128,11 +129,11 @@
             [[svg::logo]]
         </div>
         <ul class="lightbox__buttons" data-component="LightboxNav">
-            <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active">Mementos</button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info">Info</button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript">Transcript</button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads">Downloads</button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related">Related</button></li>
+            <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active"><span>Mementos</span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span>Info</span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span>Transcript</span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span>Downloads</span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span>Related</span></button></li>
         </ul>
     </div>
     <aside class="lightbox__aside">
