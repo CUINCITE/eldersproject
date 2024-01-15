@@ -120,12 +120,16 @@ class model_app_pages_search
                         'join' => '||',
                         'value' => [
                             str_replace('$label$', 'first_name', $q_multi_query_one_field),
-                            str_replace('$label$', 'last_name', $q_multi_query_one_field),
-                            'id IN ('.implode(',',$params['collections']).')'
+                            str_replace('$label$', 'last_name', $q_multi_query_one_field)
                         ]
                     ];
 
                 }
+
+                if ($params['collections']) {
+                    $f['name']['value'][] = 'id IN ('.implode(',',$params['collections']).')';
+                }
+
                 $sort = $label = 'last_name';
                 unset($f['label']);
                 $fields_to_read=['first_name','last_name','slug'];
@@ -147,6 +151,7 @@ class model_app_pages_search
                     ];
 
                 }
+
                 $sort = $label = 'label';
                 unset($f['label']);
                 $fields_to_read=['label','narrators_states','uid','occupation','summary','slug', 'interviewers', 'narrators'];
