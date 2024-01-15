@@ -57,6 +57,7 @@ html {
         "footer header";
     gap: 1px;
     align-content: start;
+    margin-top: -1px; // box margin-top fix
 
     // @include breakpoint(not-desktop) {
     //     grid-template-columns: 1fr;
