@@ -6,6 +6,7 @@
 
 class model_app_pages_search
 {
+
     /**
      * Constructor
      * @param array $parent
@@ -39,9 +40,21 @@ class model_app_pages_search
         if ($q) {
 
             $categories[] = $interviews = $this->getItems('narrators', $q, $live, $page);
-            $categories[] = $this->getItems('collections', $q, $live, $page,['interviews'=>$interviews]);
+
+            $collections_ids = [];
+            if (!empty($interviews['items'])) {
+                $collections_ids = array_reduce($interviews['items'], function ($carry, $item) {
+                    if (!empty($item['interviewers'])) {
+                        $ids = array_column($item['interviewers'], 'id');
+                        return array_merge($carry, $ids);
+                    }
+                    return $carry;
+                }, []);
+            }
+
+            $categories[] = $this->getItems('collections', $q, $live, $page,['collections'=>$collections_ids]);
             $categories[] = $this->getTranscripts($q, $live, $page, $f=[]);
-        }        
+        }
 
         /*
         remove empty sections
@@ -70,8 +83,8 @@ class model_app_pages_search
             $per_page = 3;
             $limit = '0,3';
         } else {
-            $per_page = 4*3;
-            $limit = $per_page * ($page - 1) . ',' . $per_page;
+            $per_page = null;
+            $limit = null;
         }
 
         if ($query) $qsafe = $this->parent->sqlSafe($query); else $qsafe='';
@@ -108,6 +121,7 @@ class model_app_pages_search
                         'value' => [
                             str_replace('$label$', 'first_name', $q_multi_query_one_field),
                             str_replace('$label$', 'last_name', $q_multi_query_one_field),
+                            'id IN ('.implode(',',$params['collections']).')'
                         ]
                     ];
 
@@ -135,7 +149,7 @@ class model_app_pages_search
                 }
                 $sort = $label = 'label';
                 unset($f['label']);
-                $fields_to_read=['label','narrator_location','uid','occupation','summary','slug'];
+                $fields_to_read=['label','narrators_states','uid','occupation','summary','slug', 'interviewers', 'narrators'];
 
                 break;
 
@@ -269,7 +283,7 @@ class model_app_pages_search
                 {
                     if (empty($g[$v['parent']])) 
                     {
-                        $g[$v['parent']]=['id'=>$v['parent'],'label'=>$i['name'],'items'=>[]];
+                        $g[$v['parent']]=['id'=>$v['parent'],'label'=>$i['label'],'items'=>[]];
                         $i_groups++;
                     }
                     $g[$v['parent']]['items']=array_merge($g[$v['parent']]['items'],$tt);
