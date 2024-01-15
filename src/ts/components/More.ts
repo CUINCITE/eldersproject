@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { Component, ComponentEvents } from '../components/Component';
 import { easing } from '../Site';
 import { PushStates } from '../PushStates';
+import Widgets from '../widgets/All';
 
 
 export interface IMoreSettings {
@@ -138,6 +139,9 @@ export class More extends Component {
             })
             .finally(() => {
                 this.view.classList.remove('is-doing-request');
+                // bind widgets
+                Widgets.bind();
+
                 setTimeout(() => {
                     this.pending = false;
                 }, 250);

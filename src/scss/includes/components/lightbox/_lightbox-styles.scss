@@ -233,7 +233,7 @@
 
     &__image {
         margin-bottom: auto;
-        padding-top: rem(24);
+        margin-top: rem(-8);
 
 
         @include breakpoint(not-desktop) {

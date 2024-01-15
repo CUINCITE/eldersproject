@@ -54,10 +54,6 @@ $background-colors: (
             --polaroid-height: #{vw(366)};
         }
 
-        @include breakpoint(tablet) {
-        
-        }
-
         @include breakpoint(phone) {
             padding: vw(14, phone) vw(14, phone) vw(18, phone);
         }
@@ -86,7 +82,6 @@ $background-colors: (
 
         @include breakpoint(tablet) {
             padding: vw(10, tablet);
-        
         }
 
         @include breakpoint(phone) {
@@ -117,9 +112,9 @@ $background-colors: (
 
 
     // maybe on scroll later
-    @include hover {
-        img {
-            animation: polaroid 1.5s linear forwards;
-        }
-    }
+    // @include hover {
+    //     img {
+    //         animation: polaroid 1.5s linear forwards;
+    //     }
+    // }
 }
