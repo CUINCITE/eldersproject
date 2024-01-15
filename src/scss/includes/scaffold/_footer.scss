@@ -1,4 +1,6 @@
 .footer {
+    @include z-index(footer);
+
     grid-area: footer;
     text-transform: uppercase;
     position: relative;
