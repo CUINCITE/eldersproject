@@ -42,8 +42,6 @@ class model_app_pages_modules_search extends model_app_pages_modules
                 else $m['amount']+=count($v['items']);
         } else $this->parent->is404=true;
 
-        dd($m);
-
         return $m;
     }
 
