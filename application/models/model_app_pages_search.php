@@ -217,7 +217,7 @@ class model_app_pages_search
         $items = $this->parent->orm->query($query, false);
 
         // new count style
-        $items_count = $this->parent->orm->query('SELECT id,transcript FROM sessions WHERE ' . $interviews_ids . ' ' . $qsafe_query);        
+        $items_count = $this->parent->orm->query('SELECT id,transcript FROM sessions WHERE ' . $interviews_ids . ' ' . $qsafe_query);
         $total_count=0;
         foreach ($items_count as $k=>$v)
         {
@@ -300,27 +300,12 @@ class model_app_pages_search
         if (!$live) $t=array_slice($g,($page-1)*$per_page,$per_page);
         
 
-        if (!$live && count($t) == $per_page)
+        $items_loaded_so_far = ($page - 1) * $per_page + count($t);
+        $more_items = $items_loaded_so_far < count($items_count);
+
+        if (!$live && $more_items)
         {
-            
-            $url_more = 'search?q=' . $q . '&page=' . ($page + 1) . '&partial=true&section=transcripts';
-            if (!empty($interviews_filters['narrators_categories']))
-            {
-                $f=[];
-                $c=$this->parent->dictGet('narrators_categories');
-                foreach ($interviews_filters['narrators_categories'] as $k=>$v)
-                    $f[]=_uho_fx::array_filter($c,'id',$v,['first'=>true])['slug'];
-                if ($f) $url_more.='&narrator='.implode(',',$f);
-            }
-            if (!empty($interviews_filters['topics']))
-            {
-                $f=[];
-                $c=$this->parent->dictGet('topics');
-                foreach ($interviews_filters['topics'] as $k=>$v)
-                    $f[]=_uho_fx::array_filter($c,'id',$v,['first'=>true])['slug'];
-                if ($f) $url_more.='&topic='.implode(',',$f);
-            }            
-            
+            $url_more = 'search?q=' . $q . '&page=' . ($page + 1) . '&section=transcripts';
         }
         else $url_more = null;
 
