@@ -41,7 +41,6 @@ class model_app_pages_search
             $categories[] = $interviews = $this->getItems('narrators', $q, $live, $page);
             $categories[] = $this->getItems('collections', $q, $live, $page,['interviews'=>$interviews]);
             $categories[] = $this->getTranscripts($q, $live, $page, $f=[]);
-            $categories[] = $this->getTranscripts($q, $live, $page, $f);
         }        
 
         /*

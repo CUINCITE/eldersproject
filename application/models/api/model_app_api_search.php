@@ -22,8 +22,7 @@ class model_app_api_search
         $result = [
             'q'=>$q,
             'results' => $categories,
-            "allResultsUrl" => "/search?q=".$q,
-            "advancedSearchUrl" => "/advanced-search?q=".$q
+            "allResultsUrl" => "/search?q=".$q
         ];
 
         return $result;
