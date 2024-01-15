@@ -8,10 +8,12 @@ export class LightboxNav extends Component {
     private navButtons: NodeListOf<HTMLButtonElement>;
     private navTabs: NodeListOf<HTMLElement>;
     private activeTab: HTMLElement;
+    private lightboxEl: HTMLElement;
 
     constructor(protected view: HTMLElement) {
         super(view);
 
+        this.lightboxEl = document.getElementById('lightbox');
         this.navButtons = this.view.querySelectorAll('button');
         this.navTabs = document.querySelectorAll('.js-lightbox-tab');
 
@@ -47,6 +49,9 @@ export class LightboxNav extends Component {
     private showTab = (tab: HTMLElement): void => {
         this.closeTab(this.activeTab).then(() => {
             if (!tab) {
+                // for animate image
+                this.lightboxEl.classList.add('is-default');
+                this.lightboxEl.classList.remove('is-not-default');
                 this.activeTab = null;
                 return;
             }
@@ -54,9 +59,8 @@ export class LightboxNav extends Component {
                 yPercent: 0,
                 duration: 0.6,
                 ease: easing,
-                onStart: () => {
-                    tab.classList.add('is-visible');
-                },
+                clearProps: 'all',
+                onStart: () => tab.classList.add('is-visible'),
                 onComplete: () => {
                     this.activeTab = tab;
                 },
@@ -67,12 +71,17 @@ export class LightboxNav extends Component {
 
 
     private closeTab = (tab: HTMLElement): Promise<void> => new Promise(resolve => {
-        if (!tab) resolve();
-        else {
+        if (!tab) {
+            // for animate image
+            this.lightboxEl.classList.add('is-not-default');
+            this.lightboxEl.classList.remove('is-default');
+            resolve();
+        } else {
             gsap.fromTo(tab, { yPercent: 0 }, {
                 yPercent: 100,
                 duration: 0.3,
                 ease: easing,
+                clearProps: 'all',
                 onComplete: () => {
                     tab.classList.remove('is-visible');
                     resolve();
