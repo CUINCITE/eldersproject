@@ -241,4 +241,108 @@ class model_app extends _uho_model
                 if (!$arr[$k]) unset($arr[$k]);
             }
     }
+
+    public function updateGridInterviews($items,$full=false)
+    {
+        foreach ($items as $k=>$v)
+        {
+            if (isset($v['interview']))
+            {
+
+            } else
+            {
+
+            }
+
+        }
+
+        return $items;
+    }
+
+    public function getTimestamp($text,$i,$tag=null)
+    {
+
+        $i_original=$i;
+
+        $time=null;
+        $text=mb_substr($text,0,$i,'UTF-8');
+        $text=strip_tags($text,'<q><a>');
+
+        $i=mb_strrpos(' '.$text,'<',0,'UTF-8');
+        $j=mb_strrpos($text,'>',$i,'UTF-8');
+
+
+
+        if ($i && $j)
+        {
+            $text=mb_substr($text,$i,$j-$i,'UTF-8');
+
+            $time=$this->getFromTag($text,'T');
+
+            if ($time) $time=mb_substr($time,0,2,'UTF-8')*3600+mb_substr($time,3,2,'UTF-8')*60+mb_substr($time,6,2,'UTF-8');
+        }
+
+        return $time;
+    }
+
+    private function getFromTag($tag,$param)
+    {
+        $html='<'.$tag.'>';
+        $r=$this->cutTag($html,['Q','A']);
+        if (!empty($r['params'][$param])) return $r['params'][$param];
+
+    }
+
+    private function cutTag(&$text,$tags)
+    {
+
+        $i=-1;
+        foreach ($tags as $k=>$v)
+        {
+            $j=mb_strpos($text,'<'.$v);
+            if ($j!==false && ($i==-1 || $j<$i)) { $i=$j; $tag=$v; }
+        }
+
+        if ($i!=-1)
+        {
+            $j=mb_strpos($text,'</'.$tag,$i);
+            if (!$j) $j=mb_strlen($text,'UTF-8');
+
+            $k=mb_strpos($text,'>',$i);
+            $t=mb_substr($text,$i+1,$k-$i-1);
+
+            $t=explode(' ',$t);
+            $new_tag=array_shift($t);
+            $t=implode(' ',$t);
+            $t=explode('" ',$t);
+            $params=[];
+
+
+            foreach ($t as $kk=>$vv)
+                if (mb_strpos($vv,'='))
+                {
+                    $vv=explode('=',$vv);
+                    $params[array_shift($vv)]=str_replace('"','',implode('=',$vv));
+                } else $params[]=$vv;
+
+            $result=[
+                'tag'=>$new_tag,
+                'params'=>$params,
+                'text'=>mb_substr($text,$k+1,$j-$k-mb_strlen($tag,'UTF-8'))
+            ];
+            if (!json_encode($result['text']))
+            {
+                exit($result['text']);
+            }
+            $text=trim(mb_substr($text,$j+mb_strlen($tag,'UTF-8')+3));
+        }
+        else
+        {
+            $text='';
+            $result=[];
+        }
+        if (!json_encode($result)) exit('error at: '.$result['text']);
+        //print_r($result);
+        return $result;
+    }
 }

@@ -1,0 +1,80 @@
+<section class="module module--results">
+    <div class="box">
+        <div class="grid">
+            <div class="col-span-12">
+                <div class="results">
+                    <div class="results__header">
+                        <h2 class="results__title">
+                            Carolina
+                            <span class="results__counter">[[svg::bracket-left]]26[[svg::bracket-right]]</span>
+                        </h2>
+                        <a href="" data-history="back" class="results__back"><i class="icon-close"></i><span class="sr-only">Go back</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if collections %}
+        <h3 class="results__label">Collections</h3>
+        <div class="box">
+            <div class="collections">
+                {% for item in collections %}
+                    <div class="collections__item">
+                        <a href="{{item.url}}" class="collections__link">{{item.label}}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if interviews %}
+        <h3 class="results__label">Interviews</h3>
+        <div class="box">
+            <div class="interviews interviews--grid">
+                {% for interview in interviews %}
+                    {% include './subviews/interviews/interviews_tile_single.html' with { item: interview } %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if transcripts %}
+        <h3 class="results__label">Transcripts</h3>
+        <div id="transcripts-wrap" class="transcripts">
+            {% for item in transcripts %}
+                {% set expand_id = 'transcript-results-list-' ~ loop.index0 %}
+
+                <div class="box">
+                    <div class="transcripts__item">
+                        <h3 class="transcripts__label">{{item.label}}</h3>
+                        <div class="transcripts__elements">
+                            <ul>
+                                {% for element in item.items %}
+                                <li><a href="{{element.path}}">{{element.text|raw}}</a></li>
+
+                                {% if item.items|length > 5 and loop.index == 5 %}
+                            </ul>
+                            <div class="results__expand expand" data-expand id="{{expand_id}}">
+                                <ul>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                {% if item.items|length > 5 %}
+                            </div>{# END of .results__expand #}
+                            <button class="results__expand-trigger button button--small" aria-expanded="false" aria-controls="{{expand_id}}" data-expanded-text="Show less" data-hidden-text="Load more">
+                                {% include "./components/c_arrow_icon.html" %}
+                                <span class="js-expand-text">Load more</span>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="results__more box">
+            {% include "./components/c_load_more.html" with {
+                contentSelector: "#transcripts-wrap",
+                text: "Load More <i>Transcripts</i>",
+                url: url
+            } %}
+        </div>
+    {% endif %}
+</section>
