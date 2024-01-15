@@ -42,7 +42,7 @@
         <h3 class="results__label">Transcripts</h3>
         <div id="transcripts-wrap" class="transcripts">
             {% for item in categories.transcripts.items %}
-                {% set expand_id = 'transcript-results-list-' ~ loop.index0 %}
+                {% set expand_id = 'transcript-results-list-' ~ item.id %}
 
                 <div class="box">
                     <div class="transcripts__item">
@@ -54,7 +54,7 @@
 
                                     {% if item.items|length > 5 and loop.index == 5 %}
                                 </ul>
-                                <div class="results__expand expand" data-expand id="{{ expand_id }}">
+                                <div class="results__expand expand" data-expand id="{{ item.id }}">
                                     <ul>
                                         {% endif %}
                                     {% endfor %}

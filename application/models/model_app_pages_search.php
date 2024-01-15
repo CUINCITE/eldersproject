@@ -34,25 +34,27 @@ class model_app_pages_search
      * @param string $lead
      * @return array updated article
      */
-    public function get($q, $live = false, $page = 1)
+    public function get($q, $live = false, $page = 1, $transcripts_only=false)
     {
         $categories = [];
         if ($q) {
 
-            $categories[] = $interviews = $this->getItems('narrators', $q, $live, $page);
+            if (!$transcripts_only) {
+                $categories[] = $interviews = $this->getItems('narrators', $q, $live, $page);
 
-            $collections_ids = [];
-            if (!empty($interviews['items'])) {
-                $collections_ids = array_reduce($interviews['items'], function ($carry, $item) {
-                    if (!empty($item['interviewers'])) {
-                        $ids = array_column($item['interviewers'], 'id');
-                        return array_merge($carry, $ids);
-                    }
-                    return $carry;
-                }, []);
+                $collections_ids = [];
+                if (!empty($interviews['items'])) {
+                    $collections_ids = array_reduce($interviews['items'], function ($carry, $item) {
+                        if (!empty($item['interviewers'])) {
+                            $ids = array_column($item['interviewers'], 'id');
+                            return array_merge($carry, $ids);
+                        }
+                        return $carry;
+                    }, []);
+                }
+
+                $categories[] = $this->getItems('collections', $q, $live, $page,['collections'=>$collections_ids]);
             }
-
-            $categories[] = $this->getItems('collections', $q, $live, $page,['collections'=>$collections_ids]);
             $categories[] = $this->getTranscripts($q, $live, $page, $f=[]);
         }
 
