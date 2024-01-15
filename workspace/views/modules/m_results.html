@@ -71,7 +71,10 @@
         </div>
         <div class="results__more box">
             {% include "./components/c_load_more.html" with {
-                contentSelector: "#transcripts-wrap",
+                options: {
+                    "contentSelector": "#transcripts-wrap",
+                    "updateURL": true,
+                },
                 text: "Load More <i>Transcripts</i>",
                 url: url
             } %}
