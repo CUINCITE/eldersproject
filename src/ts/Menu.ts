@@ -1,3 +1,5 @@
+import { AudioPlayer } from './components/AudioPlayer';
+
 export class Menu {
     private isOpen = false;
 
@@ -58,6 +60,7 @@ export class Menu {
         this.isOpen = true;
         this.view.style.display = 'flex';
         document.body.classList.add('has-menu-open');
+        AudioPlayer.closeAudioPlayer();
     };
 
 

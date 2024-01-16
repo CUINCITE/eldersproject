@@ -11,6 +11,14 @@ export class AudioPlayerStatesText {
 
 export class AudioPlayer extends Video {
 
+    // eslint-disable-next-line no-use-before-define
+    public static instance: AudioPlayer;
+
+    public static closeAudioPlayer(): void {
+        AudioPlayer.instance.minimize();
+    }
+
+
     private audioTitle: HTMLElement;
     private isExpanded = false;
     private cassetteTitle: HTMLElement;
@@ -18,6 +26,7 @@ export class AudioPlayer extends Video {
     constructor(protected view: HTMLElement) {
         super(view);
 
+        AudioPlayer.instance = this;
 
         this.controls.thumbnail = this.view.querySelector('.player__thumbnail');
         this.controls.minimize = this.view.querySelector('.player__minimize');
