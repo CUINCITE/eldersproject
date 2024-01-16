@@ -10,24 +10,6 @@
         flex-shrink: 0;
         pointer-events: all;
         cursor: pointer;
-
-
-        &-extend {
-            position: absolute;
-            z-index: 0;
-            inset: 0 calc(var(--GLOBAL-aside-width) + 1px) 0 auto;
-            width: rem(11);
-            background: linear-gradient(to bottom, var(--color-black) 0%, var(--color-black) calc(var(--top-panel-height) + 1px), var(--color-theme) calc(var(--top-panel-height) + 1px), var(--color-theme) var(--bottom-panel-height));
-            transform-origin: right center;
-            transition: transform .25s $ease-custom;
-        }
-
-
-        @include hover {
-            ~ .player__thumbnail-extend {
-                transform: scaleX(1.5);
-            }
-        }
     }
 
 
@@ -66,7 +48,7 @@
 
 
             path {
-                animation: cassette 10s linear infinite;
+                animation: cassette 4s linear infinite;
                 animation-play-state: paused;
 
                 &:first-of-type {
