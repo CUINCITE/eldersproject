@@ -1,4 +1,6 @@
 .lightbox {
+    $animation-stagger: 0.02s;
+
     --easing: cubic-bezier(0, 0, 1, 1);
     --distance: 150vh;
 
@@ -41,11 +43,11 @@
 
         transition: transform var(--animation-time) var(--easing);
         transform-origin: left top;
-        transform: translateY(100vh);
+        transform: translateY(var(--distance));
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .1s;
+            transition-delay: $animation-stagger * 2;
         }
 
         .is-closing & {
@@ -60,12 +62,12 @@
     &__illu {
         transition: transform var(--animation-time) var(--easing);
         transform-origin: left top;
-        transform: translateY(100vh);
+        transform: translateY(var(--distance));
 
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .05s;
+            transition-delay: $animation-stagger * 1;
         }
 
         .is-closing & {
@@ -81,12 +83,12 @@
         transition: transform var(--animation-time) var(--easing);
         transform-origin: right bottom;
 
-        transform: translateY(100%);
+        transform: translateY(var(--distance));
 
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .15s;
+            transition-delay: $animation-stagger * 1.5;
         }
 
         .is-closing & {
@@ -102,7 +104,7 @@
     &__image {
         transition: transform var(--animation-time) var(--easing);
 
-        transform: translateY(100%) rotate(25deg);
+        transform: translateY(var(--distance)) rotate(25deg);
 
 
         .is-showing &,
@@ -147,7 +149,7 @@
     &__header {
         transition: transform var(--animation-time) var(--easing);
         transform-origin: right bottom;
-        transform: translateY(100vh);
+        transform: translateY(var(--distance));
 
 
         .is-showing & {
@@ -169,12 +171,12 @@
         @include z-index(buttons, $lightbox-elements);
 
         transition: transform var(--animation-time) var(--easing);
-        transform: translateY(100%);
+        transform: translateY(var(--distance));
 
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: .25s;
+            transition-delay: $animation-stagger * 2.5;
         }
 
         .is-closing & {
