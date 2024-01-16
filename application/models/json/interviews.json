@@ -245,9 +245,21 @@
             "list": "edit",
             "search":true,
             "hr": true
+        },
+        {
+            "hr":true,
+            "label": "Mementos",
+            "type": "media",
+            "field":"media",
+            "captions":
+            [
+                {"label":"Caption","field":"caption"}
+            ],
+            "media" :
+            {
+                "model":"media",
+                "type": ["image"]
+            }
         }
-
-
-
     ]
 }

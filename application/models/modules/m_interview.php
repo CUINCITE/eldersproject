@@ -22,10 +22,34 @@ class model_app_pages_modules_interview extends model_app_pages_modules
 			else $m['item']['date']=_uho_fx::getDate($date1,$date2,'en')['long_no_time'];
 
 		}
+
+        dd($m['item']);
         
         
 		return $m;
 	}
+
+    private function getJson($item, $url)
+    {
+        $url = '/'.implode('/', $url);
+        $backUrl = '/interviews';
+        $modifier = 'purple';
+        $illu = $item['interviewers'][0]['image'];
+        $mainImage = [
+            'type' => 'polaroid',
+            'image' => $item['interviewers'][0]['image']
+        ];
+        $title = $item['label'];
+        $description = $item['narrators'][0]['occupation'];
+        $collection = $item['interviewers'][0]['label'];
+        $collectionUrl = '/collections/'.$item['interviewers'][0]['slug'];
+        $text = $item['narrators'][0]['bio'];
+        $tags = [];
+        $state = 'Huston';
+
+
+        return $item;
+    }
 
 
 }
