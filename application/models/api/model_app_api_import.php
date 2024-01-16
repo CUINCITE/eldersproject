@@ -14,6 +14,9 @@
  * UPDATE sessions,interviews SET sessions.label=CONCAT(interviews.label,' (',interviews.interviewer_name,')'),sessions.label_sort=CONCAT(interviews.label_sort,' (',interviews.interviewer_name,')') WHERE sessions.parent=interviews.id
  */
 
+require_once('vendor/autoload.php');
+use Maestroerror\HeicToJpg;
+
 class model_app_api_import
 {
 
@@ -487,11 +490,8 @@ class model_app_api_import
 
 
             case "mementos":
-                //fetch file
                 $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos.csv', ',');
-//                dd($items);
 
-                // locate the intervy
                 $items_count = 0;
                 foreach ($items as $k => $v) {
                     $id = $v['Interview ID'];
@@ -503,12 +503,8 @@ class model_app_api_import
                     if (!empty($interview['media'])) {
                         foreach ($interview['media'] as $k => $media_item) {
 
-//                            dd($interview);
-
                             if (!empty($media_item['id']) && is_numeric($media_item['id'])) {
                                 $this->parent->deleteJsonModel('media', ['id' => $media_item['id']]);
-//                                $query = 'DELETE FROM media WHERE id = ' . (int)$media_item['id'];
-//                                $this->parent->query($query);
                             }
 
                             else {
@@ -551,8 +547,6 @@ class model_app_api_import
                     $oldFile = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/'.$v['Filename'];
                     $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
 
-
-
                     $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.' . strtolower($ext);
 
 
@@ -560,16 +554,30 @@ class model_app_api_import
                         return ['message' => 'Resize image not successful: ' . $v['Filename']];
                     }
 
-                    // Convert the image to jpg using Imagick
-                    $imagick = new Imagick($newFile);
-                    $jpgFile = pathinfo($newFile, PATHINFO_DIRNAME) . '/' . pathinfo($newFile, PATHINFO_FILENAME) . '.jpg';
+                    if (strtolower($ext) !== "jpg" && file_exists($newFile)) {
 
-                    try {
-                        $imagick->setImageFormat('jpg');
-                        $imagick->writeImage($jpgFile);
-                    } catch(Exception $e) {
-                        return ['message' => 'Image conversion to jpg not successful: ' . $v['Filename']];
+                        if (strtolower($ext) === "heic") {
+                            try {
+                                HeicToJpg::convertOnMac($newFile)->saveAs($_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.jpg');
+                                unlink($newFile);
+                            } catch(Exception $e) {
+                                return ['message' => 'Image conversion to jpg using HeicToJpg not successful: ' . $v['Filename'] . '. Error: ' . $e->getMessage()];
+                            }
+                        } else {
+                            $imagick = new Imagick($newFile);
+                            $jpgFile = pathinfo($newFile, PATHINFO_DIRNAME) . '/' . pathinfo($newFile, PATHINFO_FILENAME) . '.jpg';
+
+                            try {
+                                $imagick->setImageFormat('jpg');
+                                $imagick->writeImage($jpgFile);
+                            } catch(Exception $e) {
+                                return ['message' => 'Image conversion to jpg using Imagick not successful: ' . $v['Filename']];
+                            }
+                        }
+
                     }
+
+
                 }
 
                 return ['message' => 'Import sucessful', 'items' => $items_count];
