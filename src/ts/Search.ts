@@ -138,15 +138,11 @@ export class Search {
             })
             .fromTo(
                 this.liveLi,
+                { y: window.innerHeight },
                 {
-                    opacity: 0,
-                    y: 40,
-                },
-                {
-                    opacity: 1,
                     y: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
+                    duration: 0.9,
+                    stagger: 0.1,
                     ease: easing,
                 },
             );
@@ -172,19 +168,21 @@ export class Search {
 
 
     private animationHide(): void {
-        this.isLiveShown && gsap.timeline()
-            .to(this.liveLi, {
-                opacity: 0,
-                y: 40,
-                duration: 0.6,
-                stagger: 0.1,
+        if (!this.isLiveShown) return;
+        [...this.liveLi].reverse().forEach((item, index) => {
+            gsap.to(item, {
+                y: window.innerHeight,
+                rotate: index % 2 === 0 ? 15 : -15,
+                duration: 0.8,
+                delay: index * 0.1,
                 ease: easing,
-            }, 0)
-            .to(this.liveList.parentElement, {
-                height: 0,
-                duration: 0.4,
-                ease: easing,
+                onComplete: () => {
+                    item.remove();
+                    // after all tweens
+                    if (index === this.liveLi.length) gsap.set(this.liveList.parentElement, { height: 0 });
+                },
             });
+        });
 
 
         this.isLiveShown = false;

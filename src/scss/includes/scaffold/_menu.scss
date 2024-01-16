@@ -20,7 +20,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
     }
 
     &__wrap {
-        @include flex(column, flex-end, flex-end);
+        @include flex(column, flex-start, flex-end);
 
         text-transform: uppercase;
         width: 100%;
@@ -167,7 +167,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
 
     &__footer {
-        margin-top: auto;
+        margin-top: rem(17);
 
         @include breakpoint(desktop) {
             @include font-size(10, 16);
@@ -177,17 +177,17 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
         @include breakpoint(not-desktop) {
             @include flex(column, flex-start, flex-start);
-        
+
             @include breakpoint(tablet) {
                 @include font-size(20, 1.1);
 
                 padding-bottom: vw(36, tablet);
                 gap: rem(32);
             }
-    
+
             @include breakpoint(phone) {
                 @include font-size(14, 18.9);
-    
+
                 padding-bottom: vw(25, phone);
                 gap: rem(19);
             }
