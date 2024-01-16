@@ -8,20 +8,14 @@
 
     @include flex;
 
-    background-color: var(--interview-bg);
     position: relative;
-    transition: transform .45s $ease-custom;
-    will-change: transform;
 
     @include breakpoint(desktop) {
         width: vw(196);
         height: vw(196);
-        transform: rotate(-20deg);
     }
 
     @include breakpoint(not-desktop) {
-        @include flex(row, center, center);
-
         @include breakpoint(tablet) {
             width: vw(186, tablet);
             height: vw(100, tablet);
@@ -37,8 +31,7 @@
 
 
 
-
-    &--reversed {
+    &--reversed &__wrap {
         @include breakpoint(desktop) {
             transform: rotate(20deg);
         }
@@ -68,10 +61,31 @@
 
 
 
+    &__wrap {
+        width: 100%;
+        height: 100%;
+        background-color: var(--interview-bg);
+        position: relative;
+        transition: transform .35s $ease-out;
+        will-change: transform;
+
+
+        @include breakpoint(desktop) {
+            transform: rotate(-20deg);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            @include flex(row, center, center);
+        }
+    }
+
+
+
     &__layer {
         position: absolute;
         inset: 0;
-        transition: transform .45s $ease-custom;
+        transition: transform .35s $ease-out;
 
         &:first-of-type {
             background-color: var(--interview-first-layer-bg);
@@ -88,18 +102,17 @@
         }
 
         @include breakpoint(desktop) {
-
             &:first-of-type {
                 transform: scale(calc(164 / 196));
             }
-    
+
 
             &:nth-of-type(2) {
                 transform: scale(calc(128 / 196));
                 transition-duration: .4s;
             }
-    
-    
+
+
             &:nth-of-type(3) {
                 transform: scale(calc(96 / 196));
                 transition-duration: .35s;
@@ -115,14 +128,13 @@
         z-index: 2;
         text-transform: uppercase;
         color: var(--interview-text-color);
-        transition: opacity .4s $ease-custom;
+        overflow: hidden;
 
         @include breakpoint(desktop) {
             @include font-size(50, 38);
             @include letter-spacing(-1.25, 50);
 
             padding: vw(14) vw(11);
-            opacity: 0;
             inset: 0;
         }
 
@@ -139,13 +151,31 @@
 
             padding-top: rem(1);
         }
+
+
+        p {
+            transition: opacity .2s $ease-out, transform .25s $ease-out;
+            transition-delay: 0s;
+
+
+            @include breakpoint(desktop) {
+                opacity: 0;
+                transform: translateX(#{rem(-90)});
+            }
+        }
     }
 }
- 
+
 
 %box-hover {
-    transform: rotate(0deg);
+    .interview-box__wrap { transform: rotate(0deg); }
 
     .interview-box__layer { transform: scale(1); }
-    .interview-box__text { transition-delay: .15s; opacity: 1; }
+
+    .interview-box__text p {
+        transition-delay: .05s;
+        transition-duration: .25s;
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
