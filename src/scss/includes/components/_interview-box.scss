@@ -16,6 +16,8 @@
     }
 
     @include breakpoint(not-desktop) {
+        @include flex(row, center, center);
+
         @include breakpoint(tablet) {
             width: vw(186, tablet);
             height: vw(100, tablet);
