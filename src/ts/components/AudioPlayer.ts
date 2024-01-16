@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { easing } from '../Site';
 import { Video } from './Video';
 
 
@@ -62,9 +63,9 @@ export class AudioPlayer extends Video {
 
     private minimize = (): void => {
         gsap.to(this.controls.playerBar, {
-            xPercent: 0,
-            duration: 1,
-            ease: 'power3.inOut',
+            yPercent: 0,
+            duration: 0.7,
+            ease: easing,
             onComplete: () => {
                 this.setTitleInCassette(this.audioTitle.innerText);
                 this.isExpanded = false;
@@ -76,9 +77,9 @@ export class AudioPlayer extends Video {
 
     private expand = (): void => {
         gsap.to(this.controls.playerBar, {
-            xPercent: -100,
-            duration: 1,
-            ease: 'power3.inOut',
+            yPercent: -100,
+            duration: 0.7,
+            ease: easing,
             onStart: () => {
                 this.setTitleInCassette(this.isPaused() ? AudioPlayerStatesText.PAUSED : AudioPlayerStatesText.PLAYING);
             },

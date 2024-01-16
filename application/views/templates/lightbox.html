@@ -26,6 +26,7 @@
     <div class="lightbox__overlay"></div>
     <div class="lightbox__grid">
         <div class="lightbox__header">
+            <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
                 <h2 class="lightbox__title">{{title}}</h2>
                 <div class="lightbox__filters">
@@ -46,6 +47,7 @@
             </div>
         </div>
         <div class="lightbox__illu">
+            <div class="lightbox__darken"></div>
             {% if collectionUrl %}
                 <a href="{{collectionUrl}}" class="lightbox__collection"><span>{{collection}}</span></a>
             {% endif %}
@@ -58,7 +60,9 @@
             {% endif %}
         </div>
         <div class="lightbox__main">
-            <div class="lightbox__main-bg"></div>
+            <div class="lightbox__main-bg">
+                <div class="lightbox__darken"></div>
+            </div>
             {% if slider %}
                 <div class="lightbox__slider slider" data-component="LightboxSlider">
                     <div class="slider__wrap js-slider-wrap">

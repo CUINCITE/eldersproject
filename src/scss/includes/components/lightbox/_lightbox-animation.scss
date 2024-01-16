@@ -1,11 +1,18 @@
+@mixin default-transition($xOrigin: left, $yOrigin: top) {
+    transition: transform var(--animation-time) var(--easing);
+    transform-origin: $xOrigin $yOrigin;
+    transform: translateY(var(--distance));
+}
+
 .lightbox {
-    $animation-stagger: 0.02s;
+    $animation-stagger: 0s;
+    $content-delay: .75s;
 
     --easing: cubic-bezier(0, 0, 1, 1);
     --distance: 150vh;
 
     &.is-showing {
-        --easing: cubic-bezier(.2, .75, .4, .95);
+        --easing: cubic-bezier(0, .8, .35, 1);
         --animation-time: .65s;
     }
 
@@ -40,14 +47,13 @@
 
     &__logo {
         @include z-index(logo, $lightbox-elements);
-
-        transition: transform var(--animation-time) var(--easing);
-        transform-origin: left top;
-        transform: translateY(var(--distance));
+        @include default-transition;
 
         .is-showing & {
             transform: translateY(0);
-            transition-delay: $animation-stagger * 2;
+
+            // transition-delay: $animation-stagger * 2;
+            transition-delay: .05s;
         }
 
         .is-closing & {
@@ -60,9 +66,9 @@
 
 
     &__illu {
-        transition: transform var(--animation-time) var(--easing);
-        transform-origin: left top;
-        transform: translateY(var(--distance));
+        @include default-transition;
+
+        --darken-stagger: .33s;
 
 
         .is-showing & {
@@ -80,10 +86,9 @@
 
 
     &__main-bg {
-        transition: transform var(--animation-time) var(--easing);
-        transform-origin: right bottom;
+        @include default-transition((right, bottom));
 
-        transform: translateY(var(--distance));
+        --darken-stagger: .36s;
 
 
         .is-showing & {
@@ -103,17 +108,17 @@
 
     &__image {
         transition: transform var(--animation-time) var(--easing);
-
-        transform: translateY(var(--distance)) rotate(25deg);
+        transform: translateY(var(--distance)) rotate(-25deg);
 
 
         .is-showing &,
         .is-default & {
-            --easing: cubic-bezier(.15, .8, .2, .95);
-            --animation-time: .75s;
+            // --easing: cubic-bezier(.2, .7, .35, .9);
+
+            transition-duration: .9s;
 
             transform: translateY(0) rotate(-7.5deg);
-            transition-delay: .55s;
+            transition-delay: $content-delay;
         }
 
 
@@ -147,9 +152,9 @@
 
 
     &__header {
-        transition: transform var(--animation-time) var(--easing);
-        transform-origin: right bottom;
-        transform: translateY(var(--distance));
+        @include default-transition(right, bottom);
+
+        --darken-stagger: .3s;
 
 
         .is-showing & {
@@ -162,6 +167,20 @@
             transform: translate(0, var(--distance)) rotate(-35deg);
 
             // transition-delay: 0s;
+        }
+    }
+
+
+
+    &__header-info {
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateX(-120%);
+
+
+        .is-showing & {
+            transform: translateX(0);
+            transition-duration: .9s;
+            transition-delay: $content-delay;
         }
     }
 
@@ -188,7 +207,8 @@
 
         @for $i from 1 through 5 {
             li:nth-of-type(#{$i}) span {
-                transition-delay: calc(.75s + 0.075 * #{$i}s);
+                transition-duration: .75s;
+                transition-delay: calc(1.1s + 0.05 * #{$i}s);
             }
         }
 
@@ -204,6 +224,21 @@
                     transform: translateX(0);
                 }
             }
+        }
+    }
+
+
+    &__darken {
+        transition: transform var(--animation-time) var(--easing);
+        transform-origin: center top;
+        transform: scaleY(1);
+
+
+        .is-showing & {
+            transition-duration: 1s;
+
+            transform: scaleY(0);
+            transition-delay: var(--darken-stagger);
         }
     }
 

@@ -10,7 +10,7 @@
         grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
         z-index: 1;
         background-color: $bar-color;
-        transform: translateX(100%);
+        transform: translateY(100%);
         pointer-events: all;
 
 
@@ -228,7 +228,7 @@
             top: 50%;
             height: $scrubber-height;
             width: 0%;
-            transition: all $time-fast $easing;
+            transition: all $time-fast linear;
             transform: translate(0, -#{$scrubber-height * 0.5});
         }
     }
