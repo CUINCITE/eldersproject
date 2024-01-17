@@ -59,6 +59,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 		*/
 		$sort=@$this->settings['get']['sort'];		
 		if (!$sort) $sort='narrators';
+        $m['sort']['selected'] = $sort;
 		if ($sort[0]=='!') { $desc=true; $sort=substr($sort,1); } else $desc=false;
 		
 		$m['sort']=[];
