@@ -1,18 +1,21 @@
 <?php
 
 /**
- * 
- * 
+ *
+ *
  * 1. http://elder.lh/api/import?action=interviews
  * 2. cms interviews auto-update
  * 3. http://elder.lh/api/import?action=sessions
  * 4. http://elder.lh/api/import?action=media
- * 
- * 
+ *
+ *
  * SELECT  incite_id, COUNT(incite_id) FROM interviews GROUP BY incite_id HAVING COUNT(incite_id) > 1;
  * SELECT  incite_id, COUNT(incite_id) FROM sessions GROUP BY incite_id HAVING COUNT(incite_id) > 1;
  * UPDATE sessions,interviews SET sessions.label=CONCAT(interviews.label,' (',interviews.interviewer_name,')'),sessions.label_sort=CONCAT(interviews.label_sort,' (',interviews.interviewer_name,')') WHERE sessions.parent=interviews.id
  */
+
+require_once('vendor/autoload.php');
+use Maestroerror\HeicToJpg;
 
 class model_app_api_import
 {
@@ -26,6 +29,8 @@ class model_app_api_import
 
     public function rest($method, $params)
     {
+//        phpinfo();
+//        die();
         //$action='interviews';
         //$action='narrators';
         //$action='sessions';
@@ -55,42 +60,41 @@ class model_app_api_import
 
                 break;
 
-                case  "leads":
-                    $i = 0;
-                    $items = $this->parent->query('SELECT id,summary FROM interviews WHERE summary!=""');
-                    
-                    foreach ($items as $k => $v) {
-                        $id = $v['id'];
-                        $v = explode(';', trim($v['summary']));
-                        $v[0] = trim($v[0]);
-                        if ($v[0])
-                        {
-                            $i++;
-                            $v=['lead'=>$v[0].'.'];
-                            $this->parent->putJsonModel('interviews', $v, ['id' => $id]);
-                        }
-                    }
-                    return ['result' => true, 'message' => 'Updated interviews: ' . $i];
-    
-                    break;
-                /*
-            case "states_allocate":
-                $states = $this->parent->getJsonModel('s_states');
-                $sessions = $this->parent->query('SELECT id,narrator_location FROM sessions WHERE narrator_location!=""');
-                foreach ($sessions as $k => $v) {
-                    $vv = explode(',', $v['narrator_location']);
-                    $state = trim(array_pop($vv));
-                    if ($state && strlen($state) == 2) {
-                        $i = _uho_fx::array_filter($states, 'slug', $state, ['first' => true]);
-                        if ($i) {
-                            $r = $this->parent->putJsonModel('sessions', ['narrator_state' => $i['id']], ['id' => $v['id']]);
-                            if (!$r) exit('error');
-                        } else echo ('not found=' . $vv[1] . ' ');
+            case  "leads":
+                $i = 0;
+                $items = $this->parent->query('SELECT id,summary FROM interviews WHERE summary!=""');
+
+                foreach ($items as $k => $v) {
+                    $id = $v['id'];
+                    $v = explode(';', trim($v['summary']));
+                    $v[0] = trim($v[0]);
+                    if ($v[0]) {
+                        $i++;
+                        $v = ['lead' => $v[0] . '.'];
+                        $this->parent->putJsonModel('interviews', $v, ['id' => $id]);
                     }
                 }
-                exit('!');
+                return ['result' => true, 'message' => 'Updated interviews: ' . $i];
 
-                break;*//*
+                break;
+            /*
+        case "states_allocate":
+            $states = $this->parent->getJsonModel('s_states');
+            $sessions = $this->parent->query('SELECT id,narrator_location FROM sessions WHERE narrator_location!=""');
+            foreach ($sessions as $k => $v) {
+                $vv = explode(',', $v['narrator_location']);
+                $state = trim(array_pop($vv));
+                if ($state && strlen($state) == 2) {
+                    $i = _uho_fx::array_filter($states, 'slug', $state, ['first' => true]);
+                    if ($i) {
+                        $r = $this->parent->putJsonModel('sessions', ['narrator_state' => $i['id']], ['id' => $v['id']]);
+                        if (!$r) exit('error');
+                    } else echo ('not found=' . $vv[1] . ' ');
+                }
+            }
+            exit('!');
+
+            break;*//*
             case "states_add":
                 $s = [];
                 $ss = [];
@@ -113,31 +117,31 @@ class model_app_api_import
                     $this->parent->postJsonModel('s_states', ['slug' => $k, 'active' => 1]);
                 break;
                 */
-                /*
-            case "narrators":
+            /*
+        case "narrators":
 
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/csv/ElderProject_Interview_Data_20231127.csv', ';');
-                $n = [];
+            $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/csv/ElderProject_Interview_Data_20231127.csv', ';');
+            $n = [];
 
-                foreach ($items as $k => $v) {
-                    if (@$v['1st Narrator: Full Name']) $n[$v['1st Narrator: Full Name']] = $v['Brief Narrator Bio'];
-                    if (@$v['2nd Narrator: Full Name']) $n[$v['2nd Narrator: Full Name']] = $v['Brief Narrator Bio'];
-                    if (@$v['3rd Narrator: Full Name']) $n[$v['3rd Narrator: Full Name']] = $v['Brief Narrator Bio'];
-                }
+            foreach ($items as $k => $v) {
+                if (@$v['1st Narrator: Full Name']) $n[$v['1st Narrator: Full Name']] = $v['Brief Narrator Bio'];
+                if (@$v['2nd Narrator: Full Name']) $n[$v['2nd Narrator: Full Name']] = $v['Brief Narrator Bio'];
+                if (@$v['3rd Narrator: Full Name']) $n[$v['3rd Narrator: Full Name']] = $v['Brief Narrator Bio'];
+            }
 
-                $this->parent->queryOut('TRUNCATE TABLE narrators');
+            $this->parent->queryOut('TRUNCATE TABLE narrators');
 
-                foreach ($n as $k => $v) {
-                    $vv = explode(' ', $k);
-                    $last_name = array_pop($vv);
-                    $first_name = implode(' ', $vv);
-                    $this->parent->postJsonModel('narrators', ['active' => 1, 'name' => $first_name, 'surname' => $last_name, 'bio' => $v]);
-                }
+            foreach ($n as $k => $v) {
+                $vv = explode(' ', $k);
+                $last_name = array_pop($vv);
+                $first_name = implode(' ', $vv);
+                $this->parent->postJsonModel('narrators', ['active' => 1, 'name' => $first_name, 'surname' => $last_name, 'bio' => $v]);
+            }
 
-                return ['count' => count($n)];
+            return ['count' => count($n)];
 
 
-                break;*/
+            break;*/
 
             case "interviews":
 
@@ -241,7 +245,7 @@ class model_app_api_import
                     // ID=narrator id
                     if (@$id) {
                         $i = [];
-                        if (@$v['Interviewer: Full Name'])  $i[] = $v['Interviewer: Full Name'];
+                        if (@$v['Interviewer: Full Name']) $i[] = $v['Interviewer: Full Name'];
                         if (@$v['2nd Interviewer: Full Name']) $i[] = $v['2nd Interviewer: Full Name'];
                         if (@$v['3rd Interviewer: Full Name']) $i[] = $v['3rd Interviewer: Full Name'];
                         foreach ($i as $kk => $vv) {
@@ -284,66 +288,66 @@ class model_app_api_import
                 return ['result' => true, 'message' => implode(' ... ', $message)];
 
                 break;
-                /*
-            case "sessions_old":
+            /*
+        case "sessions_old":
 
-                $interviews = $this->parent->getJsonModel('interviews');
-                foreach ($interviews as $k => $v)
-                    $interviews[$k] = ['id' => $v['id'], 'name' => $v['narrators'][0]['name'] . ' ' . $v['narrators'][0]['surname']];
+            $interviews = $this->parent->getJsonModel('interviews');
+            foreach ($interviews as $k => $v)
+                $interviews[$k] = ['id' => $v['id'], 'name' => $v['narrators'][0]['name'] . ' ' . $v['narrators'][0]['surname']];
 
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Session_Data_20231113.csv', ';');
-                foreach ($items as $k => $v) {
+            $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Session_Data_20231113.csv', ';');
+            foreach ($items as $k => $v) {
 
-                    $date = explode('/', $v['Session Date']);
-                    if (count($date) == 3) $date = $date[2] . '-' . _uho_fx::dozeruj($date[0], 2) . '-' . _uho_fx::dozeruj($date[1], 2);
-                    else $date = '';
-                    $languages = $v['Language of Interview'];
-                    $languages = str_replace(';', ',', $languages);
-                    $languages = str_replace(' and ', ', ', $languages);
+                $date = explode('/', $v['Session Date']);
+                if (count($date) == 3) $date = $date[2] . '-' . _uho_fx::dozeruj($date[0], 2) . '-' . _uho_fx::dozeruj($date[1], 2);
+                else $date = '';
+                $languages = $v['Language of Interview'];
+                $languages = str_replace(';', ',', $languages);
+                $languages = str_replace(' and ', ', ', $languages);
 
-                    if (!$languages || $languages == 'English') $languages = [1];
-                    elseif ($languages == 'Spanish') $languages = [2];
-                    elseif ($languages == 'English, Spanish') $languages = [1, 2];
-                    else exit($languages . '!');
+                if (!$languages || $languages == 'English') $languages = [1];
+                elseif ($languages == 'Spanish') $languages = [2];
+                elseif ($languages == 'English, Spanish') $languages = [1, 2];
+                else exit($languages . '!');
 
-                    $duration = trim($v['Media File Duration']);
-                    if ($duration) $duration = explode(':', $duration);
-                    if ($duration && count($duration) == 3) {
-                        $duration = $duration[0] * 60 * 60 + $duration[1] * 60 + $duration[2];
-                    } elseif ($duration && count($duration) == 2) {
-                        $duration = $duration[0] * 60 + $duration[1];
-                    } elseif ($duration) {
-                        print_r($duration);
-                        exit();
-                    }
-
-                    $interview = $v['1st Narrator: Full Name'];
-                    $interview_id = _uho_fx::array_filter($interviews, 'name', $interview, ['first' => true]);
-                    if (!$interview_id) exit('interview not found=' . $interview);
-                    else $interview_id = $interview_id['id'];
-
-                    $items[$k] = [
-                        'nr' => intval(substr($v['Session Name'], 8)),
-                        'parent' => $interview_id,
-                        'acitve' => 1,
-                        'media' => 'audio',
-                        'date' => $date,
-                        'narrator_location' => $v['Session Location(s)'],
-                        'interviewer_location' => $v['Session Location(s)'],
-                        'languages' => $languages,
-                        'duration' => $duration,
-                        'filename' => $v['Media File Name(s)']
-                    ];
+                $duration = trim($v['Media File Duration']);
+                if ($duration) $duration = explode(':', $duration);
+                if ($duration && count($duration) == 3) {
+                    $duration = $duration[0] * 60 * 60 + $duration[1] * 60 + $duration[2];
+                } elseif ($duration && count($duration) == 2) {
+                    $duration = $duration[0] * 60 + $duration[1];
+                } elseif ($duration) {
+                    print_r($duration);
+                    exit();
                 }
 
-                /*$this->parent->queryOut('TRUNCATE TABLE sessions');
-                    foreach ($items as $k=>$v)
-                    {
-                        $r=$this->parent->postJsonModel('sessions',$v);
-                        if (!$r) exit($this->parent->orm->getLastError());
-                    }
+                $interview = $v['1st Narrator: Full Name'];
+                $interview_id = _uho_fx::array_filter($interviews, 'name', $interview, ['first' => true]);
+                if (!$interview_id) exit('interview not found=' . $interview);
+                else $interview_id = $interview_id['id'];
 
-                break;
+                $items[$k] = [
+                    'nr' => intval(substr($v['Session Name'], 8)),
+                    'parent' => $interview_id,
+                    'acitve' => 1,
+                    'media' => 'audio',
+                    'date' => $date,
+                    'narrator_location' => $v['Session Location(s)'],
+                    'interviewer_location' => $v['Session Location(s)'],
+                    'languages' => $languages,
+                    'duration' => $duration,
+                    'filename' => $v['Media File Name(s)']
+                ];
+            }
+
+            /*$this->parent->queryOut('TRUNCATE TABLE sessions');
+                foreach ($items as $k=>$v)
+                {
+                    $r=$this->parent->postJsonModel('sessions',$v);
+                    if (!$r) exit($this->parent->orm->getLastError());
+                }
+
+            break;
 */
             case "sessions":
 
@@ -405,7 +409,6 @@ class model_app_api_import
                     ];
 
 
-
                     $i++;
                 }
 
@@ -423,14 +426,13 @@ class model_app_api_import
                 }
 
 
-
                 return ['result' => true, 'message' => 'Sessions all:' . count($items) . ', upated: ' . $i];
 
                 break;
 
-                /*
-                MEDIA
-                */
+            /*
+            MEDIA
+            */
 
             case "media":
 
@@ -485,9 +487,105 @@ class model_app_api_import
                 return ['result' => true, 'message' => 'Files copied: ' . $c];
 
                 break;
-        }
-    }
 
-    // --------------------------------------------------------------------------------
+
+            case "mementos":
+                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos.csv', ',');
+
+                $items_count = 0;
+                foreach ($items as $k => $v) {
+                    $id = $v['Interview ID'];
+                    $interview = $this->parent->getJsonModel('interviews', ['incite_id' => $id], true);
+
+                    if (!$interview) return ['message' => 'Interview not found: ' . $id];
+
+                    // remove old items
+                    if (!empty($interview['media'])) {
+                        foreach ($interview['media'] as $k2 => $media_item) {
+
+                            if (!empty($media_item['id']) && is_numeric($media_item['id'])) {
+                                $this->parent->deleteJsonModel('media', ['id' => $media_item['id']]);
+                            }
+
+                            else {
+                                return ['message' => 'Cannot remove media item: ' . $media_item['id']];
+                            }
+
+
+                            foreach ($media_item['image'] as $k3 => $image_size) {
+                                $file = $_SERVER['DOCUMENT_ROOT'] . $image_size;
+                                $file = parse_url($file, PHP_URL_PATH);
+                                if (is_file($file)) {
+                                    unlink($file);
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                foreach ($items as $k=> $v) {
+                    $id = $v['Interview ID'];
+                    $interview = $this->parent->getJsonModel('interviews', ['incite_id' => $id], true);
+                    // add new items
+                    $uid = uniqid();
+
+                    $item = [
+                        'type' => 'image',
+                        'caption' => $v['Description'],
+                        'alt' => $v['Alt text'],
+                        'uid' => $uid,
+                        'model_id' => $interview['id'],
+                        'model' => 'interviews',
+                        'filename_original' => $v['Filename']
+                    ];
+
+                    $postSuccess = $this->parent->postJsonModel('media', $item);
+                    if (!$postSuccess) return ['message' => 'Media Item not succesfully posted: ' . $id];
+                    $items_count++;
+
+                    $oldFile = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/'.$v['Filename'];
+                    $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
+
+                    $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.' . strtolower($ext);
+
+
+                    if (!copy($oldFile, $newFile)) {
+                        return ['message' => 'Resize image not successful: ' . $v['Filename']];
+                    }
+
+                    if (strtolower($ext) !== "jpg" && file_exists($newFile)) {
+
+                        if (strtolower($ext) === "heic") {
+                            try {
+                                HeicToJpg::convertOnMac($newFile)->saveAs($_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.jpg');
+                                unlink($newFile);
+                            } catch(Exception $e) {
+                                return ['message' => 'Image conversion to jpg using HeicToJpg not successful: ' . $v['Filename'] . '. Error: ' . $e->getMessage()];
+                            }
+                        } else {
+                            $imagick = new Imagick($newFile);
+                            $jpgFile = pathinfo($newFile, PATHINFO_DIRNAME) . '/' . pathinfo($newFile, PATHINFO_FILENAME) . '.jpg';
+
+                            try {
+                                $imagick->setImageFormat('jpg');
+                                $imagick->writeImage($jpgFile);
+                            } catch(Exception $e) {
+                                return ['message' => 'Image conversion to jpg using Imagick not successful: ' . $v['Filename']];
+                            }
+                        }
+
+                    }
+
+
+                }
+
+                return ['message' => 'Import sucessful', 'items' => $items_count];
+
+        }
+
+        // --------------------------------------------------------------------------------
+
+    }
 
 }

@@ -3,10 +3,6 @@
     "label":"Media",
     "order": "!date",
     "layout":{"type":"grid"},
-    "buttons_page":
-    [
-        {"label":"Refresh","plugin":"refresh","type":"serdelia","admin":true}
-    ],
     "fields" :
     [
         { "label" : "Modyfikacja", "field": "date", "type": "date", "list": "read" },
@@ -18,12 +14,13 @@
         {"field":"alt"},
         {"field":"vimeo"},
         {"field":"vimeo_sources"},
-        {"field":"uid","type":"uid", "list": "read"},
+        {"field":"uid","type":"uid"},
         {   
             "type": "image",
             "field":"image",
             "folder": "/public/upload/media",
-            "folder_preview": "mobile",
+            "folder_audio": "/public/upload/media/audio",
+            "folder_video": "/public/upload/media/video",
 
             "list":{"position_after":"","height":120,"layout":"cover","src_blank":"blank.png"},
             "images":
