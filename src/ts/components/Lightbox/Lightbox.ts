@@ -15,6 +15,7 @@ export class Lightbox {
     private currentPath: string;
 
     private animating: boolean;
+    private controller: AbortController;
 
     constructor() {
         this.view = document.getElementById('lightbox');
@@ -29,6 +30,7 @@ export class Lightbox {
 
     public async load(payload?: Object): Promise<LightboxData> {
         this.view.classList.add('is-fetching');
+        this.controller = new AbortController();
 
         const isWorkspace = window.location.pathname.indexOf('/workspace/') >= 0;
         // const url = isWorkspace ? this.settings.api[type] : window.location.href + window.location.search;
@@ -39,12 +41,17 @@ export class Lightbox {
         try {
             const response = await fetch(url, {
                 method: 'POST',
+                signal: this.controller?.signal,
                 body: new URLSearchParams(payload as any),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Elder-Api': 'true',
+                },
             });
 
             const data = await response.json();
             this.view.classList.remove('is-fetching');
+            this.controller = null;
 
             return data;
 
@@ -163,6 +170,7 @@ export class Lightbox {
 
 
     private hide(fast?: boolean): Promise<void> {
+        this.controller?.abort();
         return new Promise<void>((resolve, reject) => {
             if (this.animating) {
                 reject();
@@ -214,7 +222,7 @@ export class Lightbox {
 
 
     private matchPathnamePattern(): boolean {
-        return /^\/(workspace\/lightbox|lightbox)\/[a-z0-9-]/gmi
+        return /^\/(workspace\/lightbox|interviews)\/[a-z0-9-]/gmi
             .test(window.location.pathname + window.location.search);
     }
 
