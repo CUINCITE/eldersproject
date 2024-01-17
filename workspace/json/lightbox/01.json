@@ -5,13 +5,12 @@
     "illu": {
         "desktop": "/workspace/images/lightbox-illu.png"
     },
-    "mainImage": {
-        "type": "polaroid",
-        "image": {
+    "images": [
+        {
             "desktop": "https://assets.huncwot.net/wip/R-etnografia-G-wikimedia2.jpg",
             "mobile": "https://assets.huncwot.net/wip/R-etnografia-G-wikimedia2.jpg"
         }
-    },
+    ],
     "title": "Joan Benoit",
     "description": "Dedicated teacher, long-time Albuquerque resident",
     "collection": "Natalie Diaz Collection",

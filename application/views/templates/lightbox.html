@@ -63,25 +63,25 @@
             <div class="lightbox__main-bg">
                 <div class="lightbox__darken"></div>
             </div>
-            {% if slider %}
+            {% if images %}
+                {% if images|length > 1 %}
+                <!-- slider -->
                 <div class="lightbox__slider slider" data-component="LightboxSlider">
                     <div class="slider__wrap js-slider-wrap">
                         <div class="slider__slides">
-                            {% for item in slider %}
+                            {% for item in images %}
                             <div class="lightbox__slide js-slide">
-                                {% if item.image %}
-                                    <!-- components/c_polaroid -->
-                                    <div class="lightbox__slide-image polaroid">
-                                        <figure class="polaroid__image">
-                                            <!-- subview_picture -->
-                                            <picture>
-                                                <source media="(max-width: 1023px)" srcset="{{item.image.desktop}}">
-                                                <source media="(min-width: 1024px)" srcset="{{item.image.mobile}}">
-                                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
-                                            </picture>
-                                        </figure>
-                                    </div>
-                                {% endif %}
+                                <!-- components/c_polaroid -->
+                                <div class="lightbox__slide-image polaroid">
+                                    <figure class="polaroid__image">
+                                        <!-- subview_picture -->
+                                        <picture>
+                                            <source media="(max-width: 1023px)" srcset="{{item.desktop}}">
+                                            <source media="(min-width: 1024px)" srcset="{{item.mobile}}">
+                                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                                        </picture>
+                                    </figure>
+                                </div>
                             </div>
                         {% endfor %}
                         </div>
@@ -94,33 +94,37 @@
                         </div>
                     </div>
                 </div>
+                <!-- slider -->
+                {% else %}
+                <!-- single photo -->
+                {% set image = images[0] %}
+                <div class="lightbox__image lightbox__image--polaroid">
+                    <!-- components/c_polaroid -->
+                    <div class="polaroid polaroid--horizontal">
+                        <figure class="polaroid__image">
+                            <!-- subview_picture -->
+                            <picture>
+                                <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
+                                <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
+                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                            </picture>
+                        </figure>
+                    </div>
+                </div>
+                <!-- single photo -->
+                {% endif %}
             {% endif %}
+            <!-- cover's part when no images -->
             {% if mainImage %}
                 {% set image = mainImage.image %}
-                {% if mainImage.type == 'polaroid' %}
-                    <div class="lightbox__image lightbox__image--polaroid">
-                        <!-- components/c_polaroid -->
-                        <div class="polaroid {% if mainImage.horizontal %} polaroid--horizontal {% endif %}">
-                            <figure class="polaroid__image">
-                                <!-- subview_picture -->
-                                <picture>
-                                    <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
-                                    <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
-                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
-                                </picture>
-                            </figure>
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="lightbox__image">
-                        <!-- subview_picture -->
-                        <picture>
-                            <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
-                            <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
-                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
-                        </picture>
-                    </div>
-                {% endif %}
+                <div class="lightbox__image">
+                    <!-- subview_picture -->
+                    <picture>
+                        <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
+                        <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
+                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                    </picture>
+                </div>
             {% endif %}
             {% if caption %}<div class="lightbox__caption">{{caption}}</div>{% endif %}
         </div>
