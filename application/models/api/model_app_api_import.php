@@ -501,7 +501,7 @@ class model_app_api_import
 
                     // remove old items
                     if (!empty($interview['media'])) {
-                        foreach ($interview['media'] as $k => $media_item) {
+                        foreach ($interview['media'] as $k2 => $media_item) {
 
                             if (!empty($media_item['id']) && is_numeric($media_item['id'])) {
                                 $this->parent->deleteJsonModel('media', ['id' => $media_item['id']]);
@@ -512,7 +512,7 @@ class model_app_api_import
                             }
 
 
-                            foreach ($media_item['image'] as $k2 => $image_size) {
+                            foreach ($media_item['image'] as $k3 => $image_size) {
                                 $file = $_SERVER['DOCUMENT_ROOT'] . $image_size;
                                 $file = parse_url($file, PHP_URL_PATH);
                                 if (is_file($file)) {

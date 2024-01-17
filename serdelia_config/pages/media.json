@@ -18,7 +18,7 @@
         {"field":"alt"},
         {"field":"vimeo"},
         {"field":"vimeo_sources"},
-        {"field":"uid","type":"uid"},
+        {"field":"uid","type":"uid", "list": "read"},
         {   
             "type": "image",
             "field":"image",
