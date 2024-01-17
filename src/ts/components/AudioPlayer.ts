@@ -1,6 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
 import { easing } from '../Site';
-import { Video } from './Video';
+import { Video } from './Player/Video';
 
 
 export class AudioPlayerStatesText {
@@ -28,8 +28,8 @@ export class AudioPlayer extends Video {
 
         AudioPlayer.instance = this;
 
-        this.controls.thumbnail = this.view.querySelector('.player__thumbnail');
-        this.controls.minimize = this.view.querySelector('.player__minimize');
+        this.ui.thumbnail = this.view.querySelector('.player__thumbnail');
+        this.ui.minimize = this.view.querySelector('.player__minimize');
         this.audioTitle = this.view.querySelector('.player__title');
         this.cassetteTitle = this.view.querySelector('.player__marquee');
 
@@ -53,8 +53,8 @@ export class AudioPlayer extends Video {
 
 
     private bindAudioPlayer = (): void => {
-        this.controls.thumbnail && this.controls.thumbnail.addEventListener('click', this.onThumbnailClick);
-        this.controls.minimize && this.controls.minimize.addEventListener('click', this.onMinimizeClick);
+        this.ui.thumbnail && this.ui.thumbnail.addEventListener('click', this.onThumbnailClick);
+        this.ui.minimize && this.ui.minimize.addEventListener('click', this.onMinimizeClick);
     };
 
 
@@ -71,7 +71,7 @@ export class AudioPlayer extends Video {
 
 
     private minimize = (): void => {
-        gsap.to(this.controls.playerBar, {
+        gsap.to(this.ui.playerBar, {
             yPercent: 0,
             duration: 0.7,
             ease: easing,
@@ -85,7 +85,7 @@ export class AudioPlayer extends Video {
 
 
     private expand = (): void => {
-        gsap.to(this.controls.playerBar, {
+        gsap.to(this.ui.playerBar, {
             yPercent: -100,
             duration: 0.7,
             ease: easing,

@@ -258,14 +258,6 @@ export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
-export function parseToTime(sec: number): string {
-    const totalSec = parseInt(`${sec}`, 10);
-    const hours = parseInt(`${totalSec / 3600}`, 10) % 24;
-    const minutes = parseInt(`${totalSec / 60}`, 10) % 60;
-    const seconds = totalSec % 60;
-
-    return `${(hours < 10 ? `0${hours}` : hours)}:${(minutes < 10 ? `0${minutes}` : minutes)}:${seconds < 10 ? `0${seconds}` : seconds}`;
-}
 
 export function normalizeUrl(url: string): string {
     return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
@@ -320,4 +312,19 @@ export function removeTags(str) {
     // the input string. Replacing the identified
     // HTML tag with a null string.
     return str.replace(/(<([^>]+)>)/ig, '');
+}
+
+
+
+export function setStorageItem(key: string, value: string): void {
+    try {
+        localStorage.setItem(key, value);
+    } catch (error) {
+        console.warn(error);
+    }
+}
+
+
+export function getStorageItem(key: string): string {
+    return localStorage.getItem(key);
 }

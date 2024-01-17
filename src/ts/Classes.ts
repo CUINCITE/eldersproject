@@ -7,8 +7,8 @@ import { Modal } from './components/Modal';
 import { More } from './components/More';
 import { Accordeon } from './components/Accordeon';
 import { AccordeonList } from './components/AccordeonList';
-import { Player } from './components/Player';
-import { Video } from './components/Video';
+import { Player } from './components/Player/Player';
+import { Video } from './components/Player/Video';
 
 export const components = {
     Accordeon,

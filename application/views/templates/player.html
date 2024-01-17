@@ -1,31 +1,31 @@
-<div class="player__poster"></div>
-<div class="player__bar">{% spaceless %}
+<div class="player__poster js-player-poster"></div>
+<div class="player__bar js-player-bar">{% spaceless %}
     <div class="player__header">
         <div class="player__title">Patricia Welch</div>
         <div class="player__scrubber-wrap">
-            <div class="player__scrubber">
-                <div class="player__loaded"></div>
-                <div class="player__progress"></div>
+            <div class="player__scrubber js-player-timeline">
+                <div class="player__loaded js-player-loaded"></div>
+                <div class="player__progress js-player-progress"></div>
             </div>
         </div>
     </div>
     <div class="player__controls">
         <div class="player__time">
-            <em class="player__played">00:00:00</em>
+            <span class="player__played js-player-time">00:00:00</span>
             <a class="player__more" href="/workspace/lightbox/01">View more [[svg::arrow-player-small]]</a>
         </div>
         <div class="player__buttons">
             <button class="player__rewind">[[svg::rewind]]<span>15</span></button>
             <button class="player__prev">[[svg::prevnext]]</button>
-            <button class="player__playpause">[[svg::play]]</button>
+            <button class="player__playpause js-player-playpause">[[svg::play]]</button>
             <button class="player__next">[[svg::prevnext]]</button>
             <button class="player__forward">[[svg::rewind]]<span>15</span></button>
         </div>
-        <div class="player__volume volume">
+        <div class="player__volume volume js-player-volume">
             <button class="player__minimize">[[svg::arrow-oblique]] Minimize</button>
-            <button class="volume__button" aria-label="Volume"><i class="icon-volume"><span></span><span></span><span></span><span></span><span></span></i></button>
+            <button class="volume__button js-volume-btn" aria-label="Volume"><i class="icon-volume"><span></span><span></span><span></span><span></span><span></span></i></button>
         </div>
-        <div class="player__full">
+        <div class="player__full js-player-fullscreen">
             <button aria-label="Fullscreen">
                 <i class="icon-full"><span></span><span></span><span></span><span></span></i>
             </button>

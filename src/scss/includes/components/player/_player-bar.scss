@@ -228,7 +228,8 @@
             top: 50%;
             height: $scrubber-height;
             width: 0%;
-            transition: all $time-fast linear;
+
+            // transition: all $time-fast linear;
             transform: translate(0, -#{$scrubber-height * 0.5});
         }
     }
