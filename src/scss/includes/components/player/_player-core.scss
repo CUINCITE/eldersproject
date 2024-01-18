@@ -28,6 +28,8 @@
 
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
+
+            z-index: 3;
         }
 
         audio { display: none; }
