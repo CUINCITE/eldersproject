@@ -260,7 +260,11 @@ export function isEmpty(obj) {
 
 
 export function normalizeUrl(url: string): string {
-    return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
+    // without search query parameter - needed for reloading search results' page with different query
+    return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '')}`;
+
+    // old version - let's leave it just in case
+    // return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
 }
 
 
