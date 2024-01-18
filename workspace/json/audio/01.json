@@ -1,9 +1,13 @@
 {
-    "id": 1,
+    "id": "1",
     "title": "Patricia Welch",
-    "src": "http://assets.huncwot.net/audio.mp3",
-    "duration": "00:00:00",
-    "nextId": 2,
-    "prevId": 2,
-    "interviewUrl": "/workspace/lightbox/01"
+    "src": [
+        {
+            "src": "http://assets.huncwot.net/audio.mp3",
+            "duration": "00:00:00"
+        }
+    ],
+    "nextId": "2",
+    "prevId": "2",
+    "urlInterview": "/workspace/lightbox/01"
 }

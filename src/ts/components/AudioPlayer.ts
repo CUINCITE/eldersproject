@@ -9,15 +9,17 @@ export class AudioPlayerStatesText {
     public static PAUSED = 'Play interview';
 }
 
-
-export interface IAudioPlayerResponse {
-    id: number;
+export interface IAudioPlayerMedia {
     src: string;
+    duration: string;
+}
+export interface IAudioPlayerResponse {
+    id: string;
+    src: IAudioPlayerMedia[];
     title: string;
-    interviewUrl: string;
-    nextId?: number;
-    prevId?: number;
-    duration?: number;
+    urlInterview: string;
+    nextId?: string;
+    prevId?: string;
 }
 
 
@@ -41,7 +43,7 @@ export class AudioPlayer extends Video {
     private isExpanded = false;
     private cassetteTitle: HTMLElement;
     private apiUrl: string;
-    private currentAudioId: number;
+    private currentAudioId: string;
     private elements: IAudioPlayerResponseElements;
 
     constructor(protected view: HTMLElement) {
@@ -173,11 +175,12 @@ export class AudioPlayer extends Video {
 
     private updatePlayer = (data: IAudioPlayerResponse): void => {
         this.currentAudioId = data.id;
-        this.media.src = data.src;
+        // TO DO - add multiple sources
+        this.media.src = data.src[0].src;
         this.elements.title.innerText = data.title;
-        this.elements.urlLink.href = data.interviewUrl;
-        this.elements.nextBtn.dataset.nextId = data.nextId.toString() || '';
-        this.elements.prevBtn.dataset.prevId = data.prevId.toString() || '';
+        this.elements.urlLink.href = data.urlInterview;
+        this.elements.nextBtn.dataset.nextId = data.nextId?.toString() || '';
+        this.elements.prevBtn.dataset.prevId = data.prevId?.toString() || '';
     };
 
 
@@ -188,7 +191,7 @@ export class AudioPlayer extends Video {
         // url for workspace handles the id differently - adding .json at the end for local reading json file
         const url = isWorkspace
             ? `${this.apiUrl}${id ? `0${id}` : '01'}.json`
-            : `${this.apiUrl}${id || ''}`;
+            : `${this.apiUrl}${id ? `?id=${id}` : ''}`;
         try {
             const response = await fetch(url, {
                 method: 'POST',
