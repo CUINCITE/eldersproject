@@ -36,7 +36,6 @@ class model_app_api_interview
         //mementos
         $media = [];
         if (!empty($item['media'])) {
-            $media = [];
             foreach ($item['media'] as $k=>$media_item) {
                 if (!empty($media_item['image'])) $media[] = $media_item['image'];
             }
