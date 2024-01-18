@@ -32,6 +32,7 @@ class model_app_api_interview
         $collectionImage = !empty($item['interviewers'][0]['image']) ? $item['interviewers'][0]['image'] : [];
 
         //mementos
+        $media = [];
         if (!empty($item['media'])) {
             $media = [];
             foreach ($item['media'] as $k=>$media_item) {
@@ -39,7 +40,17 @@ class model_app_api_interview
             }
         }
 
-        if (empty($media)) $media[] = ['desktop' => '/src/images/lightbox-fresh.png'];
+        // if no mementos, display placeholder main image
+        $mainImage = false;
+        if (empty($media)) {
+            $mainImage = [
+                'type' => '',
+                'image' => [
+                    'desktop' => '/src/images/lightbox-fresh.png',
+                    'mobile' => '/src/images/lightbox-fresh.png'
+                ]
+            ];
+        }
 
         // tags
         $tags = [];
@@ -49,20 +60,20 @@ class model_app_api_interview
             }
         }
 
-
+        // transcripts
         $transcript = [
             'english' => $this->formatTranscript($sessions[0]['transcript_tags']),
             'spanish' => $this->formatTranscript($sessions[0]['transcript_tags'])
         ];
 
-        // biograms
+        // bios
         $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
         $label = (count($interview_info) > 1) ? 'Narrators bios' : 'Narrator bio';
 
         $interview_info[] = "<h3>Interview Summary</h3><p>{$item['summary']}</p>";
         $interview_info = "<h3>{$label}</h3>" . implode('', $interview_info);
 
-
+        // aggregate data
         $data = [
             'id' => $item['id'],
             'url' => ['type' => 'interview', 'slug' => $item['slug']],
@@ -94,6 +105,11 @@ class model_app_api_interview
                 ]
             ]
         ];
+
+        if ($mainImage) {
+            unset($data['images']);
+            $data['mainImage'] = $mainImage;
+        }
 
         return $data;
     }
