@@ -44,9 +44,11 @@
             "auto": {
                 "pattern": "{{first_name}} {{last_name}}"
             }
-        },        
+        },
         {
-            "field":"color","label":"color"
+            "label": "Collection Theme (color)",
+            "field": "color",
+            "type": "select"
         },
         {
             "label": "Interviews Amount",
