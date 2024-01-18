@@ -92,7 +92,7 @@ export abstract class Player extends Component {
             height: 270,
             size: PlayerSize.AUTO,
             readyTime: 0.001,
-            hotkeys: true,
+            hotkeys: false,
             pauseOnScroll: false,
             ...JSON.parse(view.dataset.options || '{}'),
             ...options,

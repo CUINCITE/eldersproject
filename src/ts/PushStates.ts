@@ -10,11 +10,15 @@ export class PushStatesEvents {
 
 
 export class PushStates extends Handler {
+
+
+
     // eslint-disable-next-line no-use-before-define
     public static instance: PushStates;
     public static readonly TIME_LIMIT = 10000;
     private static initialHistoryLength: number;
     private static noChange = false;
+
 
 
     /** change document title */
@@ -24,6 +28,7 @@ export class PushStates extends Handler {
 
         document.title = title || dataTitle.dataset.title;
     }
+
 
 
     /** change loaction pathname and trigger History */
@@ -43,6 +48,7 @@ export class PushStates extends Handler {
     }
 
 
+
     /** only change loaction pathname without triggering History */
     public static changePath(location: string, replace?: boolean, title?: string): void {
         PushStates.noChange = true;
@@ -55,6 +61,7 @@ export class PushStates extends Handler {
     }
 
 
+
     /** bind links to be used with PushStates / History */
     public static bind(target?: Element, elementItself?: boolean): void {
         if (!elementItself) {
@@ -63,6 +70,7 @@ export class PushStates extends Handler {
             PushStates.instance.bindLink(target as Element);
         }
     }
+
 
 
     /**
@@ -82,15 +90,18 @@ export class PushStates extends Handler {
     }
 
 
+
     public static reload(): void {
         PushStates.instance.trigger(PushStatesEvents.CHANGE);
     }
 
 
+
     private loadedData: string;
     private request: XMLHttpRequest;
     private timeout: ReturnType<typeof setTimeout>;
-    private currentPathname: string;
+    private currentUrl: string;
+
 
 
     constructor() {
@@ -109,7 +120,7 @@ export class PushStates extends Handler {
 
         PushStates.instance = this;
         PushStates.initialHistoryLength = window.history.length;
-        this.currentPathname = normalizeUrl(window.location.pathname);
+        this.currentUrl = normalizeUrl(window.location.pathname + window.location.search);
 
         this.setActiveLinks();
     }
@@ -150,7 +161,7 @@ export class PushStates extends Handler {
             this.request.onload = () => {
                 if (this.request.status === 200) {
                     this.loadedData = this.request.responseText;
-                    this.currentPathname = normalizeUrl(pathname);
+                    this.currentUrl = normalizeUrl(url);
 
                     this.trigger(PushStatesEvents.PROGRESS, 1);
                     resolve();
@@ -190,15 +201,7 @@ export class PushStates extends Handler {
      * tells if rendered html match current pathname
      */
     public isRendered(pathname?: string): boolean {
-        return this.currentPathname === normalizeUrl(pathname || window.location.pathname);
-    }
-
-
-    public static dupa(): void {
-        const gohno = {
-            pudfw: 'costam',
-            fdwhio: 'foo',
-        };
+        return this.currentUrl === normalizeUrl(pathname || window.location.pathname + window.location.search);
     }
 
 
@@ -236,7 +239,9 @@ export class PushStates extends Handler {
     }
 
 
+
     private renderElement(el: HTMLElement, data: string, forcePlain?: boolean): boolean {
+
         let code: string = null;
 
         if (!el.id) { console.warn('Rendered element must have an `id` attribute!'); return false; }
@@ -269,6 +274,7 @@ export class PushStates extends Handler {
     }
 
 
+
     /** bind links */
     private bindLink(target: Element): void {
         target.removeEventListener('click', this.onClick);
@@ -276,18 +282,20 @@ export class PushStates extends Handler {
     }
 
 
+
     /** bind links */
     private bindLinks(target?: Element): void {
         const t = target ?? document.body;
 
         // eslint-disable-next-line max-len
-        const links = t.querySelectorAll('a:not([data-history="false"]):not([data-api]):not([download]):not([data-modal]):not([href^="#"]):not([href$=".jpg"]):not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([data-poczta]):not([data-login]):not([data-lang])');
+        const links = t.querySelectorAll('a:not([data-history="false"]):not([data-component="More"]):not([data-api]):not([download]):not([data-modal]):not([href^="#"]):not([href$=".jpg"]):not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([data-poczta]):not([data-login]):not([data-lang])');
 
         links.forEach(el => {
             el.removeEventListener('click', this.onClick);
             el.addEventListener('click', this.onClick);
         });
     }
+
 
 
     /** links click handler */
@@ -311,6 +319,7 @@ export class PushStates extends Handler {
     };
 
 
+
     /** `statechange` event handler */
     private onState = (): void => {
         this.setActiveLinks();
@@ -321,12 +330,18 @@ export class PushStates extends Handler {
     };
 
 
+
     /** mark links as active */
     private setActiveLinks(): void {
         [...document.querySelectorAll('a[href]')].map(el => el.classList.remove('is-active'));
 
-        if (document.querySelector(`a[href="${window.location.pathname}"]`)) {
-            document.querySelector(`a[href="${window.location.pathname}"]`).classList.add('is-active');
-        }
+        [...document.querySelectorAll(`a[href^="${window.location.pathname}"]`)]
+            .forEach(el => el.classList.add('is-active'));
+
+        const path = `/${window.location.pathname.split('/')[1]}`;
+        [...document.querySelectorAll(`.nav a[href^="${path}"]`)]
+            .forEach(el => {
+                (el as HTMLAnchorElement)?.href !== '/' && el.classList.add('is-active');
+            });
     }
 }
