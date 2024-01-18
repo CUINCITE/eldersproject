@@ -16,6 +16,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
     @include breakpoint(not-desktop) {
         padding: 0;
+        height: 100vh;
         height: 100lvh;
     }
 
@@ -32,7 +33,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
         @include breakpoint(not-desktop) {
-            @include flex(column, flex-end, flex-start);
+            @include flex(column, flex-start, flex-start);
 
             height: var(--app-height);
             text-align: left;
@@ -176,7 +177,9 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
         @include breakpoint(not-desktop) {
-            @include flex(column, flex-start, flex-start);
+            @include flex(column, flex-end, flex-start);
+ 
+            flex-grow: 1;
 
             @include breakpoint(tablet) {
                 @include font-size(20, 1.1);

@@ -26,6 +26,9 @@
         pointer-events: none;
         cursor: default;
 
+        @include breakpoint(not-desktop) {
+            @include menuShiftedElement;
+        }
 
         audio { display: none; }
     }

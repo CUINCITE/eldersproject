@@ -16,24 +16,59 @@
     &__list {
         @include flex(column, flex-start, stretch);
 
-        // background: var(--color-bg);
-
-        // overflow: hidden;
         position: relative;
-        padding-left: 1px;
+
+        // background: var(--color-bg);
+        // overflow: hidden;
+
+        @include breakpoint(desktop) {
+            padding-left: 1px;
+        }
+
+        @include breakpoint(not-desktop) {
+            overflow-y: auto;
+
+            @include breakpoint(tablet) {
+                height: calc(100vh - #{rem(102)});
+            }
+    
+            @include breakpoint(phone) {
+                height: calc(100vh - #{rem(54)});
+            }
+        }
     }
 
 
 
     &__category {
         @include font-family(normal, 400);
-        @include font-size(14, 15);
 
-        padding-bottom: rem(8);
+        @include breakpoint(desktop) {
+            @include font-size(14, 15);
+
+            padding-bottom: rem(8);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(14);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(11);
+        }
+
 
 
         .livesearch__item--transcripts & {
-            padding-bottom: rem(11);
+            @include breakpoint(desktop) {
+                padding-bottom: rem(11);
+            }
         }
     }
 
@@ -41,61 +76,167 @@
 
     &__item {
         background-color: var(--color-box);
-        padding: rem(12) rem(14) rem(47);
         border: 1px solid var(--color-bg);
         border-bottom: none;
         border-right: none;
 
+        @include breakpoint(desktop) {
+            padding: rem(12) rem(14) rem(47);
+        }
+
         @include breakpoint(tablet) {
-            padding-left: map-get($grid-offset, tablet);
+            padding: rem(12) map-get($grid-offset, tablet) rem(68);
+        }
+
+        @include breakpoint(phone) {
+            padding: rem(13) map-get($grid-offset, phone) rem(48);
         }
 
 
-        &:first-of-type { padding-bottom: rem(37); }
+        &:first-of-type { 
+            @include breakpoint(desktop) {
+                padding-bottom: rem(37); 
+            }
+        }
 
 
 
         ul {
             li {
-                @include font-size(30, 28);
-                @include letter-spacing(-0.9, 30);
+                @include breakpoint(desktop) {
+                    @include font-size(30, 28);
+                    @include letter-spacing(-0.9, 30);
+                }
+
+                @include breakpoint(tablet) {
+                    @include font-size(50, 1);
+                    @include letter-spacing(-1.5, 50);
+
+                    margin-block: trim-font(1);
+                }
 
                 @include breakpoint(phone) {
-                    @include font-size(16, 1);
+                    @include font-size(30, 1);
+                    @include letter-spacing(-0.9, 30);
+
+                    margin-block: trim-font(1);
+                }
+
+                p {
+                    @include breakpoint(not-desktop) {
+                        display: inline-block;
+                        margin-block: trim-font(1) !important;
+
+                        @include breakpoint(tablet) {
+                            padding-bottom: rem(14);
+                        }
+        
+                        @include breakpoint(phone) {
+                            padding-bottom: rem(10);
+                        }
+                    }
+                }
+            }
+
+            li + li {
+                @include breakpoint(tablet) {
+                    margin-top: rem(9);
+                }
+
+                @include breakpoint(phone) {
+                    margin-top: rem(6);
                 }
             }
         }
 
 
         &--transcripts {
+            
+            @include breakpoint(not-desktop) {
+                flex-grow: 1;
+            }
+
             ul {
                 li + li {
-                    margin-top: rem(25);
+                    @include breakpoint(desktop) {
+                        margin-top: rem(25);
+                    }
+                    
+                    @include breakpoint(tablet) {
+                        margin-top: rem(30);
+                    }
+
+                    @include breakpoint(phone) {
+                        margin-top: rem(17);
+                    }
                 }
 
                 p {
-                    @include font-size(30, 28);
-                    margin-bottom: rem(6);
-                    display: inline-block;
-                }
+                    @include breakpoint(desktop) {
+                        @include font-size(30, 28);
+
+                        margin-bottom: rem(6);
+                        display: inline-block;
+                    }
+                } 
             }
         }
 
 
         &--empty {
-            @include font-size(30, 1);
-            @include letter-spacing(-0.9, 30);
 
-            min-height: vw(128);
+            @include breakpoint(desktop) {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+    
+                min-height: vw(128);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1.5, 50);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+            }
+
+
 
             p:last-of-type {
                 @include font-family(normal);
-                @include font-size(14, 18);
 
                 letter-spacing: normal;
                 text-transform: none;
-                margin-top: rem(8);
+
+                @include breakpoint(desktop) {
+                    @include font-size(14, 18);
+                
+                    margin-top: rem(8);
+                }
+
+                @include breakpoint(tablet) {
+                    @include font-size(20, 1);
+
+                    margin-top: rem(16);
+                }
+
+                @include breakpoint(phone) {
+                    @include font-size(14, 18);
+                
+                    margin-top: rem(12);
+                }
             }
+
+            @include breakpoint(not-desktop) {
+                color: $background-light-offwhite;
+                background-color: var(--color-black);
+                border: unset;
+                border-top: 1px solid $color-bg;
+                flex-grow: 1;
+            }
+
         }
     }
 
@@ -103,13 +244,23 @@
 
     &__fragment {
         @include font-family(normal);
-        @include font-size(14, 18);
-
+        
         text-transform: none;
         display: block;
         transition: background-color .3s $easing;
         letter-spacing: normal;
 
+        @include breakpoint(desktop) {
+            @include font-size(14, 18);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 24);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 18.9);
+        }
 
         @include hover {
             background-color: $color-white;
@@ -139,6 +290,7 @@
 
     &__noresults-info {
         @include font-size(13, 18);
+
         margin-bottom: rem(12);
         margin-top: rem(4);
 
