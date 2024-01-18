@@ -61,9 +61,14 @@ class model_app_api_interview
         }
 
         // transcripts
+        $raw_transcripts = [];
+        foreach ($sessions as $k=>$session) {
+            $raw_transcripts[] = $session['transcript_tags'];
+        }
+
         $transcript = [
-            'english' => $this->formatTranscript($sessions[0]['transcript_tags']),
-            'spanish' => $this->formatTranscript($sessions[0]['transcript_tags'])
+            'english' => $this->formatMultipleTranscripts($raw_transcripts),
+//            'spanish' => $this->formatTranscript($sessions)
         ];
 
         // bios
@@ -198,6 +203,49 @@ class model_app_api_interview
                 $text = "<strong>{$name}:</strong> " . $matches[4];
                 $result[] = [$total_seconds, $text];
             }
+        }
+
+        return $result;
+    }
+
+    private function formatMultipleTranscripts($raw_transcripts)
+    {
+        // Cumulative seconds of all previous transcripts
+        $timeOffset = 0;
+        $result = [];
+
+        foreach ($raw_transcripts as $raw_transcript)
+        {
+            $lines = explode("\n", $raw_transcript);
+            $max_transcript_seconds = 0;
+
+            foreach ($lines as $line)
+            {
+                preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s]*:)?)(.*)/", $line, $matches);
+
+                if (isset($matches[1], $matches[2], $matches[4]))
+                {
+                    $time = explode(':', $matches[2]);
+                    $transcript_seconds = count($time) == 3
+                        ? intval($time[0]) * 3600 + intval($time[1]) * 60 + intval($time[2])
+                        : intval($time[0]) * 60 + intval($time[1]);
+
+                    // Detect the highest timestamp within the transcript
+                    if ($transcript_seconds > $max_transcript_seconds) {
+                        $max_transcript_seconds = $transcript_seconds;
+                    }
+
+                    // Add the timestamp of the previous transcript(s) to the current one
+                    $total_seconds = $transcript_seconds + $timeOffset;
+
+                    $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? "Question" : "Answer");
+                    $text = "<strong>{$name}:</strong> " . $matches[4];
+                    $result[] = [$total_seconds, $text];
+                }
+            }
+
+            // Update the time offset for the next transcript
+            $timeOffset += $max_transcript_seconds;
         }
 
         return $result;
