@@ -39,13 +39,16 @@ class model_app_api_interview
             }
         }
 
-        if (empty($media)) $media[] = ['desktop' => '/workspace/src/images/lightbox-fresh.png'];
+        if (empty($media)) $media[] = ['desktop' => '/src/images/lightbox-fresh.png'];
 
         // tags
         $tags = [];
-        foreach ($item['topics'] as $k => $v) {
-            $tags[] = $v['label'];
+        if (!empty($item['topics'])) {
+            foreach ($item['topics'] as $k => $v) {
+                $tags[] = $v['label'];
+            }
         }
+
 
         $transcript = [
             'english' => $this->formatTranscript($sessions[0]['transcript_tags']),
