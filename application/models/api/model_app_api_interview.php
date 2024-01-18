@@ -64,7 +64,7 @@ class model_app_api_interview
             'id' => $item['id'],
             'url' => ['type' => 'interview', 'slug' => $item['slug']],
             'urlBack' => ['type' => 'interviews'],
-            'modifier' => !empty($item['modifier']) ? $item['modifier'] : 'purple',
+            'modifier' => !empty($item['interviewers'][0]['color']) ? $item['interviewers'][0]['color'] : '',
             'collectionImage' => $collectionImage,
             'images' => $media,
             'title' => $item['label'],
