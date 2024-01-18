@@ -72,6 +72,8 @@ export abstract class Player extends Component {
         thumbnail?: HTMLElement;
         minimize?: HTMLElement;
         playerBar?: HTMLElement;
+        rewindBtn?: HTMLElement;
+        forwardBtn?: HTMLElement;
     };
 
 
@@ -127,6 +129,8 @@ export abstract class Player extends Component {
     public abstract volumeDown(): void;
     public abstract speedUp(): void;
     public abstract speedDown(): void;
+    public abstract goRewind(): void;
+    public abstract goForward(): void;
 
     protected abstract isPaused(): boolean;
     protected abstract setup(): void;
@@ -201,6 +205,8 @@ export abstract class Player extends Component {
             playPauseBtn: this.view.querySelector('.js-player-playpause'),
             toggleBtn: this.view.querySelector('.js-player-toggle'),
             playerBar: this.view.querySelector('.js-player-bar'),
+            rewindBtn: this.view.querySelector('.js-player-rewind'),
+            forwardBtn: this.view.querySelector('.js-player-forward'),
         };
 
         this.view.classList.toggle('has-autoplay', this.settings.autoplay);
@@ -228,6 +234,9 @@ export abstract class Player extends Component {
         this.ui.playPauseBtn?.addEventListener('click', this.onToggleClick);
         this.ui.toggleBtn?.addEventListener('click', this.onToggleClick);
         this.ui.toggleBtn?.addEventListener('dblclick', this.onDoubleClick);
+
+        this.ui.rewindBtn?.addEventListener('click', () => this.goRewind());
+        this.ui.forwardBtn?.addEventListener('click', () => this.goForward());
 
         !!this.settings.hotkeys && document.addEventListener('keydown', this.onKeyDown);
 

@@ -161,6 +161,18 @@ export class Video extends Player {
 
 
 
+    public goRewind(): void {
+        this.media.currentTime -= 15;
+    }
+
+
+
+    public goForward(): void {
+        this.media.currentTime += 15;
+    }
+
+
+
     public end(): void {
         this.seek(1);
         this.pause();
