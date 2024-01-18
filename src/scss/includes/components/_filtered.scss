@@ -1,12 +1,23 @@
 .filtered {
     &__list {
         @include flex(row, flex-start, center);
-
+        padding-left: map-get($grid-offset, desktop);
         gap: rem(16);
+        flex-wrap: wrap;
 
+        @include breakpoint(tablet) {
+            padding-inline: map-get($grid-offset, tablet);
+        }
+
+        @include breakpoint(phone) {
+            row-gap: rem(4);
+            column-gap: rem(14);
+            padding-top: rem(12);
+            padding-inline: map-get($grid-offset, phone);
+        }
 
         &:has(li) {
-            margin-bottom: rem(25);
+            padding-bottom: rem(25);
         }
     }
 
@@ -25,6 +36,10 @@
 
             margin-top: rem(12);
             gap: rem(8);
+
+            @include breakpoint(phone) {
+                margin-top: rem(5);
+            }
         }
 
 

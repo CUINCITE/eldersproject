@@ -59,6 +59,10 @@ html {
     align-content: start;
     margin-top: -1px; // box margin-top fix
 
+    @include breakpoint(not-desktop) {
+        z-index: unset;
+    }
+
     // @include breakpoint(not-desktop) {
     //     grid-template-columns: 1fr;
     // }

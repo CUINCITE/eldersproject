@@ -1,5 +1,7 @@
+import { gsap } from 'gsap/dist/gsap';
 import { Component } from './Component';
 import Scroll from '../Scroll';
+
 
 
 export class Modal extends Component {
@@ -8,6 +10,7 @@ export class Modal extends Component {
     private closerBtn: HTMLButtonElement;
     private form: HTMLFormElement;
     private isOpen = false;
+    private tl: gsap.core.Timeline;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -29,6 +32,33 @@ export class Modal extends Component {
 
 
 
+    private createTimeline = (): void => {
+        const wrapper = this.view.querySelector('.js-modal-wrap');
+        const bar: HTMLElement = this.view.querySelector('.js-modal-wrap-bar');
+
+        if (!wrapper) return;
+
+        this.tl = gsap.timeline({
+            ease: 'none',
+            scrollTrigger: {
+                trigger: wrapper,
+                scroller: this.view,
+                invalidateOnRefresh: true,
+                start: () => `top ${bar?.offsetHeight ?? 0}px`,
+                onToggle: self => this.view.classList.toggle('is-scrolled', self.isActive),
+            },
+        });
+    };
+
+
+
+    private cleanupTimeline = (): void => {
+        this.tl.kill();
+        this.view.classList.remove('is-scrolled');
+    };
+
+
+
     private onTriggerClick = (): void => {
         this.isOpen ? this.close() : this.open();
     };
@@ -37,19 +67,24 @@ export class Modal extends Component {
 
     private close = (): void => {
         this.view.classList.remove('is-open');
+        document.body.classList.remove('has-open-modal');
         this.isOpen = false;
+        this.cleanupTimeline();
     };
 
 
 
     private open = (): void => {
         this.view.classList.add('is-open');
+        document.body.classList.add('has-open-modal');
         this.isOpen = true;
+        this.createTimeline();
+
         Scroll.scrollTo({
             el: this.view,
-            duration: 0.75,
+            duration: window.matchMedia('(orientation: landscape)').matches ? 0.75 : 0,
             ease: 'sine.out',
-            offsetY: this.view.parentElement.clientHeight,
+            offsetY: window.matchMedia('(orientation: landscape)').matches ? this.view.parentElement.clientHeight : -1,
         });
     };
 }

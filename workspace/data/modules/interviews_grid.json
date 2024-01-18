@@ -7,6 +7,7 @@
             "url": "/workspace/interview-single",
             "collection": "Natalie Diaz",
             "locations": ["San Francisco, CA", "Oakland, CA"],
+            "modifier": "red",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {
@@ -16,6 +17,7 @@
             "url": "/workspace/interview-single",
             "collection": "Caleb Gayle",
             "locations": ["Houston, TX"],
+            "modifier": "green",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {
@@ -25,6 +27,7 @@
             "url": "/workspace/interview-single",
             "collection": "Eve L. Ewing",
             "locations": ["Los Angeles, CA", "New York, NY"],
+            "modifier": "yellow",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {
@@ -44,6 +47,7 @@
             "url": "/workspace/interview-single",
             "collection": "Natalie Diaz",
             "locations": ["San Francisco, CA", "Oakland, CA"],
+            "modifier": "red",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {
@@ -53,6 +57,7 @@
             "url": "/workspace/interview-single",
             "collection": "Caleb Gayle",
             "locations": ["Houston, TX"],
+            "modifier": "red",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {
@@ -62,6 +67,7 @@
             "url": "/workspace/interview-single",
             "collection": "Eve L. Ewing",
             "locations": ["Los Angeles, CA", "New York, NY"],
+            "modifier": "red",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
         },
         {

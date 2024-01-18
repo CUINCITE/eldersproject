@@ -239,12 +239,10 @@
 
         @include breakpoint(tablet) {
             inset: calc(100% - #{rem(5)}) auto auto 0;
-            z-index: 5;
         }
 
         @include breakpoint(phone) {
             inset: calc(100% - #{rem(3)}) auto auto 0;
-            z-index: 5;
         }
 
         .is-completed & {

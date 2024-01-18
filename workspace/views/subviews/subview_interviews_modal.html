@@ -1,117 +1,216 @@
 <div id="modal" class="interviews-grid__modal modal" data-component="Modal">
-    <button class="modal__close js-modal-close" aria-label="Close filters modal"><i class="icon-close"></i></button>
-    <div class="modal__wrap">
+    <div class="modal__bar js-modal-bar">
+        <button class="modal__close js-modal-close" aria-label="Close filters modal"><i class="icon-close"></i></button>
         <h3 class="modal__title">Filters</h3>
-        <form action="" data-component="Load" data-options='{"contentSelector": "#interviews-grid", "live": false, "extra": ".js-interviews-sort", "filtered": ".js-interviews-filtered", "scrollTo": ".js-interviews-filtered"}' class="modal__form js-interviews-filters">
+    </div>
+
+    <div class="modal__wrap js-modal-wrap">
+        <form action="" data-component="Load" data-options='{"contentSelector": "#interviews-grid", "live": false, "extra": ".js-interviews-sort", "extraMobile": ".js-interviews-sort-mobile", "filtered": ".js-interviews-filtered", "scrollTo": ".js-interviews-filtered"}' class="modal__form js-interviews-filters">
             <div class="modal__grid">
                 <fieldset class="modal__group">
                     <legend>Collections</legend>
-                    <input type="checkbox" name="collections" id="collections-reign" value="april-reign" data-name="April Reign">
-                    <label for="collections-reign"><i class="checkmark">[[svg::checkmark]]</i><span>April Reign</span></label>
-                    <input type="checkbox" name="collections" id="collections-gayle" value="caleb-gayle" data-name="Caleb Gayle">
-                    <label for="collections-gayle"><i class="checkmark">[[svg::checkmark]]</i><span>Caleb Gayle</span></label>
-                    <input type="checkbox" name="collections" id="collections-de-robertis" value="carolina-de-robertis" data-name="Carolina de Robertis">
-                    <label for="collections-de-robertis"><i class="checkmark">[[svg::checkmark]]</i><span>Carolina de Robertis</span></label>
-                    <input type="checkbox" name="collections" id="collections-frohman" value="denise frohman" data-name="Denise Frohman">
-                    <label for="collections-frohman"><i class="checkmark">[[svg::checkmark]]</i><span>Denise Frohman</span></label>
-                    <input type="checkbox" name="collections" id="collections-washington" value="ellery-washington" data-name="Ellery Washington">
-                    <label for="collections-washington"><i class="checkmark">[[svg::checkmark]]</i><span>Ellery Washington</span></label>
-                    <input type="checkbox" name="collections" id="collections-ewing" value="eve-l-ewing" data-name="Eve L.Ewing">
-                    <label for="collections-ewing"><i class="checkmark">[[svg::checkmark]]</i><span>Eve L.Ewing</span></label>
-
+                    <div>
+                        <input type="checkbox" name="collections" id="collections-reign" value="april-reign" data-name="April Reign">
+                        <label for="collections-reign"><i class="checkmark">[[svg::checkmark]]</i><span>April Reign</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="collections" id="collections-gayle" value="caleb-gayle" data-name="Caleb Gayle">
+                        <label for="collections-gayle"><i class="checkmark">[[svg::checkmark]]</i><span>Caleb Gayle</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="collections" id="collections-de-robertis" value="carolina-de-robertis" data-name="Carolina de Robertis">
+                        <label for="collections-de-robertis"><i class="checkmark">[[svg::checkmark]]</i><span>Carolina de Robertis</span></label>
+                    </div>
+                    <div>    
+                        <input type="checkbox" name="collections" id="collections-frohman" value="denise frohman" data-name="Denise Frohman">
+                        <label for="collections-frohman"><i class="checkmark">[[svg::checkmark]]</i><span>Denise Frohman</span></label>
+                    </div>
+                    <div>    
+                        <input type="checkbox" name="collections" id="collections-washington" value="ellery-washington" data-name="Ellery Washington">
+                        <label for="collections-washington"><i class="checkmark">[[svg::checkmark]]</i><span>Ellery Washington</span></label>
+                    </div>
+                    <div>  
+                        <input type="checkbox" name="collections" id="collections-ewing" value="eve-l-ewing" data-name="Eve L.Ewing">
+                        <label for="collections-ewing"><i class="checkmark">[[svg::checkmark]]</i><span>Eve L.Ewing</span></label>
+                    </div>
                 </fieldset>
                 <fieldset class="modal__group modal__group--topics">
                     <legend>Topics</legend>
-                    <input type="checkbox" name="topic" id="topic-1" value="topic-1" data-name="Inclusion">
-                    <label for="topic-1"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-2" value="topic-2" data-name="Queer">
-                    <label for="topic-2"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-3" value="topic-3" data-name="Activism">
-                    <label for="topic-3"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
-                    <input type="checkbox" name="topic" id="topic-4" value="topic-4" data-name="Communnities">
-                    <label for="topic-4"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
-                    <input type="checkbox" name="topic" id="topic-5" value="topic-5" data-name="Inclusion">
-                    <label for="topic-5"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-6" value="topic-6" data-name="Queer">
-                    <label for="topic-6"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-7" value="topic-7" data-name="Inclusion">
-                    <label for="topic-7"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-8" value="topic-8" data-name="Queer">
-                    <label for="topic-8"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-9" value="topic-9" data-name="Activism">
-                    <label for="topic-9"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
-                    <input type="checkbox" name="topic" id="topic-10" value="topic-10" data-name="Communnities">
-                    <label for="topic-10"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
-                    <input type="checkbox" name="topic" id="topic-11" value="topic-11" data-name="Inclusion">
-                    <label for="topic-11"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-12" value="topic-12" data-name="Queer">
-                    <label for="topic-12"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-13" value="topic-13" data-name="Inclusion">
-                    <label for="topic-13"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-14" value="topic-14" data-name="Queer">
-                    <label for="topic-14"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-15" value="topic-15" data-name="Activism">
-                    <label for="topic-15"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
-                    <input type="checkbox" name="topic" id="topic-16" value="topic-16" data-name="Communnities">
-                    <label for="topic-16"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
-                    <input type="checkbox" name="topic" id="topic-17" value="topic-17" data-name="Inclusion">
-                    <label for="topic-17"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-18" value="topic-18" data-name="Queer">
-                    <label for="topic-18"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-19" value="topic-19" data-name="Inclusion">
-                    <label for="topic-19"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-20" value="topic-20" data-name="Queer">
-                    <label for="topic-20"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-21" value="topic-21" data-name="Activism">
-                    <label for="topic-21"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
-                    <input type="checkbox" name="topic" id="topic-22" value="topic-22" data-name="Communnities">
-                    <label for="topic-22"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
-                    <input type="checkbox" name="topic" id="topic-23" value="topic-23" data-name="Inclusion">
-                    <label for="topic-23"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-24" value="topic-24" data-name="Queer">
-                    <label for="topic-24"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-25" value="topic-25" data-name="Inclusion">
-                    <label for="topic-25"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-26" value="topic-26" data-name="Queer">
-                    <label for="topic-26"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-                    <input type="checkbox" name="topic" id="topic-27" value="topic-27" data-name="Activism">
-                    <label for="topic-27"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
-                    <input type="checkbox" name="topic" id="topic-28" value="topic-28" data-name="Communnities">
-                    <label for="topic-28"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
-                    <input type="checkbox" name="topic" id="topic-29" value="topic-29" data-name="Inclusion">
-                    <label for="topic-29"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
-                    <input type="checkbox" name="topic" id="topic-30" value="topic-30" data-name="Queer">
-                    <label for="topic-30"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
-
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-1" value="topic-1" data-name="Inclusion">
+                        <label for="topic-1"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-2" value="topic-2" data-name="Queer">
+                        <label for="topic-2"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-3" value="topic-3" data-name="Activism">
+                        <label for="topic-3"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-4" value="topic-4" data-name="Communnities">
+                        <label for="topic-4"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-5" value="topic-5" data-name="Inclusion">
+                        <label for="topic-5"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-6" value="topic-6" data-name="Queer">
+                        <label for="topic-6"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-7" value="topic-7" data-name="Inclusion">
+                        <label for="topic-7"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-8" value="topic-8" data-name="Queer">
+                        <label for="topic-8"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-9" value="topic-9" data-name="Activism">
+                        <label for="topic-9"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-10" value="topic-10" data-name="Communnities">
+                        <label for="topic-10"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-11" value="topic-11" data-name="Inclusion">
+                        <label for="topic-11"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-12" value="topic-12" data-name="Queer">
+                        <label for="topic-12"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-13" value="topic-13" data-name="Inclusion">
+                        <label for="topic-13"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-14" value="topic-14" data-name="Queer">
+                        <label for="topic-14"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-15" value="topic-15" data-name="Activism">
+                        <label for="topic-15"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-16" value="topic-16" data-name="Communnities">
+                        <label for="topic-16"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-17" value="topic-17" data-name="Inclusion">
+                        <label for="topic-17"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-18" value="topic-18" data-name="Queer">
+                        <label for="topic-18"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-19" value="topic-19" data-name="Inclusion">
+                        <label for="topic-19"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-20" value="topic-20" data-name="Queer">
+                        <label for="topic-20"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-21" value="topic-21" data-name="Activism">
+                        <label for="topic-21"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-22" value="topic-22" data-name="Communnities">
+                        <label for="topic-22"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-23" value="topic-23" data-name="Inclusion">
+                        <label for="topic-23"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-24" value="topic-24" data-name="Queer">
+                        <label for="topic-24"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-25" value="topic-25" data-name="Inclusion">
+                        <label for="topic-25"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-26" value="topic-26" data-name="Queer">
+                        <label for="topic-26"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-27" value="topic-27" data-name="Activism">
+                        <label for="topic-27"><i class="checkmark">[[svg::checkmark]]</i><span>Activism</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-28" value="topic-28" data-name="Communnities">
+                        <label for="topic-28"><i class="checkmark">[[svg::checkmark]]</i><span>Communnities</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-29" value="topic-29" data-name="Inclusion">
+                        <label for="topic-29"><i class="checkmark">[[svg::checkmark]]</i><span>Inclusion</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="topic" id="topic-30" value="topic-30" data-name="Queer">
+                        <label for="topic-30"><i class="checkmark">[[svg::checkmark]]</i><span>Queer</span></label>
+                    </div>
                 </fieldset>
                 <fieldset class="modal__group">
                     <legend>States</legend>
-                    <input type="checkbox" name="state" id="state-1" value="state-1" data-name="Arizona">
-                    <label for="state-1"><i class="checkmark">[[svg::checkmark]]</i><span>Arizona</span></label>
-                    <input type="checkbox" name="state" id="state-2" value="state-2" data-name="Georgia">
-                    <label for="state-2"><i class="checkmark">[[svg::checkmark]]</i><span>Georgia</span></label>
-                    <input type="checkbox" name="state" id="state-3" value="state-3" data-name="Illinois">
-                    <label for="state-3"><i class="checkmark">[[svg::checkmark]]</i><span>Illinois</span></label>
-                    <input type="checkbox" name="state" id="state-4" value="state-4" data-name="Louisiana">
-                    <label for="state-4"><i class="checkmark">[[svg::checkmark]]</i><span>Louisiana</span></label>
-                    <input type="checkbox" name="state" id="state-5" value="state-5" data-name="Maryland">
-                    <label for="state-5"><i class="checkmark">[[svg::checkmark]]</i><span>Maryland</span></label>
-                    <input type="checkbox" name="state" id="state-6" value="state-6" data-name="Massachusetts">
-                    <label for="state-6"><i class="checkmark">[[svg::checkmark]]</i><span>Massachusetts</span></label>
-                    <input type="checkbox" name="state" id="state-7" value="state-7" data-name="Michigan">
-                    <label for="state-7"><i class="checkmark">[[svg::checkmark]]</i><span>Michigan</span></label>
-                    <input type="checkbox" name="state" id="state-8" value="state-8" data-name="Minnesota">
-                    <label for="state-8"><i class="checkmark">[[svg::checkmark]]</i><span>Minnesota</span></label>
-                    <input type="checkbox" name="state" id="state-9" value="state-9" data-name="New York">
-                    <label for="state-9"><i class="checkmark">[[svg::checkmark]]</i><span>New York</span></label>
-                    <input type="checkbox" name="state" id="state-10" value="state-10" data-name="Oklahoma">
-                    <label for="state-10"><i class="checkmark">[[svg::checkmark]]</i><span>Oklahoma</span></label>
-                    <input type="checkbox" name="state" id="state-11" value="state-11" data-name="Oregon">
-                    <label for="state-11"><i class="checkmark">[[svg::checkmark]]</i><span>Oregon</span></label>
-                    <input type="checkbox" name="state" id="state-12" value="state-12" data-name="Pensylvania">
-                    <label for="state-12"><i class="checkmark">[[svg::checkmark]]</i><span>Pensylvania</span></label>
-                    <input type="checkbox" name="state" id="state-13" value="state-13" data-name="Washington">
-                    <label for="state-13"><i class="checkmark">[[svg::checkmark]]</i><span>Washington</span></label>
+                    <div>
+                        <input type="checkbox" name="state" id="state-1" value="state-1" data-name="Arizona">
+                        <label for="state-1"><i class="checkmark">[[svg::checkmark]]</i><span>Arizona</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-2" value="state-2" data-name="Georgia">
+                        <label for="state-2"><i class="checkmark">[[svg::checkmark]]</i><span>Georgia</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-3" value="state-3" data-name="Illinois">
+                        <label for="state-3"><i class="checkmark">[[svg::checkmark]]</i><span>Illinois</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-4" value="state-4" data-name="Louisiana">
+                        <label for="state-4"><i class="checkmark">[[svg::checkmark]]</i><span>Louisiana</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-5" value="state-5" data-name="Maryland">
+                        <label for="state-5"><i class="checkmark">[[svg::checkmark]]</i><span>Maryland</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-6" value="state-6" data-name="Massachusetts">
+                        <label for="state-6"><i class="checkmark">[[svg::checkmark]]</i><span>Massachusetts</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-7" value="state-7" data-name="Michigan">
+                        <label for="state-7"><i class="checkmark">[[svg::checkmark]]</i><span>Michigan</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-8" value="state-8" data-name="Minnesota">
+                        <label for="state-8"><i class="checkmark">[[svg::checkmark]]</i><span>Minnesota</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-9" value="state-9" data-name="New York">
+                        <label for="state-9"><i class="checkmark">[[svg::checkmark]]</i><span>New York</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-10" value="state-10" data-name="Oklahoma">
+                        <label for="state-10"><i class="checkmark">[[svg::checkmark]]</i><span>Oklahoma</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-11" value="state-11" data-name="Oregon">
+                        <label for="state-11"><i class="checkmark">[[svg::checkmark]]</i><span>Oregon</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-12" value="state-12" data-name="Pensylvania">
+                        <label for="state-12"><i class="checkmark">[[svg::checkmark]]</i><span>Pensylvania</span></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="state" id="state-13" value="state-13" data-name="Washington">
+                        <label for="state-13"><i class="checkmark">[[svg::checkmark]]</i><span>Washington</span></label>
+                    </div>
                 </fieldset>
             </div>
             <div class="modal__footer">

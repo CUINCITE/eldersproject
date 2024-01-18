@@ -1,4 +1,9 @@
 .interviews {
+
+    @include breakpoint(tablet) {
+        // overflow: hidden;
+    }
+
     &__heading {
         @include flex(row, flex-start, flex-start);
         position: relative;
@@ -85,29 +90,50 @@
 
     &__item {
         position: relative;
+    }
 
 
-        // display: grid;
-        // grid-template-columns: 2fr 1fr 1fr;
-        // gap: 22px;
-        // padding: 0 var(--grid-margin);
+
+    &__main {
     }
 
 
 
     &__name {
         @include font-family(compressed);
-        @include font-size(50, 38);
-        @include letter-spacing(-1.25, 50);
 
-        padding-top: rem(17);
-        margin-left: rem(-6);
         text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 38);
+            @include letter-spacing(-1.25, 50);
+    
+            padding-top: rem(17);
+            margin-left: rem(-6);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1, 40);
+
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1, 40);
+
+            margin-block: trim-font(1);
+            padding-top: rem(18);
+        }
 
 
         .interviews--grid & {
-            margin-left: rem(-2);
-            padding-top: rem(17);
+            @include breakpoint(desktop) {
+                margin-left: rem(-2);
+                padding-top: rem(17);
+            }
+
         }
 
         .is-grid-view & {
@@ -118,12 +144,22 @@
 
         .interviews-grid__tile--group & {
             .is-list-view & {
-                padding-top: rem(4);
-                padding-bottom: rem(6);
+                @include breakpoint(desktop) {
+                    padding-top: rem(4);
+                    padding-bottom: rem(6);
+                }
+
+                @include breakpoint(phone) {
+                    padding-bottom: rem(12);
+                }
+
             }
 
             .is-grid-view & {
-                padding-bottom: rem(10);
+
+                @include breakpoint(phone) {
+                    padding-bottom: rem(10);
+                }
             }
         }
     }
@@ -162,6 +198,11 @@
             padding-bottom: rem(17);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(18, 1);
+            @include letter-spacing(-0.425, 17);
+        }
+
         &--grid {
 
             @include breakpoint(desktop) {
@@ -182,8 +223,6 @@
         @include font-family(reclined);
 
         text-transform: uppercase;
-
-        // font-weight: 400;
 
         @include breakpoint(desktop) {
             @include font-size(20, 19);
@@ -227,7 +266,7 @@
 
         @include breakpoint(phone) {
             @include flex(row, space-between, flex-start);
-            margin-top: vw(8, phone);
+            margin-top: rem(8);
         }
 
         &-wrap {
@@ -257,26 +296,43 @@
 
 
     &__locations {
-        @include font-family(reclined);
-        @include font-size(20, 19);
-        @include letter-spacing(0.5, 20);
         @include flex(column, flex-start, flex-start);
+        @include font-family(reclined);
 
         font-feature-settings: "ss03" on;
         text-transform: uppercase;
-        padding-top: rem(15);
-        padding-left: rem(1);
 
+        @include breakpoint(desktop) {
+            @include font-size(20, 19);
+            @include letter-spacing(0.5, 20);
+            
+            padding-top: rem(15);
+            padding-left: rem(1);
+    
+    
+            .is-grid-view & {
+                @include font-size(17, 19);
+                @include letter-spacing(0.4, 17);
+    
+                padding-top: rem(4);
+                padding-left: rem(4);
+                flex-direction: row;
+                gap: rem(4);
+                position: relative;
+            }
+        }
 
-        .is-grid-view & {
-            @include font-size(17, 19);
-            @include letter-spacing(0.4, 17);
+        @include breakpoint(tablet) {
+            @include font-size(18, 1);
+            @include letter-spacing(-0.425, 17);
+        }
 
-            padding-top: rem(4);
-            padding-left: rem(4);
-            flex-direction: row;
-            gap: rem(4);
-            position: relative;
+        @include breakpoint(phone) {
+            @include font-size(17, 15.5);
+            @include letter-spacing(-0.425, 17);
+
+            padding-left: 0.1em;
+            padding-top: rem(3);
         }
     }
 
@@ -284,28 +340,61 @@
 
     &__description {
         @include font-family(compact);
-        @include font-size(14, 1);
-        @include letter-spacing(-0.14, 14);
         @include font-settings(400, 100);
 
-        margin-top: rem(3);
+        @include breakpoint(desktop) {
+            @include font-size(14, 1);
+            @include letter-spacing(-0.14, 14);
+            
+            margin-top: rem(3);
+    
+    
+            .is-grid-view & {
+                margin-top: rem(8);
+                margin-left: rem(2);
+            }
+        }
 
+        @include breakpoint(tablet) {
+            @include font-size(15, 1.1);
+            @include letter-spacing(-0.15, 15);
 
-        .is-grid-view & {
-            margin-top: rem(8);
-            margin-left: rem(2);
+            margin-block: trim-font(1.1);
+            padding-top: rem(16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 1.05);
+            @include letter-spacing(-0.14, 14);
+
+            margin-top: rem(12);
+            margin-bottom: rem(28);
         }
     }
 
 
 
     &__copy {
-        @include font-size(13, 15);
         @include font-settings(400, 100);
-        @include letter-spacing(0.1, 13);
 
-        padding-top: rem(14);
-        padding-left: rem(1);
+        @include breakpoint(desktop) {
+            @include font-size(13, 15);
+            @include letter-spacing(0.1, 13);
+    
+            padding-top: rem(14);
+            padding-left: rem(1);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 18);
+
+            grid-column: span 3;
+            margin-top: rem(32);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(12, 16.2);
+        }
 
 
         &-collection {

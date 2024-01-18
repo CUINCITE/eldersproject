@@ -1,6 +1,13 @@
 .modal {
     --checkmark-width: #{rem(23)};
 
+    @include breakpoint(tablet) {
+        --checkmark-width: #{rem(36)};
+    }
+
+    @include breakpoint(phone) {
+        --checkmark-width: #{rem(36)};
+    }
 
 
     background-color: var(--color-black);
@@ -9,6 +16,10 @@
     text-align: left;
     display: none;
 
+    @include breakpoint(not-desktop) {
+        overflow-y: auto;
+    }
+
 
     &.is-open { display: block; }
 
@@ -16,7 +27,19 @@
 
     &__close {
         position: absolute;
-        inset: rem(18) rem(20) auto auto;
+
+        @include breakpoint(desktop) {
+            inset: rem(18) rem(20) auto auto;
+        }
+
+        @include breakpoint(tablet) {
+            inset: rem(10) rem(16) auto auto;
+        }
+
+        @include breakpoint(phone) {
+            inset: rem(10) rem(16) auto auto;
+        }
+        
 
 
         .icon-close {
@@ -29,17 +52,64 @@
 
     &__wrap {
         @include flex(column, flex-start, flex-start);
+
+        @include breakpoint(tablet) {
+            margin-top: rem(98);
+        }
+
+        @include breakpoint(phone) {
+            margin-top: rem(75);
+        }
     }
 
 
 
     &__title {
         @include font-family(compressed);
-        @include font-size(50, 41);
-        @include letter-spacing(-1.25, 50);
-
         text-transform: uppercase;
-        margin-left: rem(-2);
+
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 41);
+            @include letter-spacing(-1.25, 50);
+    
+            margin-left: rem(-2);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(60, 1);
+
+            margin-block: trim-font(1);
+            padding-top: rem(20);
+            padding-left: rem(18);
+            padding-bottom: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(40, 1);
+
+            margin-block: trim-font(1);
+            padding-top: rem(18);
+            padding-left: rem(18);
+            padding-bottom: rem(14);
+        }
+    }
+
+    &__bar {
+        @include breakpoint(not-desktop) {
+            position: fixed;
+            z-index: 1;
+            top: -1px;
+            left: 0;
+            width: 100vw;
+            background-color: var(--color-black);
+            border-bottom: 1px solid transparent;
+            transition: border-color .3s ease;
+
+            .modal.is-scrolled & {
+                border-color: $color-bg;
+            }
+        }
     }
 
 
@@ -47,9 +117,26 @@
     &__grid {
         width: 100%;
         display: grid;
-        grid-template-columns: auto auto auto;
-        margin-top: rem(56);
         align-items: start;
+
+        @include breakpoint(desktop) {
+            grid-template-columns: auto auto auto;
+            margin-top: rem(56);
+        }
+
+        @include breakpoint(not-desktop) {
+            grid-template-columns: auto;
+
+            @include breakpoint(tablet) {
+                gap: rem(42);
+                margin-bottom: rem(80);
+            }
+
+            @include breakpoint(phone) {
+                gap: rem(35);
+                margin-bottom: rem(80);
+            }
+        }
     }
 
 
@@ -60,24 +147,42 @@
         position: relative;
         gap: 2px;
 
+        @include breakpoint(tablet) {
+            display: grid;
+            align-content: start;
+            grid-template-columns: repeat(2, 1fr);
+        } 
+
 
         &--topics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(12, 1fr);
-            align-content: start;
-            grid-auto-flow: column;
+            
+            @include breakpoint(desktop) {
+                display: grid;
+                align-content: start;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(12, 1fr);
+                grid-auto-flow: column;
+            }
         }
 
 
         legend {
-            position: absolute;
-            inset: auto auto 100% 0;
+            @include breakpoint(desktop) {
+                position: absolute;
+                inset: auto auto 100% 0;
+            }
         }
 
 
         input {
-            position: absolute;
+            @include breakpoint(desktop) {
+                // causes weird jump upon clicking when form is scrollable on mobile
+                position: absolute;
+            }
+
+            @include breakpoint(not-desktop) {
+                display: inline;
+            }
         }
     }
 
@@ -87,19 +192,67 @@
         @include flex(row, flex-end, center);
 
         margin-left: auto;
-        margin-top: rem(58);
+        
+
+        @include breakpoint(desktop) {
+            margin-top: rem(58);
+        }
+
+
+
+        @include breakpoint(not-desktop) {
+            position: fixed;
+            top: calc(100vh + 1px);
+            left: 0;
+            translate: 0 -100%;
+            background-color: $color-black;
+            width: 100vw;
+            padding-right: rem(16);
+
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(24);
+            padding-bottom: rem(24);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(16);
+            padding-bottom: rem(16);
+        }
     }
 
 
 
     &__reset {
         @include font-family(compressed);
-        @include font-size(20, 17);
-        @include letter-spacing(-0.3, 20);
 
         text-transform: uppercase;
-        margin-right: rem(14);
-        margin-top: rem(4);
+
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 17);
+            @include letter-spacing(-0.3, 20);
+
+            margin-right: rem(14);
+            margin-top: rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(26.836, 0.85);
+            @include letter-spacing(-0.805, 26.836);
+
+            margin-right: rem(19);
+            padding-top: rem(6);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(26.836, 0.85);
+            @include letter-spacing(-0.805, 26.836);
+
+            margin-right: rem(19);
+            padding-top: rem(8);
+        }
     }
 
 
@@ -107,7 +260,32 @@
     &__submit {
         @extend %modal-label;
 
-        svg { opacity: 1 !important; }
+        svg { 
+            opacity: 1 !important; 
+        }
+
+
+        span { 
+
+            @include breakpoint(not-desktop) {
+                transform: translateX(0) !important; 
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(26.836, 0.85);
+                @include letter-spacing(-0.805, 26);
+            }
+        }
+
+        .checkmark {
+            @include breakpoint(phone) {
+                width: rem(29) !important;
+            }
+
+            @include breakpoint(tablet) {
+                width: rem(29) !important;
+            }
+        }
     }
 
 
@@ -118,19 +296,38 @@
 
 
     legend {
-        @include font-size(17, 12);
-
         text-transform: uppercase;
-        margin-bottom: rem(7);
+
+        @include breakpoint(desktop) {
+            @include font-size(17, 12);
+
+            margin-bottom: rem(7);
+        }
+        
+        @include breakpoint(tablet) {
+            @include font-size(17, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(12);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(12);
+        }
     }
 
 
     label {
         @extend %modal-label;
+
     }
 
 
     input:checked + label {
+
         span { transform: translateX(0); }
         svg { opacity: 1; }
     }
@@ -142,18 +339,59 @@
 
     span {
         @include font-family(compressed);
-        @include font-size(21.27, 18);
-        @include letter-spacing(-0.638, 21.27);
 
-        height: rem(23);
+        @include breakpoint(desktop) {
+            @include font-size(21.27, 18);
+            @include letter-spacing(-0.638, 21.27);
+
+            height: rem(23);
+            padding: rem(4) rem(3.5) rem(2);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(34.545, 0.85);
+            @include letter-spacing(-1.036, 34.545);
+
+            height: rem(39);
+            padding: rem(7) rem(4) 0;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(34.545, 0.85);
+            @include letter-spacing(-1.036, 34.545);
+
+            height: rem(39);
+            padding: rem(7) rem(3.5) 0;
+        }
+
+
         background-color: var(--color-box);
         color: var(--color-black);
         text-transform: uppercase;
-        padding: rem(4) rem(3.5) rem(2);
         transition: transform .3s $ease-custom;
         transform: translateX(calc(var(--checkmark-width) * -1));
     }
 
+
+    &.modal__submit {
+        span {
+            @include breakpoint(phone) {
+                @include font-size(26.836, 0.85);
+                @include letter-spacing(-0.805, 26);
+    
+                height: unset;
+                padding: rem(7) rem(5.5) rem(1);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(26.836, 0.85);
+                @include letter-spacing(-0.805, 26);
+    
+                height: unset;
+                padding: rem(7) rem(5.5) rem(1);
+            }
+        }
+    }
 
     .checkmark {
         @include flex(row, center, center);
@@ -169,8 +407,10 @@
 
 
     @include hover {
-        span {
-            transform: translateX(0);
+        @include breakpoint(desktop) {
+            span {
+                transform: translateX(0);
+            }
         }
     }
 }

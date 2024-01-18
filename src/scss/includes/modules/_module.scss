@@ -185,4 +185,68 @@
             padding-top: rem(27);
         }
     }
+
+    &--results {
+        .collections__item {
+            border-bottom: unset;
+
+            @include breakpoint(phone) {
+                padding-top: rem(10);
+                padding-bottom: rem(40);
+            }
+        }
+        
+        @include breakpoint(phone) {
+
+            .collections__link {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+
+                margin-block: trim-font(1);
+            } 
+
+            .interviews__copy, .interviews__box {
+                display: none;
+            } 
+
+            .interviews__locations {
+                
+            }
+
+            .interviews__description {
+                padding-bottom: rem(20);
+            }
+s
+            .interviews__collection {
+                br {
+                    display: none;
+                }
+            }
+
+            .interviews__locations {
+                @include font-size(16, 0.969);
+
+                order: 1;
+                margin-bottom: rem(48);
+                display: block !important;
+
+                span {
+                    display: block;
+                }
+            }
+
+            .interviews__name {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+                 
+                padding-top: rem(12);
+            }
+
+            .interviews-grid__tile {
+                &:last-child {
+                    border-bottom: unset;
+                }
+            }
+        }
+    }
 }

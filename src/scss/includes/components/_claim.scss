@@ -69,7 +69,7 @@
         position: absolute;
         left: 0;
         bottom: calc(100% - #{rem(10)});
-        z-index: 2;
+        z-index: 5;
 
 
         .is-404 &, .page_404 & { 

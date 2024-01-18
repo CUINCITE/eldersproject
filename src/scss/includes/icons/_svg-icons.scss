@@ -21,13 +21,52 @@
 
 .svg-bracket-left,
 .svg-bracket-right {
-    width: rem(5);
-    height: rem(27);
+    @include breakpoint(desktop) {
+        width: rem(5);
+        height: rem(27);
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(5);
+        height: rem(27);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(4.4);
+        height: rem(20);
+    }
 }
 
 
-.svg-bracket-left { margin-right: rem(5); }
-.svg-bracket-right { margin-left: rem(5); }
+.svg-bracket-left { 
+    
+    @include breakpoint(desktop) {
+        margin-right: rem(5); 
+    }
+
+    @include breakpoint(tablet) {
+        margin-right: rem(4); 
+    }
+
+    @include breakpoint(phone) {
+        margin-right: rem(3); 
+    }
+}
+
+
+.svg-bracket-right {
+    @include breakpoint(desktop) {
+        margin-left: rem(5); 
+    }
+
+    @include breakpoint(tablet) {
+        margin-left: rem(4); 
+    }
+
+    @include breakpoint(phone) {
+        margin-left: rem(3); 
+    }
+}
 
 
 .svg-prevnext {
@@ -93,6 +132,35 @@
     path:last-of-type { fill: currentColor; }
 }
 
+
+.svg-apply {
+
+    @include breakpoint(desktop) {
+        height: rem(16);
+        width: rem(16);
+    }
+
+    @include breakpoint(tablet) {
+        height: rem(21);
+        width: rem(21);
+    }
+    
+    @include breakpoint(phone) {
+        height: rem(21);
+        width: rem(21);
+    }
+}
+
+.svg-checkmark {
+    @include breakpoint(tablet) {
+        width: rem(26) !important;
+        height: rem(25) !important;
+    }
+
+    @include breakpoint(phone) {
+        width: rem(24) !important;
+        height: rem(25) !important;
+    }
 
 .svg-arrow-player-small {
     width: rem(8);

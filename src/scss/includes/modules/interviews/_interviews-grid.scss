@@ -2,27 +2,90 @@
     &__letters {
         @include flex;
 
-        padding-top: rem(36);
         transition: padding-top .25s $ease-custom;
 
+        @include breakpoint(desktop) {
+            padding-top: rem(36);
+        }
 
-        .is-pinned & { padding-top: rem(13); }
+        @include breakpoint(tablet) {
+            padding-top: rem(36);
+            flex-wrap: wrap;
+            column-gap: rem(42);
+        }
+
+        @include breakpoint(phone) {
+            flex-wrap: wrap;
+            column-gap: rem(24);
+         }
+
+        .is-pinned & { 
+
+            @include breakpoint(desktop) {
+                padding-top: rem(13); 
+            }
+        }
     }
 
 
 
     &__letter {
-        flex-basis: rem(27);
         text-align: center;
+
+        @include breakpoint(desktop) {
+            flex-basis: rem(27);
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                height: 1px;
+                width: 300%;
+                background-color: $color-bg;
+                bottom: 0;
+                left: 50%;
+                translate: -50%;
+            }
+
+            @include breakpoint(tablet) {
+                flex-basis: rem(36);
+                margin-top: rem(18);
+            }
+    
+            @include breakpoint(phone) {
+                flex-basis: rem(27);
+                margin-top: rem(14);
+            }
+        }
+
 
 
         button {
             @include flex(row, center, center);
-            @include font-size(17, 17);
 
             width: 100%;
-            height: rem(24);
-            padding-bottom: rem(4);
+
+            @include breakpoint(desktop) {
+                @include font-size(17, 17);
+
+                height: rem(24);
+                padding-bottom: rem(4);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(22, 1);
+
+                height: rem(36);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+                height: rem(28);
+            }
         }
     }
 
@@ -30,6 +93,10 @@
 
     &__tabs {
         background-color: var(--color-box);
+
+        @include breakpoint(not-desktop) {
+            overflow: hidden;
+        }
     }
 
 
@@ -45,20 +112,65 @@
 
     &__tile {
         position: relative;
-        padding: 0 var(--grid-margin);
-        min-height: vw(117);
-        display: grid;
-        align-content: start;
-        align-items: start;
-        grid-template-columns: 34% 23.5% 17% 1fr;
         border-bottom: 1px solid var(--color-bg);
         overflow: hidden;
+        padding: 0 var(--grid-margin);
+
+        @include breakpoint(desktop) {
+            min-height: vw(117);
+            display: grid;
+            align-content: start;
+            align-items: start;
+            grid-template-columns: 34% 23.5% 17% 1fr;
+        }
+
+        @include breakpoint(tablet) {
+            display: grid;
+            align-content: start;
+            align-items: start;
+            // grid-template-columns: repeat(8, 1fr);
+            grid-template-columns: 2.15fr 1fr 1fr;
+            column-gap: map-get($grid-gutter, tablet);
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, stretch);
+        }
 
 
         &--group {
-            @include flex(column, center, center);
-
             overflow: visible;
+
+            @include breakpoint(desktop) {
+                @include flex(column, center, center);
+            }
+
+            @include breakpoint(tablet) {
+                @include flex(column, center, flex-start); 
+
+                height: vw(212, tablet);
+
+                .button {
+                    margin-top: rem(10);
+                    margin-left: rem(2);
+                }
+            }
+
+            @include breakpoint(phone) {
+                @include flex(column, flex-end, flex-start);
+
+                height: vw(274, phone);
+                padding-bottom: rem(24); 
+
+                .button {
+                    margin-block: trim-font(1);
+                }
+
+                .triangle {
+                    border-width: rem(11) 0 rem(11) rem(13) !important;
+                }
+            }
         }
 
 
@@ -80,20 +192,88 @@
 
     &__header {
         text-align: right;
-        margin-bottom: rem(35);
-        padding-bottom: rem(10);
-        position: relative;
         transition: margin-bottom .25s $ease-custom, padding-bottom .25s $ease-custom;
 
+        @include breakpoint(desktop) {
+            margin-bottom: rem(35);
+            padding-bottom: rem(10);
+            position: relative;
+        }
+
+        @include breakpoint(phone) {
+            @include flex(row-reverse, space-between, flex-end);
+            // position: absolute;
+            // bottom: rem(12);
+            // right: rem(14);
+            margin-top: rem(42);
+            margin-bottom: rem(8);
+            z-index: 2;
+            text-align: left;
+        }
 
         .is-pinned & {
-            margin-bottom: 0;
-            padding-bottom: 0;
+            @include breakpoint(desktop) {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
         }
 
 
         > button {
-            margin-right: rem(-8);
+            @include breakpoint(desktop) {
+                margin-right: rem(-8);
+            }
+
+            @include breakpoint(tablet) {
+                margin-right: rem(8);
+            }
+
+            @include breakpoint(phone) {
+                margin-right: rem(4);
+            }
+        }
+
+
+
+        .interviews-grid__sort-button {
+            @include font-settings(400, 100);
+
+            text-transform: uppercase;
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
+
+            legend {
+                @include breakpoint(phone) {
+                    margin-bottom: rem(2);
+                }
+            }
+
+            button {
+                @include breakpoint(phone) {
+                    @include font-family(normal);
+                    @include font-settings(800, 100);
+
+                    text-transform: uppercase;
+                }
+            }
+
+            svg {
+                @include breakpoint(phone) {
+                    translate: 0 -6%;
+                }
+            }
+
+            .button--inversed {
+                svg {
+                    @include breakpoint(phone) {
+                        translate: 0 -20%;
+                    }
+                }
+            }
         }
     }
 
@@ -101,8 +281,22 @@
 
     &__radios {
         display: grid;
-        grid-template-columns: 34% 23.5% 17% 1fr;
-        padding-bottom: rem(4);
+
+        @include breakpoint(desktop) {
+            grid-template-columns: 34% 23.5% 17% 1fr;
+            padding-bottom: rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            grid-template-columns: 2.15fr 1fr 1fr;
+            column-gap: map-get($grid-gutter, tablet);
+            margin-top: rem(30);
+            padding-bottom: rem(12);
+
+            legend {
+                padding-bottom: rem(8);
+            }
+        }
 
 
         > div {
@@ -112,12 +306,26 @@
 
         label,
         legend {
-            @include font-size(17, 17.85);
             @include font-settings(400, 100);
 
             text-transform: uppercase;
             transition: opacity .3s $ease-custom;
 
+            @include breakpoint(desktop) {
+                @include font-size(17, 17.85);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
 
             body:has(.is-grid-view) & {
                 opacity: 0;
@@ -152,7 +360,13 @@
 
 
         legend {
-            @include font-size(17, 13);
+            @include breakpoint(desktop) {
+                @include font-size(17, 13);
+            }
+
+            @include breakpoint(phone) {
+                padding-bottom: rem(8);
+            }
         }
 
 
@@ -174,9 +388,15 @@
     &__buttons {
         @include flex(row, flex-start, center);
 
-        margin: rem(-4) rem(-13) rem(4) auto;
-        gap: rem(4);
+        @include breakpoint(desktop) {
+            margin: rem(-4) rem(-13) rem(4) auto;
+            gap: rem(4);
+        }
 
+        @include breakpoint(tablet) {
+            margin: rem(-4) rem(-13) rem(8) auto;
+            gap: rem(4);
+        }
 
         button {
             @include flex(row, center, center);
@@ -206,36 +426,74 @@
 
     &__filters {
         margin-top: 0;
-        border-top: 1px solid $color-bg;
         border-bottom: 1px solid $color-bg;
+
+        @include breakpoint(desktop) {
+            border-top: 1px solid $color-bg;
+        }
     }
 
 
 
     &__form {
-        padding-top: rem(3);
+        
+
+        @include breakpoint(desktop) {
+            padding-top: rem(3);
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+        }
     }
 
 
 
     &__modal {
-        position: absolute;
-        inset: 100% calc(var(--grid-margin) * -1) auto;
-        z-index: 4;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+            inset: 100% calc(var(--grid-margin) * -1) auto;
+            z-index: 4;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99;
+        }
     }
 
 
 
     &__image {
         position: absolute;
-        inset: auto var(--grid-margin) auto auto;
-        max-width: rem(256);
+        
 
+        @include breakpoint(desktop) {
+            max-width: rem(256);
+            inset: auto var(--grid-margin) auto auto;
 
-        .is-grid-view & {
-            inset: auto rem(-10) rem(-20) auto;
-            max-width: rem(225);
+            .is-grid-view & {
+                inset: auto rem(-10) rem(-20) auto;
+                max-width: rem(225);
+            }
         }
+
+        @include breakpoint(tablet) {
+            max-width: rem(212);
+            inset: auto var(--grid-margin) auto auto;
+        }
+
+        @include breakpoint(phone) {
+            max-width: rem(236);
+            inset: var(--grid-margin) var(--grid-margin) auto auto;
+        }
+
     }
 
 

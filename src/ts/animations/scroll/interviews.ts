@@ -4,21 +4,24 @@ export const interviews = el => {
 
     const controls = el.querySelector('.interviews-grid__controls');
     const moreInterviews = el.querySelector('.interviews__more');
-    let moreInterviewsHeight = 0;
-    if (moreInterviews) moreInterviewsHeight = moreInterviews.offsetHeight;
 
-    controls && gsap.to(controls, {
+    if (controls) {
+        const mm = gsap.matchMedia();
 
-        ease: 'none',
-        scrollTrigger: {
-            trigger: el,
-            pin: controls,
-            pinSpacing: false,
-            start: 'top top',
-            end: () => `bottom ${controls.offsetHeight + moreInterviewsHeight}px`,
-            onToggle: self => el.classList.toggle('is-pinned', self.isActive),
-            invalidateOnRefresh: true,
-        },
-    });
+        mm.add('(orientation: landscape)', () => {
 
+            gsap.to(controls, {
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: el,
+                    pin: controls,
+                    pinSpacing: false,
+                    start: 'top top',
+                    end: () => `bottom ${controls.offsetHeight + (moreInterviews?.offsetHeight ?? 0)}px`,
+                    onToggle: self => el.classList.toggle('is-pinned', self.isActive),
+                    invalidateOnRefresh: true,
+                },
+            });
+        });
+    }
 };

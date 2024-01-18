@@ -136,60 +136,59 @@ export default class Scroll {
         // if (browser.safari) { return; }
 
         Scroll.matchMedia = (gsap as any).matchMedia();
-        Scroll.matchMedia.add('(min-width: 1024px)', () => {
+        // Scroll.matchMedia.add('(min-width: 1024px)', () => {}
 
 
-            // general animations:
-            [...document.querySelectorAll('[data-animation]')]
-                .map((el: HTMLElement) => <IScrollData>{
-                    el,
-                    type: el.dataset.animation,
-                    delay: parseInt(el.dataset.delay, 10) || 0,
-                }).forEach((item: IScrollData) => {
-                    if (animations[item.type]) {
-                        ScrollTrigger.create({
-                            trigger: item.el,
-                            toggleActions: 'play pause resume reset',
-                            animation: getAnimation(item.type, item.el, item.delay || 0),
-                        });
-                    } else {
-                        console.warn(`animation type "${item.type}" does not exist`, item.el);
-                    }
-                });
-
-
-            // custom animations:
-            [...document.querySelectorAll('[data-scroll]')]
-                .map((el: HTMLElement) => <IScrollData>{
-                    el,
-                    type: el.dataset.scroll,
-                    delay: parseInt(el.dataset.delay, 10) || 0,
-                }).forEach((item: IScrollData) => {
-                    if (scrolls[item.type]) {
-                        scrolls[item.type](item.el, item.delay);
-                    } else {
-                        console.warn(`scroll type "${item.type}" does not exist`, item.el);
-                    }
-                });
-
-
-            // parallaxes:
-            [...document.querySelectorAll('[data-parallax]')]
-                .map((el: HTMLElement) => <IParallaxData> {
-                    el,
-                    parallax: parseInt(el.dataset.parallax, 10),
-                    delay: el.dataset.delay || 0,
-                }).forEach((item: IParallaxData) => {
-                    gsap.fromTo(item.el, { y: -item.parallax * (window.innerWidth / 1280) }, {
-                        y: () => item.parallax * (window.innerWidth / 1280),
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: item.el,
-                            scrub: true,
-                        },
+        // general animations:
+        [...document.querySelectorAll('[data-animation]')]
+            .map((el: HTMLElement) => <IScrollData>{
+                el,
+                type: el.dataset.animation,
+                delay: parseInt(el.dataset.delay, 10) || 0,
+            }).forEach((item: IScrollData) => {
+                if (animations[item.type]) {
+                    ScrollTrigger.create({
+                        trigger: item.el,
+                        toggleActions: 'play pause resume reset',
+                        animation: getAnimation(item.type, item.el, item.delay || 0),
                     });
+                } else {
+                    console.warn(`animation type "${item.type}" does not exist`, item.el);
+                }
+            });
+
+
+        // custom animations:
+        [...document.querySelectorAll('[data-scroll]')]
+            .map((el: HTMLElement) => <IScrollData>{
+                el,
+                type: el.dataset.scroll,
+                delay: parseInt(el.dataset.delay, 10) || 0,
+            }).forEach((item: IScrollData) => {
+                if (scrolls[item.type]) {
+                    scrolls[item.type](item.el, item.delay);
+                } else {
+                    console.warn(`scroll type "${item.type}" does not exist`, item.el);
+                }
+            });
+
+
+        // parallaxes:
+        [...document.querySelectorAll('[data-parallax]')]
+            .map((el: HTMLElement) => <IParallaxData> {
+                el,
+                parallax: parseInt(el.dataset.parallax, 10),
+                delay: el.dataset.delay || 0,
+            }).forEach((item: IParallaxData) => {
+                gsap.fromTo(item.el, { y: -item.parallax * (window.innerWidth / 1280) }, {
+                    y: () => item.parallax * (window.innerWidth / 1280),
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: item.el,
+                        scrub: true,
+                    },
                 });
-        });
+            });
     }
 
 

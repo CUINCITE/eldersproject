@@ -6,10 +6,15 @@
     &__wrap {
         position: relative;
     }
+    
 
 
     &__sticker {
         position: absolute;
         inset: rem(-70) rem(-75) auto auto;
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
     }
 }

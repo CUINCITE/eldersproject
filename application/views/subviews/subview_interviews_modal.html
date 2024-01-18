@@ -1,31 +1,41 @@
 <div id="modal" class="interviews-grid__modal modal" data-component="Modal">
-    <button class="modal__close js-modal-close" aria-label="Close filters modal"><i class="icon-close"></i></button>
-    <div class="modal__wrap">
+    <div class="modal__bar js-modal-bar">
+        <button class="modal__close js-modal-close" aria-label="Close filters modal"><i class="icon-close"></i></button>
         <h3 class="modal__title">Filters</h3>
-        <form action="" data-component="Load" data-options='{"contentSelector": "#interviews-grid", "live": false, "extra": ".js-interviews-sort", "filtered": ".js-interviews-filtered", "scrollTo": ".js-interviews-filtered"}' class="modal__form js-interviews-filters">
+    </div>
+
+    <div class="modal__wrap js-modal-wrap">
+        <form action="" data-component="Load" data-options='{"contentSelector": "#interviews-grid", "live": false, "extra": ".js-interviews-sort", "extraMobile": ".js-interviews-sort-mobile", "filtered": ".js-interviews-filtered", "scrollTo": ".js-interviews-filtered"}' class="modal__form js-interviews-filters">
             <div class="modal__grid">
                 <fieldset class="modal__group">
                     <legend>Collections</legend>
                     {% for collection in collections %}
-                        <input type="checkbox" name="collections" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}"{% if collection.selected %} checked{% endif %}>
-                        <label for="collection-{{ collection.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ collection.label }}</span></label>
+                        <div>
+                            <input type="checkbox" name="collections" id="collection-{{ collection.slug }}" value="{{ collection.slug }}" data-name="{{ collection.label }}"{% if collection.selected %} checked {% endif %}>
+                            <label for="collection-{{ collection.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ collection.label }}</span></label>
+                        </div>
                     {% endfor %}
                 </fieldset>
                 <fieldset class="modal__group modal__group--topics">
                     <legend>Topics</legend>
                     {% for topic in topics %}
-                        <input type="checkbox" name="topics" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }}"{% if topic.selected %} checked{% endif %}>
-                        <label for="topic-{{ topic.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ topic.label }}</span></label>
+                        <div>
+                            <input type="checkbox" name="topics" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }}"{% if topic.selected %} checked {% endif %}>
+                            <label for="topic-{{ topic.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ topic.label }}</span></label>
+                        </div>
                     {% endfor %}
                 </fieldset>
                 <fieldset class="modal__group">
                     <legend>States</legend>
                     {% for state in states %}
-                        <input type="checkbox" name="states" id="state-{{ state.slug }}" value="{{ state.slug }}" data-name="{{ state.label }}"{% if state.selected %} checked{% endif %}>
-                        <label for="state-{{ state.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ state.label }}</span></label>
+                        <div>
+                            <input type="checkbox" name="states" id="state-{{ state.slug }}" value="{{ state.slug }}" data-name="{{ state.label }}"{% if state.selected %} checked{% endif %}>
+                            <label for="state-{{ state.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ state.label }}</span></label>
+                        </div>
                     {% endfor %}
                 </fieldset>
             </div>
+            
             <div class="modal__footer">
                 <button type="reset" class="modal__reset js-reset">Clear All</button>
                 <button type="submit" class="modal__submit js-submit"><i class="checkmark">[[svg::apply]]</i><span>Apply</span></button>

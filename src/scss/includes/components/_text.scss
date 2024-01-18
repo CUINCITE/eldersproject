@@ -123,6 +123,12 @@
             p {
                 max-width: rem(301);
             }
+
+            .text-sticker__wrap & {
+                @include font-size(14, 1.4);
+
+                padding-block: rem(9) rem(40);
+            }
         }
     }
 

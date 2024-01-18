@@ -32,16 +32,24 @@
         }
     }
 
-    &--reversed {
 
+    &--reversed {
         @include breakpoint(desktop) {
             flex-direction: row-reverse;
         }
     }
 
+
     &--simple {
         @include breakpoint(desktop) {
             justify-content: flex-end;
+        }
+    }
+
+
+    &--inversed {
+        svg {
+            rotate: 180deg;
         }
     }
 
@@ -84,6 +92,21 @@
 
             --padding: #{rem(3)};
             gap: vw(2);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 16);
+            @include letter-spacing(-0.6, 20);
+
+            --padding: #{rem(3)};
+            gap: rem(2)
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 16);
+            @include letter-spacing(-0.6, 20);
+
+            gap: rem(3)
         }
     }
 

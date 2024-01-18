@@ -48,6 +48,14 @@
                 @include breakpoint(desktop) {
                     height: rem(8);
                 }
+
+                @include breakpoint(tablet) {
+                    height: rem(8);
+                }
+
+                @include breakpoint(phone) {
+                    height: rem(7);
+                }
             }
           
             .button--medium & { 
@@ -94,6 +102,14 @@
                 @include breakpoint(desktop) {
                     width: rem(15);
                 }
+
+                @include breakpoint(tablet) {
+                    width: rem(15); 
+                }
+
+                @include breakpoint(phone) {
+                    width: rem(15); 
+                }
             }
 
             .button--big & {
@@ -138,11 +154,11 @@
                 }
 
                 @include breakpoint(tablet) {
-                    border-width: rem(1) 0 rem(9) rem(12);
+                    border-width: rem(8) 0 rem(8) rem(9);
                 }
-
+ 
                 @include breakpoint(phone) {
-                    border-width: rem(7) 0 rem(7) rem(9);
+                    border-width: rem(7) 0 rem(7) rem(8);
                 }
             }
 

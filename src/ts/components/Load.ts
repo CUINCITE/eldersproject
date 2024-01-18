@@ -9,6 +9,7 @@ interface ILoadSettings {
     contentSelector?: string;
     live?: boolean; // live reload on form change events
     extra?: string; // additional form to parse
+    extraMobile?: string; // additional mobile form to parse instead of extra
     total?: string; // updating total value on filters' change
     filtered?: string; // show filtered items' list
     scrollTo?: string; // scroll to given element when reloading filters
@@ -32,6 +33,7 @@ export class Load extends Component {
     private resetButton: HTMLButtonElement;
 
 
+
     constructor(protected view: HTMLElement) {
         super(view);
 
@@ -39,6 +41,7 @@ export class Load extends Component {
             contentSelector: '.js-load-content',
             live: false,
         };
+
 
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('data-options')));
 
@@ -70,7 +73,7 @@ export class Load extends Component {
             [...this.view.querySelectorAll('input, select')].forEach(el => {
                 el.addEventListener('change', () => {
                     window.clearTimeout(this.liveTimeout);
-                    this.liveTimeout = setTimeout(this.onSubmit, 10);
+                    this.liveTimeout = setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
                 });
             });
         }
@@ -182,12 +185,22 @@ export class Load extends Component {
 
         let loadPath = this.view.getAttribute('action') || this.view.dataset.api || window.location.pathname;
 
-        const extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
+        let extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
+        const extraFormsMobile = this.settings.extraMobile
+            ? ([...document.querySelectorAll(this.settings.extraMobile)] as HTMLFormElement[])
+            : null;
+
+        if (extraFormsMobile && window.matchMedia('(orientation: portrait) and (max-width: 659px)').matches) {
+            extraForms = extraFormsMobile;
+        }
+
         const formData = Utils.getQueryString([...extraForms, this.view as HTMLFormElement]);
 
         if (formData) {
             loadPath += `?${formData}`;
         }
+
+
 
         Promise.all([this.hideContent(), this.load(loadPath)]).then(() => {
             this.showContent();

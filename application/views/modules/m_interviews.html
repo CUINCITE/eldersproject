@@ -1,14 +1,13 @@
 <section class="module module--interviews">
     <div class="interviews-grid">
+
         <div class="interviews-grid__filtered filtered box">
-            <div class="grid">
-                <div class="col-span-12">
-                    <ul class="filtered__list js-interviews-filtered"></ul>
-                </div>
-            </div>
+            <ul class="filtered__list js-interviews-filtered"></ul>
         </div>
+        
         <div data-scroll="interviews">
             <div class="interviews-grid__controls">
+
                 <div class="interviews-grid__tabs">
                     <div class="grid">
                         <div class="col-span-12">
@@ -24,10 +23,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="interviews-grid__filters box">
                     <div class="grid">
                         <div class="col-span-12">
-                            <div class="interviews-grid__form">
+                            <div class="interviews-grid__controls">
+
                                 <div class="interviews-grid__header">
                                     <button type="button js-modal" aria-controls="modal">
                                         <span class="sr-only">show filters</span>
@@ -45,35 +46,52 @@
                                         </i>
                                     </button>
                                     {% include "subviews/subview_interviews_modal.html" %}
+                                    <div class="interviews-grid__sort-button desktop-hide tablet-hide">
+                                        <legend>Sort by:</legend>
+                                        <button type="button js-modal" aria-controls="modal-sort"{% if '!' in sort.selected %} class="button--inversed"{% endif %}>
+                                            <span class="sr-only">show sorting</span>
+                                            <i>[[svg::arrow-small]]</i>
+                                            <span>
+                                                {% if 'collections' in sort.selected %} 
+                                                    collections
+                                                {% elseif 'locations' in sort.selected %} 
+                                                    locations
+                                                {% else %}
+                                                    narrators
+                                                {% endif %}
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {% include "./subviews/subview_interviews_modal_sort.html" %} 
                                 </div>
+
                                 <form action="" data-component="Load"
                                     data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters", "scrollTo": ".js-interviews-filtered"}'
                                     class="interviews-grid__form js-interviews-sort">
                                     <fieldset class="interviews-grid__radios">
-                                        <legend>Sort by:</legend>
-                                        <div>
-                                            <input type="radio" checked name="sort" id="narrators" value="narrators">
+                                        <legend class="phone-hide">Sort by:</legend>
+                                        <div class="phone-hide">
+                                            <input type="radio"  name="sort" id="narrators" value="narrators" {% if sort.selected == 'narrators' or not sort.selected %} checked{% endif %}>
                                             <label for="narrators">
                                                 <i>[[svg::arrow-small]]</i>
                                                 <span>Narrators</span>
                                             </label>
                                         </div>
-                                        <div>
-                                            <input type="radio" name="sort" id="locations" value="locations">
+                                        <div class="phone-hide">
+                                            <input type="radio"  name="sort" id="locations" value="locations" {% if sort.selected == 'locations' %} checked{% endif %}>
                                             <label for="locations">
                                                 <i>[[svg::arrow-small]]</i>
                                                 <span>Locations</span>
                                             </label>
-
                                         </div>
-                                        <div>
-                                            <input type="radio" name="sort" id="collections" value="collections">
+                                        <div class="phone-hide">
+                                            <input type="radio"  name="sort" id="collections" value="collections" {% if sort.selected == 'colections' %} checked{% endif %}>
                                             <label for="collections">
                                                 <i>[[svg::arrow-small]]</i>
                                                 <span>Collections</span>
                                             </label>
                                         </div>
-                                        <div>
+                                        <div class="desktop-only">
                                             <div class="interviews-grid__buttons">
                                                 <button type="button" aria-label="show grid view" data-view="grid">
                                                     <i class="icon-grid">
@@ -89,11 +107,11 @@
                                         </div>
                                     </fieldset>
                                 </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="interviews-grid__interviews box">

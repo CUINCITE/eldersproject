@@ -4,14 +4,30 @@
         <h3 class="interviews__name">{{item.label}}</h3>
         <p class="interviews__description">{{item.narrators.0.occupation}}</p>
     </div>
-    <div class="interviews__locations">
+
+    <div class="interviews__locations phone-hide">
         {% for location in item.narrators_states %}
             <span>{{ location.label }}, {{ location.slug }}</span>
         {% endfor %}
     </div>
-    <h4 class="interviews__collection interviews__collection--grid">{{item.interviewers.0.label}} <br> Collection</h4>
+
+    <h4 class="interviews__collection interviews__collection--grid phone-hide">{{item.interviewers.0.label}} <br> Collection</h4>
+
     <div class="interviews__copy">
         <p>{{item.summary}}</p>
-        <h3 class="interviews__copy-collection">{{item.interviewers.0.label}} collection</h3>
+        <h3 class="interviews__copy-collection phone-hide">{{item.interviewers.0.label}} collection</h3>
+    </div>
+
+    <div class="interviews__box desktop-hide tablet-hide">
+        <div class="interviews__locations">
+            {% for location in item.narrators_states %}
+                <span>{{ location.label }}, {{ location.slug }}</span>
+            {% endfor %}
+        </div>
+        <div class="interviews__box-wrap">
+            {% include "./components/c_interview-box.html" with {
+                modifier: item.modifier
+            } %}
+        </div>
     </div>
 </div>

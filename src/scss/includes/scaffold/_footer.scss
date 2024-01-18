@@ -28,6 +28,7 @@
 
         @include breakpoint(desktop) {
             @include flex(row, flex-start, center);
+
             gap: vw(24);
             padding: vw(56) 0 vw(19);
         }
