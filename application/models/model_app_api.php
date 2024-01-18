@@ -52,6 +52,16 @@ class model_app_api extends model_app
 
                 break;
 
+            case "interview":
+
+                require_once("api/model_app_api_" . $action . ".php");
+                $class = 'model_app_api_' . $action;
+                $class = new $class($this, null);
+                $result = $class->rest($method, $params, $url);
+
+
+                break;
+
             case "s3cache":
                 if (!empty($cfg['s3'])) {
                     require_once("api/model_app_api_" . $action . ".php");

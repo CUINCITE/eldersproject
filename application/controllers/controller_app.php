@@ -105,8 +105,20 @@ class controller_app extends _uho_controller
                             $v='collections/'.$v['slug'];
                         break;
                         case "interview":
-                            $v='interviews/'.$v['slug'];
-                        break;
+                            $v = 'interviews/' . $v['slug'];
+                            $p=[];
+                            if (!empty($vv['time'])) $p['time']=$vv['time'];
+                            if (!empty($vv['session'])) $p['session']=$vv['session'];
+                            if ($p) $v.='?'.http_build_query($p);
+                            break;
+
+                        case "interviews":
+                            $v = 'interviews';
+                            if (!isset($vv['filters'])) $vv['filters'] = [];
+                            if (@$vv['page']) $vv['filters']['page'] = $vv['page'];
+                            if (@$vv['sort']) $vv['filters']['sort'] = $vv['sort'];
+                            if (!empty($vv['filters'])) $v .= '?' . http_build_query($vv['filters']);
+                            break;
 
                         case "interview_filter":
                             $v='interviews?'.$v['filter_type'].'='.$v['slug'];

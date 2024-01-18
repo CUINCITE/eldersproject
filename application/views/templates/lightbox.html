@@ -48,13 +48,13 @@
         </div>
         <div class="lightbox__illu">
             <div class="lightbox__darken"></div>
-            {% if collectionUrl %}
-                <a href="{{collectionUrl}}" class="lightbox__collection"><span>{{collection}}</span></a>
+            {% if urlCollection %}
+                <a href="{{urlCollection}}" class="lightbox__collection"><span>{{collection}}</span></a>
             {% endif %}
-            {% if illu %}
+            {% if collectionImage %}
                 <div class="lightbox__picture">
                     <picture>
-                        <img src="{{illu.desktop}}" alt="">
+                        <img src="{{collectionImage.desktop}}" alt="">
                     </picture>
                 </div>
             {% endif %}
@@ -129,7 +129,7 @@
             {% if caption %}<div class="lightbox__caption">{{caption}}</div>{% endif %}
         </div>
         <div class="lightbox__logo">
-            <a href="{{backUrl}}" class="lightbox__close js-close" data-history="back">
+            <a href="{{urlBack}}" class="lightbox__close js-close" data-history="back">
                 <span class="button button--lightbox">
                     <i class="icon-close"></i>
                 </span>

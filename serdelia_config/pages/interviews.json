@@ -23,7 +23,7 @@
             "label": "Interview auto-update",
             "type": "plugin",
             "plugin": "interview_update",
-            "hhidden": true,
+            "hidden": true,
             "on_update": true
         },
         {

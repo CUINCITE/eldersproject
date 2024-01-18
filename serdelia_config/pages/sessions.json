@@ -152,6 +152,14 @@
         },
         {
             "field":"filename_docx","label":"DOCX filename","edit":false
+        },
+        {
+            "tab":"Transcript with Tags",
+            "field":"transcript_tags",
+            "edit":false,
+            "type":"text",
+            "label":"Transcript data with Tags",
+            "settings":{"style":"json","wide":true,"rows":20}
         }
     ]
 }
