@@ -11,12 +11,14 @@ class model_app_api_interview
 
     public function rest($method, $params, $url)
     {
+        if (empty($params['slug']) && empty($url[2])) return null;
         $slug = (!empty($params['slug'])) ? $params['slug'] : $url[2];
 
         $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $slug], true);
 
-        if (!$item) $m = null; else {
+        if (!$item) return null; else {
             $sessions = $this->parent->getJsonModel('sessions', ['active' => 1, 'parent' => $item['id']], false, 'nr');
+            if (!$sessions) return null;
             $date1 = $sessions[0]['date'];
             $date2 = $sessions[count($sessions) - 1]['date'];
             if ($date1 == $date2) $item['date'] = _uho_fx::convertSingleDate($date1, 'en')['long_short_month'];
