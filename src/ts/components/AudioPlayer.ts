@@ -83,6 +83,7 @@ export class AudioPlayer extends Video {
 
 
     private init = (): void => {
+        if (!this.apiUrl) return;
         this.setNewAudio();
     };
 
