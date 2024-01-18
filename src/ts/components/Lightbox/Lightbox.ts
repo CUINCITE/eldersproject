@@ -104,7 +104,7 @@ export class Lightbox {
 
     private onKeyDown = (e): void => {
         // ONLY for testing
-        if (e.key === 'r') this.shown ? this.hide() : this.show();
+        // if (e.key === 'r') this.shown ? this.hide() : this.show();
     };
 
 

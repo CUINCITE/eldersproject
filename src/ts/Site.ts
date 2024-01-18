@@ -132,6 +132,7 @@ class Site {
         const pageChangedState = this.currentPage.onState();
         const lightboxChangedState = this.lightbox.onState(isRendered);
         this.menu?.onState();
+        this.search?.onState();
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([

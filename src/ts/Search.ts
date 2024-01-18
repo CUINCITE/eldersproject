@@ -36,6 +36,12 @@ export class Search {
     }
 
 
+    public onState(): void {
+        this.onFormReset();
+        clearTimeout(this.timer);
+    }
+
+
     private init(): void {
         this.settings = {
             liveMinLen: 3,
@@ -65,6 +71,7 @@ export class Search {
 
 
     private onFormReset = (): void => {
+        this.input.value = '';
         this.animationHide();
         this.view.classList.remove('has-value');
     };
