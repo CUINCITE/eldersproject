@@ -150,7 +150,7 @@ class model_app_api_import
                 $interviewers = $this->parent->getJsonModel('interviewers');
                 foreach ($interviewers as $k => $v) $interviewers[$k] = ['id' => $v['id'], 'name' => $v['first_name'] . ' ' . $v['last_name']];
 
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Interview_Data_20231211.csv', ',');
+                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/interviews.csv', ',');
                 if (!$items) return ['message' => 'CSV not found'];
 
                 $known_columns = [
