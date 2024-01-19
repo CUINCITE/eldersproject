@@ -68,7 +68,7 @@ class model_app_api_interview
         }
 
         $transcript = [
-            'english' => $this->formatMultipleTranscripts($raw_transcripts),
+            'english' => $this->formatMultipleTranscripts($raw_transcripts, $item['narrators'], $item['interviewers']),
 //            'spanish' => $this->formatTranscript($sessions)
         ];
 
@@ -120,100 +120,14 @@ class model_app_api_interview
         return $data;
     }
 
-    private function getInterviewDataa($item, $tags, $related)
-    {
-        $duration = 0;
-        foreach ($item['sessions'] as $k => $v) {
-            if (!$v['media']);
-            elseif ($v['media'] == 'audio') $duration += $v['audio']['duration'];
-            else $duration += $v['video']['duration'];
-        }
-
-        $narrator_location = [$item['sessions'][0]['narrator_location']];
-        foreach ($item['sessions'] as $k => $v)
-            if ($k > 0 && !in_array($v['narrator_location'], $narrator_location))
-                $narrator_location[] = $v['narrator_location'];
-
-        $info = [];
-        if ($item['preface']) $info[] = "<h3>Interview description</h3>" . $item['preface'];
-        if ($item['bio']) $info[] = '<h3>Narrator Bio</h3><p>' . $item['bio'] . '</p>';
-        if ($item['citation']) $info[] = '<h3>Citation</h3><p>' . $item['citation'] . '</p>';
-
-        $downloads = [];
-        if (!empty($item['pdf']['src'])) {
-            $downloads[] =
-                [
-                    "url" => 'api/download?transcript=' . $item['id'],
-                    "name" => "Transcript",
-                    "ext" => "PDF",
-                    "filename" => _uho_fx::charsetNormalize($item['name']) . "-transcript.pdf",
-                    "size" => $item['pdf_size'] ? number_format($item['pdf_size'] / 1000000, 1) . 'MB' : ''
-                ];
-        }
-
-        $result =
-            [
-                'title' => 'Interview with ' . $item['name'] . ' - Obama Presidency Oral History',
-                'id' => $item['id'],
-                'url' => ['type' => 'interview', 'slug' => $item['slug']],
-                'url_fav' => ['type' => 'interview_fav', 'id' => $item['id']],
-                'url_back' => ['type' => 'interviews'],
-                'sessions' => $item['sessions'],
-                'totalDuration' => $duration,
-                'thumbnail' => $item['image']['desktop'],
-                'thumbnail_square' => $item['image']['square'],
-                'narrator' =>
-                    [
-                        "id" => $item['id'],
-                        "name" => [$item['name1'], $item['surname1']],
-                        "profession" => $item['occupation'],
-                        "url" => ""
-
-                    ],
-                'interviewers' => $this->getInterviewers($item['interviewer']),
-
-                'tags' => $tags,
-                'related' => $related,
-                'date' => $item['date'],
-                "summary" => $item['summary'],
-                "info" => [
-                    "date" => $item['date'],
-                    "place" => implode(', ', $narrator_location),
-                    "text" => implode('', $info)
-                ],
-                "downloads" => $downloads,
-                "saved" => $this->parent->favGet('i' . $item['id'])
-            ];
-        return $result;
-    }
-
-    private function formatTranscript($raw_transcript)
-    {
-        $lines = explode("\n", $raw_transcript);
-        $result = [];
-
-        foreach ($lines as $line) {
-            preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s]*:)?)(.*)/", $line, $matches);
-            if (isset($matches[1], $matches[2], $matches[4])) {
-                $time = explode(':', $matches[2]);
-                $total_seconds = count($time) == 3
-                    ? intval($time[0]) * 3600 + intval($time[1]) * 60 + intval($time[2])
-                    : intval($time[0]) * 60 + intval($time[1]);
-
-                $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? "Question" : "Answer");
-                $text = "<strong>{$name}:</strong> " . $matches[4];
-                $result[] = [$total_seconds, $text];
-            }
-        }
-
-        return $result;
-    }
-
-    private function formatMultipleTranscripts($raw_transcripts)
+    private function formatMultipleTranscripts($raw_transcripts, $narrators, $interviewers): array
     {
         // Cumulative seconds of all previous transcripts
         $timeOffset = 0;
         $result = [];
+
+        $narrator = (count($narrators) == 1) ? $narrators[0]['name'].' '.$narrators[0]['surname'] : 'Answer';
+        $interviewer = (count($interviewers) == 1) ? $interviewers[0]['first_name'].' '.$interviewers[0]['last_name'] : 'Question';
 
         foreach ($raw_transcripts as $raw_transcript)
         {
@@ -239,7 +153,7 @@ class model_app_api_interview
                     // Add the timestamp of the previous transcript(s) to the current one
                     $total_seconds = $transcript_seconds + $timeOffset;
 
-                    $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? "Question" : "Answer");
+                    $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? $narrator : $interviewer);
                     $text = "<strong>{$name}:</strong> " . $matches[4];
                     $result[] = [$total_seconds, $text];
                 }
@@ -252,16 +166,4 @@ class model_app_api_interview
         return $result;
     }
 
-    private function getInterviewers($items)
-    {
-        foreach ($items as $k => $v)
-            $items[$k] =
-                [
-                    "id" => $v['id'],
-                    "name" => $v['first_name'] . ' ' . $v['last_name'],
-                    "url" => $v['active'] ? (!empty($v['people_index']['url']) ? $v['people_index']['url'] : $v['url']) : null
-                ];
-
-        return $items;
-    }
 }
