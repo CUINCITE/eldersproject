@@ -22,7 +22,7 @@
         </div>
         <div class="interviews__box-wrap">
             {% include "./components/c_interview-box.html" with {
-                modifier: item.modifier
+                modifier: item.interviewers.0.color
             } %}
         </div>
     </div>

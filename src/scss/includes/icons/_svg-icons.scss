@@ -134,7 +134,6 @@
 
 
 .svg-apply {
-
     @include breakpoint(desktop) {
         height: rem(16);
         width: rem(16);
@@ -152,14 +151,19 @@
 }
 
 .svg-checkmark {
+    @include breakpoint(desktop) {
+        width: rem(16) !important;
+        height: rem(16) !important;
+    } 
+
     @include breakpoint(tablet) {
         width: rem(26) !important;
-        height: rem(25) !important;
+        height: rem(26) !important;
     }
 
     @include breakpoint(phone) {
         width: rem(24) !important;
-        height: rem(25) !important;
+        height: rem(24) !important;
     }
 } 
 
