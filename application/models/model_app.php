@@ -43,7 +43,7 @@ class model_app extends _uho_model
         $this->orm->setLogErrors(true);
 
 //        if (cache or $_SERVER['REQUEST_URI'] === '/interviews') {
-        if (true) {
+        if (true && $_SERVER['REQUEST_URI'] !== '/api/player') {
             $this->sql->cacheSet('7g!',
                 [
                     'users','users_newsletter'
