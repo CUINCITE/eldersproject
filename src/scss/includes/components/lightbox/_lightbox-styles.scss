@@ -164,6 +164,7 @@
 
     &__filters {
         @include flex(row, flex-start, center);
+        flex-wrap: nowrap;
 
         margin-top: rem(-4);
     }
@@ -302,6 +303,7 @@
 
         position: relative;
         margin-right: rem(16);
+        flex-shrink: 0;
 
         &::before {
             content: "";
@@ -347,6 +349,7 @@
 
         text-transform: uppercase;
         margin-top: rem(2);
+        flex-shrink: 0;
 
 
         svg {
