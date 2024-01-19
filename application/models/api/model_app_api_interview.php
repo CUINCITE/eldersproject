@@ -74,7 +74,7 @@ class model_app_api_interview
 
         // bios
         $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
-        $label = (count($interview_info) > 1) ? 'Narrators bios' : 'Narrator bio';
+        $label = (count($interview_info) > 1) ? 'Narrators bios' : $item['narrators'][0]['name'] . ' ' . $item['narrators'][0]['surname'] .' bio';
 
         $interview_info[] = "<h3>Interview Summary</h3><p>{$item['summary']}</p>";
         $interview_info = "<h3>{$label}</h3>" . implode('', $interview_info);
