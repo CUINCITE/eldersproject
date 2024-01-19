@@ -6,9 +6,7 @@
     </div>
 
     <div class="interviews__locations phone-hide">
-        {% for location in item.narrators_states %}
-            <span>{{ location.label }}, {{ location.slug }}</span>
-        {% endfor %}
+        <span>{{ item.locations }}</span>
     </div>
 
     <h4 class="interviews__collection interviews__collection--grid phone-hide">{{item.interviewers.0.label}} <br> Collection</h4>
@@ -20,9 +18,7 @@
 
     <div class="interviews__box desktop-hide tablet-hide">
         <div class="interviews__locations">
-            {% for location in item.narrators_states %}
-                <span>{{ location.label }}, {{ location.slug }}</span>
-            {% endfor %}
+            <span>{{ item.locations }}</span>
         </div>
         <div class="interviews__box-wrap">
             {% include "./components/c_interview-box.html" with {
