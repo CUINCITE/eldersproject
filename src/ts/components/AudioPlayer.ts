@@ -1,6 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
 import { easing } from '../Site';
 import { Video } from './Player/Video';
+import { Lightbox } from './Lightbox/Lightbox';
 
 
 export class AudioPlayerStatesText {
@@ -39,12 +40,17 @@ export class AudioPlayer extends Video {
         AudioPlayer.instance.minimize();
     }
 
+    public static openAudioPlayer(): void {
+        AudioPlayer.instance.expand();
+    }
+
 
     private isExpanded = false;
     private cassetteTitle: HTMLElement;
     private apiUrl: string;
     private currentAudioId: string;
     private elements: IAudioPlayerResponseElements;
+    private playerButtons: NodeListOf<HTMLButtonElement>;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -67,6 +73,24 @@ export class AudioPlayer extends Video {
         this.init();
         this.bindAudioPlayer();
     }
+
+
+
+    public bindButtons = (): void => {
+        // bind new buttons after each page transition
+
+        document.querySelectorAll('[data-audio-player]').forEach(button => {
+
+            button.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
+
+                this.setNewAudio(id, true);
+            });
+        });
+    };
 
 
 
@@ -125,6 +149,9 @@ export class AudioPlayer extends Video {
 
 
     private onThumbnailClick = (): void => {
+        // when lightbox is open, do not minimize the player - it should be always expanded
+        if (Lightbox.isOpen) return;
+
         this.isExpanded ? this.minimize() : this.expand();
         this.view.classList.toggle('is-expanded');
     };
