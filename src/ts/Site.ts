@@ -176,6 +176,7 @@ class Site {
         this.scroll.load();
         Scroll.start();
         PushStates.setTitle();
+        this.audioPlayer.bindButtons();
         this.isInitialized = true;
     };
 

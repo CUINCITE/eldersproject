@@ -148,6 +148,11 @@
         gap: rem(4);
         padding-top: rem(9);
 
+        body.has-lightbox & {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
 
         svg {
             margin-bottom: rem(3);

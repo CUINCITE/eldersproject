@@ -5,10 +5,14 @@ import { LightboxData } from './Lightbox.types';
 import { easing } from '../../Site';
 import { Component } from '../../components/Component';
 import { components } from '../../Classes';
+import { AudioPlayer } from '../../components/AudioPlayer';
 
 
 
 export class Lightbox {
+
+    public static isOpen: boolean;
+
     private components: Array<Component>;
     private view: HTMLElement;
     private shown = false;
@@ -90,6 +94,8 @@ export class Lightbox {
         this.view.innerHTML = html;
 
         PushStates.bind(this.view);
+        // lightbox has its own audio player's button to run it
+        AudioPlayer.instance.bindButtons();
 
         this.buildComponents(this.view.querySelectorAll('[data-component]'));
     };
@@ -171,6 +177,9 @@ export class Lightbox {
 
     private hide(fast?: boolean): Promise<void> {
         this.controller?.abort();
+
+        Lightbox.isOpen = false;
+
         return new Promise<void>((resolve, reject) => {
             if (this.animating) {
                 reject();
@@ -187,6 +196,7 @@ export class Lightbox {
                 delay: fast ? 0 : 1,
                 ease: 'none',
                 onStart: () => {
+                    document.body.classList.remove('has-lightbox');
                     this.view.classList.remove('is-showing');
                 },
                 onComplete: (): void => {
@@ -205,17 +215,23 @@ export class Lightbox {
         if (this.shown) { return; }
 
         this.shown = true;
+        Lightbox.isOpen = true;
 
         gsap.to(this.view, {
             duration: 0.3,
             opacity: 1,
             ease: 'none',
             onStart: () => {
+                document.body.classList.add('has-lightbox');
                 this.view.classList.remove('is-closing');
                 this.view.style.display = 'block';
             },
             // that class runs CSS animation
-            onComplete: () => this.view.classList.add('is-showing'),
+            onComplete: () => {
+                this.view.classList.add('is-showing');
+                // audioplayer should be always expanded when lightbox is open
+                AudioPlayer.openAudioPlayer();
+            },
         });
     }
 
