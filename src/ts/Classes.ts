@@ -9,10 +9,12 @@ import { Accordeon } from './components/Accordeon';
 import { AccordeonList } from './components/AccordeonList';
 import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
+import { FilterLetters } from './components/FilterLetters';
 
 export const components = {
     Accordeon,
     AccordeonList,
+    FilterLetters,
     Load,
     Modal,
     More,

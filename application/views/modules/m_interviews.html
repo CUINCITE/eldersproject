@@ -4,14 +4,14 @@
         <div class="interviews-grid__filtered filtered box">
             <ul class="filtered__list js-interviews-filtered"></ul>
         </div>
-        
+
         <div data-scroll="interviews">
-            <div class="interviews-grid__controls">
+            <div class="interviews-grid__controls js-controls">
 
                 <div class="interviews-grid__tabs">
                     <div class="grid">
                         <div class="col-span-12">
-                            <ul class="interviews-grid__letters">
+                            <ul class="interviews-grid__letters" data-component="FilterLetters" data-options='{"contentSelector": "#interviews-grid"}'>
                                 {% set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
                                 {% for letter in letters %}
                                     <li class="interviews-grid__letter">
@@ -52,9 +52,9 @@
                                             <span class="sr-only">show sorting</span>
                                             <i>[[svg::arrow-small]]</i>
                                             <span>
-                                                {% if 'collections' in sort.selected %} 
+                                                {% if 'collections' in sort.selected %}
                                                     collections
-                                                {% elseif 'locations' in sort.selected %} 
+                                                {% elseif 'locations' in sort.selected %}
                                                     locations
                                                 {% else %}
                                                     narrators
@@ -62,7 +62,7 @@
                                             </span>
                                         </button>
                                     </div>
-                                    {% include "./subviews/subview_interviews_modal_sort.html" %} 
+                                    {% include "./subviews/subview_interviews_modal_sort.html" %}
                                 </div>
 
                                 <form action="" data-component="Load"

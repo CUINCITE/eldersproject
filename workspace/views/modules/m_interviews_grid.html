@@ -11,7 +11,7 @@
                 <div class="interviews-grid__tabs">
                     <div class="grid">
                         <div class="col-span-12">
-                            <ul class="interviews-grid__letters">
+                            <ul class="interviews-grid__letters" data-component="FilterLetters" data-options='{"contentSelector": "#interviews-grid"}'>
                                 {% set letters =
                                 ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
                                 {% for letter in letters %}
@@ -28,7 +28,7 @@
                 <div class="interviews-grid__filters box">
                     <div class="grid">
                         <div class="col-span-12">
-                            <div class="interviews-grid__controls">
+                            <div class="interviews-grid__controls js-controls">
 
                                 <div class="interviews-grid__header">
                                     <button type="button js-modal" aria-controls="modal">
@@ -100,7 +100,7 @@
                                         </div>
                                     </fieldset>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>
