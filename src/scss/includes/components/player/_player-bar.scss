@@ -131,12 +131,31 @@
     &__more {
         @extend %player-small-button;
 
-        gap: rem(2);
         padding-bottom: rem(10);
+    }
+
+
+
+    &__icon {
+        @include flex(column, flex-start, center);
+
+        margin-bottom: rem(3);
+        overflow: hidden;
+        position: relative;
 
 
         svg {
-            margin-bottom: rem(3);
+            transition: transform $time-fast $easing;
+
+            &:last-of-type {
+                position: absolute;
+                inset: 100% auto auto;
+            }
+        }
+
+
+        .player__minimize & {
+            transform: scaleY(-1);
         }
     }
 
@@ -145,17 +164,11 @@
     &__minimize {
         @extend %player-small-button;
 
-        gap: rem(4);
         padding-top: rem(9);
 
         body.has-lightbox & {
             opacity: 0 !important;
             pointer-events: none;
-        }
-
-
-        svg {
-            margin-bottom: rem(3);
         }
     }
 
@@ -277,7 +290,17 @@
     @include letter-spacing(-0.532, 17.727);
     @include flex(row, flex-start, flex-end);
 
+    gap: rem(2);
     text-transform: uppercase;
     opacity: 0;
     transition: opacity .25s $ease-custom;
+
+
+    @include hover {
+        svg {
+            animation: slide-up .25s $ease-custom forwards;
+
+            &:last-of-type { animation-delay: .1s; }
+        }
+    }
 }
