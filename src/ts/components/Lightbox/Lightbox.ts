@@ -108,6 +108,7 @@ export class Lightbox {
         this.view.innerHTML = html;
 
         PushStates.bind(this.view);
+
         // lightbox has its own audio player's button to run it
         AudioPlayer.instance.bindButtons();
 
@@ -179,7 +180,7 @@ export class Lightbox {
         if (patternFound) {
 
             Promise.all([
-                this.animateOut(),
+                this.hide(),
                 this.load(),
             ]).then(results => {
                 const data = results.filter(Boolean).reduce((p, c) => ({ ...p, ...c })) as LightboxData;
@@ -193,7 +194,7 @@ export class Lightbox {
 
                 this.animateIn();
             }).catch(() => {
-                // this.hide();
+                this.hide();
             });
             return true;
         }
@@ -213,7 +214,6 @@ export class Lightbox {
 
     private hide(fast?: boolean): Promise<void> {
         this.controller?.abort();
-
         Lightbox.isOpen = false;
 
         return new Promise<void>((resolve, reject) => {
@@ -239,6 +239,8 @@ export class Lightbox {
                     this.view.style.display = 'none';
                     this.shown = false;
                     this.animating = false;
+                    // empty the lightbox
+                    this.view.innerHTML = '';
                     resolve();
                 },
             });
@@ -250,24 +252,26 @@ export class Lightbox {
 
         if (this.shown) { return; }
 
-        this.shown = true;
-        Lightbox.isOpen = true;
+        Promise.all([this.shown ? this.hide() : null]).then(() => {
+            this.shown = true;
+            Lightbox.isOpen = true;
 
-        gsap.to(this.view, {
-            duration: 0.3,
-            opacity: 1,
-            ease: 'none',
-            onStart: () => {
-                document.body.classList.add('has-lightbox');
-                this.view.classList.remove('is-closing');
-                this.view.style.display = 'block';
-            },
-            // that class runs CSS animation
-            onComplete: () => {
-                this.view.classList.add('is-showing');
-                // audioplayer should be always expanded when lightbox is open
-                AudioPlayer.openAudioPlayer();
-            },
+            gsap.to(this.view, {
+                duration: 0.3,
+                opacity: 1,
+                ease: 'none',
+                onStart: () => {
+                    document.body.classList.add('has-lightbox');
+                    this.view.classList.remove('is-closing');
+                    this.view.style.display = 'block';
+                },
+                // that class runs CSS animation
+                onComplete: () => {
+                    this.view.classList.add('is-showing');
+                    // audioplayer should be always expanded when lightbox is open
+                    AudioPlayer.openAudioPlayer();
+                },
+            });
         });
     }
 
