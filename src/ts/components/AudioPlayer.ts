@@ -35,20 +35,40 @@ export class AudioPlayer extends Video {
 
     // eslint-disable-next-line no-use-before-define
     public static instance: AudioPlayer;
+    public static currentAudioId: string;
 
     public static closeAudioPlayer(): void {
         AudioPlayer.instance.minimize();
     }
+
+
 
     public static openAudioPlayer(): void {
         AudioPlayer.instance.expand();
     }
 
 
+
+    public static getId(): string {
+        return AudioPlayer.currentAudioId;
+    }
+
+
+
+    public static isAudioPlayerPaused(): boolean {
+        return AudioPlayer.instance.isPaused();
+    }
+
+
+    public static updateColors(color: string): void {
+        AudioPlayer.instance.updateColors(color);
+    }
+
+
+
     private isExpanded = false;
     private cassetteTitle: HTMLElement;
     private apiUrl: string;
-    private currentAudioId: string;
     private elements: IAudioPlayerResponseElements;
     private playerButtons: NodeListOf<HTMLButtonElement>;
 
@@ -80,16 +100,26 @@ export class AudioPlayer extends Video {
         // bind new buttons after each page transition
 
         document.querySelectorAll('[data-audio-player]').forEach(button => {
-
-            button.addEventListener('click', e => {
-                e.preventDefault();
-                e.stopPropagation();
-
-                const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
-
-                this.setNewAudio(id, true);
-            });
+            button.addEventListener('click', this.onBtnClick);
         });
+    };
+
+
+
+    protected onBtnClick = (e): void => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
+        if (!id) return;
+
+        if (id !== AudioPlayer.currentAudioId) {
+            // if button has different id than audio player, load new audio and play
+            this.setNewAudio(id, true);
+        } else {
+            // if button has the same id as current audio, only toggle player
+            this.isPaused() ? this.play() : this.pause();
+        }
     };
 
 
@@ -97,6 +127,7 @@ export class AudioPlayer extends Video {
     protected onPlay(): void {
         super.onPlay();
         this.setTitleInCassette(AudioPlayerStatesText.PLAYING);
+        this.togglePlayerButtons(true);
     }
 
 
@@ -104,6 +135,7 @@ export class AudioPlayer extends Video {
     protected onPause(): void {
         super.onPause();
         this.setTitleInCassette(AudioPlayerStatesText.PAUSED);
+        this.togglePlayerButtons(false);
     }
 
 
@@ -111,6 +143,13 @@ export class AudioPlayer extends Video {
     private init = (): void => {
         if (!this.apiUrl) return;
         this.setNewAudio();
+    };
+
+
+
+    private togglePlayerButtons = (isPlaying: boolean): void => {
+        this.playerButtons = document.querySelectorAll(`[data-audio-player="${AudioPlayer.currentAudioId}"]`);
+        this.playerButtons.forEach(btn => btn.classList.toggle('is-playing', isPlaying));
     };
 
 
@@ -127,6 +166,8 @@ export class AudioPlayer extends Video {
     private setNewAudio = (id?: string, play?: boolean): void => {
         this.loadAudio(id).then((data: IAudioPlayerResponse) => {
             this.updatePlayer(data);
+            // check if lightbox is open and has the same id as audio player
+            Lightbox.checkPlayerState();
             // play audio when it has been already initialized
             play && this.play();
         });
@@ -201,7 +242,7 @@ export class AudioPlayer extends Video {
 
 
     private updatePlayer = (data: IAudioPlayerResponse): void => {
-        this.currentAudioId = data.id;
+        AudioPlayer.currentAudioId = data.id;
         // TO DO - add multiple sources
         this.media.src = data.src[0].src;
         this.elements.title.innerText = data.title;
@@ -238,4 +279,17 @@ export class AudioPlayer extends Video {
             throw new Error(error);
         }
     }
+
+
+
+    private updateColors = (color: string): void => {
+        this.view.style.setProperty('--lightbox-color', `var(--color-${color})`);
+
+        // remove all previous color modifiers (if exist)
+        const classes = this.view.className.split(' ').filter(c => !c.startsWith('audioplayer--'));
+        this.view.className = classes.join(' ').trim();
+
+        // add new color modifier
+        this.view.classList.add(`audioplayer--${color}`);
+    };
 }

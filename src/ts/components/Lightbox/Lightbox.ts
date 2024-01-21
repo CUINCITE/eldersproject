@@ -1,5 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
-import { Templates } from '../../templates/Templates';
+import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
 import { easing } from '../../Site';
@@ -11,21 +11,35 @@ import { AudioPlayer } from '../../components/AudioPlayer';
 
 export class Lightbox {
 
+    // eslint-disable-next-line no-use-before-define
+    public static instance: Lightbox;
     public static isOpen: boolean;
+    public static currentId: string;
+
+
+    public static checkPlayerState(): void {
+        Lightbox.instance.checkPlayerState();
+    }
+
+
+    public static getId(): string {
+        return Lightbox.currentId;
+    }
 
     private components: Array<Component>;
     private view: HTMLElement;
     private shown = false;
     private currentPath: string;
+    private playerBtn: HTMLButtonElement;
 
     private animating: boolean;
     private controller: AbortController;
 
     constructor() {
+        Lightbox.instance = this;
         this.view = document.getElementById('lightbox');
 
         this.hide(true);
-
 
         this.bind();
     }
@@ -88,7 +102,7 @@ export class Lightbox {
 
 
     public build = (data: LightboxData): void => {
-        const template = Templates.get('lightbox');
+        const template = Templates.get(TemplateNames.LIGHTBOX);
 
         const html = template.render(data);
         this.view.innerHTML = html;
@@ -97,7 +111,30 @@ export class Lightbox {
         // lightbox has its own audio player's button to run it
         AudioPlayer.instance.bindButtons();
 
+        Lightbox.currentId = data.id;
+
         this.buildComponents(this.view.querySelectorAll('[data-component]'));
+
+        // find button connected to player
+        this.playerBtn = this.view.querySelector('.js-player-btn');
+
+        // check if player is playing audio for this lightbox
+        this.checkPlayerState();
+
+        this.tryToSetColor();
+    };
+
+
+
+    private tryToSetColor = (): void => {
+        const lightboxItem: HTMLElement = this.view.firstElementChild as HTMLElement;
+        // for initial load, when lightbox is not rendered yet
+        if (!lightboxItem) return;
+
+        // get data-attribute from .lightbox__item and update color variable in audioplayer
+        const color: string = lightboxItem.getAttribute('data-theme-color');
+
+        if (color && (AudioPlayer.getId() === Lightbox.getId())) AudioPlayer.updateColors(color);
     };
 
 
@@ -140,9 +177,6 @@ export class Lightbox {
         const patternFound = this.matchPathnamePattern();
 
         if (patternFound) {
-            // show the interview lightbox:
-            if (!this.shown) { this.show(); }
-
 
             Promise.all([
                 this.animateOut(),
@@ -154,6 +188,8 @@ export class Lightbox {
                 this.currentPath = window.location.pathname;
 
                 this.build(data);
+                // show the interview lightbox:
+                if (!this.shown) { this.show(); }
 
                 this.animateIn();
             }).catch(() => {
@@ -233,6 +269,17 @@ export class Lightbox {
                 AudioPlayer.openAudioPlayer();
             },
         });
+    }
+
+
+
+    private checkPlayerState(): void {
+        if (AudioPlayer.getId() === Lightbox.getId() && !AudioPlayer.isAudioPlayerPaused()) {
+            this.playerBtn?.classList.add('is-playing');
+        } else {
+            this.playerBtn?.classList.remove('is-playing');
+        }
+        this.tryToSetColor();
     }
 
 

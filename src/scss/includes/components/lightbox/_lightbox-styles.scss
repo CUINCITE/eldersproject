@@ -4,6 +4,8 @@
 
 
 .lightbox {
+    --lightbox-play-width: #{rem(92)};
+
     @include full(fixed);
     @include z-index(offscreen);
 
@@ -39,6 +41,9 @@
         background: var(--main-body-color);
         padding-top: rem(12);
         padding-left: var(--grid-margin);
+
+
+        &-info { overflow: hidden; }
     }
 
 
@@ -366,6 +371,12 @@
         max-width: rem(480);
         margin-top: rem(-1);
         margin-left: rem(15);
+        transition: transform .25s $ease-out;
+
+
+        .is-playing ~ & {
+            transform: translateX(calc((var(--lightbox-play-width) + #{rem(15)}) * -1));
+        }
     }
 
 
@@ -634,13 +645,31 @@
         @include font-family(compressed);
         @include font-size(62, 60);
         @include letter-spacing(-1.24, 62);
+        @include flex(row, flex-start, center);
 
         text-transform: uppercase;
         margin-top: rem(4);
+        overflow: hidden;
 
 
         span {
+            width: var(--lightbox-play-width);
             margin-left: rem(13);
+            height: 100%;
+            display: inline-block;
+            transition: transform .25s $ease-out;
+        }
+
+
+        svg {
+            margin-top: rem(-6);
+        }
+
+
+        &.is-playing {
+            span {
+                transform: translateY(100%);
+            }
         }
     }
 }

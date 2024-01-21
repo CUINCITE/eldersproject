@@ -169,6 +169,9 @@ export class Load extends Component {
                 this.view.classList.remove('is-pending');
                 ScrollTrigger.refresh();
 
+                // should have lightbox links
+                PushStates.bind(this.contentElement);
+
                 setTimeout(() => {
                     this.isPending = false;
                 }, 250);

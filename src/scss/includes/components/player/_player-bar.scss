@@ -163,7 +163,14 @@
 
     &__header {
         position: relative;
-        border-bottom: 1px solid #404040;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 1px;
+            background-color: #404040;
+        }
     }
 
 
@@ -249,8 +256,12 @@
 
 
     &__progress {
-        background: $progress-color;
+        background: var(--lightbox-color, var(--color-deep-red));
         opacity: $progress-opacity;
+
+        .player[style] & {
+            filter: brightness(0.8);
+        }
     }
 
 
