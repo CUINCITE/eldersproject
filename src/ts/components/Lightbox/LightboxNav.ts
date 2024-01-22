@@ -9,6 +9,7 @@ export class LightboxNav extends Component {
     private navTabs: NodeListOf<HTMLElement>;
     private activeTab: HTMLElement;
     private lightboxEl: HTMLElement;
+    private isAnimating: boolean;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -29,6 +30,8 @@ export class LightboxNav extends Component {
 
 
     private onBtnClick = (e): void => {
+        if (this.isAnimating) return;
+
         const { currentTarget: button } = e;
 
         const tabSlug: string = button.getAttribute('aria-controls');
@@ -47,6 +50,8 @@ export class LightboxNav extends Component {
 
 
     private showTab = (tab: HTMLElement): void => {
+        if (this.isAnimating) return;
+
         this.closeTab(this.activeTab).then(() => {
             if (!tab) {
                 // for animate image
@@ -60,8 +65,12 @@ export class LightboxNav extends Component {
                 duration: 0.6,
                 ease: easing,
                 clearProps: 'all',
-                onStart: () => tab.classList.add('is-visible'),
+                onStart: () => {
+                    this.isAnimating = true;
+                    tab.classList.add('is-visible');
+                },
                 onComplete: () => {
+                    this.isAnimating = false;
                     this.activeTab = tab;
                 },
             });
@@ -71,6 +80,8 @@ export class LightboxNav extends Component {
 
 
     private closeTab = (tab: HTMLElement): Promise<void> => new Promise(resolve => {
+        if (this.isAnimating) resolve();
+
         if (!tab) {
             // for animate image
             this.lightboxEl.classList.add('is-not-default');
@@ -82,7 +93,11 @@ export class LightboxNav extends Component {
                 duration: 0.3,
                 ease: easing,
                 clearProps: 'all',
+                onStart: () => {
+                    this.isAnimating = true;
+                },
                 onComplete: () => {
+                    this.isAnimating = false;
                     tab.classList.remove('is-visible');
                     resolve();
                 },
