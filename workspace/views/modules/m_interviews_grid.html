@@ -49,10 +49,10 @@
                                     {% include "./subviews/subview_interviews_modal.html" %}
                                     <div class="interviews-grid__sort-button desktop-hide tablet-hide">
                                         <legend>Sort by:</legend>
-                                        <button type="button" aria-controls="modal-sort" class="js-modal">
+                                        <button type="button" aria-controls="modal-sort" class="js-modal js-mobile-modal-button{% if '!' in sort.selected %} button--inversed{% endif %}">
                                             <span class="sr-only">show sorting</span>
                                             <i>[[svg::arrow-small]]</i>
-                                            <span>{{state.selected ?? 'Narrators'}}</span>
+                                            <span class="js-current-sorting">{{state.selected ?? 'Narrators'}}</span>
                                         </button>
                                     </div>
                                     {% include "./subviews/subview_interviews_modal_sort.html" %}

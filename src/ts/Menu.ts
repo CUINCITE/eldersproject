@@ -1,3 +1,4 @@
+import { gsap } from 'gsap/dist/gsap';
 import { AudioPlayer } from './components/AudioPlayer';
 
 export class Menu {
@@ -7,6 +8,12 @@ export class Menu {
     private closeBtn: HTMLButtonElement;
     private wrapEl: HTMLElement;
     private isAnimating = false;
+    private items: NodeListOf<HTMLElement>;
+    private lines: NodeListOf<HTMLElement>;
+    private labels: NodeListOf<HTMLElement>;
+    private links: NodeListOf<HTMLElement>;
+    private searchLabel: HTMLElement;
+    private searchIcon: HTMLElement;
 
 
     // eslint-disable-next-line no-unused-vars
@@ -14,6 +21,12 @@ export class Menu {
         this.elToggle = document.querySelector('.js-toggle-menu');
         this.closeBtn = this.view.querySelector('.js-menu-close');
         this.wrapEl = document.getElementById('wrapper');
+        this.items = this.view.querySelectorAll('.js-menu-item');
+        this.labels = this.view.querySelectorAll('.js-menu-label');
+        this.lines = this.view.querySelectorAll('.js-menu-line');
+        this.links = this.view.querySelectorAll('.js-menu-link');
+        this.searchLabel = this.view.querySelector('.js-menu-search-label');
+        this.searchIcon = this.view.querySelector('.js-menu-search-svg');
 
         this.bind();
     }
@@ -60,6 +73,39 @@ export class Menu {
         this.isOpen = true;
         this.view.style.display = 'flex';
         document.body.classList.add('has-menu-open');
+
+        gsap.timeline()
+            .addLabel('init')
+            .fromTo(this.labels, { yPercent: 120 }, {
+                yPercent: 0,
+                duration: 0.8,
+                stagger: 0.25,
+                ease: 'power2.out',
+            }, 'init')
+            .fromTo(this.lines, { scaleX: 0 }, {
+                scaleX: 1,
+                duration: 1.2,
+                stagger: 0.25,
+                ease: 'power2.out',
+            }, 'init')
+            .fromTo(this.links, { xPercent: 100 }, {
+                xPercent: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            }, '-=.8')
+            .fromTo(this.searchIcon, { scale: 0 }, {
+                scale: 1,
+                duration: 0.4,
+                ease: 'power2.out',
+            }, '-=.4')
+            .fromTo(this.searchLabel, { xPercent: 100 }, {
+                xPercent: 0,
+                duration: 0.6,
+                clearProps: 'all',
+                ease: 'power2.out',
+            }, '-=.25');
+
         AudioPlayer.closeAudioPlayer();
     };
 

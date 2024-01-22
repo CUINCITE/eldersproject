@@ -103,3 +103,15 @@
     0% { transform: translateY(0%); }
     100% { transform: translateY(-100%); }
 }
+
+
+@keyframes search-label-down {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(150%) rotate(-20deg); }
+}
+
+
+@keyframes search-label-alt {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0%); }
+}

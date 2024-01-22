@@ -10,8 +10,8 @@
     }
 
     @include breakpoint(phone) {
-        @include font-size(30, 28.2);
-        @include letter-spacing(-0.9, 30);
+        @include font-size(28, 0.94);
+        @include letter-spacing(-0.84, 28);
     }
 
 
@@ -25,13 +25,40 @@
         @include breakpoint(desktop) {
             width: rem(29);
             margin-bottom: rem(4);
+            margin-left: rem(1);
         }
 
         @include breakpoint(phone) {
-            width: rem(29);
+            width: rem(28);
             margin-bottom: rem(4);
+            margin-left: rem(1);
         }
     } 
+
+
+
+    &--mini {
+        @include font-family(normal, 400);
+        @include font-settings(700, 100);
+        text-transform: unset;
+
+        &::before {
+            all: unset;
+        }
+
+        @include breakpoint(desktop) {
+        
+        }
+
+        @include breakpoint(tablet) {
+        
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 1.3);
+        }
+    }
+
 
 
     footer {
@@ -73,5 +100,31 @@
             }
 
         }
+    }
+
+    &__cassette {
+        display: inline-flex;
+        position: relative; 
+        background-color: $color-gold;
+
+        svg {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        @include breakpoint(desktop) {
+        
+        }
+
+        @include breakpoint(tablet) {
+        
+        }
+
+        @include breakpoint(phone) {
+            width: rem(38);
+            height: rem(20);
+        }
+
     }
 }

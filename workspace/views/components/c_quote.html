@@ -1,6 +1,14 @@
-<div class="quote">
+<div class="quote{% if mini %} quote--mini{% endif %}">
     <blockquote>
-        <p>{{text}}</p>
-        <footer>{{author}}</footer>
+        <p>
+            {{text}}
+            {% if clip %}
+                <button data-audio-player="{{clip.player}}" data-start="{{clip.start}}" class="quote__cassette">[[svg::cassette]]</button>
+            {% endif %}
+        </p>
+        {% if author %}
+            <footer>{{author}}</footer>
+        {% endif %}
+
     </blockquote>
 </div>

@@ -73,23 +73,23 @@
                 margin-left: map-get($grid-gutter, phone); 
                 padding-bottom: rem(32);
 
-                &::after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    height: 1px;
-                    background-color: $color-bg;
-                    z-index: -1;
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     top: 0;
+                //     height: 1px;
+                //     background-color: $color-bg;
+                //     z-index: -1;
     
-                    @each $bp in (tablet, phone) {
+                //     @each $bp in (tablet, phone) {
     
-                        @include breakpoint($bp) {
-                            left: map-get($grid-gutter, $bp) * -1;
-                            width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
-                        }
-                    }
-                } 
+                //         @include breakpoint($bp) {
+                //             left: map-get($grid-gutter, $bp) * -1;
+                //             width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                //         }
+                //     }
+                // } 
             }
  
             img {
@@ -149,23 +149,23 @@
                 padding-bottom: rem(32);
                 padding-top: vw(5, phone);
 
-                &::after {
-                    content: ""; 
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    height: 1px;
-                    background-color: $color-bg;
-                    z-index: -1;
+                // &::after {
+                //     content: ""; 
+                //     display: block;
+                //     position: absolute;
+                //     top: 0;
+                //     height: 1px;
+                //     background-color: $color-bg;
+                //     z-index: -1;
     
-                    @each $bp in (tablet, phone) {
+                //     @each $bp in (tablet, phone) {
     
-                        @include breakpoint($bp) {
-                            left: map-get($grid-gutter, $bp) * -1;
-                            width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
-                        }
-                    }
-                }
+                //         @include breakpoint($bp) {
+                //             left: map-get($grid-gutter, $bp) * -1;
+                //             width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                //         }
+                //     }
+                // }
             }
 
             .polaroid {
@@ -317,6 +317,8 @@
         }
 
         @include breakpoint(phone) {
+            position: relative;
+            
             .text {
                 padding-bottom: 0;
             }

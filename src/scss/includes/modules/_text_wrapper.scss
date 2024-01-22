@@ -1,0 +1,218 @@
+.text_wrapper {
+    @include breakpoint(desktop) {
+
+    }
+
+    @include breakpoint(tablet) {
+
+    }
+
+    @include breakpoint(phone) {
+
+    }
+
+
+
+    &__column {
+        @include breakpoint(desktop) {
+            position: relative;
+        }
+
+        @include breakpoint(tablet) {
+            position: relative;
+            grid-column: 1 / span 8 !important;
+        }
+
+        @include breakpoint(phone) {
+            position: relative;
+        }
+    }
+
+
+
+    &__content {
+        @include breakpoint(desktop) {
+
+        }
+
+        @include breakpoint(tablet) {
+
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(15) rem(65);
+            padding-right: rem(36.5);
+        }
+    }
+
+
+
+    &__module {
+        & + & {
+            @include breakpoint(desktop) {
+
+            }
+
+            @include breakpoint(tablet) {
+
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(25);
+            }
+        }
+
+        p {
+            @include breakpoint(phone) {
+                // max-width: rem(267) !important;
+            }
+        }
+
+        .text {
+            padding-block: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        p + p, blockquote + p, p + blockquote, p + div, div + p {
+            @include breakpoint(desktop) {
+                margin-top: vw(22);
+                margin-top: vw(22);
+
+            }
+    
+            @include breakpoint(tablet) {
+                margin-top: rem(25);
+                margin-top: rem(25);
+
+            }
+     
+            @include breakpoint(phone) {
+                margin-top: rem(25);
+                
+            }
+        }
+    }
+
+
+
+    &__text + &__quote--mini,
+    &__quote--mini + &__text {
+        @include breakpoint(desktop) {
+
+        }
+
+        @include breakpoint(tablet) {
+
+        }
+
+        @include breakpoint(phone) {
+            margin-top: rem(25);
+        }
+    }
+
+
+
+    &__photo {
+        .polaroid {
+            @include breakpoint(phone) {
+                --polaroid-width: #{vw(165, phone)};
+                --polaroid-height: #{vw(205, phone)};
+
+                position: relative;
+                rotate: 11deg;
+                left: 50%;
+                translate: -50% 0;
+                margin-block: vw(28, phone);
+            }
+        }
+
+        &--horizontal {
+            .polaroid {
+                @include breakpoint(phone) {
+                    --polaroid-width: #{vw(239, phone)};
+                    --polaroid-height: #{vw(187, phone)};
+                }
+            }
+        }
+
+        &--square {
+            .polaroid {
+                @include breakpoint(phone) {
+                    --polaroid-width: #{vw(165, phone)};
+                    --polaroid-height: #{vw(165, phone)};
+                }
+            }
+        }
+
+        &--reversed {
+            .polaroid {
+                @include breakpoint(phone) {
+                    rotate: -11deg;
+                }
+            }
+        }
+    }
+
+
+    &__illustration {
+        img {
+            max-width: unset;
+
+            @include breakpoint(phone) {
+                position: relative;
+                left: 50%;
+                translate: -50% 0;
+                height: vw(260, phone);
+            }
+        }
+    }
+
+
+
+    &__info {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            height: 1px;
+            background-color: $color-black;
+
+            @include breakpoint(desktop) {
+                width: rem(35);
+                right: 0;
+            }
+
+            @include breakpoint(phone) {
+                width: rem(35);
+                left: 0;
+            }
+        }
+
+        @include breakpoint(desktop) {
+            @include flex(column, flex-start, flex-end)
+
+                text-align: right;
+            max-width: rem(182);
+            padding-top: rem(16);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(16);
+            margin-top: rem(16);
+        }
+
+        p {
+            margin: 0 !important;
+        }
+
+        p + p {
+            margin: 0;
+        }
+
+        b {
+            @include font-settings(700, 0);
+        }
+    }
+}

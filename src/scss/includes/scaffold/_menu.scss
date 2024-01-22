@@ -17,6 +17,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
     @include breakpoint(not-desktop) {
         padding: 0;
         height: 100vh;
+        /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
         height: 100lvh;
     }
 
@@ -74,12 +75,12 @@ $theme-colors: ("orange", "red", "blue", "pink");
             }
         }
 
-        border-top: 1px solid currentColor;
         overflow: hidden;
+        position: relative;
 
         @include breakpoint(desktop) {
             padding-right: rem(12);
-            padding-top: rem(10);
+            padding-top: rem(11);
         }
 
         @include breakpoint(tablet) {
@@ -93,10 +94,24 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
 
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            background-color: var(--theme-color);
+            height: 1px;
+            z-index: 2;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform .5s $ease-custom;
+        }
+
+
         a {
             @include flex(row, flex-end, flex-end);
 
             width: 100%;
+            position: relative;
 
             @include breakpoint(not-desktop) {
                 @include flex(row, flex-start, flex-start);
@@ -106,6 +121,25 @@ $theme-colors: ("orange", "red", "blue", "pink");
                 .menu__arrow { opacity: 1; }
             }
         }
+
+
+        @include hover {
+            &::before {
+                transform: scaleX(1);
+                transform-origin: right center;
+            }
+        }
+    }
+
+
+
+    &__line {
+        position: absolute;
+        inset: 0 0 auto;
+        transform-origin: right center;
+        height: 1px;
+        background-color: currentColor;
+        display: inline-block;
     }
 
 
@@ -169,6 +203,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
     &__footer {
         margin-top: rem(17);
+        overflow: hidden;
 
         @include breakpoint(desktop) {
             @include font-size(10, 16);
@@ -178,7 +213,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
         @include breakpoint(not-desktop) {
             @include flex(column, flex-end, flex-start);
- 
+
             flex-grow: 1;
 
             @include breakpoint(tablet) {

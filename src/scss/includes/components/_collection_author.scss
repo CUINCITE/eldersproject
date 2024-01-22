@@ -13,7 +13,10 @@
             }
 
             @include breakpoint(tablet) {
+                @include font-size(92, 0.84);
+                @include letter-spacing(-2.97, 92);
 
+                margin-block: trim-font(0.84);
             }
 
             @include breakpoint(phone) {
@@ -31,6 +34,16 @@
                 margin-left: 0;
             }
 
+            @include breakpoint(tablet) {
+                @include font-size(25, 1.05);
+                @include letter-spacing(-0.25, 25);
+
+                margin-block: trim-font(1.05);
+
+                padding-left: rem(3);
+                padding-top: rem(12);
+            }
+
             @include breakpoint(phone) {
                 @include font-size(20, 21);
                 @include letter-spacing(-0.2, 20);
@@ -42,6 +55,11 @@
                 @include breakpoint(desktop) {
                     width: rem(35);
                     margin-right: rem(16);
+                }
+
+                @include breakpoint(tablet) {
+                    width: rem(32);
+                    margin-right: rem(10);
                 }
 
                 @include breakpoint(phone) {

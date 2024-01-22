@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { CustomEase } from 'gsap/dist/CustomEase';
 import Scroll from './Scroll';
 import { pages as Pages } from './Classes';
@@ -227,6 +228,8 @@ class Site {
 
         // update links:
         this.setActiveLinks();
+
+        ScrollTrigger.refresh();
 
         this.lightbox?.check();
 

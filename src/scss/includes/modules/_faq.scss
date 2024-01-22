@@ -1,9 +1,12 @@
 .faq {
 
     &__heading {
+        @include breakpoint(not-desktop) {
+            position: relative;
+        }
+
         @include breakpoint(tablet) {
             grid-column: span 8 !important;
-            position: relative;
         }
     }
 

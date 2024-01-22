@@ -27,7 +27,8 @@
         @include breakpoint(tablet) {
             @include font-size(140, 0.8);
             @include letter-spacing(-6.5, 140);
-            margin-block: trim-font(0.8); 
+
+            margin-block: trim-font(0.8);
         }
 
         @include breakpoint(phone) {
@@ -54,13 +55,13 @@
 
             @include breakpoint(phone) {
                 @include letter-spacing(-6, 80);
-     
-                padding-left: rem(5); 
-            } 
+
+                padding-left: rem(5);
+            }
         }
     }
 
-    
+
     &--smaller {
 
         @include breakpoint(desktop) {
@@ -70,18 +71,35 @@
 
         @include breakpoint(tablet) {
             @include font-size(140, 0.8);
-            @include letter-spacing(-6.5, 140); 
+            @include letter-spacing(-6.5, 140);
 
-            margin-block: trim-font(0.8); 
+            margin-block: trim-font(0.8);
         }
-
-
 
         @include breakpoint(phone) {
             @include font-size(80, 67.2);
             @include letter-spacing(-2.8, 80);
 
             margin-left: rem(-2);
+            margin-block: trim-font(67.2 / 80);
+        }
+    }
+
+
+    &--small-plus {
+        @include breakpoint(desktop) {
+
+        }
+
+        @include breakpoint(tablet) {
+
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(70, 0.84);
+            @include letter-spacing(-2.45, 70);
+
+            margin-block: trim-font(0.84);
         }
     }
 
@@ -110,15 +128,14 @@
             @include breakpoint(desktop) {
                 margin-top: vw(38);
             }
-            
         }
     }
 
 
-    &--right { 
+    &--right {
 
         @include breakpoint(desktop) {
-            text-align: right; 
+            text-align: right;
         }
 
         @include breakpoint(tablet) {
@@ -133,7 +150,8 @@
             @include font-size(82, 0.84);
             @include letter-spacing(-2.87, 82);
 
-            padding-top: rem(12);
+            padding-block: rem(12);
+            margin-block: trim-font(0.84);
         }
     }
 
@@ -147,13 +165,12 @@
             z-index: 1;
 
             &::before {
-                content: '';
+                content: "";
                 display: block;
                 position: absolute;
                 height: 1px;
                 background-color: $color-bg;
                 bottom: -1px;
-                z-index: -1;
             }
 
             @include breakpoint(tablet) {
@@ -162,13 +179,12 @@
                 &::before {
                     width: calc(100% + 2 * #{map-get($grid-offset, tablet)});
                     left: -1 * map-get($grid-offset, tablet);
-                    z-index: unset;
                 }
             }
 
             @include breakpoint(phone) {
-                padding-block: rem(13) rem(2);
-                position: relative;
+                padding-block: rem(12) rem(12);
+                margin-block: trim-font(67.5 / 80);
 
                 &::before {
                     width: calc(100% + 2 * #{map-get($grid-offset, phone)});
@@ -177,6 +193,7 @@
             }
         }
     }
+
 
     &--reclined {
         @include font-family(reclined, 300);
@@ -190,14 +207,37 @@
             @include font-size(140, 1);
             @include letter-spacing(-6.5, 140);
 
-            margin-block: trim-font(1); 
+            margin-block: trim-font(1);
         }
 
         @include breakpoint(phone) {
+            @include font-family(reclined, 400);
             @include font-size(80, 80);
             @include letter-spacing(-2.8, 80);
+
+            margin-block: trim-font(1);
         }
     }
+
+
+    &--title {
+
+        @include breakpoint(tablet) {
+            @include font-size(230, 1);
+            @include letter-spacing(-5.94, 132);
+
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(132, 140.253);
+            @include letter-spacing(-5.94, 132);
+
+            margin-block: trim-font(140.253 / 132);
+        }
+    }
+
+
 
     .module--about_hero + .module--text-aside & {
         @include breakpoint(desktop) {
@@ -217,19 +257,12 @@
     }
 
 
-    &--title {
- 
-        @include breakpoint(tablet) {
-            @include font-size(230, 1);
-            @include letter-spacing(-5.94, 132);
 
-            margin-block: trim-font(1); 
-        }
+    .module--quote_panel + .module--text_wrapper & {
 
         @include breakpoint(phone) {
-            @include font-size(132, 140.253);
-            @include letter-spacing(-5.94, 132);
-        }     
+            padding-bottom: rem(70);
+        }
     }
 
 
@@ -240,8 +273,9 @@
             margin-bottom: rem(-7);
             padding-right: rem(10);
         }
-
     }
+
+
 
     .text--wide & {
         @include breakpoint(desktop) {

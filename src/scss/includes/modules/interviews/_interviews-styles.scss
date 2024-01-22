@@ -13,9 +13,8 @@
         }
 
         @include breakpoint(phone) {
-            padding-top: rem(9);
-            margin-block: rem(-3) rem(-6);
-        }
+            padding-block: rem(12);
+        } 
 
 
         &--reversed {
@@ -33,16 +32,16 @@
                     bottom: unset;
                     z-index: 5;
 
-                    @include breakpoint(tablet) {
-                        right: rem(-5);
-                        top: calc(100% - #{rem(24)});
+                    @include breakpoint(tablet) { 
+                        right: rem(75);
+                        top: calc(100% - #{rem(40)});
                     }
 
                     @include breakpoint(phone) {
                         right: rem(-5);
-                        top: calc(100% - #{rem(24)});
+                        top: calc(100% - #{rem(40)});
                     }
-                }
+                } 
             }
         }
 
