@@ -79,6 +79,19 @@ class model_app_api_interview
         $interview_info[] = "<h3>Interview Summary</h3><p>{$item['summary']}</p>";
         $interview_info = "<h3>{$label}</h3>" . implode('', $interview_info);
 
+        //downloads
+        $downloads = [];
+        if (!empty($item['PDF']['src'])) {
+            $downloads[] =
+                [
+                    "url" => 'api/download?transcript=' . $item['id'],
+                    "name" => "Transcript",
+                    "ext" => "pdf",
+                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript.pdf",
+                    "size" => $item['pdf_size'] ? number_format($item['pdf_size'] / 1000000, 1) . 'MB' : ''
+                ];
+        }
+
         // aggregate data
         $data = [
             'id' => $item['id'],
@@ -96,13 +109,7 @@ class model_app_api_interview
             'state' => $item['narrator_location'],
             'transcript' => $transcript,
             'info' => $interview_info,
-            'downloads' => [
-                ['url' => '',
-                    'name' => 'Transcript',
-                    'ext' => 'PDF',
-                    'filename' => ''
-                ]
-            ],
+            'downloads' => $downloads,
             'related' => [
                 ['url' => '',
                     'title' => 'Related title',
