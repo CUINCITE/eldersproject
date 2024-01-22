@@ -413,10 +413,10 @@
     &__controls {
         position: relative;
         z-index: 4;
-        left: 0;
         right: 0;
 
         // trick for proper scrolltrigger's pin
+        left: 0 !important;
         height: auto !important;
     }
 
