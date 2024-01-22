@@ -16,7 +16,7 @@
 
     @include breakpoint(tablet) {
         --search-height: #{vw(95, tablet)};
-    
+
         @include font-size(60, 37.4);
     }
 
@@ -42,6 +42,7 @@
 
     &__input {
         position: relative;
+        overflow: hidden;
 
         @include breakpoint(desktop) {
             margin-left: vw(15);
@@ -54,14 +55,16 @@
         @include breakpoint(phone) {
             margin-left: vw(15, phone);
         }
-        
+
 
         label {
             position: absolute;
             left: 0;
             pointer-events: none;
-            transition: opacity .3s $ease-custom;
-            opacity: 0;
+
+            // transition: transform .5s $ease-custom;
+
+            // opacity: 0;
 
             @include breakpoint(desktop) {
                 @include font-size(50, 1);
@@ -77,6 +80,15 @@
                 @include font-size(40, 37.4);
                 letter-spacing: unset;
             }
+
+
+            > span:first-child {
+                display: inline-block;
+                overflow: hidden;
+
+
+                span { display: inline-block; }
+            }
         }
 
 
@@ -86,8 +98,16 @@
             width: 100%;
             text-transform: uppercase;
 
-            &:placeholder-shown + label { opacity: 1; }
-            &:focus + label { opacity: 0; }
+            &:placeholder-shown + label {
+                // opacity: 1;
+                animation: search-label-alt .5s $ease-custom forwards;
+            }
+
+            &:focus + label {
+                // opacity: 0;
+                // transform: translateY(150%) rotate(-15deg);
+                animation: search-label-down .5s $ease-custom forwards;
+            }
 
             @include breakpoint(desktop) {
                 @include font-size(50, 1);
@@ -118,6 +138,7 @@
 
     &__svg {
         position: absolute;
+        display: inline-block;
 
         svg {
             vertical-align: top;

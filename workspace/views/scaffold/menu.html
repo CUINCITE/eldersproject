@@ -4,12 +4,13 @@
         <nav class="menu__nav">
             <ul>
                 {% for item in scaffold.menu.nav %}
-                    <li class="menu__item">
+                    <li class="menu__item js-menu-item">
+                        <i class="menu__line js-menu-line"></i>
                         <a href="{{ item.url }}">
                             <span class="menu__arrow">
                                 {% include "./components/c_arrow_icon.html" with { reversed: true } %}
                             </span>
-                            <span class="menu__text">{{ item.label }}</span>
+                            <span class="menu__text js-menu-label">{{ item.label }}</span>
                         </a>
                     </li>
                 {% endfor %}
@@ -17,7 +18,7 @@
         </nav>
         <ul class="menu__footer">
             {% for item in scaffold.menu.footer %}
-                <li class="menu__link">
+                <li class="menu__link js-menu-link">
                     <a href="{{ item.url }}">
                         <span>
                             <span>{{ item.label }}</span>
