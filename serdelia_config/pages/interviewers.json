@@ -14,6 +14,7 @@
     },
     "buttons_edit":
     [
+        {"label":"Storytelling","type":"page","icon":"reorder","page":"collection_modules,%id%"},
         {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }},
         {"type":"plugin","plugin":"interviewer_update","label":"Update" }
     ],

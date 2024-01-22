@@ -1,0 +1,9 @@
+{
+  "table": "s_collection_submodules",
+  "order": "label",
+  "fields" :
+  [
+    {"field":"slug"},
+    {"field":"label"}
+  ]
+}
