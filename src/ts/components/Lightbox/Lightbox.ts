@@ -213,15 +213,11 @@ export class Lightbox {
 
 
     private hide(fast?: boolean): Promise<void> {
+        if (this.animating) return Promise.resolve();
         this.controller?.abort();
         Lightbox.isOpen = false;
 
         return new Promise<void>((resolve, reject) => {
-            if (this.animating) {
-                reject();
-                return;
-            }
-
             this.animating = true;
             this.view.classList.add('is-closing');
             gsap.to(this.view, {
@@ -249,10 +245,12 @@ export class Lightbox {
 
 
     private show(): void {
-
+        if (this.animating) return;
         if (this.shown) { return; }
 
+
         Promise.all([this.shown ? this.hide() : null]).then(() => {
+            this.animating = true;
             this.shown = true;
             Lightbox.isOpen = true;
 
@@ -270,6 +268,7 @@ export class Lightbox {
                     this.view.classList.add('is-showing');
                     // audioplayer should be always expanded when lightbox is open
                     AudioPlayer.openAudioPlayer();
+                    this.animating = false;
                 },
             });
         });
