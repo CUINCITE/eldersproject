@@ -1,14 +1,14 @@
 <form class="newsletter" action="json/newsletter.json" data-api='{"beforeCall": "validate", "callback": "onSubscribe"}'>
     <input type="hidden" data-recaptcha data-recaptchakey="6LcHsOMoAAAAAJgIWp7B-XpDKBGk1_dpVXxXu_IT" name="token" required="required">
     <h2 class="newsletter__heading">Newsletter:</h2>
-    
+
     <fieldset class="newsletter__fields">
         <legend>Sign up with your email address to receive news and updates.</legend>
-        <div class="newsletter__error js-error"></div>
         <div class="newsletter__wrap">
+            <div class="newsletter__error js-error"></div>
             <div class="newsletter__input">
-                <label for="email" class="sr-only">Enter your e-mail address</label>
-                <input id="email" type="email" name="email" required placeholder="ENTER YOUR E-MAIL ADDRESS">
+                <input id="email" type="email" name="email" required placeholder=" " autocomplete="off">
+                <label class="newsletter__label" for="email">ENTER YOUR E-MAIL ADDRESS</label>
                 <div class="newsletter__button">
                     {% include "components/c_button.html" with scaffold.newsletter.button %}
                 </div>

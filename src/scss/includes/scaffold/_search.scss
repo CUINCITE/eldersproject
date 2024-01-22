@@ -61,10 +61,7 @@
             position: absolute;
             left: 0;
             pointer-events: none;
-
-            // transition: transform .5s $ease-custom;
-
-            // opacity: 0;
+            animation: search-label-down .5s $ease-custom forwards;
 
             @include breakpoint(desktop) {
                 @include font-size(50, 1);

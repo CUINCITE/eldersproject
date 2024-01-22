@@ -5,16 +5,14 @@
 
     <fieldset class="newsletter__fields">
         <legend>Sign up with your email address to receive news and updates.</legend>
-        <div class="newsletter__error js-error"></div>
-
         <div class="newsletter__wrap">
+            <div class="newsletter__error js-error"></div>
             <div class="newsletter__input">
-                <label for="email" class="sr-only">Enter your e-mail address</label>
-                <input id="email" type="email" name="email" required placeholder="ENTER YOUR E-MAIL ADDRESS">
-
+                <input id="email" type="email" name="email" required placeholder=" " autocomplete="off">
+                <label class="newsletter__label" for="email">Enter your e-mail address</label>
                 <div class="newsletter__button">
                     <button class="button" type="submit">
-                        <i class="icon-btn-arrow arrow ">
+                        <i class="icon-btn-arrow arrow">
                             <span></span>
                             <span></span>
                             <span class="triangle"></span>

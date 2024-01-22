@@ -28,6 +28,10 @@
 
     body.is-404 & { display: none; }
 
+    &.has-errors legend {
+        transform: translateY(#{rem(-23)});
+    }
+
 
 
     &__wrap {
@@ -50,6 +54,7 @@
         padding: vw(14) 0 vw(7);
         padding-left: var(--side-padding);
         border-top: 1px solid var(--color-bg);
+        overflow: hidden;
 
 
         &.is-error { color: var(--color-red); }
@@ -86,27 +91,44 @@
             .is-completed & { opacity: 0; }
 
 
-            &::placeholder {
-                @include letter-spacing(-1.75, 50);
-
-                opacity: 1;
-                color: currentColor;
-                font-weight: bold;
-                transition: opacity $time-fast;
-
-                @include breakpoint(desktop) {
-                    @include letter-spacing(-1.75, 50);
-                }
-
-                @include breakpoint(phone) {
-                    @include letter-spacing(-0.5, 20);
-                }
+            &:placeholder-shown + label {
+                // opacity: 1;
+                animation: search-label-alt .5s $ease-custom forwards;
             }
 
-
-            &:focus::placeholder {
-                opacity: 0;
+            &:focus + label {
+                // opacity: 0;
+                // transform: translateY(150%) rotate(-15deg);
+                animation: search-label-down .5s $ease-custom forwards;
             }
+        }
+    }
+
+
+
+    &__label {
+        @include font-family(compressed);
+        @include letter-spacing(-1.75, 50);
+
+        text-transform: uppercase;
+        width: 100%;
+        color: currentColor;
+        font-weight: bold;
+        position: absolute;
+        pointer-events: none;
+        animation: search-label-down .5s $ease-custom forwards;
+
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 50);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 20);
         }
     }
 
@@ -194,6 +216,9 @@
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
+
+            position: absolute;
+            inset: auto auto 100% 0;
         }
 
         @include breakpoint(tablet) {
@@ -263,13 +288,13 @@
 
     legend {
         @include font-family(normal);
-
         padding-left: var(--side-padding);
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
 
             margin-bottom: vw(4);
+            transition: transform .25s $ease-out;
         }
 
         @include breakpoint(tablet) {
