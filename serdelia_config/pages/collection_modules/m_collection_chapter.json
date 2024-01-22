@@ -9,6 +9,11 @@
       "tab": "Copy",
       "field": "label",
       "label": "Label"
+    },
+    {
+      "field": "text",
+      "label": "Copy",
+      "type": "html"
     }
   ]
 }

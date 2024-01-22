@@ -1,18 +1,1 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Collection: {{item.label}}
-        <br>{{items|length}} Interviews
-      </h2>
-      <h4>{{item.lead}}</h4>
-      <hr>
-      <h3>Interviews from the collection:</h3>
-      {% for item in items %}      
-        <ol>
-          <a href="{{item.url}}">{{item.label}}</a>
-          <br><small>{{item.locations}}</small>
-          <p>{{item.summary}}</p>
-        </ol>
-        {% endfor %}
-      
-    </div>
-  </section>
+{% include 'modules/m_collection_hero.html' %}
