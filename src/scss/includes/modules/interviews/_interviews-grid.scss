@@ -17,12 +17,12 @@
         @include breakpoint(phone) {
             flex-wrap: wrap;
             column-gap: rem(24);
-         }
+        }
 
-        .is-pinned & { 
+        .is-pinned & {
 
             @include breakpoint(desktop) {
-                padding-top: rem(13); 
+                padding-top: rem(13);
             }
         }
     }
@@ -55,7 +55,7 @@
                 flex-basis: rem(36);
                 margin-top: rem(18);
             }
-    
+
             @include breakpoint(phone) {
                 flex-basis: rem(27);
                 margin-top: rem(14);
@@ -128,6 +128,7 @@
             display: grid;
             align-content: start;
             align-items: start;
+
             // grid-template-columns: repeat(8, 1fr);
             grid-template-columns: 2.15fr 1fr 1fr;
             column-gap: map-get($grid-gutter, tablet);
@@ -147,7 +148,7 @@
             }
 
             @include breakpoint(tablet) {
-                @include flex(column, center, flex-start); 
+                @include flex(column, center, flex-start);
 
                 height: vw(212, tablet);
 
@@ -161,7 +162,7 @@
                 @include flex(column, flex-end, flex-start);
 
                 height: vw(274, phone);
-                padding-bottom: rem(24); 
+                padding-bottom: rem(24);
 
                 .button {
                     margin-block: trim-font(1);
@@ -202,6 +203,7 @@
 
         @include breakpoint(phone) {
             @include flex(row-reverse, space-between, flex-end);
+
             // position: absolute;
             // bottom: rem(12);
             // right: rem(14);
@@ -411,6 +413,8 @@
     &__controls {
         position: relative;
         z-index: 4;
+        left: 0;
+        right: 0;
 
         // trick for proper scrolltrigger's pin
         height: auto !important;
@@ -436,7 +440,7 @@
 
 
     &__form {
-        
+
 
         @include breakpoint(desktop) {
             padding-top: rem(3);
@@ -472,7 +476,7 @@
 
     &__image {
         position: absolute;
-        
+
 
         @include breakpoint(desktop) {
             max-width: rem(256);
@@ -493,7 +497,6 @@
             max-width: rem(236);
             inset: var(--grid-margin) var(--grid-margin) auto auto;
         }
-
     }
 
 
