@@ -114,7 +114,8 @@ export class More extends Component {
                     this.linkEl.setAttribute('href', newURL);
                     this.scrollTrigger?.refresh();
                 } else {
-                    this.view.remove();
+                    // we have more link inside div here
+                    this.view.parentElement.remove();
                     this.scrollTrigger?.kill();
                 }
 
