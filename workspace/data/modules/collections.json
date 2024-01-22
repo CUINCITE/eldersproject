@@ -6,7 +6,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["purple"],
+            "shadow": "purple",
             "image": {
                 "desktop": "robin_coste_lewis.png",
                 "mobile": "robin_coste_lewis.png"
@@ -18,7 +18,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["purple"],
+            "shadow": "purple",
             "image": {
                 "desktop": "carolina_de_robertis.png",
                 "mobile": "carolina_de_robertis.png"
@@ -30,7 +30,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["yellow"],
+            "shadow": "yellow",
             "image": {
                 "desktop": "carolina_de_robertis.png",
                 "mobile": "carolina_de_robertis.png"
@@ -42,7 +42,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["purple"],
+            "shadow": "purple",
             "image": {
                 "desktop": "denice_frohman.png",
                 "mobile": "denice_frohman.png"
@@ -54,7 +54,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["red"],
+            "shadow": "red",
             "image": {
                 "desktop": "caleb_gayle.png",
                 "mobile": "caleb_gayle.png"
@@ -66,7 +66,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["green"],
+            "shadow": "green",
             "image": {
                 "desktop": "eve_ewing.png",
                 "mobile": "eve_ewing.png"
@@ -78,7 +78,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["purple"],
+            "shadow": "purple",
             "image": {
                 "desktop": "carolina_de_robertis.png",
                 "mobile": "carolina_de_robertis.png"
@@ -90,7 +90,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["red"],
+            "shadow": "red",
             "image": {
                 "desktop": "ellery_washington.png",
                 "mobile": "ellery_washington.png"
@@ -102,7 +102,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["purple"],
+            "shadow": "purple",
             "image": {
                 "desktop": "carolina_de_robertis.png",
                 "mobile": "carolina_de_robertis.png"
@@ -114,7 +114,7 @@
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat.",
             "states": "Galveston, Houston, San Antonio, Austin, Dallas and surrounding areas in Texas",
             "url": "/workspace/collection-single",
-            "shadows": ["green"],
+            "shadow": "green",
             "image": {
                 "desktop": "j_wortham.png",
                 "mobile": "j_wortham.png"

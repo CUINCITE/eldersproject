@@ -8,7 +8,7 @@
         filter: brightness(100%);
         opacity: 1;
     }
-}
+} 
 
 $background-colors: (
     "pale_green": $color-pale-green,
@@ -86,6 +86,21 @@ $background-colors: (
 
         @include breakpoint(phone) {
             padding: vw(10, phone);
+        }
+    }
+
+
+    &--wrapped {
+        @include breakpoint(desktop) {
+        
+        }
+
+        @include breakpoint(tablet) {
+        
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(12.75, phone) vw(12.75, phone) vw(20.25, phone);
         }
     }
 

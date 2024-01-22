@@ -4,10 +4,10 @@
     &__heading {
         @include breakpoint(not-desktop) {
             grid-row-start: 1;
+            position: relative;
             
             @include breakpoint(tablet) {
                 grid-column: 1 / span 8 !important;
-                position: relative;
             }
         }
     }

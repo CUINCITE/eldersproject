@@ -19,17 +19,17 @@
         }
 
         @include breakpoint(phone) {
-            height: vw(512, phone);
+            height: vw(517, phone);
     
             .heading { 
-                margin-block: rem(-18) rem(-25);
+                padding-block: rem(8);
             }
         }
     }
 
 
 
-    .box {
+    > .box {
         height: calc(100% - 1px);
 
         @include breakpoint(not-desktop) {

@@ -13,6 +13,7 @@ interface ILoadSettings {
     total?: string; // updating total value on filters' change
     filtered?: string; // show filtered items' list
     scrollTo?: string; // scroll to given element when reloading filters
+    updateCurrentSorting?: boolean // manually updates currently selected sorting on mobile
 }
 
 
@@ -195,6 +196,23 @@ export class Load extends Component {
 
         if (extraFormsMobile && window.matchMedia('(orientation: portrait) and (max-width: 659px)').matches) {
             extraForms = extraFormsMobile;
+        }
+
+        if (this.settings.updateCurrentSorting) {
+            const indicator = document.querySelector('.js-current-sorting');
+
+            if (indicator) {
+                const sorting = Utils.getQueryString([this.view as HTMLFormElement]).replace('sort=', '');
+                const arrow = document.querySelector('.js-mobile-modal-button');
+
+                if (sorting.includes('!') && arrow) {
+                    arrow.classList.add('button--inversed');
+                } else {
+                    arrow.classList.remove('button--inversed');
+                }
+
+                indicator.innerHTML = sorting.replace('!', '');
+            }
         }
 
         const formData = Utils.getQueryString([...extraForms, this.view as HTMLFormElement]);
