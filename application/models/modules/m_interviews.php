@@ -113,6 +113,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             return $item;
         }, $m['items']);
 
+        dd($m['items']);
+
         /*
 			Load more - check if load more items
 		*/
