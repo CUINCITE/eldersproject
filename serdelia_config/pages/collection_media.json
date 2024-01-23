@@ -42,7 +42,7 @@
     {"field":"duration"},
     {
       "label": "Type",
-      "field": "types",
+      "field": "variant",
       "type": "select"
     }
 

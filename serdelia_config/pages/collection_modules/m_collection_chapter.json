@@ -13,6 +13,14 @@
     {
       "label": "Media",
       "help": "Help goes here",
+      "field": "variant",
+      "type": "media",
+      "media": {
+        "model": "collection_media",
+        "type": [
+          "image"
+        ]
+      },
       "captions": [
         {
           "label": "Caption",
@@ -24,18 +32,11 @@
         },
         {
           "label": "Type",
-          "field": "types",
-          "type": "checkbox"
+          "field": "variant",
+          "field_type": "select",
+          "options":[{"id":"illustration","label":"Illustration"},{"id":"photograph","label":"Photograph"}]
         }
-      ],
-      "field": "media",
-      "type": "media",
-      "media": {
-        "model": "collection_media",
-        "type": [
-          "image"
-        ]
-      }
+      ]
     }
   ]
 }
