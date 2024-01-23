@@ -81,6 +81,28 @@
       "position_after": "params",
       "type": "boolean",
       "list": "edit"
+    },
+    {
+      "label": "Media",
+      "help": "Help goes here",
+      "captions": [
+        {
+          "label": "Caption",
+          "field": "caption"
+        },
+        {
+          "label": "ALT",
+          "field": "alt"
+        }
+      ],
+      "field": "media",
+      "type": "media",
+      "media": {
+        "model": "collection_media",
+        "type": [
+          "image"
+        ]
+      }
     }
   ]
 }

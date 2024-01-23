@@ -126,12 +126,6 @@ class model_app_pages_modules
         return $array[$keys[$random_index]];
     }
 
-    function updateArticle($text)
-    {
-       // cassette
-
-    }
-
 
 }
 

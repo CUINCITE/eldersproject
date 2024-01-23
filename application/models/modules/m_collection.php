@@ -21,7 +21,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             foreach ($m['modules'] as $k=>$v) {
                 if ($v['type']['slug'] == 'collection_chapter') {
-                    $m['modules'][$k]['article'] = $this->updateArticle($v['text']);
+                    $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
                 }
             }
 		}
@@ -29,7 +29,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 		return $m;
 	}
 
-    public function updateArticle($article) {
+    public function updateArticle($article, $article_media) {
         $dom = new DOMDocument();
         @$dom->loadHTML("<body>{$article}</body>");
 
@@ -52,15 +52,26 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
 
             if ($nodeName == 'p' || $nodeName == 'blockquote') {
-                $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
-                $type = $nodeName = 'text';
-                if ($lastType == $type && !empty($elements)) {
-                    $elements[count($elements) - 1]['content'] .= '<br>' . $content;
-                } else {
-                    $elements[] = ['type' => $type, 'content' => $content];
+
+                if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>')) {
+                    $type = $nodeName = 'image';
+                    $elements[] = ['type' => $type, 'content' => array_shift($article_media)];
                     $lastType = $type;
                 }
+
+                else {
+                    $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
+                    $type = $nodeName = 'text';
+                    if ($lastType == $type && !empty($elements)) {
+                        $elements[count($elements) - 1]['content'] .= '<br>' . $content;
+                    } else {
+                        $elements[] = ['type' => $type, 'content' => $content];
+                    }
+                    $lastType = $type;
+                }
+
             }
+
             else {
                 if ($lastType == 'text' && $node->nodeType === XML_ELEMENT_NODE) {
                     $elements[count($elements) - 1]['content'] .= '<br>' . $content;

@@ -1,5 +1,5 @@
 <div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}">
     <div class="polaroid__image">
-        {% include "./modules/subview_picture.html" with image %}
+        {% include "/subviews/subview_picture.html" with {image: image} %}
     </div>
 </div>

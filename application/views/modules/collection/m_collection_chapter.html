@@ -13,18 +13,19 @@
                     {% set photoCounter = 0 %}
 
                     {% for module in article %}
+
                         {% if module.type == "text" %}
                             <div class="text_wrapper__module text_wrapper__text">
                                 {% include "/subviews/subview_text.html" with {text:module.content} %}
                             </div>
                         {% endif %}
 
-                        {% if module.type == "quote" %}
-                            <div
-                                    class="text_wrapper__module text_wrapper__quote{% if module.quote.mini %} text_wrapper__quote--mini{% endif %}">
-                                {% include "/components/c_quote.html" with {text:module.content} %}
-                            </div>
-                        {% endif %}
+{#                        {% if module.type == "quote" %}#}
+{#                            <div#}
+{#                                    class="text_wrapper__module text_wrapper__quote{% if module.quote.mini %} text_wrapper__quote--mini{% endif %}">#}
+{#                                {% include "/components/c_quote.html" with {text:module.content} %}#}
+{#                            </div>#}
+{#                        {% endif %}#}
 
                         {% if module.type == "illustration" %}
                             <div
@@ -33,13 +34,12 @@
                             </div>
                         {% endif %}
 
-                        {% if module.type == "photo" %}
-                            <div
-                                    class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">
-                                {% include "./components/c_polaroid.html" with module.photo|merge({modifiers: ["wrapped"]}) %}
-                                {% if module.text %}
+                        {% if module.type == "image" %}
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %}#}
+                                {% include "/components/c_polaroid.html" with {image: module.content.image, modifiers: ["wrapped"]} %}
+                                {% if module.content.caption %}
                                     <div class="text_wrapper__info">
-                                        {% include "./subviews/subview_text.html" with module.text %}
+                                        {% include "/subviews/subview_text.html" with {text: module.content.caption} %}
                                     </div>
                                 {% endif %}
                             </div>

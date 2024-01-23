@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', 'Blockquote' ] },
 	'/',
-	{ name: 'styles', items: [ 'Format','Styles' ] },
+	{ name: 'styles', items: [ 'Format','Styles','uho_media' ] },
 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] }
   
   
@@ -31,7 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.stylesSet =
 	[
-    	{ name: 'Inline Quote',   element:'p',   attributes: { 'class': 'quote' } }
+    	{ name: 'Inline Quote',   element:'p',   attributes: { 'class': 'quote' } },
     	
     ];
   
@@ -93,7 +93,7 @@ config.allowedContent = {
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
     //config.extraPlugins = 'timestamp';
-    config.extraPlugins = 'onchange,uho_customkeyboardshortcuts';
+    config.extraPlugins = 'onchange,uho_customkeyboardshortcuts,uho_media';
     //config.embed_provider='//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 };
