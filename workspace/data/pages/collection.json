@@ -58,14 +58,11 @@
                     }
                 },
                 {
-                    "type": "quote",
-                    "quote": {
-                        "text": "Many of the transplants from many Southern states came for a better life; for a happier life, a more prosperous life. We came to keep my father from being lynched, again. And we came as a family. Everyone around us became the extended family",
-                        "clip": {
-                            "player": 160,
-                            "start": 80
-                        },
-                        "big": true
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<blockquote class='quote quote--big'><p>Many of the transplants from many Southern states came for a better life; for a happier life, a more prosperous life. We came to keep my father from being lynched, again. And we came as a family. Everyone around us became the extended family<button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
                     }
                 },
                 {
@@ -77,14 +74,11 @@
                     }
                 },
                 {
-                    "type": "quote",
-                    "quote": {
-                        "text": "We played outside, and we stayed outside all day until those streetlights came on, or you heard somebody’s mother calling your name from a distance.",
-                        "clip": {
-                            "player": 160,
-                            "start": 80
-                        },
-                        "big": true
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<blockquote class='quote quote--big'><p>We played outside, and we stayed outside all day until those streetlights came on, or you heard somebody’s mother calling your name from a distance. <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
                     }
                 },
                 {
@@ -101,8 +95,8 @@
                         "image": {
                             "desktop": "mariah_taylor_young.png",
                             "mobile": "mariah_taylor_young.png",
-                            "width": 400,
-                            "height": 200,
+                            "width": 200,
+                            "height": 400,
                             "alt": ""
                         },
                         "modifiers": []
@@ -127,7 +121,7 @@
                     "text": {
                         "size": "large",
                         "modifiers": ["aside"],
-                        "text": "<p>In the 20th century, three major events decentralized Portland’s Black community: the Vanport flood, school desegregation and bussing, and gentrification.</p><p>At the onset of World War II, Portland city officials developed Vanport, the largest public housing project in the United States, to house a growing population of shipyard workers. Built on low-lying land on the edge of the Columbia River and protected by dikes, Vanport housed over 40,000 residents at its peak, one-fourth of whom were Black. Despite underinvestment, Vanport’s Black community flourished. “I grew up with over two hundred family members, again, so I had this very unique experience, because it was like, this Black, little Black utopia in the whitest city, later I found out, in the country. And I felt that later growing up and going out, when, in dominant culture settings, honors classes, you know, as I later went into high school, college, and different things, and so my orientation to who I was, was very much steeped in Black history, poetry, church, so I kind of always stood out, [laughs] in those settings, because I had a lot of confidence because I was affirmed where I was. And later, that began to erode as I had to meet up against, you know, being the only all the time, that was exhausting at times, but I could always come back to this nucleus.”</p>"
+                        "text": "<p>In the 20th century, three major events decentralized Portland’s Black community: the Vanport flood, school desegregation and bussing, and gentrification.</p><p>At the onset of World War II, Portland city officials developed Vanport, the largest public housing project in the United States, to house a growing population of shipyard workers. Built on low-lying land on the edge of the Columbia River and protected by dikes, Vanport housed over 40,000 residents at its peak, one-fourth of whom were Black. Despite underinvestment, Vanport’s Black community flourished.</p>"
                     }
                 },
                 {
@@ -140,42 +134,11 @@
                     "modifiers": []
                 },
                 {
-                    "type": "quote",
-                    "quote": {
-                        "text": "“I grew up with over two hundred family members, again, so I had this very unique experience, because it was like, this Black, little Black utopia in the whitest city, later I found out, in the country. And I felt that later growing up and going out, when, in dominant culture settings, honors classes, you know, as I later went into high school, college, and different things, and so my orientation to who I was, was very much steeped in Black history, poetry, church, so I kind of always stood out, [laughs] in those settings, because I had a lot of confidence because I was affirmed where I was. And later, that began to erode as I had to meet up against, you know, being the only all the time, that was exhausting at times, but I could always come back to this nucleus.”",
-                        "clip": {
-                            "player": 160,
-                            "start": 80
-                        }
-                    }
-                },
-                {
-                    "type": "quote",
-                    "quote": {
-                        "text": "[...] that gentrification bomb, it destroyed the Black community in Portland. It doesn’t exist anymore.",
-                        "clip": {
-                            "player": 160,
-                            "start": 80
-                        },
-                        "big": true
-                    }
-                },
-                {
                     "type": "text",
                     "text": {
                         "size": "large",
                         "modifiers": ["aside"],
-                        "text": "<p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p>"
-                    }
-                },
-                {
-                    "type": "quote",
-                    "quote": {
-                        "text": "“You knew that was going on. We talked about even when we were younger that the neighborhood was going to get gentrified. We knew it. The value of the land was just too valuable. We used to talk about it all the time. Man, why they going to let the Black community, right close to the freeway, right by the mall, right over by the coliseum. It seemed like this wouldn’t be the Black community. But we would talk about it and laugh about it. Because we only had to drive five minutes and you’re at the coliseum. Jump right on the freeway, go where you want to go. Never understood that. I didn’t understand that.But two things. The one. When they put those divides down Union Avenue, and they put those islands, like oh, okay. We’re beautifying Northeast Portland. Like okay. But it made it difficult to maneuver. And I don’t know if they were just like trying to slow people down or what they were trying. But it made it difficult to maneuver in Portland...",
-                        "clip": {
-                            "player": 160,
-                            "start": 80
-                        }
+                        "text": "<blockquote class='quote'>“I grew up with over two hundred family members, again, so I had this very unique experience, because it was like, this Black, little Black utopia in the whitest city, later I found out, in the country. And I felt that later growing up and going out, when, in dominant culture settings, honors classes, you know, as I later went into high school, college, and different things, and so my orientation to who I was, was very much steeped in Black history, poetry, church, so I kind of always stood out, [laughs] in those settings, because I had a lot of confidence because I was affirmed where I was. And later, that began to erode as I had to meet up against, you know, being the only all the time, that was exhausting at times, but I could always come back to this nucleus.”<button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote><blockquote class='quote quote--big'><p>[...] that gentrification bomb, it destroyed the Black community in Portland. It doesn’t exist anymore.<button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote><p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p><blockquote class='quote'><p>“You knew that was going on. We talked about even when we were younger that the neighborhood was going to get gentrified. We knew it. The value of the land was just too valuable.</p><p>We used to talk about it all the time. Man, why they going to let the Black community, right close to the freeway, right by the mall, right over by the coliseum. It seemed like this wouldn’t be the Black community. But we would talk about it and laugh about it. Because we only had to drive five minutes and you’re at the coliseum. Jump right on the freeway, go where you want to go. Never understood that. I didn’t understand that.</p><p>But two things. The one. When they put those divides down Union Avenue, and they put those islands, like oh, okay. We’re beautifying Northeast Portland. Like okay. But it made it difficult to maneuver. And I don’t know if they were just like trying to slow people down or what they were trying. But it made it difficult to maneuver in Portland... <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p><div class='text__expand expand' data-expand='' id='expand-quote-test'><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.</p><p>Lorem ipsum...</p></div> <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='expand-quote-test' data-expanded-text='Read less' data-hidden-text='Read more'><i class='icon-btn-arrow arrow'><span></span><span></span><span class='triangle'></span></i><span class='js-expand-text'>Read more</span></button></blockquote>"
                     }
                 },
                 {
@@ -202,7 +165,82 @@
                     "text": {
                         "size": "large",
                         "modifiers": ["aside"],
-                        "text": "<p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p><blockquote class='quote'><p>“You knew that was going on. We talked about even when we were younger that the neighborhood was going to get gentrified. We knew it. The value of the land was just too valuable.</p><p>We used to talk about it all the time. Man, why they going to let the Black community, right close to the freeway, right by the mall, right over by the coliseum. It seemed like this wouldn’t be the Black community. But we would talk about it and laugh about it. Because we only had to drive five minutes and you’re at the coliseum. Jump right on the freeway, go where you want to go. Never understood that. I didn’t understand that.</p><p>But two things. The one. When they put those divides down Union Avenue, and they put those islands, like oh, okay. We’re beautifying Northeast Portland. Like okay. But it made it difficult to maneuver. And I don’t know if they were just like trying to slow people down or what they were trying. But it made it difficult to maneuver in Portland... <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p><div class='text__expand expand' data-expand='' id='expand-quote-test'><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.</p><p>balblababalba</p></div> <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='expand-quote-test' data-expanded-text='Read less' data-hidden-text='Read more'><i class='icon-btn-arrow arrow'><span></span><span></span><span class='triangle'></span></i><span class='js-expand-text'>Read more</span></button></blockquote>"
+                        "text": "<p>The continuous survival and success of Black Portlanders is widely celebrated in this collection. Against incredible odds, these narrators have boldly carved new paths, changed the course of history for all Oregonians, and tirelessly preserved and promoted Black Portland’s past and future.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "shala_rene.jpg",
+                            "mobile": "shala_rene.jpg",
+                            "width": 400,
+                            "height": 200,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Shalanda Sims with Renée Watson at the grand opening of Shalanda's theater, World Stage Theater in Portland, OR</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Elder Shalanda Sims, a celebrated performer and artist, created a play titled “Vanport,” about the Vanport flood. Elder Bernie Foster founded the Skanner newspaper, one of Oregon’s oldest African American newspapers, alongside his wife, Bobbie Doré Foster.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "avel_gordly.jpg",
+                            "mobile": "avel_gordly.jpg",
+                            "width": 400,
+                            "height": 200,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Avel Gordly - photos of her in senate chamber</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Some elders have dedicated their lives to their communities through activism, organizing, and community governance. Elder Kent Ford is an activist and co-founder of the Portland chapter of Oregon’s Black Panther Party in 1969. Avel Gordly is a community organizer, activist, and former politician who became the first African-American woman to be elected to the Oregon State Senate. Margaret Carter is a former politician and the first Black woman elected to Oregon's state legislature.</p><p>Raised to understand the importance of culturally-affirming education, some of our elders turned to a life of teaching the next generation. Linda Harris is a trailblazing educator who led school desegregation efforts. Elder Ken Berry is a celebrated teacher and educator and co-founder of the Martin Luther King program.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "judge_nelson.jpg",
+                            "mobile": "judge_nelson.jpg",
+                            "width": 200,
+                            "height": 400,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Judge Adrienne Nelson</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Religious leaders in this collection have also contributed tirelessly to their communities. Alcena Boozer is one of the first women ordained in the Diocese of Oregon and one of only three Black women ordained in the United States Episcopal Church. Lisa Manning-Saunders has ministered to women in Portland for decades and is now the director of FaithBridge LLC, an organization that helps women emerging from trauma or experiencing a life transition to reconnect with their faith.</p><p>Asked about her hopes for the future of Black Portland, elder Raina Evans says:</p><blockquote class='quote quote--big'><p>I think my biggest hope is that future generations have places to go to learn and to know about the history. Because it’s pretty significant history. <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
                     }
                 }
             ]

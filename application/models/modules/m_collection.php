@@ -54,14 +54,14 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             if ($nodeName == 'p' || $nodeName == 'blockquote') {
 
                 if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>')) {
-                    $type = $nodeName = 'image';
+                    $type = 'image';
                     $elements[] = ['type' => $type, 'content' => array_shift($article_media)];
                     $lastType = $type;
                 }
 
                 else {
                     $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
-                    $type = $nodeName = 'text';
+                    $type = 'text';
                     if ($lastType == $type && !empty($elements)) {
                         $elements[count($elements) - 1]['content'] .= '<br>' . $content;
                     } else {

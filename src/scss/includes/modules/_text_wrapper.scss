@@ -124,19 +124,15 @@
                 translate: -50% 0;
                 margin-block: vw(28, phone);
             }
-        }
 
-        &--horizontal {
-            .polaroid {
+            &--horizontal {
                 @include breakpoint(phone) {
                     --polaroid-width: #{vw(239, phone)};
                     --polaroid-height: #{vw(187, phone)};
                 }
             }
-        }
 
-        &--square {
-            .polaroid {
+            &--square {
                 @include breakpoint(phone) {
                     --polaroid-width: #{vw(165, phone)};
                     --polaroid-height: #{vw(165, phone)};
@@ -144,10 +140,17 @@
             }
         }
 
+
         &--reversed {
             .polaroid {
                 @include breakpoint(phone) {
                     rotate: -11deg;
+                }
+
+                &--horizontal {
+                    @include breakpoint(phone) {
+                        margin-bottom: vw(44, phone);
+                    }
                 }
             }
         }

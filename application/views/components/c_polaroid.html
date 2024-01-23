@@ -1,5 +1,10 @@
-<div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}">
-    <div class="polaroid__image">
-        {% include "/subviews/subview_picture.html" with {image: image} %}
+<div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}
+{% if image.width and image.height %}
+{% if image.width > image.height %} polaroid--horizontal
+{% elseif image.width == image.height %} polaroid--square
+{% endif %}
+{% endif %}">
+    <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">
+        {% include "./subviews/subview_picture.html" with image %}
     </div>
 </div>
