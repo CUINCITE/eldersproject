@@ -1,6 +1,7 @@
 <div class="interviews-grid__tile interviews-grid__tile--group interviews-grid__tile--{{item.modifier}}">
     <h3 class="interviews__name"># {{item.label}}</h3>
     {% include "./components/c_link.html" with {
+        filters: true,
         small: true,
         url: item.url,
         modifiers: ["small"],

@@ -4,6 +4,7 @@ import Scroll from '../Scroll';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
 import { PushStates } from '../PushStates';
+import { FilterLetters } from './FilterLetters';
 
 interface ILoadSettings {
     contentSelector?: string;
@@ -14,6 +15,7 @@ interface ILoadSettings {
     filtered?: string; // show filtered items' list
     scrollTo?: string; // scroll to given element when reloading filters
     updateCurrentSorting?: boolean // manually updates currently selected sorting on mobile
+    externalLinks?: string; // external links with [data-filters] attribute to reload filters
 }
 
 
@@ -56,6 +58,9 @@ export class Load extends Component {
 
         this.updateFiltered();
         this.bind();
+
+        // bind external links with [data-filter] attribute to reload filters
+        this.settings.externalLinks && this.bindExternalFilters();
     }
 
 
@@ -85,6 +90,20 @@ export class Load extends Component {
 
 
 
+    protected bindExternalFilters(): void {
+        const externalFilters: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[data-filters]');
+
+        [...externalFilters].forEach(el => {
+            el.addEventListener('click', e => {
+                e.preventDefault();
+                const url = el.href;
+                this.reloadFilters(url);
+            });
+        });
+    }
+
+
+
     protected hideContent(): Promise<void> {
 
         return new Promise<void>(resolve => {
@@ -108,6 +127,8 @@ export class Load extends Component {
 
     protected showContent = (): void => {
         this.isContentHidden = false;
+        FilterLetters.checkButtons();
+
         gsap.fromTo(this.contentElement, { opacity: 0 }, {
             opacity: 1,
             duration: 0.45,
@@ -172,6 +193,7 @@ export class Load extends Component {
 
                 // should have lightbox links
                 PushStates.bind(this.contentElement);
+                this.bindExternalFilters();
 
                 setTimeout(() => {
                     this.isPending = false;
@@ -222,8 +244,13 @@ export class Load extends Component {
         }
 
 
+        this.reloadFilters(loadPath);
+    };
 
-        Promise.all([this.hideContent(), this.load(loadPath)]).then(() => {
+
+
+    private reloadFilters = (path: string): void => {
+        Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
         });
     };
