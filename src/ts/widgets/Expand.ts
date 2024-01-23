@@ -6,27 +6,25 @@ export class Expand {
 
 
 
-    public static bind(): void {
+    public static bind(where?: HTMLElement): void {
 
         this.setMaxHeight();
 
-        ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
-            const toggleButton = document.querySelector(`[aria-controls="${element.id}"]`) as HTMLElement;
-            toggleButton?.addEventListener('click', Expand.onAriaControlsClick);
-            // console.log(element, toggleButton);
-        });
+        ([...(where || document).querySelectorAll('[data-expand][id]')] as HTMLElement[])
+            .forEach(element => {
+                const toggleButton = document.querySelector(`[aria-controls="${element.id}"]`) as HTMLElement;
+                toggleButton?.addEventListener('click', Expand.onAriaControlsClick);
+            });
     }
 
 
 
-    public static unbind = (): void => {
-
+    public static unbind(): void {
         ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
             const toggleButton = element.querySelector('[aria-controls]') as HTMLElement;
-
             toggleButton?.removeEventListener('click', Expand.onAriaControlsClick);
         });
-    };
+    }
 
 
 

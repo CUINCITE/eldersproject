@@ -278,28 +278,26 @@ export class API {
     };
 
 
-    public static bind(): void {
-        if (document.querySelectorAll('[data-api]:not(form)')) {
-            document.querySelectorAll('[data-api]:not(form)').forEach(apiEl => {
+    public static bind(where?: HTMLElement): void {
+
+        [...(where || document).querySelectorAll('[data-api]:not(form)')]
+            .forEach(apiEl => {
                 apiEl.removeEventListener('click', API.onAction);
                 apiEl.addEventListener('click', API.onAction);
             });
-        }
 
-        if (document.querySelectorAll('form[data-api]')) {
-            document.querySelectorAll('form[data-api]').forEach(apiFormEl => {
-                apiFormEl.removeEventListener('submit', API.onAction);
-                apiFormEl.addEventListener('submit', API.onAction);
-                apiFormEl.setAttribute('novalidate', 'novalidate');
+        [...(where || document).querySelectorAll('form[data-api]')].forEach(apiFormEl => {
+            apiFormEl.removeEventListener('submit', API.onAction);
+            apiFormEl.addEventListener('submit', API.onAction);
+            apiFormEl.setAttribute('novalidate', 'novalidate');
 
-                apiFormEl.querySelectorAll('input[required').forEach(input => {
-                    input.addEventListener('blur', () => {
-                        const data: IApiData = { ...JSON.parse(apiFormEl.getAttribute('data-api')) };
-                        API.beforeCalls.validateBlur(data, apiFormEl as HTMLElement);
-                    });
+            apiFormEl.querySelectorAll('input[required]').forEach(input => {
+                input.addEventListener('blur', () => {
+                    const data: IApiData = { ...JSON.parse(apiFormEl.getAttribute('data-api')) };
+                    API.beforeCalls.validateBlur(data, apiFormEl as HTMLElement);
                 });
             });
-        }
+        });
     }
 
 

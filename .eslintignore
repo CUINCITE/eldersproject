@@ -2,3 +2,4 @@ node_modules
 src/ts/definitions
 dist
 public
+src/js

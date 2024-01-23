@@ -53,6 +53,10 @@
             "source": "src/favicons/**/*",
             "dest": "public/theme/favicons"
         },
+        "sounds": {
+            "source": "src/sounds/**/*.mp3",
+            "dest": "public/theme/sounds"
+        },
         "json": ["workspace/**/*.json"],
         "html": ["index.php", "index.html", "workspace/**/*.html", "workspace/**/*.json", "workspace/**/*.php", "application/views/**/*.html"]
     },

@@ -30,7 +30,7 @@ function stylesDefault() {
 }
 
 
-// // Copy fonts
+// Copy fonts
 
 function fonts() {
     return gulp
@@ -41,7 +41,17 @@ function fonts() {
 }
 
 
-// // Copy map data
+// Copy sounds
+
+function sounds() {
+    return gulp
+        .src(paths.sounds.source)
+        .pipe(plugins.newer(paths.sounds.dest))
+        .pipe(gulp.dest(paths.sounds.dest))
+        .pipe(plugins.notify({ message: 'Sound files copied!', onLast: true }));
+}
+
+// Copy map data
 
 function mapdata() {
     return gulp
@@ -51,7 +61,7 @@ function mapdata() {
         .pipe(plugins.notify({ message: 'Map data copied!', onLast: true }));
 }
 
-// // Favicons
+// Favicons
 
 function favicons() {
     return gulp
@@ -60,7 +70,7 @@ function favicons() {
         .pipe(plugins.notify({ message: 'Favicons copied!', onLast: true }));
 }
 
-// // Libs
+// Libs
 
 function libs() {
     const libFiles = paths.scripts.libs.concat(paths.scripts.plugins);
@@ -159,7 +169,7 @@ function clean() {
     ], { force: true });
 }
 
-// // Images
+// Images
 function imagemin() {
     return gulp
         .src(paths.images.source)
@@ -210,7 +220,7 @@ function svgstore() {
         .pipe(plugins.notify({ message: 'SVG sprite created!', onLast: true }));
 }
 
-// // Video
+// Video
 
 function videos() {
     return gulp
@@ -307,11 +317,12 @@ exports.scripts = bundle;
 exports.test = test;
 exports.init = init;
 exports.videos = videos;
+exports.sounds = sounds;
 exports.libs = libs;
 exports.fonts = fonts;
 exports.bump = bump;
 exports.favicons = favicons;
 exports.images = gulp.series(cleanImages, imagemin, svgnomin, svgmin, svgstore);
 // eslint-disable-next-line max-len
-exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, bump);
+exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, sounds, bump);
 exports.watch = watch;

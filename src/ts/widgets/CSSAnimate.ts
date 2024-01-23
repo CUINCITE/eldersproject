@@ -14,8 +14,8 @@
 export class CSSAnimate {
 
 
-    public static bind(): void {
-        [...document.querySelectorAll('[data-cssanimate]')].forEach(el => {
+    public static bind(where?: HTMLElement): void {
+        [...(where || document).querySelectorAll('[data-cssanimate]')].forEach(el => {
             const selector = (el as HTMLElement).dataset.cssanimate;
             const target = selector ? el.querySelector(selector) : el;
             target?.addEventListener('transitionend', CSSAnimate.onAnimationEnd);

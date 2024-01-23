@@ -48,4 +48,8 @@ sunship.env
 .gulp/*
 
 *.code-workspace
+.vscode
 .npmrc
+
+*.pkf
+*.wav
