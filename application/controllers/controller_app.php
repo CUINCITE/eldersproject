@@ -27,6 +27,7 @@ class controller_app extends _uho_controller
         $this->data['head']['http']=$this->route->getDomain();
         
         if ($this->model->is404) $this->outputType='404';
+        $this->data['content']['is_404'] = $this->model->is404;
 
         if (isset($lang)) $this->data['langs']=$lang;
         $this->data=$this->urlUpdate($this->data);
