@@ -102,6 +102,9 @@ export class Lightbox {
 
 
     public build = (data: LightboxData): void => {
+        // return early when no data to show
+        if (!data.result) return;
+
         const template = Templates.get(TemplateNames.LIGHTBOX);
 
         const html = template.render(data);
@@ -189,8 +192,8 @@ export class Lightbox {
                 this.currentPath = window.location.pathname;
 
                 this.build(data);
-                // show the interview lightbox:
-                if (!this.shown) { this.show(); }
+                // show the interview lightbox (only when there's data to show)
+                if (!this.shown && data.result) { this.show(); }
 
                 this.animateIn();
             }).catch(() => {

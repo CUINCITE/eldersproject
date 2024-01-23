@@ -1,4 +1,5 @@
 export type LightboxData = {
+    result?: boolean;
     id?: string;
     url?: string;
     urlBack?: string;
