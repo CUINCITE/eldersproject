@@ -11,9 +11,17 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
+
+        // return 404 if no interview
+        if (!empty($url[1])) {
+            $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $url[1]], true);
+            if (!$item) $this->parent->set404();
+            return $m;
+        }
+
         /*
-			PAGINATION
-		*/
+        PAGINATION
+        */
 
         $itemsPerPage = 300;
         $page = 1;
