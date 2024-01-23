@@ -1,4 +1,4 @@
-<div class="quote{% if mini %} quote--mini{% endif %}">
+<div class="quote{% if big %} quote--big{% endif %}">
     <blockquote>
         <p>
             {{text}}
@@ -7,8 +7,7 @@
             {% endif %}
         </p>
         {% if author %}
-            <footer>{{label}}</footer>
+            <footer>{{author}}</footer>
         {% endif %}
-
     </blockquote>
 </div>
