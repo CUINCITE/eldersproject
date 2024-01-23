@@ -1,9 +1,4 @@
 {
-  "buttons_edit":
-  [
-    {"label_EN":"Chapter Submodules","type":"page","icon":"reorder","page":"collection_submodules,%id%"},
-    {"type":"plugin","plugin":"preview","params":{"url":"/{{url}}?preview=true"  }}
-  ],
   "fields": [
     {
       "tab": "Copy",
@@ -30,7 +25,7 @@
         {
           "label": "Type",
           "field": "types",
-          "type": "select"
+          "type": "checkbox"
         }
       ],
       "field": "media",
