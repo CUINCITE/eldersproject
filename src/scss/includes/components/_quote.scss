@@ -98,14 +98,17 @@
     }
 
     &__cassette {
-        display: inline-flex;
+        display: inline-block;
         position: relative; 
         background-color: $color-gold;
 
         svg {
             width: 100%;
             height: 100%;
+        }
 
+        .quote--big & {
+            display: inline-flex;
         }
 
         @include breakpoint(desktop) {
