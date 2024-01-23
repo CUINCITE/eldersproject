@@ -1,0 +1,17 @@
+{
+  "table": "interviews",
+  "url": {
+    "type": "interview",
+    "slug": "%slug%"
+  },
+  "fields": [
+    {
+      "label": "Url",
+      "field": "slug"
+    },
+    {
+      "field":"active",
+      "type": "boolean"
+    }
+  ]
+}
