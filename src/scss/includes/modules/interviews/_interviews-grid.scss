@@ -101,6 +101,12 @@
 
 
 
+    &__tabs {
+        background-color: var(--color-box);
+    }
+
+
+
     &__tiles {
         .is-grid-view & {
             display: grid;
