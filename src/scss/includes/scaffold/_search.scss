@@ -153,40 +153,55 @@
 
 
 
-    &__clear {
-
-
-        text-transform: uppercase;
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .3s $ease-custom;
+    &__button {
+        @include font-family(compressed);
 
         @include breakpoint(desktop) {
-            @include font-size(14, 10);
-
-            right: rem(9);
-            bottom: rem(12);
+            @include font-size(17.727, 13.636);
+            @include letter-spacing(-0.532, 17.727);
         }
 
-        @include breakpoint(tablet) {
-            @include font-size(18, 0.9);
+        &--clear {
+            text-transform: uppercase;
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s $ease-custom;
 
-            right: map-get($grid-offset, tablet);
-            bottom: rem(14);
+            @include breakpoint(desktop) {
+                right: rem(9);
+                bottom: rem(8);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(18, 0.9);
+
+                right: map-get($grid-offset, tablet);
+                bottom: rem(14);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(12, 10);
+
+                right: rem(16);
+                bottom: rem(6);
+            }
+
+
+            .search.has-value & {
+                opacity: 1;
+                pointer-events: all;
+            }
         }
-
-        @include breakpoint(phone) {
-            @include font-size(12, 10);
-
-            right: rem(16);
-            bottom: rem(6);
-        }
+    }
 
 
-        .search.has-value & {
-            opacity: 1;
-            pointer-events: all;
-        }
+
+    &__arrow {
+        display: inline-block;
+        position: relative;
+        top: rem(-1);
+        transform: rotate(-90deg);
+        margin-right: rem(6);
     }
 }

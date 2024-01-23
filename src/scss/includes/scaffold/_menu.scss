@@ -47,6 +47,12 @@ $theme-colors: ("orange", "red", "blue", "pink");
         @include font-family(compressed);
 
         width: 100%;
+        transition: opacity .3s $ease-out;
+
+
+        .is-livesearch-shown ~ & {
+            opacity: 0;
+        }
 
         @include breakpoint(desktop) {
             @include font-size(100, 82);
@@ -204,6 +210,12 @@ $theme-colors: ("orange", "red", "blue", "pink");
     &__footer {
         margin-top: rem(17);
         overflow: hidden;
+        transition: opacity .3s $ease-out;
+
+
+        .is-livesearch-shown ~ & {
+            opacity: 0;
+        }
 
         @include breakpoint(desktop) {
             @include font-size(10, 16);

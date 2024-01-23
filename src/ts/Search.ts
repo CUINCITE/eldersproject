@@ -29,6 +29,7 @@ export class Search {
     private timer;
     private liveTemplate;
     private isOpen: boolean;
+    private allLink: HTMLElement;
 
     // eslint-disable-next-line no-unused-vars
     constructor(protected view: HTMLElement) {
@@ -133,6 +134,7 @@ export class Search {
         this.view.classList.add('is-livesearch-shown');
         this.liveList = this.view.querySelector('.js-livesearch-list');
         this.liveLi = this.view.querySelectorAll('.js-livesearch-item');
+        this.allLink = this.view.querySelector('.js-livesearch-all');
 
         // set max-height of livesearch wrap - prevent growing outside viewport
         const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
@@ -152,6 +154,15 @@ export class Search {
                     stagger: 0.1,
                     ease: easing,
                 },
+            )
+            .fromTo(
+                this.allLink,
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: easing,
+                },
             );
 
         this.isLiveShown = true;
@@ -161,6 +172,8 @@ export class Search {
 
     private quickHide(): void {
         if (!this.liveList) return;
+        this.view.classList.remove('is-livesearch-shown');
+
         gsap.to(this.liveList.parentElement, {
             height: 0,
             duration: 0.01,
@@ -176,6 +189,13 @@ export class Search {
 
     private animationHide(): void {
         if (!this.isLiveShown) return;
+
+        // hide 'all' link before hiding all li's
+        gsap.to(this.allLink, {
+            opacity: 0,
+            duration: 0.4,
+            ease: easing,
+        });
         [...this.liveLi].reverse().forEach((item, index) => {
             gsap.to(item, {
                 y: window.innerHeight,
@@ -186,7 +206,11 @@ export class Search {
                 onComplete: () => {
                     item.remove();
                     // after all tweens
-                    if (index === this.liveLi.length) gsap.set(this.liveList.parentElement, { height: 0 });
+                    if (index === this.liveLi.length - 1) {
+                        gsap.set(this.liveList.parentElement, { height: 0 });
+                        this.live.innerHTML = '';
+                    }
+                    this.view.classList.remove('is-livesearch-shown');
                 },
             });
         });
