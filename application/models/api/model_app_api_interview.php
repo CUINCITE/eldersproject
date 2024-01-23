@@ -16,7 +16,7 @@ class model_app_api_interview
 
         $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $slug], true);
 
-        if (!$item) return null; else {
+        if (!$item) return false; else {
             $sessions = $this->parent->getJsonModel('sessions', ['active' => 1, 'parent' => $item['id']], false, 'nr');
             if (!$sessions) return null;
             $date1 = $sessions[0]['date'];

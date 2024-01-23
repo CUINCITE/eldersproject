@@ -13,9 +13,7 @@
                         <div class="collection_hero__author">
                             <div class="collection_author collection_author--huge">
                                 <h3 class="collection_author__name">{{item.label}}</h3>
-                                {% if true %}
-                                    <h4 class="collection_author__collection">  Collection</h4>
-                                {% endif %}
+                                <h4 class="collection_author__collection">Collection</h4>
                             </div>
                         </div>
 
@@ -28,7 +26,7 @@
 
             <div class="box collection_hero__cover_wrapper">
                 <div class="collection_hero__cover">
-                    {% include "/subviews/subview_illustration.html" with { shadow: item.colod, image: item.image } %}
+                    {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
                 </div>
                 <div class="collection_hero__area desktop-only">
                     {{item.locations}}
