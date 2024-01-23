@@ -43,6 +43,15 @@
       "tab_PL": "Informacje"
     },
     {
+      "field": "label"
+    },
+    {
+      "field": "sublabel"
+    },
+    {
+      "field": "text"
+    },
+    {
       "label_PL": "Opis modułu",
       "label_EN": "Module description",
       "list": true,
