@@ -219,6 +219,9 @@
             @include hover {
                 color: var(--color-white);
             }
+
+            svg { transition: scale 0.2s; }
+            &:active svg { scale: 0.9; }
         }
     }
 

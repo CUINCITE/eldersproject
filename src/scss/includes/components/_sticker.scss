@@ -33,12 +33,10 @@
 
     @include breakpoint(phone) {
         --sticker-size: #{vw(83.25, phone)};
-
-
     }
 
     // to do: refactor this
-    * { transition: all $time ease-in-out; }
+    * { transition: all 0.35s ease-in-out; }
 
 
     &--yellow {
@@ -59,7 +57,7 @@
             @include breakpoint(phone) {
                 @include font-size(17, 16.252);
                 @include letter-spacing(-0.051, 17);
-                
+
                 margin-top: rem(-7);
             }
         }
@@ -100,11 +98,10 @@
             @include breakpoint(desktop) {
                 @include font-size(32, 27.5);
                 @include letter-spacing(-0.96, 32);
-    
+
                 transform: rotate(-32deg);
                 padding-top: rem(2);
             }
-
         }
 
 
@@ -113,7 +110,7 @@
             @include breakpoint(desktop) {
                 @include font-size(23, 19);
                 @include letter-spacing(-1.15, 23);
-                
+
                 padding-right: rem(8);
             }
         }
