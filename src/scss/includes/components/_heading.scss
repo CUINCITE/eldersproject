@@ -18,8 +18,8 @@
     &--medium {
 
         @include breakpoint(desktop) {
-            @include font-size(130, 100);
-            @include letter-spacing(-3.9, 130);
+            @include font-size(128, 100);
+            @include letter-spacing(-3.9, 128);
 
             padding-top: rem(47);
         }
@@ -65,8 +65,8 @@
     &--smaller {
 
         @include breakpoint(desktop) {
-            @include font-size(103, 100);
-            @include letter-spacing(-3.09, 103);
+            @include font-size(128, 100);
+            @include letter-spacing(-3.9, 128); 
         }
 
         @include breakpoint(tablet) {
@@ -88,7 +88,10 @@
 
     &--small-plus {
         @include breakpoint(desktop) {
+            @include font-size(128, 100);
+            @include letter-spacing(-3.84, 128);
 
+            margin-block: trim-font(100 / 128);
         }
 
         @include breakpoint(tablet) {
@@ -158,7 +161,7 @@
 
     &--aside {
         @include breakpoint(desktop) {
-            padding-top: rem(24);
+            padding-top: rem(21);
         }
 
         @include breakpoint(not-desktop) {

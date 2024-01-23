@@ -21,7 +21,7 @@
     }
 
 
-    &--text-aside {
+    &--text-aside, &--text_wrapper {
         position: relative;
 
         @include breakpoint(desktop) {
@@ -35,14 +35,16 @@
             }
         }
 
+        @include breakpoint(phone) {
+            max-width: 100%;
+        }
+    }
+
+    &--text-aside {
         .box:last-of-type {
             @include breakpoint(desktop) {
                 padding-bottom: rem(67);
             }
-        }
-
-        @include breakpoint(phone) {
-            max-width: 100%;
         }
     }
 

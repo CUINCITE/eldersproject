@@ -63,7 +63,6 @@ export class Expand {
             let height = 0;
             [...element.children].forEach(children => {
                 height += children.getBoundingClientRect().height;
-                console.log(children, height);
             });
 
             element.style.maxHeight = `${height}px`;

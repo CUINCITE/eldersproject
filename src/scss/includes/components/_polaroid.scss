@@ -92,7 +92,7 @@ $background-colors: (
 
     &--wrapped {
         @include breakpoint(desktop) {
-        
+            padding: vw(17) vw(17) vw(27);
         }
 
         @include breakpoint(tablet) {

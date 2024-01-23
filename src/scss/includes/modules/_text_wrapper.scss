@@ -1,21 +1,45 @@
 .text_wrapper {
-    @include breakpoint(desktop) {
+    overflow: hidden;
+    position: relative;
 
+
+    &--reversed {
+
+        .text_wrapper__photo, .text_wrapper__illustration {
+            @include breakpoint(desktop) {
+                left: calc(50% + #{map-get($grid-offset, desktop)});
+                right: unset;
+            }
+        }
+
+        .text_wrapper__photo {
+            @include breakpoint(desktop) {
+                @include flex(column, flex-start, flex-start);
+
+                .polaroid {
+                    translate: vw(-28) 0;
+                }
+            }
+        }
+
+        .text_wrapper__info {
+            @include breakpoint(desktop) {
+                @include flex(column, flex-start, flex-start)
+
+                text-align: left;
+
+                &::before {
+                    left: 0;
+                    right: unset;
+                }
+            }
+        }
     }
-
-    @include breakpoint(tablet) {
-
-    }
-
-    @include breakpoint(phone) {
-
-    }
-
 
 
     &__column {
         @include breakpoint(desktop) {
-            position: relative;
+
         }
 
         @include breakpoint(tablet) {
@@ -32,7 +56,8 @@
 
     &__content {
         @include breakpoint(desktop) {
-
+            padding-block: rem(20) rem(110);
+            padding-right: rem(36.5);
         }
 
         @include breakpoint(tablet) {
@@ -48,9 +73,13 @@
 
 
     &__module {
+        @include breakpoint(desktop) {
+            z-index: 1;
+        }
+
         & + & {
             @include breakpoint(desktop) {
-
+                margin-top: rem(25);
             }
 
             @include breakpoint(tablet) {
@@ -59,12 +88,6 @@
 
             @include breakpoint(phone) {
                 margin-top: rem(25);
-            }
-        }
-
-        p {
-            @include breakpoint(phone) {
-                // max-width: rem(267) !important;
             }
         }
 
@@ -76,19 +99,14 @@
         p + p, blockquote + p, p + blockquote, p + div, div + p {
             @include breakpoint(desktop) {
                 margin-top: vw(22);
-                margin-top: vw(22);
-
             }
     
             @include breakpoint(tablet) {
                 margin-top: rem(25);
-                margin-top: rem(25);
-
             }
      
             @include breakpoint(phone) {
                 margin-top: rem(25);
-                
             }
         }
     }
@@ -113,19 +131,44 @@
 
 
     &__photo {
+
+        @include breakpoint(desktop) {
+            @include flex(column, flex-start, flex-end);
+        }
+
         .polaroid {
+            rotate: 11deg;
+            position: relative;
+
+            @include breakpoint(desktop) {
+                --polaroid-width: #{vw(220)};
+                --polaroid-height: #{vw(274)};
+
+                // left: 50%;
+                margin-block: vw(28);
+                translate: vw(8) 0;
+            }
+
+            @include breakpoint(tablet) {
+            
+            }
+
             @include breakpoint(phone) {
                 --polaroid-width: #{vw(165, phone)};
                 --polaroid-height: #{vw(205, phone)};
 
-                position: relative;
-                rotate: 11deg;
+                
                 left: 50%;
                 translate: -50% 0;
                 margin-block: vw(28, phone);
             }
 
             &--horizontal {
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{vw(320)};
+                    --polaroid-height: #{vw(250)};
+                }
+
                 @include breakpoint(phone) {
                     --polaroid-width: #{vw(239, phone)};
                     --polaroid-height: #{vw(187, phone)};
@@ -133,6 +176,12 @@
             }
 
             &--square {
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{vw(386)};
+                    --polaroid-height: #{vw(386)};
+                }
+    
+
                 @include breakpoint(phone) {
                     --polaroid-width: #{vw(165, phone)};
                     --polaroid-height: #{vw(165, phone)};
@@ -143,11 +192,14 @@
 
         &--reversed {
             .polaroid {
-                @include breakpoint(phone) {
-                    rotate: -11deg;
-                }
+                rotate: -11deg;
 
                 &--horizontal {
+
+                    @include breakpoint(desktop) {
+                        margin-bottom: vw(44);
+                    }
+
                     @include breakpoint(phone) {
                         margin-bottom: vw(44, phone);
                     }
@@ -159,14 +211,25 @@
 
     &__illustration {
         img {
-            max-width: unset;
+            position: relative;
+
+            @include breakpoint(desktop) {
+                height: vw(316);
+            }
 
             @include breakpoint(phone) {
-                position: relative;
                 left: 50%;
                 translate: -50% 0;
                 height: vw(260, phone);
             }
+        }
+    }
+
+
+    &__photo, &__illustration {
+        @include breakpoint(desktop) {
+            position: absolute;
+            right: calc(50% + #{map-get($grid-offset, desktop)});
         }
     }
 
@@ -196,7 +259,7 @@
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end)
 
-                text-align: right;
+            text-align: right;
             max-width: rem(182);
             padding-top: rem(16);
         }
@@ -216,6 +279,10 @@
 
         b {
             @include font-settings(700, 0);
+        }
+
+        .text {
+            padding-inline: 0;
         }
     }
 }

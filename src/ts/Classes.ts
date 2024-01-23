@@ -7,6 +7,7 @@ import { Modal } from './components/Modal';
 import { More } from './components/More';
 import { Accordeon } from './components/Accordeon';
 import { AccordeonList } from './components/AccordeonList';
+import { WrappedText } from './components/WrappedText';
 import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
@@ -23,6 +24,7 @@ export const components = {
     LightboxNav,
     LightboxTranscript,
     LightboxSlider,
+    WrappedText,
 };
 
 export const pages = { Page };

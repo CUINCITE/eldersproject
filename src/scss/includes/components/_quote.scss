@@ -32,7 +32,6 @@
             @include letter-spacing(-0.84, 28);
         }
     
-    
         &::before {
             // content: url("./public/theme/images/svg/quote-icon.svg");
             content: url("./images/svg/quote-icon.svg");
@@ -52,6 +51,12 @@
                 margin-left: rem(1);
             }
         } 
+
+        p {
+            @include breakpoint(desktop) {
+                max-width: unset !important;
+            }
+        }
     }
 
 
@@ -105,14 +110,29 @@
         svg {
             width: 100%;
             height: 100%;
+            object-fit: contain;
         }
 
         .quote--big & {
             display: inline-flex;
+
+            @include breakpoint(desktop) {
+                width: rem(57);
+                height: rem(30);
+
+                svg {
+                    translate: 0;
+                }
+            }
         }
 
         @include breakpoint(desktop) {
-        
+            width: rem(35);
+            height: rem(18);
+
+            svg {
+                translate: 0 -12%;
+            }
         }
 
         @include breakpoint(tablet) {
