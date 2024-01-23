@@ -4,7 +4,11 @@
       "tab": "Copy",
       "field": "text",
       "label": "Copy",
-      "type": "html"
+      "type": "text"
+    },
+    {
+      "field": "label",
+      "label": "Author"
     }
   ]
 }
