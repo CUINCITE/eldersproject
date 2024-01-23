@@ -239,7 +239,7 @@
 
 
 
-    p + p, blockquote + p, p + blockquote, p + div, div + p {
+    p + p, blockquote + blockquote, blockquote + p, p + blockquote, p + div, div + p {
         @include breakpoint(desktop) {
             margin-top: vw(22);
         }
