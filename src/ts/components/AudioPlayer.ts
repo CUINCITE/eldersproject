@@ -111,14 +111,21 @@ export class AudioPlayer extends Video {
         e.stopPropagation();
 
         const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
+        const startTime = (e.currentTarget as HTMLElement).dataset.start;
         if (!id) return;
 
         if (id !== AudioPlayer.currentAudioId) {
             // if button has different id than audio player, load new audio and play
-            this.setNewAudio(id, true);
+            this.setNewAudio(id, true, startTime);
         } else {
             // if button has the same id as current audio, only toggle player
-            this.isPaused() ? this.play() : this.pause();
+            // eslint-disable-next-line no-lonely-if
+            if (startTime) {
+                this.media.currentTime = parseInt(startTime, 10);
+                this.play();
+            } else {
+                this.isPaused() ? this.play() : this.pause();
+            }
         }
     };
 
@@ -163,13 +170,16 @@ export class AudioPlayer extends Video {
 
 
 
-    private setNewAudio = (id?: string, play?: boolean): void => {
+    private setNewAudio = (id?: string, play?: boolean, startTime?: string): void => {
         this.loadAudio(id).then((data: IAudioPlayerResponse) => {
             this.updatePlayer(data);
             // check if lightbox is open and has the same id as audio player
             Lightbox.checkPlayerState();
             // play audio when it has been already initialized
-            play && this.play();
+            if (play) {
+                this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                this.play();
+            }
         });
     };
 
