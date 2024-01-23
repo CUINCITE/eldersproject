@@ -9,7 +9,13 @@
             <div class="col-span-12">
                 <div class="box__wrap">
                     <div class="page_404__image">
-                        {% include "subviews/subview_picture.html" with { image: image } %}
+                        {% include "subviews/subview_picture.html" with {
+                            image: {
+                                desktop: "/public/theme/images/megaphone.png",
+                                mobile: "/public/theme/images/megaphone.png"
+                                }
+                            }
+                        %}
                     </div>
                     {% include "components/c_heading.html" with { reclined: true, label: "404" } %}
                 </div>
