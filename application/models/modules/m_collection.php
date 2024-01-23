@@ -17,7 +17,10 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 		else
 		{
         	$m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
+            $m['modules'] =$this->parent->getJsonModel('collection_modules',['parent' => $m['item']['id'],'active'=>1]);
 		}
+
+//        dd($m['modules']);
 		
 		return $m;
 	}
