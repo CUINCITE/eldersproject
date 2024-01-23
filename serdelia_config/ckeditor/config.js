@@ -31,10 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.stylesSet =
 	[
-    	{ name: '- Usuń -',   element:'p',   attributes: { 'class': ' ' } },
-    	{ name: 'Lead',   element:'p',   attributes: { 'class': 'lead' } },
-    	{ name: 'Podpis cytatu',   element:'p',   attributes: { 'class': 'blockquote-footer' } },
-    	{ name: 'Pytanie',   element:'p',   attributes: { 'class': 'question' } }
+    	{ name: 'Inline Quote',   element:'p',   attributes: { 'class': 'quote' } }
     	
     ];
   
