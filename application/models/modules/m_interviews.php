@@ -14,7 +14,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         // return 404 if no interview
         if (!empty($url[1])) {
-            $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $url[1]], true);
+            $item = $this->parent->getJsonModel('interviews_simple', ['active' => 1, 'slug' => $url[1]], true);
             if (!$item) $this->parent->set404();
             return $m;
         }
