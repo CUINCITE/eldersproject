@@ -163,7 +163,7 @@
                     "text": {
                         "size": "large",
                         "modifiers": ["aside"],
-                        "text": "<p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p>"
+                        "text": "<blockquote class='quote quote--big'><p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p></blockquote>"
                     }
                 },
                 {

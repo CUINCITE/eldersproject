@@ -253,24 +253,64 @@
         }
     }
 
+    p + .text__expand {
+        @include breakpoint(desktop) {
+        }
+
+        @include breakpoint(tablet) {
+        }
+ 
+        @include breakpoint(phone) {
+            margin-top: rem(8);
+        }
+    }
+
 
     &__expand {
-        p + p {
+        p {
             @include breakpoint(desktop) {
-                margin-top: unset;
-                padding-top: vw(22);
+                margin-top: unset !important;
+                padding-top: vw(16);
             }
     
             @include breakpoint(tablet) {
-                margin-top: unset;
-                padding-top: rem(25);
+                margin-top: unset !important;
+                padding-top: rem(16);
 
             }
      
             @include breakpoint(phone) {
-                margin-top: unset;
+                margin-top: unset !important;
+                padding-top: rem(16);
+            }
+        }
+
+        p + p {
+            @include breakpoint(desktop) {
+                padding-top: vw(22);
+            }
+    
+            @include breakpoint(tablet) {
                 padding-top: rem(25);
             }
+     
+            @include breakpoint(phone) {
+                padding-top: rem(25);
+            }
+        }
+
+        p:last-child {
+            @include breakpoint(desktop) {
+                padding-bottom: vw(8);
+            }
+    
+            @include breakpoint(tablet) {
+                padding-bottom: rem(8);
+            }
+     
+            @include breakpoint(phone) {
+                padding-bottom: rem(8);
+            } 
         }
     } 
 
@@ -381,23 +421,6 @@
     }
 
 
-    blockquote {
-        @include font-family(normal, 400);
-        @include font-settings(700, 100);
-
-        @include breakpoint(desktop) {
-        
-        }
-
-        @include breakpoint(tablet) {
-        
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(17, 1.3);
-        }
-    }
-
 
     &__expand {
         overflow: hidden;
@@ -434,21 +457,18 @@
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
-                padding: rem(28) 0 0;
             }
 
             @include breakpoint(tablet) {
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
-                padding: rem(28) 0 0;
             }
 
             @include breakpoint(phone) {
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
-                padding: rem(28) 0 0;
             }
 
             i { 

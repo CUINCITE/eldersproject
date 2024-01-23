@@ -1,6 +1,13 @@
-<div class="quote">
+<div class="quote{% if big %} quote--big{% endif %}">
     <blockquote>
-        <p>The cohort from whom I'll be gathering stories reflects an incredibly varied range of lived experiences, hailing from trans, lesbian, gay, non-binary, genderqueer, Black, Latinx, AAPI, and Native communities, to name a few. They are activists who blazed trails for queer visibility and rights; they are ordinary people who have lived with extraordinary courage; they are witnesses to history, agents of change, and foreparents of today’s racial and queer justice movements. Their stories are inspiring, and essential to our understanding of who we are and might collectively become.</p>
-        <footer>Carolina De Robertis</footer>
+        <p>
+            {{text}}
+            {% if clip %}
+                <button data-audio-player="{{clip.player}}" data-start="{{clip.start}}" class="quote__cassette">[[svg::cassette]]</button>
+            {% endif %}
+        </p>
+        {% if author %}
+            <footer>{{author}}</footer>
+        {% endif %}
     </blockquote>
 </div>
