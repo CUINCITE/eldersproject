@@ -21,7 +21,7 @@
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
 
-            gap: vw(6, tablet); 
+            gap: vw(6, tablet);
         }
 
         @include breakpoint(phone) {
@@ -52,6 +52,9 @@
             rotate: 180deg;
         }
     }
+
+
+    &--collection { overflow: hidden; }
 
 
     &--lightbox {
