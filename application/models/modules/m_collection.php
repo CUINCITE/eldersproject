@@ -19,8 +19,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         	$m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
             $m['modules'] =$this->parent->getJsonModel('collection_modules',['parent' => $m['item']['id'],'active'=>1]);
 
+            $counter = 0;
             foreach ($m['modules'] as $k=>$v) {
                 if ($v['type']['slug'] == 'collection_chapter') {
+                    if ($counter % 2 != 0) {
+                        $m['modules'][$k]['reversed'] = true;
+                    }
+                    $counter++;
                     $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
                 }
             }
