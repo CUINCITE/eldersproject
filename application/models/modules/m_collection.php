@@ -63,7 +63,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             // text blocks, including blockquotes
             else {
-                $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
+
+                $content = str_replace(
+                    ['<blockquote>', '<q class="quote">', '</q>'],
+                    ['<blockquote class="quote quote--big">', '<q class="quote">“', '”</q>'],
+                    $content
+                );
+
                 $type = 'text';
 
                 if ($lastType == $type && !empty($elements)) {
