@@ -38,12 +38,21 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
+//        dd($m['modules']);
+
         return $m;
     }
 
     public function updateArticle($article, $article_media)
     {
         // process load_more
+        $findReplace = [
+            '/<p><q class="quote">/' => '<blockquote class="quote"><p>',
+            '/<\/q>\[AUDIO=([\d]+), ([\d:]+)-([\d:]+)\]<\/p>/' => '[AUDIO=$1, $2-$3]</p></blockquote>',
+            '/<\/q><\/p>/' => '</p></blockquote>',
+        ];
+        $article = preg_replace(array_keys($findReplace), $findReplace, $article);
+
         $article = $this->processLoadMore($article);
 
         $dom = new DOMDocument();
