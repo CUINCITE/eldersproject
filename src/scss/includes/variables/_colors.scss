@@ -1,5 +1,6 @@
 $color-white: #fff;
 $color-black: #1B1B1B;
+$color-pure-black: #000;
 $color-pale: #E9F5FF;
 
 $color-dark: #121316;
@@ -63,4 +64,5 @@ $color-select-text: $color-pale;
     --color-grey200: #{$color-grey200};
     --color-grey300: #{$color-grey300};
     --color-black: #{$color-black};
+    --color-pure-black: #{$color-pure-black};
 }
