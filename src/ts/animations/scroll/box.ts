@@ -3,7 +3,7 @@ import { easing } from '../../Site';
 
 export const box = el => {
 
-    gsap.fromTo(el, { y: window.innerHeight / 2 }, {
+    gsap.fromTo(el, { y: window.innerHeight / 5 }, {
         y: 0,
         duration: 1.2,
         ease: easing,
