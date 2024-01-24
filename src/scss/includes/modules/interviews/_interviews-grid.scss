@@ -68,6 +68,7 @@
             @include flex(row, center, center);
 
             width: 100%;
+            position: relative;
 
 
             &.is-disabled {
@@ -91,6 +92,25 @@
             @include breakpoint(phone) {
                 @include font-size(17, 1);
                 height: rem(28);
+            }
+
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 100% 0 auto;
+                height: 1px;
+                background-color: var(--color-pure-black);
+                transform: scalex(0);
+                transition: transform .3s $ease-custom;
+                transform-origin: center;
+            }
+
+
+            @include hover {
+                &:after {
+                    transform: scaleX(1);
+                }
             }
         }
     }
