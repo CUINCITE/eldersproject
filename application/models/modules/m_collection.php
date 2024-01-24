@@ -50,27 +50,31 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         foreach ($bodyNode->childNodes as $node) {
 
             $content = $dom->saveHTML($node);
+
+            // change audio tags to buttons
             $content = $this->processAudioTag($content);
 
-            if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>')) {
-                $type = 'image';
-                $elements[] = ['type' => $type, 'content' => array_shift($article_media)];
-                $lastType = $type;
+            // images
+            if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>') && !empty($article_media)) {
+                $media_item = array_shift($article_media);
+                $type = ($media_item['variant'] == 'photograph') ? 'image' : 'illustration';
+                $elements[] = ['type' => $type, 'content' => $media_item];
             }
 
+            // text blocks, including blockquotes
             else {
                 $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
                 $type = 'text';
 
                 if ($lastType == $type && !empty($elements)) {
                     end($elements);
-                    $elements[key($elements)]['content'] .= '<br>' . $content;
+                    $elements[key($elements)]['content'] .= $content;
                 } else {
                     $elements[] = ['type' => $type, 'content' => $content];
                 }
-                $lastType = $type;
             }
 
+            $lastType = $type;
 
         }
 

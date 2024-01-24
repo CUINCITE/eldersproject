@@ -16,20 +16,13 @@
 
                         {% if module.type == "text" %}
                             <div class="text_wrapper__module text_wrapper__text">
-                                {% include "/subviews/subview_text.html" with {text:module.content} %}
+                                {% include "/subviews/subview_text.html" with {text:module.content, large:true, aisde:true} %}
                             </div>
                         {% endif %}
 
-{#                        {% if module.type == "quote" %}#}
-{#                            <div#}
-{#                                    class="text_wrapper__module text_wrapper__quote{% if module.quote.mini %} text_wrapper__quote--mini{% endif %}">#}
-{#                                {% include "/components/c_quote.html" with {text:module.content} %}#}
-{#                            </div>#}
-{#                        {% endif %}#}
-
                         {% if module.type == "illustration" %}
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.image.width and module.image.height %}{% if module.image.width > module.image.height %} text_wrapper__illustration--horizontal{% elseif module.image.width == module.image.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
-                                {% include "subviews/subview_picture.html" with { image: module.image } %}
+                                {% include "subviews/subview_picture.html" with { image: module.content.image } %}
                             </div>
                         {% endif %}
 
