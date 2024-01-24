@@ -160,7 +160,7 @@ class model_app_api_interview
                     // Add the timestamp of the previous transcript(s) to the current one
                     $total_seconds = $transcript_seconds + $timeOffset;
 
-                    $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? $narrator : $interviewer);
+                    $name = $matches[3] ? trim($matches[3], " :") : ($matches[1] == 'Q' ? $interviewer : $narrator);
                     $text = "<strong>{$name}:</strong> " . $matches[4];
                     $result[] = [$total_seconds, $text];
                 }
