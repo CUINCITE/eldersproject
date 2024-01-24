@@ -2,27 +2,29 @@
 
 class model_app_pages_modules_collection extends model_app_pages_modules
 {
+    private mixed $settings;
+    private mixed $parent;
 
-	function __construct($parent,$settings)
-	{
-		$this->parent=$parent;
-		$this->settings=$settings;
-	}
+    function __construct($parent, $settings)
+    {
+        $this->parent = $parent;
+        $this->settings = $settings;
+    }
 
-	public function updateModel($m,$url)
-	{
+    public function updateModel($m, $url)
+    {
         //exit($url[1].'!');
-        $m['item']=$this->parent->getJsonModel('interviewers',['active'=>1,'slug'=>$url[1]],true);
+        $m['item'] = $this->parent->getJsonModel('interviewers', ['active' => 1, 'slug' => $url[1]], true);
 
         if (!$m['item']) {
             return null;
         }
 
-        $m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
-        $m['modules'] =$this->parent->getJsonModel('collection_modules',['parent' => $m['item']['id'],'active'=>1]);
+        $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
+        $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
 
         $counter = 0;
-        foreach ($m['modules'] as $k=>$v) {
+        foreach ($m['modules'] as $k => $v) {
 
             if ($v['type']['slug'] == 'collection_chapter') {
 
@@ -35,11 +37,15 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             }
         }
-		
-		return $m;
-	}
 
-    public function updateArticle($article, $article_media) {
+        return $m;
+    }
+
+    public function updateArticle($article, $article_media)
+    {
+        // process load_more
+        $article = $this->processLoadMore($article);
+
         $dom = new DOMDocument();
         $dom->loadHTML("<body>{$article}</body>");
 
@@ -59,14 +65,12 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                 $media_item = array_shift($article_media);
                 $type = ($media_item['variant'] == 'photograph') ? 'image' : 'illustration';
                 $elements[] = ['type' => $type, 'content' => $media_item];
-            }
-
-            // text blocks, including blockquotes
+            } // text blocks, including blockquotes
             else {
 
                 $content = str_replace(
                     ['<blockquote>', '<q class="quote">', '</q>'],
-                    ['<blockquote class="quote quote--big">', '<q class="quote">“', '”</q>'],
+                    ['<blockquote class="quote quote--big">', '<blockquote class="quote">', '</blockquote>'],
                     $content
                 );
 
@@ -87,7 +91,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         return $elements;
     }
 
-    private function processAudioTag($content): string {
+    private function processAudioTag($content): string
+    {
         // Check for audio tag and replace it with button
         $pattern = '/\[AUDIO=(\d+), ([0-9:]+)-([0-9:]+)\]/';
         if (preg_match($pattern, $content, $matches)) {
@@ -101,5 +106,27 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         return $content;
     }
 
+    private function processLoadMore($content)
+    {
+        $pattern = '/<p>\[MORE\]<\/p>(.*?)<p>\[ENDMORE\]<\/p>/s';
+
+        preg_match_all($pattern, $content, $matches);
+
+        $content = preg_replace_callback($pattern, function ($matches) {
+            $uniqueId = uniqid('expand-quote-');
+            $replacement = "<div class='text__expand expand' data-expand='' id='$uniqueId'>{$matches[1]}</div>
+        <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='$uniqueId'
+                    data-expanded-text='Read less' data-hidden-text='Read more'><i
+                        class='icon-btn-arrow arrow'><span></span><span></span><span class='triangle'></span></i><span
+                        class='js-expand-text'>Read more</span></button>";
+
+            return $replacement;
+        }, $content);
+
+        return $content;
+
+    }
+
 }
+
 ?>
