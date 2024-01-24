@@ -9,6 +9,14 @@ interface ILoadSettings {
 
 export class FilterLetters extends Component {
 
+    // eslint-disable-next-line no-use-before-define
+    public static instance: FilterLetters;
+
+    public static checkButtons(): void {
+        FilterLetters.instance.checkButtons();
+    }
+
+
     private settings: ILoadSettings;
     private contentElement: HTMLElement;
     private buttons: NodeListOf<HTMLElement>;
@@ -19,12 +27,14 @@ export class FilterLetters extends Component {
     constructor(protected view: HTMLElement) {
         super(view);
 
+        FilterLetters.instance = this;
+
         this.settings = { ...this.settings, ...JSON.parse(this.view.getAttribute('data-options')) };
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.buttons = this.view.querySelectorAll('.js-letter');
-        this.scrolledItems = this.contentElement.querySelectorAll('.js-tile');
 
         this.bind();
+        this.checkButtons();
     }
 
 
@@ -52,6 +62,20 @@ export class FilterLetters extends Component {
             offsetY: this.view.closest('.js-controls').clientHeight - 1, // prevent double border
         });
     };
+
+
+
+    private checkButtons(): void {
+        this.scrolledItems = this.contentElement.querySelectorAll('.js-tile');
+
+        [...this.buttons].forEach(button => {
+            const { letter } = button.dataset;
+
+            const letterItem: HTMLElement = [...this.scrolledItems].find(item => this.getFirstLetter(item) === letter.toLowerCase());
+
+            button.classList.toggle('is-disabled', !letterItem);
+        });
+    }
 
 
 

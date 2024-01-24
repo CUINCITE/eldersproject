@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { log } from 'three';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
@@ -103,7 +104,7 @@ export class Lightbox {
 
     public build = (data: LightboxData): void => {
         // return early when no data to show
-        if (!data.result) return;
+        if (data.result === false) return;
 
         const template = Templates.get(TemplateNames.LIGHTBOX);
 
@@ -192,8 +193,9 @@ export class Lightbox {
                 this.currentPath = window.location.pathname;
 
                 this.build(data);
+
                 // show the interview lightbox (only when there's data to show)
-                if (!this.shown && data.result) { this.show(); }
+                if (!this.shown && data.result !== false) { this.show(); }
 
                 this.animateIn();
             }).catch(() => {

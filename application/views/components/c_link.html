@@ -2,6 +2,7 @@
     href={{url}}
     class="button{% if modifiers %}{% for modifier in modifiers %} button--{{modifier}}{% endfor %}{% endif %}"
     {% if more %}data-more{% endif %}
+    {% if filters %}data-filters{% endif %}
     >
     {% include "components/c_arrow_icon.html" %}
     <span>{% if text %}{{text|raw}}{% else %}button{% endif %}</span>

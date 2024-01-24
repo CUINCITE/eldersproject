@@ -31,7 +31,7 @@
             @include breakpoint(tablet) {
                 height: calc(100vh - #{rem(102)});
             }
-    
+
             @include breakpoint(phone) {
                 height: calc(100vh - #{rem(54)});
             }
@@ -93,9 +93,9 @@
         }
 
 
-        &:first-of-type { 
+        &:first-of-type {
             @include breakpoint(desktop) {
-                padding-bottom: rem(37); 
+                padding-bottom: rem(37);
             }
         }
 
@@ -130,7 +130,7 @@
                         @include breakpoint(tablet) {
                             padding-bottom: rem(14);
                         }
-        
+
                         @include breakpoint(phone) {
                             padding-bottom: rem(10);
                         }
@@ -151,7 +151,7 @@
 
 
         &--transcripts {
-            
+
             @include breakpoint(not-desktop) {
                 flex-grow: 1;
             }
@@ -161,7 +161,7 @@
                     @include breakpoint(desktop) {
                         margin-top: rem(25);
                     }
-                    
+
                     @include breakpoint(tablet) {
                         margin-top: rem(30);
                     }
@@ -178,7 +178,7 @@
                         margin-bottom: rem(6);
                         display: inline-block;
                     }
-                } 
+                }
             }
         }
 
@@ -188,7 +188,7 @@
             @include breakpoint(desktop) {
                 @include font-size(30, 1);
                 @include letter-spacing(-0.9, 30);
-    
+
                 min-height: vw(128);
             }
 
@@ -212,7 +212,7 @@
 
                 @include breakpoint(desktop) {
                     @include font-size(14, 18);
-                
+
                     margin-top: rem(8);
                 }
 
@@ -224,7 +224,7 @@
 
                 @include breakpoint(phone) {
                     @include font-size(14, 18);
-                
+
                     margin-top: rem(12);
                 }
             }
@@ -244,7 +244,7 @@
 
     &__fragment {
         @include font-family(normal);
-        
+
         text-transform: none;
         display: block;
         transition: background-color .3s $easing;
@@ -298,5 +298,33 @@
             margin-top: rem(10);
             margin-bottom: rem(-4);
         }
+    }
+
+
+
+    &__all {
+        @include font-family(compressed);
+
+        position: absolute;
+        inset: 100% 0 auto auto;
+        color: var(--color-grey200);
+
+        @include breakpoint(desktop) {
+            @include font-size(17.727, 13.636);
+            @include letter-spacing(-0.532, 17.727);
+
+            right: rem(9);
+            margin-top: rem(12);
+        }
+    }
+
+
+
+    &__arrow {
+        display: inline-block;
+        position: relative;
+        top: rem(-1);
+        transform: rotate(90deg);
+        margin-right: rem(6);
     }
 }

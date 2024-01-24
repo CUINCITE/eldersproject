@@ -52,7 +52,7 @@
                                             <span class="sr-only">show sorting</span>
                                             <i>[[svg::arrow-small]]</i>
                                             <span class="js-current-sorting">
-                                                {% if 'collections' in sort.selected %} 
+                                                {% if 'collections' in sort.selected %}
                                                     collections
                                                 {% elseif 'locations' in sort.selected %}
                                                     locations
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <form action="" data-component="Load"
-                                    data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters", "scrollTo": ".js-interviews-filtered"}'
+                                    data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters", "scrollTo": ".js-interviews-filtered", "externalLinks": true}'
                                     class="interviews-grid__form js-interviews-sort">
                                     <fieldset class="interviews-grid__radios">
                                         <legend class="phone-hide">Sort by:</legend>
