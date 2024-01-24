@@ -215,6 +215,8 @@
 
     &--contact {
         @include breakpoint(phone) {
+            margin-bottom: 0;
+
             p:first-child {
                 margin-bottom: rem(22);
             }
@@ -222,8 +224,6 @@
             h2 {
                 max-width: 20ch;
             }
-
-            margin-bottom: 0;
         }
     }
 
@@ -246,7 +246,7 @@
     }
 
 
-    p + p, blockquote + blockquote, blockquote + p, p + blockquote, p + div, div + p {
+    :is(p, q, blockquote, .quote) + :is(p, q, blockquote, .quote) {
         @include breakpoint(desktop) {
             margin-top: vw(22);
         }
@@ -260,22 +260,11 @@
         }
     }
 
-    p + .text__expand {
-        @include breakpoint(desktop) {
-            margin-top: rem(12);
-        }
-
-        @include breakpoint(tablet) {
-        }
- 
-        @include breakpoint(phone) {
-            margin-top: rem(8);
-        }
-    }
 
 
     &__expand {
-        p {
+
+        .quote {
             @include breakpoint(desktop) {
                 margin-top: unset !important;
                 padding-top: vw(16);
@@ -293,7 +282,7 @@
             }
         }
 
-        p + p {
+        .quote + .quote {
             @include breakpoint(desktop) {
                 padding-top: vw(22);
             }
@@ -306,26 +295,11 @@
                 padding-top: rem(25);
             }
         }
-
-        p:last-child {
-            @include breakpoint(desktop) {
-                padding-bottom: vw(8);
-            }
-    
-            @include breakpoint(tablet) {
-                padding-bottom: rem(8);
-            }
-     
-            @include breakpoint(phone) {
-                padding-bottom: rem(8);
-            } 
-        }
     } 
 
 
     a {
         display: inline-block;
-
         margin-top: rem(3);
     }
 
@@ -465,18 +439,21 @@
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
+                margin-top: rem(8);
             }
 
             @include breakpoint(tablet) {
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
+                margin-top: rem(8);
             }
 
             @include breakpoint(phone) {
                 @include font-size(20, 14);
                 @include letter-spacing(-0.6, 20);
 
+                margin-top: rem(8);
             }
 
             i { 

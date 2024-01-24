@@ -92,9 +92,7 @@
         @include breakpoint(tablet) {
             @include flex(column, flex-start, flex-start);
 
-            div {
-                max-width: rem(480);
-            }
+            max-width: rem(480);
         }
 
         @include breakpoint(phone) {
@@ -195,23 +193,47 @@
 
 
     &__button {
+        
+        .button {
+            flex-wrap: wrap;
+        }
 
         @include breakpoint(desktop) {
             margin-top: auto;
+            margin-bottom: rem(12);
+
+            .button {
+                max-width: rem(268);
+                row-gap: rem(6);
+
+                span {
+                    margin-block: trim-font(1);
+                }
+            }
         }
 
         @include breakpoint(not-desktop) {
             .button {
                 flex-direction: row-reverse;
                 justify-content: flex-end;
+
+                span {
+                    margin-block: trim-font(1);
+                }
             }
 
             @include breakpoint(tablet) {
                 margin-top: rem(24);
+                max-width: rem(240);
             }
     
             @include breakpoint(phone) {
                 margin-top: rem(16);
+                max-width: rem(140);
+
+                .button {
+                    row-gap: rem(4);
+                }
             }
         }
     }

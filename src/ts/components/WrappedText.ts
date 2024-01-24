@@ -6,6 +6,7 @@ export class WrappedText extends Component {
 
     private allImages: HTMLDivElement[];
     private title: HTMLHeadingElement;
+    private content: HTMLDivElement;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -19,6 +20,16 @@ export class WrappedText extends Component {
     private bind(): void {
         this.allImages = [...this.view.querySelectorAll('.js-wrapped-image')] as HTMLDivElement[];
         this.title = this.view.querySelector('.js-wrapped-title .heading');
+        this.content = this.view.querySelector('.js-wrapped-content');
+    }
+
+
+    private checkOverflow(element: HTMLDivElement): void {
+        const containerHeight = this.content.offsetHeight - parseInt(window.getComputedStyle(this.content).paddingBottom.replace('px', ''), 10);
+
+        if ((element.offsetTop + element.offsetHeight) > containerHeight) {
+            element.style.top = `${containerHeight - element.offsetHeight}px`;
+        }
     }
 
 
@@ -28,18 +39,18 @@ export class WrappedText extends Component {
 
         mm.add('(orientation: landscape)', () => {
             let previousHeight = this.title ? (this.title.offsetTop + this.title.offsetHeight) : 0;
-            // console.log(previousHeight);
 
             this.allImages.forEach(image => {
 
                 if (image.offsetTop < previousHeight) {
-                    // console.log('colission', previousHeight, image.offsetTop);
-
                     image.style.top = `${previousHeight}px`;
                 }
 
                 previousHeight = image.offsetTop + image.offsetHeight;
+
+                this.content && this.checkOverflow(image);
             });
         });
     }
+
 }

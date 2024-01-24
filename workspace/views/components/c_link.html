@@ -6,4 +6,5 @@
     >
     {% include "./components/c_arrow_icon.html" with { small } %}
     <span>{% if text %}{{text|raw}}{% else %}button{% endif %}</span>
+    {% if extraText %}<span>{{extraText|raw}}</span>{% endif %}
 </a>

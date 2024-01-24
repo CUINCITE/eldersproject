@@ -96,7 +96,7 @@ $background-colors: (
         }
 
         @include breakpoint(tablet) {
-        
+            padding: vw(12.75, tablet) vw(12.75, tablet) vw(20.25, tablet);
         }
 
         @include breakpoint(phone) {

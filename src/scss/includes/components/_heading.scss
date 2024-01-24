@@ -25,8 +25,8 @@
         }
 
         @include breakpoint(tablet) {
-            @include font-size(140, 0.8);
-            @include letter-spacing(-6.5, 140);
+            @include font-size(110, 0.8);
+            @include letter-spacing(-5.5, 110);
 
             margin-block: trim-font(0.8);
         }
@@ -70,8 +70,8 @@
         }
 
         @include breakpoint(tablet) {
-            @include font-size(140, 0.8);
-            @include letter-spacing(-6.5, 140);
+            @include font-size(110, 0.8);
+            @include letter-spacing(-5.5, 110);
 
             margin-block: trim-font(0.8);
         }
@@ -95,7 +95,10 @@
         }
 
         @include breakpoint(tablet) {
+            @include font-size(110, 0.84);
+            @include letter-spacing(-4, 110);
 
+            margin-block: trim-font(0.84);
         }
 
         @include breakpoint(phone) {
