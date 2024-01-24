@@ -13,18 +13,28 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 	{
         //exit($url[1].'!');
         $m['item']=$this->parent->getJsonModel('interviewers',['active'=>1,'slug'=>$url[1]],true);
-        if (!$m['item']) $m=null;
-		else
-		{
-        	$m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
-            $m['modules'] =$this->parent->getJsonModel('collection_modules',['parent' => $m['item']['id'],'active'=>1]);
 
-            foreach ($m['modules'] as $k=>$v) {
-                if ($v['type']['slug'] == 'collection_chapter') {
-                    $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
+        if (!$m['item']) {
+            return null;
+        }
+
+        $m['items']=$this->parent->getJsonModel('interviews',['interviewers'=>$m['item']['id'],'active'=>1],false,'label');
+        $m['modules'] =$this->parent->getJsonModel('collection_modules',['parent' => $m['item']['id'],'active'=>1]);
+
+        $counter = 0;
+        foreach ($m['modules'] as $k=>$v) {
+
+            if ($v['type']['slug'] == 'collection_chapter') {
+
+                if ($counter % 2 != 0) {
+                    $m['modules'][$k]['reversed'] = true;
                 }
+
+                $counter++;
+                $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
+
             }
-		}
+        }
 		
 		return $m;
 	}
@@ -40,27 +50,37 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         foreach ($bodyNode->childNodes as $node) {
 
             $content = $dom->saveHTML($node);
+
+            // change audio tags to buttons
             $content = $this->processAudioTag($content);
 
-            if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>')) {
-                $type = 'image';
-                $elements[] = ['type' => $type, 'content' => array_shift($article_media)];
-                $lastType = $type;
+            // images
+            if (str_contains($content, '<p><img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png"></p>') && !empty($article_media)) {
+                $media_item = array_shift($article_media);
+                $type = ($media_item['variant'] == 'photograph') ? 'image' : 'illustration';
+                $elements[] = ['type' => $type, 'content' => $media_item];
             }
 
+            // text blocks, including blockquotes
             else {
-                $content = str_replace('<blockquote>', '<blockquote class="quote quote--big">', $content);
+
+                $content = str_replace(
+                    ['<blockquote>', '<q class="quote">', '</q>'],
+                    ['<blockquote class="quote quote--big">', '<q class="quote">“', '”</q>'],
+                    $content
+                );
+
                 $type = 'text';
 
                 if ($lastType == $type && !empty($elements)) {
                     end($elements);
-                    $elements[key($elements)]['content'] .= '<br>' . $content;
+                    $elements[key($elements)]['content'] .= $content;
                 } else {
                     $elements[] = ['type' => $type, 'content' => $content];
                 }
-                $lastType = $type;
             }
 
+            $lastType = $type;
 
         }
 
