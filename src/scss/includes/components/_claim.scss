@@ -11,7 +11,7 @@
         max-width: 75%;
     }
 
-    @include breakpoint(tablet) { 
+    @include breakpoint(tablet) {
         @include font-size(66, 0.855);
         @include letter-spacing(-1.55, 66);
     }
@@ -48,10 +48,10 @@
 
 
 
-    .is-404 &, .page_404 & { 
+    .is-404 &, .page_404 & {
 
         @include breakpoint(desktop) {
-            padding-bottom: vw(95); 
+            padding-bottom: vw(95);
         }
 
         @include breakpoint(tablet) {
@@ -72,19 +72,19 @@
         z-index: 5;
 
 
-        .is-404 &, .page_404 & { 
+        .is-404 &, .page_404 & {
 
             @include breakpoint(desktop) {
-                left: rem(192); 
+                left: rem(192);
             }
 
             @include breakpoint(tablet) {
                 bottom: calc(100% - #{rem(238)});
             }
 
-            @include breakpoint(phone) { 
+            @include breakpoint(phone) {
                 bottom: calc(100% - #{rem(205)});
-            } 
+            }
         }
 
 
@@ -97,4 +97,8 @@
             }
         }
     }
+
+
+    &[data-scroll] { opacity: 0; }
+    .line { overflow: hidden; }
 }

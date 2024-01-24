@@ -42,7 +42,7 @@
                                                 {% set reversedModifier = (loop.index is even) ? "reversed" : "" %}
                                                 {% include "./components/c_link.html" with {
                                                     url: item.url,
-                                                    modifiers: ["simple", reversedModifier],
+                                                    modifiers: ["simple", reversedModifier, "collection"],
                                                     text: "Explore"
                                                 } %}
                                                 <span class="collection__count">{{ item.amount }} Interviews</span>

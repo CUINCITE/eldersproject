@@ -1,4 +1,4 @@
-<section class="module module--interviews">
+<section class="module module--interviews" data-scroll="box">
     <div class="interviews">
 
         {% if label %}
@@ -8,7 +8,7 @@
                         <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
                             <div class="interviews__sticker">
                                 {% include "./components/c_sticker.html" with { text: sticker, modifiers: ["long_text"] } %}
-                            </div>        
+                            </div>
                             {% include "./components/c_heading.html" with { reclined: true } %}
                         </div>
                     </div>
@@ -23,13 +23,13 @@
                 {% for item in items %}
                     <li class="interviews__item box">
                         <div class="grid">
-                            
+
                             <a href="#" class="interviews__link">
                                 <span class="sr-only">Go to interview</span>
                             </a>
 
                             <div class="interviews__left col-span-5">
-                                {% include "./components/c_collection_author.html" with { 
+                                {% include "./components/c_collection_author.html" with {
                                 name: item.name,
                                 title: item.title } %}
 

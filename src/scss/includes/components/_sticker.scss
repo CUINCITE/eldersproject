@@ -3,7 +3,7 @@
 
 
     --sticker-size: #{vw(111)};
-    --sticker-fold-size: 11%;
+    --sticker-fold-size: 0%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
     --sticker-text-color: var(--color-text-alt);
@@ -21,6 +21,11 @@
     overflow: hidden;
     backface-visibility: hidden;
 
+
+    &.is-visible {
+        --sticker-fold-size: 11%;
+    }
+
     @include breakpoint(desktop) {
         padding: vw(30) vw(20);
     }
@@ -36,7 +41,7 @@
     }
 
     // to do: refactor this
-    * { transition: all 0.35s ease-in-out; }
+    * { transition: all 0.5s ease-in-out; }
 
 
     &--yellow {
@@ -180,25 +185,25 @@
 
     @include hover {
 
-        #{$self}__back {
-            height: 0;
-            top: 0;
+        // #{$self}__back {
+        //     height: 0;
+        //     top: 0;
 
 
-            #{$self}__circle {
-                margin-top: calc(var(--sticker-size) * -1);
-            }
-        }
+        //     #{$self}__circle {
+        //         margin-top: calc(var(--sticker-size) * -1);
+        //     }
+        // }
 
 
-        #{$self}__front {
-            top: 0;
-            height: var(--sticker-size);
+        // #{$self}__front {
+        //     top: 0;
+        //     height: var(--sticker-size);
 
 
-            #{$self}__circle {
-                margin-top: 0;
-            }
-        }
+        //     #{$self}__circle {
+        //         margin-top: 0;
+        //     }
+        // }
     }
 }
