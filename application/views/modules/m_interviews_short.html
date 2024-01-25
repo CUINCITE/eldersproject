@@ -7,12 +7,13 @@
             <div class="grid">
                 <div class="col-span-12">
 
-                    <div class="interviews__heading">
+                    <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
                         <div class="interviews__sticker">
-                            {% include 'subviews/subview_sticker.html' with {label:'Featured', modifier: "long_text"} %}
+                            {% if not stickerLabel %} {% set stickerLabel = 'Featured' %}{% endif %}
+                            {% include 'subviews/subview_sticker.html' with {label:stickerLabel, modifier: "long_text"} %}
                         </div>
                         <h2 class="heading heading--reclined">
-                            Interviews
+                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}
                         </h2>
                     </div>
 

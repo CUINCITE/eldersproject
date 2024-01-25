@@ -12,7 +12,8 @@
                     <div class="col-span-12">
                         <div class="collection_hero__author">
                             <div class="collection_author collection_author--huge">
-                                <h3 class="collection_author__name">{{item.label}}</h3>
+                                <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
+                                
                                 <h4 class="collection_author__collection">Collection</h4>
                             </div>
                         </div>
@@ -38,8 +39,8 @@
             <div class="grid">
                 <div class="col-span-12">
                     <div class="collection_hero__copy no-padding">
-                        <div>
-                            {% include "/subviews/subview_text.html" with {text: item.lead} %}
+                        <div class="collection_hero__intro" >
+                            {% include "/subviews/subview_text.html" with {text: "<p>#{item.lead}</p>" } %}
                             {% include "components/c_link.html" with { url: "/workspace/interviews", text: "Go to interviews" } %}
                         </div>
                         <span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>
