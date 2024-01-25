@@ -264,7 +264,7 @@
 
     &__expand {
 
-        .quote {
+        p:first-child {
             @include breakpoint(desktop) {
                 margin-top: unset !important;
                 padding-top: vw(16);
@@ -279,20 +279,6 @@
             @include breakpoint(phone) {
                 margin-top: unset !important;
                 padding-top: rem(16);
-            }
-        }
-
-        .quote + .quote {
-            @include breakpoint(desktop) {
-                padding-top: vw(22);
-            }
-    
-            @include breakpoint(tablet) {
-                padding-top: rem(25);
-            }
-     
-            @include breakpoint(phone) {
-                padding-top: rem(25);
             }
         }
     } 
