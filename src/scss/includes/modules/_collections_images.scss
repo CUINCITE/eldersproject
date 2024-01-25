@@ -52,29 +52,17 @@
         }
 
         &__names:has(li:nth-child(#{$i}):hover) + &__cards {
-
             li { transform: unset !important; }
 
-            li:nth-last-child(#{3 + $i}) {
-                transform: translate(-10px, -10px) !important;
+            @for $j from 1 through 4 {
+                li:nth-last-child(#{4 - $j + $i}) {
+                    transform: translate($j * -10px, $j * -10px) !important;
+                }
             }
-
-            li:nth-last-child(#{2 + $i}) {
-                transform: translate(-20px, -20px) !important;
-            }
-
-            li:nth-last-child(#{1 + $i}) {
-                transform: translate(-30px, -30px) !important;
-            }
-
-            li:nth-last-child(#{$i}) {
-                transform: translate(-40px, -40px) !important;
-            }
-
 
             li:nth-last-child(-n + #{$i - 1}) {
                 transform: rotate(-15deg) translate(-90%, -50%) !important;
             }
         }
-    };
+    }
 }
