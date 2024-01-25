@@ -402,6 +402,8 @@
         color: var(--color-black);
         pointer-events: none;
         display: none;
+        // player's height
+        padding-bottom: rem(82);
 
 
         &.is-visible {
@@ -440,7 +442,7 @@
             // sometimes not visible on screen and that's ok!
 
             &:nth-of-type(2) {
-                top: rem(489);
+                top: rem(460);
             }
         }
     }
