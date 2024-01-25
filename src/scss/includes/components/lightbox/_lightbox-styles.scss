@@ -251,8 +251,10 @@
 
 
     &__image {
-        margin-bottom: auto;
-        margin-top: rem(-8);
+        // player's height
+        margin-bottom: rem(82);
+        // margin-top: rem(-8);
+        height: rem(450);
 
 
         @include breakpoint(not-desktop) {
@@ -400,6 +402,8 @@
         color: var(--color-black);
         pointer-events: none;
         display: none;
+        // player's height
+        padding-bottom: rem(82);
 
 
         &.is-visible {
@@ -438,7 +442,7 @@
             // sometimes not visible on screen and that's ok!
 
             &:nth-of-type(2) {
-                top: rem(489);
+                top: rem(460);
             }
         }
     }
@@ -631,6 +635,12 @@
         grid-column: 1 / -2;
         grid-row: 1 / -1;
         display: none;
+
+
+        &-image {
+            --polaroid-width: #{rem(300)} !important;
+            --polaroid-height: #{rem(400)} !important;
+        }
     }
 
 
