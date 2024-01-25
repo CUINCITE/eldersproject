@@ -93,6 +93,11 @@
             margin-bottom: 0 !important;
 
             p {
+
+                @include breakpoint(desktop) {
+                    max-width: rem(292);
+                }
+
                 @include breakpoint(tablet) {
                     max-width: unset;
                 }

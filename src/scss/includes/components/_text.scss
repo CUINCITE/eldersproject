@@ -263,7 +263,6 @@
 
 
     &__expand {
-
         p:first-child {
             @include breakpoint(desktop) {
                 margin-top: unset !important;
