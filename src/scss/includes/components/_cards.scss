@@ -10,12 +10,11 @@
       transform-origin: -100% 150%;
       // $baseHue: random(360);
 
-      @for $i from 1 through 10 {
+      @for $i from 6 through 10 {
         &:nth-child(#{$i}) {
-          margin: ($i - 1) * -10px;
-          // background: hsl(($i * 130) + $baseHue, 80%, 50%);
+          margin: ($i - 6) * -10px;
         }
-      }
+      };
 
     img {
       width: 100%;

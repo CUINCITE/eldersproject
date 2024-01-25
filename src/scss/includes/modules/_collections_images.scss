@@ -5,15 +5,15 @@
         position: absolute;
         pointer-events: none;
         z-index: 2;
-        
+
         @include breakpoint(desktop) {
             width: vw(585);
             height: vw(585);
             max-width: vh(585);
             max-height: vh(585);
             rotate: -8deg;
-            top: calc(#{rem(-50)} + 10 * 10px);
-            right: 29rem; 
+            top: calc(#{rem(-80)} + 10 * 10px);
+            right: 29rem;
         }
     }
 
@@ -22,12 +22,12 @@
         display: grid;
 
         @include breakpoint(desktop) {
-            grid-template-rows: auto vw(270); 
+            grid-template-rows: auto vw(270);
             grid-template-columns: 1fr 1fr;
 
-        } 
+        }
     }
- 
+
     &__authors {
         @include breakpoint(desktop) {
             position: relative;
@@ -35,11 +35,11 @@
             width: 50%;
         }
 
- 
+
     }
 
     &__filler {
-        @include breakpoint(desktop) { 
+        @include breakpoint(desktop) {
             border-top: 1px solid $color-bg;
         }
     }

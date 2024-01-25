@@ -44,7 +44,7 @@ $grid-line-offsets: (
         .accordeon_item__copy {
             height: 0 !important;
         }
-    
+
         .accordeon_item__term {
             svg {
                 transform: rotateX(0deg);
@@ -67,7 +67,7 @@ $grid-line-offsets: (
         @include breakpoint(phone) {
             padding-top: rem(5);
         }
-    } 
+    }
 
     &__term {
         transition: .3s color ease;
@@ -91,16 +91,6 @@ $grid-line-offsets: (
         left: 0;
         z-index: 5;
 
-        &:focus ~ .accordeon_item__term {                                            
-            color: $color-purple;
-        }
-
-        @include hover {
-            & ~ .accordeon_item__term {                                            
-                color: $color-purple;
-            }
-        }
-
         @each $bp, $value in $grid-line-offsets {
 
             @include breakpoint($bp) {
@@ -121,7 +111,7 @@ $grid-line-offsets: (
 
         @include breakpoint(tablet) {
             top: rem(20);
-            width: rem(22); 
+            width: rem(22);
         }
 
         @include breakpoint(phone) {
