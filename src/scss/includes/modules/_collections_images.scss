@@ -46,8 +46,12 @@
 
     @for $i from 1 through 10 {
         &__names:has(li:nth-child(#{$i}):focus-within) + &__cards {
-            li:nth-last-child(-n + #{$i - 1}) {
+            li:nth-last-child(-n + #{$i - 1} + 3) {
                 transform: rotate(-15deg) translate(-90%, -50%);
+            }
+
+            li:nth-last-child(-n + #{$i - 1} + 4) {
+                transform: translate(-10px, -10px);
             }
         }
 
@@ -55,6 +59,10 @@
 
             li {
                 transform: unset !important;
+            }
+
+            li:nth-last-child(-n + #{$i}) {
+                transform: translate(-10px, -10px) !important;
             }
 
             li:nth-last-child(-n + #{$i - 1}) {
