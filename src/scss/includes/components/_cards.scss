@@ -10,16 +10,17 @@
         transform-origin: -100% 150%;
         // $baseHue: random(360);
 
-        @for $i from 6 through 10 {
-            &:nth-child(3 + #{$i}) {
-                margin: ($i - 6) * -10px;
+        @for $i from 1 through 4 {
+            &:nth-last-child(#{$i}) {
+                // margin: ((5 - $i) * -10px);
+                transform: translate(((5 - $i) * -10px), ((5 - $i) * -10px));
             }
         };
 
 
-        &--red { background-color: var(--color-red); margin: 10px; }
-        &--yellow { background-color: var(--color-yellow); margin: 20px; }
-        &--lightblue { background-color: var(--color-light-blue); margin: 30px; }
+        &--red { background-color: var(--color-red); }
+        &--yellow { background-color: var(--color-yellow); }
+        &--lightblue { background-color: var(--color-light-blue); }
 
         img {
             width: 100%;
