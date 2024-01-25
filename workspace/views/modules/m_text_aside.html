@@ -1,7 +1,8 @@
 <section class="module module--text-aside">
     <div class="text_aside">
-        <div class="box">
-
+        <i class="text_aside__line desktop-only" data-scroll="line"></i>
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
             <div class="grid grid--row-start">
 
                 {% if mainText %}
@@ -24,7 +25,7 @@
 
             {% if decor %}
                 <div class="text_aside__decorator text_aside__decorator--{{decor.type}}{% if decor.modifiers %}{% for modifier in decor.modifiers %} text_aside__decorator--{{modifier}}{% endfor %}{% endif %}{% if reversed %} text_aside__decorator--reversed{% endif %}">
-                    
+
                     {% if decor.type == "boxes" %}
                         {% include "./modules/m_boxes.html" with { reversed: reversed } %}
                     {% endif %}

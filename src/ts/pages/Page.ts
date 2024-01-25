@@ -39,7 +39,7 @@ export class Page extends Handler {
      * @return {Promise<boolean>} loading images promise
      */
     public preload(): Promise<void> {
-        return Images.preload(this.view.querySelectorAll('img.preload'))
+        return Images.preload(this.view.querySelectorAll('img'))
             .then(() => {
                 this.trigger(PageEvents.COMPLETE);
             });

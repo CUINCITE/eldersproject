@@ -19,7 +19,7 @@ export class Images {
 
         return new Promise<void>(resolve => {
             const il = imagesLoaded(imgElements);
-            (local || debug) && il.on('progress', () => console.log(il));
+            // (local || debug) && il.on('progress', () => console.log(il));
             il.on('always', () => resolve());
         });
 
