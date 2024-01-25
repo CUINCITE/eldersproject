@@ -48,6 +48,13 @@
     ],
     "fields": [
         {
+            "label": "CMS ID",
+            "edit": false,
+
+            "field": "ID",
+            "list": true
+        },
+        {
             "tab": "Interview",
             "label": "Narrators",
             "field": "narrators",
