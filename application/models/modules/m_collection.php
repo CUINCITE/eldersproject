@@ -21,6 +21,16 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         }
 
         $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
+
+        foreach ($m['items'] as $k=>$v) {
+            foreach ($v['interviewers'] as $k2=>$v2) {
+                if ($v2['id'] != $m['item']['id']) {
+                    unset($m['items'][$k]);
+                    break;
+                }
+            }
+        }
+
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
 
         $counter = 0;
