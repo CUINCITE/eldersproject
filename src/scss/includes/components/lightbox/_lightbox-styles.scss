@@ -254,6 +254,7 @@
         // player's height
         margin-bottom: rem(82);
         // margin-top: rem(-8);
+        height: rem(450);
 
 
         @include breakpoint(not-desktop) {
@@ -632,6 +633,12 @@
         grid-column: 1 / -2;
         grid-row: 1 / -1;
         display: none;
+
+
+        &-image {
+            --polaroid-width: #{rem(300)} !important;
+            --polaroid-height: #{rem(400)} !important;
+        }
     }
 
 
