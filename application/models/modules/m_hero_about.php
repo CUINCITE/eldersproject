@@ -18,7 +18,6 @@ class model_app_pages_modules_hero_about extends model_app_pages_modules
         });
 
         $m['item'] = $this->getSeedRandomElement($collections);
-
         // this module requires bigger image sizes
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
 
