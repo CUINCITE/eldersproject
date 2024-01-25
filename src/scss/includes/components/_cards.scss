@@ -1,24 +1,29 @@
 .cards {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  &__card {
-      width: inherit;
-      height: inherit;
-      position: absolute;
-      transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
-      transform-origin: -100% 150%;
-      // $baseHue: random(360);
+    &__card {
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+        transform-origin: -100% 150%;
+        // $baseHue: random(360);
 
-      @for $i from 6 through 10 {
-        &:nth-child(#{$i}) {
-          margin: ($i - 6) * -10px;
+        @for $i from 6 through 10 {
+            &:nth-child(3 + #{$i}) {
+                margin: ($i - 6) * -10px;
+            }
+        };
+
+
+        &--red { background-color: var(--color-red); margin: 10px; }
+        &--yellow { background-color: var(--color-yellow); margin: 20px; }
+        &--lightblue { background-color: var(--color-light-blue); margin: 30px; }
+
+        img {
+            width: 100%;
+            height: 100%;
         }
-      };
-
-    img {
-      width: 100%;
-      height: 100%;
     }
-  }
 };

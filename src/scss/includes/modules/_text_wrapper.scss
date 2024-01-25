@@ -91,12 +91,29 @@
         .text {
             padding-block: 0 !important;
             margin-bottom: 0 !important;
-        }
 
-        .text {
             p {
+
+                @include breakpoint(desktop) {
+                    max-width: rem(292);
+                }
+
                 @include breakpoint(tablet) {
                     max-width: unset;
+                }
+            }
+
+            button + p {
+                @include breakpoint(desktop) {
+                    margin-top: rem(25);
+                }
+    
+                @include breakpoint(tablet) {
+                    margin-top: rem(25);
+                }
+    
+                @include breakpoint(phone) {
+                    margin-top: rem(25);
                 }
             }
         }

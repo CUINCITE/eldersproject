@@ -49,6 +49,9 @@
 
                 <div class="collections_images__cards">
                     <ul class="cards">
+                            <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
+                            <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
+                            <li class="cards__card cards__card--placeholder cards__card--red"></li>
                         {% for item in items %}
                             <li class="cards__card">
                                 {% include "subviews/subview_picture.html" with {image:item.image} %}
