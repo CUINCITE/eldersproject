@@ -62,8 +62,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         $article = $this->processAudioTag($article);
 
         $article = str_replace(
-            ['<blockquote>', '<q class="quote">', '</q>'],
-            ['<blockquote class="quote quote--big">', '<blockquote class="quote">', '</blockquote>'],
+            ['<blockquote>', '<q>'],
+            ['<blockquote class="quote quote--big">', '<q class="quote">'],
             $article
         );
 
