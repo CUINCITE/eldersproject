@@ -1,45 +1,113 @@
 {
-    "table": "media",
-    "label":"Media",
-    "order": "!date",
-    "layout":{"type":"grid"},
-    "buttons_page":
-    [
-        {"label":"Refresh","plugin":"refresh","type":"serdelia","admin":true}
-    ],
-    "fields" :
-    [
-        { "label" : "Modyfikacja", "field": "date", "type": "date", "list": "read" },
-        { "label" : "Media Type", "field": "type", "list": true },
-        { "label" : "Model", "field": "model", "list": true },
-        { "label" : "Model Id", "field": "model_id", "list": true },
-        { "label" : "Model Id Nr", "field": "model_id_order", "list": true },
-        {"field":"caption"},
-        {"field":"alt"},
-        {"field":"vimeo"},
-        {"field":"vimeo_sources"},
-        {"field":"uid","type":"uid", "list": "read"},
-        {   
-            "type": "image",
-            "field":"image",
-            "folder": "/public/upload/media",
-            "folder_preview": "mobile",
-
-            "list":{"position_after":"","height":120,"layout":"cover","src_blank":"blank.png"},
-            "images":
-            [
-                {  "folder" : "original","label":"original" },
-                {  "folder" : "mobile", "width":350,"height":180 ,"label":"Mobile","retina":true },
-                {  "folder" : "desktop", "width":740,"height":560, "label":"Desktop","retina":true }
-              ]
+  "table": "media",
+  "label": "Media",
+  "order": "!date",
+  "layout": {
+    "type": "grid"
+  },
+  "buttons_page": [
+    {
+      "label": "Refresh",
+      "plugin": "refresh",
+      "type": "serdelia",
+      "admin": true
+    }
+  ],
+  "fields": [
+    {
+      "label": "Modyfikacja",
+      "field": "date",
+      "type": "date",
+      "list": "read"
+    },
+    {
+      "label": "Media Type",
+      "field": "type",
+      "list": true
+    },
+    {
+      "label": "Model",
+      "field": "model",
+      "list": true
+    },
+    {
+      "label": "Model Id",
+      "field": "model_id",
+      "list": true
+    },
+    {
+      "label": "Model Id Nr",
+      "field": "model_id_order",
+      "list": true
+    },
+    {
+      "field": "caption"
+    },
+    {
+      "field": "alt"
+    },
+    {
+      "field": "vimeo"
+    },
+    {
+      "field": "vimeo_sources"
+    },
+    {
+      "field": "uid",
+      "type": "uid",
+      "list": "read"
+    },
+    {
+      "type": "image",
+      "field": "image",
+      "folder": "/public/upload/media",
+      "folder_preview": "mobile",
+      "list": {
+        "position_after": "",
+        "height": 120,
+        "layout": "cover",
+        "src_blank": "blank.png"
+      },
+      "images": [
+        {
+          "folder": "original",
+          "label": "original"
         },
         {
-            "field":"width","type":"integer"
+          "folder": "mobile",
+          "width": 350,
+          "height": 180,
+          "label": "Mobile",
+          "retina": true
         },
         {
-            "field":"height","type":"integer"
-        },
-        {"field":"duration"}
-
-    ]
+          "folder": "desktop",
+          "width": 740,
+          "height": 560,
+          "label": "Desktop",
+          "retina": true
+        }
+      ],
+      "settings": {
+        "webp": true,
+        "sizes": "image_sizes"
+      }
+    },
+    {
+      "field": "width",
+      "type": "integer"
+    },
+    {
+      "field": "height",
+      "type": "integer"
+    },
+    {
+      "field": "duration"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json",
+      "label": "Image sizes"
+    }
+  ]
 }

@@ -92,7 +92,11 @@
           "label": "Desktop",
           "retina": true
         }
-      ]
+      ],
+      "settings": {
+        "webp": true,
+        "sizes": "image_sizes"
+      }
     },
     {
       "field": "width",
@@ -112,6 +116,11 @@
     },
     {
       "field": "extension"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json",
+      "label": "Image sizes"
     }
   ]
 }
