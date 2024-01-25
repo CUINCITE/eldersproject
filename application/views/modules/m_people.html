@@ -2,11 +2,10 @@
 {% set i_color=-1 %}
 <section class="module module--people">
     <div class="people">
-        <div class="box">
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
             <div class="grid">
-
                 <div class="people__photos col-span-6 no-padding">
-
                     <div class="text text--large">
                         {{text|raw}}
                     </div>
@@ -14,19 +13,19 @@
                     {% set reverse=false %}
 
                     {% for section in items %}
-                        <div class="people_group">
-                            
+                        <div class="people_group" data-scroll="people">
+
                             <div class="people_group__title">
                                 <h2 class="heading heading--small">
                                     {{section.label}}
                                 </h2>
                             </div>
 
-                            
+
                             <div class="people_group__people">
                                 {% for person in section.people %}
                                 {% set i_color=i_color+1 %}{% if i_color>=colors|length %}{% set i_color=0 %}{% endif %}
-                                <div class="person{% if reverse %} person--reversed{% endif %}">
+                                <div class="person{% if reverse %} person--reversed{% endif %} js-person">
                                     <div class="person__photo">
                                         <div class="polaroid polaroid--fit polaroid--small_frame">
                                             <div class="polaroid__image polaroid__image--{{colors[i_color]}}">
@@ -48,7 +47,7 @@
                         {% set reverse= reverse ? (section.people | length) % 2 != 0 : (section.people | length) % 2 == 0 %}
                     {% endfor %}
                 </div>
- 
+
                 <div class="people__heading col-span-6 col-start-7">
                     <h2 class="heading heading--aside heading--smaller">{{label}}</h2>
                 </div>

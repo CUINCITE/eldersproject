@@ -1,8 +1,9 @@
 {% if header=='large' %}{% include 'subviews/subview_header_large.html' %}{% endif %}
-<section class="module module--claim box">
+<section class="module module--claim box" data-scroll="box">
+  <div class="box__bg"></div>
   <div class="grid">
     <div class="col-span-12">
-      <div class="claim {% if params.claim %}claim--{{params.claim}}{% endif %}" >
+      <div class="claim {% if params.claim %}claim--{{params.claim}}{% endif %}" data-scroll="claim">
         <p>{{text}}</p>
         {% if params.sticker %}
           <div class="claim__sticker">

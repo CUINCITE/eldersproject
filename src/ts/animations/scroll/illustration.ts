@@ -18,6 +18,7 @@ export const illustration = (el: HTMLElement) => {
         rotate: 0,
         duration: 1,
         ease: 'power2.out',
+        clearProps: 'all',
         scrollTrigger: {
             trigger: el,
             pinSpacing: false,
