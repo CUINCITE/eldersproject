@@ -1,39 +1,42 @@
 .illustration {
 
     --color-primary: var(--color-red);
-    --color-secondary: var(--color-dark-green);
-    --color-tetriary: var(--color-yellow);
+    --color-secondary: var(--color-purple);
+    --color-tetriary: var(--color-pink);
     --color-quaternary: var(--color-light-blue);
 
 
     &--red {
-        --color-primary: var(--color-green);
-        --color-secondary: var(--color-red);
-        --color-tetriary: var(--color-yellow);
-        --color-quaternary: var(--color-light-blue);
+        --color-primary: var(--color-pink);
+        --color-secondary: var(--color-light-blue);
+        --color-tetriary: var(--color-dark-green);
     }
 
 
-    &--pink {
-        --color-primary: var(--color-purple);
-    }
-
-
-    &--purple {
+    &--orange {
         --color-primary: var(--color-purple);
     }
  
 
-    &--brown {
+    &--pink {
         --color-primary: var(--color-purple);
+        --color-secondary: var(--color-dark-green);
+        --color-tetriary: var(--color-yellow);
+    }
+
+    
+    &--pale-purple {
+        --color-primary: var(--color-dark-green);
     }
 
 
-    &--green {
-        --color-primary: var(--color-red);
-        --color-secondary: var(--color-green);
-        --color-tetriary: var(--color-yellow);
-        --color-quaternary: var(--color-light-blue);
+    &--purple {
+        --color-primary: var(--color-yellow);
+    }
+
+ 
+    &--brown {
+        --color-primary: var(--color-purple);
     }
 
 
@@ -42,23 +45,20 @@
     }
 
 
-    &--orange {
-        --color-primary: var(--color-purple);
+    &--green {
+        --color-primary: var(--color-red);
+        --color-secondary: var(--color-purple);
+        --color-tetriary: var(--color-pink);
     }
 
-
+    
     &--dark-green {
-        --color-primary: var(--color-orange);
+        --color-primary: var(--color-red);
     }
 
 
     &--pale-blue {
-        --color-primary: var(--color-orange);
-    }
-
-
-    &--pale-purple {
-        --color-primary: var(--color-dark-green);
+        --color-primary: var(--color-purple);
     }
 
 
