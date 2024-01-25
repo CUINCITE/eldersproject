@@ -47,8 +47,8 @@ class model_app_api_interview
             $mainImage = [
                 'type' => '',
                 'image' => [
-                    'desktop' => '/src/images/lightbox-fresh.png',
-                    'mobile' => '/src/images/lightbox-fresh.png'
+                    'desktop' => '/src/images/illu-1.png',
+                    'mobile' => '/src/images/illu-1.png'
                 ]
             ];
         }
@@ -56,8 +56,13 @@ class model_app_api_interview
         // tags
         $tags = [];
         if (!empty($item['topics'])) {
+            $i = 0;
             foreach ($item['topics'] as $k => $v) {
+                if ($i == 4) {
+                    break;
+                }
                 $tags[] = $v['label'];
+                $i++;
             }
         }
 
