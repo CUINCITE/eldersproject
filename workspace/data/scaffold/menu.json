@@ -10,11 +10,11 @@
     },
     {
       "label": "Interviews",
-      "url": "/interviews"
+      "url": "/workspace/interviews"
     },
     {
       "label": "About",
-      "url": "/about"
+      "url": "/workspace/about"
     }
   ],
   "footer": [

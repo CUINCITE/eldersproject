@@ -1,6 +1,7 @@
 <section class="module module--people">
     <div class="people">
-        <div class="box">
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
             <div class="grid">
 
                 <div class="people__photos col-span-6 no-padding">
@@ -11,7 +12,7 @@
                         {% include "./components/c_people_group.html" with group %}
                     {% endfor %}
                 </div>
-        
+
                 <div class="people__heading col-span-6 col-start-7">
                     {% include "./components/c_heading.html" with title %}
                 </div>

@@ -7,7 +7,13 @@
 
     grid-area: newsletter;
     position: relative;
+
     background-color: var(--color-box);
+
+
+    &[data-scroll] {
+        background: none;
+    }
 
     @include breakpoint(desktop) {
         padding-top: vw(200);
