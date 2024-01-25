@@ -78,14 +78,14 @@ export class Menu {
             .addLabel('init')
             .fromTo(this.labels, { yPercent: 120 }, {
                 yPercent: 0,
-                duration: 0.8,
-                stagger: 0.25,
+                duration: 0.9,
+                stagger: 0.15,
                 ease: 'power2.out',
             }, 'init')
             .fromTo(this.lines, { scaleX: 0 }, {
                 scaleX: 1,
-                duration: 1.2,
-                stagger: 0.25,
+                duration: 1,
+                stagger: 0.15,
                 ease: 'power2.out',
             }, 'init')
             .fromTo(this.links, { xPercent: 100 }, {
@@ -98,13 +98,13 @@ export class Menu {
                 scale: 1,
                 duration: 0.4,
                 ease: 'power2.out',
-            }, '-=.4')
+            }, '-=.6')
             .fromTo(this.searchLabel, { xPercent: 100 }, {
                 xPercent: 0,
                 duration: 0.6,
                 clearProps: 'all',
                 ease: 'power2.out',
-            }, '-=.25');
+            }, '-=.4');
 
         AudioPlayer.closeAudioPlayer();
     };
