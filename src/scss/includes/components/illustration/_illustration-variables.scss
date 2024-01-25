@@ -8,43 +8,53 @@
 
     &--red {
         --color-primary: var(--color-pink);
-        --color-secondary: var(--color-light-blue);
+        --color-secondary: var(--color-blue);
         --color-tetriary: var(--color-dark-green);
     }
-
+ 
 
     &--orange {
         --color-primary: var(--color-purple);
-    }
+        --color-secondary: var(--color-red);
+        --color-tetriary: var(--color-pink);
+    } 
  
 
     &--pink {
         --color-primary: var(--color-purple);
         --color-secondary: var(--color-dark-green);
-        --color-tetriary: var(--color-yellow);
+        --color-tetriary: var(--color-brown);
     }
 
     
     &--pale-purple {
         --color-primary: var(--color-dark-green);
+        --color-secondary: var(--color-red);
+        --color-tetriary: var(--color-pink);
     }
 
-
+ 
     &--purple {
         --color-primary: var(--color-yellow);
+        --color-secondary: var(--color-red);
+        --color-tetriary: var(--color-pink);
     }
 
  
     &--brown {
         --color-primary: var(--color-purple);
+        --color-secondary: var(--color-red);
+        --color-tetriary: var(--color-pink);
     }
 
 
     &--pale-green {
         --color-primary: var(--color-yellow);
+        --color-secondary: var(--color-red);
+        --color-tetriary: var(--color-pink);
     }
 
-
+ 
     &--green {
         --color-primary: var(--color-red);
         --color-secondary: var(--color-purple);
@@ -53,12 +63,16 @@
 
     
     &--dark-green {
-        --color-primary: var(--color-red);
+        --color-primary: var(--color-orange);
+        --color-secondary: var(--color-purple);
+        --color-tetriary: var(--color-pink);
     }
 
-
+ 
     &--pale-blue {
         --color-primary: var(--color-purple);
+        --color-secondary: var(--color-orange);
+        --color-tetriary: var(--color-pink);
     }
 
 
