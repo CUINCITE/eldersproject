@@ -51,7 +51,7 @@
             max-height: vh(927);
             rotate: -8deg;
             top: 10.6%;
-            right: 27.8rem;
+            right: calc(23rem + 3 * 1rem);
         }
 
         @include breakpoint(tablet) {

@@ -3,11 +3,13 @@
     --color-primary: var(--color-red);
     --color-secondary: var(--color-purple);
     --color-tetriary: var(--color-pink);
-    --color-quaternary: var(--color-green);
+    --color-quaternary: var(--color-light-blue);
 
 
     &--red {
         --color-primary: var(--color-pink);
+        --color-secondary: var(--color-light-blue);
+        --color-tetriary: var(--color-dark-green);
     }
 
 
@@ -47,7 +49,6 @@
         --color-primary: var(--color-red);
         --color-secondary: var(--color-purple);
         --color-tetriary: var(--color-pink);
-        --color-quaternary: var(--color-green);
     }
 
     
