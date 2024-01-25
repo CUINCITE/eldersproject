@@ -21,7 +21,7 @@
                         {% endif %}
 
                         {% if module.type == "illustration" %}
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.image.width and module.image.height %}{% if module.image.width > module.image.height %} text_wrapper__illustration--horizontal{% elseif module.image.width == module.image.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.image.desktop.width and module.image.desktop.height %}{% if module.image.desktop.width > module.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.image.desktop.width == module.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
                                 {% include "subviews/subview_picture.html" with { image: module.content.image } %}
                             </div>
                         {% endif %}
