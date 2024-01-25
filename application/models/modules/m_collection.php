@@ -38,8 +38,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
-        dd($m['modules'][1]);
-
         return $m;
     }
 
