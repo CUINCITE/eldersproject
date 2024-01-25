@@ -1,7 +1,7 @@
 .illustration {
 
-    --color-primary: var(--color-dark-green);
-    --color-secondary: var(--color-red);
+    --color-primary: var(--color-red);
+    --color-secondary: var(--color-dark-green);
     --color-tetriary: var(--color-yellow);
     --color-quaternary: var(--color-light-blue);
 
@@ -20,9 +20,9 @@
 
 
     &--purple {
-        --color-primary: var(--color-yellow);
+        --color-primary: var(--color-purple);
     }
-
+ 
 
     &--brown {
         --color-primary: var(--color-purple);
@@ -58,7 +58,7 @@
 
 
     &--pale-purple {
-        --color-primary: var(--color-pale-pink);
+        --color-primary: var(--color-dark-green);
     }
 
 
