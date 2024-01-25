@@ -14,32 +14,41 @@
 
                     {% for module in article %}
 
-                        {% if module.type == "text" %}
-                            <div class="text_wrapper__module text_wrapper__text">
-                                {% include "/subviews/subview_text.html" with {text:module.content, large:true, aisde:true} %}
-                            </div>
-                        {% endif %}
+                        {% if module.type == "html" %}
 
-                        {% if module.type == "illustration" %}
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.image.desktop.width and module.image.desktop.height %}{% if module.image.desktop.width > module.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.image.desktop.width == module.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
+                            <div class="text_wrapper__module text_wrapper__text">
+                                {% include "/subviews/subview_text.html" with {text:module.value, large:true, aisde:true} %}
+                            </div>
+
+{#                        {% elseif module.type == "quote" %}#}
+
+{#                            <div class="text_wrapper__module text_wrapper__text">#}
+{#                                {% include "/subviews/subview_text.html" with {text:module.content, large:true, aisde:true} %}#}
+{#                            </div>#}
+
+                        {% elseif module.type == "image" and module.value.variant == 'illustration' %}
+
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
                                 {% include "subviews/subview_picture.html" with { image: module.content.image } %}
                             </div>
-                        {% endif %}
 
-                        {% if module.type == "image" %}
+                        {% elseif module.type == "image" and module.value.variant == 'photograph' %}
+
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %}#}
-                                {% include "/components/c_polaroid.html" with {image: module.content.image, modifiers: ["wrapped"]} %}
-                                {% if module.content.caption %}
+                                {% include "/components/c_polaroid.html" with {image: module.value.image, modifiers: ["wrapped"]} %}
+                                {% if module.value.caption %}
                                     <div class="text_wrapper__info">
-                                        {% include "/subviews/subview_text.html" with {text: module.content.caption} %}
+                                        {% include "/subviews/subview_text.html" with {text: module.value.caption} %}
                                     </div>
                                 {% endif %}
                             </div>
                             {% set photoCounter = photoCounter + 1 %}
+
                         {% endif %}
 
                     {% endfor %}
                 </div>
             </div>
         </div>
+    </div>
 </section>
