@@ -251,8 +251,9 @@
 
 
     &__image {
-        margin-bottom: auto;
-        margin-top: rem(-8);
+        // player's height
+        margin-bottom: rem(82);
+        // margin-top: rem(-8);
 
 
         @include breakpoint(not-desktop) {
