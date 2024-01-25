@@ -126,6 +126,14 @@ class model_app_pages_modules
         return $array[$keys[$random_index]];
     }
 
+    protected function articleUpdate($text,&$media)
+    {
+        require_once (__DIR__.'/model_app_pages_article.php');
+        $article=new model_app_pages_article($this->parent);
+        $article=$article->convert($text,$media);
+        return $article;
+    }
+
 
 }
 
