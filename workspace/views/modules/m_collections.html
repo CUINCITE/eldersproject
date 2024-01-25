@@ -3,9 +3,9 @@
         {% if items %}
             <div class="collections__grid">
                 {% for item in items %}
-                    <div class="collections__grid-item collection {% if loop.index is even %}collection--reversed {% endif %} box" data-scroll="box">
-                        <div class="box__bg"></div>
-                        <div class="">
+                    <div class="collections__grid-item collection {% if loop.index is even %}collection--reversed {% endif %}">
+                        <div class="box" data-scroll="box">
+                            <div class="box__bg"></div>
                             <div class="grid">
                                 <div class="col-span-12">
 
@@ -21,7 +21,8 @@
                             </div>
                         </div>
 
-                        <div class="box">
+                        <div class="box" data-scroll="box">
+                            <div class="box__bg"></div>
                             <div class="grid">
                                 <div class="col-span-12">
                                     <div class="collection__wrap">
