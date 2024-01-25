@@ -7,6 +7,11 @@
             padding-bottom: rem(138);
         }
 
+        @include breakpoint(tablet) {
+            padding-top: rem(23);
+            padding-bottom: rem(81);
+        }
+
         @include breakpoint(phone) {
             padding-top: rem(23);
             padding-bottom: rem(81);
@@ -15,6 +20,10 @@
 
     &__column {
         position: relative;
+
+        @include breakpoint(tablet) {
+            grid-column: span 8 !important;
+        }
 
         @include breakpoint(phone) {
             &:nth-child(2) {

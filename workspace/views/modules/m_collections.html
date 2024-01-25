@@ -39,9 +39,10 @@
                                                 {% include "./components/c_link.html" with {
                                                     url: item.url,
                                                     modifiers: ["simple", reversedModifier],
-                                                    text: "Explore"
+                                                    text: "Explore ",
+                                                    extraText: "23 interviews"
                                                 } %}
-                                                <span class="collection__count">{{item.interviews_count}} Interviews</span>
+                                                {# <span class="collection__count">{{item.interviews_count}} Interviews</span> #}
                                             </div>
                                             <div class="collection__text">{{item.text}}</div>
                                         </div>

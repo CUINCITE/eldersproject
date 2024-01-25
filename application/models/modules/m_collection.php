@@ -43,7 +43,14 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     public function updateArticle($article, $article_media)
     {
-        // process load_more
+
+        $findReplace = [
+            '/<p><q class="quote">/' => '<blockquote class="quote"><p>',
+            '/<\/q>\[AUDIO=([\d]+), ([\d:]+)-([\d:]+)\]<\/p>/' => '[AUDIO=$1, $2-$3]</p></blockquote>',
+            '/<\/q><\/p>/' => '</p></blockquote>',
+        ];
+        $article = preg_replace(array_keys($findReplace), $findReplace, $article);
+
         $article = $this->processLoadMore($article);
 
         $dom = new DOMDocument();
@@ -65,7 +72,9 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                 $media_item = array_shift($article_media);
                 $type = ($media_item['variant'] == 'photograph') ? 'image' : 'illustration';
                 $elements[] = ['type' => $type, 'content' => $media_item];
-            } // text blocks, including blockquotes
+            }
+
+            // text blocks, including blockquotes
             else {
 
                 $content = str_replace(
