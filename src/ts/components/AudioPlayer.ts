@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { PushStates } from '../PushStates';
 import { easing } from '../Site';
 import { Video } from './Player/Video';
 import { Lightbox } from './Lightbox/Lightbox';
@@ -166,6 +167,17 @@ export class AudioPlayer extends Video {
         this.ui.minimize && this.ui.minimize.addEventListener('click', this.onMinimizeClick);
         this.elements.nextBtn && this.elements.nextBtn.addEventListener('click', this.onNextClick);
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
+        this.elements.urlLink && this.elements.urlLink.addEventListener('click', this.onUrlClick);
+    };
+
+
+
+    private onUrlClick = (e): void => {
+        e.preventDefault();
+        e.stopPropagation();
+
+
+        PushStates.goTo(e.currentTarget.getAttribute('href'), Lightbox.isOpen);
     };
 
 

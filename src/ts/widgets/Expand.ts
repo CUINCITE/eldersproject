@@ -47,7 +47,7 @@ export class Expand {
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-expanded-text');
         document.getElementById(target.getAttribute('aria-controls')).classList.add('is-expanded');
 
-        target.dataset.scrollY = (target.getBoundingClientRect().top + document.documentElement.scrollTop).toString();
+        target.dataset.scrollY = (target.getBoundingClientRect().top + window.scrollY).toString();
     };
 
 
@@ -57,15 +57,18 @@ export class Expand {
         target.parentElement.classList.remove('is-expanded');
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-hidden-text');
 
-        document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
+        const elementTop = parseInt(target.dataset.scrollY, 10);
 
+        if (target.classList.contains('text__expand-trigger') && elementTop < window.scrollY) {
 
-        if (target.classList.contains('text__expand-trigger')) {
-            const elementTop = parseInt(target.dataset.scrollY, 10);
+            window.scrollTo({ top: elementTop - 100, behavior: 'smooth' });
 
-            if (elementTop < window.scrollY) {
-                window.scrollTo({ top: elementTop - 100, behavior: 'smooth' });
-            }
+            setTimeout(() => {
+                document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
+            }, 500);
+
+        } else {
+            document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
         }
     };
 
