@@ -116,8 +116,8 @@
         display: inline-flex;
         vertical-align: middle;
         position: relative; 
-
         z-index: 1;
+        margin-inline: 0.15em;
 
         svg {
             width: 100%;
@@ -168,7 +168,7 @@
                 content: 'PLAY';
                 position: absolute;
                 display: block;
-                width: 110%;
+                width: 120%;
                 height: 120%;
                 z-index: -1;
                 top: 0;
@@ -179,7 +179,7 @@
 
             @include hover {
                 &::before {
-                    translate: calc(100% + #{rem(2)}) 0;
+                    translate: calc(82% + #{rem(3)}) 0;
                     transition-delay: 0s;
                     opacity: 1;
                 }
@@ -212,11 +212,12 @@
 
                 &::before {
                     font-size: 0.98em;
+                    margin-top: -0.14em;
                 }
 
                 @include hover {
                     &::before {
-                        translate: calc(100% + #{rem(4)}) 0;
+                        translate: calc(82% + #{rem(4)}) 0;
                     }
                 }
             }

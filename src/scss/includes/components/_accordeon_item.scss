@@ -39,6 +39,28 @@ $grid-line-offsets: (
         padding-bottom: rem(40);
     }
 
+
+    @include breakpoint(desktop) {
+        @include hover {
+            .accordeon_item__term {
+                svg {
+                    translate: 0 15%;
+                }
+            }
+        }
+    
+    
+        &:focus {
+            .accordeon_item__term {
+                svg {
+                    translate: 0 15%;
+                }
+            }
+        }
+    }
+
+
+    
     &.is-closed {
 
         .accordeon_item__copy {
@@ -78,7 +100,7 @@ $grid-line-offsets: (
         }
 
         svg {
-            transition: .3s transform ease;
+            transition: .3s transform ease, .3s translate ease;
             transform: rotateX(-180deg);
         }
     }
