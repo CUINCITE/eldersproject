@@ -35,7 +35,6 @@ export class Expand {
 
         const target = e.currentTarget as HTMLElement;
         const isExpanded = target.getAttribute('aria-expanded') === 'true';
-        console.log(target.getBoundingClientRect().top + document.documentElement.scrollTop);
 
         isExpanded ? this.collapse(target) : this.expand(target);
     };
@@ -60,8 +59,13 @@ export class Expand {
 
         document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
 
+
         if (target.classList.contains('text__expand-trigger')) {
-            window.scrollTo({ top: parseInt(target.dataset.scrollY, 10) - 100, behavior: 'smooth' });
+            const elementTop = parseInt(target.dataset.scrollY, 10);
+
+            if (elementTop < window.scrollY) {
+                window.scrollTo({ top: elementTop - 100, behavior: 'smooth' });
+            }
         }
     };
 
