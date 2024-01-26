@@ -177,6 +177,7 @@ export class AudioPlayer extends Video {
             Lightbox.checkPlayerState();
             // play audio when it has been already initialized
             if (play) {
+                !this.isExpanded && this.expand();
                 this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
                 this.play();
             }
