@@ -173,7 +173,6 @@ class Site {
         document.body.classList.remove('is-not-ready', 'is-rendering');
         this.currentPage.animateIn(0);
         !this.isInitialized && Scroll.scrollToTop(true);
-        Scroll.scrollToCached();
         this.scroll.load();
         Scroll.start();
         PushStates.setTitle();
@@ -229,6 +228,7 @@ class Site {
         // update links:
         this.setActiveLinks();
 
+        Scroll.scrollToCached();
         ScrollTrigger.refresh();
 
         this.lightbox?.check();
