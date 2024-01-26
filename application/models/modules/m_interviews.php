@@ -14,7 +14,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
     public function updateModel($m, $url)
     {
 
-        // return 404 if no interview
+        // return 404 if a user hits single interview url and no interview is found
         if (!empty($url[1])) {
             $item = $this->parent->getJsonModel('interviews_simple', ['active' => 1, 'slug' => $url[1]], true);
             if (!$item) {
