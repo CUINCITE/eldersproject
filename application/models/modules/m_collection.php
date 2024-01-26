@@ -51,13 +51,15 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
+//        dd($m['modules'][3]['article']);
+
         return $m;
     }
 
     public function updateArticle($article, $article_media)
     {
 
-        $article = $this->processLoadMore($article);
+//        $article = $this->processLoadMore($article);
 
         $article = $this->processAudioTag($article);
 

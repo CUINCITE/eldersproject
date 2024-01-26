@@ -35,13 +35,13 @@ class model_app_pages_article
      */
     public function convert($text, &$media, $lead = null)
     {
-        
+
         if (_uho_fx::getGet('debug')) {
-            echo ('<!-- ');
+            echo('<!-- ');
             print_r($media);
-            echo (' -->');
+            echo(' -->');
         }
-        
+
         if (!$media) $media = [];
 
         // images
@@ -66,13 +66,11 @@ class model_app_pages_article
 
         $blocks = [
             ['html' => '[IMAGE]', 'type' => 'image'],
-            ['html' => '[SLIDER]', 'type' => 'slider'],
-            ['html' => '[AUDIO]', 'type' => 'audio'],
-            ['html' => '[VIDEO]', 'type' => 'video'],
-            ['html' => '[WIĘCEJ]', 'type' => 'expand_open'],
-            ['html' => '[/WIĘCEJ]', 'type' => 'expand_close'],
-            ['html' => '[CLIP=', 'html_close' => ']', 'type' => 'clip'],
-            ['html' => '[CLIPS=', 'html_close' => ']', 'type' => 'clips'],
+//            ['html' => '[SLIDER]', 'type' => 'slider'],
+//            ['html' => '[AUDIO]', 'type' => 'audio'],
+//            ['html' => '[VIDEO]', 'type' => 'video'],
+            ['html' => '[MORE]', 'html_close' => '[ENDMORE]', 'type' => 'expand_open'],
+//            ['html' => '[ENDMORE]', 'type' => 'expand_close'],
 //            ['html' => '<blockquote>', 'html_close' => '</blockquote>', 'type' => 'area'],
         ];
 
@@ -82,6 +80,7 @@ class model_app_pages_article
 
             $min = -1;
             $block = null;
+            $id = 1;
             foreach ($blocks as $k => $v)
                 if (strpos(' ' . $text, $v['html']) && ($min == -1 || strpos(' ' . $text, $v['html']) < $min)) {
                     $min = strpos(' ' . $text, $v['html']);
@@ -94,33 +93,38 @@ class model_app_pages_article
                 $i1 = strpos($text, $block['html']);
 
                 if ($i1 > 0) {
-                    $m[] = ['type' => 'html', 'value' => substr($text, 0, $i1 - 1)];
+                    $m[] = ['type' => 'html', 'value' => trim(substr($text, 0, $i1 - 1))];
                     $text = substr($text, $i1);
                 }
 
                 switch ($block['type']) {
 
                     case "expand_open":
-                        $iExpand++;
-                        $m[] = ['type' => 'expand_open', 'value' => $iExpand];
-                        $text = substr($text, strlen("expand_open"));
+                        $i2 = strpos($text, $block['html_close']);
+                        $value = substr($text, strlen($block['html']), $i2 - strlen($block['html']));
+                        $m[] = ['type' => 'read_more', 'value' => ['text' => trim($value)], 'id' => $id];
+
+                        if (!$i2) $i2 = strlen($text) - 1;
+                        $text = substr($text, $i2 + strlen($block['html_close']));
+                        $text = trim($text);
+                        $text = _uho_fx::trim($text, '<br />');
+                        $id++;
                         break;
 
-                    case "expand_close":
-                        $m[] = ['type' => 'expand_close', 'value' => $iExpand];
-                        $text = substr($text, strlen("expand_close"));
-                        break;
+//                    case "expand_close":
+//                        $m[] = ['type' => 'expand_close', 'value' => $iExpand];
+//                        $text = substr($text, strlen("[ENDMORE]"));
+//                        break;
 
                     case "clip":
 
                         $i2 = strpos($text, $block['html_close']);
                         $value = substr($text, strlen($block['html']), $i2 - strlen($block['html']));
-                        if ($value) $value=$this->parent->getJsonModel('clips',['active'=>1,'id'=>$value],true);
-                        if ($value)
-                        {
-                            $value=$this->updateClip($value);
+                        if ($value) $value = $this->parent->getJsonModel('clips', ['active' => 1, 'id' => $value], true);
+                        if ($value) {
+                            $value = $this->updateClip($value);
                             $m[] = ['type' => 'clip', 'value' => $value];
-                        }                            
+                        }
 
                         if (!$i2) $i2 = strlen($text) - 1;
                         $text = substr($text, $i2 + strlen($block['html_close']));
@@ -128,32 +132,31 @@ class model_app_pages_article
 
                         break;
 
-                        case "clips":
+                    case "clips":
 
-                            $i2 = strpos($text, $block['html_close']);
-                            $value = substr($text, strlen($block['html']), $i2 - strlen($block['html']));
-                            if ($value) $value=explode(',',$value);
-                            if ($value) $value=$this->parent->getJsonModel('clips',['active'=>1,'id'=>$value]);
-                            
-                            if ($value)
-                            {
-                                foreach ($value as $kk=>$vv) $value[$kk]=$this->updateClip($vv);
-                                $m[] = ['type' => 'clips', 'value' => $value];
-                            }
-                                
-    
-                            if (!$i2) $i2 = strlen($text) - 1;
-                            $text = substr($text, $i2 + strlen($block['html_close']));
-                            $text = trim($text);
-    
-                            break;
+                        $i2 = strpos($text, $block['html_close']);
+                        $value = substr($text, strlen($block['html']), $i2 - strlen($block['html']));
+                        if ($value) $value = explode(',', $value);
+                        if ($value) $value = $this->parent->getJsonModel('clips', ['active' => 1, 'id' => $value]);
+
+                        if ($value) {
+                            foreach ($value as $kk => $vv) $value[$kk] = $this->updateClip($vv);
+                            $m[] = ['type' => 'clips', 'value' => $value];
+                        }
+
+
+                        if (!$i2) $i2 = strlen($text) - 1;
+                        $text = substr($text, $i2 + strlen($block['html_close']));
+                        $text = trim($text);
+
+                        break;
 
                     case "image":
                     case "audio":
                     case "video":
                     case "slider":
 
-                        if ($block['type'] == 'video') $types = ['video', 'youtube','vimeo'];
+                        if ($block['type'] == 'video') $types = ['video', 'youtube', 'vimeo'];
                         elseif ($block['type'] == 'slider') $types = ['image'];
                         else $types = [$block['type']];
 
@@ -166,21 +169,20 @@ class model_app_pages_article
 
                         if (isset($found)) {
                             $t = $media[$found]['type'];
-                            
-                            switch ($t)
-                            {
+
+                            switch ($t) {
                                 case "vimeo":
-                                    $mm=$media[$found];
-                                    
-                                    $media[$found]['video']=
-                                    [
-                                        "src"=> $this->parent->getVimeoSource($mm['vimeo_sources'],1280),
-                                        'duration'=>$mm['duration'],
-                                        "srcMobile"=> $this->parent->getVimeoSource($mm['vimeo_sources'],640),
-                                        "captions"=> null
-                                    ];
-                                    
-                                break;
+                                    $mm = $media[$found];
+
+                                    $media[$found]['video'] =
+                                        [
+                                            "src" => $this->parent->getVimeoSource($mm['vimeo_sources'], 1280),
+                                            'duration' => $mm['duration'],
+                                            "srcMobile" => $this->parent->getVimeoSource($mm['vimeo_sources'], 640),
+                                            "captions" => null
+                                        ];
+
+                                    break;
                             }
 
                             if ($block['type'] == 'slider') {
@@ -203,7 +205,6 @@ class model_app_pages_article
                         $text = _uho_fx::trim($text, '<br />');
 
                         break;
-
 
 
                     case "area":
@@ -230,32 +231,30 @@ class model_app_pages_article
 
     private function updateClip($item)
     {
-        $sessions=$this->parent->getJsonModel('sessions',['parent'=>$item['interview']['id'],'active'=>1],'false','nr');
-        $nr=0;
-        $t=0;
-        if ($sessions)
-        {
-            while ($item['time_from']<($t+$sessions[$nr]['duration']) && ($nr+1)<count($sessions))
-            {
-                $t+=$sessions[$nr]['duration'];
+        $sessions = $this->parent->getJsonModel('sessions', ['parent' => $item['interview']['id'], 'active' => 1], 'false', 'nr');
+        $nr = 0;
+        $t = 0;
+        if ($sessions) {
+            while ($item['time_from'] < ($t + $sessions[$nr]['duration']) && ($nr + 1) < count($sessions)) {
+                $t += $sessions[$nr]['duration'];
                 $nr++;
             }
-            $session=$sessions[$nr];
+            $session = $sessions[$nr];
             // $item['image']=$session['image'];
-        } 
-        $item['saved']=$this->parent->favGet('c'.$item['id']);
-        $item['url_fav']=['type'=>'clip_fav','id'=>$item['id']];
-        $item['video']=[
-                "src"=> @$this->parent->getVimeoSource($session['vimeo_source'],1280),
-                'start'=>$t+$item['time_from'],
-                'duration'=>$item['time_to']-$item['time_from'],
-                "srcMobile"=> $this->parent->getVimeoSource(@$session['vimeo_source'],640),
-                "captions"=> @$session['subtitles']['src']
-            ];
-    //print_r($item);exit();
+        }
+        $item['saved'] = $this->parent->favGet('c' . $item['id']);
+        $item['url_fav'] = ['type' => 'clip_fav', 'id' => $item['id']];
+        $item['video'] = [
+            "src" => @$this->parent->getVimeoSource($session['vimeo_source'], 1280),
+            'start' => $t + $item['time_from'],
+            'duration' => $item['time_to'] - $item['time_from'],
+            "srcMobile" => $this->parent->getVimeoSource(@$session['vimeo_source'], 640),
+            "captions" => @$session['subtitles']['src']
+        ];
+        //print_r($item);exit();
         return $item;
-        
+
         //time_from
-        
+
     }
 }
