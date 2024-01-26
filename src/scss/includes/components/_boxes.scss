@@ -16,7 +16,6 @@
         } 
     }
 
-
     &--reversed {
         text-align: right;
 
@@ -28,14 +27,14 @@
             transform: scaleX(-1);
         }
 
-        .module--home-text--link & {
-            text-align: left;
+        @include breakpoint(not-desktop) {
+            .module--home-text--link & {
+                text-align: left;
 
-            svg {
-                transform: unset;
+                svg {
+                    transform: unset;
+                }
             }
         }
     }
-
-
 }

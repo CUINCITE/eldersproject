@@ -3,16 +3,18 @@
 class model_app_pages_modules_interviews extends model_app_pages_modules
 {
 
-	function __construct($parent,$settings)
-	{
-		$this->parent=$parent;
-		$this->settings=$settings;
-	}
+    private int $itemsPerPage = 300;
 
-	public function updateModel($m,$url)
-	{
+    function __construct($parent, $settings)
+    {
+        $this->parent = $parent;
+        $this->settings = $settings;
+    }
 
-        // return 404 if no interview
+    public function updateModel($m, $url)
+    {
+
+        // return 404 if a user hits single interview url and no interview is found
         if (!empty($url[1])) {
             $item = $this->parent->getJsonModel('interviews_simple', ['active' => 1, 'slug' => $url[1]], true);
             if (!$item) {
@@ -20,11 +22,9 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
                 return $m;
             }
         }
-        /*
-        PAGINATION
-        */
 
-        $itemsPerPage = 300;
+        // Calculate pagination variables
+        $itemsPerPage = $this->itemsPerPage;
         $page = 1;
         $isPartial = (!empty($this->settings['get']['partial']));
 
@@ -32,89 +32,42 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             $page = (int)$this->settings['get']['page'];
         }
 
-        // startingPage & numberOfItems variables are used in getJsonModel method
+        // startingPage & numberOfItems variables are used in getJsonModel method later
         $startingPage = $isPartial ? $page : 1;
         $numberOfItems = $isPartial ? $itemsPerPage : $page * $itemsPerPage;
 
-		/*
-			FILTERS
-		*/
 
         //filters in the query
-		$input=[
-			'collections'=>['collections','interviewers'],
-			'topics'=>['topics','topics'],
-			'states'=>['states','narrators_states']
-		];
+        $input = [
+            'collections' => ['collections', 'interviewers'],
+            'topics' => ['topics', 'topics'],
+            'states' => ['states', 'narrators_states']
+        ];
 
-		$filters=['active'=>1];
-		foreach ($input as $param=>$dictionaries)
-		{
+        $filters = ['active' => 1];
+        foreach ($input as $param => $dictionaries) {
             $filter = false;
 
-			if (!empty($this->settings['get'][$param]))
-			{
-				$filter=$this->getModelFilter($dictionaries[0],$this->settings['get'][$param]);
-				if (!empty($filter)) $filters[$dictionaries[1]]=$filter;
-			}
+            if (!empty($this->settings['get'][$param])) {
+                $filter = $this->getModelFilter($dictionaries[0], $this->settings['get'][$param]);
+                if (!empty($filter)) $filters[$dictionaries[1]] = $filter;
+            }
 
-            $m[$param]=$this->filterUpdate($this->parent->dictGet($dictionaries[0]),$filter);
+            $m[$param] = $this->filterUpdate($this->parent->dictGet($dictionaries[0]), $filter);
 
-		}
+        }
 
+        // define sort variables
+        $m['sort'] = $this->handleSortVariables();
 
-		/*
-			Sort
-		*/
-		$sort=@$this->settings['get']['sort'];		
-		if (!$sort) $sort='narrators';
-        $m['sort']=[];
-        $m['sort']['selected'] = $sort;
-		if ($sort[0]=='!') { $desc=true; $sort=substr($sort,1); } else $desc=false;
+        /*
+            Get Interviews and supplement it with Filters and Load More data
+        */
 
-		$m['sort']['url_narrator']=$this->getSort('narrators',$sort,$desc);
-		$m['sort']['url_locations']=$this->getSort('locations',$sort,$desc);
-		$m['sort']['url_collections']=$this->getSort('collections',$sort,$desc);
-		
-		$sort_model='label_sort';
+        $m['items'] = $this->parent->getJsonModel('interviews_list', $filters, false, $m['sort']['sort_model'], [$startingPage, $numberOfItems]);
 
-		switch ($sort)
-		{
-			case "narrators":
-				$sort_model='label_sort';
-				$m['sort']['arrow_narrator']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_narrator']='↑';
-				}
-			break;
-			case "collections":
-				$sort_model='interviewer_name_sort';
-				$m['sort']['arrow_collections']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_collections']='↑';
-				}
-			break;
-			case "locations":
-				$sort_model='locations';
-				$m['sort']['arrow_locations']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_locations']='↑';
-				}
-			break;
-		}
-
-		/*
-			Get Interviews
-		*/
-
-        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, $numberOfItems]);
-        $m['items']= array_map(function($item) {
+        // remove duplicated states
+        $m['items'] = array_map(function ($item) {
             $item['type'] = 'single';
             if (is_array($item['narrators_states'])) {
                 $item['narrators_states'] = array_map("unserialize", array_unique(array_map("serialize", $item['narrators_states'])));
@@ -122,61 +75,110 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             return $item;
         }, $m['items']);
 
-        /*
-			Load more - check if load more items
-		*/
+        // Check if load more items
+        $m['load_more'] = $this->checkForMoreItems(count($m['items']), $itemsPerPage, $page, $url, $filters, $m['sort']['sort_model']);
 
-        $m['load_more'] = false;
+        // Add filter tags to the interview list
+        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
 
-        $originalStartingPage = $startingPage;
+        return $m;
+    }
 
-        if (count($m['items']) >=  $itemsPerPage) {
+    private function checkForMoreItems($itemsCount, $itemsPerPage, $page, $uri, $filters, $sortModel): bool|string
+    {
+        if ($itemsCount >= $itemsPerPage) {
             $startingPage = $page * $itemsPerPage + 1;
-            $newItem = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, 1]);
-            if ($newItem) $m['load_more'] = $this->getNextPageUri($page, $url);
+            $newItem = $this->parent->getJsonModel('interviews_list', $filters, false, $sortModel, [$startingPage, 1]);
+
+            if ($newItem) {
+                return $this->getNextPageUri($page, $uri);
+            }
         }
 
-        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $originalStartingPage);
-        
-		return $m;
-	}
+        return false;
+    }
 
-	private function getSort($item,$sort_now,$desc_now)
-	{
-		
-		if ($item==$sort_now)
-		{			
-			$sort=$sort_now;
-			if (!$desc_now) $sort='!'.$sort;
-		}
-			else $sort=$item;
+    private function handleSortVariables(): array
+    {
+        $sort = !empty($this->settings['get']['sort']) ? $this->settings['get']['sort'] : 'narrators';
+        $returnArray = [];
+        $returnArray['selected'] = $sort;
+        if ($sort[0] == '!') {
+            $desc = true;
+            $sort = substr($sort, 1);
+        } else $desc = false;
 
-		$url=['type'=>'url_now','get'=>['sort'=>$sort]];
-		return $url;
-	}
+        $returnArray['url_narrator'] = $this->getSort('narrators', $sort, $desc);
+        $returnArray['url_locations'] = $this->getSort('locations', $sort, $desc);
+        $returnArray['url_collections'] = $this->getSort('collections', $sort, $desc);
 
-	private function filterUpdate($items,$filters)
-	{
+        $sort_model = 'label_sort';
+
+        switch ($sort) {
+            case "narrators":
+                $sort_model = 'label_sort';
+                $returnArray['arrow_narrator'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_narrator'] = '↑';
+                }
+                break;
+            case "collections":
+                $sort_model = 'interviewer_name_sort';
+                $returnArray['arrow_collections'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_collections'] = '↑';
+                }
+                break;
+            case "locations":
+                $sort_model = 'locations';
+                $returnArray['arrow_locations'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_locations'] = '↑';
+                }
+                break;
+        }
+
+        $returnArray['sort_model'] = $sort_model;
+
+        return $returnArray;
+    }
+
+    private function getSort($item, $sort_now, $desc_now)
+    {
+
+        if ($item == $sort_now) {
+            $sort = $sort_now;
+            if (!$desc_now) $sort = '!' . $sort;
+        } else $sort = $item;
+
+        $url = ['type' => 'url_now', 'get' => ['sort' => $sort]];
+        return $url;
+    }
+
+    private function filterUpdate($items, $filters)
+    {
         if (!$filters) return $items;
 
-		if (!is_array($filters)) $filters=explode(',',$filters);
+        if (!is_array($filters)) $filters = explode(',', $filters);
 
-		if ($filters)
-		{
-			foreach ($items as $k=>$v)
-				$items[$k]['selected']=in_array($v['id'],$filters);
-		}
+        if ($filters) {
+            foreach ($items as $k => $v)
+                $items[$k]['selected'] = in_array($v['id'], $filters);
+        }
 
-		return $items;
-	}
+        return $items;
+    }
 
-	private function getModelFilter($dict,$slug)
-	{
+    private function getModelFilter($dict, $slug)
+    {
         $slugs = explode(',', $slug);
         $return_array = [];
 
         foreach ($slugs as $slug) {
-            $item=$this->parent->dictGet($dict,$slug);
+            $item = $this->parent->dictGet($dict, $slug);
             if ($item) $return_array[] = $item['id'];
         }
 
@@ -186,32 +188,33 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         return [];
 
-	}
+    }
 
     function getNextPageUri($current_page, $url): string
     {
 
         $allowedParams = ['page', 'sort', 'collections', 'topics', 'states'];
         $params = _uho_fx::getGetArray();
-        foreach ($params as $k=>$v) {
+
+        foreach ($params as $k => $v) {
             if (!in_array($k, $allowedParams)) unset($params[$k]);
         }
 
         $params['page'] = $current_page + 1;
-        $uri = '/'. implode('/', $url);
+        $uri = '/' . implode('/', $url);
 
         return $uri . '?' . http_build_query($params);
     }
 
-    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page) {
+    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page): array
+    {
 
         /**
-         * Adds filters to a list of interviews - takes into account today's seed and the current page
-         * @param int $first_index Places the first filter at the specified index
-         * @param int $frequency Places the filters evert X (frequency) elements
+         * This method adds filters to the list and ensures that the filters are displayed in the same order on the list no matter if partial load or not.
+         * The list of tags is generated in random order based on today's seed.
          */
 
-        $newItems = []; // Initialize $newItems array
+        $newItems = [];
 
         // Map topics and states to their respective types
         $filters = array_merge(
@@ -219,15 +222,19 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
         );
 
-        mt_srand(date('z')); // Different seed each day
-        shuffle($filters); // Shuffle the array
+        // Different seed every day
+        mt_srand(date('z'));
+        shuffle($filters);
 
-        // Select only unselected filters
+        //Remove already selected filters from the list
         $filters = array_filter($filters, fn($item) => empty($item['selected']));
         $filters = array_values($filters);
 
         // calculate how many $filters have been already assigned and calculate an index at which to
         // place a new filter if partial
+
+        $partialIndexOfNextFilter = 0;
+
         if ($page > 1) {
             $offset = ($page - 1) * $items_per_page;
             $no_of_used_filters = floor($offset / $frequency);
@@ -239,10 +246,10 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             // if at least one filter has been used, calculate the index of the last one
             if ($no_of_used_filters) {
                 $positionOfLastFilter = ($frequency * $no_of_used_filters) + ($no_of_used_filters - 1);
-                $countItems  = $offset + $no_of_used_filters;
+                $countItems = $offset + $no_of_used_filters;
                 $partialIndexOfNextFilter = $frequency - ($countItems - $positionOfLastFilter - 1);
             }
-        } else $partialIndexOfNextFilter = 0;
+        }
 
         $filters_index = 0;
 
@@ -250,32 +257,35 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         foreach ($items as $i => $item) {
 
+            // place the first filter at the specified position
             if ($page == 1 && $i == $first_index && !empty($filters[$filters_index])) {
-                $filter = $filters[$filters_index++];
-                $filter['url'] = $this->getFilterUrl($filter);
-                $k = array_rand($modifiers);
-                $filter['modifier'] = $modifiers[$k];
-                $newItems[] = $filter;
+                $this->addFilter($newItems, $filters, $filters_index, $modifiers);
             }
 
             $newItems[] = $item;
 
-            if (($i+1 - $partialIndexOfNextFilter) % $frequency == 0 && !empty($filters[$filters_index])) {
-                $filter = $filters[$filters_index++];
-                $filter['url'] = $this->getFilterUrl($filter);
-                $k = array_rand($modifiers);
-                $filter['modifier'] = $modifiers[$k];
-                $newItems[] = $filter;
+            // place the next filters at the specified interval
+            if (($i + 1 - $partialIndexOfNextFilter) % $frequency == 0 && !empty($filters[$filters_index])) {
+                $this->addFilter($newItems, $filters, $filters_index, $modifiers);
             }
         }
 
         return $newItems;
     }
 
-    private function getFilterUrl($filter)
+    private function getFilterUrl($filter): array
     {
         return ['type' => 'interview_filter', 'slug' => $filter['slug'], 'filter_type' => $filter['filter_type']];
     }
 
+    private function addFilter(&$newItems, &$filters, &$filters_index, $modifiers) {
+        $filter = $filters[$filters_index++];
+        $filter['url'] = $this->getFilterUrl($filter);
+        $k = array_rand($modifiers);
+        $filter['modifier'] = $modifiers[$k];
+        $newItems[] = $filter;
+    }
+
 }
+
 ?>

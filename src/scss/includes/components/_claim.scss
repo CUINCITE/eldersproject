@@ -5,9 +5,10 @@
     position: relative;
 
     @include breakpoint(desktop) {
-        @include font-size(103, 93);
+        @include font-size(103, 0.935);
         @include letter-spacing(-3.09, 103);
 
+        margin-block: trim-font(0.935);
         max-width: 75%;
     }
 
@@ -19,6 +20,8 @@
     @include breakpoint(phone) {
         @include font-size(49, 0.855);
         @include letter-spacing(-1.47, 49);
+
+        margin-block: trim-font(0.855);
     }
 
     &--small {

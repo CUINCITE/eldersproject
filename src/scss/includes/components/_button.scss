@@ -54,7 +54,9 @@
     }
 
 
-    &--collection { overflow: hidden; }
+    &--collection { 
+        overflow: hidden; 
+    }
 
 
     &--lightbox {
@@ -185,16 +187,9 @@
     }
 
 
-    .module--home-text & {
-        padding-top: rem(20);
-
-        @include breakpoint(phone) {
-            padding-top: rem(12);
-        }
+    .interviews--grid & { 
+        color: inherit; 
     }
-
-
-    .interviews--grid & { color: inherit; }
 }
 
 %button-hover {
