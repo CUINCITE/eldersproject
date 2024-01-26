@@ -6,6 +6,7 @@ import { Component } from './components/Component';
 import { browser } from './Site';
 import { getAnimation } from './Animate';
 import { animations, scrolls } from './animations/all';
+import { normalizeUrl } from './Utils';
 
 
 export type ScrollToProps = {
@@ -114,7 +115,7 @@ export default class Scroll {
 
 
     public static scrollToCached(): void {
-        const y = Scroll.scrollCache[window.location.pathname] || 0;
+        const y = Scroll.scrollCache[normalizeUrl(window.location.pathname + window.location.search)] || 0;
         Scroll.scrollTo({ y, duration: 0 });
     }
 
