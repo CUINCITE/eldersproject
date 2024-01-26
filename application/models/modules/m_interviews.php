@@ -133,7 +133,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         if (count($m['items']) >=  $itemsPerPage) {
             $startingPage = $page * $itemsPerPage + 1;
             $newItem = $this->parent->getJsonModel('interviews_list',$filters,false,$sort_model, [$startingPage, 1]);
-            if ($newItem) $m['load_more'] = $this->getNextPageUri($page);
+            if ($newItem) $m['load_more'] = $this->getNextPageUri($page, $url);
         }
 
         $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $originalStartingPage);
@@ -188,22 +188,17 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
 	}
 
-    function getNextPageUri($current_page): string
+    function getNextPageUri($current_page, $url): string
     {
 
         $allowedParams = ['page', 'sort', 'collections', 'topics', 'states'];
-
-        $requestUri = $_SERVER['REQUEST_URI'];
-        $uri = strtok($requestUri, '?');
-
-        $queryParams = [];
-        if (strpos($requestUri, '?') !== false) {
-            parse_str(substr($requestUri, strpos($requestUri, '?') + 1), $queryParams);
+        $params = _uho_fx::getGetArray();
+        foreach ($params as $k=>$v) {
+            if (!in_array($k, $allowedParams)) unset($params[$k]);
         }
 
-        $params = array_intersect_key($queryParams, array_flip($allowedParams));
-
         $params['page'] = $current_page + 1;
+        $uri = '/'. implode('/', $url);
 
         return $uri . '?' . http_build_query($params);
     }
