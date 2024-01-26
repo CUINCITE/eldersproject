@@ -41,8 +41,12 @@
 
                         {% elseif module.type == 'read_more' %}
 
-                            <div class="text text--large text--aside">
-                                <div class='text__expand expand' data-expand='' id='read-more-{{ module.id }}'>{{ module.value.text|raw}}</div>
+                            <div class="text_wrapper__module text_wrapper__read_more">
+                                <div class='text__expand expand' data-expand='' id='read-more-{{ module.id }}'>
+                                    <div class="text text--large text--aside">
+                                        {{ module.value.text|raw }}
+                                    </div>
+                                </div>
 
                                 <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='read-more-{{ module.id }}'
                                         data-expanded-text='Read less' data-hidden-text='Read more'>
@@ -53,8 +57,6 @@
                                     </i>
                                     <span class='js-expand-text'>Read more</span>
                                 </button>
-
-
                             </div>
 
                         {% endif %}

@@ -39,6 +39,7 @@ $grid-line-offsets: (
         padding-bottom: rem(40);
     }
 
+    
     &.is-closed {
 
         .accordeon_item__copy {
@@ -48,6 +49,25 @@ $grid-line-offsets: (
         .accordeon_item__term {
             svg {
                 transform: rotateX(0deg);
+            }
+        }
+
+        .accordeon_item__button {
+
+            @include breakpoint(desktop) {
+                &:focus ~ .accordeon_item__term {                                            
+                    svg {
+                        translate: 0 20%;
+                    }
+                }
+            
+                @include hover {
+                    & ~ .accordeon_item__term {                                            
+                        svg {
+                            translate: 0 20%;
+                        }
+                    }
+                }
             }
         }
     }
@@ -78,7 +98,7 @@ $grid-line-offsets: (
         }
 
         svg {
-            transition: .3s transform ease;
+            transition: .3s transform ease, .3s translate ease;
             transform: rotateX(-180deg);
         }
     }

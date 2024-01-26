@@ -26,6 +26,11 @@ export function setAppHeight(): void {
 }
 
 
+export function setVwUnit(): void {
+    document.documentElement.style.setProperty('--vw', `${document.documentElement.clientWidth}px`);
+}
+
+
 // eslint-disable-next-line no-undef
 export function stats(): Stats {
     // eslint-disable-next-line no-undef
