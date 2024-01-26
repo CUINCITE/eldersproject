@@ -51,15 +51,11 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
-//        dd($m['modules'][3]['article']);
-
         return $m;
     }
 
     public function updateArticle($article, $article_media)
     {
-
-//        $article = $this->processLoadMore($article);
 
         $article = $this->processAudioTag($article);
 
@@ -74,7 +70,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     private function processAudioTag($content): string
     {
-        // Check for audio tag and replace it with button
+        // Check for audio tag and replace it with the audio button
         $pattern = '/\[AUDIO=(\d+), ([0-9:]+)-([0-9:]+)\]/';
         if (preg_match($pattern, $content, $matches)) {
             $id = intval($matches[1]);
@@ -85,27 +81,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             $content = preg_replace($pattern, $button, $content);
         }
         return $content;
-    }
-
-    private function processLoadMore($content)
-    {
-        $pattern = '/<p>\[MORE\]<\/p>(.*?)<p>\[ENDMORE\]<\/p>/s';
-
-        preg_match_all($pattern, $content, $matches);
-
-        $content = preg_replace_callback($pattern, function ($matches) {
-            $uniqueId = uniqid('expand-quote-');
-            $replacement = "<div class='text__expand expand' data-expand='' id='$uniqueId'>{$matches[1]}</div>
-        <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='$uniqueId'
-                    data-expanded-text='Read less' data-hidden-text='Read more'><i
-                        class='icon-btn-arrow arrow'><span></span><span></span><span class='triangle'></span></i><span
-                        class='js-expand-text'>Read more</span></button>";
-
-            return $replacement;
-        }, $content);
-
-        return $content;
-
     }
 
 }
