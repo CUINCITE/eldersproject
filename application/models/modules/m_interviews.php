@@ -3,7 +3,7 @@
 class model_app_pages_modules_interviews extends model_app_pages_modules
 {
 
-    private int $itemsPerPage = 10;
+    private int $itemsPerPage = 300;
 
     function __construct($parent, $settings)
     {
