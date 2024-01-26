@@ -1,5 +1,4 @@
 import { gsap } from 'gsap/dist/gsap';
-import { log } from 'three';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
@@ -29,7 +28,7 @@ export class Lightbox {
 
     private components: Array<Component>;
     private view: HTMLElement;
-    private shown = false;
+    private shown = true;
     private currentPath: string;
     private playerBtn: HTMLButtonElement;
 
@@ -218,9 +217,8 @@ export class Lightbox {
 
 
     private hide(fast?: boolean): Promise<void> {
-        if (this.animating) return Promise.resolve();
+        if (this.animating || !this.shown) return Promise.resolve();
         this.controller?.abort();
-        Lightbox.isOpen = false;
 
         return new Promise<void>((resolve, reject) => {
             this.animating = true;
@@ -242,6 +240,7 @@ export class Lightbox {
                     this.animating = false;
                     // empty the lightbox
                     this.view.innerHTML = '';
+                    Lightbox.isOpen = false;
                     resolve();
                 },
             });
@@ -257,10 +256,9 @@ export class Lightbox {
         Promise.all([this.shown ? this.hide() : null]).then(() => {
             this.animating = true;
             this.shown = true;
-            Lightbox.isOpen = true;
 
             gsap.to(this.view, {
-                duration: 0.3,
+                duration: 0.05,
                 opacity: 1,
                 ease: 'none',
                 onStart: () => {
@@ -274,6 +272,7 @@ export class Lightbox {
                     // audioplayer should be always expanded when lightbox is open
                     AudioPlayer.openAudioPlayer();
                     this.animating = false;
+                    Lightbox.isOpen = true;
                 },
             });
         });
