@@ -21,12 +21,6 @@
                                 {% include "/subviews/subview_text.html" with {text:module.value, large:true, aisde:true} %}
                             </div>
 
-                            {#                        {% elseif module.type == "quote" %} #}
-
-                            {#                            <div class="text_wrapper__module text_wrapper__text"> #}
-                            {#                                {% include "/subviews/subview_text.html" with {text:module.content, large:true, aisde:true} %} #}
-                            {#                            </div> #}
-
                         {% elseif module.type == "image" and module.value.variant == 'illustration' %}
 
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
@@ -46,10 +40,6 @@
                             {% set photoCounter = photoCounter + 1 %}
 
                         {% elseif module.type == 'read_more' %}
-
-{#                            <div class="text_wrapper__module text_wrapper__text">#}
-{#                                {% include "/subviews/subview_text_read_more.html" with {text:module.value, large:true, aisde:true, id:item module.id, read_more:true} %}#}
-{#                            </div>#}
 
                             <div class="text text--large text--aside">
                                 <div class='text__expand expand' data-expand='' id='read-more-{{ module.id }}'>{{ module.value.text }}</div>
