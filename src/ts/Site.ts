@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { CustomEase } from 'gsap/dist/CustomEase';
 import Scroll from './Scroll';
 import { pages as Pages } from './Classes';
-import { stats, debounce, setAppHeight } from './Utils';
+import { stats, debounce, setAppHeight, setVwUnit } from './Utils';
 import { IBrowser, getBrowser } from './Browser';
 import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
@@ -53,7 +53,9 @@ class Site {
         pixelRatio = Math.min(2, window.devicePixelRatio || 1);
 
         this.bind();
+        setVwUnit();
         setAppHeight();
+
         debug && stats();
 
         this.pushStates = new PushStates();
@@ -109,6 +111,8 @@ class Site {
      */
     private onResize = (isOrientationChanged?: boolean): void => {
 
+        setVwUnit();
+
         const oldBreakpoint = breakpoint ? breakpoint.value : null;
         breakpoint = getBreakpoint();
 
@@ -118,6 +122,7 @@ class Site {
 
         !browser.touch && setAppHeight();
         isOrientationChanged && setAppHeight();
+
 
         this.currentPage?.resize(width, height, breakpoint, changed);
         (!browser.touch || changed) && Scroll?.resize();

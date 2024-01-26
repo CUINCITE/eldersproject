@@ -15,7 +15,7 @@
         phone: 375
     );
     @if map-has-key($layouts, $bp) {
-        @return strip-units($size) / map-get($layouts, $bp) * 100vw;
+        @return calc(#{strip-units($size) / map-get($layouts, $bp)} * var(--vw));
     } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$bp}`.";
     }
