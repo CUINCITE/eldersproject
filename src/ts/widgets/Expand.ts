@@ -1,9 +1,10 @@
 export class Expand {
 
+
+
     public static resize = () => {
         this.setMaxHeight();
     };
-
 
 
     public static bind(where?: HTMLElement): void {
@@ -45,6 +46,8 @@ export class Expand {
         target.parentElement.classList.add('is-expanded');
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-expanded-text');
         document.getElementById(target.getAttribute('aria-controls')).classList.add('is-expanded');
+
+        target.dataset.scrollY = (target.getBoundingClientRect().top + document.documentElement.scrollTop).toString();
     };
 
 
@@ -53,7 +56,17 @@ export class Expand {
         target.setAttribute('aria-expanded', 'false');
         target.parentElement.classList.remove('is-expanded');
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-hidden-text');
+
         document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
+
+
+        if (target.classList.contains('text__expand-trigger')) {
+            const elementTop = parseInt(target.dataset.scrollY, 10);
+
+            if (elementTop < window.scrollY) {
+                window.scrollTo({ top: elementTop - 100, behavior: 'smooth' });
+            }
+        }
     };
 
 
@@ -68,4 +81,5 @@ export class Expand {
             element.style.maxHeight = `${height}px`;
         });
     };
+
 }
