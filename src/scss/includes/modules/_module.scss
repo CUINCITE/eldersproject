@@ -160,7 +160,9 @@
                 }
 
                 @include breakpoint(phone) {
-                
+                 .text {
+                    padding-bottom: rem(15);
+                 }
                 }
             }
         }

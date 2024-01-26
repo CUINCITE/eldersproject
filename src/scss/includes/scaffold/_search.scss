@@ -26,6 +26,8 @@
         @include font-size(40, 37.4);
     }
 
+
+
     &__content {
         width: 100%;
     }
@@ -75,7 +77,9 @@
 
             @include breakpoint(phone) {
                 @include font-size(40, 37.4);
+
                 letter-spacing: unset;
+                top: vw(4, phone);
             }
 
 
@@ -83,8 +87,9 @@
                 display: inline-block;
                 overflow: hidden;
 
-
-                span { display: inline-block; }
+                span { 
+                    display: inline-block; 
+                }
             }
         }
 
@@ -116,14 +121,17 @@
             @include breakpoint(phone) {
                 @include font-size(40, 37.4);
 
-                height: vw(40, phone);
+                height: vw(44, phone);
+                padding-top: vw(4, phone);
                 width: 66%;
             }
         }
 
 
         @include hover {
-            .search__svg svg { transform: scale(1.25); }
+            .search__svg svg { 
+                transform: scale(1.25); 
+            }
         }
     }
 
@@ -140,6 +148,14 @@
         svg {
             vertical-align: top;
             transition: transform .3s $ease-custom;
+        }
+
+        @include breakpoint(tablet) {
+            margin-left: rem(4);
+
+            svg {
+                translate: 0 -10%;
+            }
         }
 
         @include breakpoint(phone) {

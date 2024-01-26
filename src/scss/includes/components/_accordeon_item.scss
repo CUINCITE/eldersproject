@@ -76,16 +76,19 @@ $grid-line-offsets: (
         overflow: hidden;
         transition: height .3s ease-in;
 
-        @include breakpoint(desktop) {
-            padding-top: rem(10);
-        }
-
-        @include breakpoint(tablet) {
-            padding-top: rem(15);
-        }
-
-        @include breakpoint(phone) {
-            padding-top: rem(5);
+        .text.text--large {
+    
+            @include breakpoint(desktop) {
+                padding-top: rem(5);
+            }
+    
+            @include breakpoint(tablet) {
+                padding-top: rem(15);
+            }
+    
+            @include breakpoint(phone) {
+                padding-top: rem(6);
+            }
         }
     }
 
@@ -149,6 +152,12 @@ $grid-line-offsets: (
 
         @include breakpoint(phone) {
             max-width: rem(256);
+        }
+    }
+
+    .faq & {
+        @include breakpoint(desktop) {
+            padding-bottom: rem(38);
         }
     }
 }

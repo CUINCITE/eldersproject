@@ -173,7 +173,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
                 inset: 0 auto 0 100%;
                 margin-top: rem(-1);
                 margin-right: 0;
-                margin-left: rem(8);
+                margin-left: rem(10);
             }
 
             @include breakpoint(phone) {
