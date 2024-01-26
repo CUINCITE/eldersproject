@@ -263,21 +263,21 @@
 
 
     &__expand {
-        p:first-child {
+        p, q, blockquote {
+            margin-top: unset !important;
+        }
+
+        q, blockquote {
             @include breakpoint(desktop) {
-                margin-top: unset !important;
-                padding-top: vw(16);
+                padding-top: vw(22);
             }
     
             @include breakpoint(tablet) {
-                margin-top: unset !important;
-                padding-top: rem(16);
-
+                padding-top: rem(25);
             }
      
             @include breakpoint(phone) {
-                margin-top: unset !important;
-                padding-top: rem(16);
+                padding-top: rem(25);
             }
         }
     } 
@@ -439,20 +439,6 @@
                 @include letter-spacing(-0.6, 20);
 
                 margin-top: rem(8);
-            }
-
-            i { 
-                @include breakpoint(desktop) {
-                    padding-top: rem(2); 
-                }
-
-                @include breakpoint(tablet) {
-                    padding-top: rem(2); 
-                }
-
-                @include breakpoint(phone) {
-                    margin-top: rem(-2); 
-                }
             }
         }
     }
