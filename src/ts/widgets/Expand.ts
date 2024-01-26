@@ -1,9 +1,10 @@
 export class Expand {
 
+
+
     public static resize = () => {
         this.setMaxHeight();
     };
-
 
 
     public static bind(where?: HTMLElement): void {
@@ -34,6 +35,7 @@ export class Expand {
 
         const target = e.currentTarget as HTMLElement;
         const isExpanded = target.getAttribute('aria-expanded') === 'true';
+        console.log(target.getBoundingClientRect().top + document.documentElement.scrollTop);
 
         isExpanded ? this.collapse(target) : this.expand(target);
     };
@@ -45,6 +47,8 @@ export class Expand {
         target.parentElement.classList.add('is-expanded');
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-expanded-text');
         document.getElementById(target.getAttribute('aria-controls')).classList.add('is-expanded');
+
+        target.dataset.scrollY = (target.getBoundingClientRect().top + document.documentElement.scrollTop).toString();
     };
 
 
@@ -53,7 +57,12 @@ export class Expand {
         target.setAttribute('aria-expanded', 'false');
         target.parentElement.classList.remove('is-expanded');
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-hidden-text');
+
         document.getElementById(target.getAttribute('aria-controls')).classList.remove('is-expanded');
+
+        if (target.classList.contains('text__expand-trigger')) {
+            window.scrollTo({ top: parseInt(target.dataset.scrollY, 10) - 100, behavior: 'smooth' });
+        }
     };
 
 
@@ -68,4 +77,5 @@ export class Expand {
             element.style.maxHeight = `${height}px`;
         });
     };
+
 }
