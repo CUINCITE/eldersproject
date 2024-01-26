@@ -48,7 +48,6 @@ export class Expand {
         document.getElementById(target.getAttribute('aria-controls')).classList.add('is-expanded');
 
         target.dataset.scrollY = (target.getBoundingClientRect().top + window.scrollY).toString();
-        console.log(target.dataset.scrollY);
     };
 
 
@@ -59,7 +58,6 @@ export class Expand {
         (target.querySelector('.js-expand-text') as HTMLElement).innerText = target.getAttribute('data-hidden-text');
 
         const elementTop = parseInt(target.dataset.scrollY, 10);
-
 
         if (target.classList.contains('text__expand-trigger') && elementTop < window.scrollY) {
 
