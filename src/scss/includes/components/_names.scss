@@ -52,9 +52,10 @@
             @include breakpoint(desktop) {
                 @include font-size(30, 30);
                 @include letter-spacing(-0.75, 30);
-                margin-bottom: rem(10);
+
+                margin-bottom: rem(-7);
                 margin-right: rem(11);
-                margin-top: rem(80);
+                margin-top: rem(78);
             }
 
 

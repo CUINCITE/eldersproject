@@ -187,6 +187,19 @@
                 .button {
                     margin-top: rem(10);
                     margin-left: rem(2);
+                    gap: rem(5);
+
+                    &--small {
+                        @include font-size(26, 1);
+                        @include letter-spacing(-0.8, 26)
+                    }
+
+                    .arrow {
+
+                        .triangle {
+                            border-width: rem(10) 0 rem(10) rem(11);
+                        }
+                    }
                 }
             }
 
@@ -198,10 +211,27 @@
 
                 .button {
                     margin-block: trim-font(1);
-                }
+                    margin-left: rem(1);
+                    gap: rem(5);
 
-                .triangle {
-                    border-width: rem(11) 0 rem(11) rem(13) !important;
+                    &--small {
+                        @include font-size(30, 1);
+                        @include letter-spacing(-0.9, 30)
+                    }
+
+                    .arrow {
+                        span:nth-child(1) {
+                            height: rem(10);
+                        }
+
+                        span:nth-child(2) {
+                            width: rem(23);
+                        }
+
+                        .triangle {
+                            border-width: rem(11) 0 rem(11) rem(12);
+                        }
+                    }
                 }
             }
         }

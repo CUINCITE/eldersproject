@@ -16,7 +16,7 @@
     }
 
     @include breakpoint(desktop) {
-        padding-top: vw(200);
+        padding-top: vw(175);
     }
 
     @include breakpoint(tablet) {
@@ -257,6 +257,10 @@
         inset: 0 0 auto var(--side-padding);
         min-height: var(--input-height);
         pointer-events: none;
+
+        // .sticker {
+        //     pointer-events: all; 
+        // }
     }
 
 
