@@ -3,7 +3,7 @@
 {% endif %}
 
 {% set decor = (header == 'standard') ? {} : {'decor': 'boxes'} %}
-{% set modifiers = (header == 'standard') ? ['wide', 'privacy'] : ['aside','contact'] %}
+{% set modifiers = (header == 'standard') ? ['wide', 'privacy'] : ['aside','contact', 'large'] %}
 {% set decor_modifiers = (header == 'standard') ? [] : ['contact'] %}
 
 {% include "modules/m_text_aside.html" with {'params': decor, 'hide_label': header == 'large', 'modifiers': modifiers,'decor_modifiers': decor_modifiers } %}
