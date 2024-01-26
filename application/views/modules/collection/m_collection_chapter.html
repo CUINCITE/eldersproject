@@ -42,7 +42,7 @@
                         {% elseif module.type == 'read_more' %}
 
                             <div class="text text--large text--aside">
-                                <div class='text__expand expand' data-expand='' id='read-more-{{ module.id }}'>{{ module.value.text }}</div>
+                                <div class='text__expand expand' data-expand='' id='read-more-{{ module.id }}'>{{ module.value.text|raw}}</div>
 
                                 <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='read-more-{{ module.id }}'
                                         data-expanded-text='Read less' data-hidden-text='Read more'>
