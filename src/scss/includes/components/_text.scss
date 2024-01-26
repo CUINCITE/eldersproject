@@ -267,7 +267,7 @@
             margin-top: unset !important;
         }
 
-        q, blockquote {
+        p {
             @include breakpoint(desktop) {
                 padding-top: vw(22);
             }
