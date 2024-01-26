@@ -161,25 +161,26 @@
                 @include font-family(compressed);
 
                 background-color: $background-light-offwhite;
+                // background-color: red;
                 margin-block: trim-font(1);
                 font-size: 1.4em;
-                margin-top: -0.12em;
+                margin-top: -0.1em;
                 color: $color-gold;
                 content: 'PLAY';
                 position: absolute;
                 display: block;
-                width: 120%;
+                width: 140%;
                 height: 120%;
                 z-index: -1;
                 top: 0;
-                left: 0;
+                left: -8%;
                 opacity: 0;
                 transition: opacity 0.1s 0.3s, translate 0.4s $easing;
             }
 
             @include hover {
                 &::before {
-                    translate: calc(82% + #{rem(3)}) 0;
+                    translate: calc(74% + #{rem(3)}) 0;
                     transition-delay: 0s;
                     opacity: 1;
                 }
@@ -217,7 +218,7 @@
 
                 @include hover {
                     &::before {
-                        translate: calc(82% + #{rem(4)}) 0;
+                        translate: calc(74% + #{rem(4)}) 0;
                     }
                 }
             }
