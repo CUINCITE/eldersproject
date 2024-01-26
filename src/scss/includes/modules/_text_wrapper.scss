@@ -88,6 +88,10 @@
             }
         }
 
+        & + &.text_wrapper__read_more {
+            margin-top: 0;
+        }
+
         .text {
             padding-block: 0 !important;
             margin-bottom: 0 !important;
@@ -133,6 +137,16 @@
 
         @include breakpoint(phone) {
             margin-top: rem(25);
+        }
+    }
+
+
+
+    &__read_more {
+        .button {
+            @include breakpoint(desktop) {
+                margin-left: rem(11);
+            }
         }
     }
 

@@ -76,6 +76,7 @@ export class Expand {
 
     private static setMaxHeight = () => {
         ([...document.querySelectorAll('[data-expand][id]')] as HTMLElement[]).forEach(element => {
+
             let height = 0;
             [...element.children].forEach(children => {
                 height += children.getBoundingClientRect().height;
