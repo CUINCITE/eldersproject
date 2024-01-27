@@ -70,15 +70,16 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     private function processAudioTag($content): string
     {
-        // Check for audio tag and replace it with the audio button
         $pattern = '/\[AUDIO=(\d+), ([0-9:]+)-([0-9:]+)\]/';
-        if (preg_match($pattern, $content, $matches)) {
-            $id = intval($matches[1]);
-            $startHMS = $matches[2];
-            list($h, $m, $s) = explode(':', $startHMS);
-            $startSeconds = $s + ($m * 60) + ($h * 60 * 60);
-            $button = '<button data-audio-player="' . $id . '" data-start="' . $startSeconds . '" class="quote__cassette">[[svg::cassette]]</button>';
-            $content = preg_replace($pattern, $button, $content);
+        if (preg_match_all($pattern, $content, $matches, PREG_SET_ORDER)) {
+            $content = preg_replace_callback($pattern, function($matches) {
+                $id = intval($matches[1]);
+                $startHMS = $matches[2];
+                list($h, $m, $s) = explode(':', $startHMS);
+                $startSeconds = $s + ($m * 60) + ($h * 60 * 60);
+                $button = '<button data-audio-player="' . $id . '" data-start="' . $startSeconds . '" class="quote__cassette">[[svg::cassette]]</button>';
+                return $button;
+            }, $content);
         }
         return $content;
     }

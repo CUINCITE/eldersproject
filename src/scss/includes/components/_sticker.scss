@@ -182,28 +182,28 @@
     }
 
 
-
-    @include hover {
-
-        // #{$self}__back {
-        //     height: 0;
-        //     top: 0;
-
-
-        //     #{$self}__circle {
-        //         margin-top: calc(var(--sticker-size) * -1);
-        //     }
-        // }
-
-
-        // #{$self}__front {
-        //     top: 0;
-        //     height: var(--sticker-size);
-
-
-        //     #{$self}__circle {
-        //         margin-top: 0;
-        //     }
-        // }
-    }
+    // @include breakpoint(desktop) {
+    //     @include hover {
+    //         #{$self}__back {
+    //             height: 0;
+    //             top: 0;
+    
+    
+    //             #{$self}__circle {
+    //                 margin-top: calc(var(--sticker-size) * -1);
+    //             }
+    //         }
+    
+    
+    //         #{$self}__front {
+    //             top: 0;
+    //             height: var(--sticker-size);
+    
+    
+    //             #{$self}__circle {
+    //                 margin-top: 0;
+    //             }
+    //         }
+    //     }
+    // }
 }

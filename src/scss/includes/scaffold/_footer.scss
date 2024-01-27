@@ -54,7 +54,10 @@
     &__copy {
 
         @include breakpoint(desktop) {
-            padding: vw(409) 0 vw(19);
+            @include font-size(8, 1);
+
+            margin-block: trim-font(1);
+            padding: vw(397) 0 vw(21);
         }
 
         @include breakpoint(tablet) {

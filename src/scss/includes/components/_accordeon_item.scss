@@ -39,6 +39,7 @@ $grid-line-offsets: (
         padding-bottom: rem(40);
     }
 
+    
     &.is-closed {
 
         .accordeon_item__copy {
@@ -50,22 +51,44 @@ $grid-line-offsets: (
                 transform: rotateX(0deg);
             }
         }
+
+        .accordeon_item__button {
+
+            @include breakpoint(desktop) {
+                &:focus ~ .accordeon_item__term {                                            
+                    svg {
+                        translate: 0 20%;
+                    }
+                }
+            
+                @include hover {
+                    & ~ .accordeon_item__term {                                            
+                        svg {
+                            translate: 0 20%;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     &__copy {
         overflow: hidden;
         transition: height .3s ease-in;
 
-        @include breakpoint(desktop) {
-            padding-top: rem(10);
-        }
-
-        @include breakpoint(tablet) {
-            padding-top: rem(15);
-        }
-
-        @include breakpoint(phone) {
-            padding-top: rem(5);
+        .text.text--large {
+    
+            @include breakpoint(desktop) {
+                padding-top: rem(5);
+            }
+    
+            @include breakpoint(tablet) {
+                padding-top: rem(15);
+            }
+    
+            @include breakpoint(phone) {
+                padding-top: rem(6);
+            }
         }
     }
 
@@ -78,7 +101,7 @@ $grid-line-offsets: (
         }
 
         svg {
-            transition: .3s transform ease;
+            transition: .3s transform ease, .3s translate ease;
             transform: rotateX(-180deg);
         }
     }
@@ -129,6 +152,12 @@ $grid-line-offsets: (
 
         @include breakpoint(phone) {
             max-width: rem(256);
+        }
+    }
+
+    .faq & {
+        @include breakpoint(desktop) {
+            padding-bottom: rem(38);
         }
     }
 }
