@@ -1,10 +1,11 @@
 <ul class="cards">
-        <li class="cards__card cards__card--placeholder cards__card--red"></li>
-        <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
-        <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
-    {% for card in cards %}
-        <li class="cards__card">
-            {% include "subviews/subview_picture.html" with { image: card } %}
-        </li>
-    {% endfor %}
+    <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
+    <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
+    <li class="cards__card cards__card--placeholder cards__card--red"></li>
+    <li class="cards__card cards__card--placeholder cards__card--dark-green"></li>
+{% for card in cards %}
+    <li class="cards__card">
+        {% include "subviews/subview_picture.html" with { image: card } %}
+    </li>
+{% endfor %}
 </ul>
