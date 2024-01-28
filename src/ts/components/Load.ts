@@ -156,7 +156,6 @@ export class Load extends Component {
         this.isPending = true;
         this.view.classList.add('is-pending');
         PushStates.changePath(url, true);
-        ScrollTrigger.refresh();
 
         if (this.settings.filtered) this.updateFiltered();
         if (this.settings.scrollTo) this.scrollToContainer();
@@ -189,7 +188,8 @@ export class Load extends Component {
             })
             .finally(() => {
                 this.view.classList.remove('is-pending');
-                ScrollTrigger.refresh();
+                // with this flag enabled, scrolltrigger is refreshed in other function
+                !this.settings.scrollTo && ScrollTrigger.refresh();
 
                 // should have lightbox links
                 PushStates.bind(this.contentElement);
@@ -297,6 +297,9 @@ export class Load extends Component {
         Scroll.scrollTo({
             el: elem,
             duration: 1,
+            onComplete: (): void => {
+                ScrollTrigger.refresh();
+            },
         });
     };
 
