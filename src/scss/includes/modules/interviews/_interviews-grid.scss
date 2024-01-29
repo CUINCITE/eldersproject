@@ -138,6 +138,12 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
         }
+
+        .is-padded & {
+            @include breakpoint(desktop) {
+                padding-top: rem(68);
+            }
+        }
     }
 
 
