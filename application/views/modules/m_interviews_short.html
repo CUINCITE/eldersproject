@@ -1,6 +1,6 @@
 {% set colors=['green','red','yellow'] %}{% set c=random(colors|length) %}
 
-<section class="module module--interviews" data-scroll="box">
+<section class="module module--interviews" data-scroll="box"{% if collection_page %} id="interviews"{% endif %}>
     <div class="box__bg"></div>
     <div class="interviews">
         <div class="box">
