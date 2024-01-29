@@ -52,7 +52,7 @@
                         <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
                         <li class="cards__card cards__card--placeholder cards__card--red"></li>
                         <li class="cards__card cards__card--placeholder cards__card--dark-green"></li>
-                    {% for item in items %}
+                    {% for item in items | reverse %}
                         <li class="cards__card">
                             {% include "subviews/subview_picture.html" with {image:item.image} %}
                         </li>
