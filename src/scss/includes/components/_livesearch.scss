@@ -19,11 +19,11 @@
             }
 
             @include breakpoint(tablet) {
-                height: calc(100lvh - #{rem(153)})
+                height: calc(100svh - #{rem(146)})
             }
 
             @include breakpoint(phone) {
-                height: calc(100lvh - #{rem(108)})
+                height: calc(100svh - #{rem(100)})
             }
         }
     }
@@ -42,17 +42,18 @@
             padding-left: 1px;
         }
 
-        // @include breakpoint(not-desktop) {
-        //     // overflow-y: auto;
+        @include breakpoint(not-desktop) {
+            height: 100%;
+            // overflow-y: auto;
 
-        //     @include breakpoint(tablet) {
-        //         height: calc(100vh - #{rem(102)});
-        //     }
+            // @include breakpoint(tablet) {
+            //     height: calc(100vh - #{rem(102)});
+            // }
 
-        //     @include breakpoint(phone) {
-        //         height: calc(100vh - #{rem(54)});
-        //     }
-        // }
+            // @include breakpoint(phone) {
+            //     height: calc(100vh - #{rem(54)});
+            // }
+        }
     }
 
 
@@ -371,7 +372,7 @@
             }
         }
     }
-
+ 
 
 
     &__arrow {
