@@ -6,8 +6,8 @@ import { Lightbox } from './Lightbox/Lightbox';
 
 
 export class AudioPlayerStatesText {
-    public static RANDOM = 'Play random interview';
-    public static PLAYING = 'Playing interview';
+    public static RANDOM = 'Shuffle';
+    public static PLAYING = 'Now playing';
     public static PAUSED = 'Play interview';
 }
 
@@ -134,7 +134,7 @@ export class AudioPlayer extends Video {
 
     protected onPlay(): void {
         super.onPlay();
-        this.setTitleInCassette(AudioPlayerStatesText.PLAYING);
+        this.setTitleInCassette(`${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
         this.togglePlayerButtons(true);
     }
 
@@ -142,7 +142,7 @@ export class AudioPlayer extends Video {
 
     protected onPause(): void {
         super.onPause();
-        this.setTitleInCassette(AudioPlayerStatesText.PAUSED);
+        this.setTitleInCassette(`${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}`);
         this.togglePlayerButtons(false);
     }
 
@@ -232,7 +232,8 @@ export class AudioPlayer extends Video {
             duration: 0.7,
             ease: easing,
             onComplete: () => {
-                this.setTitleInCassette(this.elements.title.innerText);
+                // eslint-disable-next-line max-len
+                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
                 this.isExpanded = false;
             },
         });
@@ -246,7 +247,8 @@ export class AudioPlayer extends Video {
             duration: 0.7,
             ease: easing,
             onStart: () => {
-                this.setTitleInCassette(this.isPaused() ? AudioPlayerStatesText.PAUSED : AudioPlayerStatesText.PLAYING);
+                // eslint-disable-next-line max-len
+                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
             },
             onComplete: () => {
                 this.isExpanded = true;
