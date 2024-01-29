@@ -3,6 +3,7 @@
     "sticker": "Featured",
     "items": [
         {
+            "modifier": "pink",
             "name": "Patricia Welch",
             "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
@@ -10,6 +11,7 @@
             "collection": "Natalie Diaz"
         },
         {
+            "modifier": "green",
             "name": "C. Njoube Dugas",
             "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
@@ -17,6 +19,63 @@
             "collection": "Natalie Diaz"
         },
         {
+            "modifier": "pale-purple",
+            "name": "Donna Personna",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Oakland, CA",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "orange",
+            "name": "Patricia Welch",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Houston, TX",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "pale-blue",
+            "name": "C. Njoube Dugas",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "San Antonio, TX",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "brown",
+            "name": "Donna Personna",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Oakland, CA",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "dark-green",
+            "name": "Patricia Welch",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Houston, TX",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "pale-green",
+            "name": "C. Njoube Dugas",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "San Antonio, TX",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "purple",
+            "name": "Donna Personna",
+            "title": "Dedicated teacher, long-time Albuquerque resident",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+            "state": "Oakland, CA",
+            "collection": "Natalie Diaz"
+        },
+        {
+            "modifier": "default",
             "name": "Donna Personna",
             "title": "Dedicated teacher, long-time Albuquerque resident",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",

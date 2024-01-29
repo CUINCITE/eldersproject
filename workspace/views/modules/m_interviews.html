@@ -19,8 +19,6 @@
 
         {% if items %}
             <ul class="interviews__list">
-                {% set modifiers = ['yellow', 'green', 'red'] %}
-
                 {% for item in items %}
                     <li class="interviews__item box">
                         <div class="grid">
@@ -46,7 +44,7 @@
                                 <p class="interviews__state desktop-hide">{{item.state|raw}}</p>
                                 <div class="interviews__box-wrap">
                                     {% include "./components/c_interview-box.html" with {
-                                        modifier: modifiers[loop.index % 3],
+                                        modifier: item.modifier,
                                         reversed: loop.index is even
                                     } %}
                                 </div>
