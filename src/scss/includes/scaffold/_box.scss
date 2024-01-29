@@ -3,14 +3,14 @@
     margin-top: 1px;
 
 
-    &[data-scroll='box'],
-    [data-scroll='box'] & {
+    &[data-scroll="box"],
+    [data-scroll="box"] & {
         background: none;
         position: relative;
     }
 
 
-    [data-scroll='box'] & {
+    [data-scroll="box"] & {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
@@ -30,6 +30,7 @@
         background-color: var(--color-box);
         z-index: -1;
         pointer-events: none;
+        will-change: transform;
     }
 
 
