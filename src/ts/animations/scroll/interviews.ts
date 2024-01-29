@@ -18,9 +18,6 @@ export const interviews = el => {
                     pinSpacing: false,
                     start: 'top top',
                     end: () => `bottom ${controls.offsetHeight + (moreInterviews?.offsetHeight ?? 0)}px`,
-                    onRefresh: () => {
-                        console.log('refreshing');
-                    },
                     onToggle: self => {
                         el.classList.toggle('is-pinned', self.isActive);
                     },
@@ -31,13 +28,8 @@ export const interviews = el => {
                         }, 500);
                     },
                     invalidateOnRefresh: true,
-                    markers: true,
                 },
             });
-
-            // el.addeventlistener('refresh', () => {
-            //     console.log('dududu');
-            // });
         });
     }
 };
