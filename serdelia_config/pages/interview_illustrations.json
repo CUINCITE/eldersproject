@@ -7,9 +7,6 @@
     "page": "Interview Illustrations",
     "edit": "{% if not nr %}New Illustration{% else %}Edit Illustration{% endif %}"
   },
-  "layout": {
-    "type": "grid"
-  },
   "order": "id",
   "fields": [
     {
@@ -89,6 +86,7 @@
     {
       "hr": true,
       "field": "topics",
+      "list": true,
       "label": "Topics",
       "type": "checkboxes",
       "settings": {
