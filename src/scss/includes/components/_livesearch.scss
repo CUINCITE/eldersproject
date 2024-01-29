@@ -8,7 +8,10 @@
     &__wrap {
         height: 0;
 
-        // overflow-y: auto;
+        // @include breakpoint(not-desktop) {
+        //     overflow-y: auto;
+        // }
+        
     }
 
 
@@ -306,15 +309,53 @@
         @include font-family(compressed);
 
         position: absolute;
-        inset: 100% 0 auto auto;
         color: var(--color-grey200);
 
         @include breakpoint(desktop) {
             @include font-size(17.727, 13.636);
             @include letter-spacing(-0.532, 17.727);
 
+            inset: 100% 0 auto auto;
             right: rem(9);
             margin-top: rem(12);
+
+        }
+
+        @include breakpoint(not-desktop) {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-color: $color-black;
+            text-align: right;
+
+
+            @include breakpoint(tablet) {
+                @include font-size(30, 1);
+
+                margin-block: trim-font(1);
+                padding: rem(14) map-get($grid-offset, tablet);
+
+                svg {
+                    width: rem(15);
+                    height: rem(30);
+                    translate: -15% 0;
+                }
+            }
+
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+
+                margin-block: trim-font(1);
+                padding: rem(12) map-get($grid-offset, phone);
+
+                svg {
+                    width: rem(15);
+                    height: rem(30);
+                    translate: -15% 0;
+                }
+            }
         }
     }
 

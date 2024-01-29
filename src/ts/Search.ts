@@ -137,7 +137,8 @@ export class Search {
         this.allLink = this.view.querySelector('.js-livesearch-all');
 
         // set max-height of livesearch wrap - prevent growing outside viewport
-        const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
+
+        const height = window.matchMedia('(orientation: landscape)').matches ? Math.min(this.liveList.clientHeight, window.innerHeight * 0.80) : this.liveList.clientHeight;
 
         gsap.timeline()
             .to(this.liveList.parentElement, {
