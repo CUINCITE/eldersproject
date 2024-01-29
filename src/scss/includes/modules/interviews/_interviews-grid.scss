@@ -138,6 +138,12 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
         }
+
+        .is-padded & {
+            @include breakpoint(desktop) {
+                padding-top: rem(68);
+            }
+        }
     }
 
 
@@ -424,6 +430,8 @@
 
 
         legend {
+            width: max-content;
+            
             @include breakpoint(desktop) {
                 @include font-size(17, 13);
             }

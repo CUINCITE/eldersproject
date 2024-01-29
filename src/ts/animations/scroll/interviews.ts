@@ -10,7 +10,7 @@ export const interviews = el => {
 
         mm.add('(orientation: landscape)', () => {
 
-            gsap.to(controls, {
+            const tl = gsap.timeline({
                 ease: 'none',
                 scrollTrigger: {
                     trigger: el,
@@ -18,7 +18,14 @@ export const interviews = el => {
                     pinSpacing: false,
                     start: 'top top',
                     end: () => `bottom ${controls.offsetHeight + (moreInterviews?.offsetHeight ?? 0)}px`,
-                    onToggle: self => el.classList.toggle('is-pinned', self.isActive),
+                    onToggle: self => {
+                        el.classList.toggle('is-pinned', self.isActive);
+                    },
+                    onLeaveBack: self => {
+                        setTimeout(() => {
+                            self.refresh();
+                        }, 500);
+                    },
                     invalidateOnRefresh: true,
                 },
             });

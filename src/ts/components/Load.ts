@@ -262,7 +262,7 @@ export class Load extends Component {
 
         if (!this.filteredEl) return;
 
-        // always find inputs in main form with filters, sometimes it's executed in outer form (eg. clicking at banners)
+        // always find inputs in main form with filters, sometimes it's executed in outer form
         const selectedInputs: HTMLInputElement[] = [...document.getElementById('main-form').querySelectorAll('input')].filter(input => input.checked);
         const filteredItems = selectedInputs.map(input => `
             <li class="filtered__label">
