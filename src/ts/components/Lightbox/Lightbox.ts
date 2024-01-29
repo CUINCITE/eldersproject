@@ -270,7 +270,7 @@ export class Lightbox {
                 onComplete: () => {
                     this.view.classList.add('is-showing');
                     // audioplayer should be always expanded when lightbox is open
-                    AudioPlayer.openAudioPlayer();
+                    AudioPlayer.openAudioPlayer(true);
                     this.animating = false;
                     Lightbox.isOpen = true;
                 },

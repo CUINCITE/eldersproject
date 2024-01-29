@@ -44,8 +44,9 @@ export class AudioPlayer extends Video {
 
 
 
-    public static openAudioPlayer(): void {
+    public static openAudioPlayer(fromLightbox?: boolean): void {
         AudioPlayer.instance.expand();
+        if (fromLightbox && !AudioPlayer.instance.isInitialized) AudioPlayer.instance.setNewAudio(Lightbox.currentId, true);
     }
 
 
@@ -72,6 +73,7 @@ export class AudioPlayer extends Video {
     private apiUrl: string;
     private elements: IAudioPlayerResponseElements;
     private playerButtons: NodeListOf<HTMLButtonElement>;
+    private isInitialized = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -91,7 +93,6 @@ export class AudioPlayer extends Video {
         };
 
 
-        this.init();
         this.bindAudioPlayer();
     }
 
@@ -148,13 +149,6 @@ export class AudioPlayer extends Video {
 
 
 
-    private init = (): void => {
-        if (!this.apiUrl) return;
-        this.setNewAudio();
-    };
-
-
-
     private togglePlayerButtons = (isPlaying: boolean): void => {
         this.playerButtons = document.querySelectorAll(`[data-audio-player="${AudioPlayer.currentAudioId}"]`);
         this.playerButtons.forEach(btn => btn.classList.toggle('is-playing', isPlaying));
@@ -193,6 +187,7 @@ export class AudioPlayer extends Video {
                 this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
                 this.play();
             }
+            this.isInitialized = true;
         });
     };
 
@@ -215,6 +210,9 @@ export class AudioPlayer extends Video {
     private onThumbnailClick = (): void => {
         // when lightbox is open, do not minimize the player - it should be always expanded
         if (Lightbox.isOpen) return;
+
+        // if audio player is not initialized yet, load random audio
+        if (!this.isInitialized) this.setNewAudio();
 
         this.isExpanded ? this.minimize() : this.expand();
         this.view.classList.toggle('is-expanded');
