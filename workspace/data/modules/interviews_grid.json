@@ -37,7 +37,7 @@
             "url": "/workspace/interview-single",
             "count": 12,
             "image": {
-                "desktop": "/workspace/images/california-illu.png"
+                "desktop": "california-illu.png"
             }
         },
         {
@@ -77,7 +77,7 @@
             "url": "/workspace/interview-single",
             "count": 20,
             "image": {
-                "desktop": "/workspace/images/community-illu.png"
+                "desktop": "community-illu.png"
             }
         }
     ]

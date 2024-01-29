@@ -6,8 +6,8 @@ import { Lightbox } from './Lightbox/Lightbox';
 
 
 export class AudioPlayerStatesText {
-    public static RANDOM = 'Play random interview';
-    public static PLAYING = 'Playing interview';
+    public static RANDOM = 'Shuffle';
+    public static PLAYING = 'Now playing';
     public static PAUSED = 'Play interview';
 }
 
@@ -44,8 +44,9 @@ export class AudioPlayer extends Video {
 
 
 
-    public static openAudioPlayer(): void {
+    public static openAudioPlayer(fromLightbox?: boolean): void {
         AudioPlayer.instance.expand();
+        if (fromLightbox && !AudioPlayer.instance.isInitialized) AudioPlayer.instance.setNewAudio(Lightbox.currentId, true);
     }
 
 
@@ -72,6 +73,7 @@ export class AudioPlayer extends Video {
     private apiUrl: string;
     private elements: IAudioPlayerResponseElements;
     private playerButtons: NodeListOf<HTMLButtonElement>;
+    private isInitialized = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -91,7 +93,6 @@ export class AudioPlayer extends Video {
         };
 
 
-        this.init();
         this.bindAudioPlayer();
     }
 
@@ -134,7 +135,7 @@ export class AudioPlayer extends Video {
 
     protected onPlay(): void {
         super.onPlay();
-        this.setTitleInCassette(AudioPlayerStatesText.PLAYING);
+        this.setTitleInCassette(`${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
         this.togglePlayerButtons(true);
     }
 
@@ -142,16 +143,9 @@ export class AudioPlayer extends Video {
 
     protected onPause(): void {
         super.onPause();
-        this.setTitleInCassette(AudioPlayerStatesText.PAUSED);
+        this.setTitleInCassette(`${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}`);
         this.togglePlayerButtons(false);
     }
-
-
-
-    private init = (): void => {
-        if (!this.apiUrl) return;
-        this.setNewAudio();
-    };
 
 
 
@@ -193,6 +187,7 @@ export class AudioPlayer extends Video {
                 this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
                 this.play();
             }
+            this.isInitialized = true;
         });
     };
 
@@ -216,6 +211,9 @@ export class AudioPlayer extends Video {
         // when lightbox is open, do not minimize the player - it should be always expanded
         if (Lightbox.isOpen) return;
 
+        // if audio player is not initialized yet, load random audio
+        if (!this.isInitialized) this.setNewAudio();
+
         this.isExpanded ? this.minimize() : this.expand();
         this.view.classList.toggle('is-expanded');
     };
@@ -232,7 +230,8 @@ export class AudioPlayer extends Video {
             duration: 0.7,
             ease: easing,
             onComplete: () => {
-                this.setTitleInCassette(this.elements.title.innerText);
+                // eslint-disable-next-line max-len
+                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
                 this.isExpanded = false;
             },
         });
@@ -246,7 +245,8 @@ export class AudioPlayer extends Video {
             duration: 0.7,
             ease: easing,
             onStart: () => {
-                this.setTitleInCassette(this.isPaused() ? AudioPlayerStatesText.PAUSED : AudioPlayerStatesText.PLAYING);
+                // eslint-disable-next-line max-len
+                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
             },
             onComplete: () => {
                 this.isExpanded = true;

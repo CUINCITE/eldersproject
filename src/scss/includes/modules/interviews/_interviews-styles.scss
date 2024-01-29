@@ -132,7 +132,6 @@
                 margin-left: rem(-2);
                 padding-top: rem(17);
             }
-
         }
 
         .is-grid-view & {
@@ -157,7 +156,6 @@
                 @include breakpoint(phone) {
                     padding-bottom: rem(12);
                 }
-
             }
 
             .is-grid-view & {
@@ -266,7 +264,6 @@
             align-items: start;
             grid-template-columns: repeat(map-get($grid-columns, tablet), minmax(0, 1fr));
             column-gap: map-get($grid-gutter, tablet);
-
         }
 
         @include breakpoint(phone) {
@@ -277,6 +274,7 @@
         &-wrap {
             @include breakpoint(desktop) {
                 border-left: 1px solid var(--color-bg);
+                margin-right: calc(var(--grid-margin) * -1);
             }
         }
     }
