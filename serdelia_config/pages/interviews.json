@@ -238,7 +238,7 @@
         {
             "tab": "Copy",
             "field": "summary",
-            "type": "html",
+            "type": "text",
             "label": "Interview Summary"
         },
         {
