@@ -138,7 +138,8 @@ export class Search {
 
         // set max-height of livesearch wrap - prevent growing outside viewport
 
-        const height = window.matchMedia('(orientation: landscape)').matches ? Math.min(this.liveList.clientHeight, window.innerHeight * 0.80) : this.liveList.clientHeight;
+        // const height = window.matchMedia('(orientation: landscape)').matches ? Math.min(this.liveList.clientHeight, window.innerHeight * 0.80) : this.liveList.clientHeight;
+        const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
 
         gsap.timeline()
             .to(this.liveList.parentElement, {
