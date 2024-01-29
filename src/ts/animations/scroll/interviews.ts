@@ -21,7 +21,6 @@ export const interviews = el => {
                     onToggle: self => {
                         el.classList.toggle('is-pinned', self.isActive);
                     },
-
                     onLeaveBack: self => {
                         setTimeout(() => {
                             self.refresh();
