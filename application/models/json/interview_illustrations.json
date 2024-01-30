@@ -1,0 +1,110 @@
+{
+  "table": "interview_illustrations",
+  "filters": {
+    "parent": "%1%"
+  },
+  "label": {
+    "page": "Interview Illustrations",
+    "edit": "{% if not nr %}New Illustration{% else %}Edit Illustration{% endif %}"
+  },
+  "order": "id",
+  "fields": [
+    {
+      "label": "Label",
+      "field": "label",
+      "list": true
+    },
+    {
+      "field": "uid",
+      "type": "uid",
+      "list": "read",
+      "hidden": true
+    },
+    {
+      "tab":"Image",
+      "label": "Cover",
+      "type": "image",
+      "field": "image",
+      "settings":{"webp":true},
+      "folder": "/public/upload/interviews_illustrations",
+      "folder_preview": "mobile",
+
+      "extensions": [
+        "jpg",
+        "png"
+      ],
+      "extension_field": "extension",
+
+      "list": {
+        "position_after": "",
+        "height": 140,
+        "src_blank": "blank.png"
+      },
+
+      "filename": "%uid%",
+      "images": [
+        {
+          "folder": "original",
+          "label": "Original image"
+        },
+        {
+          "folder": "desktop",
+          "label": "Desktop",
+          "width": 800,
+          "height": 800,
+          "crop": true,
+          "retina": true
+        },
+        {
+          "folder": "mobile",
+          "label": "Mobile",
+          "width": 375,
+          "height": 375,
+          "crop": true,
+          "retina": true
+        },
+        {
+          "folder": "big",
+          "label": "Big Tile",
+          "width": 1346,
+          "height": 1346,
+          "crop": true,
+          "retina": true
+        }
+      ]
+    },
+    {
+      "field": "extension",
+      "hidden": true,
+      "list": "read"
+    },
+    {
+      "label": "Author",
+      "field": "author"
+    },
+    {
+      "hr": true,
+      "field": "topics",
+      "list": true,
+      "label": "Topics",
+      "type": "checkboxes",
+      "settings": {
+        "small": true
+      },
+      "source": {
+        "model": "topics",
+        "model_fields": [
+          "label"
+        ]
+      }
+    },
+    {
+      "hr": true,
+      "label": "Publish",
+      "field": "active",
+      "search":true,
+      "type": "boolean",
+      "list": "edit"
+    }
+  ]
+}

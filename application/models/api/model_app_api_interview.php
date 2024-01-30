@@ -48,12 +48,12 @@ class model_app_api_interview
         // if no mementos, display placeholder main image
         $mainImage = false;
         if (empty($media)) {
+
+            $placeholder_image = $this->parent->getJsonModel('interview_illustrations', ['active' => 1, 'parent' => $item['interviewers'][0]['id']], true, 'rand()');
+
             $mainImage = [
                 'type' => '',
-                'image' => [
-                    'desktop' => '/src/images/illu-1.png',
-                    'mobile' => '/src/images/illu-1.png'
-                ]
+                'image' => $placeholder_image['image']
             ];
         }
 
