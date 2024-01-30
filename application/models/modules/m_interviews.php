@@ -213,7 +213,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         return ['type' => 'interview_filter', 'slug' => $filter['slug'], 'filter_type' => $filter['filter_type']];
     }
 
-    private function addAlphabeticalFiltersToItems($items, $topics, $states) {
+    private function addTagsToInterviews($items, $topics, $states) {
 
         $filters = array_merge(
             array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
