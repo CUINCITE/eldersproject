@@ -79,7 +79,9 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $m['load_more'] = $this->checkForMoreItems(count($m['items']), $itemsPerPage, $page, $url, $filters, $m['sort']['sort_model']);
 
         // Add filter tags to the interview list
-        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
+//        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
+
+        $m['items'] = $this->addAlphabeticalFiltersToItems($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
 
         return $m;
     }
@@ -206,84 +208,46 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         return $uri . '?' . http_build_query($params);
     }
 
-    function addFiltersToItems($items, $topics, $states, $frequency, $items_per_page, $first_index, $page): array
-    {
-
-        /**
-         * This method adds filters to the list and ensures that the filters are displayed in the same order on the list no matter if partial load or not.
-         * The list of tags is generated in random order based on today's seed.
-         */
-
-        $newItems = [];
-
-        // Map topics and states to their respective types
-        $filters = array_merge(
-            array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
-            array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
-        );
-
-        // Different seed every day
-        mt_srand(date('z'));
-        shuffle($filters);
-
-        //Remove already selected filters from the list
-        $filters = array_filter($filters, fn($item) => empty($item['selected']));
-        $filters = array_values($filters);
-
-        // calculate how many $filters have been already assigned and calculate an index at which to
-        // place a new filter if partial
-
-        $partialIndexOfNextFilter = 0;
-
-        if ($page > 1) {
-            $offset = ($page - 1) * $items_per_page;
-            $no_of_used_filters = floor($offset / $frequency);
-
-            if ($first_index) $no_of_used_filters++;
-
-            $filters = array_slice($filters, $no_of_used_filters);
-
-            // if at least one filter has been used, calculate the index of the last one
-            if ($no_of_used_filters) {
-                $positionOfLastFilter = ($frequency * $no_of_used_filters) + ($no_of_used_filters - 1);
-                $countItems = $offset + $no_of_used_filters;
-                $partialIndexOfNextFilter = $frequency - ($countItems - $positionOfLastFilter - 1);
-            }
-        }
-
-        $filters_index = 0;
-
-        $modifiers = ['pink', 'pale-purple'];
-
-        foreach ($items as $i => $item) {
-
-            // place the first filter at the specified position
-            if ($page == 1 && $i == $first_index && !empty($filters[$filters_index])) {
-                $this->addFilter($newItems, $filters, $filters_index, $modifiers);
-            }
-
-            $newItems[] = $item;
-
-            // place the next filters at the specified interval
-            if (($i + 1 - $partialIndexOfNextFilter) % $frequency == 0 && !empty($filters[$filters_index])) {
-                $this->addFilter($newItems, $filters, $filters_index, $modifiers);
-            }
-        }
-
-        return $newItems;
-    }
-
     private function getFilterUrl($filter): array
     {
         return ['type' => 'interview_filter', 'slug' => $filter['slug'], 'filter_type' => $filter['filter_type']];
     }
 
-    private function addFilter(&$newItems, &$filters, &$filters_index, $modifiers) {
-        $filter = $filters[$filters_index++];
-        $filter['url'] = $this->getFilterUrl($filter);
-        $k = array_rand($modifiers);
-        $filter['modifier'] = $modifiers[$k];
-        $newItems[] = $filter;
+    private function addAlphabeticalFiltersToItems($items, $topics, $states) {
+
+        $filters = array_merge(
+            array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
+            array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
+        );
+
+        $newItems = [];
+        $lastLetter = null;
+        $i = 0;
+
+        $modifiers = ['pink', 'pale-purple'];
+
+        if (!empty($items))
+
+        foreach ($items as $k=>$v) {
+
+            if ($lastLetter !== strtoupper(substr($v['label_sort'], 0, 1))) {
+                $lastLetter = strtoupper(substr($v['label_sort'], 0, 1));
+                $i++;
+
+                if ($i > 1) {
+                    $filter = array_shift($filters);
+                    $filter['url'] = $this->getFilterUrl($filter);
+                    $k = array_rand($modifiers);
+                    $filter['modifier'] = $modifiers[$k];
+                    $newItems[] = $filter;
+                }
+            }
+
+            $newItems[] = $v;
+        }
+
+        return $newItems;
+
     }
 
 }
