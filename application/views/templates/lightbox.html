@@ -67,6 +67,11 @@
                 {% if images|length > 1 %}
                 <!-- slider -->
                 <div class="lightbox__slider slider" data-component="LightboxSlider">
+                    <div class="slider__captions">
+                        {% for item in images %}
+                            <div class="lightbox__caption js-caption">{{item.description}}</div>
+                        {% endfor %}
+                    </div>
                     <div class="slider__wrap js-slider-wrap">
                         <div class="slider__slides">
                             {% for item in images %}
@@ -99,16 +104,19 @@
                                         </picture>
                                     </figure>
                                 </div>
-                                <div class="lightbox__caption">{{item.description}}</div>
                             </div>
                         {% endfor %}
                         </div>
-                         <div class="slider__arrows">
-                            <button aria-label="go to prev slide" class="button button--lightbox slider__arrow slider__arrow--prev js-slider-prev">
-                            <i class="icon-btn-arrow arrow"><span></span><span></span><span class="triangle"></span></i><span class="js-text">01</span></button>
-                            <button aria-label="go to next slide" class="button button--lightbox button--reversed slider__arrow slider__arrow--next js-slider-next">
-                            <i class="icon-btn-arrow arrow arrow--reversed"><span></span><span></span><span class="triangle"></span></i>
-                            <span class="js-text">02</span></button>
+                        <div class="slider__controls">
+                            <div class="slider__arrow slider__arrow--prev">
+                                <button aria-label="go to prev slide" class="button button--lightbox js-slider-prev">
+                                [[svg::arrow-lightbox]]<span class="js-text">01</span></button>
+                            </div>
+                            <div class="slider__arrow slider__arrow--next">
+                                <button aria-label="go to next slide" class="button button--lightbox button--reversed js-slider-next">
+                                [[svg::arrow-lightbox]]
+                                <span class="js-text">02</span></button>
+                            </div>
                         </div>
                     </div>
                 </div>

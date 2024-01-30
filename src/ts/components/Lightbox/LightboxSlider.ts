@@ -7,6 +7,7 @@ export class LightboxSlider extends Component {
 
     private wrap: HTMLElement;
     private slides: NodeListOf<HTMLElement>;
+    private captions: NodeListOf<HTMLElement>;
     private arrowPrev: HTMLButtonElement;
     private arrowNext: HTMLButtonElement;
     private activeSlide: HTMLElement;
@@ -17,6 +18,7 @@ export class LightboxSlider extends Component {
 
         this.wrap = this.view.querySelector('.js-slider-wrap');
         this.slides = this.wrap.querySelectorAll('.js-slide');
+        this.captions = this.view.querySelectorAll('.js-caption');
         this.arrowPrev = this.view.querySelector('.js-slider-prev');
         this.arrowNext = this.view.querySelector('.js-slider-next');
 
@@ -43,35 +45,59 @@ export class LightboxSlider extends Component {
     private goTo = (index: number, fast?: boolean): void => {
         const direction: number = index > this.activeSlideIndex ? 1 : -1;
 
-        this.hideSlide(this.activeSlide, direction, fast);
-        this.showSlide(this.slides[index], direction, fast);
+        this.hideSlide(this.activeSlideIndex, direction, fast);
+        this.showSlide(index, direction, fast);
     };
 
 
 
-    private hideSlide = (slide: HTMLElement, direction: number, fast?: boolean): void => {
+    private hideSlide = (index: number, direction: number, fast?: boolean): void => {
+        const slide = this.slides[index];
+        const caption = this.captions[index];
+
         if (!slide) return;
 
-        gsap.fromTo(slide, { xPercent: 0 }, {
-            xPercent: direction * -100,
-            duration: fast ? 0 : 0.25,
+        gsap.fromTo(slide, { x: 0 }, {
+            x: direction * (window.innerWidth * -0.75),
+            duration: fast ? 0 : 0.5,
             ease: easing,
             onComplete: () => {
                 slide.style.display = 'none';
+            },
+        });
+
+        gsap.fromTo(caption, { y: 0 }, {
+            y: 200,
+            duration: fast ? 0 : 0.5,
+            ease: easing,
+            onComplete: () => {
+                caption.style.opacity = '0';
             },
         });
     };
 
 
 
-    private showSlide = (slide: HTMLElement, direction: number, fast?: boolean): void => {
+    private showSlide = (index: number, direction: number, fast?: boolean): void => {
+        const slide = this.slides[index];
+        const caption = this.captions[index];
 
-        gsap.fromTo(slide, { xPercent: direction * 100 }, {
-            xPercent: 0,
-            duration: fast ? 0.01 : 0.4,
+        gsap.fromTo(caption, { y: 200 }, {
+            y: 0,
+            delay: 0.3,
+            duration: fast ? 0 : 0.5,
             ease: easing,
             onStart: () => {
-                slide.style.display = 'block';
+                caption.style.opacity = '1';
+            },
+        });
+
+        gsap.fromTo(slide, { x: direction * (window.innerWidth * 0.75) }, {
+            x: 0,
+            duration: fast ? 0.01 : 0.5,
+            ease: easing,
+            onStart: () => {
+                slide.style.display = 'flex';
             },
             onComplete: () => {
                 this.activeSlide = slide;

@@ -208,11 +208,15 @@
         @include font-size(12, 15.6);
 
         position: absolute;
-        bottom: rem(20);
+        bottom: rem(102);
         right: rem(58);
         max-width: rem(226);
         color: var(--color-black);
         padding-top: rem(18);
+        opacity: 0;
+
+
+        &:first-of-type { opacity: 1; }
 
         &::before {
             content: "";
@@ -638,12 +642,17 @@
 
 
     &__slide {
+        @include flex(row, center, center);
+
         grid-column: 1 / -2;
         grid-row: 1 / -1;
         display: none;
+        height: 100%;
 
 
         &-image {
+            transform: translateY(0) rotate(-7.5deg);
+
             --polaroid-width: #{rem(300)} !important;
             --polaroid-height: #{rem(400)} !important;
         }

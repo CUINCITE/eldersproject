@@ -3,57 +3,77 @@
 
     width: 100%;
     height: 100%;
+    padding-bottom: rem(82);
 
 
 
     &__wrap {
-        position: relative;
-        width: 100%;
-        height: calc(100% - #{rem(82)});
-        margin-bottom: rem(82);
+        @include flex(row, center, center);
 
-        @include hover {
-            .slider__arrow {
-                opacity: 1;
-                pointer-events: all;
-            }
-        }
+        position: relative;
+        height: 100%;
+        margin-top: rem(-41);
     }
 
 
 
     &__slides {
+        height: 100%;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         position: relative;
-        overflow: hidden;
         justify-items: center;
     }
 
 
 
-    &__arrow {
+    &__arrows {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .25s $ease-custom;
+        inset: 0;
+    }
+
+
+
+    &__arrow {
+        @include flex(column, center, flex-start);
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
         color: var(--color-black);
 
 
         &--prev {
-            right: 100%;
+            left: rem(-74);
+            right: 50%;
+
+            svg { transform: scaleX(-1); }
 
             .is-first & { display: none; }
         }
 
 
         &--next {
-            left: 100%;
+            align-items: flex-end;
+            left: 50%;
+            right: rem(-74);
 
             .is-last & { display: none; }
+        }
+
+
+        button {
+            opacity: 0;
+            transition: opacity .25s $ease-custom;
+        }
+
+
+        @include hover {
+            .button {
+                opacity: 1;
+                pointer-events: all;
+            }
         }
     }
 }
