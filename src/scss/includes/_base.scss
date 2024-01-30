@@ -39,6 +39,12 @@ html {
     overflow-x: hidden;
 
     &:has(.modal.is-open) { overflow: hidden; }
+
+    &:has(.has-menu-open) { 
+        @include breakpoint(not-desktop) {
+            overflow: hidden;
+        } 
+    }
 }
 
 
