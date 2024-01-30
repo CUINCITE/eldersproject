@@ -332,7 +332,7 @@
         @include font-family(compressed);
 
         position: absolute;
-        color: var(--color-grey200);
+        color: $color-black;
 
         @include breakpoint(desktop) {
             @include font-size(17.727, 13.636);
