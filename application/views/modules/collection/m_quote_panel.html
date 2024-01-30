@@ -3,22 +3,22 @@
         <div class="box">
             <div class="grid grid--row-start">
                 <div class="quote_panel__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
-                    {% if decor %}
-                        <div class="quote_panel__decorator quote_panel__decorator--{{decor.type}}{% if reversed %}{% endif %}">
-                            {% if decor.type == "boxes" %}
-                                {% include "./modules/m_boxes.html" with { reversed: reversed } %}
-                            {% endif %}
-                            {% if decor.type == "illustration" %}
-                                {% include "subviews/subview_picture.html" with { image: decor.image } %}
-                            {% endif %}
-                        </div>
+                    <!-- video HERE -->
+                    {% if video %}
+                    <div class="quote_panel__video">
+                        <figure style="margin-bottom: 40px;">
+                            <div class="player player--video" data-component="Video" data-options='{"volume": 0.7, "size": "cover", "timeFormatLong": false}'>
+                                <video src="http://assets.huncwot.net/video.mp4" controls poster="/workspace/images/player-poster.jpg"></video>
+                            </div>
+                        </figure>
+                    </div>
                     {% endif %}
                 </div>
 
                 <div class="quote_panel__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
                     <div class="quote_panel__quote">
                         {% include "/components/c_quote.html" with {
-                            big: true, 
+                            big: true,
                             text: text,
                             author: label
                         } %}
