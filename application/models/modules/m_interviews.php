@@ -226,8 +226,6 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         $modifiers = ['pink', 'pale-purple'];
 
-        if (!empty($items))
-
         foreach ($items as $k=>$v) {
 
             if ($lastLetter !== strtoupper(substr($v['label_sort'], 0, 1))) {
