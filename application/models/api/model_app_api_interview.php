@@ -49,8 +49,9 @@ class model_app_api_interview
         $mainImage = false;
         if (empty($media)) {
 
+            // this is only temporary image assignment
             if (!empty($item['illustration']['image'])) $image = $item['illustration']['image'];
-            else $image = $this->parent->getJsonModel('interview_illustrations', ['active' => 1], true, 'rand()');
+            else $image = $this->parent->getJsonModel('interview_illustrations', ['active' => 1], true, 'rand()')['image'];
 
             if (!$image) {
                 $image = [
