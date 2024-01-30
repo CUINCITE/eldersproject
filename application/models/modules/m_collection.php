@@ -13,7 +13,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     public function updateModel($m, $url)
     {
-        //exit($url[1].'!');
         $m['item'] = $this->parent->getJsonModel('interviewers', ['active' => 1, 'slug' => $url[1]], true);
 
         // display higher res cover
@@ -23,8 +22,10 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             return null;
         }
 
+        // get interviews
         $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
 
+        //temporary workaround - ORM error
         foreach ($m['items'] as $k=>$v) {
             foreach ($v['interviewers'] as $k2=>$v2) {
                 if ($v2['id'] != $m['item']['id']) {
@@ -34,6 +35,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
+
+        // get storytelling modules
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
 
         $counter = 0;
@@ -41,11 +44,9 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             if ($v['type']['slug'] == 'collection_chapter') {
 
-                if ($counter % 2 != 0) {
-                    $m['modules'][$k]['reversed'] = true;
-                }
-
+                $m['modules'][$k]['reversed'] = $counter % 2 != 0;
                 $counter++;
+
                 $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
 
             }
