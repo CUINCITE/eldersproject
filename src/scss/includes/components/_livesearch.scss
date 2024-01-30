@@ -20,11 +20,11 @@
             }
 
             @include breakpoint(tablet) {
-                height: calc(100vh - #{rem(146)});
+                height: calc(100dvh - #{rem(146)});
             }
 
             @include breakpoint(phone) {
-                height: calc(100vh - #{rem(100)});
+                height: calc(100dvh - #{rem(100)});
             }
         }
     }
@@ -341,7 +341,6 @@
             inset: 100% 0 auto auto;
             right: rem(9);
             margin-top: rem(12);
-
         }
 
         @include breakpoint(not-desktop) {
@@ -349,7 +348,7 @@
             bottom: 0;
             right: 0;
             left: 0;
-            background-color: $color-black;
+            background-color: #726f6f;
             text-align: right;
 
             @include breakpoint(tablet) {
