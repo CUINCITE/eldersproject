@@ -6,16 +6,16 @@
 
         // transition: transform ($time * 2) $easing;
         width: 100%;
-        display: grid;
-        grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
         z-index: 1;
         background-color: $bar-color;
-        transform: translateY(100%);
         pointer-events: all;
 
 
         .player--audio & {
             position: relative;
+            display: grid;
+            grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
+            transform: translateY(100%);
             top: auto;
             flex-grow: 1;
             will-change: transform;
@@ -40,6 +40,13 @@
             position: relative;
             transition: width $time-fast $easing, padding $time-fast $easing, opacity $time-fast $easing;
             overflow: hidden;
+        }
+
+
+        .player--video & {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
         }
     }
 
@@ -136,12 +143,31 @@
 
 
 
+    &__fullscreen {
+        @extend %player-small-button;
+
+        opacity: 1 !important;
+        margin-left: auto;
+        margin-bottom: auto;
+        padding-top: rem(9);
+    }
+
+
+
     &__icon {
         @include flex(column, flex-start, center);
 
         margin-bottom: rem(3);
         overflow: hidden;
         position: relative;
+
+
+        .player__fullscreen & {
+            flex-shrink: 0;
+            width: rem(12);
+            height: rem(12);
+            margin-left: rem(3);
+        }
 
 
         svg {

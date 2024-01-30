@@ -1,5 +1,4 @@
 .quote_panel {
-
     &__quote {
         @include breakpoint(desktop) {
             padding-top: rem(20);
@@ -18,6 +17,15 @@
         }
     }
 
+
+
+    &__video {
+        margin-left: calc(var(--grid-margin) * -1);
+        margin-right: -10px; // grid-gap / 2
+    }
+
+
+
     &__column {
         position: relative;
 
@@ -32,8 +40,10 @@
         }
     }
 
+
+
     &__decorator {
-        
+
         z-index: 5;
 
         &--illustration {
@@ -78,7 +88,7 @@
                         width: vw(180, phone);
                     }
                 }
-            } 
-        } 
+            }
+        }
     }
 }

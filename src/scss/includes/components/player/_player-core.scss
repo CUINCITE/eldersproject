@@ -3,7 +3,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
+    cursor: default;
     margin: 0 auto;
     user-select: none;
 
@@ -11,6 +11,13 @@
     &--vimeo,
     &--youtube {
         height: 0;
+    }
+
+
+    &--video {
+        overflow: visible;
+        margin-bottom: $bar-height;
+        padding-bottom: 56.25%;
     }
 
 
@@ -24,7 +31,6 @@
         overflow: visible;
         color: var(--color-grey200);
         pointer-events: none;
-        cursor: default;
 
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
@@ -70,6 +76,8 @@
         display: none;
         z-index: 1;
         background: rgba($bar-color, $bar-opacity);
+
+        .player--video & { display: none; }
 
         .icon-toggleplay {
             position: absolute;

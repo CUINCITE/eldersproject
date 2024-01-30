@@ -57,7 +57,11 @@
                         "mobile": "polaroid-photo.jpg"
                     }
                 }
-            ]
+            ],
+            "player": {
+                "src": "http://assets.huncwot.net/video.mp4",
+                "poster": "/src/images/player-poster.jpg"
+            }
         }
     ]
 }

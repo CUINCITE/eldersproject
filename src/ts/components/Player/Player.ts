@@ -83,6 +83,7 @@ export abstract class Player extends Component {
 
         // extend settings:
         this.settings = {
+            template: TemplateNames.PLAYER,
             autoplay: false,
             loop: false,
             muted: false,
@@ -150,8 +151,8 @@ export abstract class Player extends Component {
     public resize = (): void => {};
 
     public setVolume(volume: number): void {
-        this.ui.volume.update(volume);
-        this.ui.volume.toggle(volume < 0.05);
+        this.ui.volume?.update(volume);
+        this.ui.volume?.toggle(volume < 0.05);
         Utils.setStorageItem(PlayerStorage.VOLUME, `${volume}`);
     }
 
@@ -188,7 +189,7 @@ export abstract class Player extends Component {
 
 
     protected buildUI(): void {
-        const template = Templates.get(TemplateNames.PLAYER);
+        const template = Templates.get(this.settings.template);
         const html = template.render({});
 
         this.view.insertAdjacentHTML('beforeend', html);
@@ -197,7 +198,7 @@ export abstract class Player extends Component {
             fullscreen: new PlayerFullscreen(this.view.querySelector('.js-player-fullscreen'), this.view),
             timeline: new PlayerTimeline(this.view.querySelector('.js-player-timeline'), this.view),
             popups: new PlayerPopups(this.view.querySelector('.js-player-popups')),
-            volume: new PlayerVolume(this.view.querySelector('.js-player-volume'), this.view),
+            volume: this.view.querySelector('.js-player-volume') ? new PlayerVolume(this.view.querySelector('.js-player-volume'), this.view) : null,
             time: new PlayerTime(this.view),
             poster: new PlayerPoster(this.view.querySelector('.js-player-poster'), this.view),
             // settings: new PlayerSettings(this.view.querySelector('.js-player-settings'), this.view),

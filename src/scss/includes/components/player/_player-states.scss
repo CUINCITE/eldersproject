@@ -114,13 +114,13 @@
     &.is-ended.has-playlist .player__bar,
     &.is-playlist-open.has-playlist .player__bar,
     &.is-playing.is-mousemove:hover .player__bar {
-        transform: translateY(-100%);
+        // transform: translateY(-100%);
     }
 
 
     &:not(.is-played, .is-native) .player__toggle,
     &:not(.is-native).is-ended .player__toggle {
-        display: block;
+        // display: block;
     }
 
 

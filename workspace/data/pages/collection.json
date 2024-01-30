@@ -7,7 +7,7 @@
             "illustration": {
                 "image": {
                     "desktop": "carolina_de_robertis.png",
-                    "mobile": "carolina_de_robertis.png" 
+                    "mobile": "carolina_de_robertis.png"
                 },
                 "shadow": "purple"
             },
@@ -18,6 +18,10 @@
         },
         {
             "type": "quote_panel",
+            "video": {
+                "src": "http://assets.huncwot.net/video.mp4",
+                "poster": "/workspace/images/player-poster.jpg"
+            },
             "quote": {
                 "text": "The cohort from whom I'll be gathering stories reflects an incredibly varied range of lived experiences, hailing from trans, lesbian, gay, non-binary, genderqueer, Black, Latinx, AAPI, and Native communities, to name a few. They are activists who blazed trails for queer visibility and rights; they are ordinary people who have lived with extraordinary courage; they are witnesses to history, agents of change, and foreparents of today’s racial and queer justice movements. Their stories are inspiring, and essential to our understanding of who we are and might collectively become.",
                 "author": "Carolina De Robertis"

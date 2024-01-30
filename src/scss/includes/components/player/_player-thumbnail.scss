@@ -10,6 +10,9 @@
         flex-shrink: 0;
         pointer-events: all;
         cursor: pointer;
+
+
+        .player--video & { display: none; }
     }
 
 
