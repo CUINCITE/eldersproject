@@ -34,6 +34,16 @@
                 "model_fields":["occupation"]
 
             }
+        },
+        {
+            "field": "interviewers",
+            "type":"elements",
+            "source":
+            {
+                "model":"interviewers",
+                "model_fields":["color"]
+
+            }
         }
     ]
 }

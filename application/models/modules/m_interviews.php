@@ -81,7 +81,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         // Add filter tags to the interview list
 //        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
 
-        $m['items'] = $this->addAlphabeticalFiltersToItems($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
+        $m['items'] = $this->addTagsToInterviews($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
 
         return $m;
     }
