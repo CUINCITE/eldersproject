@@ -3,6 +3,7 @@ import { LightboxNav } from './components/Lightbox/LightboxNav';
 import { LightboxTranscript } from './components/Lightbox/LightboxTranscript';
 import { LightboxSlider } from './components/Lightbox/LightboxSlider';
 import { Load } from './components/Load';
+import { Button } from './components/Button';
 import { Modal } from './components/Modal';
 import { More } from './components/More';
 import { Accordeon } from './components/Accordeon';
@@ -15,6 +16,7 @@ import { FilterLetters } from './components/FilterLetters';
 export const components = {
     Accordeon,
     AccordeonList,
+    Button,
     FilterLetters,
     Load,
     Modal,

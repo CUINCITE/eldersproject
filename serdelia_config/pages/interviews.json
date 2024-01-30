@@ -229,6 +229,18 @@
             }
         },
         {
+            "label": "Placeholder Illustration",
+            "field": "illustration",
+            "required": true,
+            "type": "select",
+            "source": {
+                "model": "interview_illustrations",
+                "model_fields": [
+                    "label", "parent"
+                ]
+            }
+        },
+        {
             "field": "uid",
             "type": "uid",
             "list": "read",

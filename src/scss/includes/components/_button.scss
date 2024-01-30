@@ -11,6 +11,7 @@
         @include font-size(50, 1);
         @include letter-spacing(-1.75, 50);
 
+        overflow: hidden;
         gap: vw(9);
     }
 
@@ -20,6 +21,7 @@
         @include breakpoint(tablet) {
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
+            
 
             gap: vw(6, tablet);
         }
@@ -109,11 +111,12 @@
     &--small {
 
         @include breakpoint(desktop) {
-            @include font-size(20, 16);
+            @include font-size(20, 1);
             @include letter-spacing(-0.6, 20);
 
             --padding: #{rem(3)};
             gap: vw(2);
+            padding-right: rem(2);
         }
 
         @include breakpoint(tablet) {
@@ -179,6 +182,12 @@
 
         @include breakpoint(phone) {
             padding-left: rem(3);
+        }
+    }
+
+    span {
+        span {
+            display: inline-block;
         }
     }
 
