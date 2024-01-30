@@ -106,8 +106,7 @@
 
 
 
-    &__image,
-    &__slider {
+    &__image {
         transition: transform var(--animation-time) var(--easing);
         transform: translateY(var(--distance)) rotate(-25deg);
 
@@ -119,6 +118,37 @@
             transition-duration: .9s;
 
             transform: translateY(0) rotate(-7.5deg);
+            transition-delay: $content-delay;
+        }
+
+
+        .is-default & { transition-delay: 0s; }
+
+
+        .is-closing &,
+        .is-not-default & {
+            --easing: cubic-bezier(.65, .1, .3, .6);
+
+            transition-duration: .6s;
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-25deg);
+            transition-delay: 0s;
+        }
+    }
+
+
+
+    &__slider {
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateY(var(--distance)) rotate(-25deg);
+
+
+        .is-showing &,
+        .is-default & {
+            // --easing: cubic-bezier(.2, .7, .35, .9);
+
+            transition-duration: .9s;
+
+            transform: translateY(0) rotate(0deg);
             transition-delay: $content-delay;
         }
 

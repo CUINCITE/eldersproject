@@ -2,44 +2,53 @@
     <div class="box__bg"></div>
     <input type="hidden" data-recaptcha data-recaptchakey="6LcHsOMoAAAAAJgIWp7B-XpDKBGk1_dpVXxXu_IT" name="token"
         required="required">
-    <h2 class="newsletter__heading">Newsletter:</h2>
+    <div class="newsletter__top">
+        <h2 class="newsletter__heading">Newsletter:</h2>
 
-    <fieldset class="newsletter__fields">
-        <legend>Sign up with your email address to receive news and updates.</legend>
-        <div class="newsletter__wrap">
-            <div class="newsletter__error js-error"></div>
-            <div class="newsletter__input">
-                <input id="email" type="email" name="email" required placeholder=" " autocomplete="off">
-                <label class="newsletter__label" for="email">Enter your e-mail address</label>
-                <div class="newsletter__button">
-                    <button class="button" type="submit">
-                        <i class="icon-btn-arrow arrow">
-                            <span></span>
-                            <span></span>
-                            <span class="triangle"></span>
-                        </i> <span>Send</span>
-                    </button>
+        <fieldset class="newsletter__fields">
+            <legend>Sign up with your email address to receive news and updates.</legend>
+            <div class="newsletter__wrap">
+                <div class="newsletter__error js-error"></div>
+                <div class="newsletter__input">
+                    <input id="email" type="email" name="email" required placeholder=" " autocomplete="off">
+                    <label class="newsletter__label" for="email">Enter your e-mail address</label>
+                    <div class="newsletter__button">
+                        <button class="button" type="submit">
+                            <i class="icon-btn-arrow arrow">
+                                <span></span>
+                                <span></span>
+                                <span class="triangle"></span>
+                            </i> <span>Send</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="newsletter__message">
-                <div class="newsletter__sticker">
-                    <div class="sticker sticker--yellow" data-scroll="sticker">
-                        <div class="sticker__layer">
-                            <div class="sticker__front sticker__wrap">
-                                <div class="sticker__circle"></div>
+                <div class="newsletter__message">
+                    <div class="newsletter__sticker">
+                        <div class="sticker sticker--yellow" data-scroll="sticker">
+                            <div class="sticker__layer">
+                                <div class="sticker__front sticker__wrap">
+                                    <div class="sticker__circle"></div>
+                                </div>
                             </div>
-                        </div>
-                        <span class="sticker__text">Spam? Not us!</span>
-                        <div class="sticker__layer">
-                            <div class="sticker__back sticker__wrap">
-                                <div class="sticker__circle"></div>
+                            <span class="sticker__text">Spam? Not us!</span>
+                            <div class="sticker__layer">
+                                <div class="sticker__back sticker__wrap">
+                                    <div class="sticker__circle"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="js-message message"></div>
                 </div>
-                <div class="js-message message"></div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="newsletter__bottom">
+        <div class="grid">
+            <div class="col-span-12">
+                <p class="newsletter__copy">&copy; Copyright {{ 'now' | date('Y') }}</p>
             </div>
         </div>
-    </fieldset>
+    </div>
 </form>

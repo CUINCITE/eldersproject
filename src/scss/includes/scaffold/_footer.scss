@@ -4,6 +4,7 @@
     grid-area: footer;
     text-transform: uppercase;
     position: relative;
+    background-color: var(--color-box);
 
     @include breakpoint(desktop) {
         @include font-size(10, 13.5);
@@ -20,17 +21,18 @@
 
     body.is-404 & { display: none; }
 
-    & > * { background-color: var(--color-box); }
+    // & > * { background-color: var(--color-box); }
 
 
 
     &__links {
 
         @include breakpoint(desktop) {
-            @include flex(row, flex-start, center);
+            @include flex(row, flex-start, flex-end);
 
+            height: rem(82);
             gap: vw(24);
-            padding: vw(56) 0 vw(19);
+            padding: vw(19) 0;
         }
 
         @include breakpoint(tablet) {
@@ -47,29 +49,5 @@
 
 
         a { @include hoverable-link; }
-    }
-
-
-
-    &__copy {
-
-        @include breakpoint(desktop) {
-            @include font-size(8, 1);
-
-            margin-block: trim-font(1);
-            padding: vw(397) 0 vw(21);
-        }
-
-        @include breakpoint(tablet) {
-            @include font-size(11, 1);
-
-            padding: vw(160, tablet) 0 vw(20, tablet);
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(10, 13.5);
-
-            padding: vw(282, phone) 0 vw(11, phone);
-        }
     }
 }

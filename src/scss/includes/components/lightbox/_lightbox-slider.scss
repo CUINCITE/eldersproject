@@ -3,12 +3,14 @@
 
     width: 100%;
     height: 100%;
-    margin-bottom: rem(82 * 2);
 
 
 
     &__wrap {
         position: relative;
+        width: 100%;
+        height: calc(100% - #{rem(82)});
+        margin-bottom: rem(82);
 
         @include hover {
             .slider__arrow {
@@ -26,6 +28,7 @@
         grid-template-rows: 1fr;
         position: relative;
         overflow: hidden;
+        justify-items: center;
     }
 
 

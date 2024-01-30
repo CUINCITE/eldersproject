@@ -99,6 +99,7 @@
                                         </picture>
                                     </figure>
                                 </div>
+                                <div class="lightbox__caption">{{item.description}}</div>
                             </div>
                         {% endfor %}
                         </div>
@@ -143,7 +144,6 @@
                     </picture>
                 </div>
             {% endif %}
-            {% if caption %}<div class="lightbox__caption">{{caption}}</div>{% endif %}
         </div>
         <div class="lightbox__logo">
             <a href="{{urlBack}}" class="lightbox__close js-close" data-history="back">
