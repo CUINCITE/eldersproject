@@ -20,11 +20,11 @@
             }
 
             @include breakpoint(tablet) {
-                height: calc(100lvh - #{rem(146)});
+                height: calc(100vh - #{rem(146)});
             }
 
             @include breakpoint(phone) {
-                height: calc(100lvh - #{rem(100)});
+                height: calc(100vh - #{rem(100)});
             }
         }
     }
