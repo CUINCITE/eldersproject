@@ -37,7 +37,11 @@ class model_app_api_interview
         $media = [];
         if (!empty($item['media'])) {
             foreach ($item['media'] as $k=>$media_item) {
-                if (!empty($media_item['image'])) $media[] = $media_item['image'];
+                if (!empty($media_item['image'])) {
+                    $new_media['image'] = $media_item['image'];
+                    $new_media['description'] = $media_item['caption'];
+                    $media[] = $new_media;
+                }
             }
         }
 
