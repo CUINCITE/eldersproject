@@ -59,7 +59,7 @@ export class FilterLetters extends Component {
 
         Scroll.scrollTo({
             el: letterItem,
-            offsetY: this.view.closest('.js-controls').clientHeight - 1, // prevent double border
+            offsetY: this.view.closest('.js-panel').clientHeight - 1, // prevent double border
         });
     };
 

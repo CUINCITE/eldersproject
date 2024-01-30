@@ -192,6 +192,17 @@
     }
 }
 
-%button-hover {
 
+%button-hover {
+    span {
+        span {
+            opacity: 0;
+
+            @for $i from 1 through 9 {
+                &:nth-child(#{$i}) {
+                    transition-delay: 0 + $i * 0.3s;
+                }
+            }
+        }
+    }
 }

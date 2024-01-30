@@ -99,7 +99,7 @@
             p {
 
                 @include breakpoint(desktop) {
-                    max-width: rem(292);
+                    max-width: rem(316);
                 }
 
                 @include breakpoint(tablet) {

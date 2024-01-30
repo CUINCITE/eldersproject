@@ -2,7 +2,7 @@ import { gsap } from 'gsap/dist/gsap';
 
 export const interviews = el => {
 
-    const controls = el.querySelector('.interviews-grid__controls');
+    const controls = el.querySelector('.js-panel');
     const moreInterviews = el.querySelector('.interviews__more');
 
     if (controls) {
