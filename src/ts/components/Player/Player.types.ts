@@ -15,6 +15,7 @@ export class PlayerSize {
 }
 
 export interface IPlayerSettings {
+    template: string;
     pauseOnScroll: boolean;
     autoplay?: boolean;
     loop?: boolean;
