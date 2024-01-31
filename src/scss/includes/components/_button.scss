@@ -21,7 +21,6 @@
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
             
-
             gap: vw(6, tablet);
         }
 
@@ -44,6 +43,10 @@
     &--reversed {
         @include breakpoint(desktop) {
             flex-direction: row-reverse;
+
+           .button__main {
+                flex-direction: row-reverse !important;
+            }
         }
     }
 
@@ -191,10 +194,19 @@
         }
     }
 
-    span {
-        span {
-            display: inline-block;
+    &__text {
+        &--duplicate {
+            position: absolute;
+            // margin-block: trim-font(1);
+
+            @include breakpoint(not-desktop) {
+                display: none;
+            }
         }
+    }
+
+    &__main {
+        @include flex(row, flex-start, center);
     }
 
     @include hover {
@@ -209,15 +221,5 @@
 
 
 %button-hover {
-    span {
-        span {
-            opacity: 0;
 
-            @for $i from 1 through 9 {
-                &:nth-child(#{$i}) {
-                    transition-delay: 0 + $i * 0.3s;
-                }
-            }
-        }
-    }
 }

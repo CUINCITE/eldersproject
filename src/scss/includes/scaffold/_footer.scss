@@ -30,7 +30,7 @@
         @include breakpoint(desktop) {
             @include flex(row, flex-start, flex-end);
 
-            height: rem(82);
+            height: var(--GLOBAL-player-height);
             gap: vw(24);
             padding: vw(19) 0;
         }

@@ -8,8 +8,16 @@
     &--vertical {
         transform: rotate(90deg);
 
-
         span:first-of-type { display: none; }
+    }
+
+
+    &--extra {
+        position: absolute;
+        
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
     }
 
 
