@@ -203,11 +203,44 @@
             margin-bottom: rem(12);
 
             .button {
-                max-width: rem(268);
+                max-width: rem(238);
                 row-gap: rem(6);
+                
+                &__main {
+                    display: flex;
+                    overflow: hidden;
+                    position: relative;
+                    gap: rem(8);
+                    padding-inline: rem(2);
+                }
 
-                span {
+                &__extra, &__main {
                     margin-block: trim-font(1);
+                }
+
+                .arrow--extra {
+                    top: rem(9);
+                    left: 100%;
+                }
+
+                .icon-btn-arrow {
+                    padding-left: 0;
+                }
+
+                &__text {
+                    display: inline-block;
+                    
+                    &--duplicate {
+                        right: calc(100% + #{rem(8)});
+                        top: 0;
+                    }
+                }
+
+                &--reversed {
+                    .arrow--extra {
+                        right: calc(100% + #{rem(6)});
+                        left: unset;
+                    }
                 }
             }
         }
@@ -217,7 +250,12 @@
                 flex-direction: row-reverse;
                 justify-content: flex-end;
 
-                span {
+                &__main {
+                    flex-direction: row-reverse;
+                    justify-content: flex-end;
+                }
+
+                &__extra, &__main {
                     margin-block: trim-font(1);
                 }
             }

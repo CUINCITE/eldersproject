@@ -5,7 +5,18 @@
     {% if filters %}data-filters{% endif %}
     {% if animate %}data-component="Button"{% endif %}
     >
+    {% if duplicate %}
+        <span class="button__main">
+    {% endif %}
     {% include "./components/c_arrow_icon.html" with { small } %}
-    <span class="link__text js-link-text">{% if text %}{{text|raw}}{% else %}button{% endif %}</span>
-    {% if extraText %}<span>{{extraText|raw}}</span>{% endif %}
+    <span class="button__text js-button-text">{% if text %}{{text|raw}}{% else %}button{% endif %}</span>
+    {% if duplicate %}
+        {% include "./components/c_arrow_icon.html" with { small, extra: true } %}
+        <span class="button__text button__text--duplicate js-button-duplicate-text">{% if text %}{{text|raw}}{% endif %}</span>
+        </span>
+    {% endif %}
+
+    {% if extraText %}
+        <span class="button__extra">{{extraText|raw}}</span>
+    {% endif %}
 </a>
