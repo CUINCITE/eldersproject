@@ -35,6 +35,13 @@
     }
 
 
+    &--overflow {
+        @include breakpoint(desktop) {
+            overflow: hidden;
+        }
+    }
+
+
     &--reversed {
         @include breakpoint(desktop) {
             flex-direction: row-reverse;
