@@ -8,6 +8,7 @@
     --vw: 100vw;
     --GLOBAL-aside-width: #{vw(111)};
     --GLOBAL-content-width: calc(var(--vw) - var(--GLOBAL-aside-width) - 1px);
+    --GLOBAL-player-height: #{rem(82)};
 
     @supports(height: 100lvh) {
         --app-height: 100lvh;

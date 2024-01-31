@@ -261,11 +261,10 @@
 
 
     &__image {
-        // player's height
-        margin-bottom: rem(82);
+        --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
+        margin-bottom: var(--GLOBAL-player-height);
 
-        // margin-top: rem(-8);
-        height: rem(450);
+        height: var(--container-height);
 
 
         @include breakpoint(not-desktop) {
@@ -416,7 +415,7 @@
         display: none;
 
         // player's height
-        padding-bottom: rem(82);
+        padding-bottom: var(--GLOBAL-player-height);
 
 
         &.is-visible {
@@ -654,10 +653,13 @@
 
 
         &-image {
+            --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
+
+            margin-top: vh(-20);
             transform: translateY(0) rotate(-7.5deg);
 
-            --polaroid-width: #{rem(300)} !important;
-            --polaroid-height: #{rem(400)} !important;
+            --polaroid-width: calc(var(--container-height) * .75) !important;
+            --polaroid-height: var(--container-height) !important;
         }
     }
 
