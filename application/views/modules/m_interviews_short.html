@@ -40,7 +40,9 @@
 
                         <div class="interviews__right col-span-3 col-start-7">
                             <p class="interviews__text"> {{ item.lead }}</p>
+                            {% if not collection_page %}
                             <p class="interviews__collection desktop-only">{{ item.interviewer_name }} Collection</p>
+                            {% endif %}
                         </div>
 
                         <div class="interviews__box col-span-3 col-start-10">
