@@ -4,8 +4,9 @@
         filters: true,
         small: true,
         url: item.url,
-        modifiers: ["small"],
+        modifiers: ["small", "overflow"],
         text: "Explore <i>" ~ item.count ~ ' interviews</i>'
+        animate: true
     } %}
     {% if item.image %}
         <div class="interviews-grid__image">

@@ -6,6 +6,6 @@
     {% if animate %}data-component="Button"{% endif %}
     >
     {% include "./components/c_arrow_icon.html" with { small } %}
-    <span class="link__text">{% if text %}{{text|raw}}{% else %}button{% endif %}</span>
+    <span class="link__text js-link-text">{% if text %}{{text|raw}}{% else %}button{% endif %}</span>
     {% if extraText %}<span>{{extraText|raw}}</span>{% endif %}
 </a>

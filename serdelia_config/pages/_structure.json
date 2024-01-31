@@ -7,10 +7,8 @@
             "sessions"
         ],
         "interviewers": [
-            "collection_modules"
-        ],
-        "collection_modules": [
-            "collection_submodules"
+            "collection_modules",
+            "interview_illustrations"
         ]
     }
 }

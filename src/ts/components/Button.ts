@@ -18,9 +18,9 @@ export class Button extends Component {
     }
 
     private bind(): void {
-        this.splitText = new SplitText(this.view.querySelector('.link__text'), { type: 'words', wordsClass: 'word' });
-        this.horizontal = this.view.querySelector('.horizontal');
-        this.triangle = this.view.querySelector('.triangle');
+        this.splitText = new SplitText(this.view.querySelector('.js-link-text'), { type: 'words', wordsClass: 'word' });
+        this.horizontal = this.view.querySelector('.js-arrow-horizontal');
+        this.triangle = this.view.querySelector('.js-arrow-triangle');
 
         this.setupTimeline();
     }

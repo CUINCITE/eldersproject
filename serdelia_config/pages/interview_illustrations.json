@@ -1,5 +1,8 @@
 {
   "table": "interview_illustrations",
+  "filters": {
+    "parent": "%1%"
+  },
   "label": {
     "page": "Interview Illustrations",
     "edit": "{% if not nr %}New Illustration{% else %}Edit Illustration{% endif %}"
