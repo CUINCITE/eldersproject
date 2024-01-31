@@ -11,6 +11,9 @@
         ],
         "collection_modules": [
             "collection_submodules"
+        ],
+        "interview_illustrations": [
+            "interviewers"
         ]
     }
 }
