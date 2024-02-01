@@ -1,0 +1,219 @@
+{
+    "locations": [
+        {
+            "title": "The tenderloin",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.4249147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Gene Compton's Cafeteria",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7638134", "-122.4249147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "The castro",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7438134", "-122.4249147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                }
+            ]
+        },
+        {
+            "title": "Castro camera",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7238134", "-122.4249147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Castro theatre",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.4049147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "The mission",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.3849147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Esta noche",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.3649147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Valencia Rose",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.3449147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Esta noche",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.3249147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        },
+        {
+            "title": "Valencia Rose",
+            "description": "The Tenderloin is a vibrant and diverse district in San Francisco.",
+            "location": "San Francisco, USA",
+            "coords": ["37.7838134", "-122.3049147"],
+            "interviews": [
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "C. Njoube Dugas",
+                    "duration": "00:22:03",
+                    "id": "30"
+                },
+                {
+                    "title": "Sharyn Grayson",
+                    "duration": "00:32:00",
+                    "id": "20"
+                }
+            ]
+        }
+    ]
+}

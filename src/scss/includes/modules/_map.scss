@@ -1,10 +1,200 @@
 .map {
-    &__wrap {
-        width: 100%;
-        height: var(--app-height);
+    @include flex(row, space-between, stretch);
+    @include font-size(30, 1);
+    @include letter-spacing(-0.75, 30);
+    @include font-family(compressed);
 
-        @include breakpoint(not-desktop) {
-            height: calc(var(--app-height) * .56);
+    height: var(--app-height);
+    text-transform: uppercase;
+
+
+
+    &__wrap {
+        @include flex(row, flex-end, flex-end);
+
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+
+
+    &__container {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+    }
+
+
+
+    &__aside {
+        @include flex(column, space-between, stretch);
+
+        flex-basis: vw(308);
+        flex-shrink: 0;
+        background-color: var(--color-box);
+        border-right: 1px solid var(--color-bg);
+    }
+
+
+
+    &__heading {
+        padding-top: rem(38);
+        padding-left: rem(16);
+    }
+
+
+
+    &__locations {
+        text-transform: uppercase;
+        counter-reset: map-locations;
+        overflow-y: auto;
+    }
+
+
+
+    &__location {
+        border-top: 1px solid var(--color-bg);
+        padding: 0 rem(16);
+        position: relative;
+
+
+        &-button {
+            @include full;
+
+
+            &.is-active { pointer-events: none; }
         }
+    }
+
+
+
+    &__title {
+        @include flex(row, flex-start, center);
+
+        min-height: rem(64);
+
+
+        &::before {
+            @include font-settings(200, 100);
+            content: counter(map-locations, decimal-leading-zero) ".";
+            counter-increment: map-locations;
+            font-weight: 200;
+            font-feature-settings: "ss03" on;
+        }
+    }
+
+
+
+    &__interviews {
+        @include flex(column, flex-end, stretch);
+
+        gap: 1px;
+    }
+
+
+
+    &__interview {
+        background-color: var(--color-box);
+        position: relative;
+
+
+        &-wrap {
+            @include flex;
+        }
+
+
+        &-data {
+            @include font-size(30, 21);
+            @include flex(column, space-between, flex-start);
+
+            gap: rem(5);
+            width: rem(286);
+            padding: 0 rem(14);
+            padding-top: rem(4);
+        }
+
+
+        &-duration {
+            @include font-settings(200, 100);
+            @include font-family(normal);
+
+            font-weight: 200;
+        }
+
+
+        &-button {
+            @include font-size(30, 24);
+
+            background-color: var(--color-green);
+            color: var(--color-pink);
+            padding: rem(16) rem(15) rem(13);
+        }
+    }
+
+
+
+    &__button {
+        @include full;
+    }
+
+
+
+    &__description {
+        @include font-size(14, 16);
+        @include font-family(normal);
+        @include font-settings(400, 100);
+
+        letter-spacing: normal;
+        text-transform: none;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows .4s $ease-out;
+
+
+        .is-active ~ & { grid-template-rows: 1fr; }
+
+
+        & > div { overflow: hidden; }
+
+
+        p { padding-bottom: rem(18); }
+    }
+
+
+
+    &__marker {}
+
+
+
+    &__tooltip {
+        @include font-family(compressed);
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        text-transform: uppercase;
+
+
+        &-location {
+            @include font-family(normal, 400);
+            @include font-settings(400, 100);
+            @include font-size(14, 16);
+
+            letter-spacing: normal;
+            position: absolute;
+            inset: calc(100% + #{rem(79)}) 0 auto;
+            text-transform: none;
+        }
+    }
+
+
+    // mapbox elements
+    .mapboxgl-popup-tip { display: none; }
+
+    .mapboxgl-popup-content {
+        background: none;
+        box-shadow: none;
+        color: var(--color-box);
+        text-align: center;
     }
 }

@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
 import mapboxgl from 'mapbox-gl';
+import { gsap } from 'gsap/dist/gsap';
 
 import { Component } from './Component';
-import { local } from '../Site';
+import { easing, local } from '../Site';
+import { AudioPlayer } from './AudioPlayer';
 
-export const token = local ? 'pk.eyJ1IjoibWlrb2xhai1odW5jd290IiwiYSI6ImNram1wNWZodDZlOHcyc2xnYmF0ODlpeXcifQ.svOUXdAo7D73Wloj7laAUA'
-    : 'pk.eyJ1IjoibWlrb2xhai1odW5jd290IiwiYSI6ImNram1wNWZodDZlOHcyc2xnYmF0ODlpeXcifQ.svOUXdAo7D73Wloj7laAUA';
+export const token = local ? 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA'
+    : 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA';
 
 export interface IMapSettings {
     lat: number;
@@ -19,26 +21,39 @@ export interface IMapSettings {
 }
 
 
+export interface IMapInterview {
+    title: string;
+    duration: string;
+    id: string;
+}
+
+
 export class Map extends Component {
 
     private map: mapboxgl.Map;
     private settings: IMapSettings;
+    private locations: NodeListOf<HTMLElement>;
+    private activeLocation: HTMLElement;
+    private interviewsList: HTMLElement;
+    private marker: mapboxgl.Marker;
 
 
     constructor(protected view: HTMLElement) {
         super(view);
 
         this.settings = {
-            lng: 20,
-            lat: 30,
-            zoom: 1,
+            lng: -122,
+            lat: 37,
+            zoom: 16,
             interactive: true,
             renderWorldCopies: true,
-            style: 'mapbox://styles/mikolaj-huncwot/cl42ptcdy003114n04snldcng',
+            style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
             token,
         };
 
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
+        this.locations = this.view.querySelectorAll('.js-location');
+        this.interviewsList = this.view.querySelector('.js-interviews-list');
 
         this.init();
     }
@@ -48,7 +63,7 @@ export class Map extends Component {
     private init = (): Promise<void> => new Promise(resolveAll => {
         mapboxgl.accessToken = this.settings.token;
         this.map = new mapboxgl.Map({
-            container: this.view,
+            container: this.view.querySelector('.js-map') as HTMLElement,
             style: this.settings.style,
             center: [this.settings.lng, this.settings.lat],
             zoom: this.settings.zoom,
@@ -56,6 +71,7 @@ export class Map extends Component {
             interactive: this.settings.interactive,
             dragRotate: false,
             touchZoomRotate: false,
+            pitch: 60,
         });
 
         const mapPromise = new Promise<void>(resolve => {
@@ -79,7 +95,126 @@ export class Map extends Component {
     });
 
 
-    private onLoad = async() => {
 
+    private onLoad = async() => {
+        this.bind();
+        this.goToLocation(this.locations[0]);
+    };
+
+
+
+    private bind = (): void => {
+        this.locations.forEach((location: HTMLElement) => {
+            location.addEventListener('click', this.onLocationClick);
+        });
+
+        this.map.on('moveend', () => {
+            this.setMarker(this.activeLocation);
+            this.buildInterviews(this.activeLocation);
+        });
+    };
+
+
+
+    private setMarker = (location: HTMLElement): void => {
+        const coords = location.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+
+        const elMarker = document.createElement('div');
+        elMarker.classList.add('map__marker');
+        elMarker.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">
+        <circle cx="31.6143" cy="31" r="31" fill="#548068"/>
+        <circle cx="31.6142" cy="31" r="19.5185" fill="#B79258"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M31.6143 7.73926C44.3168 7.73926 54.6143 18.2046 54.6143 31.1143C54.6143 49.2193 39.0554 53.9793 31.6143 75.7393C25.526 53.9793 8.61426 47.1793 8.61426 31.1143C8.61426 18.2046 18.9117 7.73926 31.6143 7.73926Z" fill="#B79258"/>
+        <circle cx="31.6143" cy="30.7393" r="16" fill="#DBB9B1"/>
+        </svg>`;
+
+        const popup = new mapboxgl.Popup({ offset: 25 })
+            .setLngLat([coords[1], coords[0]])
+            .setHTML(`
+                <div class="map__tooltip map__tooltip--marker">${location.dataset.title}</div>
+                <div class="map__tooltip-location">${location.dataset.location}</div>
+            `);
+
+        this.marker = new mapboxgl.Marker({ element: elMarker })
+            .setLngLat([coords[1], coords[0]])
+            .setPopup(popup)
+            .addTo(this.map)
+            .togglePopup();
+    };
+
+
+
+    private onLocationClick = (e: Event): void => {
+        const location = e.currentTarget as HTMLElement;
+
+        this.goToLocation(location);
+    };
+
+
+
+    private goToLocation = (location: HTMLElement): void => {
+        if (this.marker) this.marker.remove();
+        this.locations.forEach(l => l.classList.remove('is-active'));
+        location.classList.add('is-active');
+        this.removeCurrentInterviews();
+
+        const coords = location.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+        const currentZoom = this.map.getZoom();
+        const zoom = currentZoom < 16 ? 16 : currentZoom;
+
+        this.map.flyTo({
+            center: [coords[1], coords[0]],
+            zoom,
+        });
+        this.activeLocation = location;
+    };
+
+
+
+    private removeCurrentInterviews = (): void => {
+        const interviews = this.interviewsList.querySelectorAll('li');
+        if (!interviews) return;
+
+        [...interviews].reverse().forEach((item, index) => {
+            gsap.to(item, {
+                y: (item.clientHeight * 2) * interviews.length,
+                rotate: index % 2 === 0 ? 15 : -15,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: easing,
+                onComplete: () => {
+                    item.remove();
+                    // after all tweens
+                    if (index === interviews.length - 1) {
+                        this.interviewsList.innerHTML = '';
+                    }
+                },
+            });
+        });
+    };
+
+
+
+    private buildInterviews = (location: HTMLElement): void => {
+        // empty existing list items first
+        this.interviewsList.innerHTML = '';
+
+        const interviews: IMapInterview[] = JSON.parse(location.dataset.interviews) as IMapInterview[];
+        [...interviews].forEach(interview => {
+            const interviewHtml = `
+            <li class="map__interview">
+                <button class="map__button" data-audio-player=${interview.id}></button>
+                <div class="map__interview-wrap">
+                    <div class="map__interview-data">
+                        <div class="map__interview-title">${interview.title}</div>
+                        <div class="map__interview-duration">${interview.duration}</div>
+                    </div>
+                    <div class="map__interview-button">Play <br> interview</div>
+                </div>
+            </li>`;
+            this.interviewsList.insertAdjacentHTML('beforeend', interviewHtml);
+        });
+
+        AudioPlayer.instance.bindButtons();
     };
 }
