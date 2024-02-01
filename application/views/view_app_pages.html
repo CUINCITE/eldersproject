@@ -1,4 +1,4 @@
-<article {% if type=='Home' %}data-page="Page" data-home{% else %}data-page="{{ type }}"{% endif %}
+<article {% if slug=='home' %}data-page="Page" data-home{% else %}data-page="{{ type }}"{% endif %}
         {% if is_404 %} data-not-found{% endif %}
          data-title="{{ title }}"
          data-alternate='{{ langs|json_encode|raw }}' {% if serdelia_page_id %}data-serdelia-page-id="{{ serdelia_page_id }}"{% endif %}>
