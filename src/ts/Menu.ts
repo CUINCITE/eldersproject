@@ -1,5 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
 import { AudioPlayer } from './components/AudioPlayer';
+import { breakpoint, easing } from './Site';
+import { debounce } from './Utils';
 
 export class Menu {
     private isOpen = false;
@@ -14,6 +16,8 @@ export class Menu {
     private links: NodeListOf<HTMLElement>;
     private searchLabel: HTMLElement;
     private searchIcon: HTMLElement;
+    private timelines: gsap.core.Timeline[];
+
 
 
     // eslint-disable-next-line no-unused-vars
@@ -27,6 +31,7 @@ export class Menu {
         this.links = this.view.querySelectorAll('.js-menu-link');
         this.searchLabel = this.view.querySelector('.js-menu-search-label');
         this.searchIcon = this.view.querySelector('.js-menu-search-svg');
+        this.timelines = [];
 
         this.bind();
     }
@@ -43,11 +48,76 @@ export class Menu {
         this.elToggle && this.elToggle.addEventListener('click', this.onToggle);
         this.closeBtn && this.closeBtn.addEventListener('click', this.close);
 
+        this.setupHovers();
+
         // on close menu animation's end (related to whole #content toggle animation) set display: none for menu
         this.wrapEl.addEventListener('transitionend', () => {
             this.onAnimationEnd();
         });
+        window.addEventListener('resize', debounce(() => this.timelines.forEach(tl => tl.invalidate())));
     }
+
+
+
+    private setupHovers = (): void => {
+        this.items.forEach(item => {
+            const vertical: HTMLElement = item.querySelector('.js-arrow-vertical');
+            const horizontal: HTMLElement = item.querySelector('.js-arrow-horizontal');
+            const triangle: HTMLElement = item.querySelector('.js-arrow-triangle');
+            const link = item.querySelector('.js-menu-main-link');
+
+            if ([vertical, horizontal, triangle, link].some(el => !el)) return;
+
+            gsap.set(vertical, { scaleY: 0 });
+            gsap.set(horizontal, { scaleX: 0 });
+            gsap.set(triangle, { scale: 0 });
+
+            const tl = gsap.timeline({ paused: true, ease: easing });
+            this.timelines.push(tl);
+
+            const duration = 0.3;
+
+            tl
+                .to(vertical, {
+                    scaleY: 1,
+                    duration: duration * 0.5,
+                    transformOrigin: 'bottom center',
+                })
+                .to(horizontal, {
+                    scaleX: 1,
+                    duration,
+                    transformOrigin: 'left center',
+                }, 'arrow')
+                .fromTo(
+                    triangle,
+                    { x: () => -horizontal.offsetWidth },
+                    {
+                        x: 0,
+                        scale: 1,
+                        duration,
+                        transformOrigin: 'left center',
+                    },
+                    'arrow',
+                );
+
+
+            item.addEventListener('mouseenter', () => {
+                breakpoint.desktop && tl.play();
+            });
+
+            item.addEventListener('mouseleave', () => {
+                breakpoint.desktop && tl.reverse();
+            });
+
+            link.addEventListener('focus', () => {
+                breakpoint.desktop && tl.play();
+            });
+
+            link.addEventListener('blur', () => {
+                breakpoint.desktop && tl.reverse();
+            });
+        });
+    };
 
 
 

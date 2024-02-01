@@ -9,6 +9,7 @@ import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
 import { Menu } from './Menu';
+import { Button } from './components/Button';
 import { Search } from './Search';
 import { AudioPlayer } from './components/AudioPlayer';
 import { Lightbox } from './components/Lightbox/Lightbox';
@@ -33,6 +34,7 @@ class Site {
     private pushStates: PushStates;
     private scroll: Scroll;
     private menu: Menu;
+    private newsletterButton: Button;
     private lightbox: Lightbox;
     private search: Search;
     private audioPlayer: AudioPlayer;
@@ -66,6 +68,7 @@ class Site {
         this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
         this.search = new Search(document.getElementById('search'));
+        this.newsletterButton = new Button(document.querySelector('.js-newsletter-button'));
 
         this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
 

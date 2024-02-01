@@ -187,8 +187,12 @@
     }
 
 
-    &--reversed span:first-of-type {
-        inset: 50% auto auto 0;
+    &--reversed {
+        margin-top: 0;
+        
+        span:first-of-type {
+            inset: 50% auto auto 0;
+        }
     }
 }
 

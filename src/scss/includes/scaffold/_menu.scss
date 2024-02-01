@@ -124,7 +124,19 @@ $theme-colors: ("orange", "red", "blue", "pink");
             }
 
             @include hover {
-                .menu__arrow { opacity: 1; }
+                .menu__arrow { 
+                    opacity: 1;
+
+                    transition: opacity 0s 0s;
+                };
+            }
+
+            &:focus {
+                .menu__arrow { 
+                    opacity: 1;
+
+                    transition: opacity 0s 0s;
+                };
             }
         }
 
@@ -196,9 +208,13 @@ $theme-colors: ("orange", "red", "blue", "pink");
         margin-right: rem(5);
         color: var(--theme-color);
 
+        @include breakpoint(desktop) {
+            overflow: hidden;
+        }
+
         // TEMP - todo animation on icon
         opacity: 0;
-        transition: opacity .3s $ease-custom;
+        transition: opacity 0s 2s $ease-custom;
 
         @include breakpoint(not-desktop) {
             display: none;

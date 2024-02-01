@@ -10,6 +10,7 @@ export class Button extends Component {
 
     private splitText: any;
     private horizontal: HTMLElement;
+    private vertical: HTMLElement;
     private triangle: HTMLElement;
     private arrow: HTMLElement;
     private tl: gsap.core.Timeline;
@@ -18,12 +19,13 @@ export class Button extends Component {
         super(view);
         this.bind();
 
-        window.addEventListener('resize', debounce(() => this.setupTimeline()));
+        window.addEventListener('resize', debounce(() => this.tl.invalidate()));
     }
 
     private bind(): void {
         this.splitText = new SplitText(this.view.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
         this.horizontal = this.view.querySelector('.js-arrow-horizontal');
+        this.vertical = this.view.querySelector('.js-arrow-vertical');
         this.triangle = this.view.querySelector('.js-arrow-triangle');
         this.arrow = this.view.querySelector('.js-arrow');
 
@@ -32,12 +34,10 @@ export class Button extends Component {
     }
 
     private setupTimeline(): void {
-        if (!this.splitText.words[0] || !this.horizontal || !this.triangle || !this.arrow) return;
+        if ([this.splitText.words[0], this.horizontal, this.triangle, this.arrow, this.vertical].some(el => !el)) return;
 
         this.tl && this.tl.kill();
         this.tl = gsap.timeline({ paused: true, defaults: { ease: easing } });
-
-        const wordsWidth = this.splitText.words[0].offsetWidth;
 
         if (this.view.classList.contains('button--simple')) {
             if (this.view.classList.contains('button--reversed')) {
@@ -45,17 +45,17 @@ export class Button extends Component {
 
                 this.tl
                     .to(this.splitText.words[0], {
-                        x: this.arrow.offsetWidth * 1.08,
+                        x: () => this.arrow.offsetWidth * 1.08,
                         duration: 0.4,
                     }, 'arrow')
                     .to(this.arrow, {
-                        x: this.arrow.offsetWidth * 1.08,
+                        x: () => this.arrow.offsetWidth * 1.08,
                         duration: 0.4,
                     }, 'arrow');
 
                 arrowExtra && this.tl
                     .to(arrowExtra, {
-                        x: this.arrow.offsetWidth * 1.08,
+                        x: () => this.arrow.offsetWidth * 1.08,
                         duration: 0.4,
                     }, 'arrow');
 
@@ -64,17 +64,17 @@ export class Button extends Component {
 
                 this.tl
                     .to(this.splitText.words[0], {
-                        x: wordsWidth * 1.06,
+                        x: () => this.splitText.words[0].offsetWidth * 1.06,
                         duration: 0.4,
                     }, 'arrow')
                     .to(this.arrow, {
                         transformOrigin: 'right center',
-                        x: wordsWidth * 1.06,
+                        x: () => this.splitText.words[0].offsetWidth * 1.06,
                         duration: 0.4,
                     }, 'arrow');
 
                 duplicateText && this.tl.to(duplicateText, {
-                    x: wordsWidth * 1.06,
+                    x: () => this.splitText.words[0].offsetWidth * 1.06,
                     duration: 0.4,
                 }, 'arrow');
 
@@ -106,6 +106,40 @@ export class Button extends Component {
                 //     delay: -0.3,
                 // }, 'shrink');
             }
+        } else if (this.view.classList.contains('button--draw')) {
+
+            const mm = gsap.matchMedia();
+
+            mm.add('(orientation: landscape)', () => {
+                gsap.set(this.vertical, { scaleY: 0 });
+                gsap.set(this.horizontal, { scaleX: 0 });
+                gsap.set(this.triangle, { scale: 0 });
+            });
+
+            const duration = 0.3;
+
+            this.tl
+                .to(this.vertical, {
+                    scaleY: 1,
+                    duration: duration * 0.5,
+                    transformOrigin: 'top center',
+                })
+                .to(this.horizontal, {
+                    scaleX: 1,
+                    duration,
+                    transformOrigin: 'left center',
+                }, 'arrow')
+                .fromTo(
+                    this.triangle,
+                    { x: () => -this.horizontal.offsetWidth },
+                    {
+                        x: 0,
+                        scale: 1,
+                        duration,
+                        transformOrigin: 'left center',
+                    },
+                    'arrow',
+                );
         } else {
             this.tl
                 .to(this.splitText.words[0], {
@@ -115,13 +149,13 @@ export class Button extends Component {
                 })
                 .to(this.horizontal, {
                     transformOrigin: 'left center',
-                    scaleX: (wordsWidth / this.horizontal.offsetWidth) + 1.01,
+                    scaleX: () => (this.splitText.words[0].offsetWidth / this.horizontal.offsetWidth) + 1.01,
                     delay: -0.5,
                     duration: 0.65,
                 }, 'arrow')
                 .to(this.triangle, {
                     transformOrigin: 'left center',
-                    x: wordsWidth,
+                    x: () => this.splitText.words[0].offsetWidth,
                     delay: -0.5,
                     duration: 0.65,
                 }, 'arrow');
@@ -134,6 +168,14 @@ export class Button extends Component {
         });
 
         this.view.addEventListener('mouseleave', () => {
+            breakpoint.desktop && this.tl.reverse();
+        });
+
+        this.view.addEventListener('focus', () => {
+            breakpoint.desktop && this.tl.play();
+        });
+
+        this.view.addEventListener('blur', () => {
             breakpoint.desktop && this.tl.reverse();
         });
     }

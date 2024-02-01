@@ -44,7 +44,7 @@
         @include breakpoint(desktop) {
             flex-direction: row-reverse;
 
-           .button__main {
+            .button__main {
                 flex-direction: row-reverse !important;
             }
         }
@@ -197,6 +197,7 @@
     &__text {
         &--duplicate {
             position: absolute;
+
             // margin-block: trim-font(1);
 
             @include breakpoint(not-desktop) {
@@ -220,6 +221,6 @@
 }
 
 
-%button-hover {
+// %button-hover {
 
-}
+// }

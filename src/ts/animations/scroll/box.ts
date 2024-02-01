@@ -16,6 +16,7 @@ export const box = (el: HTMLElement) => {
             invalidateOnRefresh: true,
         },
     });
+
     gsap.fromTo(bg, { y: window.innerHeight / 5 }, {
         y: 0,
         duration: 0.4,

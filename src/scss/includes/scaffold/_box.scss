@@ -7,8 +7,11 @@
     [data-scroll="box"] & {
         background: none;
         position: relative;
-    }
 
+        @include breakpoint(not-desktop) {
+            z-index: 1;
+        }
+    }
 
     [data-scroll="box"] & {
         border-top: 1px solid var(--color-bg);
@@ -53,4 +56,20 @@
             }
         }
     };
+}
+
+.module[data-scroll="box"] {
+    
+    @include breakpoint(not-desktop) {
+        position: relative;
+        z-index: 1;
+
+        // > div {
+        //     z-index: 1;
+        // } 
+
+        // .box__bg {
+        //     z-index: unset;
+        // }
+    }
 }
