@@ -12,6 +12,7 @@ import { WrappedText } from './components/WrappedText';
 import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
+import { Map } from './components/Map';
 
 export const components = {
     Accordeon,
@@ -19,6 +20,7 @@ export const components = {
     Button,
     FilterLetters,
     Load,
+    Map,
     Modal,
     More,
     Player,
