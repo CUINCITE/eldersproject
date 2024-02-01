@@ -1,0 +1,54 @@
+{
+  "table": "map_locations",
+  "order": "label",
+  "label_EN":
+  {
+    "page":"Map Locations",
+    "edit":"{% if not label %}New Location% else %}Location: <em>{{label}}</em>{% endif %}"
+  },
+  "filters": {
+    "collection": "%1%"
+  },
+  "layouts":
+  [
+    {
+      "type":"preview",
+      "iframe":"/serdelia-preview-%1%"
+    },
+    {
+      "type":"list"
+    }
+  ],
+  "fields": [
+    {
+      "label": "Location Name",
+      "field": "label"
+    },
+    {
+      "label": "Location Description",
+      "field": "description",
+      "type": "text"
+    },
+    {
+      "Help": "Use format 0:45:52",
+      "label": "Time start",
+      "field": "time_start"
+    },
+    {
+      "Help": "Use format 0:45:52",
+      "label": "Time end",
+      "field": "time_end"
+    },
+    {
+      "label": "Interview",
+      "field": "interview",
+      "type": "select",
+      "source": {
+        "model": "interviews",
+        "filters": {
+          "interviewers": "%1%"
+        }
+      }
+    }
+  ]
+}

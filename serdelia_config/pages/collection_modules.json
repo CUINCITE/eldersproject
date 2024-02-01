@@ -28,7 +28,7 @@
       "plugin": "preview",
       "type": "serdelia",
       "params": {
-        "url": "/pl/%url%?preview=true"
+        "url": "/collections/%url%?preview=true"
       }
     }
   ],
