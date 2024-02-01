@@ -103,6 +103,35 @@
           "image"
         ]
       }
+    },
+    {
+      "tab": "Video",
+      "label": "Video",
+      "type": "video",
+      "field": "video",
+      "folder": "/public/upload/video"
+    },
+    {
+      "label": "Poster Image",
+      "type": "image",
+      "field": "image",
+      "folder": "/public/upload/modules",
+      "images": [
+        {
+          "folder": "desktop",
+          "width": 1280,
+          "height": 800,
+          "label": "Desktop",
+          "retina": true
+        },
+        {
+          "folder": "mobile",
+          "width": 375,
+          "height": 375,
+          "label": "Mobile",
+          "retina": true
+        }
+      ]
     }
   ]
 }
