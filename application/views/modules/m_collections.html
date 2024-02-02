@@ -36,8 +36,9 @@
 
                                         <div class="collection__data">
                                             <div class="collection__states">
-                                                {{ item.locations }}
+                                               {{ item.locations }}
                                             </div>
+                                            <div class="collection__text">{{ item.lead }}</div>
                                             <div class="collection__button">
                                                 {% set reversedModifier = (loop.index is even) ? "reversed" : "" %}
                                                 {% include "./components/c_link.html" with {
@@ -49,9 +50,7 @@
                                                     animate: true
                                                 } %}
                                             </div>
-                                            <div class="collection__text">{{ item.lead }}</div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
