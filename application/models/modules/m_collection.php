@@ -15,6 +15,10 @@ class model_app_pages_modules_collection extends model_app_pages_modules
     {
         $m['item'] = $this->parent->getJsonModel('interviewers', ['active' => 1, 'slug' => $url[1]], true);
 
+        if (!$m['item']) {
+            return null;
+        }
+
         // display higher res cover
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
 
