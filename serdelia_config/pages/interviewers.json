@@ -49,11 +49,21 @@
             }
         },
         {
+            "hr": true,
+            "label": "Collection Title",
+            "field": "collection_title",
+            "type": "text",
+            "settings": {
+                "rows": 2
+            }
+        },
+        {
             "label": "Collection Theme (color)",
             "field": "color",
             "type": "select"
         },
         {
+            "hr": true,
             "label": "Interviews Amount",
             "field": "amount",            
             "edit":false,
