@@ -13,7 +13,7 @@
                         <div class="collection_hero__author">
                             <div class="collection_author collection_author--huge">
                                 <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
-                                
+
                                 <h4 class="collection_author__collection">Collection</h4>
                             </div>
                         </div>
@@ -39,12 +39,16 @@
             <div class="grid">
                 <div class="col-span-12">
                     <div class="collection_hero__copy no-padding">
-                        <div class="collection_hero__intro" >
+                        <div class="collection_hero__intro">
                             <div class="text">
-                                <p style="font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">{{item.collection_title}}</p>
+                                <p
+                                    style="max-width:30rem;font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">
+                                    {{item.collection_title|nl2br}}</p>
                             </div>
-                            {#{% include "/subviews/subview_text.html" with {text: "<p>#{item.collection_title}</p>" } %}#}
-                            {#{% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}#}
+                            {#{% include "/subviews/subview_text.html" with {text: "<p>#{item.collection_title}</p>" }
+                            %}#}
+                            {#{% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" }
+                            %}#}
                         </div>
                         {#<span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>#}
                     </div>
@@ -52,5 +56,16 @@
             </div>
         </div>
 
+    </div>
+</section>
+
+<section class="module module--claim box" data-scroll="box" style="padding-top:150px;padding-bottom:100px">
+    <div class="box__bg"></div>
+    <div class="grid">
+        <div class="col-span-12">
+            <div class="claim" style="font-size:3rem;" data-scroll="claim">
+                <p>{{item.lead}}</p>
+            </div>
+        </div>
     </div>
 </section>
