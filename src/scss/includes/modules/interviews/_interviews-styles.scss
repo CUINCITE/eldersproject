@@ -59,6 +59,8 @@
     }
 
     &__sticker {
+        position: relative;
+        z-index: 2;
 
         @include breakpoint(not-desktop) {
             position: absolute;
@@ -93,7 +95,14 @@
 
 
 
-    &__main {
+    &__main {}
+
+
+
+    &__list {
+        &--collection {
+            counter-reset: interviews;
+        }
     }
 
 

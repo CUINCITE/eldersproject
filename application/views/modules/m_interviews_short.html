@@ -13,7 +13,7 @@
                             {% include 'subviews/subview_sticker.html' with {label:stickerLabel, modifier: "long_text"} %}
                         </div>
                         <h2 class="heading heading--reclined">
-                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}
+                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}{% if collection_page %} <span class="heading__counter">({{items|length}})</span>{% endif %}
                         </h2>
                     </div>
 
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <ul class="interviews__list">
+        <ul class="interviews__list {% if collection_page %}interviews__list--collection{% endif %}">
             {% for item in items %}
                 <li class="interviews__item box">
 

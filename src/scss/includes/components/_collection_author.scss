@@ -94,6 +94,20 @@
 
             padding-top: rem(18);
         }
+
+
+        .interviews__list--collection & {
+            &::before {
+                @include font-family(compact);
+                @include font-settings(200, 100);
+                @include letter-spacing(-3, 58);
+
+                content: counter(interviews, decimal-leading-zero) ". ";
+                counter-increment: interviews;
+                font-weight: 200;
+                font-feature-settings: "ss03" on;
+            }
+        }
     }
 
 

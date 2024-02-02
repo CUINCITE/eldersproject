@@ -3,6 +3,7 @@
 
     text-transform: uppercase;
     padding-left: unset;
+    position: relative;
 
     @include breakpoint(desktop) {
         @include font-size(204, 157);
@@ -66,7 +67,7 @@
 
         @include breakpoint(desktop) {
             @include font-size(128, 100);
-            @include letter-spacing(-3.9, 128); 
+            @include letter-spacing(-3.9, 128);
         }
 
         @include breakpoint(tablet) {
@@ -241,6 +242,16 @@
 
             margin-block: trim-font(140.253 / 132);
         }
+    }
+
+
+
+    &__counter {
+        @include font-size(50, 1);
+        @include letter-spacing(-1.75, 50);
+
+        position: absolute;
+        inset: auto auto rem(18) calc(100% + #{rem(22)});
     }
 
 
