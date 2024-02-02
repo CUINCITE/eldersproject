@@ -29,9 +29,9 @@
                 <div class="collection_hero__cover">
                     {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
                 </div>
-                <div class="collection_hero__area desktop-only">
+                {#<div class="collection_hero__area desktop-only">
                     {{item.locations}}
-                </div>
+                </div>#}
             </div>
         </div>
 
@@ -40,10 +40,13 @@
                 <div class="col-span-12">
                     <div class="collection_hero__copy no-padding">
                         <div class="collection_hero__intro" >
-                            {% include "/subviews/subview_text.html" with {text: "<p>#{item.lead}</p>" } %}
-                            {% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}
+                            <div class="text">
+                                <p style="font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">{{item.collection_title}}</p>
+                            </div>
+                            {#{% include "/subviews/subview_text.html" with {text: "<p>#{item.collection_title}</p>" } %}#}
+                            {#{% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}#}
                         </div>
-                        <span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>
+                        {#<span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>#}
                     </div>
                 </div>
             </div>
