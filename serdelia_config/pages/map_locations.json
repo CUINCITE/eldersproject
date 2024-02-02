@@ -1,20 +1,13 @@
 {
   "table": "map_locations",
   "order": "label",
-  "label_EN":
+  "label":
   {
     "page":"Map Locations",
     "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
   },
-  "filters": {
-    "collection": "%1%"
-  },
   "layouts":
   [
-    {
-      "type":"preview",
-      "iframe":"/serdelia-preview-%1%"
-    },
     {
       "type":"list"
     }
@@ -22,33 +15,73 @@
   "fields": [
     {
       "label": "Location Name",
-      "field": "label"
+      "field": "label",
+      "list": true
     },
     {
       "label": "Location Description",
       "field": "description",
-      "type": "text"
-    },
-    {
-      "Help": "Use format 0:45:52",
-      "label": "Time start",
-      "field": "time_start"
-    },
-    {
-      "Help": "Use format 0:45:52",
-      "label": "Time end",
-      "field": "time_end"
-    },
-    {
-      "label": "Interview",
-      "field": "interview",
-      "type": "select",
-      "source": {
-        "model": "interviews",
-        "filters": {
-          "interviewers": "%1%"
-        }
+      "type": "text",
+      "settings": {
+        "rows": 4
       }
+    },
+    {
+      "hr": true,
+      "label": "Latitude",
+      "field": "latitude"
+    },
+    {
+      "label": "Longitude",
+      "field": "longitude"
+    },
+    {
+      "hr": true,
+      "label": "Address (optional)",
+      "field": "address",
+      "type": "text",
+      "settings": {
+        "rows": 4
+      }
+    },
+    {
+      "label": "uid",
+      "field": "uid",
+      "hidden": true,
+      "type": "uid"
+    },
+    {
+      "label": "Image",
+      "type": "image",
+      "field":"image",
+      "folder": "/public/upload/locations",
+      "list":{"xposition_after":"","width":50,"height":50},
+      "images":
+      [
+        {
+          "folder": "desktop",
+          "label": "Desktop",
+          "width": 800,
+          "height": 800,
+          "crop": true,
+          "retina": true
+        },
+        {
+          "folder": "mobile",
+          "label": "Mobile",
+          "width": 375,
+          "height": 375,
+          "crop": true,
+          "retina": true
+        }
+      ]
+    },
+    {
+      "hr": true,
+      "field": "active",
+      "type": "boolean",
+      "label": "Active",
+      "list": "edit"
     }
   ]
 }

@@ -35,7 +35,14 @@
                 "page":"pages",
                 "icon":"article "
             }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"map_locations",
+                "icon":"add-location "
+            }
         }
-
     ]
 }

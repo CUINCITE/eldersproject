@@ -42,6 +42,10 @@
             "required": true
         },
         {
+            "label": "Collection Title",
+            "field": "collection_title"
+        },
+        {
             "label": "Position",
             "list": true,
             "field": "position",
