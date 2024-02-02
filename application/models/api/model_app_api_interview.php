@@ -74,7 +74,7 @@ class model_app_api_interview
                 if ($i == 4) {
                     break;
                 }
-                $tags[] = $v['label'];
+                $tags[] = ['label'=>$v['label'],'url'=>['type'=>'interviews','topics'=>[$v['slug']]]];
                 $i++;
             }
         }

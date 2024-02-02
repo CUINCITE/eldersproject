@@ -2,7 +2,7 @@
     <a href="{{item.url}}" class="interviews__link"><span class="sr-only">Go to interview</span></a>
     <div class="interviews__main">
         <h3 class="interviews__name {% if item.label|length > 30 %} interviews__name--small {% endif %}">{{item.label|replace({',': '<br>'})|raw}}</h3>
-        <p class="interviews__description">{{item.narrators.0.occupation}}</p>
+        <p class="interviews__description" style="font-size:1rem">{{item.narrators.0.occupation}}</p>
     </div>
 
     <div class="interviews__locations phone-hide">
