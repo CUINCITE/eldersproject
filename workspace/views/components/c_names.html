@@ -1,7 +1,7 @@
 <ul class="names">
     {% for author in authors %}
-        <li class="names__name js-accordeon-item is-closed" >
-
+        <li class="names__name js-accordeon-item is-closed">
+            <a href="" class="names__link"></a>
             <div class="names__author">
                 <button class="names__button js-accordeon-button">
                     <span class='sr-only'>Toggle visibility of the content</span>
@@ -9,6 +9,13 @@
                 <span class="names__box">{{author.name}}</span>
             </div>
 
+            <div class="names__expand">
+                <div class="names__expand-wrap">
+                    <p class="names__claim">Westward Black Journey: Cultural Weave in Los Angeles</p>
+                </div>
+            </div>
+
+            <!--
             <div class="names__copy js-accordeon-copy">
                 <div class="names__link">
                     {% include "./components/c_link.html" with {
@@ -19,6 +26,7 @@
                 </div>
                 {% include "./subviews/subview_text.html" with { text: author.copy, heading: false } %}
             </div>
+            -->
         </li>
     {% endfor %}
 </ul>

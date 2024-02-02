@@ -12,12 +12,12 @@
         </section>
         <div class="collections_images__content">
             <div class="col-span-1 col-start-2">
-                <div class="collections_images__names" data-component="AccordeonList" data-close-others="true">
+                <div class="collections_images__names" xxxdata-component="AccordeonList" data-close-others="true">
 
                     <ul class="names">
                         {% for item in items %}
                                 <li class="names__name js-accordeon-item is-closed">
-
+                                    <a href="{{ item.url }}" class="names__link"></a>
                                     <div class="names__author">
                                         <button class="names__button js-accordeon-button">
                                             <span class="sr-only">Toggle visibility of the content</span>
@@ -25,6 +25,14 @@
                                         <span class="names__box">{{ item.label }}</span>
                                     </div>
 
+
+                                    <div class="names__expand">
+                                        <div class="names__expand-wrap">
+                                            <p class="names__claim">Westward Black Journey: Cultural Weave in Los Angeles</p>
+                                        </div>
+                                    </div>
+
+                                    <!--
                                     <div class="names__copy js-accordeon-copy">
                                         <div class="names__link">
 
@@ -40,6 +48,7 @@
                                             <p>{{ item.lead }}</p>
                                         </div>
                                     </div>
+                                    -->
                                 </li>
                         {% endfor %}
                     </ul>
