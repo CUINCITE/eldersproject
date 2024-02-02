@@ -6,7 +6,7 @@
                 {% for item in scaffold.menu.nav %}
                     <li class="menu__item js-menu-item">
                         <i class="menu__line js-menu-line"></i>
-                        <a href="{{ item.url }}">
+                        <a href="{{ item.url }}" class="js-menu-main-link">
                             <span class="menu__arrow">
                                 {% include "./components/c_arrow_icon.html" with { reversed: true } %}
                             </span>

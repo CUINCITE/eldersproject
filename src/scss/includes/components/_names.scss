@@ -1,5 +1,4 @@
 .names {
-
     &__name {
         position: relative;
         border-left: 1px solid $color-bg;
@@ -14,7 +13,6 @@
 
 
         &.is-closed {
-
             .names__copy {
                 height: 0 !important;
             }
@@ -41,43 +39,52 @@
     }
 
     &__link {
-
-        .button {
-            @include font-family(compressed);
-            @include flex(row, flex-end, flex-end);
-
-            text-transform: uppercase;
-            margin-top: auto;
-
-            @include breakpoint(desktop) {
-                @include font-size(30, 30);
-                @include letter-spacing(-0.75, 30);
-
-                margin-bottom: rem(-7);
-                margin-right: rem(11);
-                margin-top: rem(78);
-            }
+        @include full;
+        z-index: 2;
 
 
-            .arrow {
-
-                @include breakpoint(desktop) {
-                    translate: 0 rem(-6);
-                }
-
-                span.triangle {
-                    @include breakpoint(desktop) {
-                        border-width: rem(11) 0 rem(11) rem(16);
-                    }
-                }
-
-                span:nth-of-type(2) {
-                    @include breakpoint(desktop) {
-                        width: rem(33);
-                    }
-                }
+        @include hover {
+            ~ .names__expand {
+                grid-template-rows: 1fr;
             }
         }
+
+        // .button {
+        //     @include font-family(compressed);
+        //     @include flex(row, flex-end, flex-end);
+
+        //     text-transform: uppercase;
+        //     margin-top: auto;
+
+        //     @include breakpoint(desktop) {
+        //         @include font-size(30, 30);
+        //         @include letter-spacing(-0.75, 30);
+
+        //         margin-bottom: rem(-7);
+        //         margin-right: rem(11);
+        //         margin-top: rem(78);
+        //     }
+
+
+        //     .arrow {
+
+        //         @include breakpoint(desktop) {
+        //             translate: 0 rem(-6);
+        //         }
+
+        //         span.triangle {
+        //             @include breakpoint(desktop) {
+        //                 border-width: rem(11) 0 rem(11) rem(16);
+        //             }
+        //         }
+
+        //         span:nth-of-type(2) {
+        //             @include breakpoint(desktop) {
+        //                 width: rem(33);
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     &__box {
@@ -97,12 +104,11 @@
         right: 0;
 
         cursor: pointer;
-
     }
 
     &__copy {
         @include flex(column, flex-start, flex-end)
-        transition: height .3s ease-in;
+            transition: height .3s ease-in;
 
 
         @include breakpoint(desktop) {
@@ -117,6 +123,37 @@
                     max-width: rem(350);
                 }
             }
+        }
+    }
+
+
+
+    &__expand {
+        text-align: right;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows .3s $ease-out;
+
+
+        & > div { overflow: hidden; }
+    }
+
+
+
+    &__claim {
+        @include font-family(reclined);
+        @include font-size(22, 19);
+        @include letter-spacing(-0.75, 22);
+
+        max-width: rem(269);
+        margin-left: auto;
+        text-transform: uppercase;
+        padding-top: rem(5);
+        padding-bottom: rem(59);
+
+
+        @include breakpoint(desktop) {
+            padding-right: rem(28);
         }
     }
 }

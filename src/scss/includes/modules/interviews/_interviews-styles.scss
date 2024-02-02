@@ -175,7 +175,10 @@
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
+
             padding-top: rem(15);
+            opacity: 0;
+            transition: opacity .15s $ease-custom;
         }
 
         @include breakpoint(tablet) {
@@ -288,6 +291,11 @@
         @include hover {
             ~ .interviews__box .interview-box {
                 @extend %box-hover;
+            }
+
+
+            ~ .interviews__right .interviews__text {
+                opacity: 1;
             }
 
 

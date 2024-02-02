@@ -27,17 +27,20 @@
                                 <span class="sr-only">Go to interview</span>
                             </a>
 
-                            <div class="interviews__left col-span-5">
+                            <div class="interviews__left col-span-6">
                                 {% include "./components/c_collection_author.html" with {
                                 name: item.name,
                                 title: item.title } %}
-
+                                <!--
                                 <p class="interviews__state desktop-only">{{item.state|raw}}</p>
+                                -->
                             </div>
 
                             <div class="interviews__right col-span-3 col-start-7">
                                 <p class="interviews__text">{{item.text}}</p>
+                                <!--
                                 <p class="interviews__collection desktop-only">{{item.collection}} collection</p>
+                                -->
                             </div>
 
                             <div class="interviews__box col-span-3 col-start-10">
