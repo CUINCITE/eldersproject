@@ -15,8 +15,8 @@
     "buttons_edit":
     [
         {"label":"Storytelling","type":"page","icon":"history-edu","page":"collection_modules,%id%"},
-        {"label":"Map Locations","type":"page","icon":"history-edu","page":"map_locations,%id%"},
-        {"label":"Interview Illustrations","type":"page","icon":"image","page":"interview_illustrations,%id%"},
+        {"label":"Excerpts on Map","type":"page","icon":"history-edu","page":"map_excerpts,%id%"},
+        {"label":"Illustrations","type":"page","icon":"image","page":"interview_illustrations,%id%"},
         {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }},
         {"type":"plugin","plugin":"interviewer_update","label":"Update" }
     ],
@@ -129,8 +129,8 @@
                 {
                     "folder": "desktop",
                     "label": "Desktop",
-                    "width": 800,
-                    "height": 800,
+                    "width": 969,
+                    "height": 969,
                     "crop": true,
                     "retina": true
                 },
