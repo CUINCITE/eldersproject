@@ -30,19 +30,23 @@
                             <span class="sr-only">Go to the interview</span>
                         </a>
 
-                        <div class="interviews__left col-span-5">
+                        <div class="interviews__left col-span-6">
                             <div class="collection_author">
                                 <h3 class="collection_author__name">{{ item.label }}</h3>
-                                <h4 class="collection_author__title">{{ item.narrators[0].occupation }}</h4>
+                                <h4 class="collection_author__title">{{ item.narrators[0].occupation }}t</h4>
                             </div>
+                            <!--
                             <p class="interviews__state desktop-only">{{ item.narrator_location }}</p>
+                            -->
                         </div>
 
                         <div class="interviews__right col-span-3 col-start-7">
                             <p class="interviews__text"> {{ item.lead }}</p>
+                            <!--
                             {% if not collection_page %}
                             <p class="interviews__collection desktop-only">{{ item.interviewer_name }} Collection</p>
                             {% endif %}
+                            -->
                         </div>
 
                         <div class="interviews__box col-span-3 col-start-10">

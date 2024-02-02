@@ -1,7 +1,5 @@
 .collection_author {
-
     &--huge {
-
         .collection_author__name {
 
             @include breakpoint(desktop) {
@@ -76,12 +74,12 @@
         text-transform: uppercase;
 
         @include breakpoint(desktop) {
-            @include font-size(50, 38);
-            @include letter-spacing(-1.25, 50);
-    
-            padding-top: rem(17);
+            @include font-size(58, 38);
+            @include letter-spacing(-1.45, 58);
+
+            padding-top: rem(22);
             margin-left: rem(-6);
-        } 
+        }
 
         @include breakpoint(tablet) {
             @include font-size(49, 68);
@@ -96,7 +94,6 @@
 
             padding-top: rem(18);
         }
-
     }
 
 
@@ -132,9 +129,11 @@
 
     &__title {
         @extend .collection_author__collection;
-        
+
         @include breakpoint(desktop) {
-            @include font-size(17, 1.05);
+            @include font-size(19, 1.05);
+            @include letter-spacing(-0.19, 19);
+
             max-width: unset;
             margin-top: rem(7);
         }
@@ -154,7 +153,7 @@
             margin-top: rem(2);
             margin-bottom: rem(24);
         }
-        
+
         &::before {
             all: unset;
         }
