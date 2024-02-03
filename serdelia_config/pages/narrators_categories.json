@@ -7,7 +7,8 @@
     "layout":
     {
         "type":"grid",            
-        "settings":{"cards":true,"height":100,"width":3}
+        "settings":{"cards":true,"height":100,"width":3},
+        "html":"<b>{{html.label}}</b><br><small>{{html.keywords}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
 
     },
     
@@ -27,6 +28,9 @@
         },
         {
             "field":"keywords","label":"Keywords","list":true
+        },
+        {
+            "label":"amount","list":true,"field":"amount"
         },
         {
             "label": "Url",

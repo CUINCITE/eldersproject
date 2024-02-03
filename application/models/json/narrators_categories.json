@@ -26,6 +26,9 @@
             "field": "label"
         },
         {
+            "label":"amount","list":true,"field":"amount"
+        },
+        {
             "field":"keywords","label":"Keywords","list":true
         },
         {

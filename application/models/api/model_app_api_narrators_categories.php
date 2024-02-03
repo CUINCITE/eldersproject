@@ -19,9 +19,15 @@ class model_app_api_narrators_categories
     public function rest($method, $params)
     {
         $empty=[];
-        $cats=$this->parent->getJsonModel('narrators_categories');
+        $c=$this->parent->getJsonModel('narrators_categories');
+        $cats=[];
+        foreach ($c as $k=>$v) $cats[$v['id']]=$v;
+        
         foreach ($cats as $k=>$v)
+        {
             $cats[$k]['keywords']=explode(',',strtolower($cats[$k]['keywords']));
+            $cats[$k]['amount']=0;
+        }
 
         $items=$this->parent->getJsonModel('narrators');
         $i=0;
@@ -39,10 +45,16 @@ class model_app_api_narrators_categories
             {
                 $i++;
                 $c=array_unique($c);
+                foreach ($c as $k2=>$v2)
+                    $cats[$v2]['amount']++;
+
                 $this->parent->putJsonModel('narrators',['narrators_categories'=>$c],['id'=>$v['id']]);
             } else $empty[]=$v['occupation'];
             
         }
+
+        foreach ($cats as $k=>$v)
+            $this->parent->putJsonModel('narrators_categories',['amount'=>$v['amount']],['id'=>$v['id']]);
 
         return['count'=>$i,'empty'=>$empty];
     }
