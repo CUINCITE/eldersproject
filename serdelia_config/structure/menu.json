@@ -32,23 +32,43 @@
     {
         "label": "Pages",
         "submenu": [
+            {"label":"Homepage","page":"pages_modules,1"},
+            {"label":"Collections","page":"pages_modules,10"},
+            {"label":"Interviews","page":"pages_modules,13"},
             {
                 "label": "About",
                 "submenu": [
                     {"label":"About page"},
                     {"label":"FAQ","page":"faq"},
                     {"label":"People - sections","page":"people_sections"},
-                    {"label":"People - portraits","page":"people"}
+                    {"label":"People - portraits","page":"people"},
+                    {
+                        "label": "Logotypes",
+                        "page": "logotypes"
+                    }        
                 ]
-            }
+            },
+            {"label":"Contact","page":"pages_modules,15"}
         ]
+    },
+    {
+        "label": "Collections","page": "interviewers"
     },
     {
         "label": "Interviews",
         "submenu": [
             {
-                "label": "Interviews",
+                "label": "All Interviews",
                 "page": "interviews"
+            },
+            {
+                "label": "All Sessions",
+                "page": "sessions_all"
+            },
+            {},
+            {
+                "label": "Topics",
+                "page": "topics"
             },
             {},
             {
@@ -56,37 +76,18 @@
                 "page": "narrators"
             },
             {
-                "label": "Interviewers (Collections)",
-                "page": "interviewers"
+                "label": "Narrators Categories",
+                "page": "narrators_categories"
             },
             {},
             {
-                "label": "Sessions (all)",
-                "page": "sessions_all"
-            },
-            {
-                "label": "Narrators Categories",
-                "page": "narrators_categories"
+                "label":"Locations","page":"s_states"
             }
+            
+            
         ]
     },
-    {
-        "label": "Topics",
-        "page": "topics"
-    },
-    {
-        "label": "About page",
-        "submenu": [
-            {
-                "label": "FAQ",
-                "page": "faq"
-            },
-            {
-                "label": "Logotypes",
-                "page": "logotypes"
-            }
-        ]
-    },
+    
     {
         "label": "Admin",
         "submenu": [

@@ -1,7 +1,7 @@
 {
     "table": "interviews",
     "label": {
-        "page": "Interviews",
+        "page": "All Interviews",
         "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
     },
     "layout-temp": {
@@ -50,12 +50,12 @@
         {
             "label": "CMS ID",
             "edit": false,
-
+            "tab": "Interview",
             "field": "ID",
             "list": true
         },
         {
-            "tab": "Interview",
+            
             "label": "Narrators",
             "field": "narrators",
             "required": true,

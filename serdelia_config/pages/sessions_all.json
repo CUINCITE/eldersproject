@@ -2,7 +2,7 @@
     "table": "sessions",
     "disable":["add"],
     "label": {
-        "page": "Sessions (All)",
+        "page": "All Sessions",
         "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.name}} {{parent.surname}}, #{{nr}}</em>{% endif %}"
     },
     "layout-temp":

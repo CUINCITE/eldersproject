@@ -46,6 +46,7 @@ class model_app_api extends model_app
             case "player":
             case "slugify":
             case "download":
+            case "narrators_categories":
 
                 require_once("api/model_app_api_" . $action . ".php");
                 $class = 'model_app_api_' . $action;
