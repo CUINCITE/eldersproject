@@ -15,6 +15,11 @@ class model_app_pages_modules_collection extends model_app_pages_modules
     {
         $m['item'] = $this->parent->getJsonModel('interviewers', ['active' => 1, 'slug' => $url[1]], true);
 
+        if (!$m['item']) {
+            $this->parent->set404();
+            return null;
+        }
+
         // display higher res cover
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
 
@@ -25,7 +30,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         // get interviews
         $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
 
-        //temporary workaround - ORM error
+//        temporary workaround - ORM error
         foreach ($m['items'] as $k=>$v) {
             foreach ($v['interviewers'] as $k2=>$v2) {
                 if ($v2['id'] != $m['item']['id']) {

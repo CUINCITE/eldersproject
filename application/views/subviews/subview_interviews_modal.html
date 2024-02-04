@@ -20,7 +20,7 @@
                     <legend>Topics</legend>
                     {% for topic in topics %}
                         <div>
-                            <input type="checkbox" name="topics" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }}"{% if topic.selected %} checked {% endif %}>
+                            <input type="checkbox" name="topics" id="topic-{{ topic.slug }}" value="{{ topic.slug }}" data-name="{{ topic.label }} ({{topic.count_interviews}})"{% if topic.selected %} checked {% endif %}>
                             <label for="topic-{{ topic.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ topic.label }}</span></label>
                         </div>
                     {% endfor %}

@@ -34,11 +34,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="collection__data">
-                                            <div class="collection__states">
-                                               {{ item.locations }}
+                                        <div class="collection__data" style="max-width:none;margin-left:5px;margin-right:5px">
+                                            <div class="collection__states" style="font-family: Pangram Sans;font-size:28px">
+                                               {{ item.collection_title | nl2br }}
                                             </div>
-                                            <div class="collection__text">{{ item.lead }}</div>
+                                            <div class="collection__text" style="font-size:1rem">{{ item.lead }}</div>
                                             <div class="collection__button">
                                                 {% set reversedModifier = (loop.index is even) ? "reversed" : "" %}
                                                 {% include "./components/c_link.html" with {

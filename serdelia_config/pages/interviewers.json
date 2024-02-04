@@ -1,13 +1,13 @@
 {
     "table": "interviewers",
     "label": {
-        "page": "Interviewers (Collections)",
+        "page": "Collections",
         "edit": "{% if not last_name %}New person{% else %}Interviewers: <em>{{first_name}} {{last_name}}</em>{% endif %}"
     },
     "layout": {
         "type": "grid",
         "count": 100,
-        "html": "{{html.image|raw}}<br>{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div><br><span class='badge badge-secondary'>{{html.amount}}</span>"
+        "html": "{{html.image|raw}}<br>{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div><small><br>{{html.collection_title|raw}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
     },
     "model": {
         "label": "{{last_name}}, {{first_name}}"
@@ -52,6 +52,7 @@
             "hr": true,
             "label": "Collection Title",
             "field": "collection_title",
+            "list":true,
             "type": "text",
             "settings": {
                 "rows": 2
@@ -125,8 +126,8 @@
             "folder": "/public/upload/interviewers",
             
             "list": {
-                "height": 140,
-                "folder": "desktop_x2",
+                "height": 160,
+                "folder": "desktop",
                 "temp-layout": "cover",
                 "src_blank": "blank.png"
             },

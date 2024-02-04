@@ -13,7 +13,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     public function updateModel($m, $url)
     {
-
+        
         // return 404 if a user hits single interview url and no interview is found
         if (!empty($url[1])) {
             $item = $this->parent->getJsonModel('interviews_simple', ['active' => 1, 'slug' => $url[1]], true);
@@ -35,7 +35,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         // startingPage & numberOfItems variables are used in getJsonModel method later
         $startingPage = $isPartial ? $page : 1;
         $numberOfItems = $isPartial ? $itemsPerPage : $page * $itemsPerPage;
-
+        
 
         //filters in the query
         $input = [
@@ -56,7 +56,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             $m[$param] = $this->filterUpdate($this->parent->dictGet($dictionaries[0]), $filter);
 
         }
-
+        
+        
         // define sort variables
         $m['sort'] = $this->handleSortVariables();
 
@@ -82,7 +83,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 //        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
 
         $m['items'] = $this->addTagsToInterviews($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
-
+        
         return $m;
     }
 
@@ -170,7 +171,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             foreach ($items as $k => $v)
                 $items[$k]['selected'] = in_array($v['id'], $filters);
         }
-
+        
         return $items;
     }
 
@@ -210,7 +211,9 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     private function getFilterUrl($filter): array
     {
-        return ['type' => 'interview_filter', 'slug' => $filter['slug'], 'filter_type' => $filter['filter_type']];
+        //return ['type' => 'interview_filter', 'slug' => $filter['slug'],
+        //    'filter_type' => $filter['filter_type']];
+        return['type'=>'interviews',$filter['filter_type']=>[$filter['slug']]];
     }
 
     private function addTagsToInterviews($items, $topics, $states) {
@@ -219,25 +222,33 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
             array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
         );
-
+        
         $newItems = [];
         $lastLetter = null;
         $i = 0;
 
         $modifiers = ['pink', 'pale-purple'];
+        $minimum_distance=8;
+        $last_index=-4;
 
         foreach ($items as $k=>$v) {
 
-            if ($lastLetter !== strtoupper(substr($v['label_sort'], 0, 1))) {
+            if ($lastLetter !== strtoupper(substr($v['label_sort'], 0, 1)))
+            {
                 $lastLetter = strtoupper(substr($v['label_sort'], 0, 1));
                 $i++;
 
-                if ($i > 1) {
+                if ($i > 1 && ($k-$last_index>=$minimum_distance))
+                {
+                    $last_index=$k;
                     $filter = array_shift($filters);
-                    $filter['url'] = $this->getFilterUrl($filter);
-                    $k = array_rand($modifiers);
-                    $filter['modifier'] = $modifiers[$k];
-                    $newItems[] = $filter;
+                    if ($filter)
+                    {
+                        $filter['url'] = $this->getFilterUrl($filter);
+                        $k = array_rand($modifiers);
+                        $filter['modifier'] = $modifiers[$k];
+                        $newItems[] = $filter;
+                    }
                 }
             }
 

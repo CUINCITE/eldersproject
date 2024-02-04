@@ -29,26 +29,43 @@
                 <div class="collection_hero__cover">
                     {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
                 </div>
-                <div class="collection_hero__area desktop-only">
-                    {{item.collection_title}}
-                </div>
-                <span class="collection_hero__scroll">SCROLL DOWN TO READ MORE</span>
+                {#<div class="collection_hero__area desktop-only">
+                    {{item.locations}}
+                </div>#}
             </div>
         </div>
 
-        <!--
-        <div class="grid">
-            <div class="col-span-12">
-                <div class="collection_hero__copy no-padding">
-                    <div class="collection_hero__intro" >
-                        {% include "/subviews/subview_text.html" with {text: "<p>#{item.lead}</p>" } %}
-                        {% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}
+        <div class="box">
+            <div class="grid">
+                <div class="col-span-12">
+                    <div class="collection_hero__copy no-padding">
+                        <div class="collection_hero__intro">
+                            <div class="text">
+                                <p
+                                    style="max-width:30rem;font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">
+                                    {{item.collection_title|nl2br}}</p>
+                            </div>
+                            {#{% include "/subviews/subview_text.html" with {text: "<p>#{item.collection_title}</p>" }
+                            %}#}
+                            {#{% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" }
+                            %}#}
+                        </div>
+                        {#<span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>#}
                     </div>
 
                 </div>
             </div>
         </div>
-        -->
+    </div>
+</section>
 
+<section class="module module--claim box" data-scroll="box" style="padding-top:150px;padding-bottom:100px">
+    <div class="box__bg"></div>
+    <div class="grid">
+        <div class="col-span-12">
+            <div class="claim" style="font-size:3rem;" data-scroll="claim">
+                <p>{{item.lead}}</p>
+            </div>
+        </div>
     </div>
 </section>

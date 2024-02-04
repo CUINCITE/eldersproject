@@ -7,8 +7,7 @@
     "layout":
     {
         "type":"grid",            
-        "settings":{"cards":true,"height":100,"width":3},
-        "html":"<b>{{html.label}}</b><br><small>{{html.keywords}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
+        "settings":{"cards":true,"height":100,"width":3}
 
     },
     
@@ -27,10 +26,10 @@
             "field": "label"
         },
         {
-            "field":"keywords","label":"Keywords","list":true
+            "label":"amount","list":true,"field":"amount"
         },
         {
-            "label":"amount","list":true,"field":"amount"
+            "field":"keywords","label":"Keywords","list":true
         },
         {
             "label": "Url",

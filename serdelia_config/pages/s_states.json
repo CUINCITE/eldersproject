@@ -4,7 +4,9 @@
     "model":{"label":"{{label}} ({{slug}})"},
     "fields" :
     [
-        {"field":"label"},
-        {"field":"slug"}
+        {"field":"label","list":true,"label":"Label"},
+        {"field":"type","label":"Type","type":"select","list":true},
+        {"field":"slug"},
+        { "label" : "Publish", "field": "active", "type":"boolean", "list": "edit","hr":true }
     ]
 }

@@ -36,7 +36,7 @@ class model_app_pages extends model_app
 		
 		if ($page)
 		{
-			$this->ogSet($page['title'],$page['description'],$page['image']['medium']);
+			$this->ogSet(@$page['title'],@$page['description'],@$page['image']['medium']);
 			if (substr($urlArr[0],0,17)=='serdelia-preview-') $urlArr=explode('/',$page['url']);
 			$page=$this->updatePage($page,$urlArr,$params['get']);
 		}
