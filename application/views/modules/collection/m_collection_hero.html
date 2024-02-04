@@ -13,13 +13,13 @@
                         <div class="collection_hero__author">
                             <div class="collection_author collection_author--huge">
                                 <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
-                                
+
                                 <h4 class="collection_author__collection">Collection</h4>
                             </div>
                         </div>
 
                         <div class="collection_hero__area desktop-hide">
-                            {{item.locations}}
+                            {{item.collection_title}}
                         </div>
                     </div>
                 </div>
@@ -30,24 +30,25 @@
                     {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
                 </div>
                 <div class="collection_hero__area desktop-only">
-                    {{item.locations}}
+                    {{item.collection_title}}
                 </div>
+                <span class="collection_hero__scroll">SCROLL DOWN TO READ MORE</span>
             </div>
         </div>
 
-        <div class="box">
-            <div class="grid">
-                <div class="col-span-12">
-                    <div class="collection_hero__copy no-padding">
-                        <div class="collection_hero__intro" >
-                            {% include "/subviews/subview_text.html" with {text: "<p>#{item.lead}</p>" } %}
-                            {% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}
-                        </div>
-                        <span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>
+        <!--
+        <div class="grid">
+            <div class="col-span-12">
+                <div class="collection_hero__copy no-padding">
+                    <div class="collection_hero__intro" >
+                        {% include "/subviews/subview_text.html" with {text: "<p>#{item.lead}</p>" } %}
+                        {% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" } %}
                     </div>
+
                 </div>
             </div>
         </div>
+        -->
 
     </div>
 </section>

@@ -4,7 +4,6 @@
 
 
     &--reversed {
-
         .text_wrapper__photo, .text_wrapper__illustration {
             @include breakpoint(desktop) {
                 left: calc(50% + #{map-get($grid-offset, desktop)});
@@ -26,7 +25,7 @@
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-start)
 
-                text-align: left;
+                    text-align: left;
 
                 &::before {
                     left: 0;
@@ -99,7 +98,7 @@
             p {
 
                 @include breakpoint(desktop) {
-                    max-width: rem(316);
+                    max-width: rem(438);
                 }
 
                 @include breakpoint(tablet) {
@@ -111,11 +110,11 @@
                 @include breakpoint(desktop) {
                     margin-top: rem(25);
                 }
-    
+
                 @include breakpoint(tablet) {
                     margin-top: rem(25);
                 }
-    
+
                 @include breakpoint(phone) {
                     margin-top: rem(25);
                 }
@@ -327,7 +326,7 @@
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end)
 
-            text-align: right;
+                text-align: right;
             max-width: rem(182);
             padding-top: rem(16);
         }
@@ -335,6 +334,7 @@
         @include breakpoint(tablet) {
             max-width: rem(260);
             padding-top: rem(16);
+
             // margin-top: rem(16);
         }
 

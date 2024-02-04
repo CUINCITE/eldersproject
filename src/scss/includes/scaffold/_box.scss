@@ -46,12 +46,12 @@
             padding-inline-start: rem(11);
         }
 
-        .heading--aside {
+        .heading--aside:not(.heading--collection) {
             padding-inline-start: rem(9);
         }
 
         .no-padding {
-            .text, .heading--aside {
+            .text, .heading--aside:not(.heading--collection) {
                 padding-inline-start: rem(0);
             }
         }
@@ -59,14 +59,14 @@
 }
 
 .module[data-scroll="box"] {
-    
+
     @include breakpoint(not-desktop) {
         position: relative;
         z-index: 1;
 
         // > div {
         //     z-index: 1;
-        // } 
+        // }
 
         // .box__bg {
         //     z-index: unset;

@@ -32,6 +32,9 @@ body {
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
+
+    // for collection's page
+    counter-reset: collection-counter;
 }
 
 body,
@@ -40,10 +43,10 @@ html {
 
     &:has(.modal.is-open) { overflow: hidden; }
 
-    &:has(.has-menu-open) { 
+    &:has(.has-menu-open) {
         @include breakpoint(not-desktop) {
             overflow: hidden;
-        } 
+        }
     }
 }
 
