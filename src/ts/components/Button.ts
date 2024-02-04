@@ -6,28 +6,41 @@ import { debounce } from '../Utils';
 
 gsap.registerPlugin(SplitText);
 
+
+interface IButtonSettings {
+    sibling?: boolean; // If the button/link is a sibling of animated items (eg link it's empty itself)
+}
+
 export class Button extends Component {
 
+    private button: HTMLElement;
     private splitText: any;
     private horizontal: HTMLElement;
     private vertical: HTMLElement;
     private triangle: HTMLElement;
     private arrow: HTMLElement;
     private tl: gsap.core.Timeline;
+    private settings: IButtonSettings;
 
     constructor(protected view: HTMLElement) {
         super(view);
+
+        this.settings = { ...{ sibling: false }, ...JSON.parse(this.view.getAttribute('data-options')) };
+
+        this.button = this.settings.sibling ? this.view.parentElement : this.view;
         this.bind();
 
         window.addEventListener('resize', debounce(() => this.tl.invalidate()));
     }
 
     private bind(): void {
-        this.splitText = new SplitText(this.view.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
-        this.horizontal = this.view.querySelector('.js-arrow-horizontal');
-        this.vertical = this.view.querySelector('.js-arrow-vertical');
-        this.triangle = this.view.querySelector('.js-arrow-triangle');
-        this.arrow = this.view.querySelector('.js-arrow');
+
+
+        this.splitText = new SplitText(this.button.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
+        this.horizontal = this.button.querySelector('.js-arrow-horizontal');
+        this.vertical = this.button.querySelector('.js-arrow-vertical');
+        this.triangle = this.button.querySelector('.js-arrow-triangle');
+        this.arrow = this.button.querySelector('.js-arrow');
 
         this.setupTimeline();
         this.setupListeners();
@@ -39,9 +52,9 @@ export class Button extends Component {
         this.tl && this.tl.kill();
         this.tl = gsap.timeline({ paused: true, defaults: { ease: easing } });
 
-        if (this.view.classList.contains('button--simple')) {
-            if (this.view.classList.contains('button--reversed')) {
-                const arrowExtra = this.view.querySelector('.js-arrow-extra');
+        if (this.button.classList.contains('button--simple')) {
+            if (this.button.classList.contains('button--reversed')) {
+                const arrowExtra = this.button.querySelector('.js-arrow-extra');
 
                 this.tl
                     .to(this.splitText.words[0], {
@@ -60,7 +73,7 @@ export class Button extends Component {
                     }, 'arrow');
 
             } else {
-                const duplicateText = this.view.querySelector('.js-button-duplicate-text');
+                const duplicateText = this.button.querySelector('.js-button-duplicate-text');
 
                 this.tl
                     .to(this.splitText.words[0], {
@@ -106,7 +119,7 @@ export class Button extends Component {
                 //     delay: -0.3,
                 // }, 'shrink');
             }
-        } else if (this.view.classList.contains('button--draw')) {
+        } else if (this.button.classList.contains('button--draw')) {
 
             const mm = gsap.matchMedia();
 
