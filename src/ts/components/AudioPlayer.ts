@@ -74,6 +74,7 @@ export class AudioPlayer extends Video {
     private elements: IAudioPlayerResponseElements;
     private playerButtons: NodeListOf<HTMLButtonElement>;
     private isInitialized = false;
+    private closeTimeout: any;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -162,6 +163,23 @@ export class AudioPlayer extends Video {
         this.elements.nextBtn && this.elements.nextBtn.addEventListener('click', this.onNextClick);
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
         this.elements.urlLink && this.elements.urlLink.addEventListener('click', this.onUrlClick);
+
+        this.view.addEventListener('mouseleave', this.onMouseLeave);
+        this.view.addEventListener('mouseenter', this.onMouseEnter);
+    };
+
+
+
+    private onMouseLeave = (e): void => {
+        this.closeTimeout = setTimeout(() => {
+            this.minimize();
+        }, 5000);
+    };
+
+
+
+    private onMouseEnter = (e): void => {
+        clearTimeout(this.closeTimeout);
     };
 
 
@@ -225,6 +243,9 @@ export class AudioPlayer extends Video {
 
 
     private minimize = (): void => {
+        // when lightbox is open, do not minimize the player - it should be always expanded
+        if (Lightbox.isOpen) return;
+
         gsap.to(this.ui.playerBar, {
             yPercent: 0,
             duration: 0.7,
