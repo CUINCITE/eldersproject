@@ -10,9 +10,9 @@
                 </div>
             </div>
         </section>
-        <div class="collections_images__content">
+        <div class="collections_images__content" data-scroll="collections">
             <div class="col-span-1 col-start-2">
-                <div class="collections_images__names" xxxdata-component="AccordeonList" data-close-others="true">
+                <div class="collections_images__names js-scroll-names">
 
                     <ul class="names">
                         {% for item in items %}
@@ -55,7 +55,7 @@
 
                 </div>
 
-                <div class="collections_images__cards">
+                <div class="collections_images__cards js-scroll-cards">
                     <ul class="cards">
                         <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
                         <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
