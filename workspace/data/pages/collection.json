@@ -17,6 +17,15 @@
 
         },
         {
+            "type": "collection_location",
+            "location": "Portland, Oregon and the Pacific Northwest",
+            "text": {
+                "size": "large",
+                "text": "<p>Though often dubbed 'America's whitest big city,' Portland has a remarkable history of Black life. This collection chronicles said history, tracing key moments of disaster and displacement, but more importantly, the enduring bonds that have come to define Black life in the Pacific Northwest.</p>"
+            }
+
+        },
+        {
             "type": "quote_panel",
             "video": {
                 "src": "http://assets.huncwot.net/video.mp4",
