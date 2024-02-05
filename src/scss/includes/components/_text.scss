@@ -271,6 +271,24 @@
     a {
         display: inline-block;
         margin-top: rem(3);
+
+        @include breakpoint(desktop) {
+            text-decoration: none;
+            background: 
+                linear-gradient(to right, currentColor, currentColor),
+                linear-gradient(to right, transparent, transparent);
+
+            background-size: 0 0.08em, 100% 0.08em;
+            background-position: 100% 98%, 0 98%;
+            background-repeat: no-repeat;
+            transition: background-size .4s $ease-custom;
+
+            &:hover,
+            &:focus {
+              background-size: 100% 0.08em, 0 0.08em;
+              background-position: 0% 98%, 0 98%;
+            }
+        }
     }
 
 
