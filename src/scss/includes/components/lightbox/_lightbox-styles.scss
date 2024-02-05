@@ -150,7 +150,8 @@
         display: block !important;
 
         &.is-active { 
-            color: var(--aside-text-color); 
+            color: var(--aside-text-color);
+            pointer-events: none;
         }
 
         @include breakpoint(desktop) {
@@ -160,6 +161,7 @@
                 span {
                     margin-block: trim-font(1);
                     padding-block: rem(5);
+                    user-select: none;
                 }
             }
         }
@@ -806,7 +808,7 @@
         @include breakpoint(desktop) {
             @include hover {
                 path {
-                    fill: var(--color-grey200);
+                    fill: var(--alt-text-color);
                 }
             }
         }
