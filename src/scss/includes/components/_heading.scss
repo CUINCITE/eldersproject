@@ -10,6 +10,11 @@
         @include letter-spacing(-6.12, 204);
     }
 
+    @include breakpoint(tablet) {
+        @include font-size(132, 1);
+        @include letter-spacing(-5.94, 132);
+    }
+
     @include breakpoint(phone) {
         @include font-size(132, 140.253);
         @include letter-spacing(-5.94, 132);

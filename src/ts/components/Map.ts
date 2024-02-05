@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import mapboxgl from 'mapbox-gl';
 import { gsap } from 'gsap/dist/gsap';
-
+import { debounce } from '../Utils';
 import { Component } from './Component';
-import { easing, local } from '../Site';
+import { breakpoint, easing, local } from '../Site';
 import { AudioPlayer } from './AudioPlayer';
 
 export const token = local ? 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA'
@@ -36,6 +36,7 @@ export class Map extends Component {
     private activeLocation: HTMLElement;
     private interviewsList: HTMLElement;
     private marker: mapboxgl.Marker;
+    private contentInjected: boolean;
 
 
     constructor(protected view: HTMLElement) {
@@ -54,8 +55,11 @@ export class Map extends Component {
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
         this.locations = this.view.querySelectorAll('.js-location');
         this.interviewsList = this.view.querySelector('.js-interviews-list');
+        this.contentInjected = false;
 
         this.init();
+
+        window.addEventListener('resize', debounce(() => breakpoint.phone && !this.contentInjected && this.getTabContent()));
     }
 
 
@@ -112,6 +116,8 @@ export class Map extends Component {
             this.setMarker(this.activeLocation);
             this.buildInterviews(this.activeLocation);
         });
+
+        breakpoint.phone && this.getTabContent();
     };
 
 
@@ -154,8 +160,13 @@ export class Map extends Component {
 
     private goToLocation = (location: HTMLElement): void => {
         if (this.marker) this.marker.remove();
-        this.locations.forEach(l => l.classList.remove('is-active'));
+        this.locations.forEach(l => {
+            l.classList.remove('is-active');
+            l.parentElement.classList.remove('is-active-location');
+        });
+
         location.classList.add('is-active');
+        location.parentElement.classList.add('is-active-location');
         this.removeCurrentInterviews();
 
         const coords = location.getAttribute('data-coords').split(',').map(el => parseFloat(el));
@@ -167,8 +178,50 @@ export class Map extends Component {
             zoom,
         });
         this.activeLocation = location;
+
     };
 
+
+
+    private getTabContent = (): void => {
+        this.locations.forEach(l => {
+            const coords = l.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+
+            const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${coords[1]},${coords[0]},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+            const img = `<img src='${url}' class='map-image js-map-image' />
+                        <div class="map__pin">
+                            <div class="map__tooltip map__tooltip--marker">${l.dataset.title}</div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">
+                                <circle cx="31.6143" cy="31" r="31" fill="#548068"/>
+                                <circle cx="31.6142" cy="31" r="19.5185" fill="#B79258"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M31.6143 7.73926C44.3168 7.73926 54.6143 18.2046 54.6143 31.1143C54.6143 49.2193 39.0554 53.9793 31.6143 75.7393C25.526 53.9793 8.61426 47.1793 8.61426 31.1143C8.61426 18.2046 18.9117 7.73926 31.6143 7.73926Z" fill="#B79258"/>
+                                <circle cx="31.6143" cy="30.7393" r="16" fill="#DBB9B1"/>
+                            </svg>
+                            <div class="map__tooltip-location">${l.dataset.location}</div>
+                        </div>`;
+
+            l.parentElement.querySelector('.js-map-image-wrapper')?.insertAdjacentHTML('beforeend', img);
+
+            const interviews: IMapInterview[] = JSON.parse(l.dataset.interviews) as IMapInterview[];
+            [...interviews].forEach(interview => {
+                const interviewHtml = `<li class="map__interview">
+                                            <button class="map__button" data-audio-player=${interview.id}></button>
+                                            <div class="map__interview-wrap">
+                                                <div class="map__interview-data">
+                                                    <div class="map__interview-title">${interview.title}</div>
+                                                    <div class="map__interview-duration">${interview.duration}</div>
+                                                </div>
+                                                <div class="map__interview-button">Play <br> interview</div>
+                                            </div>
+                                        </li>`;
+
+                l.parentElement.querySelector('.js-interviews-inner-list')?.insertAdjacentHTML('beforeend', interviewHtml);
+            });
+        });
+
+        AudioPlayer.instance.bindButtons();
+        this.contentInjected = true;
+    };
 
 
     private removeCurrentInterviews = (): void => {
