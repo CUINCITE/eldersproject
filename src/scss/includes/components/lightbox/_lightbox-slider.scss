@@ -63,17 +63,67 @@
         }
 
 
-        button {
+        span {
             opacity: 0;
             transition: opacity .25s $ease-custom;
+        }
+
+        svg {
+            *:nth-child(1) {
+                scale: 0;
+                transition: scale .2s $ease-custom, translate .2s $ease-custom;
+                transform-origin: 60% center;
+            }
+
+            *:nth-child(2) {
+                scale: 1 0;
+                transition: scale .2s 0.15s $ease-custom;
+                transform-origin: left center;
+            }
+
+            *:nth-child(3) {
+                scale: 0 1;
+                transition: scale .2s 0.30s $ease-custom;
+                transform-origin: 10% center;
+            }
+        }
+
+        .button {
+            @include breakpoint(desktop) {
+                @include hover {
+                    svg {
+                        *:nth-child(1) {
+                            translate: 5% 0;
+                        }
+                    }
+                }
+            }
         }
 
 
         @include hover {
             .button {
-                opacity: 1;
-                pointer-events: all;
+                span {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+                *:nth-child(1) {
+                    scale: 1;
+                    transition: scale .2s 0.3s $ease-custom, translate .2s $ease-custom;
+                }
+    
+                *:nth-child(2) {
+                    scale: 1;
+                    transition: scale .2s 0.15s $ease-custom;
+                }
+    
+                *:nth-child(3) {
+                    scale: 1;
+                    transition: scale .2s 0s $ease-custom;
+                }
             }
+
         }
     }
 }

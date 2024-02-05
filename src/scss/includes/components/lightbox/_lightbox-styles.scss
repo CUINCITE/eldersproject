@@ -806,7 +806,7 @@
         @include breakpoint(desktop) {
             @include hover {
                 path {
-                    fill: var(--color-grey200);
+                    fill: var(--alt-text-color);
                 }
             }
         }

@@ -1,1 +1,5 @@
-<svg viewBox="0 0 74 42" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M66.46 20.86L44.184 4.2v33.319l22.274-16.66z" fill="#1B1B1B"/><path stroke="#1B1B1B" d="M40.685 4.2v33.6M7.385 20.5h33.6"/></svg>
+<svg viewBox="0 0 74 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M66.4591 20.8593L44.1846 4.19995V37.5186L66.4591 20.8593Z" fill="#1B1B1B"/>
+<line x1="40.6846" y1="4.19995" x2="40.6846" y2="37.7999" stroke="#1B1B1B"/>
+<line x1="7.38477" y1="20.5" x2="40.9848" y2="20.5" stroke="#1B1B1B"/>
+</svg>
