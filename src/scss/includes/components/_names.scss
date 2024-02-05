@@ -42,10 +42,6 @@
         @include full;
         z-index: 2;
 
-        &:focus {
-            background: red;
-        }
-
 
         // @include hover {
         //     ~ .names__expand {
