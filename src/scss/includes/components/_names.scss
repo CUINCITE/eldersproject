@@ -14,7 +14,7 @@
 
         &.is-closed {
             .names__copy {
-                height: 0 !important;
+                // height: 0 !important;
             }
 
             .names_link {
@@ -41,6 +41,10 @@
     &__link {
         @include full;
         z-index: 2;
+
+        &:focus {
+            background: red;
+        }
 
 
         // @include hover {
@@ -115,6 +119,9 @@
             letter-spacing: unset;
             overflow: hidden;
             padding-right: rem(17);
+            min-height: 50vh;
+            justify-content: flex-end;
+
 
             .text {
                 text-align: end;
