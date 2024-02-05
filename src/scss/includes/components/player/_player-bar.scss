@@ -256,6 +256,11 @@
     &__scrubber-wrap {
         height: 100%;
         width: auto;
+
+
+        .player--video & {
+            height: rem(24);
+        }
     }
 
 
@@ -304,6 +309,9 @@
         .player[style] & {
             filter: brightness(0.8);
         }
+
+
+        .player--video & { background: currentColor; }
     }
 
 

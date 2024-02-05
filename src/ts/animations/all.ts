@@ -10,10 +10,11 @@ import { sticker } from './scroll/sticker';
 import { illustration } from './scroll/illustration';
 import { line } from './scroll/line';
 import { people } from './scroll/people';
+import { collections } from './scroll/collections';
 
 
 export const animations = { fadeUp };
 
-export const scrolls = { box, hero, interviews, claim, sticker, illustration, line, people };
+export const scrolls = { box, collections, hero, interviews, claim, sticker, illustration, line, people };
 
 export const hovers = {};

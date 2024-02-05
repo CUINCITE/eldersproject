@@ -1,12 +1,28 @@
 .map {
     @include flex(row, space-between, stretch);
-    @include font-size(30, 1);
-    @include letter-spacing(-0.75, 30);
     @include font-family(compressed);
 
-    height: var(--app-height);
     text-transform: uppercase;
 
+    @include breakpoint(desktop) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        height: var(--app-height);
+    }
+
+    @include breakpoint(tablet) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        height: calc(var(--app-height) * 0.66);
+    }
+
+
+    @include breakpoint(phone) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+    }
 
 
     &__wrap {
@@ -30,17 +46,50 @@
     &__aside {
         @include flex(column, space-between, stretch);
 
-        flex-basis: vw(308);
         flex-shrink: 0;
         background-color: var(--color-box);
-        border-right: 1px solid var(--color-bg);
+
+        @include breakpoint(desktop) {
+            flex-basis: vw(308);
+            border-right: 1px solid var(--color-bg);
+        }
+
+        @include breakpoint(tablet) {
+            flex-basis: vw(254, tablet);
+            border-right: 1px solid var(--color-bg);
+        }
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
     }
 
 
 
     &__heading {
-        padding-top: rem(38);
-        padding-left: rem(16);
+        @include breakpoint(desktop) {
+            padding-top: rem(38);
+            padding-left: rem(16);
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: map-get($grid-offset, tablet);
+            padding-left: map-get($grid-offset, tablet);
+
+            .heading {
+                margin-block: trim-font(1);
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(8);
+            padding-left: map-get($grid-offset, phone);
+
+            .heading {
+                margin-block: trim-font(140.253 / 132);
+                margin-left: rem(-5);
+            }
+        }
     }
 
 
@@ -48,16 +97,72 @@
     &__locations {
         text-transform: uppercase;
         counter-reset: map-locations;
-        overflow-y: auto;
+
+        @include breakpoint(desktop) {
+            overflow-y: auto;
+        }
+
+        @include breakpoint(tablet) {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        @include breakpoint(phone) {
+            flex-grow: 1;
+        }
+    }
+
+
+
+    &__image {
+        &_wrapper {
+            @include breakpoint(phone) {
+                height: vw(294, phone);
+                object-fit: contain;
+                position: relative;
+
+                img {
+                    object-fit: cover;
+                    object-position: center;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+
+
+    &__pin {
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, center);
+
+            position: absolute;
+            top: 43%;
+            left: 50%;
+            translate: -50% -50%;
+            color: $background-light-offwhite;
+            width: max-content;
+        }
     }
 
 
 
     &__location {
         border-top: 1px solid var(--color-bg);
-        padding: 0 rem(16);
         position: relative;
 
+        @include breakpoint(desktop) {
+            padding: 0 rem(16);
+        }
+
+        @include breakpoint(tablet) {
+            padding: 0 rem(16) 0 rem(28);
+        }
+
+        @include breakpoint(phone) {
+
+        }
 
         &-button {
             @include full;
@@ -70,10 +175,25 @@
 
 
     &__title {
-        @include flex(row, flex-start, center);
+        @include flex(row, flex-start, flex-start);
 
-        min-height: rem(64);
+        @include breakpoint(desktop) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+        }
 
+        @include breakpoint(tablet) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(20);
+            padding-inline: map-get($grid-offset, phone);
+            margin-block: trim-font(1);
+        }
 
         &::before {
             @include font-settings(200, 100);
@@ -81,6 +201,18 @@
             counter-increment: map-locations;
             font-weight: 200;
             font-feature-settings: "ss03" on;
+
+            @include breakpoint(desktop) {
+                margin-right: rem(5);
+            }
+
+            @include breakpoint(tablet) {
+                margin-right: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                margin-right: rem(5);
+            }
         }
     }
 
@@ -90,6 +222,10 @@
         @include flex(column, flex-end, stretch);
 
         gap: 1px;
+
+        @include breakpoint(phone) {
+            margin-top: 1px;
+        }
     }
 
 
@@ -98,20 +234,47 @@
         background-color: var(--color-box);
         position: relative;
 
+        @include breakpoint(phone) {
+            background-color: $color-black;
+            color: var(--color-box);
+        }
+
 
         &-wrap {
             @include flex;
         }
 
 
-        &-data {
-            @include font-size(30, 21);
+        &-data { 
             @include flex(column, space-between, flex-start);
 
-            gap: rem(5);
-            width: rem(286);
-            padding: 0 rem(14);
-            padding-top: rem(4);
+            @include breakpoint(desktop) {
+                @include font-size(30, 1);
+
+                gap: rem(5);
+                width: rem(286);
+                padding: 0 rem(14);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(30, 1);
+
+                gap: rem(5);
+                width: rem(286);
+                padding: 0 rem(14);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+
+                gap: rem(6);
+                padding: map-get($grid-offset, phone);
+            }
+        }
+
+
+        &-title {
+            margin-block: trim-font(1);
         }
 
 
@@ -120,15 +283,46 @@
             @include font-family(normal);
 
             font-weight: 200;
+
+            @include breakpoint(desktop) {
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(tablet) {
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(28, 1);
+
+                margin-block: trim-font(1);
+            }
         }
 
 
         &-button {
-            @include font-size(30, 24);
-
             background-color: var(--color-green);
             color: var(--color-pink);
-            padding: rem(16) rem(15) rem(13);
+
+            @include breakpoint(desktop) {
+                @include font-size(30, 24);
+
+                padding: rem(16) rem(15) rem(13);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(30, 24);
+
+                padding: rem(16) rem(15) rem(13);
+            }
+
+            @include breakpoint(phone) {
+                @include flex();
+                @include font-size(30, 24);
+
+                align-self: stretch;
+                padding-inline: map-get($grid-offset, phone);
+            }
         }
     }
 
@@ -139,18 +333,10 @@
     }
 
 
-
-    &__description {
-        @include font-size(14, 16);
-        @include font-family(normal);
-        @include font-settings(400, 100);
-
-        letter-spacing: normal;
-        text-transform: none;
+    &__content {
         display: grid;
         grid-template-rows: 0fr;
         transition: grid-template-rows .4s $ease-out;
-
 
         .is-active ~ & { grid-template-rows: 1fr; }
 
@@ -162,28 +348,82 @@
     }
 
 
+    &__description {
+        @include font-family(normal);
+        @include font-settings(400, 100);
 
-    &__marker {}
+        letter-spacing: normal;
+        text-transform: none;
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 16);
+
+            padding-inline: map-get($grid-offset, phone);
+        }
+
+        p { padding-bottom: rem(18); }
+    }
+
+
+
+    &__marker {
+
+    }
 
 
 
     &__tooltip {
         @include font-family(compressed);
-        @include font-size(30, 1);
-        @include letter-spacing(-0.75, 30);
 
         text-transform: uppercase;
 
+        @include breakpoint(desktop) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.75, 30);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.75, 30);
+        }
 
         &-location {
             @include font-family(normal, 400);
             @include font-settings(400, 100);
-            @include font-size(14, 16);
 
             letter-spacing: normal;
             position: absolute;
-            inset: calc(100% + #{rem(79)}) 0 auto;
             text-transform: none;
+
+            @include breakpoint(desktop) {
+                @include font-size(14, 16);
+
+                inset: calc(100% + #{rem(79)}) 0 auto;
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(14, 16);
+                
+                inset: calc(100% + #{rem(79)}) 0 auto;
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(14, 16);
+                
+                text-align: center;
+                width: max-content;
+                top: calc(100% + #{rem(12)});
+                left: 50%;
+                translate: -50% 0;
+            }
         }
     }
 

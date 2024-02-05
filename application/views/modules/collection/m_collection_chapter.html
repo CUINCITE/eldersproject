@@ -6,7 +6,7 @@
 
                 {% if label %}
                     <div class="text_wrapper__title js-wrapped-title text_wrapper__column col-span-6 col-start-{{ reversed ? '7' : '1' }}{{ reversed ? '' : ' no-padding' }}">
-                        {% include "/components/c_heading.html" with {label:label, aside:true, size:"small-plus"} %}
+                        {% include "/components/c_heading.html" with {label:label, aside:true, size:"small-plus", modifiers: ["collection"]} %}
                     </div>
                 {% endif %}
 

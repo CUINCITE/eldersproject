@@ -43,11 +43,11 @@
         z-index: 2;
 
 
-        @include hover {
-            ~ .names__expand {
-                grid-template-rows: 1fr;
-            }
-        }
+        // @include hover {
+        //     ~ .names__expand {
+        //         grid-template-rows: 1fr;
+        //     }
+        // }
 
         // .button {
         //     @include font-family(compressed);
@@ -131,11 +131,14 @@
     &__expand {
         text-align: right;
         display: grid;
-        grid-template-rows: 0fr;
+        grid-template-rows: 1fr;
         transition: grid-template-rows .3s $ease-out;
 
 
         & > div { overflow: hidden; }
+
+
+        .collections_images__content--simple & { display: none; }
     }
 
 

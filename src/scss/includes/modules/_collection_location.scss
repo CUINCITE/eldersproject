@@ -1,0 +1,19 @@
+.collection_location {
+    padding-top: rem(15);
+    padding-bottom: rem(154);
+
+
+
+    &__locations {
+        @include font-family(reclined);
+        @include font-size(22, 19);
+        @include letter-spacing(0.52, 22);
+        @include flex(row, flex-start, center);
+
+        gap: rem(6);
+        text-transform: uppercase;
+
+
+        svg { margin-top: -3px; }
+    }
+}

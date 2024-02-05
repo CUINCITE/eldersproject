@@ -44,7 +44,7 @@
         &_wrapper {
             @include breakpoint(not-desktop) {
                 margin-top: 0;
-                
+
                 .grid {
                     height: 100%;
                     position: relative;
@@ -62,8 +62,9 @@
             position: absolute;
             width: vw(626);
             right: vw(40);
-            top: 32%;
-            translate: 0 -50%;
+            bottom: rem(100);
+
+            // translate: 0 -50%;
 
             .illustration {
                 transform: rotate(-10.2deg);
@@ -80,7 +81,7 @@
             @include breakpoint(tablet) {
                 width: vw(520, tablet);
                 left: vw(40, tablet);
-            } 
+            }
 
             @include breakpoint(phone) {
                 width: vw(290, phone);
@@ -90,7 +91,10 @@
 
         &_wrapper {
             @include breakpoint(desktop) {
+                @include flex(column, space-between, flex-start);
+
                 position: relative;
+                padding: rem(20) var(--grid-margin);
             }
 
             @include breakpoint(not-desktop) {
@@ -98,7 +102,7 @@
             }
         }
     }
- 
+
 
     &__copy {
 
@@ -132,7 +136,7 @@
             @include breakpoint(phone) {
                 @include flex(row, flex-start, center)
 
-                margin-bottom: rem(-5);
+                    margin-bottom: rem(-5);
             }
         }
     }
@@ -146,7 +150,6 @@
             @include font-size (14, 1);
 
             margin-block: trim-font(0.95);
-            padding-bottom: rem(16);
         }
 
         @include breakpoint(tablet) {
@@ -170,14 +173,12 @@
 
         text-transform: uppercase;
 
-        @include breakpoint(desktop) { 
-            @include font-size (20, 0.95);
-            @include letter-spacing (-0.5, 20);
+        @include breakpoint(desktop) {
+            @include font-size (30, 28);
+            @include letter-spacing (-0.75, 30);
 
             margin-block: trim-font(0.95);
-            position: absolute;
-            bottom: rem(20);
-            left: var(--grid-margin);
+            max-width: rem(370);
         }
 
         @include breakpoint(tablet) {
