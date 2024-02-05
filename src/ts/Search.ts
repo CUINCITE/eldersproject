@@ -138,32 +138,33 @@ export class Search {
 
         // set max-height of livesearch wrap - prevent growing outside viewport
         const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
+        const tl = gsap.timeline();
 
-        gsap.timeline()
-            .to(this.liveList.parentElement, {
-                duration: !this.isLiveShown ? 0.8 : 0,
-                // height,
-                ease: easing,
-            })
+        tl.to(this.liveList.parentElement, {
+            duration: !this.isLiveShown ? 0.8 : 0,
+            // height,
+            ease: easing,
+        })
             .fromTo(
                 this.liveLi,
-                { y: window.innerHeight },
+                { y: this.isLiveShown ? 0 : window.innerHeight },
                 {
                     y: 0,
                     duration: 0.9,
                     stagger: 0.1,
                     ease: easing,
                 },
-            )
-            .fromTo(
-                this.allLink,
-                { opacity: 0 },
-                {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: easing,
-                },
             );
+
+        this.allLink && tl.fromTo(
+            this.allLink,
+            { opacity: this.isLiveShown ? 1 : 0 },
+            {
+                opacity: 1,
+                duration: 0.5,
+                ease: easing,
+            },
+        );
 
         this.isLiveShown = true;
     }
