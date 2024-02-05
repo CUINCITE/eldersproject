@@ -1,6 +1,10 @@
 <section class="module module--collection_hero">
     <div class="collection_hero">
 
+        <div class="collection_hero__cover">
+            {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+        </div>
+
         <div class="collection_hero__wrapper">
 
             <div class="about_hero__logo desktop-hide">
@@ -26,9 +30,6 @@
             </div>
 
             <div class="box collection_hero__cover_wrapper">
-                <div class="collection_hero__cover">
-                    {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
-                </div>
                 {#<div class="collection_hero__area desktop-only">
                     {{item.locations}}
                 </div>#}
@@ -59,15 +60,21 @@
     </div>
 </section>
 
-<section class="module module--collection_location box">
-    <div class="collection_location text_wrapper__module">
-        <div class="collection_location__wrapper">
+ <section class="module module--collection_location">
+    <div class="collection_location">
+        <div class="collection_location__claim box" data-scroll="box">
+            <div class="box__bg"></div>
             <div class="grid">
-                <div class="col-span-6">
-                    <p class="collection_location__locations">[[svg::pin]]{{location}}</p>
+                <div class="col-span-12">
+                    {% include "./components/c_claim.html" with { modifier: "collection", text: item.lead } %}
                 </div>
-                <div class="col-span-6 col-start-7">
-                    {% include "/subviews/subview_text.html" with {text:item.lead} %}
+            </div>
+        </div>
+        <div class="collection_location__pin box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid">
+                <div class="col-span-12">
+                    <p class="collection_location__locations">[[svg::pin]]{{item.locations}}</p>
                 </div>
             </div>
         </div>

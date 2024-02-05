@@ -1,19 +1,23 @@
  <section class="module module--collection_hero">
     <div class="collection_hero">
 
+        <div class="collection_hero__cover">
+            {% include "./subviews/subview_illustration.html" with { shadow: illustration.shadow, image: illustration.image } %}
+        </div>
+
         <div class="collection_hero__wrapper">
 
             <div class="about_hero__logo desktop-hide">
                 {% include "./components/c_logo_box.html" %}
             </div>
-            
+
             <div class="box collection_hero__author_wrapper">
                 <div class="grid">
                     <div class="col-span-12">
                         <div class="collection_hero__author">
-                            {% include "./components/c_collection_author.html" with { 
+                            {% include "./components/c_collection_author.html" with {
                                 name: name,
-                                size: "huge", 
+                                size: "huge",
                                 collection: " ",
                                 title: "" } %}
                         </div>
@@ -25,14 +29,7 @@
                 </div>
             </div>
 
-            <div class="box collection_hero__cover_wrapper">
-                <div class="collection_hero__cover">
-                    {% include "./subviews/subview_illustration.html" with { shadow: illustration.shadow, image: illustration.image } %}
-                </div>
-                <div class="collection_hero__area desktop-only">
-                    {{area|raw}}
-                </div>
-            </div>
+            <div class="box collection_hero__cover_wrapper"></div>
         </div>
 
         <div class="box">
@@ -40,10 +37,21 @@
                 <div class="col-span-12">
                     <div class="collection_hero__copy no-padding">
                         <div class="collection_hero__intro">
+                            <div class="text">
+                                <p style="max-width:30rem;font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">
+                                    Black History in Portland:<br>
+                                    Enduring Bonds<br>
+                                    in the Pacific Northwest
+                                </p>
+                            </div>
+                        <!--
                             {% include "./subviews/subview_text.html" with text %}
                             {% include "components/c_link.html" with { url: "/workspace/interviews", text: "Go to interviews" } %}
+                        -->
                         </div>
-                        <span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>
+                        <!--
+                        <span class="collection_hero__scroll">SCROLL DOWN TO READ MORE</span>
+                        -->
                     </div>
                 </div>
             </div>

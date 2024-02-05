@@ -60,7 +60,9 @@
 
         @include breakpoint(desktop) {
             position: absolute;
-            width: vw(626);
+            z-index: 1;
+            width: calc(var(--app-height) * .87);
+            height: calc(var(--app-height) * .87);
             right: vw(40);
             bottom: rem(100);
 

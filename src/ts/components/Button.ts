@@ -47,16 +47,17 @@ export class Button extends Component {
     }
 
     private setupTimeline(): void {
-        if ([this.splitText.words[0], this.horizontal, this.triangle, this.arrow, this.vertical].some(el => !el)) return;
+        if ([this.vertical, this.horizontal, this.triangle, this.arrow].some(el => !el)) return;
 
         this.tl && this.tl.kill();
         this.tl = gsap.timeline({ paused: true, defaults: { ease: easing } });
 
         if (this.button.classList.contains('button--simple')) {
+
             if (this.button.classList.contains('button--reversed')) {
                 const arrowExtra = this.button.querySelector('.js-arrow-extra');
 
-                this.tl
+                this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.arrow.offsetWidth * 1.08,
                         duration: 0.4,
@@ -75,7 +76,7 @@ export class Button extends Component {
             } else {
                 const duplicateText = this.button.querySelector('.js-button-duplicate-text');
 
-                this.tl
+                this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.splitText.words[0].offsetWidth * 1.06,
                         duration: 0.4,
@@ -127,34 +128,35 @@ export class Button extends Component {
                 gsap.set(this.vertical, { scaleY: 0 });
                 gsap.set(this.horizontal, { scaleX: 0 });
                 gsap.set(this.triangle, { scale: 0 });
-            });
 
-            const duration = 0.3;
+                const duration = 0.3;
 
-            this.tl
-                .to(this.vertical, {
-                    scaleY: 1,
-                    duration: duration * 0.5,
-                    transformOrigin: 'top center',
-                })
-                .to(this.horizontal, {
-                    scaleX: 1,
-                    duration,
-                    transformOrigin: 'left center',
-                }, 'arrow')
-                .fromTo(
-                    this.triangle,
-                    { x: () => -this.horizontal.offsetWidth },
-                    {
-                        x: 0,
-                        scale: 1,
+                this.tl
+                    .to(this.vertical, {
+                        scaleY: 1,
+                        duration: duration * 0.5,
+                        transformOrigin: `${this.arrow.classList.contains('arrow--reversed') ? 'bottom' : 'top'} center`,
+                    })
+                    .to(this.horizontal, {
+                        scaleX: 1,
                         duration,
                         transformOrigin: 'left center',
-                    },
-                    'arrow',
-                );
+                    }, 'arrow')
+                    .fromTo(
+                        this.triangle,
+                        { x: () => -this.horizontal.offsetWidth },
+                        {
+                            x: 0,
+                            scale: 1,
+                            duration,
+                            transformOrigin: 'left center',
+                        },
+                        'arrow',
+                    );
+            });
+
         } else {
-            this.tl
+            this.splitText.words[0] && this.tl
                 .to(this.splitText.words[0], {
                     yPercent: 150,
                     rotate: -15,
@@ -173,6 +175,7 @@ export class Button extends Component {
                     duration: 0.65,
                 }, 'arrow');
         }
+
     }
 
     private setupListeners(): void {

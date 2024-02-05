@@ -124,12 +124,18 @@
 
 
     &__buttons {
+        @include flex(column, flex-start, center);
+
         grid-area: buttons;
         background: var(--aside-body-color);
-        padding-top: rem(20);
+        padding-top: rem(12);
         border-top: 1px solid var(--color-box);
 
         li { text-align: center; }
+
+        button {
+            @include hoverable-link;
+        }
     }
 
 
@@ -140,15 +146,78 @@
         text-transform: uppercase;
         text-align: center;
         color: var(--alt-text-color);
+        position: relative;
+        display: block !important;
 
-        &.is-active { color: var(--aside-text-color); }
+        &.is-active { 
+            color: var(--aside-text-color);
+            pointer-events: none;
+        }
+
+        @include breakpoint(desktop) {
+            > span {
+                display: block !important;
+
+                span {
+                    margin-block: trim-font(1);
+                    padding-block: rem(5);
+                    user-select: none;
+                }
+            }
+        }
 
 
-        &--mementos { @include font-size(29, 17); @include letter-spacing(-0.87, 29); }
-        &--info { @include font-size(69, 55); @include letter-spacing(-2.07, 69); }
-        &--transcript { @include font-size(26, 26); @include letter-spacing(-0.78, 26); }
-        &--downloads { @include font-size(25, 26); @include letter-spacing(-0.75, 25); }
-        &--related { @include font-size(38, 31); @include letter-spacing(-0.76, 38); }
+
+        &--mementos {
+            margin-top: rem(-5);
+
+            span > span {
+                @include breakpoint(desktop) {
+                    @include font-size(29, 1); 
+                    @include letter-spacing(-0.87, 29); 
+                }
+            }
+        }
+
+
+        &--info { 
+            span > span {
+                @include breakpoint(desktop) {
+                    @include font-size(69, 1); 
+                    @include letter-spacing(-2.07, 69); 
+                }
+            }
+        }
+
+
+        &--transcript { 
+            span > span {
+                @include breakpoint(desktop) {
+                    @include font-size(26, 1); 
+                    @include letter-spacing(-0.78, 26); 
+                }
+            }
+        }
+
+
+        &--downloads { 
+            span > span {
+                @include breakpoint(desktop) {
+                    @include font-size(25, 1); 
+                    @include letter-spacing(-0.75, 25); 
+                }
+            }
+        }
+
+
+        &--related { 
+            span > span {
+                @include breakpoint(desktop) {
+                    @include font-size(38, 1); 
+                    @include letter-spacing(-0.76, 38); 
+                }
+            }
+        }
     }
 
 
@@ -524,6 +593,24 @@
 
                 text-transform: uppercase;
                 margin-bottom: rem(13);
+                overflow: hidden;
+                position: relative;
+
+                @include breakpoint(desktop) {
+                    @include hover {
+                       .lightbox__downloads-arrow {
+                            transition: translate 0.3s ease;
+
+                            &:nth-child(1) {
+                                translate: 0 100%;
+                            }
+
+                            &:nth-child(2) {
+                                translate: 0 0;
+                            } 
+                       }
+                    }
+                }
             }
         }
 
@@ -531,8 +618,18 @@
         &-arrow {
             padding-top: 1px;
             margin-right: rem(8);
+            transition: translate 0s;
 
             svg { vertical-align: top; }
+
+            & + & {
+                position: absolute;
+                translate: 0 -100%;
+
+                @include breakpoint(not-desktop) {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -624,20 +721,20 @@
             inset: rem(28) 100% auto auto;
             margin-right: rem(7);
 
-            // TEMP - todo animation on icon
-            opacity: 0;
-            transition: opacity .3s $ease-custom;
+            // // TEMP - todo animation on icon
+            // opacity: 0;
+            // transition: opacity .3s $ease-custom;
         }
 
 
         &-link {
             @include full;
 
-            @include hover {
-                ~ .lightbox__related-arrow {
-                    opacity: 1;
-                }
-            }
+            // @include hover {
+            //     ~ .lightbox__related-arrow {
+            //         opacity: 1;
+            //     }
+            // }
         }
     }
 
@@ -695,12 +792,24 @@
 
         svg {
             margin-top: rem(-6);
+
+            path {
+                transition: fill 0.3s ease;
+            }
         }
 
 
         &.is-playing {
             span {
                 transform: translateY(100%);
+            }
+        }
+
+        @include breakpoint(desktop) {
+            @include hover {
+                path {
+                    fill: var(--alt-text-color);
+                }
             }
         }
     }

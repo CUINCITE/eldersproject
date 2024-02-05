@@ -1,6 +1,14 @@
 .collection_location {
-    padding-top: rem(15);
-    padding-bottom: rem(154);
+    &__claim {
+        padding: rem(15) 0;
+    }
+
+
+
+    &__pin {
+        padding-top: rem(13);
+        padding-bottom: rem(175);
+    }
 
 
 

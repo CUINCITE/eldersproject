@@ -372,6 +372,10 @@
             @include font-size(50, 50);
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(20, 22);
+        }
+
         @include breakpoint(phone) {
             @include font-size(20, 22);
         }
@@ -385,6 +389,11 @@
                 @include breakpoint(desktop) {
                     padding-top: vw(7);
                     margin-bottom: vw(8);
+                }
+
+                @include breakpoint(tablet) {
+                    padding-top: vw(7, tablet);
+                    margin-bottom: vw(12, tablet);
                 }
 
                 @include breakpoint(phone) {
