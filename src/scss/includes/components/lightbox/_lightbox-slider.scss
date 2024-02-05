@@ -77,13 +77,13 @@
 
             *:nth-child(2) {
                 scale: 1 0;
-                transition: scale 0.25s $ease-custom;
+                transition: scale 0.25s 0.05s $ease-custom;
                 transform-origin: left center;
-            }
+            } 
 
             *:nth-child(3) {
                 scale: 0 1;
-                transition: scale 0.25s 0.2s $ease-custom;
+                transition: scale 0.25s 0.25s $ease-custom;
                 transform-origin: 10% center;
             }
         }
@@ -110,7 +110,7 @@
 
                 *:nth-child(1) {
                     scale: 1;
-                    transition: scale 0.25s 0.2s $ease-custom, translate 0.2s $ease-custom;
+                    transition: scale 0.25s 0.25s $ease-custom, translate 0.2s $ease-custom;
                 }
     
                 *:nth-child(2) {
