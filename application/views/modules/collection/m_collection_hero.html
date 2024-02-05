@@ -1,6 +1,10 @@
 <section class="module module--collection_hero">
     <div class="collection_hero">
 
+        <div class="collection_hero__cover">
+            {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+        </div>
+
         <div class="collection_hero__wrapper">
 
             <div class="about_hero__logo desktop-hide">
@@ -26,9 +30,6 @@
             </div>
 
             <div class="box collection_hero__cover_wrapper">
-                <div class="collection_hero__cover">
-                    {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
-                </div>
                 {#<div class="collection_hero__area desktop-only">
                     {{item.locations}}
                 </div>#}
@@ -59,12 +60,22 @@
     </div>
 </section>
 
-<section class="module module--claim box" data-scroll="box" style="padding-top:150px;padding-bottom:100px">
-    <div class="box__bg"></div>
-    <div class="grid">
-        <div class="col-span-12">
-            <div class="claim" style="font-size:3rem;" data-scroll="claim">
-                <p>{{item.lead}}</p>
+ <section class="module module--collection_location">
+    <div class="collection_location">
+        <div class="collection_location__claim box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid">
+                <div class="col-span-12">
+                    {% include "./components/c_claim.html" with { modifier: "collection", text: item.lead } %}
+                </div>
+            </div>
+        </div>
+        <div class="collection_location__pin box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid">
+                <div class="col-span-12">
+                    <p class="collection_location__locations">[[svg::pin]]{{item.locations}}</p>
+                </div>
             </div>
         </div>
     </div>
