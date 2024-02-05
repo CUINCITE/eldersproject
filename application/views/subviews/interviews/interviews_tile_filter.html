@@ -1,5 +1,5 @@
-<div class="interviews-grid__tile interviews-grid__tile--group interviews-grid__tile--{{item.modifier}}">
-    <a class="interviews__link" href="{{item.url}}" data-filters data-component="Button" data-options='{"sibling": true}'></a>
+<div class="interviews-grid__tile interviews-grid__tile--group interviews-grid__tile--{{item.modifier}}" data-component="Button">
+    <a class="interviews__link" href="{{item.url}}" data-filters data-component="Load" data-options='{"contentSelector": "#interviews", "scrollTo": ".module--interviews"}'></a>
     <h3 class="interviews__name"># {{item.label}}</h3>
 
     <button class="button button--small button--overflow">
