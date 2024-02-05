@@ -3,7 +3,7 @@
     <div class="collections_images">
         {% include "modules/m_heading.html" with { heading: heading } %}
 
-        <div class="collections_images__content" data-scroll="collections">
+        <div class="collections_images__content {% if simple %}collections_images__content--simple{% endif %}" {% if not simple %}data-scroll="collections"{% endif %}>
             <div class="col-span-1 col-start-2">
                 <div class="collections_images__names js-scroll-names">
                     {% include "components/c_names.html" with { names: names } %}
