@@ -28,7 +28,7 @@
               <span class="search__svg js-menu-search-svg">[[svg::search]]</span>
             </label>
           </div>
-          <button aria-label="Clear Search" type="reset" class="search__button search__button--clear js-search-clear"><i class="search__arrow">[[svg::arrow-player-small]]</i> Clear Search</button>
+          <button aria-label="Clear Search" type="reset" class="search__button search__button--clear js-search-clear" data-gtm='{"event": "clear-search-btn-click"}'><i class="search__arrow">[[svg::arrow-player-small]]</i> Clear Search</button>
           <div class="livesearch js-livesearch"></div>
         </form>
         <button class="search__exit js-search-close"></button>
@@ -56,7 +56,7 @@
     <ul class="menu__footer">
       {% for item in scaffold.footer %}
       <li class="menu__link js-menu-link">
-        <a href="{{item.url}}">
+        <a href="{{item.url}}" data-gtm='{"event":"menu_item_click"}'>
           <span>
             <span>{{item.label}}</span>
             <span>{{item.label}}</span>
@@ -66,5 +66,5 @@
       {% endfor %}
     </ul>
   </div>
-  <button aria-label="Close menu" class="menu__close js-menu-close" data-gtm='{"event":"menu_exit_click"}'><i class="icon-close"></i></button>
+  <button aria-label="Close menu" class="menu__close js-menu-close" data-gtm='{"event":"menu_footer_link_click"}'><i class="icon-close"></i></button>
 </div>

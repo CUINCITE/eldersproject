@@ -15,8 +15,12 @@
                                 {% set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
                                 {% for letter in letters %}
                                     <li class="interviews-grid__letter">
-                                        <button class="js-letter" aria-label="scroll to letter {{ letter }}"
-                                                data-letter="{{ letter }}">{{ letter }}</button>
+                                        <button
+                                            class="js-letter"
+                                            aria-label="scroll to letter {{ letter }}"
+                                            data-letter="{{ letter }}"
+                                            data-gtm='{"event": "{{ letter }}-letter-btn-click"}'
+                                            >{{ letter }}</button>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -30,7 +34,7 @@
                             <div class="interviews-grid__controls js-controls">
 
                                 <div class="interviews-grid__header">
-                                    <button type="button js-modal" aria-controls="modal">
+                                    <button type="button js-modal" aria-controls="modal" data-gtm='{"event": "filters-btn-click"}'>
                                         <span class="sr-only">show filters</span>
                                         <i class="icon-filters">
                                             <span class="row">
@@ -93,12 +97,12 @@
                                         </div>
                                         <div class="desktop-only">
                                             <div class="interviews-grid__buttons">
-                                                <button type="button" aria-label="show grid view" data-view="grid">
+                                                <button type="button" aria-label="show grid view" data-view="grid" data-gtm='{"event": "show-grid-btn-click"}'>
                                                     <i class="icon-grid">
                                                         <span></span><span></span><span></span><span></span>
                                                     </i>
                                                 </button>
-                                                <button type="button" aria-label="show list view" data-view="list">
+                                                <button type="button" aria-label="show list view" data-view="list" data-gtm='{"event": "show-list-btn-click"}'>
                                                     <i class="icon-list">
                                                         <span></span><span></span><span></span>
                                                     </i>
