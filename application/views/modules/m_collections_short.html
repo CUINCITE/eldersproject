@@ -22,7 +22,7 @@
                                         <button class="names__button js-accordeon-button">
                                             <span class="sr-only">Toggle visibility of the content</span>
                                         </button>
-                                        <span class="names__box">{{ item.label }}</span>
+                                        <span class="names__box"{% if params.simple2 %}style="margin-top:10px"{% endif %}>{{ item.label }}</span>
                                     </div>
 
 
