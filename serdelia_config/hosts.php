@@ -36,7 +36,10 @@ $cfg_domains = [
 		],
 		"api_keys" =>
 		[
-			'youtube' => getenv('YOUTUBE_TOKEN')
+			'youtube' => getenv('YOUTUBE_TOKEN'),
+			'mapbox'=> [
+                'token' => getenv('MAPBOX_TOKEN')
+			]
 		],
 		"s3"=>$s3
 	]

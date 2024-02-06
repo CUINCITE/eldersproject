@@ -6,7 +6,17 @@
     "page":"Map Locations",
     "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
   },
-  "layouts":
+  "buttons_page":
+  [
+    {"type":"plugin","plugin":"refresh"}
+  ],
+  "buttons_edit":
+  [
+      {"label":"GPS Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"lat":"gps_lat","lng":"gps_lng","address":"address","name":"label"}
+      }
+  ],
+"layouts":
   [
     {
       "type":"list"
@@ -96,6 +106,7 @@
       "field": "active",
       "type": "boolean",
       "label": "Active",
+      "search":true,
       "list": "edit"
     }
     
