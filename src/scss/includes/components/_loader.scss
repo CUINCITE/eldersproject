@@ -34,6 +34,12 @@
         @include font-family(compressed);
         @include font-size(240, 1);
         @include letter-spacing(-8.4, 240);
+
+
+        @media (max-height: 719px) {
+            @include font-size(210, 1);
+            @include letter-spacing(-7.5, 210);
+        }
     }
 
 

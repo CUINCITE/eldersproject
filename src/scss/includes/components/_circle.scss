@@ -11,6 +11,15 @@ $circles-colors: "green", "red", "pink";
     opacity: 0;
     display: none;
 
+
+    @include breakpoint(desktop) {
+        @media (max-height: 719px) {
+            width: rem(212);
+            height: rem(212);
+            margin-left: rem(-14);
+        }
+    }
+
     // only at homepage
     body.is-homepage & { display: block; }
 

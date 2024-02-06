@@ -1,7 +1,4 @@
 .hero {
-
-
-
     &__wrap {
         position: relative;
 
@@ -9,7 +6,7 @@
             @include flex(column, flex-start, stretch);
             min-height: var(--app-height);
         }
-    }  
+    }
 
 
 
@@ -22,16 +19,22 @@
         @include breakpoint(desktop) {
             @include font-size(240, 169);
             @include letter-spacing(-10.8, 240);
+
+
+            @media (max-height: 719px) {
+                @include font-size(210, 144);
+                @include letter-spacing(-9.5, 210);
+            }
         }
 
         @include breakpoint(tablet) {
-            @include font-size(220, .72); 
-            @include letter-spacing(-9.5, 220); 
+            @include font-size(220, .72);
+            @include letter-spacing(-9.5, 220);
         }
 
         @include breakpoint(phone) {
-            @include font-size(118.8, 85.7); 
-            @include letter-spacing(-10.8, 240); 
+            @include font-size(118.8, 85.7);
+            @include letter-spacing(-10.8, 240);
         }
     }
 
@@ -49,13 +52,13 @@
         text-transform: uppercase;
 
         @include breakpoint(desktop) {
-            @include font-size(20, 31.5);
-            @include letter-spacing(-0.6, 20);
+            @include font-size(24, 1.5);
+            @include letter-spacing(-0.75, 24);
         }
 
         @include breakpoint(tablet) {
             @include font-size(28, 1);
-            @include letter-spacing(-0.9, 28); 
+            @include letter-spacing(-0.9, 28);
 
             padding-top: rem(14);
         }
@@ -130,11 +133,10 @@
 
     &__logo {
         @include breakpoint(phone) {
-            
-            svg { 
-                width: vw(80, phone); 
+            svg {
+                width: vw(80, phone);
                 margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
-                height: auto; 
+                height: auto;
             }
         }
     }
@@ -170,5 +172,5 @@
 
             padding-left: rem(9);
         }
-    } 
+    }
 }
