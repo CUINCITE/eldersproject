@@ -57,6 +57,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
+        $m['map']=$this->getMap($m['item']['id']);
+
         return $m;
     }
 
@@ -88,6 +90,29 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }, $content);
         }
         return $content;
+    }
+
+    private function getMap($collection)
+    {
+        $interviews=$this->parent->getJsonModel('interviews',['active'=>1],false,null,null,['fields'=>['label','slug']]);        
+        $items=$this->parent->getJsonModel('map_locations',['active'=>1,'collection'=>$collection]);
+        
+        foreach ($items as $k=>$v)
+            if ($v['quotes'])
+            foreach ($v['quotes'] as $kk=>$vv)
+            {
+                $i=_uho_fx::array_filter($interviews,'label',$vv[0],['first'=>true]);
+                if ($i) $items[$k]['quotes'][$kk]=
+                [
+                    'title'=>$i['label'],
+                    'duration'=>$vv[1],
+                    'id'=>$i['id']
+                ];
+                    else unset($items[$k]['quotes'][$kk]);
+
+            }
+                //[{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;Sharyn Grayson&quot;,&quot;duration&quot;:&quot;00:32:00&quot;,&quot;id&quot;:&quot;20&quot;}]
+        return $items;
     }
 
 }
