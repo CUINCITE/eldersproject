@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__wrap">
-    <button class="header__trigger js-toggle-menu" aria-label="Open Menu">
+    <button class="header__trigger js-toggle-menu" aria-label="Open Menu" data-gtm='{"event":"menu_hamburger_click"}'>
       <div class="hamburger">
         <span class="hamburger__line"></span>
         <span class="hamburger__line"></span>
@@ -39,13 +39,13 @@
         {% for item in scaffold.menu %}
         <li class="menu__item js-menu-item">
           <i class="menu__line js-menu-line"></i>
-          <a href="{{item.url}}" class="js-menu-main-link">
+          <a href="{{item.url}}" class="js-menu-main-link" data-gtm='{"event":"menu_item_click"}'>
             <span class="menu__arrow">
               <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
                 <span class="vertical js-arrow-vertical"></span>
                 <span class="horizontal js-arrow-horizontal"></span>
                 <span class="triangle js-arrow-triangle"></span>
-              </i> 
+              </i>
             </span>
             <span class="menu__text js-menu-label">{{item.label}}</span>
           </a>
@@ -66,5 +66,5 @@
       {% endfor %}
     </ul>
   </div>
-  <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
+  <button aria-label="Close menu" class="menu__close js-menu-close" data-gtm='{"event":"menu_exit_click"}'><i class="icon-close"></i></button>
 </div>

@@ -29,6 +29,7 @@ export class Analytics {
             el.addEventListener('click', e => {
                 const data = JSON.parse((e.currentTarget as HTMLElement).dataset.gtm);
                 this.sendCustomEvent(data);
+                console.log(data);
             });
         });
     }

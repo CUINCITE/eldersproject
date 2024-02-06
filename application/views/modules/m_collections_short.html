@@ -17,7 +17,7 @@
                     <ul class="names">
                         {% for item in items %}
                                 <li class="names__name js-accordeon-item is-closed">
-                                    <a href="{{ item.url }}" class="names__link"></a>
+                                    <a href="{{ item.url }}" class="names__link" data-gtm='{"event": "collection-item-click"}'></a>
                                     <div class="names__author">
                                         <button class="names__button js-accordeon-button">
                                             <span class="sr-only">Toggle visibility of the content</span>
