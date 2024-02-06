@@ -22,13 +22,16 @@
                                         <button class="names__button js-accordeon-button">
                                             <span class="sr-only">Toggle visibility of the content</span>
                                         </button>
-                                        <span class="names__box"{% if params.simple2 %}style="margin-top:10px"{% endif %}>{{ item.label }}</span>
+                                        <span class="names__box"{% if params.simple2 %}style="margin-top:10px"{% endif %}>
+                                            {#<span style="font-size:1.25rem;letter-spacing: 1px;margin-top:-10px">0{{loop.index}}</span>#}
+                                            {{ item.label }}
+                                        </span>
                                     </div>
 
 
                                     <div class="names__expand">
                                         <div class="names__expand-wrap">
-                                            <p class="names__claim" style="font-size:1.25rem">{{ item.collection_title | nl2br }}</p>
+                                            <p class="names__claim" style="font-size:1.25rem;line-height:1.25rem">{{ item.collection_title | nl2br }}</p>
                                         </div>
                                     </div>
                                     {% if params.long %}
@@ -72,9 +75,24 @@
                     </ul>
                 </div>
             </div>
+            
+            {% if params.simple2 %}
+            <div style="position:relative;left:100%;float:right;width:100%">
+                <a href="/collections" class="button button--two_line button--overflow" data-component="Button">
+                    <i class="icon-btn-arrow arrow js-arrow">
+                        <span class="vertical js-arrow-vertical"></span>
+                        <span class="horizontal js-arrow-horizontal"></span>
+                        <span class="triangle js-arrow-triangle"></span>
+                    </i> <span class="button__text js-button-text">Explore <i>All Collections</i></span>
+                </a>
+            </div>
+            {% endif %}
 
             <div class="collections_images__filler col-start-1 col-span-2"></div>
+            
+            
         </div>
 
     </div>
+    
 </section>
