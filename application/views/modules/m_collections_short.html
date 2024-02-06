@@ -10,7 +10,7 @@
                 </div>
             </div>
         </section>
-        <div class="collections_images__content {% if params.simple %}collections_images__content--simple{% endif %}" {% if not params.simple %} data-scroll="collections"{% endif %}>
+        <div class="collections_images__content {% if params.simple %}collections_images__content--simple {% else %} collections_images__content--home{% endif %}" {% if not params.simple %} data-scroll="collections"{% endif %}>
             <div class="col-span-1 col-start-2 collections_images__container">
                 <div class="collections_images__names js-scroll-names">
 
@@ -36,18 +36,20 @@
                                         <!--
                                         <div class="names__link">
 
-                                            <a href="{{ item.url }}" class="button button--simple">
-
-                                                {% include "./components/c_arrow_icon.html" %}
-
-                                                <span>Explore {{ item.amount }} interviews</span>
-                                            </a>
 
                                         </div>
                                         -->
+                                        <button class="button button--simple button--collections">
+
+                                            {% include "./components/c_arrow_icon.html" %}
+
+                                            <span>Explore {{ item.amount }} interviews</span>
+                                        </button>
+                                        <!--
                                         <div class="text">
                                             <p>{{ item.lead }}</p>
                                         </div>
+                                        -->
                                     </div>
                                 </li>
                         {% endfor %}
