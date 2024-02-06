@@ -116,9 +116,9 @@ class model_app_api extends model_app
     //------------------------------------------------------------------------------
     public function captcha($captcha)
     {
-        return true;
         if (!$captcha) return;
         $secret = $this->getApiKeys('google_recaptcha');
+
         if (!$secret) return;
 
 
