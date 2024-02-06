@@ -14,9 +14,10 @@ export const collectionsSimple = (el: HTMLElement) => {
     ScrollTrigger.create({
         trigger: el,
         start: `top ${offset}px`,
-        end: 'bottom bottom',
+        end: 'bottom 92%',
         pin: cardsWrap,
         endTrigger: namesWrap,
+        markers: true,
     });
 
     ScrollTrigger.batch(items, {
