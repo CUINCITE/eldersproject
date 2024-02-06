@@ -2,6 +2,7 @@
     position: relative;
 
     &__cards {
+        will-change: position;
         position: absolute;
         pointer-events: none;
         z-index: 2;
@@ -57,7 +58,7 @@
         &__names:has(li:nth-child(#{$i}):focus-within) + &__cards,
         &__names:has(li:nth-child(#{$i}):focus-within) + div > &__cards, {
             li:nth-last-child(-n + #{$i - 1} + 3) {
-                transform: rotate(-15deg) translate(-90%, -50%);
+                transform: rotate(-15deg) translate(-50vw, -50%);
             }
         }
 
@@ -72,7 +73,7 @@
             }
 
             li:nth-last-child(-n + #{$i - 1}) {
-                transform: rotate(-15deg) translate(-90%, -50%) !important;
+                transform: rotate(-15deg) translate(-50vw, -50%) !important;
             }
         }
 
@@ -88,7 +89,7 @@
             }
 
             li:nth-last-child(-n + #{$i - 1}) {
-                transform: rotate(-15deg) translate(-90%, -50%) !important;
+                transform: rotate(-15deg) translate(-50vw, -50%) !important;
             }
         }
     }

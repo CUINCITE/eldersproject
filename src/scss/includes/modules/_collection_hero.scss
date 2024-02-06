@@ -82,11 +82,13 @@
 
             @include breakpoint(tablet) {
                 width: vw(520, tablet);
+                height: vw(520, tablet);
                 left: vw(40, tablet);
             }
 
             @include breakpoint(phone) {
                 width: vw(290, phone);
+                height: vw(290, phone);
                 left: vw(8, phone);
             }
         }

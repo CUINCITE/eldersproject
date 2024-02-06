@@ -59,9 +59,9 @@
             }
 
             @include breakpoint(phone) {
-                right: -1 * map-get($grid-offset, phone);
+                right: -1 * map-get($grid-offset, phone) - 1px;
                 padding-bottom: vw(21, phone);
-                padding-inline: map-get($grid-offset, phone);
+                // padding-inline: map-get($grid-offset, phone);
                 margin-top: rem(-40);
                 text-align: right;
 
