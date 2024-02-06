@@ -14,7 +14,7 @@
 
     &--extra {
         position: absolute;
-        
+
         @include breakpoint(not-desktop) {
             display: none;
         }
@@ -42,8 +42,8 @@
                 height: rem(10);
             }
 
-            .button--simple & { 
-                display: none; 
+            .button--simple & {
+                display: none;
             }
 
             .button--lightbox & {
@@ -65,8 +65,8 @@
                     height: rem(7);
                 }
             }
-          
-            .button--medium & { 
+
+            .button--medium & {
                 @include breakpoint(desktop) {
                     height: rem(14);
                 }
@@ -78,8 +78,8 @@
                 }
             }
 
-            .button--lightbox.button--reversed & { 
-                inset: 0 auto rem(-6) rem(32); 
+            .button--lightbox.button--reversed & {
+                inset: 0 auto rem(-6) rem(32);
             }
         }
 
@@ -100,9 +100,14 @@
                 width: rem(33);
             }
 
-            .button--medium & { 
+
+            .button--collections & {
+                width: rem(33);
+            }
+
+            .button--medium & {
                 @include breakpoint(desktop) {
-                    width: rem(35); 
+                    width: rem(35);
                 }
             }
 
@@ -112,11 +117,11 @@
                 }
 
                 @include breakpoint(tablet) {
-                    width: rem(15); 
+                    width: rem(15);
                 }
 
                 @include breakpoint(phone) {
-                    width: rem(15); 
+                    width: rem(15);
                 }
             }
 
@@ -140,7 +145,7 @@
             }
 
             @include breakpoint(tablet) {
-                border-width: rem(14) 0 rem(14) rem(17); 
+                border-width: rem(14) 0 rem(14) rem(17);
             }
 
             @include breakpoint(phone) {
@@ -156,6 +161,13 @@
             }
 
 
+            .button--collections & {
+                @include breakpoint(desktop) {
+                    border-width: rem(10) 0 rem(10) rem(14);
+                }
+            }
+
+
             .button--small & {
                 @include breakpoint(desktop) {
                     border-width: rem(7) 0 rem(7) rem(9);
@@ -164,7 +176,7 @@
                 @include breakpoint(tablet) {
                     border-width: rem(8) 0 rem(8) rem(9);
                 }
- 
+
                 @include breakpoint(phone) {
                     border-width: rem(7) 0 rem(7) rem(8);
                 }
@@ -189,7 +201,7 @@
 
     &--reversed {
         margin-top: 0;
-        
+
         span:first-of-type {
             inset: 50% auto auto 0;
         }

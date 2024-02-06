@@ -32,6 +32,12 @@
         font-weight: 800;
         position: relative;
 
+
+        .collections_images__content--home & {
+            padding-top: rem(20);
+        }
+
+
         @include breakpoint(desktop) {
             @include font-size(50, 44.5);
             @include letter-spacing(-2, 50);
@@ -41,6 +47,18 @@
     &__link {
         @include full;
         z-index: 2;
+
+
+        .collections_images__content--home & {
+            & ~ * {
+                opacity: 0.5;
+            }
+
+
+            &.is-visible ~ * {
+                opacity: 1;
+            }
+        }
 
 
         // @include hover {
@@ -114,6 +132,18 @@
 
         .collections_images__content--simple & { display: none; }
 
+        .collections_images__content--home & {
+            padding-bottom: rem(20);
+            padding-right: rem(28);
+
+
+            .button {
+                @include font-size(30, 30);
+                @include letter-spacing(-0.75, 30);
+            }
+        }
+
+
 
         @include breakpoint(desktop) {
             letter-spacing: unset;
@@ -151,11 +181,13 @@
 
 
     &__claim {
-        @include font-family(reclined);
+        // @include font-family(reclined);
+        @include font-family(normal);
         @include font-size(22, 19);
         @include letter-spacing(-0.75, 22);
 
-        max-width: rem(269);
+        // max-width: rem(269);
+        max-width: rem(350);
         margin-left: auto;
         text-transform: uppercase;
         padding-top: rem(5);
