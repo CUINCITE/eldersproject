@@ -107,8 +107,12 @@
     }
 
     &__copy {
-        @include flex(column, flex-start, flex-end)
-            transition: height .3s ease-in;
+        @include flex(column, flex-start, flex-end);
+
+        transition: height .3s ease-in;
+
+
+        .collections_images__content--simple & { display: none; }
 
 
         @include breakpoint(desktop) {
