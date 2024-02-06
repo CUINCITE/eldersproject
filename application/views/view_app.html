@@ -4,6 +4,7 @@
 <head>
     {% include 'scaffold/meta.html' %}
     {% include 'scaffold/favicons.html' %}
+    {% include 'scaffold/critical.html' %}
 
     {% for item in scaffold.langs_alternate %}
     <link rel="alternate" href="{{item.url}}" hreflang="{{item.lang}}">
@@ -45,6 +46,8 @@
     <div id="lightbox" class="lightbox js-lightbox"></div>
 
     {% include 'scaffold/audioplayer.html' %}
+    {% include 'scaffold/loader.html' %}
+    {% include 'scaffold/circle.html' %}
     {% include 'scaffold/templates.html' %}
 
     {% if scaffold.serdelia_edit %}<script src="/serdelia/public/uho6_serdelia6/uho6.js"></script>{% endif %}

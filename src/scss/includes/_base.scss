@@ -32,6 +32,7 @@ body {
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
+    background: var(--color-bg);
 
     // for collection's page
     counter-reset: collection-counter;
@@ -57,7 +58,6 @@ html {
     min-height: var(--app-height);
     position: relative;
     z-index: 1;
-    background: var(--color-bg);
     display: grid;
     grid-template-columns: 1fr var(--GLOBAL-aside-width);
     grid-template-rows: 1fr;
@@ -71,6 +71,12 @@ html {
     @include breakpoint(not-desktop) {
         z-index: unset;
     }
+
+
+    background: var(--color-bg);
+
+    // temp - later move bg here
+    // body.is-loader-hidden & {}
 
     // @include breakpoint(not-desktop) {
     //     grid-template-columns: 1fr;
@@ -86,6 +92,7 @@ main {
 
 article {
     height: 100%;
+    opacity: 0;
 
     &::before {
         @include full;

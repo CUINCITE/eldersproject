@@ -12,6 +12,7 @@ import { Menu } from './Menu';
 import { Button } from './components/Button';
 import { Search } from './Search';
 import { AudioPlayer } from './components/AudioPlayer';
+import { Loader } from './components/Loader';
 import { Lightbox } from './components/Lightbox/Lightbox';
 
 import Widgets from './widgets/All';
@@ -38,6 +39,7 @@ class Site {
     private lightbox: Lightbox;
     private search: Search;
     private audioPlayer: AudioPlayer;
+    private loader: Loader;
 
     private isInitialized: boolean = false;
     private resizingTimeout: ReturnType<typeof setTimeout>;
@@ -68,6 +70,7 @@ class Site {
         this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
         this.search = new Search(document.getElementById('search'));
+        this.loader = new Loader(document.querySelector('.js-loader'));
         this.newsletterButton = new Button(document.querySelector('.js-newsletter-button'));
 
         this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
@@ -81,6 +84,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
+            // this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -179,10 +183,12 @@ class Site {
      */
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
-        this.currentPage.animateIn(0);
-        !this.isInitialized && Scroll.scrollToTop(true);
-        this.scroll.load();
-        Scroll.start();
+        this.currentPage.animateIn(0).then(() => {
+            this.loader.hide();
+            !this.isInitialized && Scroll.scrollToTop(true);
+            this.scroll.load();
+            Scroll.start();
+        });
         PushStates.setTitle();
         this.audioPlayer.bindButtons();
         this.isInitialized = true;
@@ -222,6 +228,7 @@ class Site {
 
         // set custom classes to body based on <article> parameters
         document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
+        document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
 
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);

@@ -7,6 +7,7 @@ import { IBreakpoint } from '../Breakpoint';
 import { Component } from '../components/Component';
 import { components } from '../Classes';
 import { Images } from '../widgets/Images';
+import * as Utils from '../Utils';
 
 
 export class PageEvents {
@@ -77,6 +78,17 @@ export class Page extends Handler {
             for (let i = 0; i < this.components.length; i += 1) {
                 this.components[i].animateIn(i, delay);
             }
+
+            // const boxes = Utils.findVisibleBoxes(this.view.querySelectorAll('.box'));
+
+            // gsap.fromTo(boxes, { y: window.innerHeight }, {
+            //     y: 0,
+            //     duration: 0.8,
+            //     stagger: 0.15,
+            //     ease: 'power2.out',
+            //     onStart: () => gsap.set(this.view, { opacity: 1 }),
+            //     onComplete: () => resolve(),
+            // });
 
             gsap.to(this.view, {
                 duration: 0.3,

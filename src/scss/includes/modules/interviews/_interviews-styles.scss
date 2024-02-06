@@ -30,7 +30,7 @@
                 @include breakpoint(not-desktop) {
                     left: unset;
                     bottom: unset;
-                    z-index: 71;
+                    z-index: 5;
 
                     @include breakpoint(tablet) {
                         right: rem(98);

@@ -337,3 +337,18 @@ export function setStorageItem(key: string, value: string): void {
 export function getStorageItem(key: string): string {
     return localStorage.getItem(key);
 }
+
+
+export function findVisibleBoxes(boxes: NodeListOf<HTMLElement>): HTMLElement[] {
+    const visibleBoxes = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+
+        if (rect.top < (window.innerHeight + window.scrollY) && rect.bottom > window.scrollY) {
+            visibleBoxes.push(box);
+        }
+    });
+
+    return visibleBoxes;
+}

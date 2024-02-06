@@ -11,9 +11,13 @@
         flex-shrink: 0;
         pointer-events: all;
         cursor: pointer;
+        transition: transform .7s $ease-custom;
 
 
-        .player--video & { display: none; }
+        body.is-not-ready & {
+            transform: translateY(100%);
+            transition: none;
+        }
     }
 
 
