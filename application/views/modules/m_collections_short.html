@@ -2,7 +2,7 @@
     <div class="box__bg"></div>
     <div class="collections_images">
         <section class="module">
-            <div class="box">
+            <div class="box" style="border-top:0">
                 <div class="grid">
                     <div class="col-span-12">
                         <h2 class="heading heading--right">Collections</h2>
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </section>
-        <div class="collections_images__content {% if params.simple %}collections_images__content--simple {% else %} collections_images__content--home{% endif %}" {% if not params.simple %} data-scroll="collections"{% endif %}>
+        <div class="collections_images__content {% if params.simple %}collections_images__content--simple {% elseif params.long %} collections_images__content--home{% endif %}" {% if params.home %} data-scroll="collections"{% elseif params.simple2 %} data-scroll="collectionsSimple"{% endif %}>
             <div class="col-span-1 col-start-2 collections_images__container">
                 <div class="collections_images__names js-scroll-names">
 
@@ -28,10 +28,10 @@
 
                                     <div class="names__expand">
                                         <div class="names__expand-wrap">
-                                            <p class="names__claim">{{ item.collection_title | nl2br }}</p>
+                                            <p class="names__claim" style="font-size:1.25rem">{{ item.collection_title | nl2br }}</p>
                                         </div>
                                     </div>
-
+                                    {% if params.long %}
                                     <div class="names__copy js-accordeon-copy">
                                         <!--
                                         <div class="names__link">
@@ -51,6 +51,7 @@
                                         </div>
                                         -->
                                     </div>
+                                    {% endif %}
                                 </li>
                         {% endfor %}
                     </ul>
