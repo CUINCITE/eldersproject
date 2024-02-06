@@ -208,7 +208,7 @@ export class Lightbox {
         if (this.shown) {
             const animate = isRendered;
             !!animate && this.animateOut();
-            this.hide(!animate);
+            this.hide(!this.shown);
         }
 
         return false;
@@ -236,6 +236,8 @@ export class Lightbox {
                 },
                 onComplete: (): void => {
                     this.view.style.display = 'none';
+                    // could be added in lightbox naivgation
+                    this.view.classList.remove('is-default', 'is-not-default');
                     this.shown = false;
                     this.animating = false;
                     // empty the lightbox
@@ -256,15 +258,15 @@ export class Lightbox {
         Promise.all([this.shown ? this.hide() : null]).then(() => {
             this.animating = true;
             this.shown = true;
+            this.view.style.opacity = '1';
+            this.view.style.display = 'block';
 
             gsap.to(this.view, {
-                duration: 0.05,
-                opacity: 1,
+                duration: 0.1,
                 ease: 'none',
                 onStart: () => {
                     document.body.classList.add('has-lightbox');
                     this.view.classList.remove('is-closing');
-                    this.view.style.display = 'block';
                 },
                 // that class runs CSS animation
                 onComplete: () => {
