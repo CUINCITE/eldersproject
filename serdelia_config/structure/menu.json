@@ -82,6 +82,9 @@
             {},
             {
                 "label":"Locations","page":"s_states"
+            },
+            {
+                "label":"Map Locations","page":"map_locations"
             }
             
             

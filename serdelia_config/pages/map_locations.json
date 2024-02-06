@@ -14,6 +14,14 @@
   ],
   "fields": [
     {
+      "field":"collection","label":"Collection","list":true,
+      "type":"select",
+      "source":
+      {
+        "model":"interviewers"
+      }
+    },
+    {
       "label": "Location Name",
       "field": "label",
       "list": true
@@ -29,11 +37,15 @@
     {
       "hr": true,
       "label": "Latitude",
-      "field": "latitude"
+      "field": "gps_lat",
+      
+      "list":true
     },
     {
       "label": "Longitude",
-      "field": "longitude"
+      "field": "gps_lng",
+      
+      "list":true
     },
     {
       "hr": true,
@@ -55,7 +67,7 @@
       "type": "image",
       "field":"image",
       "folder": "/public/upload/locations",
-      "list":{"xposition_after":"","width":50,"height":50},
+      "temp-list":{"xposition_after":"","width":50,"height":50},
       "images":
       [
         {
@@ -77,11 +89,15 @@
       ]
     },
     {
+      "field":"quotes","type":"json","label":"Quotes"
+    },
+    {
       "hr": true,
       "field": "active",
       "type": "boolean",
       "label": "Active",
       "list": "edit"
     }
+    
   ]
 }
