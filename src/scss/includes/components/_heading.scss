@@ -109,8 +109,8 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(70, 0.84);
-            @include letter-spacing(-2.45, 70);
+            @include font-size(64, 0.84);
+            @include letter-spacing(-2.35, 64);
 
             margin-block: trim-font(0.84);
         }
@@ -140,6 +140,16 @@
         a + & {
             @include breakpoint(desktop) {
                 margin-top: vw(38);
+            }
+        }
+
+        p + & {
+            @include breakpoint(tablet) {
+            
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(24);
             }
         }
     }
@@ -252,38 +262,92 @@
 
 
     &--collection {
-        position: relative;
-        padding-inline-start: rem(28);
-
-
         @include breakpoint(desktop) {
             padding-top: rem(26);
+            position: relative;
+            padding-inline-start: rem(28);
+        
+            &::before {
+                @include font-size(17, 21);
+                @include font-family(normal);
+                @include font-settings(500, 100);
+    
+                position: absolute;
+                inset: rem(22) auto auto 0;
+    
+                content: counter(collection-counter, decimal-leading-zero) ".";
+                font-weight: 500;
+                font-feature-settings: "ss03" on;
+                counter-increment: collection-counter;
+                letter-spacing: normal;
+            }
         }
 
-        &::before {
-            @include font-size(17, 21);
-            @include font-family(normal);
-            @include font-settings(500, 100);
+        @include breakpoint(not-desktop) {
+            &::after {
+                @include font-family(normal);
+                @include font-settings(500, 100);
 
-            position: absolute;
-            inset: rem(22) auto auto 0;
+                content: counter(collection-counter, decimal-leading-zero) ".";
+                position: absolute;
+                font-weight: 500;
+                font-feature-settings: "ss03" on;
+                counter-increment: collection-counter;
+                letter-spacing: normal;
+            }
+        }
 
-            content: counter(collection-counter, decimal-leading-zero) ".";
-            font-weight: 500;
-            font-feature-settings: "ss03" on;
-            counter-increment: collection-counter;
-            letter-spacing: normal;
+        @include breakpoint(tablet) {
+            padding-inline-start: rem(36);
+
+            &::after {
+                @include font-size(20, 1);
+    
+                inset: rem(18) auto auto 0;
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-inline-start: rem(28);
+
+            &::after {
+                @include font-size(17, 1);
+    
+                inset: rem(12) auto auto 0;
+            }
         }
     }
 
 
 
     &__counter {
-        @include font-size(50, 1);
-        @include letter-spacing(-1.75, 50);
-
         position: absolute;
-        inset: auto auto rem(18) calc(100% + #{rem(22)});
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 1);
+            @include letter-spacing(-1.75, 50);
+    
+            inset: auto auto rem(18) calc(100% + #{rem(22)});
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(34, 1);
+            @include letter-spacing(-1, 30);
+
+            margin-block: trim-font(1);
+    
+            inset: auto rem(120) rem(14) auto;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-1, 30);
+
+            margin-block: trim-font(1);
+    
+            inset: auto rem(30) rem(12) auto;
+        }
+
     }
 
 
@@ -307,12 +371,12 @@
 
 
 
-    .module--quote_panel + .module--text_wrapper & {
+    // .module--quote_panel + .module--text_wrapper & {
 
-        @include breakpoint(phone) {
-            padding-bottom: rem(70);
-        }
-    }
+    //     @include breakpoint(phone) {
+    //         padding-bottom: rem(70);
+    //     }
+    // }
 
 
 

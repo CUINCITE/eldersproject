@@ -2,6 +2,7 @@
     position: relative;
 
     &__cards {
+        will-change: position;
         position: absolute;
         pointer-events: none;
         z-index: 2;

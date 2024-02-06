@@ -12,7 +12,7 @@
         @include flex(row, center, center);
 
         @include breakpoint(tablet) {
-            width: vw(186, tablet);
+            width: vw(174, tablet);
             height: vw(100, tablet);
             margin-right: -1 * map-get($grid-offset, tablet);
         }
