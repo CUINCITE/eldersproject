@@ -7,7 +7,6 @@ export const collectionsSimple = (el: HTMLElement) => {
     const cardsWrap: HTMLElement = el.querySelector('.js-scroll-cards');
     const namesWrap: HTMLElement = el.querySelector('.js-scroll-names');
     const offset = (window.innerHeight - cardsWrap.clientHeight) / 2;
-    const items = el.querySelectorAll('.js-accordeon-item');
 
 
 
@@ -17,11 +16,5 @@ export const collectionsSimple = (el: HTMLElement) => {
         end: 'bottom 92%',
         pin: cardsWrap,
         endTrigger: namesWrap,
-        markers: true,
-    });
-
-    ScrollTrigger.batch(items, {
-        start: 'top 55%',
-        end: 'bottom top',
     });
 };
