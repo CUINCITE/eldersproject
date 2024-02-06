@@ -10,8 +10,8 @@
                 </div>
             </div>
         </section>
-        <div class="collections_images__content {% if params.simple %}collections_images__content--simple{% endif %}" data-scroll="collections">
-            <div class="col-span-1 col-start-2">
+        <div class="collections_images__content {% if params.simple %}collections_images__content--simple{% endif %}" {% if not params.simple %} data-scroll="collections"{% endif %}>
+            <div class="col-span-1 col-start-2 collections_images__container">
                 <div class="collections_images__names js-scroll-names">
 
                     <ul class="names">

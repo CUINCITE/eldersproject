@@ -14,6 +14,11 @@
             top: calc(#{rem(-80)} + 10 * 10px);
             right: 29rem;
         }
+
+
+        @include breakpoint(hd) {
+            right: 100%;
+        }
     }
 
     &__content {
@@ -25,6 +30,14 @@
             grid-template-columns: 1fr 1fr;
         }
     }
+
+
+
+    &__container {
+        position: relative;
+    }
+
+
 
     &__authors {
         @include breakpoint(desktop) {
