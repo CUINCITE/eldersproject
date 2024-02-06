@@ -115,6 +115,9 @@
       "label": "Poster Image",
       "type": "image",
       "field": "image",
+      "settings": {
+        "sizes": "image_sizes"
+      },
       "folder": "/public/upload/modules",
       "images": [
         {
@@ -132,6 +135,11 @@
           "retina": true
         }
       ]
+    },
+    {
+      "field": "image_sizes",
+      "type": "json","edit":false,
+      "label": "Image sizes"
     }
   ]
 }

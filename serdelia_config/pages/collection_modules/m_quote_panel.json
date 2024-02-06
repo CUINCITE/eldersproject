@@ -19,6 +19,9 @@
     },
     {
       "label": "Poster Image",
+      "settings": {
+        "sizes": "image_sizes"
+      },
       "type": "image",
       "field": "image",
       "folder": "/public/upload/modules",

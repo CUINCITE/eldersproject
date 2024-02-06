@@ -43,7 +43,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
         // get storytelling modules
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
-
+print_r($m['modules']);
         $counter = 0;
         foreach ($m['modules'] as $k => $v) {
 

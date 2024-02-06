@@ -4,7 +4,7 @@
   "label_EN":
   {
     "page":"Collection Chapters",
-    "edit":"{% if not type %}New module{% else %}Module: <em>{{type.label}}</em>{% endif %}"
+    "edit":"{% if not type %}New module{% else %}Collection Module: <em>{{type.label}}</em>{% endif %}"
   },
   "filters": {
     "parent": "%1%"
@@ -72,6 +72,12 @@
       "position_after": "params",
       "type": "boolean",
       "list": "edit"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json","hidden":true,
+      "label": "Image sizes"
     }
+
   ]
 }
