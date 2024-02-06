@@ -9,8 +9,14 @@
     width: var(--GLOBAL-aside-width);
     background-color: var(--color-box);
 
+
+    // body.is-not-ready & {
+    //     transform: translateX(100%);
+    // }
+
+
     @include breakpoint(desktop) {
-        padding: vw(13) vw(6);
+        padding: rem(13) rem(6);
     }
 
     @include breakpoint(not-desktop) {
@@ -47,7 +53,7 @@
 
     &__wrap {
         @include breakpoint(tablet) {
-        position: relative;
+            position: relative;
         }
     }
 }

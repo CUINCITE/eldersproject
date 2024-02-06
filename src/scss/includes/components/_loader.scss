@@ -1,0 +1,124 @@
+.loader {
+    // @include z-index(loader);
+    z-index: 0;
+
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-black);
+    color: var(--color-box);
+    padding-left: rem(13);
+
+    // temp
+    opacity: 0;
+
+
+
+    &__grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr var(--GLOBAL-aside-width);
+        align-items: start;
+    }
+
+
+
+    &__wrap {
+        @include flex(row, flex-start, center);
+
+        position: relative;
+    }
+
+
+
+    &__count {
+        @include font-family(compressed);
+        @include font-size(240, 1);
+        @include letter-spacing(-8.4, 240);
+
+
+        @media (max-height: 719px) {
+            @include font-size(210, 1);
+            @include letter-spacing(-7.5, 210);
+        }
+    }
+
+
+
+    &__text {
+        @include font-family(normal);
+        @include font-settings(400, 100);
+        @include font-size(20, 32);
+        @include letter-spacing(-0.6, 20);
+
+        text-transform: uppercase;
+        position: absolute;
+        inset: auto auto rem(4) rem(4);
+    }
+
+
+
+    &__aside {
+        @include flex(column, flex-end, flex-end);
+
+        height: 100%;
+        position: relative;
+
+        // padding: rem(13) 0 0;
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 1px;
+            background-color: var(--color-grey800);
+        }
+    }
+
+
+
+    &__logo {
+        padding: 0 rem(6) rem(13); // like .header
+        position: relative;
+        width: 100%;
+        transition: height .7s $ease-out;
+        will-change: height;
+        height: 0;
+
+        // logo height + bottom padding
+        min-height: rem(60 + 12);
+
+        // aside padding-top + burger height + aside logo margin-top
+        max-height: calc(100% - #{rem(13 + 9 + 13)});
+
+        svg path { fill: currentColor; }
+    }
+
+
+
+    &__line {
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 1px;
+        background-color: var(--color-white);
+
+        transition: height .7s $ease-out;
+        will-change: height;
+        height: 0;
+
+        // logo height + bottom padding
+        min-height: rem(60 + 12);
+    }
+
+
+
+    &__spacer {
+        flex-grow: 1;
+    }
+
+
+
+    &__body {
+        position: relative;
+    }
+}

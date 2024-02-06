@@ -11,7 +11,7 @@ import { illustration } from './scroll/illustration';
 import { line } from './scroll/line';
 import { people } from './scroll/people';
 import { collections } from './scroll/collections';
-import { collectionsSimple } from './scroll/collections-simple';
+import { collectionsSimple } from './scroll/collectionsSimple';
 
 
 export const animations = { fadeUp };

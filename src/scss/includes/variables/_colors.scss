@@ -7,6 +7,7 @@ $color-dark: #121316;
 $color-gray: #444;
 $color-grey200: #EAE9E8;
 $color-grey300: #DCDCDC;
+$color-grey800: #2B2B2B;
 $color-light-blue: #BDD5E3;
 $color-pale-blue: #5C7B8D;
 $color-pastel-blue: #197db5;
@@ -64,6 +65,7 @@ $color-select-text: $color-pale;
     --color-orange: #{$color-orange};
     --color-grey200: #{$color-grey200};
     --color-grey300: #{$color-grey300};
+    --color-grey800: #{$color-grey800};
     --color-black: #{$color-black};
     --color-pure-black: #{$color-pure-black};
 }

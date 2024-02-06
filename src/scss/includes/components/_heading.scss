@@ -145,7 +145,7 @@
 
         p + & {
             @include breakpoint(tablet) {
-            
+                margin-top: rem(24);
             }
 
             @include breakpoint(phone) {

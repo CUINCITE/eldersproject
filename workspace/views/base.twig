@@ -10,7 +10,7 @@
         <script src="/public/theme/libs.min.js?v=0.0.8" defer></script>
         <script src="/public/theme/scripts.min.js?v=0.0.8" defer></script>
     </head>
-    <body>
+    <body class="is-not-ready">
 {% endif %}
 
     {% include "scaffold/header.html" %}
@@ -18,7 +18,7 @@
 
     <div class="wrapper" id="wrapper">
         <main id="content" class="content">
-            <article {% if title is same as ('404') %} data-not-found {% endif %} data-page data-title="{{title}}">
+            <article {% if title is same as ('404') %} data-not-found {% endif %} {% if title is same as ('Homepage') %} data-home {% endif %} data-page data-title="{{title}}">
                 {% for module in modules %}
                     {% include 'modules/m_'~module.type~'.html' with module %}
                 {% endfor %}
@@ -32,6 +32,8 @@
     <div id="lightbox" class="lightbox js-lightbox"></div>
 
     {% include 'scaffold/audioplayer.html' %}
+    {% include 'scaffold/loader.html' %}
+    {% include 'scaffold/circle.html' %}
 
     [[templates]]
 
