@@ -338,4 +338,8 @@
             }
         }
     }
+
+    a {
+        @include hoverable-link;
+    }
 }

@@ -3,11 +3,17 @@
 
     text-transform: uppercase;
     padding-left: unset;
-    position: relative;
 
     @include breakpoint(desktop) {
         @include font-size(204, 157);
         @include letter-spacing(-6.12, 204);
+
+        position: relative;
+    }
+
+    @include breakpoint(tablet) {
+        @include font-size(132, 1);
+        @include letter-spacing(-5.94, 132);
     }
 
     @include breakpoint(phone) {
@@ -31,7 +37,7 @@
 
             margin-block: trim-font(0.8);
         }
-
+ 
         @include breakpoint(phone) {
             @include font-size(80, 67.5);
             @include letter-spacing(-2.4, 80);

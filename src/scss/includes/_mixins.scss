@@ -151,13 +151,17 @@ $line-height: 1.4;
         }
     }
 
+    @include breakpoint(desktop) {
+        @include hover {
+            & > span {
+                animation: hover-link .4s $ease-in-out forwards;
+            }
+        }
 
-    @include hover {
-        & > span {
+        &:focus > span {
             animation: hover-link .4s $ease-in-out forwards;
         }
     }
-
 }
 
 

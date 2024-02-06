@@ -1,10 +1,12 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { breakpoint } from '../Site';
 import Scroll from '../Scroll';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
 import { PushStates } from '../PushStates';
 import { FilterLetters } from './FilterLetters';
+import { components } from '../Classes';
 
 interface ILoadSettings {
     contentSelector?: string;
@@ -24,6 +26,7 @@ interface ILoadSettings {
 
 export class Load extends Component {
 
+    private isForm: boolean;
     private isPending = false;
     private isFinished = false;
     private settings: ILoadSettings;
@@ -34,6 +37,7 @@ export class Load extends Component {
     private viewsButtons: NodeListOf<HTMLButtonElement>;
     private filteredEl: HTMLElement;
     private resetButton: HTMLButtonElement;
+    private components: Array<Component>;
 
 
 
@@ -48,10 +52,16 @@ export class Load extends Component {
 
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('data-options')));
 
+        this.isForm = this.view.tagName === 'FORM';
         this.isContentHidden = false;
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
         this.resetButton = this.view.querySelector('.js-reset');
+
+        if (!breakpoint.desktop) {
+            this.contentElement.classList.remove('is-grid-view');
+            this.contentElement.classList.add('is-list-view');
+        }
 
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
@@ -60,7 +70,8 @@ export class Load extends Component {
         this.bind();
 
         // bind external links with [data-filter] attribute to reload filters
-        this.settings.externalLinks && this.bindExternalFilters();
+        // this.settings.externalLinks && this.bindExternalFilters();
+
     }
 
 
@@ -73,19 +84,29 @@ export class Load extends Component {
 
     protected bind(): void {
 
-        this.view.addEventListener('submit', this.onSubmit);
+        if (this.isForm) {
+            this.view.addEventListener('submit', this.onSubmit);
 
-        if (this.settings.live) {
-            [...this.view.querySelectorAll('input, select')].forEach(el => {
-                el.addEventListener('change', () => {
-                    window.clearTimeout(this.liveTimeout);
-                    this.liveTimeout = setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
+            if (this.settings.live) {
+                [...this.view.querySelectorAll('input, select')].forEach(el => {
+                    el.addEventListener('change', () => {
+                        window.clearTimeout(this.liveTimeout);
+                        this.liveTimeout = setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
+                    });
                 });
+            }
+
+            [...this.viewsButtons].forEach(btn => btn.addEventListener('click', this.onViewBtnClick));
+            this.resetButton && this.resetButton.addEventListener('click', this.onReset);
+        } else {
+            // for <a> elements
+            this.view.addEventListener('click', e => {
+                e.preventDefault();
+                const url = (this.view as HTMLAnchorElement).href;
+                this.reloadFilters(url);
             });
         }
 
-        [...this.viewsButtons].forEach(btn => btn.addEventListener('click', this.onViewBtnClick));
-        this.resetButton && this.resetButton.addEventListener('click', this.onReset);
     }
 
 
@@ -104,13 +125,13 @@ export class Load extends Component {
 
 
 
-    protected hideContent(): Promise<void> {
+    protected hideContent(duration = 0.25): Promise<void> {
 
         return new Promise<void>(resolve => {
             if (!this.isContentHidden) {
                 gsap.to(this.contentElement, {
                     opacity: 0,
-                    duration: 0.25,
+                    duration,
                     ease: 'sine',
                     onComplete: (): void => {
                         this.isContentHidden = true;
@@ -195,11 +216,35 @@ export class Load extends Component {
                 PushStates.bind(this.contentElement);
                 this.bindExternalFilters();
 
+                this.buildComponents(this.contentElement.querySelectorAll('[data-component]'));
+
                 setTimeout(() => {
                     this.isPending = false;
                 }, 250);
             });
     }
+
+
+
+    private buildComponents(componentsList: NodeList): void {
+        this.components = [];
+
+        this.components = [...componentsList].map(el => {
+            const element = <HTMLElement>el;
+            const name = element.dataset.component;
+            if (name !== undefined && components[name]) {
+                let options: Object = {};
+                if (element.dataset.options) {
+                    options = JSON.parse(element.dataset.options);
+                }
+                const component = new components[name](element, options);
+                return component;
+            }
+            window.console.warn('There is no `%s` component!', name);
+            return null;
+        }).filter(Boolean);
+    }
+
 
 
     private onSubmit = (e?): void => {
