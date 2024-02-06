@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { breakpoint } from '../Site';
 import Scroll from '../Scroll';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
@@ -57,6 +58,11 @@ export class Load extends Component {
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
         this.resetButton = this.view.querySelector('.js-reset');
 
+        if (!breakpoint.desktop) {
+            this.contentElement.classList.remove('is-grid-view');
+            this.contentElement.classList.add('is-list-view');
+        }
+
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
 
@@ -65,6 +71,7 @@ export class Load extends Component {
 
         // bind external links with [data-filter] attribute to reload filters
         // this.settings.externalLinks && this.bindExternalFilters();
+
     }
 
 
@@ -118,13 +125,13 @@ export class Load extends Component {
 
 
 
-    protected hideContent(): Promise<void> {
+    protected hideContent(duration = 0.25): Promise<void> {
 
         return new Promise<void>(resolve => {
             if (!this.isContentHidden) {
                 gsap.to(this.contentElement, {
                     opacity: 0,
-                    duration: 0.25,
+                    duration,
                     ease: 'sine',
                     onComplete: (): void => {
                         this.isContentHidden = true;

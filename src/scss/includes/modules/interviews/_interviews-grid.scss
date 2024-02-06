@@ -135,8 +135,10 @@
 
     &__tiles {
         .is-grid-view & {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            @include breakpoint(desktop) {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         .is-padded & {
