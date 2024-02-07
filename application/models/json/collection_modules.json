@@ -115,9 +115,6 @@
       "label": "Poster Image",
       "type": "image",
       "field": "image",
-      "settings": {
-        "sizes": "image_sizes"
-      },
       "folder": "/public/upload/modules",
       "images": [
         {
