@@ -31,7 +31,20 @@ export class Loader extends Component {
 
 
 
+    public onState(): boolean {
+        this.circleComp?.onState();
+        return false;
+    }
+
+
+
     public animate = (): Promise<void> => this.setCounterLoop();
+
+
+
+    public check = (isHomePage: boolean): void => {
+        isHomePage && this.circleComp.show();
+    };
 
 
 
