@@ -71,7 +71,7 @@ class model_app_pages_article
 //            ['html' => '[VIDEO]', 'type' => 'video'],
             ['html' => '[MORE]', 'html_close' => '[ENDMORE]', 'type' => 'expand_open'],
 //            ['html' => '[ENDMORE]', 'type' => 'expand_close'],
-//            ['html' => '<blockquote>', 'html_close' => '</blockquote>', 'type' => 'area'],
+            ['html' => '<blockquote>', 'html_close' => '</blockquote>', 'type' => 'area'],
         ];
 
         $iExpand = 0;
@@ -210,8 +210,8 @@ class model_app_pages_article
                     case "area":
                         $i2 = strpos($text, $block['html_close']);
                         $value = substr($text, strlen($block['html']), $i2 - strlen($block['html']));
-                        $value = explode('<br />', strip_tags($value, '<a><br>'));
-                        $m[] = ['type' => 'quote', 'value' => ['text' => $value[0], 'author' => @$value[1]]];
+                        $value = explode('<br />', strip_tags($value, '<a><br><button>'));
+                        $m[] = ['type' => 'quote', 'value' => ['text' => $value[0], 'author' => @trim($value[1])]];
 
                         if (!$i2) $i2 = strlen($text) - 1;
                         $text = substr($text, $i2 + strlen($block['html_close']));

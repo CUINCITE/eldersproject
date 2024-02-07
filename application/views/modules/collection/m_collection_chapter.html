@@ -21,6 +21,20 @@
                                 {% include "/subviews/subview_text.html" with {text:module.value, large:true, aisde:true} %}
                             </div>
 
+                        {% elseif module.type == "quote" %}
+
+                            <div class="text text--large text--aside">
+                                <blockquote class="quote quote--big">
+
+                                    <p>{{ module.value.text | raw }}</p>
+
+                                    {% if module.value.author %}
+                                        <footer>{{ module.value.author }}</footer>
+                                    {% endif %}
+
+                                </blockquote>
+                            </div>
+
                         {% elseif module.type == "image" and module.value.variant == 'illustration' %}
 
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
