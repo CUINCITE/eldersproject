@@ -32,7 +32,10 @@ $cfg_domains = [
             'mailchimp' => [
                 'key' => getenv('MAILCHIMP_KEY'),
                 'list_id' => getenv('MAILCHIMP_LIST_ID')
-            ]
+			],
+			'mapbox'=> [
+                'token' => getenv('MAPBOX_TOKEN')
+			]
         ],
 		'clients' =>
 		[
