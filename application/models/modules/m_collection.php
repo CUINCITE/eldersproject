@@ -23,10 +23,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         // display higher res cover
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
 
-        if (!$m['item']) {
-            return null;
-        }
-
         // get interviews
         $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
 
@@ -66,12 +62,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
     {
 
         $article = $this->processAudioTag($article);
-
-        $article = str_replace(
-            ['<blockquote>', '<q>'],
-            ['<blockquote class="quote quote--big">', '<q class="quote">'],
-            $article
-        );
 
         return $this->articleUpdate($article, $article_media);
     }

@@ -13,11 +13,13 @@ import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
 import { Map } from './components/Map';
+import { Collections } from './components/Collections';
 
 export const components = {
     Accordeon,
     AccordeonList,
     Button,
+    Collections,
     FilterLetters,
     Load,
     Map,

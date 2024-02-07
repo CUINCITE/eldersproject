@@ -161,7 +161,6 @@
                 @include font-family(compressed);
 
                 background-color: $background-light-offwhite;
-                // background-color: red;
                 margin-block: trim-font(1);
                 font-size: 1.4em;
                 margin-top: -0.1em;
@@ -176,6 +175,10 @@
                 left: -8%;
                 opacity: 0;
                 transition: opacity 0.1s 0.3s, translate 0.4s $easing;
+
+                @media (min-width: 1399px) {
+                    margin-top: -0.12em;
+                }
             }
 
             @include hover {
@@ -202,7 +205,7 @@
             width: rem(38);
             height: rem(20);
         }
-
+ 
         .quote--big & {
             vertical-align: baseline;
 
@@ -213,7 +216,7 @@
 
                 &::before {
                     font-size: 0.98em;
-                    margin-top: -0.14em;
+                    margin-top: -0.12em;
                 }
 
                 @include hover {

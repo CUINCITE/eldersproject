@@ -1,7 +1,7 @@
 <div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}
-{% if image.width and image.height %}
-{% if image.width > image.height %} polaroid--horizontal
-{% elseif image.width == image.height %} polaroid--square
+{% if image.original.width and image.original.height %}
+{% if image.original.width > image.original.height %} polaroid--horizontal
+{% elseif image.original.width == image.original.height %} polaroid--square
 {% endif %}
 {% endif %}">
     <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">

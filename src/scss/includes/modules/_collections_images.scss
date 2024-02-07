@@ -62,24 +62,25 @@
             }
         }
 
-        &__names:has(li:nth-child(#{$i}):hover) + &__cards,
-        &__names:has(li:nth-child(#{$i}):hover) + div > &__cards, {
-            li { transform: unset !important; }
+        // &__names:has(li:nth-child(#{$i}):hover) + &__cards,
+        // &__names:has(li:nth-child(#{$i}):hover) + div > &__cards, {
+        //     li { transform: unset !important; }
 
-            @for $j from 1 through 4 {
-                li:nth-last-child(#{4 - $j + $i}) {
-                    transform: translate($j * -10px, $j * -10px) !important;
-                }
-            }
+        //     @for $j from 1 through 4 {
+        //         li:nth-last-child(#{4 - $j + $i}) {
+        //             transform: translate($j * -10px, $j * -10px) !important;
+        //         }
+        //     }
 
-            li:nth-last-child(-n + #{$i - 1}) {
-                transform: rotate(-15deg) translate(-50vw, -50%) !important;
-            }
-        }
+        //     li:nth-last-child(-n + #{$i - 1}) {
+        //         transform: rotate(-15deg) translate(-50vw, -50%) !important;
+        //     }
+        // }
 
 
 
-        &__names:has(li:nth-child(#{$i}) a.is-visible) + div > &__cards, {
+        &__names:has(li:nth-child(#{$i}).is-active) + div > &__cards,
+        &__names:has(li:nth-child(#{$i}).is-active) + &__cards, {
             li { transform: unset !important; }
 
             @for $j from 1 through 4 {

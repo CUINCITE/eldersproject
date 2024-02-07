@@ -146,6 +146,7 @@ class Site {
         const lightboxChangedState = this.lightbox.onState(isRendered);
         this.menu?.onState();
         this.search?.onState();
+        this.loader?.onState();
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
@@ -228,7 +229,9 @@ class Site {
 
         // set custom classes to body based on <article> parameters
         document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
-        document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
+
+        const isHome: boolean = !!document.body.querySelector('[data-home]');
+        document.body.classList.toggle('is-homepage', isHome);
 
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);
@@ -247,6 +250,7 @@ class Site {
         ScrollTrigger.refresh();
 
         this.lightbox?.check();
+        this.loader.check(isHome);
 
         return page.preload();
     }

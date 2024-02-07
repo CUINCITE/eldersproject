@@ -18,12 +18,34 @@ export class Circle extends Component {
 
 
 
+    public onState(): boolean {
+        this.hide();
+        return false;
+    }
+
+
+
     public updatePosition = (value: number, fast?: boolean): void => {
         gsap.to(this.view, {
             x: value,
             duration: fast ? 0 : 0.3,
             opacity: fast && 1,
             ease: 'sine',
+        });
+    };
+
+
+
+    public show = (): void => {
+        this.view.style.display = 'block';
+        gsap.fromTo(this.view, { scale: 0.6 }, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'sine',
+            onStart: () => {
+                this.view.style.opacity = '1';
+            },
+            onComplete: () => this.circlesTimeline.play(),
         });
     };
 
@@ -50,5 +72,16 @@ export class Circle extends Component {
                 },
             }, '+=1.7');
         });
+    };
+
+
+
+    private hide = (): void => {
+        gsap.to(this.view, {
+            opacity: 0,
+            duration: 0.25,
+            ease: 'sine',
+        });
+        this.circlesTimeline.pause();
     };
 }

@@ -8,4 +8,7 @@
 {% endfor %}
 
 {% include 'modules/m_interviews_short.html' with {items:items, stickerLabel: 'From the Collection', reversed: true, collection_page:true} %}
-{% if map %}{% include 'modules/collection/m_collection_map.html' with {items:map} %}{% endif %}
+
+{% if map %}
+    {% include 'modules/collection/m_collection_map.html' with {items:map} %}
+{% endif %}
