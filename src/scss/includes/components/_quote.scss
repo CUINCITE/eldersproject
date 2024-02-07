@@ -164,7 +164,7 @@
                 // background-color: red;
                 margin-block: trim-font(1);
                 font-size: 1.4em;
-                margin-top: -0.1em;
+                margin-top: -0.12em;
                 color: $color-gold;
                 content: 'PLAY';
                 position: absolute;
@@ -202,7 +202,7 @@
             width: rem(38);
             height: rem(20);
         }
-
+ 
         .quote--big & {
             vertical-align: baseline;
 
@@ -213,7 +213,7 @@
 
                 &::before {
                     font-size: 0.98em;
-                    margin-top: -0.14em;
+                    margin-top: -0.12em;
                 }
 
                 @include hover {
