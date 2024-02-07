@@ -3,9 +3,16 @@
 
 {% for module in modules %}
 
+    {% if loop.index == 4 and map %}
+        {% include 'modules/collection/m_collection_map.html' with {items:map} %}
+    {% endif %}
+
     {% include 'modules/collection/m_'~module.type.slug~'.html' with module  %}
 
 {% endfor %}
 
 {% include 'modules/m_interviews_short.html' with {items:items, stickerLabel: 'From the Collection', reversed: true, collection_page:true} %}
-{% if map %}{% include 'modules/collection/m_collection_map.html' with {items:map} %}{% endif %}
+
+{% if mapp %}
+    {% include 'modules/collection/m_collection_map.html' with {items:map} %}
+{% endif %}
