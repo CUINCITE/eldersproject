@@ -119,6 +119,7 @@ class controller_app extends _uho_controller
                             if (@$vv['page']) $vv['filters']['page'] = $vv['page'];
                             if (@$vv['sort']) $vv['filters']['sort'] = $vv['sort'];
                             if (@$vv['topics']) $vv['filters']['topics'] = implode(',',$vv['topics']);
+                            if (@$vv['states']) $vv['filters']['states'] = implode(',',$vv['states']);
                             
                             if (!empty($vv['filters'])) $v .= '?' . http_build_query($vv['filters']);
                             break;
