@@ -1,0 +1,36 @@
+ <div class="map" data-component="Map" data-locations='{{locations|json_encode}}'>
+    {% if aside %}
+    <div class="map__aside">
+        <div class="map__heading">
+            {% include "./components/c_heading.html" with { label: "Map" } %}
+        </div>
+        <ul class="map__locations">
+            {% for item in locations %}
+                <li class="map__location js-location-wrapper">
+                    <button class="map__location-button js-location" data-id="{{item.id}}" data-title="{{item.label}}" data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}" data-interviews="{{item.quotes|json_encode}}"></button>
+                    <div class="map__title">
+                        {{item.label}}
+                    </div>
+                    <div class="map__content">
+                        <div class="map__content-wrapper">
+                            <div class="map__description">
+                                <p>{{item.description}}</p>
+                            </div>
+                            <div class="map__image_wrapper js-map-image-wrapper desktop-hide tablet-hide"></div>
+                            <ul class="map__interviews js-interviews-inner-list desktop-hide tablet-hide"></ul>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    {% endif %}
+    <div class="map__wrap phone-hide">
+        <div id="map" class="map__container js-map"></div>
+        <ul class="map__interviews js-interviews-list"></ul>
+        <div class="map__controls">
+            <button class="map__control js-toggle-button">Zoom In</button>
+        </div>
+    </div>
+</div>

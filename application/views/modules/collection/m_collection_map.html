@@ -1,6 +1,6 @@
 <section class="module module--map box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="map" data-component="Map">
+    <div class="map" data-component="Map" data-locations="{{items|json_encode}}">
         <div class="map__aside">
             <div class="map__heading">
                 <h2 class="heading">
@@ -10,7 +10,7 @@
             <ul class="map__locations">
                 {% for item in items %}
                 <li class="map__location js-location-wrapper">
-                    <button class="map__location-button js-location" data-id="{{loop.index0}}" data-title="{{item.label}}"
+                    <button class="map__location-button js-location" data-id="{{item.id}}" data-title="{{item.label}}"
                         data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}"
                         data-interviews="{{item.quotes|json_encode}}"></button>
                     <div class="map__title">
@@ -33,8 +33,7 @@
             <div id="map" class="map__container js-map"></div>
             <ul class="map__interviews js-interviews-list"></ul>
             <div class="map__controls">
-                <button class="map__control js-all-button">-</button>
-                <button class="map__control js-zoom-button">+</button>
+                <button class="map__control js-toggle-button">Zoom In</button>
             </div>
         </div>
     </div>

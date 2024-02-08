@@ -48,7 +48,9 @@
     &__control {
         @include font-family(compressed);
 
-        width: rem(40);
+        width: rem(120);
+        text-align: center;
+        padding-top: rem(4);
         background-color: var(--color-box);
         text-transform: uppercase;
     }
