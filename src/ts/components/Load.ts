@@ -314,7 +314,10 @@ export class Load extends Component {
                 <label for="${input.id}">${input.dataset.name}<i class="icon-close"></i></label>
             </li>`);
         this.filteredEl.innerHTML = filteredItems.join('');
-        this.bindFiltered();
+
+        setTimeout(() => {
+            this.bindFiltered();
+        }, 50);
     };
 
 
@@ -324,10 +327,13 @@ export class Load extends Component {
         if (this.settings.live) return;
 
         // force form submit on each filtered label click
-        [...this.filteredEl.querySelectorAll('label')].forEach(label => label.addEventListener('click', () => {
-            // submit needs to be triggered manually for closing modal on submit event
-            setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
-        }));
+        [...this.filteredEl.querySelectorAll('label')].forEach(label => {
+            label.addEventListener('click', () => {
+                console.log('click');
+                // submit needs to be triggered manually for closing modal on submit event
+                setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
+            });
+        });
     };
 
 
