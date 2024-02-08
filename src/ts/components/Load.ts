@@ -307,7 +307,7 @@ export class Load extends Component {
     private reloadFilters = (path: string, reloadPin = false): void => {
         Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
-            reloadPin && setTimeout(() => interviews(document.querySelector('.js-panel-wrapper')), 50);
+            reloadPin && setTimeout(() => interviews(document.querySelector('.js-panel-wrapper')), 1100);
         });
     };
 
