@@ -111,11 +111,7 @@ export class Load extends Component {
             this.view.addEventListener('click', e => {
                 e.preventDefault();
                 const url = (this.view as HTMLAnchorElement).href;
-                this.reloadFilters(url);
-
-                setTimeout(() => {
-                    interviews(document.querySelector('.js-panel-wrapper'));
-                }, 1000);
+                this.reloadFilters(url, true);
             });
         }
 
@@ -308,9 +304,10 @@ export class Load extends Component {
 
 
 
-    private reloadFilters = (path: string): void => {
+    private reloadFilters = (path: string, reloadPin = false): void => {
         Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
+            reloadPin && setTimeout(() => interviews(document.querySelector('.js-panel-wrapper')), 1100);
         });
     };
 
