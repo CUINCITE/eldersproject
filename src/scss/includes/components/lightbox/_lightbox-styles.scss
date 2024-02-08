@@ -813,7 +813,7 @@
         @include breakpoint(desktop) {
             @include hover {
                 path {
-                    fill: var(--alt-text-color);
+                    // fill: var(--alt-text-color);
                 }
             }
         }

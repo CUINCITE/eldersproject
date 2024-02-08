@@ -3,7 +3,7 @@
         @include breakpoint(desktop) {
             padding-top: rem(20);
             padding-left: rem(9);
-            padding-bottom: rem(138);
+            padding-bottom: rem(130);
         }
 
         @include breakpoint(tablet) {
@@ -21,7 +21,11 @@
 
     &__video {
         margin-left: calc(var(--grid-margin) * -1);
-        margin-right: -10px; // grid-gap / 2
+        margin-right: (map-get($grid-gutter, desktop) / -2 ) + 1px; // grid-gap / 2
+
+        @media (min-width: 1600px) {
+            margin-right: (map-get($grid-gutter, hd) / -2 ) + 1px;
+        }
 
         @include breakpoint(tablet) {
             margin-right: calc(var(--grid-margin) * -1);
