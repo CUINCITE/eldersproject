@@ -50,6 +50,9 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
                 $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
 
+            } elseif ($v['type']['slug'] == 'quote_panel') {
+                $m['modules'][$k]['bio'] = $m['item']['text'];
+                $m['modules'][$k]['heading']['text'] = $m['item']['label'];
             }
         }
 

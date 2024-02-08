@@ -1,7 +1,7 @@
 <div class="text
 {% if short %} text--short{% endif %}{% if large %} text--large{% endif %}{% if wide %} text--wide{% endif %}{% if aside  %} text--aside{% endif %}">
     {% if heading %}
-        {% include 'components/c_heading.html' with { text: heading.text, small: true } %}
+        {% include 'components/c_heading.html' with { label: heading.text, small: true } %}
     {% endif %}
     {{text|raw}}
 </div>
