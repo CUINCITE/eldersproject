@@ -149,7 +149,7 @@
         position: relative;
         display: block !important;
 
-        &.is-active { 
+        &.is-active {
             color: var(--aside-text-color);
             pointer-events: none;
         }
@@ -173,48 +173,48 @@
 
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(29, 1); 
-                    @include letter-spacing(-0.87, 29); 
+                    @include font-size(29, 1);
+                    @include letter-spacing(-0.87, 29);
                 }
             }
         }
 
 
-        &--info { 
+        &--info {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(69, 1); 
-                    @include letter-spacing(-2.07, 69); 
+                    @include font-size(69, 1);
+                    @include letter-spacing(-2.07, 69);
                 }
             }
         }
 
 
-        &--transcript { 
+        &--transcript {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(26, 1); 
-                    @include letter-spacing(-0.78, 26); 
+                    @include font-size(26, 1);
+                    @include letter-spacing(-0.78, 26);
                 }
             }
         }
 
 
-        &--downloads { 
+        &--downloads {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(25, 1); 
-                    @include letter-spacing(-0.75, 25); 
+                    @include font-size(25, 1);
+                    @include letter-spacing(-0.75, 25);
                 }
             }
         }
 
 
-        &--related { 
+        &--related {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(38, 1); 
-                    @include letter-spacing(-0.76, 38); 
+                    @include font-size(38, 1);
+                    @include letter-spacing(-0.76, 38);
                 }
             }
         }
@@ -481,14 +481,17 @@
         background-color: var(--color-grey200);
         color: var(--color-black);
         pointer-events: none;
-        display: none;
+
+        // display: none;
+        transform: translateY(100%);
+        display: flex;
 
         // player's height
         padding-bottom: var(--GLOBAL-player-height);
 
 
         &.is-visible {
-            display: flex;
+            // display: flex;
             pointer-events: all;
         }
 
@@ -503,6 +506,8 @@
                 inset: 1px auto 0 var(--aside-width);
                 width: 1px;
                 background-color: var(--theme-color);
+                z-index: 3;
+                pointer-events: none;
             }
         }
 
@@ -598,7 +603,7 @@
 
                 @include breakpoint(desktop) {
                     @include hover {
-                       .lightbox__downloads-arrow {
+                        .lightbox__downloads-arrow {
                             transition: translate 0.3s ease;
 
                             &:nth-child(1) {
@@ -607,8 +612,8 @@
 
                             &:nth-child(2) {
                                 translate: 0 0;
-                            } 
-                       }
+                            }
+                        }
                     }
                 }
             }

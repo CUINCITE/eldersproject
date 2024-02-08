@@ -109,6 +109,13 @@ export class AudioPlayer extends Video {
 
 
 
+    protected onTimeupdate = (): void => {
+        super.onTimeupdate();
+        Lightbox.isOpen && Lightbox.tryToUpdateTranscript(this.media.currentTime);
+    };
+
+
+
     protected onBtnClick = (e): void => {
         e.preventDefault();
         e.stopPropagation();
@@ -199,10 +206,13 @@ export class AudioPlayer extends Video {
             this.updatePlayer(data);
             // check if lightbox is open and has the same id as audio player
             Lightbox.checkPlayerState();
+
+            // at first load, check if URL has start time for audio
+            const hasParams = this.isInitialized ? false : this.seekToParams();
             // play audio when it has been already initialized
             if (play) {
                 !this.isExpanded && this.expand();
-                this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
                 this.play();
             }
             this.isInitialized = true;

@@ -9,7 +9,9 @@
 
         position: absolute;
         z-index: 2;
-        inset: 0 0 auto var(--aside-width);
+        inset: 0 0 auto;
+        padding-left: var(--aside-width);
+        background-color: var(--color-grey200);
     }
 
 
@@ -31,13 +33,16 @@
         display: grid;
         grid-template-columns: var(--aside-width) 1fr;
         align-items: start;
+        padding-bottom: rem(16);
+
 
         &:first-of-type {
             padding-top: rem(7);
         }
 
-        & + & {
-            padding-top: rem(16);
+
+        &:last-of-type {
+            padding-bottom: 0;
         }
     }
 

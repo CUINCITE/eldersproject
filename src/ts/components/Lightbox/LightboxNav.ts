@@ -60,11 +60,10 @@ export class LightboxNav extends Component {
                 this.activeTab = null;
                 return;
             }
-            gsap.fromTo(tab, { yPercent: 100 }, {
-                yPercent: 0,
+            gsap.fromTo(tab, { yPercent: 0 }, {
+                yPercent: -100,
                 duration: 0.6,
                 ease: easing,
-                clearProps: 'all',
                 onStart: () => {
                     this.isAnimating = true;
                     tab.classList.add('is-visible');
@@ -88,11 +87,10 @@ export class LightboxNav extends Component {
             this.lightboxEl.classList.remove('is-default');
             resolve();
         } else {
-            gsap.fromTo(tab, { yPercent: 0 }, {
-                yPercent: 100,
+            gsap.fromTo(tab, { yPercent: -100 }, {
+                yPercent: 0,
                 duration: 0.3,
                 ease: easing,
-                clearProps: 'all',
                 onStart: () => {
                     this.isAnimating = true;
                 },
