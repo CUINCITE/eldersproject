@@ -5,13 +5,11 @@ export const interviews = el => {
     const controls = el.querySelector('.js-panel');
     const moreInterviews = el.querySelector('.interviews__more');
 
-
     if (controls) {
         const mm = gsap.matchMedia();
 
         mm.add('(orientation: landscape)', () => {
-
-            const tl = gsap.timeline({
+            gsap.timeline({
                 ease: 'none',
                 scrollTrigger: {
                     trigger: el,

@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { interviews } from '../animations/scroll/interviews';
 import { breakpoint } from '../Site';
 import Scroll from '../Scroll';
 import * as Utils from '../Utils';
@@ -111,6 +112,10 @@ export class Load extends Component {
                 e.preventDefault();
                 const url = (this.view as HTMLAnchorElement).href;
                 this.reloadFilters(url);
+
+                setTimeout(() => {
+                    interviews(document.querySelector('.js-panel-wrapper'));
+                }, 1000);
             });
         }
 
