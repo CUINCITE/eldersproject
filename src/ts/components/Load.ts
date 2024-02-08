@@ -38,6 +38,8 @@ export class Load extends Component {
     private filteredEl: HTMLElement;
     private resetButton: HTMLButtonElement;
     private components: Array<Component>;
+    private section: HTMLElement;
+    private content: HTMLElement;
 
 
 
@@ -57,10 +59,15 @@ export class Load extends Component {
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
         this.resetButton = this.view.querySelector('.js-reset');
+        this.section = document.getElementById('interviews');
+        this.content = document.getElementById('interviews-grid');
 
         if (!breakpoint.desktop) {
-            this.contentElement.classList.remove('is-grid-view');
-            this.contentElement.classList.add('is-list-view');
+            this.content?.classList.remove('is-grid-view');
+            this.content?.classList.add('is-list-view');
+        } else if (this.section.classList.contains('is-list')) {
+            this.content?.classList.remove('is-list-view', 'is-grid-view');
+            this.content?.classList.add('is-list-view');
         }
 
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
@@ -165,6 +172,8 @@ export class Load extends Component {
         this.hideContent().then(() => {
             this.contentElement.classList.remove('is-list-view', 'is-grid-view');
             this.contentElement.classList.add(`is-${view}-view`);
+            this.section.classList.remove('is-list', 'is-grid');
+            this.section.classList.add(`is-${view}`);
         }).then(this.showContent);
     };
 
