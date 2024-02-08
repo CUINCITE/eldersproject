@@ -18,6 +18,9 @@ export interface IMapSettings {
     token?: string;
     renderWorldCopies?: boolean;
     interactive?: boolean;
+    pitch: number;
+    clusterRadius?: number;
+    clusterMaxZoom?: number;
 }
 
 
@@ -25,6 +28,7 @@ export interface IMapInterview {
     title: string;
     duration: string;
     id: string;
+    start: number;
 }
 
 
@@ -36,7 +40,11 @@ export class Map extends Component {
     private activeLocation: HTMLElement;
     private interviewsList: HTMLElement;
     private marker: mapboxgl.Marker;
+    private popup: mapboxgl.Popup;
     private contentInjected: boolean;
+    private allButton: HTMLButtonElement;
+    private zoomButton: HTMLButtonElement;
+    private isZoomingIn = true;
 
 
     constructor(protected view: HTMLElement) {
@@ -50,12 +58,17 @@ export class Map extends Component {
             renderWorldCopies: true,
             style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
             token,
+            pitch: 60,
+            clusterRadius: 70,
+            clusterMaxZoom: 19,
         };
 
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
         this.locations = this.view.querySelectorAll('.js-location');
         this.interviewsList = this.view.querySelector('.js-interviews-list');
         this.contentInjected = false;
+        this.allButton = this.view.querySelector('.js-all-button');
+        this.zoomButton = this.view.querySelector('.js-zoom-button');
 
         this.init();
 
@@ -109,15 +122,28 @@ export class Map extends Component {
 
     private bind = (): void => {
         this.locations.forEach((location: HTMLElement) => {
+            this.setMarker(location);
             location.addEventListener('click', this.onLocationClick);
         });
 
+
         this.map.on('moveend', () => {
-            this.setMarker(this.activeLocation);
-            this.buildInterviews(this.activeLocation);
+            if (this.isZoomingIn) {
+                this.setPopup(this.activeLocation);
+                this.buildInterviews(this.activeLocation);
+            }
+            this.isZoomingIn = false;
+        });
+
+
+        this.map.on('movestart', () => {
+            this.popup?.remove();
         });
 
         breakpoint.phone && this.getTabContent();
+
+        this.allButton && this.allButton.addEventListener('click', this.onAllButtonClick);
+        this.zoomButton && this.zoomButton.addEventListener('click', this.onZoomButtonClick);
     };
 
 
@@ -127,6 +153,7 @@ export class Map extends Component {
 
         const elMarker = document.createElement('div');
         elMarker.classList.add('map__marker');
+        elMarker.setAttribute('data-id', location.getAttribute('data-id'));
         elMarker.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">
         <circle cx="31.6143" cy="31" r="31" fill="#548068"/>
         <circle cx="31.6142" cy="31" r="19.5185" fill="#B79258"/>
@@ -134,19 +161,65 @@ export class Map extends Component {
         <circle cx="31.6143" cy="30.7393" r="16" fill="#DBB9B1"/>
         </svg>`;
 
-        const popup = new mapboxgl.Popup({ offset: 25 })
+
+        const marker = new mapboxgl.Marker({ element: elMarker })
+            .setLngLat([coords[1], coords[0]])
+            .addTo(this.map);
+
+        marker.getElement().addEventListener('click', () => {
+            this.isZoomingIn = true;
+            this.onMarkerClick(marker.getElement().getAttribute('data-id'));
+        });
+    };
+
+
+
+    private setPopup = (location: HTMLElement): void => {
+        if (!location) return;
+
+        const coords = location.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+        this.popup = new mapboxgl.Popup({ offset: 25 })
             .setLngLat([coords[1], coords[0]])
             .setHTML(`
                 <div class="map__tooltip map__tooltip--marker">${location.dataset.title}</div>
                 <div class="map__tooltip-location">${location.dataset.location}</div>
-            `);
-
-        this.marker = new mapboxgl.Marker({ element: elMarker })
-            .setLngLat([coords[1], coords[0]])
-            .setPopup(popup)
-            .addTo(this.map)
-            .togglePopup();
+            `)
+            .addTo(this.map);
+        this.popup.toggleClassName('is-active');
     };
+
+
+
+    private onMarkerClick = (id: string): void => {
+        const location = [...this.locations].filter(loc => loc.getAttribute('data-id') === id)[0];
+        this.goToLocation(location);
+    };
+
+
+
+    private onAllButtonClick = (): void => {
+        this.fitBounds();
+    };
+
+
+
+    private fitBounds = (): void => {
+        const bounds = new mapboxgl.LngLatBounds();
+
+        this.locations.forEach(l => {
+            const coords = l.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+            bounds.extend([coords[1], coords[0]]);
+        });
+
+        this.map.fitBounds(bounds, {
+            padding: 50,
+            maxZoom: 16,
+        });
+    };
+
+
+
+    private onZoomButtonClick = (): void => this.goToLocation(this.activeLocation);
 
 
 
@@ -176,6 +249,7 @@ export class Map extends Component {
         this.map.flyTo({
             center: [coords[1], coords[0]],
             zoom,
+            pitch: this.settings.pitch,
         });
         this.activeLocation = location;
 
@@ -256,7 +330,7 @@ export class Map extends Component {
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
-                <button class="map__button" data-audio-player=${interview.id}></button>
+                <button class="map__button" data-audio-player="${interview.id}" data-start="${interview.start}"></button>
                 <div class="map__interview-wrap">
                     <div class="map__interview-data">
                         <div class="map__interview-title">${interview.title}</div>

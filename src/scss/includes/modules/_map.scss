@@ -35,10 +35,31 @@
 
 
 
+    &__controls {
+        @include flex(column, flex-start, stretch);
+
+        gap: 1px;
+        position: absolute;
+        inset: 0 0 auto auto;
+    }
+
+
+
+    &__control {
+        @include font-family(compressed);
+
+        width: rem(40);
+        background-color: var(--color-box);
+        text-transform: uppercase;
+    }
+
+
+
     &__container {
         position: absolute;
         inset: 0;
-        z-index: -1;
+
+        // z-index: -1;
     }
 
 
@@ -245,7 +266,7 @@
         }
 
 
-        &-data { 
+        &-data {
             @include flex(column, space-between, flex-start);
 
             @include breakpoint(desktop) {
@@ -317,7 +338,7 @@
             }
 
             @include breakpoint(phone) {
-                @include flex();
+                @include flex;
                 @include font-size(30, 24);
 
                 align-self: stretch;
@@ -411,13 +432,13 @@
 
             @include breakpoint(tablet) {
                 @include font-size(14, 16);
-                
+
                 inset: calc(100% + #{rem(79)}) 0 auto;
             }
 
             @include breakpoint(phone) {
                 @include font-size(14, 16);
-                
+
                 text-align: center;
                 width: max-content;
                 top: calc(100% + #{rem(12)});
@@ -429,6 +450,12 @@
 
 
     // mapbox elements
+
+    .mapboxgl-popup.is-active .mapboxgl-popup-content {
+        opacity: 1;
+    }
+
+
     .mapboxgl-popup-tip { display: none; }
 
     .mapboxgl-popup-content {
@@ -436,5 +463,8 @@
         box-shadow: none;
         color: var(--color-box);
         text-align: center;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .3s $ease-out;
     }
 }

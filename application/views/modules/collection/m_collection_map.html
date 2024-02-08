@@ -10,7 +10,7 @@
             <ul class="map__locations">
                 {% for item in items %}
                 <li class="map__location js-location-wrapper">
-                    <button class="map__location-button js-location" data-title="{{item.label}}"
+                    <button class="map__location-button js-location" data-id="{{loop.index0}}" data-title="{{item.label}}"
                         data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}"
                         data-interviews="{{item.quotes|json_encode}}"></button>
                     <div class="map__title">
@@ -32,6 +32,10 @@
         <div class="map__wrap phone-hide">
             <div id="map" class="map__container js-map"></div>
             <ul class="map__interviews js-interviews-list"></ul>
+            <div class="map__controls">
+                <button class="map__control js-all-button">-</button>
+                <button class="map__control js-zoom-button">+</button>
+            </div>
         </div>
     </div>
 </section>
