@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { interviews } from '../animations/scroll/interviews';
 import { breakpoint } from '../Site';
 import Scroll from '../Scroll';
 import * as Utils from '../Utils';
@@ -110,7 +111,7 @@ export class Load extends Component {
             this.view.addEventListener('click', e => {
                 e.preventDefault();
                 const url = (this.view as HTMLAnchorElement).href;
-                this.reloadFilters(url);
+                this.reloadFilters(url, true);
             });
         }
 
@@ -172,8 +173,8 @@ export class Load extends Component {
         this.hideContent().then(() => {
             this.contentElement.classList.remove('is-list-view', 'is-grid-view');
             this.contentElement.classList.add(`is-${view}-view`);
-            this.section.classList.remove('is-list', 'is-grid');
-            this.section.classList.add(`is-${view}`);
+            this.section?.classList.remove('is-list', 'is-grid');
+            this.section?.classList.add(`is-${view}`);
         }).then(this.showContent);
     };
 
@@ -303,9 +304,13 @@ export class Load extends Component {
 
 
 
-    private reloadFilters = (path: string): void => {
+    private reloadFilters = (path: string, reloadPin = false): void => {
         Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
+            reloadPin && setTimeout(() => {
+                const panel = document.querySelector('.js-panel-wrapper');
+                panel && interviews(panel);
+            }, 1100);
         });
     };
 
