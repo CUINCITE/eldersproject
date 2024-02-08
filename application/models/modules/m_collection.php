@@ -52,7 +52,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             } elseif ($v['type']['slug'] == 'quote_panel') {
                 $m['modules'][$k]['bio'] = $m['item']['text'];
-                $m['modules'][$k]['heading']['text'] = 'Meet the Interviewer';
+                $m['modules'][$k]['heading']['text'] = $m['item']['label'];
             }
         }
 
