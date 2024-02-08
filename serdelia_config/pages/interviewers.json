@@ -109,7 +109,7 @@
         {
             "field": "text",
             "type": "html",
-            "label": "Copy"
+            "label": "Bio"
         },
         
         {
