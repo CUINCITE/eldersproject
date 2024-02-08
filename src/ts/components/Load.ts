@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { interviews } from '../animations/scroll/interviews';
 import { breakpoint } from '../Site';
 import Scroll from '../Scroll';
 import * as Utils from '../Utils';
@@ -38,6 +39,8 @@ export class Load extends Component {
     private filteredEl: HTMLElement;
     private resetButton: HTMLButtonElement;
     private components: Array<Component>;
+    private section: HTMLElement;
+    private content: HTMLElement;
 
 
 
@@ -57,10 +60,15 @@ export class Load extends Component {
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
         this.resetButton = this.view.querySelector('.js-reset');
+        this.section = document.getElementById('interviews');
+        this.content = document.getElementById('interviews-grid');
 
         if (!breakpoint.desktop) {
-            this.contentElement.classList.remove('is-grid-view');
-            this.contentElement.classList.add('is-list-view');
+            this.content?.classList.remove('is-grid-view');
+            this.content?.classList.add('is-list-view');
+        } else if (this.section.classList.contains('is-list')) {
+            this.content?.classList.remove('is-list-view', 'is-grid-view');
+            this.content?.classList.add('is-list-view');
         }
 
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
@@ -104,6 +112,10 @@ export class Load extends Component {
                 e.preventDefault();
                 const url = (this.view as HTMLAnchorElement).href;
                 this.reloadFilters(url);
+
+                setTimeout(() => {
+                    interviews(document.querySelector('.js-panel-wrapper'));
+                }, 1000);
             });
         }
 
@@ -165,6 +177,8 @@ export class Load extends Component {
         this.hideContent().then(() => {
             this.contentElement.classList.remove('is-list-view', 'is-grid-view');
             this.contentElement.classList.add(`is-${view}-view`);
+            this.section.classList.remove('is-list', 'is-grid');
+            this.section.classList.add(`is-${view}`);
         }).then(this.showContent);
     };
 
