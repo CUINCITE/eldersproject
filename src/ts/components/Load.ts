@@ -173,8 +173,8 @@ export class Load extends Component {
         this.hideContent().then(() => {
             this.contentElement.classList.remove('is-list-view', 'is-grid-view');
             this.contentElement.classList.add(`is-${view}-view`);
-            this.section.classList.remove('is-list', 'is-grid');
-            this.section.classList.add(`is-${view}`);
+            this.section?.classList.remove('is-list', 'is-grid');
+            this.section?.classList.add(`is-${view}`);
         }).then(this.showContent);
     };
 
@@ -307,7 +307,10 @@ export class Load extends Component {
     private reloadFilters = (path: string, reloadPin = false): void => {
         Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
-            reloadPin && setTimeout(() => interviews(document.querySelector('.js-panel-wrapper')), 1100);
+            reloadPin && setTimeout(() => {
+                const panel = document.querySelector('.js-panel-wrapper');
+                panel && interviews(panel);
+            }, 1100);
         });
     };
 
