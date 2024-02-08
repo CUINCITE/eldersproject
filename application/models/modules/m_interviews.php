@@ -222,6 +222,14 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
             array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
         );
+
+        // Different seed every day
+        mt_srand(date('z'));
+        shuffle($filters);
+
+        //Remove already selected filters from the list
+        $filters = array_filter($filters, fn($item) => empty($item['selected']));
+        $filters = array_values($filters);
         
         $newItems = [];
         $lastLetter = null;

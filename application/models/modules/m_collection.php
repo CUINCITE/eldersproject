@@ -82,6 +82,11 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         return $content;
     }
 
+    private function time2seconds($t)
+    {
+        $t=explode(':',$t);
+        return $t[2]+$t[1]*60+$t[0]*60*60;
+    }
     private function getMap($collection)
     {
         $interviews=$this->parent->getJsonModel('interviews',['active'=>1],false,null,null,['fields'=>['label','slug']]);        
@@ -96,11 +101,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                 [
                     'title'=>$i['label'],
                     'duration'=>$vv[1],
+                    'start'=>$this->time2seconds($vv[1]),
                     'id'=>$i['id']
                 ];
                     else unset($items[$k]['quotes'][$kk]);
 
             }
+            
                 //[{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;Sharyn Grayson&quot;,&quot;duration&quot;:&quot;00:32:00&quot;,&quot;id&quot;:&quot;20&quot;}]
         return $items;
     }

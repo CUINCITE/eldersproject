@@ -242,6 +242,12 @@ class model_app_api_import
                         }
                     }
 
+                    $namesDictionary = [
+                        'Carolina De Robertis' => 'Caro De Robertis',
+                        'Eve Ewing' => 'Eve L. Ewing',
+                        'Jenna "J" Wortham' => 'Jenna Wortham'
+                    ];
+
                     // ID=narrator id
                     if (@$id) {
                         $i = [];
@@ -250,7 +256,14 @@ class model_app_api_import
                         if (@$v['3rd Interviewer: Full Name']) $i[] = $v['3rd Interviewer: Full Name'];
                         foreach ($i as $kk => $vv) {
                             $id = _uho_fx::array_filter($interviewers, 'name', $vv, ['first' => true]);
-                            if (!$id) exit('interviewer not found=' . $vv);
+                            if (!$id) {
+                                if (isset($namesDictionary[$vv])) {
+                                    $vv = $namesDictionary[$vv];
+                                    $id = _uho_fx::array_filter($interviewers, 'name', $vv, ['first' => true]);
+                                    if (!$id) exit('interviewer not found=' . $vv);
+                                }
+                                else exit('interviewer not found=' . $vv);
+                            }
                             $i[$kk] = $id['id'];
                         }
 
