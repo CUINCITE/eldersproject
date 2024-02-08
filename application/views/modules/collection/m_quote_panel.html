@@ -24,9 +24,28 @@
                                     max-width: 27.375rem;
                                 }
 
+                                .quote_panel__quote h2 {
+                                    font-size: 4rem;
+                                    margin-bottom: 20px;
+                                }
+                                .quote_panel__quote h3 {
+                                    font-size: 1.6rem;
+                                    margin-bottom: 10px;
+                                }
+
                             </style>
 
-                            {% include "/subviews/subview_text.html" with {text:bio, large:true, aisde:true, heading: heading } %}
+                            <div class="text text--large text--aside">
+                                {% if heading %}
+                                    <h3 class="heading">Meet the interviewer</h3>
+                                    {% include 'components/c_heading.html' with { label: heading.text, small: true } %}
+                                {% endif %}
+                                {{bio|raw}}
+                            </div>
+
+
+
+{#                            {% include "/subviews/subview_text.html" with {text:bio, large:true, aisde:true, heading: heading } %}#}
 
                         {% else %}
 
