@@ -4,8 +4,10 @@ import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
 import { easing } from '../../Site';
 import { Component } from '../../components/Component';
-import { components } from '../../Classes';
 import { AudioPlayer } from '../../components/AudioPlayer';
+import { LightboxTranscript } from './LightboxTranscript';
+import { LightboxNav } from './LightboxNav';
+import { LightboxSlider } from './LightboxSlider';
 
 
 
@@ -22,6 +24,11 @@ export class Lightbox {
     }
 
 
+    public static tryToUpdateTranscript(time: number): void {
+        Lightbox.instance.tryToUpdateTranscript(time);
+    }
+
+
     public static getId(): string {
         return Lightbox.currentId;
     }
@@ -31,9 +38,11 @@ export class Lightbox {
     private shown = true;
     private currentPath: string;
     private playerBtn: HTMLButtonElement;
-
     private animating: boolean;
     private controller: AbortController;
+    private transcriptComp: LightboxTranscript;
+    private navComp: LightboxNav;
+    private sliderComp: LightboxSlider;
 
     constructor() {
         Lightbox.instance = this;
@@ -117,7 +126,7 @@ export class Lightbox {
 
         Lightbox.currentId = data.id;
 
-        this.buildComponents(this.view.querySelectorAll('[data-component]'));
+        this.buildComponents();
 
         // find button connected to player
         this.playerBtn = this.view.querySelector('.js-player-btn');
@@ -143,36 +152,14 @@ export class Lightbox {
 
 
 
-    private bind = (): void => {
-        document.addEventListener('keydown', this.onKeyDown);
-    };
+    private bind = (): void => {};
 
 
 
-    private onKeyDown = (e): void => {
-        // ONLY for testing
-        // if (e.key === 'r') this.shown ? this.hide() : this.show();
-    };
-
-
-
-    private buildComponents(componentsList: NodeList): void {
-        this.components = [];
-
-        this.components = [...componentsList].map(el => {
-            const element = <HTMLElement>el;
-            const name = element.dataset.component;
-            if (name !== undefined && components[name]) {
-                let options: Object = {};
-                if (element.dataset.options) {
-                    options = JSON.parse(element.dataset.options);
-                }
-                const component = new components[name](element, options);
-                return component;
-            }
-            window.console.warn('There is no `%s` component!', name);
-            return null;
-        }).filter(Boolean);
+    private buildComponents(): void {
+        this.transcriptComp = new LightboxTranscript(this.view.querySelector('.js-lightbox-transcript'));
+        this.navComp = new LightboxNav(this.view.querySelector('.js-lightbox-nav'));
+        this.sliderComp = this.view.querySelector('.js-lightbox-slider') && new LightboxSlider(this.view.querySelector('.js-lightbox-slider'));
     }
 
 
@@ -331,5 +318,11 @@ export class Lightbox {
                 defaults: { ease: 'expo.inOut' },
             });
         });
+    }
+
+
+
+    private tryToUpdateTranscript(time: number): void {
+        this.transcriptComp.update(time);
     }
 }

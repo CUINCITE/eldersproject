@@ -66,7 +66,7 @@
             {% if images %}
                 {% if images|length > 1 %}
                 <!-- slider -->
-                <div class="lightbox__slider slider" data-component="LightboxSlider">
+                <div class="lightbox__slider slider js-lightbox-slider">
                     <div class="slider__captions">
                         {% for item in images %}
                             <div class="lightbox__caption js-caption">{{item.description}}</div>
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        </div> 
+                        </div>
                         <div class="slider__controls">
                             <div class="slider__arrow slider__arrow--prev">
                                 <button aria-label="go to prev slide" class="button button--lightbox js-slider-prev">
@@ -161,7 +161,7 @@
             </a>
             [[svg::logo]]
         </div>
-        <ul class="lightbox__buttons" data-component="LightboxNav">
+        <ul class="lightbox__buttons js-lightbox-nav">
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active"><span><span>Mementos</span><span>Mementos</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
@@ -170,7 +170,7 @@
         </ul>
     </div>
     <aside class="lightbox__aside">
-        <div id="lightbox-transcript" data-component="LightboxTranscript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab">
+        <div id="lightbox-transcript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab js-lightbox-transcript">
             <div class="lightbox__tab-content">
                 <div class="lightbox__tab-dot"></div>
                 <div class="lightbox__tab-dot"></div>
@@ -201,8 +201,8 @@
                             {% if transcript.english %}
                                 <div class="transcript__lang js-transcript-lang is-active" data-lang="english">
                                 {% for part in transcript.english %}
-                                    <div class="transcript__part {% if loop.index == 2 %} is-current {% endif %}">
-                                        <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                    <div class="transcript__part js-transcript-part">
+                                        <button class="transcript__time js-transcript-btn" data-audio-player="{{id}}" data-start="{{part[0]}}">{{ macros.secondsToMinutes(part[0]) }}</button>
                                         <div class="transcript__text">{{part[1]}}</div>
                                     </div>
                                 {% endfor %}
@@ -211,7 +211,7 @@
                             {% if transcript.spanish %}
                                 <div class="transcript__lang js-transcript-lang" data-lang="spanish">
                                 {% for part in transcript.spanish %}
-                                    <div class="transcript__part {% if loop.index == 2 %} is-current {% endif %}">
+                                    <div class="transcript__part">
                                         <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
                                         <div class="transcript__text">{{part[1]}}</div>
                                     </div>
