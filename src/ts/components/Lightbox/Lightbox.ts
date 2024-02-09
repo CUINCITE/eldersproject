@@ -49,8 +49,6 @@ export class Lightbox {
         this.view = document.getElementById('lightbox');
 
         this.hide(true);
-
-        this.bind();
     }
 
 
@@ -152,7 +150,15 @@ export class Lightbox {
 
 
 
-    private bind = (): void => {};
+    private bind = (): void => {
+        this.navComp.on('navUpdate', (tab: HTMLElement) => this.onTabsUpdate(tab));
+    };
+
+
+
+    private onTabsUpdate = (tab: HTMLElement): void => {
+        if (this.sliderComp) this.sliderComp.isActive = (tab === null);
+    };
 
 
 
@@ -262,6 +268,7 @@ export class Lightbox {
                     AudioPlayer.openAudioPlayer(true);
                     this.animating = false;
                     Lightbox.isOpen = true;
+                    this.bind();
                 },
             });
         });

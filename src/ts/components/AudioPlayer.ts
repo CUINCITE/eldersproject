@@ -164,6 +164,18 @@ export class AudioPlayer extends Video {
 
 
 
+    private goToPreviousTrack = (): void => {
+        this.onPrevClick();
+    };
+
+
+
+    private goToNextTrack = (): void => {
+        this.onNextClick();
+    };
+
+
+
     private bindAudioPlayer = (): void => {
         this.ui.thumbnail && this.ui.thumbnail.addEventListener('click', this.onThumbnailClick);
         this.ui.minimize && this.ui.minimize.addEventListener('click', this.onMinimizeClick);
@@ -173,6 +185,14 @@ export class AudioPlayer extends Video {
 
         this.view.addEventListener('mouseleave', this.onMouseLeave);
         this.view.addEventListener('mouseenter', this.onMouseEnter);
+
+        if ('mediaSession' in navigator && this.settings.metadata) {
+            // prev/next media buttons (keyboard)
+            navigator.mediaSession.setActionHandler('previoustrack', () => this.goToPreviousTrack());
+            navigator.mediaSession.setActionHandler('nexttrack', () => this.goToNextTrack());
+        }
+
+
     };
 
 
