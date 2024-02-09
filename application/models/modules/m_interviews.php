@@ -15,7 +15,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
     {
         
         // return 404 if a user hits single interview url and no interview is found
-        if (!empty($url[1])) {
+        if (!empty($url[1]))
+        {
             $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $url[1]], true);
 
             if (!$item) {
@@ -67,6 +68,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         /*
             Get Interviews and supplement it with Filters and Load More data
         */
+
+        
 
         $m['items'] = $this->parent->getJsonModel('interviews_list', $filters, false, $m['sort']['sort_model'], [$startingPage, $numberOfItems]);
 

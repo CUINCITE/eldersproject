@@ -23,38 +23,13 @@
 
         {"field":"interviewer_name_sort"},
         
-        {
-            "tab":"Metadata",
+        {        
             "field":"topics",
-            "label":"Topics",
-            "type":"checkboxes",
-            "settings":{"small":true},
-            "source":
-            {
-                "model":"topics"
-            }
+            "type":"checkboxes"
         },
+        
         {
-            "label": "Narrators",
-            "field": "narrators",
-            "required": true,
-            "type":"elements",
-            "source":
-            {
-                "model":"narrators"
-            }
-        },
-        {
-            "tab":"Status",
-            "label": "Url",
-            "field": "slug",
-            "on_demand": true,
-            "auto": {
-                "on_null": true,
-                "unique": true,
-                "url": true,
-                "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
-            }
+            "field": "slug"
         },
         
         {"field":"locations"},
@@ -63,21 +38,13 @@
         {"field":"narrator_location"},
         {
             "field":"narrators_states","label":"Narrators states",
-            "type":"elements",
-            "source":
-            {
-                "model":"s_states"
-            }
+            "type":"elements"
         },
         {
             "hr":true,
             "label":"Interviewers",
             "field":"interviewers",
-            "type":"elements",
-            "source":
-            {
-                "model":"interviewers"
-            }
+            "type":"elements"
         },
         {
             "label": "Publish",
