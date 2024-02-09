@@ -256,8 +256,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
                     if ($filter)
                     {
                         $filter['url'] = $this->getFilterUrl($filter);
-                        $k = array_rand($modifiers);
-                        $filter['modifier'] = $modifiers[$k];
+                        $randomKey = array_rand($modifiers);
+                        $filter['modifier'] = $modifiers[$randomKey];
                         $newItems[] = $filter;
                     }
                 }
