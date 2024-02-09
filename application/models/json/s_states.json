@@ -1,9 +1,31 @@
 {
-    "table": "s_states",
-    "order": "label",
-    "fields" :
-    [
-        {"field":"label"},
-        {"field":"slug"}
-    ]
+  "table": "s_states",
+  "order": "label",
+  "fields": [
+    {
+      "field": "label"
+    },
+    {
+      "field": "slug"
+    },
+    {
+      "hr": true,
+      "label": "Topic Color",
+      "field": "color",
+      "type": "select"
+    },
+    {
+      "label": "Illustration",
+      "field": "illustration",
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all"
+      },
+      "list": {
+        "position_after": "label",
+        "height": 140,
+        "src_blank": "blank.png"
+      }
+    }
+  ]
 }

@@ -1,12 +1,47 @@
 {
-    "table": "s_states",
-    "order": "label",
-    "model":{"label":"{{label}} ({{slug}})"},
-    "fields" :
-    [
-        {"field":"label","list":true,"label":"Label"},
-        {"field":"type","label":"Type","type":"select","list":true},
-        {"field":"slug"},
-        { "label" : "Publish", "field": "active", "type":"boolean", "list": "edit","hr":true }
-    ]
+  "table": "s_states",
+  "order": "label",
+  "model": {
+    "label": "{{label}} ({{slug}})"
+  },
+  "fields": [
+    {
+      "field": "label",
+      "list": true,
+      "label": "Label"
+    },
+    {
+      "field": "type",
+      "label": "Type",
+      "type": "select",
+      "list": true
+    },
+    {
+      "label": "Collection Theme (color)",
+      "field": "color",
+      "type": "select"
+    },
+    {
+      "hr": true,
+      "label": "Illustration",
+      "field": "illustration",
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all",
+        "model_fields": [
+          "image"
+        ]
+      }
+    },
+    {
+      "field": "slug"
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "hr": true
+    }
+  ]
 }
