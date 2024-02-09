@@ -20,6 +20,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             return null;
         }
 
+        $this->parent->ogSet($m['item']['label'], $m['item']['lead']);
+
         // display higher res cover
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
 
