@@ -27,8 +27,8 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
 
 //        temporary workaround - ORM error
-        foreach ($m['items'] as $k=>$v) {
-            foreach ($v['interviewers'] as $k2=>$v2) {
+        foreach ($m['items'] as $k => $v) {
+            foreach ($v['interviewers'] as $k2 => $v2) {
                 if ($v2['id'] != $m['item']['id']) {
                     unset($m['items'][$k]);
                     break;
@@ -36,29 +36,38 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             }
         }
 
-
         // get storytelling modules
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
+        $m['modules'] = $this->updateCollectionModules($m['modules'], $m);
 
-        $counter = 0;
-        foreach ($m['modules'] as $k => $v) {
 
-            if ($v['type']['slug'] == 'collection_chapter') {
-
-                $m['modules'][$k]['reversed'] = $counter % 2 != 0;
-                $counter++;
-
-                $m['modules'][$k]['article'] = $this->updateArticle($v['text'], $v['media']);
-
-            } elseif ($v['type']['slug'] == 'quote_panel') {
-                $m['modules'][$k]['bio'] = $m['item']['text'];
-                $m['modules'][$k]['heading']['text'] = $m['item']['label'];
-            }
-        }
-
-        $m['map']=$this->getMap($m['item']['id']);
+        $m['map'] = $this->getMap($m['item']['id']);
 
         return $m;
+    }
+
+    private function updateCollectionModules($modules, $parentModule)
+    {
+        $counter = 0;
+        foreach ($modules as $k => $v) {
+
+            switch ($v['type']['slug']) {
+
+                case 'collection_chapter':
+                    $modules[$k]['reversed'] = $counter % 2 != 0;
+                    $counter++;
+                    $modules[$k]['article'] = $this->updateArticle($v['text'], $v['media']);
+                    break;
+
+                case 'quote_panel':
+                    $modules[$k]['bio'] = $parentModule['item']['text'];
+                    $modules[$k]['heading']['text'] = $parentModule['item']['label'];
+                    break;
+            }
+
+        }
+
+        return $modules;
     }
 
     public function updateArticle($article, $article_media)
@@ -73,7 +82,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
     {
         $pattern = '/\[AUDIO=(\d+), ([0-9:]+)-([0-9:]+)\]/';
         if (preg_match_all($pattern, $content, $matches, PREG_SET_ORDER)) {
-            $content = preg_replace_callback($pattern, function($matches) {
+            $content = preg_replace_callback($pattern, function ($matches) {
                 $id = intval($matches[1]);
                 $startHMS = $matches[2];
                 list($h, $m, $s) = explode(':', $startHMS);
@@ -87,31 +96,30 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     private function time2seconds($t)
     {
-        $t=explode(':',$t);
-        return $t[2]+$t[1]*60+$t[0]*60*60;
+        $t = explode(':', $t);
+        return $t[2] + $t[1] * 60 + $t[0] * 60 * 60;
     }
+
     private function getMap($collection)
     {
-        $interviews=$this->parent->getJsonModel('interviews',['active'=>1],false,null,null,['fields'=>['label','slug']]);        
-        $items=$this->parent->getJsonModel('map_locations',['active'=>1,'collection'=>$collection]);
-        
-        foreach ($items as $k=>$v)
+        $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug']]);
+        $items = $this->parent->getJsonModel('map_locations', ['active' => 1, 'collection' => $collection]);
+
+        foreach ($items as $k => $v)
             if ($v['quotes'])
-            foreach ($v['quotes'] as $kk=>$vv)
-            {
-                $i=_uho_fx::array_filter($interviews,'label',$vv[0],['first'=>true]);
-                if ($i) $items[$k]['quotes'][$kk]=
-                [
-                    'title'=>$i['label'],
-                    'duration'=>$vv[1],
-                    'start'=>$this->time2seconds($vv[1]),
-                    'id'=>$i['id']
-                ];
+                foreach ($v['quotes'] as $kk => $vv) {
+                    $i = _uho_fx::array_filter($interviews, 'label', $vv[0], ['first' => true]);
+                    if ($i) $items[$k]['quotes'][$kk] =
+                        [
+                            'title' => $i['label'],
+                            'duration' => $vv[1],
+                            'start' => $this->time2seconds($vv[1]),
+                            'id' => $i['id']
+                        ];
                     else unset($items[$k]['quotes'][$kk]);
 
-            }
-            
-                //[{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;C. Njoube Dugas&quot;,&quot;duration&quot;:&quot;00:22:03&quot;,&quot;id&quot;:&quot;30&quot;},{&quot;title&quot;:&quot;Sharyn Grayson&quot;,&quot;duration&quot;:&quot;00:32:00&quot;,&quot;id&quot;:&quot;20&quot;}]
+                }
+
         return $items;
     }
 
