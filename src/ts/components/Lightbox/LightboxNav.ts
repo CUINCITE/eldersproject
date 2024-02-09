@@ -58,6 +58,7 @@ export class LightboxNav extends Component {
                 this.lightboxEl.classList.add('is-default');
                 this.lightboxEl.classList.remove('is-not-default');
                 this.activeTab = null;
+                this.trigger('navUpdate', null);
                 return;
             }
             gsap.fromTo(tab, { yPercent: 0 }, {
@@ -71,6 +72,7 @@ export class LightboxNav extends Component {
                 onComplete: () => {
                     this.isAnimating = false;
                     this.activeTab = tab;
+                    this.trigger('navUpdate', this.activeTab);
                 },
             });
         });

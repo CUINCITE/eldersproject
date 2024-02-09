@@ -5,6 +5,7 @@ import { easing } from '../../Site';
 
 export class LightboxSlider extends Component {
 
+    public isActive = true;
     private wrap: HTMLElement;
     private slides: NodeListOf<HTMLElement>;
     private captions: NodeListOf<HTMLElement>;
@@ -12,6 +13,7 @@ export class LightboxSlider extends Component {
     private arrowNext: HTMLButtonElement;
     private activeSlide: HTMLElement;
     private activeSlideIndex: number;
+    private isAnimating = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -38,6 +40,19 @@ export class LightboxSlider extends Component {
     private bind = (): void => {
         this.arrowNext.addEventListener('click', () => this.goTo(this.activeSlideIndex + 1));
         this.arrowPrev.addEventListener('click', () => this.goTo(this.activeSlideIndex - 1));
+        document.addEventListener('keydown', this.onKeyDown);
+    };
+
+
+
+    private onKeyDown = (event: KeyboardEvent): void => {
+        if (!this.isActive || this.isAnimating) return;
+
+        if (event.key === 'ArrowRight') {
+            this.goTo(this.activeSlideIndex + 1);
+        } else if (event.key === 'ArrowLeft') {
+            this.goTo(this.activeSlideIndex - 1);
+        }
     };
 
 
@@ -57,6 +72,8 @@ export class LightboxSlider extends Component {
 
         if (!slide) return;
 
+        this.isAnimating = true;
+
         gsap.fromTo(slide, { x: 0 }, {
             x: direction * (window.innerWidth * -0.75),
             duration: fast ? 0 : 0.5,
@@ -72,6 +89,7 @@ export class LightboxSlider extends Component {
             ease: easing,
             onComplete: () => {
                 caption.style.opacity = '0';
+                this.isAnimating = false;
             },
         });
     };
