@@ -12,6 +12,12 @@
     {
       "field":"active",
       "type": "boolean"
+    },
+    {
+      "field":"label"
+    },
+    {
+      "field":"lead"
     }
   ]
 }
