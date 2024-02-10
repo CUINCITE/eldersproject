@@ -28,7 +28,7 @@ class model_app_pages_modules_map extends model_app_pages_modules
 
     private function getMap($collection=0)
     {
-        if ($collection) $f=['active' => 1, 'collection_hide' => 0, 'collection' => $collection]
+        if ($collection) $f=['active' => 1, 'collection_hide' => 0, 'collection' => $collection];
             else $f=['active' => 1];
         $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug']]);
         $items = $this->parent->getJsonModel('map_locations', $f);
