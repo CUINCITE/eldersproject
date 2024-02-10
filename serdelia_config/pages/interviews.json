@@ -7,7 +7,7 @@
   "layout-temp": {
     "type": "grid",
     "count": 100,
-    "html": "{{html.image|raw}}{{html.label}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+    "html": "{{html.image|raw}}{{html.label}}<br><small>{{html.narrator_occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
   },
   "model": {
     "label": "{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"
@@ -89,6 +89,17 @@
         "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
       }
     },
+    {
+      "label": "Narrators (occupation)",
+      
+      "on_demand":true,
+      "field": "narrator_occupation",
+      "auto": {
+        "on_null": true,
+        "pattern": "{% for item in narrators %}{% if loop.index>1 and narrators[0].occupation %}, {% endif %}{{item.occupation}}{% endfor %}"
+      }
+    },
+   
     {
       "hr": true,
       "label": "Interviewers",
@@ -231,7 +242,7 @@
     {
       "label": "Placeholder Illustration",
       "field": "illustration",
-      "required": true,
+      "temp-required": true,
       "type": "select",
       "source": {
         "model": "interview_illustrations",

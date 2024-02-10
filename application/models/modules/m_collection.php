@@ -26,11 +26,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
         // display higher res cover
         $m['item']['image'] = $this->copyValues($m['item']['image'], 'big', 'desktop');
-
+        
         // get interviews
-        $m['items'] = $this->parent->getJsonModel('interviews', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
+        $m['items'] = $this->parent->getJsonModel('interviews_list', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
+        
 
 //        temporary workaround - ORM error
+/*
         foreach ($m['items'] as $k => $v) {
             foreach ($v['interviewers'] as $k2 => $v2) {
                 if ($v2['id'] != $m['item']['id']) {
@@ -38,7 +40,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                     break;
                 }
             }
-        }
+        }*/
 
         // get storytelling modules
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
@@ -121,7 +123,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
     private function getMap($collection)
     {
         $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug']]);
-        $items = $this->parent->getJsonModel('map_locations', ['active' => 1, 'collection' => $collection]);
+        $items = $this->parent->getJsonModel('map_locations', ['active' => 1, 'collection_hide'=>0,'collection' => $collection]);
 
         foreach ($items as $k => $v)
             if ($v['quotes'])

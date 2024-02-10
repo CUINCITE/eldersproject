@@ -47,6 +47,12 @@
             "type":"elements"
         },
         {
+            "field":"lead"
+        },
+        {
+            "field":"narrator_occupation"
+        },
+        {
             "label": "Publish",
             "field": "active",
             "type": "boolean",

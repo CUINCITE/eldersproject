@@ -1,5 +1,10 @@
 <?php
 
+/*
+    Imports Map Data from XLS created from Google Docs Sheet
+    GPS values to be added in the CMS via GPS INPORT plugin
+*/
+
 use PhpOffice\PhpSpreadsheet\IOFactory as ExcelIOFactory;
 
 class model_app_api_import_map
@@ -83,7 +88,7 @@ class model_app_api_import_map
                 $r[$kk]=isset($v[$vv]) ? $v[$vv] : "";
             }
 
-            if ($r['label']=='Burger Barn') $r['gps']='45.55,-122.66';
+            // if ($r['label']=='Burger Barn') $r['gps']='45.55,-122.66';
 
             /*
             if (!empty($r['gps']))

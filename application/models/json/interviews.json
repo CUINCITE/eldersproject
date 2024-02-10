@@ -7,7 +7,7 @@
   "layout": {
     "type": "grid",
     "count": 100,
-    "html": "{{html.image|raw}}{{html.name}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+    "html": "{{html.image|raw}}{{html.name}}<br><small>{{html.narrator_occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
   },
   "url": {
     "type": "interview",
@@ -51,6 +51,9 @@
       "icon": "reorder",
       "page": "sessions,%id%"
     },
+    {
+      "field":"narrator_occupation"
+  },
     {
       "type": "plugin",
       "plugin": "preview",

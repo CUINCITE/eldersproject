@@ -103,6 +103,11 @@
     },
     {
       "hr": true,
+      "field": "collection_hide",
+      "type": "boolean",
+      "label": "Hide on collection Page"
+    },
+    {
       "field": "active",
       "type": "boolean",
       "label": "Active",
