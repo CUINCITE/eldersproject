@@ -76,10 +76,6 @@ html {
     body.is-loader-hidden & {
         background: var(--color-bg);
     }
-
-    // @include breakpoint(not-desktop) {
-    //     grid-template-columns: 1fr;
-    // }
 }
 
 
