@@ -1,5 +1,4 @@
- <div class="map" data-component="Map" data-locations='{{locations|json_encode}}'>
-    {% if aside %}
+ <div class="map {% if global %} map--global {% endif %}" data-component="Map" data-options='{ {% if zoomOnScroll %}"zoomOnScroll": true{% endif %} }' data-locations='{{locations|json_encode}}'>
     <div class="map__aside">
         <div class="map__heading">
             {% include "./components/c_heading.html" with { label: "Map" } %}
@@ -25,12 +24,11 @@
 
         </ul>
     </div>
-    {% endif %}
     <div class="map__wrap phone-hide">
         <div id="map" class="map__container js-map"></div>
         <ul class="map__interviews js-interviews-list"></ul>
         <div class="map__controls">
-            <button class="map__control js-toggle-button">Zoom In</button>
+            <button class="map__control js-toggle-button">Zoom Out</button>
         </div>
     </div>
 </div>

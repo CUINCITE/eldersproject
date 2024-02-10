@@ -21,6 +21,7 @@ export interface IMapSettings {
     pitch: number;
     clusterRadius?: number;
     clusterMaxZoom?: number;
+    zoomOnScroll?: boolean;
 }
 
 
@@ -72,9 +73,10 @@ export class Map extends Component {
             style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
             token,
             pitch: 60,
+            zoomOnScroll: false,
         };
 
-        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
+        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('data-options')));
         this.locationsElements = this.view.querySelectorAll('.js-location');
         this.interviewsList = this.view.querySelector('.js-interviews-list');
         this.contentInjected = false;
@@ -134,7 +136,7 @@ export class Map extends Component {
 
 
     private bind = (): void => {
-        this.map.scrollZoom.disable();
+        !this.settings.zoomOnScroll && this.map.scrollZoom.disable();
 
         this.locationsElements.forEach((location: HTMLElement) => {
             location.addEventListener('click', this.onLocationClick);
@@ -157,6 +159,7 @@ export class Map extends Component {
 
         this.map.on('movestart', () => {
             this.popup?.remove();
+            this.removeCurrentInterviews();
         });
 
         breakpoint.phone && this.getTabContent();
@@ -221,14 +224,14 @@ export class Map extends Component {
 
     private onToggleButtonClick = (): void => {
         !this.isGlobalView ? this.fitBounds() : this.goToLocation(this.activeLocation || this.locations[0]);
-
+        this.view.classList.toggle('is-zoomed', !this.isGlobalView);
         this.updateToggle();
     };
 
 
 
     private updateToggle = (): void => {
-        this.toggleButton.innerText = this.isGlobalView ? 'Zoom in' : 'Zoom out';
+        // this.toggleButton.innerText = this.isGlobalView ? 'Zoom in' : 'Zoom out';
     };
 
 
@@ -266,6 +269,7 @@ export class Map extends Component {
     private goToLocation = (location: IMapLocation): void => {
         this.isZoomingIn = true;
         this.isGlobalView = false;
+        this.view.classList.add('is-zoomed');
 
         this.updateToggle();
 
