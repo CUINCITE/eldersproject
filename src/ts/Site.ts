@@ -84,7 +84,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
-            // this.loader.animate(),
+            this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -229,6 +229,7 @@ class Site {
 
         // set custom classes to body based on <article> parameters
         document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
+        document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
 
         const isHome: boolean = !!document.body.querySelector('[data-home]');
         document.body.classList.toggle('is-homepage', isHome);

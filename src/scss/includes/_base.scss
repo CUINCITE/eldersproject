@@ -73,10 +73,9 @@ html {
     }
 
 
-    background: var(--color-bg);
-
-    // temp - later move bg here
-    // body.is-loader-hidden & {}
+    body.is-loader-hidden & {
+        background: var(--color-bg);
+    }
 
     // @include breakpoint(not-desktop) {
     //     grid-template-columns: 1fr;
@@ -93,6 +92,12 @@ main {
 article {
     height: 100%;
     opacity: 0;
+    transition: background-color .25s $ease-out;
+
+
+    body.is-homepage.is-loader-hiding & {
+        background-color: var(--color-bg);
+    }
 
     &::before {
         @include full;

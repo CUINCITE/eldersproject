@@ -1,4 +1,4 @@
-<div class="illustration{% if modifier %} illustration--{{modifier}}{% endif %}{% if shadow %} illustration--{{shadow}}{% endif %}">
+<div class="illustration{% if modifier %} illustration--{{modifier}}{% endif %}{% if shadow %} illustration--{{shadow}}{% endif %}" {% if animate %} data-scroll="cover"{% endif %} >
     <div class="illustration__front">
         <div class="illustration__image">
             {% include "./subviews/subview_picture.html" with { image } %}

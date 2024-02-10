@@ -10,9 +10,9 @@
     background-color: var(--color-box);
 
 
-    // body.is-not-ready & {
-    //     transform: translateX(100%);
-    // }
+    body.is-not-ready & {
+        transform: translateX(100%);
+    }
 
 
     @include breakpoint(desktop) {

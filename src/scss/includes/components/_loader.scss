@@ -9,7 +9,7 @@
     padding-left: rem(13);
 
     // temp
-    opacity: 0;
+    // opacity: 0;
 
 
 
@@ -35,10 +35,20 @@
         @include font-size(240, 1);
         @include letter-spacing(-8.4, 240);
 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+
 
         @media (max-height: 719px) {
             @include font-size(210, 1);
             @include letter-spacing(-7.5, 210);
+        }
+
+
+        span {
+            grid-column: 1 / 1;
+            grid-row: 1 / 1;
         }
     }
 

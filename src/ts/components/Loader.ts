@@ -53,9 +53,13 @@ export class Loader extends Component {
             opacity: 0,
             duration: 0.5,
             ease: 'sine',
+            onStart: () => {
+                document.body.classList.add('is-loader-hiding');
+            },
             onComplete: () => {
-                this.view.style.display = 'none';
+                document.body.classList.remove('is-loader-hiding');
                 document.body.classList.add('is-loader-hidden');
+                this.view.style.display = 'none';
             },
         });
     };
@@ -74,11 +78,35 @@ export class Loader extends Component {
                 resolve();
                 return;
             }
-            this.countEl.innerHTML = `${steps[count]}%`;
-            this.updatePositions(false, steps[count]);
+
+            this.updateHtml(steps[count]);
 
         }, 1000);
     });
+
+
+
+    private updateHtml = (value: number): void => {
+        const oldValue = this.countEl.querySelector('span');
+        const newValue = document.createElement('span');
+        newValue.innerHTML = `<span>${value}%</span>`;
+
+        this.countEl.insertAdjacentHTML('beforeend', newValue.outerHTML);
+        this.updatePositions(false, value);
+
+        gsap.to(oldValue, {
+            opacity: 0,
+            duration: 0.6,
+            ease: 'sine',
+            onComplete: () => oldValue.remove(),
+        });
+
+        gsap.fromTo(newValue, { opacity: 0 }, {
+            opacity: 1,
+            duration: 0.6,
+            ease: 'sine',
+        });
+    };
 
 
 

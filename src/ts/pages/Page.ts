@@ -79,22 +79,30 @@ export class Page extends Handler {
                 this.components[i].animateIn(i, delay);
             }
 
-            // const boxes = Utils.findVisibleBoxes(this.view.querySelectorAll('.box'));
+            const boxes = Utils.findVisibleBoxes(this.view.querySelectorAll('.box'));
 
-            // gsap.fromTo(boxes, { y: window.innerHeight }, {
-            //     y: 0,
-            //     duration: 0.8,
-            //     stagger: 0.15,
-            //     ease: 'power2.out',
-            //     onStart: () => gsap.set(this.view, { opacity: 1 }),
+            gsap.fromTo(boxes, { y: window.innerHeight }, {
+                y: 0,
+                duration: 0.75,
+                stagger: 0.1,
+                ease: 'power2.out',
+                clearProps: 'all',
+                onStart: () => {
+                    gsap.set(this.view, { opacity: 1 });
+                    // prevent double animation
+                    boxes.forEach(box => box.classList.add('is-animated'));
+                },
+                onComplete: () => {
+                    // document.body.classList.add('is-transition');
+                    resolve();
+                },
+            });
+
+            // gsap.to(this.view, {
+            //     duration: 0.3,
+            //     opacity: 1,
             //     onComplete: () => resolve(),
             // });
-
-            gsap.to(this.view, {
-                duration: 0.3,
-                opacity: 1,
-                onComplete: () => resolve(),
-            });
         });
     }
 
