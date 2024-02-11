@@ -67,7 +67,7 @@ export class Map extends Component {
         this.settings = {
             lng: -122,
             lat: 37,
-            zoom: 16,
+            zoom: 10,
             interactive: true,
             renderWorldCopies: true,
             style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
@@ -127,10 +127,18 @@ export class Map extends Component {
 
 
     private onLoad = async() => {
+        this.map.on('idle', this.onMapIdle);
         this.bind();
         // this.locationsElements.length && this.goToLocation(this.locationsElements[0]);
 
-        this.fitBounds();
+        this.fitBounds(true);
+    };
+
+
+
+    private onMapIdle = () => {
+        this.map.off('idle', this.onMapIdle);
+        (this.view.querySelector('.js-map') as HTMLElement).style.opacity = '1';
     };
 
 
@@ -236,7 +244,7 @@ export class Map extends Component {
 
 
 
-    private fitBounds = (): void => {
+    private fitBounds = (fast?: boolean): void => {
         this.removeCurrentInterviews();
 
         const bounds = new mapboxgl.LngLatBounds();
@@ -250,6 +258,7 @@ export class Map extends Component {
         this.map.fitBounds(bounds, {
             padding: 50,
             maxZoom: 16,
+            duration: fast ? 0 : 1000,
         });
 
         this.isGlobalView = true;

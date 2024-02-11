@@ -31,6 +31,7 @@
         width: 100%;
         height: 100%;
         position: relative;
+        background-color: var(--color-bg);
     }
 
 
@@ -71,6 +72,8 @@
     &__container {
         position: absolute;
         inset: 0;
+        opacity: 0;
+        transition: opacity .3s $ease-out;
 
         // z-index: -1;
     }
