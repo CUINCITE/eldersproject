@@ -1,2 +1,13 @@
-// @import "includes/variables/grid";
-// @import "includes/variables/sizes";
+@import "includes/mixins";
+@import "includes/variables/fonts";
+@import "includes/variables/global";
+@import "includes/variables/colors";
+@import "includes/variables/grid";
+@import "includes/variables/sizes";
+@import "includes/variables/transitions";
+@import "includes/variables/zindex";
+
+@import "includes/fonts";
+
+@import "includes/components/loader";
+@import "includes/components/circle";
