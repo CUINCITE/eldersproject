@@ -189,7 +189,6 @@ export class Lightbox {
                 // show the interview lightbox (only when there's data to show)
                 if (!this.shown && data.result !== false) { this.show(); }
 
-                this.animateIn();
             }).catch(() => {
                 this.hide();
             });
@@ -198,11 +197,7 @@ export class Lightbox {
 
 
         // just hide:
-        if (this.shown) {
-            const animate = isRendered;
-            !!animate && this.animateOut();
-            this.hide(!this.shown);
-        }
+        if (this.shown) this.hide(!this.shown);
 
         return false;
     }
@@ -230,7 +225,7 @@ export class Lightbox {
                 onComplete: (): void => {
                     this.view.style.display = 'none';
                     // could be added in lightbox naivgation
-                    this.view.classList.remove('is-default', 'is-not-default');
+                    this.view.classList.remove('is-default', 'is-not-default', 'is-closing');
                     this.shown = false;
                     this.animating = false;
                     // empty the lightbox
@@ -245,7 +240,7 @@ export class Lightbox {
 
     private show(): void {
         if (this.animating) return;
-        if (this.shown) { return; }
+        if (this.shown) return;
 
 
         Promise.all([this.shown ? this.hide() : null]).then(() => {
@@ -290,41 +285,6 @@ export class Lightbox {
     private matchPathnamePattern(): boolean {
         return /^\/(workspace\/lightbox|interviews)\/[a-z0-9-]/gmi
             .test(window.location.pathname + window.location.search);
-    }
-
-
-
-    private animateIn(fast?: boolean): Promise<void> {
-        return new Promise<void>(resolve => {
-            gsap.timeline({
-                onComplete: () => {
-                    this.view.classList.add('is-visible');
-                    resolve();
-                },
-                defaults: { ease: easing, duration: !fast ? 1 : 0 },
-            });
-
-            navigator.vibrate([1, 400, 1]);
-        });
-    }
-
-
-
-    private animateOut(fast?: boolean): Promise<void> {
-
-        if (!this.view.classList.contains('is-visible')) {
-            return Promise.resolve();
-        }
-
-        return new Promise<void>(resolve => {
-            gsap.timeline({
-                onComplete: () => {
-                    this.view.classList.remove('is-visible');
-                    resolve();
-                },
-                defaults: { ease: 'expo.inOut' },
-            });
-        });
     }
 
 
