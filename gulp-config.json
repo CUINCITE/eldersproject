@@ -11,7 +11,7 @@
         },
         "critical": {
             "app": "application/views/scaffold",
-            "workspace": "workspace/includes"
+            "workspace": "workspace/views/scaffold"
         },
         "scripts": {
             "ts": "src/ts/**/*.ts",
