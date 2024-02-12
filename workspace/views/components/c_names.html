@@ -15,8 +15,9 @@
                 </div>
             </div>
 
-            <!--
+
             <div class="names__copy js-accordeon-copy">
+                <!--
                 <div class="names__link">
                     {% include "./components/c_link.html" with {
                         url: "test",
@@ -24,9 +25,17 @@
                         text: "Explore #{author.interviews} interviews"
                     } %}
                 </div>
+                -->
+                <button class="button button--simple button--collections">
+                    {% include "./components/c_arrow_icon.html" %}
+
+                    <span>Explore {{ item.amount }} interviews</span>
+                </button>
+                <!--
                 {% include "./subviews/subview_text.html" with { text: author.copy, heading: false } %}
+                -->
             </div>
-            -->
+
         </li>
     {% endfor %}
 </ul>

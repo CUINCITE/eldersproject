@@ -288,7 +288,7 @@ export class PushStates extends Handler {
         const t = target ?? document.body;
 
         // eslint-disable-next-line max-len
-        const links = t.querySelectorAll('a:not([data-history="false"]):not([data-component="More"]):not([data-component="Load"]):not([data-api]):not([download]):not([data-modal]):not([href^="#"]):not([href$=".jpg"]):not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([data-poczta]):not([data-login]):not([data-lang]):not([data-more]):not([data-filters])');
+        const links = t.querySelectorAll('a:not([data-history="false"]):not([data-component="More"]):not([data-component="Load"]):not([data-api]):not([download]):not([data-modal]):not([href^="#"]):not([href$=".jpg"]):not([target="_blank"]):not([href^="mailto:"]):not([href^="tel:"]):not([data-poczta]):not([data-login]):not([data-lang]):not([data-more]):not([data-filters]):not([data-nostate])');
 
         links.forEach(el => {
             el.removeEventListener('click', this.onClick);

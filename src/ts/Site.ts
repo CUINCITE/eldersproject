@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { CustomEase } from 'gsap/dist/CustomEase';
 import Scroll from './Scroll';
 import { pages as Pages } from './Classes';
-import { stats, debounce, setAppHeight, setVwUnit } from './Utils';
+import { stats, debounce, setAppHeight, setVwUnit, getSessionStorageItem } from './Utils';
 import { IBrowser, getBrowser } from './Browser';
 import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
@@ -25,6 +25,7 @@ export let pixelRatio: number;
 export let easing: string;
 export let browser: IBrowser;
 export let breakpoint: IBreakpoint;
+export let isActiveSession: boolean;
 
 gsap.registerPlugin(CustomEase);
 
@@ -55,6 +56,8 @@ class Site {
         easing = CustomEase.create('custom', '0.5, 0, 0.1, 1');
         lang = document.documentElement.getAttribute('lang');
         pixelRatio = Math.min(2, window.devicePixelRatio || 1);
+        // set in Loader after first page load in session
+        isActiveSession = !!getSessionStorageItem('loaded');
 
         this.bind();
         setVwUnit();
@@ -84,7 +87,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
-            this.loader.animate(),
+            !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }

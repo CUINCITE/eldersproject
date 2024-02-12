@@ -21,6 +21,7 @@ export interface IMapSettings {
     pitch: number;
     clusterRadius?: number;
     clusterMaxZoom?: number;
+    zoomOnScroll?: boolean;
 }
 
 
@@ -66,15 +67,16 @@ export class Map extends Component {
         this.settings = {
             lng: -122,
             lat: 37,
-            zoom: 16,
+            zoom: 10,
             interactive: true,
             renderWorldCopies: true,
             style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
             token,
             pitch: 60,
+            zoomOnScroll: false,
         };
 
-        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('options')));
+        this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('data-options')));
         this.locationsElements = this.view.querySelectorAll('.js-location');
         this.interviewsList = this.view.querySelector('.js-interviews-list');
         this.contentInjected = false;
@@ -125,16 +127,24 @@ export class Map extends Component {
 
 
     private onLoad = async() => {
+        this.map.on('idle', this.onMapIdle);
         this.bind();
         // this.locationsElements.length && this.goToLocation(this.locationsElements[0]);
 
-        this.fitBounds();
+        this.fitBounds(true);
+    };
+
+
+
+    private onMapIdle = () => {
+        this.map.off('idle', this.onMapIdle);
+        (this.view.querySelector('.js-map') as HTMLElement).style.opacity = '1';
     };
 
 
 
     private bind = (): void => {
-        this.map.scrollZoom.disable();
+        !this.settings.zoomOnScroll && this.map.scrollZoom.disable();
 
         this.locationsElements.forEach((location: HTMLElement) => {
             location.addEventListener('click', this.onLocationClick);
@@ -157,6 +167,7 @@ export class Map extends Component {
 
         this.map.on('movestart', () => {
             this.popup?.remove();
+            this.removeCurrentInterviews();
         });
 
         breakpoint.phone && this.getTabContent();
@@ -221,19 +232,19 @@ export class Map extends Component {
 
     private onToggleButtonClick = (): void => {
         !this.isGlobalView ? this.fitBounds() : this.goToLocation(this.activeLocation || this.locations[0]);
-
+        this.view.classList.toggle('is-zoomed', !this.isGlobalView);
         this.updateToggle();
     };
 
 
 
     private updateToggle = (): void => {
-        this.toggleButton.innerText = this.isGlobalView ? 'Zoom in' : 'Zoom out';
+        // this.toggleButton.innerText = this.isGlobalView ? 'Zoom in' : 'Zoom out';
     };
 
 
 
-    private fitBounds = (): void => {
+    private fitBounds = (fast?: boolean): void => {
         this.removeCurrentInterviews();
 
         const bounds = new mapboxgl.LngLatBounds();
@@ -247,6 +258,7 @@ export class Map extends Component {
         this.map.fitBounds(bounds, {
             padding: 50,
             maxZoom: 16,
+            duration: fast ? 0 : 1000,
         });
 
         this.isGlobalView = true;
@@ -266,6 +278,7 @@ export class Map extends Component {
     private goToLocation = (location: IMapLocation): void => {
         this.isZoomingIn = true;
         this.isGlobalView = false;
+        this.view.classList.add('is-zoomed');
 
         this.updateToggle();
 

@@ -30,6 +30,32 @@ function stylesDefault() {
 }
 
 
+function errorHandler() {
+    plugins.beeper();
+    console.log('\x07');
+    return true;
+}
+
+
+function stylesCritical() {
+    return gulp.src(paths.sass.critical)
+        .pipe(plugins.newer(paths.critical.app))
+        .pipe(plugins.plumber(errorHandler))
+        .pipe(plugins.sass({ outputStyle: 'compressed' }).on('error', plugins.sass.logError))
+        .pipe(plugins.autoprefixer())
+        .pipe(plugins.insert.prepend('<style>'))
+        .pipe(plugins.insert.append('</style>'))
+        .pipe(plugins.rename({
+            basename: 'critical',
+            extname: '.html',
+        }))
+        .pipe(gulp.dest(paths.critical.workspace))
+        .pipe(gulp.dest(paths.critical.app))
+        .pipe(browserSync.stream())
+        .pipe(plugins.notify('Critical styles ready!'));
+}
+
+
 // Copy fonts
 
 function fonts() {
@@ -307,12 +333,13 @@ function watch() {
         });
     });
     gulp.watch(paths.styles.main, stylesDefault);
+    gulp.watch(paths.styles.critical, stylesCritical);
     gulp.watch(paths.images.source);
     watchBundle();
 }
 
 
-exports.styles = gulp.series(stylesDefault);
+exports.styles = gulp.series(stylesDefault, stylesCritical);
 exports.scripts = bundle;
 exports.test = test;
 exports.init = init;
