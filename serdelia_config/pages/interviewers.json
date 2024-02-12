@@ -126,7 +126,7 @@
             
             "list": {
                 "height": 160,
-                "folder": "desktop",
+                "folder": "mobile",
                 "temp-layout": "cover",
                 "src_blank": "blank.png"
             },

@@ -128,6 +128,7 @@
       },
       "field": "interviewer_name_sort",
       "list": true,
+      "search":true,
       "edit": false,
       "auto": {
         "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
@@ -325,6 +326,13 @@
       "list": true,
       "field": "status_transcripts",
       "label": "Status (transcripts)",
+      "type": "boolean",
+      "search": true
+    },
+    {
+      "list": "read",
+      "field": "status_assets",
+      "label": "Status (assets)",
       "type": "boolean",
       "search": true
     },
