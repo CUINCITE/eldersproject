@@ -9,7 +9,7 @@ export class LoaderEvents {
 }
 
 // TEMP for creating pseudo load progress
-const steps = [1, 5, 12, 46, 99];
+const steps = [1, 12, 46, 99];
 
 export class Loader extends Component {
 
@@ -86,7 +86,7 @@ export class Loader extends Component {
 
             this.updateHtml(steps[count]);
 
-        }, 1000);
+        }, 700);
     });
 
 
