@@ -334,8 +334,22 @@ export function setStorageItem(key: string, value: string): void {
 }
 
 
+export function setSessionStorageItem(key: string, value: string): void {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (error) {
+        console.warn(error);
+    }
+}
+
+
 export function getStorageItem(key: string): string {
     return localStorage.getItem(key);
+}
+
+
+export function getSessionStorageItem(key: string): string {
+    return sessionStorage.getItem(key);
 }
 
 
