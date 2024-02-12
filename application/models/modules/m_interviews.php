@@ -241,7 +241,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $lastLetter = null;
         $i = 0;
 
-        $modifiers = ['pink', 'pale-purple'];
+        $modifiers = ['pink', 'pale-purple', 'pink-alt', 'green'];
         $minimum_distance=8;
         $last_index=-4;
 
