@@ -87,7 +87,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
-            !isActiveSession && this.loader.animate(),
+            // !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
