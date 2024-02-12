@@ -80,6 +80,7 @@
 
 
         &__names:has(li:nth-child(#{$i}).is-active) + div > &__cards,
+        &__names:has(li:nth-child(#{$i}) a.is-visible) + div > &__cards,
         &__names:has(li:nth-child(#{$i}).is-active) + &__cards, {
             li { transform: unset !important; }
 
