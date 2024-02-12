@@ -14,8 +14,8 @@
  * UPDATE sessions,interviews SET sessions.label=CONCAT(interviews.label,' (',interviews.interviewer_name,')'),sessions.label_sort=CONCAT(interviews.label_sort,' (',interviews.interviewer_name,')') WHERE sessions.parent=interviews.id
  */
 
-require_once('vendor/autoload.php');
-use Maestroerror\HeicToJpg;
+//require_once('vendor/autoload.php');
+//use Maestroerror\HeicToJpg;
 
 class model_app_api_import
 {
