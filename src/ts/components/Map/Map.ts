@@ -140,7 +140,7 @@ export class Map extends Component {
     private onLoad = async() => {
         this.map.on('idle', this.onMapIdle);
         this.bind();
-        // this.locationsElements.length && this.goToLocation(this.locationsElements[0]);
+        breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
 
         this.fitBounds(true);
     };
