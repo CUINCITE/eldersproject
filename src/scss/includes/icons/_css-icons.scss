@@ -687,6 +687,34 @@
     }
 }
 
+
+.icon-cassette {
+    @include flex(row, center, center);
+
+    width: rem(30);
+    height: rem(30);
+    background-color: var(--color-black);
+    border-radius: 50%;
+    position: relative;
+    z-index: -1;
+
+    span {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        border-radius: 50%;
+        background-color: var(--color-box);
+        margin: auto;
+
+
+        &:first-child { inset: -52% auto auto; }
+        &:nth-child(2) { inset: auto auto -52%; }
+        &:nth-child(3) { inset: auto -52% auto auto; }
+        &:nth-child(4) { inset: auto auto auto -52%; }
+    }
+}
+
+
 .fa {
     // &.fa-envelope {
     //     transform: translateY(-1px);

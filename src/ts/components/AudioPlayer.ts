@@ -20,6 +20,7 @@ export interface IAudioPlayerResponse {
     src: IAudioPlayerMedia[];
     title: string;
     urlInterview: string;
+    color: string;
     nextId?: string;
     prevId?: string;
 }
@@ -62,13 +63,9 @@ export class AudioPlayer extends Video {
     }
 
 
-    public static updateColors(color: string): void {
-        AudioPlayer.instance.updateColors(color);
-    }
-
-
 
     private isExpanded = false;
+    private cassetteEl: HTMLElement;
     private cassetteTitle: HTMLElement;
     private apiUrl: string;
     private elements: IAudioPlayerResponseElements;
@@ -84,6 +81,8 @@ export class AudioPlayer extends Video {
         this.ui.thumbnail = this.view.querySelector('.js-player-thumbnail');
         this.ui.minimize = this.view.querySelector('.js-player-minimize');
         this.cassetteTitle = this.view.querySelector('.js-player-marquee');
+        this.cassetteEl = this.view.querySelector('.js-player-cassette');
+
         this.apiUrl = this.view.dataset.apiUrl;
 
         this.elements = {
@@ -222,20 +221,59 @@ export class AudioPlayer extends Video {
 
 
     private setNewAudio = (id?: string, play?: boolean, startTime?: string): void => {
-        this.loadAudio(id).then((data: IAudioPlayerResponse) => {
-            this.updatePlayer(data);
-            // check if lightbox is open and has the same id as audio player
-            Lightbox.checkPlayerState();
+        this.animateOutCassette()
+            .then(() => this.loadAudio(id))
+            .then((data: IAudioPlayerResponse) => {
+                this.updatePlayer(data);
+                this.updateColors(data.color);
+                this.animateInCassette();
+                // eslint-disable-next-line max-len
+                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
 
-            // at first load, check if URL has start time for audio
-            const hasParams = this.isInitialized ? false : this.seekToParams();
-            // play audio when it has been already initialized
-            if (play) {
-                !this.isExpanded && this.expand();
-                if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
-                this.play();
-            }
-            this.isInitialized = true;
+                // check if lightbox is open and has the same id as audio player
+                Lightbox.checkPlayerState();
+
+                // at first load, check if URL has start time for audio
+                const hasParams = this.isInitialized ? false : this.seekToParams();
+                // play audio when it has been already initialized
+                if (play) {
+                    !this.isExpanded && this.expand();
+                    if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                    this.play();
+                }
+                this.isInitialized = true;
+            });
+    };
+
+
+
+    private animateOutCassette = (): Promise<void> => new Promise(resolve => {
+        this.elements.title.innerText = 'Loading...';
+        // no cached earlier because it's rerendered in template
+        gsap.to(this.cassetteEl, {
+            yPercent: 120,
+            rotate: -10,
+            duration: 0.4,
+            ease: 'power2.out',
+            clearProps: 'all',
+            onComplete: () => {
+                this.cassetteEl.style.opacity = '0';
+                resolve();
+            },
+        });
+    });
+
+
+
+    private animateInCassette = (): void => {
+        gsap.fromTo(this.cassetteEl, { yPercent: 100 }, {
+            yPercent: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            clearProps: 'all',
+            onStart: () => {
+                this.cassetteEl.style.opacity = '1';
+            },
         });
     };
 
