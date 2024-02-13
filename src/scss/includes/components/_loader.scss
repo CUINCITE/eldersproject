@@ -90,7 +90,10 @@
         width: 100%;
         transition: height .7s $ease-out;
         will-change: height;
-        height: 0;
+
+        // WHEN HIDDEN LOADER
+        // height: 0;
+        height: 99%;
 
         // logo height + bottom padding
         min-height: rem(60 + 12);
@@ -111,7 +114,10 @@
 
         transition: height .7s $ease-out;
         will-change: height;
-        height: 0;
+
+        // WHEN HIDDEN LOADER
+        // height: 0;
+        height: 100%;
 
         // logo height + bottom padding
         min-height: rem(60 + 12);

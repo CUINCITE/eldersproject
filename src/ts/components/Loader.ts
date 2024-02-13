@@ -1,13 +1,15 @@
 import { gsap } from 'gsap/dist/gsap';
+import { isActiveSession } from '../Site';
 import { Component } from './Component';
 import { Circle } from './Circle';
+import * as Utils from '../Utils';
 
 export class LoaderEvents {
     public static LOADED: string = 'loaded';
 }
 
 // TEMP for creating pseudo load progress
-const steps = [1, 5, 12, 46, 99];
+const steps = [1, 12, 46, 99];
 
 export class Loader extends Component {
 
@@ -26,6 +28,7 @@ export class Loader extends Component {
         this.lineEl = this.view.querySelector('.js-loader-line');
         this.counterWidth = this.countEl.clientWidth;
 
+        isActiveSession && this.updateHtml(steps[steps.length - 1]);
         this.updatePositions(true);
     }
 
@@ -60,6 +63,8 @@ export class Loader extends Component {
                 document.body.classList.remove('is-loader-hiding');
                 document.body.classList.add('is-loader-hidden');
                 this.view.style.display = 'none';
+
+                Utils.setSessionStorageItem('loaded', '1');
             },
         });
     };
@@ -81,12 +86,12 @@ export class Loader extends Component {
 
             this.updateHtml(steps[count]);
 
-        }, 1000);
+        }, 700);
     });
 
 
 
-    private updateHtml = (value: number): void => {
+    private updateHtml = (value: number, fast?: boolean): void => {
         const oldValue = this.countEl.querySelector('span');
         const newValue = document.createElement('span');
         newValue.innerHTML = `<span>${value}%</span>`;
@@ -96,14 +101,14 @@ export class Loader extends Component {
 
         gsap.to(oldValue, {
             opacity: 0,
-            duration: 0.6,
+            duration: fast ? 0 : 0.6,
             ease: 'sine',
             onComplete: () => oldValue.remove(),
         });
 
         gsap.fromTo(newValue, { opacity: 0 }, {
             opacity: 1,
-            duration: 0.6,
+            duration: fast ? 0 : 0.6,
             ease: 'sine',
         });
     };
