@@ -1,6 +1,6 @@
 <section class="module module--map box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="map{% if params.global %} map--global{% endif %}" data-component="Map" {% if params.global %}data-options='{ "zoomOnScroll": true }'{% endif %} data-locations="{{items|json_encode}}">
+    <div class="map{% if params.global %} map--global{% endif %}" data-component="Map" {% if params.global %}data-options='{ "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }'{% endif %} data-locations="{{items|json_encode}}">
         <div class="map__aside">
             <div class="map__heading">
                 <h2 class="heading">
