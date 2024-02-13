@@ -10,6 +10,7 @@ $circles-colors: "green", "red", "pink";
     margin-left: rem(-18);
     opacity: 0;
     display: none;
+    pointer-events: none;
 
 
     @include breakpoint(desktop) {

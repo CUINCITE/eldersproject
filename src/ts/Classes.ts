@@ -12,7 +12,7 @@ import { WrappedText } from './components/WrappedText';
 import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
-import { Map } from './components/Map';
+import { Map } from './components/Map/Map';
 import { Collections } from './components/Collections';
 
 export const components = {
