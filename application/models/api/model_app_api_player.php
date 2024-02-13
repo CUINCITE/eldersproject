@@ -28,6 +28,7 @@ class model_app_api_player
 
     public function getPlayerData($item, $sessions)
     {
+
         $src = [];
         foreach ($sessions as $session) {
             $src[] = [
@@ -35,11 +36,13 @@ class model_app_api_player
                 'duration' => $session['duration']
             ];
         }
+
         return [
             'id' => $item['id'],
             'title' => $item['label'],
             'src' => $src,
             'urlInterview' => ['type' => 'interview', 'slug' => $item['slug']],
+            'color' => !empty($item['interviewers'][0]['color']) ? $item['interviewers'][0]['color'] : 'default'
         ];
     }
 
