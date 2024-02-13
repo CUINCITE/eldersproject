@@ -145,7 +145,7 @@ export class Map extends Component {
     private onLoad = async() => {
         this.map.on('idle', this.onMapIdle);
         this.bind();
-        // this.locationsElements.length && this.goToLocation(this.locationsElements[0]);
+        breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
 
         this.fitBounds(true);
     };
@@ -411,7 +411,7 @@ export class Map extends Component {
         this.locationsElements.forEach(l => {
             const coords = l.getAttribute('data-coords').split(',').map(el => parseFloat(el));
 
-            const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${coords[1]},${coords[0]},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+            const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
             const img = `<img src='${url}' class='map-image js-map-image' />
                         <div class="map__pin">
                             <div class="map__tooltip map__tooltip--marker">${l.dataset.title}</div>
