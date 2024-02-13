@@ -364,8 +364,10 @@ class model_app_api_import
 */
             case "sessions":
 
+                $this->parent->queryOut('UPDATE interviews SET locations=""');
+
                 $interviews = $this->parent->getJsonModel('interviews', [], false, null, null, ['fields' => ['incite_id', 'id']]);
-                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/ElderProject_Session_Data_20231211.csv', ',');
+                $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/sessions.csv', ',');
                 $i = 0;
 
                 $known_columns = [
@@ -398,12 +400,37 @@ class model_app_api_import
                         $duration = 0;
                     }
 
-                    $interview_id = _uho_fx::array_filter($interviews, 'incite_id', $v['Interview ID'], ['first' => true]);
 
-                    if (!$interview_id) {
+                    // update interview Locations
+                    $interview_id = array_search($v['Interview ID'], array_column($interviews, 'incite_id'));
+
+                    if ($interview_id === false) {
                         return ['result' => false, 'message' => 'Sessions Interview not found=[' . $v['Interview ID'] . ']'];
                     }
+
+                    $interview_id = $interviews[$interview_id];
                     $interview_id = $interview_id['id'];
+
+                    // update locations
+                    $interview = $this->parent->getJsonModel('interviews', ['id' => $interview_id], true, null, null, ['fields' => ['locations']]);
+
+                    $locations = $v['Session Location(s)'];
+
+                    if ($interview['locations']) {
+                        $locations = explode(';', $interview['locations']);
+                        $locations[] = $v['Session Location(s)'];
+                        $locations = implode(';', $locations);
+                    }
+
+                    $updateLocations = $this->parent->putJsonModel(
+                        'interviews',
+                        ['locations' => $locations],
+                        [
+                            'id' => $interview_id
+                        ]
+                    );
+
+                    if (!$updateLocations) return ['result' => false, 'message' => 'Error: ' . $this->parent->orm->getLastError()];
 
                     $items[$k] = [
                         'nr' => intval(substr($v['Session Name'], 8)),
