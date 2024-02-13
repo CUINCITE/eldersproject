@@ -412,7 +412,27 @@
 
 
     &__marker {
+        width: rem(40);
+        height: rem(40);
 
+
+        &--single {
+            width: rem(63);
+        }
+
+
+        &--cluster {
+            @include font-family(compressed);
+            @include flex(row, center, center);
+            @include font-size(20, 1);
+
+            text-align: center;
+            border-radius: 50%;
+            background-color: var(--color-brown);
+
+
+            span { padding-top: rem(2); }
+        }
     }
 
 
