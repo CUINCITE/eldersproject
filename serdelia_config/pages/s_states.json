@@ -17,6 +17,12 @@
       "list": true
     },
     {
+      "label": "Interviews count",
+      "field": "count_interviews",
+      "edit": false,
+      "list": true
+    },
+    {
       "label": "Collection Theme (color)",
       "field": "color",
       "type": "select"

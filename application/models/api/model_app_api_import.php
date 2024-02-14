@@ -84,6 +84,16 @@ class model_app_api_import
                     }
                 }
 
+                foreach ($states as $k=>$v) {
+                    $stateCount = $this->parent->getJsonModel('interviews', ['narrators_states' => $v['id'], 'active' => 1], false, null, null, ['count' => true]);
+
+                    $r = $this->parent->putJsonModel('s_states', ['count_interviews' => $stateCount], ['id' => $v['id']]);
+
+                    if (!$r) {
+                        return ['result' => false, 'message' => $this->parent->orm->getLastError()];
+                    }
+                }
+
                 return ['result' => true, 'message' => 'Updated interviews: ' . $count];
                 break;
 

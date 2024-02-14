@@ -9,6 +9,9 @@
       "field": "slug"
     },
     {
+      "field": "count_interviews"
+    },
+    {
       "hr": true,
       "label": "Topic Color",
       "field": "color",
