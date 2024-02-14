@@ -60,6 +60,33 @@ class model_app_api_import
 
                 break;
 
+            case "narrator_states":
+                $interviews = $this->parent->getJsonModel('interviews_list');
+                $states = $this->parent->getJsonModel('s_states');
+
+                $count = 0;
+
+                foreach ($interviews as $k=>$v) {
+                    $vv = explode(',', $v['narrator_location']);
+                    $state = trim(array_pop($vv));
+                    if ($state && strlen($state) == 2) {
+                        $i = _uho_fx::array_filter($states, 'slug', $state, ['first' => true]);
+
+                        if ($i) {
+
+                            $r = $this->parent->putJsonModel('interviews', ['narrators_states' => _uho_fx::dozeruj($i['id'], 8)], ['id' => $v['id']]);
+                            if (!$r) {
+                                return ['result' => false, 'message' => $this->parent->orm->getLastError()];
+                            }
+
+                            $count++;
+                        }
+                    }
+                }
+
+                return ['result' => true, 'message' => 'Updated interviews: ' . $count];
+                break;
+
             case  "leads":
                 $i = 0;
                 $items = $this->parent->query('SELECT id,summary FROM interviews WHERE summary!=""');
@@ -134,7 +161,7 @@ class model_app_api_import
             foreach ($n as $k => $v) {
                 $vv = explode(' ', $k);
                 $last_name = array_pop($vv);
-                $first_name = implode(' ', $vv);
+                $fwirst_name = implode(' ', $vv);
                 $this->parent->postJsonModel('narrators', ['active' => 1, 'name' => $first_name, 'surname' => $last_name, 'bio' => $v]);
             }
 
