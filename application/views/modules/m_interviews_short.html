@@ -52,7 +52,7 @@
                         <div class="interviews__box col-span-3 col-start-10">
                             <p class="interviews__state desktop-hide">{{ item.narrator_location }}</p>
                             <div class="interviews__box-wrap">
-                                <div class="interview-box {% if loop.index is divisible by (2) %}interview-box--reversed{% endif %} interview-box--{{ item.interviewers[0].color }}">
+                                <div class="interview-box {% if loop.index is divisible by (2) %}interview-box--reversed{% endif %} interview-box--{% if collectionColor %}{{ collectionColor }}{% elseif item.interviewers[0].color is defined and item.interviewers[0].color %}{{ item.interviewers[0].color }}{% else %}default{% endif %}">
                                     <div class="interview-box__wrap">
                                         <div class="interview-box__layer"></div>
                                         <div class="interview-box__layer"></div>
