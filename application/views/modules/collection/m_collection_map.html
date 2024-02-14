@@ -15,7 +15,9 @@
                         data-interviews="{{item.quotes|json_encode}}"></button>
                     <div class="map__place">
                         <div class="map__title">{{item.label}}</div>
+                        {% if params.global %}
                         <span class="map__address">[[svg::pin]] {{item.address}}</span>
+                        {% endif %}
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
