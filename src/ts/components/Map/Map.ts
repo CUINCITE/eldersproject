@@ -16,12 +16,14 @@ export interface IMapSettings {
     lat: number;
     lng: number;
     zoom?: number;
+    minZoom?: number;
+    maxZoom?: number;
     style?: mapboxgl.Style | string;
     scroll?: boolean;
     token?: string;
     renderWorldCopies?: boolean;
     interactive?: boolean;
-    pitch: number;
+    pitch?: number;
     clusterRadius?: number;
     clusterMaxZoom?: number;
     zoomOnScroll?: boolean;
@@ -76,7 +78,9 @@ export class Map extends Component {
         this.settings = {
             lng: -122,
             lat: 37,
+            minZoom: 8,
             zoom: 10,
+            maxZoom: 16,
             interactive: true,
             renderWorldCopies: true,
             style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
@@ -108,11 +112,12 @@ export class Map extends Component {
             style: this.settings.style,
             center: [this.settings.lng, this.settings.lat],
             zoom: this.settings.zoom,
+            maxZoom: this.settings.maxZoom,
             renderWorldCopies: this.settings.renderWorldCopies,
             interactive: this.settings.interactive,
             dragRotate: false,
             touchZoomRotate: false,
-            pitch: 60,
+            pitch: this.settings.pitch,
         });
 
         const mapPromise = new Promise<void>(resolve => {
@@ -384,7 +389,7 @@ export class Map extends Component {
         // eslint-disable-next-line camelcase
         const { gps_lat, gps_lng } = location;
         const currentZoom = this.map.getZoom();
-        const zoom = currentZoom < 16 ? 16 : currentZoom;
+        const zoom = currentZoom < this.settings.maxZoom ? this.settings.maxZoom : currentZoom;
 
         this.map.flyTo({
             center: ([parseFloat(gps_lng), parseFloat(gps_lat)]),

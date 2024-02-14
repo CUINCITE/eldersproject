@@ -2,7 +2,6 @@ import { gsap } from 'gsap/dist/gsap';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
-import { easing } from '../../Site';
 import { Component } from '../../components/Component';
 import { AudioPlayer } from '../../components/AudioPlayer';
 import { LightboxTranscript } from './LightboxTranscript';
@@ -131,21 +130,6 @@ export class Lightbox {
 
         // check if player is playing audio for this lightbox
         this.checkPlayerState();
-
-        this.tryToSetColor();
-    };
-
-
-
-    private tryToSetColor = (): void => {
-        const lightboxItem: HTMLElement = this.view.firstElementChild as HTMLElement;
-        // for initial load, when lightbox is not rendered yet
-        if (!lightboxItem) return;
-
-        // get data-attribute from .lightbox__item and update color variable in audioplayer
-        const color: string = lightboxItem.getAttribute('data-theme-color');
-
-        if (color && (AudioPlayer.getId() === Lightbox.getId())) AudioPlayer.updateColors(color);
     };
 
 
@@ -277,7 +261,6 @@ export class Lightbox {
         } else {
             this.playerBtn?.classList.remove('is-playing');
         }
-        this.tryToSetColor();
     }
 
 
