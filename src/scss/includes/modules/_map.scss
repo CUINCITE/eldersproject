@@ -479,7 +479,7 @@
 
         @include breakpoint(phone) {
             max-width: vw(320, phone);
-            text-align: center
+            text-align: center;
         }
 
         &-location {
