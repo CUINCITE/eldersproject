@@ -60,6 +60,11 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             $m[$param] = $this->filterUpdate($this->parent->dictGet($dictionaries[0]), $filter);
 
         }
+
+
+        $m['states'] = array_filter($m['states'], function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 0;
+        });
         
         
         // define sort variables
@@ -223,6 +228,10 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
     }
 
     private function addTagsToInterviews($items, $topics, $states) {
+
+        $states = array_filter($states, function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 10;
+        });
 
         $filters = array_merge(
             array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
