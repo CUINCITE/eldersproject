@@ -477,6 +477,11 @@
             @include letter-spacing(-0.75, 30);
         }
 
+        @include breakpoint(phone) {
+            max-width: vw(320, phone);
+            text-align: center
+        }
+
         &-location {
             @include font-family(normal, 400);
             @include font-settings(400, 100);
