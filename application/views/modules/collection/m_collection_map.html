@@ -1,6 +1,6 @@
 <section class="module module--map box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="map{% if params.global %} map--global{% endif %}" data-component="Map" {% if params.global %}data-options='{ "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }'{% endif %} data-locations="{{items|json_encode}}">
+    <div class="map{% if params.global %} map--global{% endif %}" data-component="Map" {% if params.global %}data-options='{ "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }'{% endif %} data-locations="{{items|json_encode}}" data-theme-color="">
         <div class="map__aside">
             <div class="map__heading">
                 <h2 class="heading">
@@ -13,8 +13,11 @@
                     <button class="map__location-button js-location" data-id="{{item.id}}" data-title="{{item.label}}"
                         data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}"
                         data-interviews="{{item.quotes|json_encode}}"></button>
-                    <div class="map__title">
-                        {{item.label}}
+                    <div class="map__place">
+                        <div class="map__title">{{item.label}}</div>
+                        {% if params.global %}
+                        <span class="map__address">[[svg::pin]] {{item.address}}</span>
+                        {% endif %}
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
@@ -33,7 +36,7 @@
             <div id="map" class="map__container js-map"></div>
             <ul class="map__interviews js-interviews-list"></ul>
             <div class="map__controls">
-                <button class="map__control js-toggle-button">Zoom Out</button>
+                <button class="map__control js-toggle-button">{% if params.global %}Full View{% else %}Zoom Out{% endif %}</button>
             </div>
         </div>
     </div>
