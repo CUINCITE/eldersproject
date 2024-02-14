@@ -431,14 +431,14 @@ export class Map extends Component {
             l.parentElement.querySelector('.js-map-image-wrapper')?.insertAdjacentHTML('beforeend', img);
 
             const interviews: IMapInterview[] = JSON.parse(l.dataset.interviews) as IMapInterview[];
-            [...interviews].forEach(interview => {
+            [...interviews].forEach(({ id, title, duration }) => {
                 const interviewHtml = `
                 <li class="map__interview">
-                    <button class="map__button" data-audio-player=${interview.id}></button>
+                    <button class="map__button" data-audio-player=${id}></button>
                     <div class="map__interview-wrap">
                         <div class="map__interview-data">
-                            <div class="map__interview-title">${interview.title}</div>
-                            <div class="map__interview-duration">${interview.duration}</div>
+                            <div class="map__interview-title">${title}</div>
+                            <div class="map__interview-duration">${duration}</div>
                         </div>
                         <div class="map__interview-button">Play <br> interview</div>
                     </div>
