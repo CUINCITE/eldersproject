@@ -311,12 +311,16 @@ export class Map extends Component {
             const location = [...this.locations].filter(loc => loc.id === markerId)[0];
             this.goToLocation(location);
         } else if (clusterId) {
+            (this.map.getSource(Map.SOURCE_NAME) as mapboxgl.GeoJSONSource).getClusterLeaves(parseInt(clusterId, 10), 10, 0, (error, features) => {
+                const bounds = new mapboxgl.LngLatBounds();
 
-            (this.map.getSource(Map.SOURCE_NAME) as mapboxgl.GeoJSONSource).getClusterExpansionZoom(parseInt(clusterId, 10), (error, zoom: number) => {
-                this.map.flyTo({
-                    // eslint-disable-next-line no-underscore-dangle
-                    center: (this.markers[clusterId] as any)._lngLat,
-                    zoom: zoom * 1.01,
+                features.forEach((feature: GeoJSON.Feature) => {
+                    bounds.extend((feature.geometry as GeoJSON.Point).coordinates as mapboxgl.LngLatLike);
+                });
+
+                this.map.fitBounds(bounds, {
+                    padding: 50,
+                    maxZoom: this.settings.maxZoom,
                 });
             });
         }

@@ -64,7 +64,7 @@
             pointer-events: all;
         }
 
-        .map--global & { display: none; }
+        // .map--global & { display: none; }
     }
 
 
@@ -213,24 +213,6 @@
 
     &__title {
         @include flex(row, flex-start, flex-start);
-
-        @include breakpoint(desktop) {
-            padding-block: rem(20);
-            min-height: rem(64);
-            margin-block: trim-font(1);
-        }
-
-        @include breakpoint(tablet) {
-            padding-block: rem(20);
-            min-height: rem(64);
-            margin-block: trim-font(1);
-        }
-
-        @include breakpoint(phone) {
-            padding-block: rem(20);
-            padding-inline: map-get($grid-offset, phone);
-            margin-block: trim-font(1);
-        }
 
         &::before {
             @include font-settings(200, 100);
@@ -407,6 +389,49 @@
         }
 
         p { padding-bottom: rem(18); }
+    }
+
+
+
+    &__place {
+        @include flex(column, flex-start, flex-start);
+
+        @include breakpoint(desktop) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(20);
+            padding-inline: map-get($grid-offset, phone);
+            margin-block: trim-font(1);
+        }
+    }
+
+
+
+    &__address {
+        @include font-family(reclined);
+        @include font-size(16, 16);
+
+        padding-top: rem(4);
+        letter-spacing: normal;
+
+
+        svg {
+            height: rem(13);
+            width: auto;
+            position: relative;
+            top: -2px;
+            margin-right: rem(5);
+        }
     }
 
 
