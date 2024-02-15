@@ -79,6 +79,76 @@
             "image": {
                 "desktop": "community-illu.png"
             }
+        },
+        {
+            "type": "group",
+            "modifier": "orange",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "pale-blue",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "brown",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "purple",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "green",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "dark-green",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
+        },
+        {
+            "type": "group",
+            "modifier": "pale-green",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
         }
     ]
 }
