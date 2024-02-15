@@ -8,6 +8,7 @@ import { Component } from '../Component';
 import { breakpoint, easing, local } from '../../Site';
 import { AudioPlayer } from '../AudioPlayer';
 import * as MapUtils from './Map.utils';
+import { mapStyles } from './Map.styles';
 
 export const token = local ? 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA'
     : 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA';
@@ -98,6 +99,13 @@ export class Map extends Component {
         this.toggleButton = this.view.querySelector('.js-toggle-button');
         this.locations = JSON.parse(this.view.getAttribute('data-locations')) as IMapLocation[];
 
+        // find style for given modifier (if exists)
+        const style = this.view.getAttribute('data-theme-color');
+        if (style && mapStyles[style]) {
+            this.settings.style = mapStyles[style];
+        }
+
+
         this.init();
 
         window.addEventListener('resize', debounce(() => breakpoint.phone && !this.contentInjected && this.getTabContent()));
@@ -183,8 +191,6 @@ export class Map extends Component {
             }
             this.isZoomingIn = false;
 
-            if (!this.map.isSourceLoaded(Map.SOURCE_NAME)) return;
-            this.updateMarkers();
         });
 
 
