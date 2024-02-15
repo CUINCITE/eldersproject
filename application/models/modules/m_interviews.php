@@ -249,10 +249,12 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $newItems = [];
         $lastLetter = null;
         $i = 0;
-
-        $modifiers = ['pink', 'pale-purple', 'pink-alt', 'green'];
         $minimum_distance=8;
         $last_index=-4;
+
+        $modifiers = ['default','pink','green','pale-purple','orange','pale-blue','brown','dark-green','pale-green','purple'];
+        shuffle($modifiers);
+        $modifierIndex = 0;
 
         foreach ($items as $k=>$v) {
 
@@ -267,10 +269,11 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
                     $filter = array_shift($filters);
                     if ($filter)
                     {
+                        if ($modifierIndex>=count($modifiers)) $modifierIndex = 0;
                         $filter['url'] = $this->getFilterUrl($filter);
-                        $randomKey = array_rand($modifiers);
-                        $filter['modifier'] = $modifiers[$randomKey];
+                        $filter['modifier'] = $modifiers[$modifierIndex];
                         $newItems[] = $filter;
+                        $modifierIndex++;
                     }
                 }
             }
