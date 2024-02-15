@@ -28,15 +28,16 @@
       "type": "select"
     },
     {
-      "hr": true,
       "label": "Illustration",
       "field": "illustration",
       "type": "select",
       "source": {
-        "model": "interview_illustrations_all",
-        "model_fields": [
-          "image"
-        ]
+        "model": "interview_illustrations_all"
+      },
+      "list": {
+        "position_after": "label",
+        "height": 140,
+        "src_blank": "blank.png"
       }
     },
     {
