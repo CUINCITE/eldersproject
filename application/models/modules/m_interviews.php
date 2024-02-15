@@ -239,7 +239,8 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         );
 
         // Different seed every day
-        mt_srand(date('z'));
+        $seed = date('z');
+        mt_srand($seed);
         shuffle($filters);
 
         //Remove already selected filters from the list
@@ -253,6 +254,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $last_index=-4;
 
         $modifiers = ['default','pink','green','pale-purple','orange','pale-blue','brown','dark-green','pale-green','purple'];
+        mt_srand($seed);
         shuffle($modifiers);
         $modifierIndex = 0;
 
