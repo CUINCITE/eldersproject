@@ -1,6 +1,5 @@
 {% include 'modules/collection/m_collection_hero.html' %}
 
-
 {% for module in modules %}
 
     {% include 'modules/collection/m_'~module.type.slug~'.html' with module  %}
