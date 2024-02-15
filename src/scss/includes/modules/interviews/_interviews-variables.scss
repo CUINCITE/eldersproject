@@ -5,6 +5,12 @@
     color: var(--tile-text-color, var(---color-text));
 
 
+    &--group {
+        --tile-bg-color: var(--color-red);
+        --tile-text-color: var(--color-pink);
+    }
+
+
     &--pink {
         --tile-bg-color: var(--color-pink);
         --tile-text-color: var(--color-red);

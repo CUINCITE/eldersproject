@@ -149,6 +149,16 @@
             "image": {
                 "desktop": "community-illu.png"
             }
+        },
+        {
+            "type": "group",
+            "modifier": "",
+            "name": "Community",
+            "url": "/workspace/interview-single",
+            "count": 20,
+            "image": {
+                "desktop": "community-illu.png"
+            }
         }
     ]
 }
