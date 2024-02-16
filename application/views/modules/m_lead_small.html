@@ -5,9 +5,14 @@
             <div class="grid">
                 <div class="col-span-12">
                     <div style="max-width:50%;float:right">
-                        <p style="font-family: Pangram Sans;text-transform: none;font-size:1.5rem;line-height:2rem">
+                        <p style="font-size:1.5rem;line-height:2rem">
+                            <style>
+                                p strong {
+                                    font-variation-settings: "wght" 700, "ital" 100;
+                                }
+                            </style>
                             <br>
-                            {{text}}
+                            {{text | raw}}
                             <br><br>
                         </p>
                     </div>
