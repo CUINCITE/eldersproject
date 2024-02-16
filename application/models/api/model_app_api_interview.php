@@ -128,13 +128,7 @@ class model_app_api_interview
             'transcript' => $transcript,
             'info' => $interview_info,
             'downloads' => $downloads,
-            'related' => [
-                ['url' => '',
-                    'title' => 'Related title',
-                    'collection' => 'Collection title',
-                    'test' => 'Lorem ipsum'
-                ]
-            ]
+            'related' => $this->getRelated($item)
         ];
 
         if ($mainImage) {
@@ -189,6 +183,31 @@ class model_app_api_interview
         }
 
         return $result;
+    }
+
+    private function getRelated($interview)
+    {
+        $collectionId = $interview['interviewers'][0]['id'];
+        $items = $m['items']=$this->parent->getJsonModel('interviews_list_home',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
+
+        $related = [];
+            foreach ($items as $item) {
+
+                if ($item['id'] === $interview['id']) {
+                    continue;
+                }
+
+                $related[] = [
+                    'id' => $item['id'],
+                    'url' => ['type' => 'interview', 'slug' => $item['slug']],
+                    'title' => $item['label'],
+                    'collection' => $interview['interviewers'][0]['label'] . ' Collection',
+                    'urlCollection' => ['type' => 'collection', 'slug' => $interview['interviewers'][0]['slug']],
+                    'description' => $item['lead']
+                ];
+            }
+
+        return array_slice($related, 0, 2);
     }
 
 }
