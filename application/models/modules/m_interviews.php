@@ -91,9 +91,17 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $m['load_more'] = $this->checkForMoreItems(count($m['items']), $itemsPerPage, $page, $url, $filters, $m['sort']['sort_model']);
 
         // Add filter tags to the interview list
-//        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
+
+        foreach ($m['items'] as $k=>$v) {
+            $occupations = [];
+            foreach ($v['narrators'] as $k2=>$v2) {
+                $occupations[] = $v2['occupation'];
+            }
+            $m['items'][$k]['occupations'] = array_unique($occupations);
+        }
 
         $m['items'] = $this->addTagsToInterviews($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
+
         
         return $m;
     }
