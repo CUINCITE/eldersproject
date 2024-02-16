@@ -161,7 +161,7 @@ class model_app_api_interview
 
             foreach ($lines as $line)
             {
-                preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s]*:)?)(.*)/", $line, $matches);
+                preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s\-']*:)?)(.*)/", $line, $matches);
 
                 if (isset($matches[1], $matches[2], $matches[4]))
                 {
