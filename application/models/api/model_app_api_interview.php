@@ -188,7 +188,7 @@ class model_app_api_interview
     private function getRelated($interview)
     {
         $collectionId = $interview['interviewers'][0]['id'];
-        $items = $m['items']=$this->parent->getJsonModel('interviews_list_home',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
+        $items = $m['items']=$this->parent->getJsonModel('interviews',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
 
         $related = [];
             foreach ($items as $item) {
@@ -203,7 +203,7 @@ class model_app_api_interview
                     'title' => $item['label'],
                     'collection' => $interview['interviewers'][0]['label'] . ' Collection',
                     'urlCollection' => ['type' => 'collection', 'slug' => $interview['interviewers'][0]['slug']],
-                    'description' => $item['lead']
+                    'text' => substr($item['summary'], 0, 250)
                 ];
             }
 
