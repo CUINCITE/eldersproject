@@ -3,13 +3,7 @@
     <div class="interviews__main">
         <h3 class="interviews__name {% if item.label|length > 30 %} interviews__name--small {% endif %}">{{item.label|replace({',': '<br>'})|raw}}</h3>
         <p class="interviews__description" style="font-size:1rem; margin-bottom: 15px">
-            {% if item.occupations | length > 1 %}
-                {% for occupation in item.occupations %}
-                    {{ occupation }}{% if not loop.last %}<br>{% endif %}
-                {% endfor %}
-            {% else %}
-                {{ item.occupations.0 }}
-            {% endif %}
+            {{ item.narrator_occupation }}
         </p>
     </div>
 

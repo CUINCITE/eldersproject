@@ -45,17 +45,6 @@
       "type": "elements"
     },
     {
-      "field": "narrators",
-      "label": "Narrators",
-      "type": "elements",
-      "source": {
-        "model": "narrators",
-        "model_fields": [
-          "occupation"
-        ]
-      }
-    },
-    {
       "hr": true,
       "label": "Interviewers",
       "field": "interviewers",
