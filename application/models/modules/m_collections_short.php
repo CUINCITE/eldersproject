@@ -11,8 +11,13 @@ class model_app_pages_modules_collections_short extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-        $m['items']=$this->parent->dictGet('collections');
-        $m['items'] = array_slice($m['items'], 0, 4);
+		$m['items']=$this->parent->dictGet('collections');
+		if (!empty($m['params']['home']))
+		{
+			shuffle($m['items']);
+			$m['items']=array_slice($m['items'],0,4);
+		}        
+		
 		return $m;
 	}
 
