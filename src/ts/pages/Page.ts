@@ -2,6 +2,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable max-classes-per-file */
 import { gsap } from 'gsap/dist/gsap';
+import { easing } from '../Site';
 import { Handler } from '../Handler';
 import { IBreakpoint } from '../Breakpoint';
 import { Component } from '../components/Component';
@@ -79,7 +80,16 @@ export class Page extends Handler {
                 this.components[i].animateIn(i, delay);
             }
 
-            const boxes = Utils.findVisibleBoxes(this.view.querySelectorAll('.box'));
+            const boxes = Utils.findVisibleBoxes(document.querySelectorAll('[data-scroll="box"], .box'));
+            const pseudoVariable = { value: 0 };
+
+            // used to run scroll animation a bit before boxes' animation (better feeling)
+            gsap.fromTo(pseudoVariable, { value: 0 }, {
+                value: 1,
+                duration: 0.5,
+                ease: 'power2.out',
+                onComplete: () => resolve(),
+            });
 
             gsap.fromTo(boxes, { y: window.innerHeight }, {
                 y: 0,
@@ -93,16 +103,10 @@ export class Page extends Handler {
                     boxes.forEach(box => box.classList.add('is-animated'));
                 },
                 onComplete: () => {
-                    // document.body.classList.add('is-transition');
-                    resolve();
+                    document.body.classList.remove('is-transition');
+                    // resolve();
                 },
             });
-
-            // gsap.to(this.view, {
-            //     duration: 0.3,
-            //     opacity: 1,
-            //     onComplete: () => resolve(),
-            // });
         });
     }
 
@@ -116,14 +120,47 @@ export class Page extends Handler {
     public animateOut(): Promise<void> {
         // animation of the page:
         const pageAnimationPromise = new Promise<void>(resolve => {
-            gsap.to(this.view, {
-                duration: 0.2,
-                onComplete: (): void => {
-                    document.body.scrollTop = 0;
-                },
-                opacity: 0,
+            const illustrations = document.querySelectorAll('.js-illustration');
+            const filteredBoxes = [...document.querySelectorAll('[data-scroll="box"], .box')].filter(element => {
+                let parent = element.parentElement;
+                while (parent) {
+                    if (parent.matches('[data-scroll="box"], .box')) return false;
+                    parent = parent.parentElement;
+                }
+                return true;
             });
-            resolve();
+            const boxes: Utils.IBox[] = Utils.getVisibleItems(filteredBoxes);
+            const children = [...boxes].map(box => [...box.element.children]);
+            const elementsToFade = [...illustrations, ...children];
+
+            const placeholders = Utils.createPlaceholders(boxes);
+
+            children.length && gsap.fromTo(elementsToFade, { opacity: 1 }, {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.out',
+                onStart: () => document.body.classList.add('is-transition'),
+            });
+
+
+            [...placeholders].reverse().forEach((item, index) => {
+                gsap.to(item, {
+                    y: window.innerHeight * 1.2,
+                    rotate: index % 2 === 0 ? 10 : -10,
+                    duration: 1.1,
+                    delay: 0.3 + (index * 0.1),
+                    ease: easing,
+                    onComplete: () => {
+                        item.remove();
+                        // after all tweens
+                        if (index === placeholders.length - 1) {
+                            document.body.scrollTop = 0;
+                            // document.body.classList.remove('is-transition');
+                            resolve();
+                        }
+                    },
+                });
+            });
         });
 
         // animations of all components:

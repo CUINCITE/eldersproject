@@ -1,7 +1,7 @@
 <section class="module module--collection_hero">
     <div class="collection_hero">
 
-        <div class="collection_hero__cover phone-hide tablet-hide" data-scroll="collectionHero">
+        <div class="collection_hero__cover phone-hide tablet-hide js-illustration" data-scroll="collectionHero">
             {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
         </div>
 
@@ -17,7 +17,8 @@
                 </div>
             </div>
 
-            <div class="box collection_hero__author_wrapper">
+            <div class="box collection_hero__author_wrapper" data-scroll="box">
+                <div class="box__bg"></div>
                 <div class="grid">
                     <div class="col-span-12">
                         <div class="collection_hero__author">
@@ -35,14 +36,16 @@
                 </div>
             </div>
 
-            <div class="box collection_hero__cover_wrapper desktop-only">
+            <div class="box collection_hero__cover_wrapper desktop-only" data-scroll="box">
+                <div class="box__bg"></div>
                 {#<div class="collection_hero__area desktop-only">
                     {{item.locations}}
                 </div>#}
             </div>
         </div>
 
-        <div class="box">
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
             <div class="grid">
                 <div class="col-span-12">
                     <div class="collection_hero__copy no-padding">

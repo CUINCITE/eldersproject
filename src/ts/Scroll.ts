@@ -115,7 +115,9 @@ export default class Scroll {
 
 
     public static scrollToCached(): void {
-        const y = Scroll.scrollCache[normalizeUrl(window.location.pathname + window.location.search)] || 0;
+        // const y = Scroll.scrollCache[normalizeUrl(window.location.pathname + window.location.search)] || 0;
+        // TEMP - testing
+        const y = 0;
         Scroll.scrollTo({ y, duration: 0 });
     }
 

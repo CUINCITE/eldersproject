@@ -64,9 +64,10 @@ html {
     grid-template-areas: "main header"
         "newsletter header"
         "footer header";
-    gap: 1px;
+    column-gap: 1px;
     align-content: start;
     margin-top: -1px; // box margin-top fix
+
 
     @include breakpoint(not-desktop) {
         z-index: unset;
@@ -75,6 +76,11 @@ html {
 
     body.is-loader-hidden & {
         background: var(--color-bg);
+    }
+
+
+    body.is-transition & {
+        background: var(--color-black);
     }
 }
 

@@ -366,3 +366,57 @@ export function findVisibleBoxes(boxes: NodeListOf<HTMLElement>): HTMLElement[] 
 
     return visibleBoxes;
 }
+
+
+export interface IBox {
+    element: HTMLElement;
+    visibleHeight: number;
+    isTopPart: boolean;
+    topOffset: number;
+}
+
+
+export function getVisibleItems(boxes: Element[]): IBox[] {
+    const visibleBoxes: IBox[] = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+        const { scrollTop } = document.documentElement;
+
+        const topFromDocument = rect.top + scrollTop;
+        const bottomFromDocument = rect.bottom + scrollTop;
+
+        if (topFromDocument < (window.innerHeight + scrollTop) && bottomFromDocument > scrollTop) {
+            visibleBoxes.push({
+                element: box as HTMLElement,
+                visibleHeight: Math.min(bottomFromDocument, window.innerHeight + scrollTop) - Math.max(topFromDocument, scrollTop),
+                isTopPart: topFromDocument > scrollTop,
+                topOffset: topFromDocument - scrollTop,
+            });
+        }
+    });
+
+    return visibleBoxes;
+}
+
+
+export function createPlaceholders(elements: IBox[]): HTMLElement[] {
+    const placeholders = [];
+
+    elements.forEach(item => {
+        const placeholder = document.createElement('div');
+        placeholder.classList.add('box__placeholder');
+        placeholder.style.height = `${item.visibleHeight}px`;
+
+        // when box is higher than viewport, make it equal to viewport height
+        if (item.visibleHeight >= window.innerHeight) {
+            placeholder.style.top = `${Math.abs(item.topOffset)}px`;
+        } else {
+            const position = item.isTopPart ? 'top' : 'bottom';
+            placeholder.style[position] = '0px';
+        }
+        item.element.appendChild(placeholder);
+        placeholders.push(placeholder);
+    });
+    return placeholders;
+}

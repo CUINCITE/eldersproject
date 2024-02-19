@@ -88,6 +88,7 @@
             max-width: rem(350);
             padding: rem(11) 0 rem(26);
             margin-right: rem(-6);
+            flex-basis: 50%;
 
             .collection--reversed & { align-items: flex-start; }
         }
@@ -285,6 +286,8 @@
 
 
     &__illustration {
+        will-change: transform;
+
 
         @include breakpoint(desktop) {
             width: vw(530);

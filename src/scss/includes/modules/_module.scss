@@ -45,26 +45,13 @@
     }
 
 
+
     &--map {
         position: relative;
         z-index: 1;
     }
 
 
-    &--quote_panel {
-        position: relative;
-
-        @include breakpoint(desktop) {
-            &::after {
-                content: "";
-                position: absolute;
-                inset: 0 auto 0 50%;
-                transform: translateX(-50%);
-                width: 1px;
-                background-color: var(--color-bg);
-            }
-        }
-    }
 
     &--faq {
         position: relative;

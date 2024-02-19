@@ -500,7 +500,13 @@
 
     &__filters {
         margin-top: 0;
+    }
+
+
+
+    &__controls {
         border-bottom: 1px solid $color-bg;
+
 
         @include breakpoint(desktop) {
             border-top: 1px solid $color-bg;
@@ -571,6 +577,6 @@
 
 
     .pin-spacer {
-        background-color: var(--color-box);
+        // background-color: var(--color-box);
     }
 }

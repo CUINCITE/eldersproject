@@ -1,4 +1,19 @@
 .quote_panel {
+    position: relative;
+
+    @include breakpoint(desktop) {
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background-color: var(--color-bg);
+        }
+    }
+
+
+
     &__quote {
         @include breakpoint(desktop) {
             padding-top: rem(20);

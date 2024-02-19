@@ -37,8 +37,22 @@
     }
 
 
+
     &__wrap {
         @include flex(row-reverse, flex-start, flex-start);
+    }
+
+
+
+    &__placeholder {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-box);
+        z-index: -1;
+        will-change: transform;
+        pointer-events: none;
     }
 
     @include breakpoint(desktop) {
