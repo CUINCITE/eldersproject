@@ -84,7 +84,7 @@ export class Map extends Component {
             maxZoom: 16,
             interactive: true,
             renderWorldCopies: true,
-            style: 'mapbox://styles/huncwoty/clomwmey400bl01pmhj6o5q61',
+            style: 'mapbox://styles/huncwoty/clslo0jir001201pk16knfveh',
             token,
             pitch: 60,
             zoomOnScroll: false,

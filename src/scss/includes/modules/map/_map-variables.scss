@@ -1,4 +1,12 @@
 .map {
+    // Default
+
+    &--global {
+        --pin-color: var(--color-pink);
+        --pin-outer-color: var(--color-brown);
+        --cluster-text-color: var(--color-black);
+    }
+
     // Caro De Robertis
 
     &--pink {
