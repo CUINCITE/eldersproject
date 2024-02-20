@@ -14,6 +14,7 @@ html {
     position: relative;
     height: 100%;
     font-size: $base-font-size;
+    overflow-x: hidden;
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
@@ -33,6 +34,9 @@ body {
     min-height: 100vh;
     color: var(--color-text);
     background: var(--color-bg);
+    overflow-x: hidden;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+    overflow-x: clip;
 
     // for collection's page
     counter-reset: collection-counter;
@@ -40,8 +44,6 @@ body {
 
 body,
 html {
-    overflow-x: hidden;
-
     &:has(.modal.is-open) { overflow: hidden; }
 
     &:has(.has-menu-open) {
