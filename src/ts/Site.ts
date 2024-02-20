@@ -187,11 +187,14 @@ class Site {
      */
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
+        const isHome: boolean = !!document.body.querySelector('[data-home]');
         this.currentPage.animateIn(0).then(() => {
             this.loader.hide();
             !this.isInitialized && Scroll.scrollToTop(true);
             this.scroll.load();
             Scroll.start();
+            // delay after animateIn
+            setTimeout(() => this.loader.check(isHome), 150);
         });
         PushStates.setTitle();
         this.audioPlayer.bindButtons();
@@ -234,9 +237,6 @@ class Site {
         document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
         document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
 
-        const isHome: boolean = !!document.body.querySelector('[data-home]');
-        document.body.classList.toggle('is-homepage', isHome);
-
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);
         this.currentPage = page;
@@ -254,7 +254,6 @@ class Site {
         ScrollTrigger.refresh();
 
         this.lightbox?.check();
-        this.loader.check(isHome);
 
         return page.preload();
     }
