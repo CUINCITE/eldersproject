@@ -219,7 +219,7 @@ class model_app_api_interview
 
     private function getContentList($item, $sessions): array
     {
-        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview_incite_id' => $item['id']], false, 'no');
+        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
 
         $sessionMap = [];
         foreach ($sessions as $index => $session) {

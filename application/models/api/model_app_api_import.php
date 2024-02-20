@@ -23,7 +23,7 @@ class model_app_api_import
             "sessions_files_data" => ["sessions_files_data"], //safe
             "mementos" => ["mementos"], // safe
             "indexes" => ['indexes'], // safe
-            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image assignment
+            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image to tag assignment
             default => explode(',', $action),
         };
 
@@ -42,7 +42,7 @@ class model_app_api_import
 
         foreach ($actions as $action) {
             if (!isset($actionsMapping[$action])) {
-                return ['result' => false, 'message' => 'Action is not supported'];
+                return ['result' => false, 'message' => 'Action is not supported: ' . $action];
             }
 
             require_once(__DIR__."/import/".$actionsMapping[$action].".php");
