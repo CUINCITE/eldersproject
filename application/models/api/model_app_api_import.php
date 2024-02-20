@@ -18,11 +18,12 @@ class model_app_api_import
         if (!$action) return ['result' => false, 'message' => 'No Action defined'];
 
         $actions = match ($action) {
-            "standard" => ['interviews', 'sessions', 'locations'],
-            "media" => ['media'],
-            "mementos" => ["mementos"],
-            "indexes" => ['indexes'],
-            "topics" => ['topics'],
+            "standard" => ['interviews', 'sessions', 'locations'], // safe to use
+            "media" => ['media'], // safe
+            "sessions_files_data" => ["sessions_files_data"], //safe
+            "mementos" => ["mementos"], // safe
+            "indexes" => ['indexes'], // safe
+            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image assignment
             default => explode(',', $action),
         };
 
@@ -33,10 +34,11 @@ class model_app_api_import
             'sessions' => 'SessionsImporter',
             'media' => 'FilesImporter',
             'mementos' => 'MementosImporter',
-            'locations' => 'LocationsImporter'
+            'locations' => 'LocationsImporter',
+            "sessions_files_data" => "SessionsUpdater"
         ];
 
-        $returnArray = [];
+        $resultArray = [];
 
         foreach ($actions as $action) {
             if (!isset($actionsMapping[$action])) {
@@ -45,18 +47,18 @@ class model_app_api_import
 
             require_once(__DIR__."/import/".$actionsMapping[$action].".php");
             $importer = new $actionsMapping[$action]($this->parent, $this->settings);
-            $returnValue = $importer->import();
+            $actionResult = $importer->import();
 
-            $returnArray[] = [
+            $resultArray[] = [
                 'action' => $action,
-                'actionResult' => $returnValue
+                'actionResult' => $actionResult
             ];
         }
 
-        return $returnArray;
+        return $resultArray;
      }
 
-    private function slugify($str): string
+    public function slugify($str): string
     {
         $str = strtolower($str);
         $str = preg_replace('/[^a-z0-9\s]/', '', $str);
