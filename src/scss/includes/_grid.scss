@@ -17,7 +17,7 @@
     --grid-columns-span: auto;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    
+
     @each $bp in (phone tablet desktop hd) {
         @include breakpoint($bp) {
             $gutter-width: map-get($grid-gutter, $bp);
@@ -53,7 +53,7 @@
         div[class*="col-span-"] {
             grid-column: var(--grid-column-start) / span var(--grid-columns-span);
         }
-    }    
+    }
 }
 
 
@@ -66,7 +66,7 @@
         .col-start-#{$cols} {
             --grid-column-start: #{$cols};
         }
-    }  
+    }
 
     @include breakpoint(tablet) {
         .col-span-#{$cols} {
@@ -76,5 +76,5 @@
         .col-start-#{$cols} {
             --grid-column-start: #{map-get($grid-tablet-pairs, $cols)};
         }
-    } 
+    }
 }

@@ -24,12 +24,23 @@
         .text_wrapper__info {
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-start)
-
                     text-align: left;
 
                 &::before {
                     left: 0;
                     right: unset;
+                }
+            }
+
+            &--collections {
+                @include breakpoint(desktop) {
+                    max-width: rem(244);
+                }
+
+                .text {
+                    @include breakpoint(desktop) {
+                        @include font-size(12, 15.6);
+                    }
                 }
             }
         }
@@ -162,11 +173,12 @@
             position: relative;
 
             @include breakpoint(desktop) {
-                --polaroid-width: #{vw(220)};
-                --polaroid-height: #{vw(274)};
+                --polaroid-width: #{vw(351)};
+                --polaroid-height: #{vw(428)};
 
                 margin-block: vw(28);
-                translate: vw(8) 0;
+                left: 4%;
+                rotate: 7.216deg;
             }
 
             @include breakpoint(tablet) {

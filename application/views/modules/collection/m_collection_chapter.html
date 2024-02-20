@@ -47,7 +47,7 @@
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
                                 {% include "/components/c_polaroid.html" with {image: module.value.image, modifiers: ["wrapped"]} %}
                                 {% if module.value.caption %}
-                                    <div class="text_wrapper__info">
+                                    <div class="text_wrapper__info text_wrapper__info--collections">
                                         {% include "/subviews/subview_text.html" with {text: module.value.caption} %}
                                     </div>
                                 {% endif %}

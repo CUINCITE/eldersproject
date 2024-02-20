@@ -37,7 +37,7 @@
 
             margin-block: trim-font(0.8);
         }
- 
+
         @include breakpoint(phone) {
             @include font-size(80, 67.5);
             @include letter-spacing(-2.4, 80);
@@ -265,16 +265,26 @@
         @include breakpoint(desktop) {
             padding-top: rem(26);
             position: relative;
-            padding-inline-start: rem(28);
-        
-            &::before {
+
+            &::after {
                 @include font-size(17, 21);
                 @include font-family(normal);
                 @include font-settings(500, 100);
-    
-                position: absolute;
-                inset: rem(22) auto auto 0;
-    
+
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                margin-left: rem(-6);
+                padding-top: rem(3);
+                padding-left: rem(3);
+                bottom: rem(63);
+                right: rem(-4);
+                width: rem(34);
+                height: rem(34);
+                border-radius: 50%;
+                background-color: $color-pale-green;
+
                 content: counter(collection-counter, decimal-leading-zero) ".";
                 font-weight: 500;
                 font-feature-settings: "ss03" on;
@@ -302,7 +312,7 @@
 
             &::after {
                 @include font-size(20, 1);
-    
+
                 inset: rem(18) auto auto 0;
             }
         }
@@ -312,7 +322,7 @@
 
             &::after {
                 @include font-size(17, 1);
-    
+
                 inset: rem(12) auto auto 0;
             }
         }
@@ -326,7 +336,7 @@
         @include breakpoint(desktop) {
             @include font-size(50, 1);
             @include letter-spacing(-1.75, 50);
-    
+
             inset: auto auto rem(18) calc(100% + #{rem(22)});
         }
 
@@ -335,7 +345,7 @@
             @include letter-spacing(-1, 30);
 
             margin-block: trim-font(1);
-    
+
             inset: auto rem(120) rem(14) auto;
         }
 
@@ -344,7 +354,7 @@
             @include letter-spacing(-1, 30);
 
             margin-block: trim-font(1);
-    
+
             inset: auto rem(30) rem(12) auto;
         }
 
