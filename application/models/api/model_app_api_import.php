@@ -23,7 +23,7 @@ class model_app_api_import
             "sessions_files_data" => ["sessions_files_data"], //safe
             "mementos" => ["mementos"], // safe
             "indexes" => ['indexes'], // safe
-            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image to tag assignment
+            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image-to-tag assignment
             default => explode(',', $action),
         };
 

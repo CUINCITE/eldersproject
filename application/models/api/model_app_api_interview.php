@@ -128,7 +128,7 @@ class model_app_api_interview
             'description' => $item['narrators'][0]['occupation'],
             'collection' => $item['interviewers'][0]['label'],
             'urlCollection' => ['type' => 'collection', 'slug' => $item['interviewers'][0]['slug']],
-            'text' => substr($item['summary'], 0, 240),
+            'text' => $item['lead'],
             'tags' => $tags,
             'state' => $item['narrator_location'],
             'transcript' => $transcript,
@@ -210,7 +210,7 @@ class model_app_api_interview
                     'title' => $item['label'],
                     'collection' => $interview['interviewers'][0]['label'] . ' Collection',
                     'urlCollection' => ['type' => 'collection', 'slug' => $interview['interviewers'][0]['slug']],
-                    'text' => substr($item['summary'], 0, 250)
+                    'text' => $item['lead']
                 ];
             }
 
