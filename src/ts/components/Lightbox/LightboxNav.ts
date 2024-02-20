@@ -22,6 +22,11 @@ export class LightboxNav extends Component {
     }
 
 
+    public hide = (): void => {
+        this.activeTab && this.closeTab(this.activeTab);
+    };
+
+
 
     private bind = (): void => {
         [...this.navButtons].forEach(btn => btn.addEventListener('click', this.onBtnClick));
