@@ -185,3 +185,10 @@
         width: rem(29);
     }
 }
+
+.svg-pin-color {
+    @include breakpoint(desktop) {
+        margin-right: rem(8);
+        width: rem(31);
+    }
+}

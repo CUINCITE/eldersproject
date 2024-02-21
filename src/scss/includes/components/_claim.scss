@@ -76,6 +76,25 @@
     }
 
 
+    &--collection-big {
+        @include breakpoint(desktop) {
+            @include font-size(122, 101.26);
+            @include letter-spacing(-2.44, 122);
+            margin-top: rem(5);
+            margin-bottom: rem(13);
+            max-width: 100%;
+        }
+    }
+
+
+    &__copy {
+        @include font-size(23, 28.06);
+        @include font-settings(400, 100);
+        margin-left: auto;
+        max-width: rem(459);
+    }
+
+
     &__author {
         @include font-size(26, 27.3);
         @include font-settings(400, 100);
@@ -127,6 +146,13 @@
             @include breakpoint(not-desktop) {
                 display: none;
             }
+        }
+
+        .quote_panel__quote & {
+            right: rem(2);
+            bottom: auto;
+            top: rem(-100);
+            left: auto;
         }
     }
 

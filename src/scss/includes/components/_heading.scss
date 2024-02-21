@@ -326,6 +326,19 @@
                 inset: rem(12) auto auto 0;
             }
         }
+
+        .col-start-7 & {
+            @include breakpoint(desktop) {
+                padding-left: rem(6);
+            }
+        }
+    }
+
+
+    &--collections {
+        @include breakpoint(desktop) {
+            margin-bottom: rem(4);
+        }
     }
 
 

@@ -10,8 +10,8 @@
     .claim__sticker {
 
         @include breakpoint(desktop) {
-            position: relative;
-            margin-top: vw(-27);
+            bottom: vw(-8);
+            left: vw(20);
         }
 
         @include breakpoint(not-desktop) {

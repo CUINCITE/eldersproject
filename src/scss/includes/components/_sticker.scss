@@ -51,6 +51,13 @@
     }
 
 
+    &--grey {
+        --sticker-bg: var(--color-bg);
+        --sticker-back-bg: var(--color-gold);
+        --sticker-text-color: var(--color-grey800);
+    }
+
+
     &--purple {
         --sticker-bg: var(--color-purple);
         --sticker-back-bg: var(--color-green);
@@ -117,6 +124,12 @@
                 @include letter-spacing(-1.15, 23);
 
                 padding-right: rem(8);
+            }
+        }
+
+        .quote_panel__quote & {
+            @include breakpoint(desktop) {
+                padding-top: rem(2);
             }
         }
     }
@@ -187,19 +200,19 @@
     //         #{$self}__back {
     //             height: 0;
     //             top: 0;
-    
-    
+
+
     //             #{$self}__circle {
     //                 margin-top: calc(var(--sticker-size) * -1);
     //             }
     //         }
-    
-    
+
+
     //         #{$self}__front {
     //             top: 0;
     //             height: var(--sticker-size);
-    
-    
+
+
     //             #{$self}__circle {
     //                 margin-top: 0;
     //             }
