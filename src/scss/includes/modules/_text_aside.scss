@@ -34,7 +34,7 @@
 
             @include breakpoint(desktop) {
                 left: -1 * map-get($grid-offset, desktop);
-                bottom: vw(51);
+                top: rem(324); 
 
                 &.text_aside__decorator--contact {
                     top: vw(21);

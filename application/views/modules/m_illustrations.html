@@ -1,0 +1,8 @@
+<section class="module module--illustrations">
+    <div class="illustrations box" data-scroll="box"> 
+        <div class="box__bg"></div>
+        <div class="illustrations__cards js-illustration">
+            {% include "subviews/subview_illustration.html" with { animate: true, shadow: item.color, image: item.image, modifier: "extraShadows" } %}
+        </div>
+    </div>
+</section>

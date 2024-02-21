@@ -24,8 +24,11 @@
 
     &--title {
         @include breakpoint(desktop) {
+            @include font-size(204, 1);
+
             margin-block: trim-font(1);
-            padding-block: rem(12);
+            padding-block: rem(24);
+            letter-spacing: -0.03em;
         }
     }
 

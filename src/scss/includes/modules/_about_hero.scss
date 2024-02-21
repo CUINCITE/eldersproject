@@ -2,16 +2,16 @@
     display: grid;
     position: relative;
 
-    @include breakpoint(desktop) {
-        grid-template-rows: auto 1fr;
-        min-height: var(--app-height);
-    }
+    // @include breakpoint(desktop) {
+    //     grid-template-rows: auto 1fr;
+    //     min-height: var(--app-height);
+    // }
 
     @include breakpoint(not-desktop) {
-        grid-template-rows: auto auto 1fr;
+        // grid-template-rows: auto auto 1fr;
 
         @include breakpoint(tablet) {
-            min-height: var(--app-height);
+            // min-height: var(--app-height);
 
             .heading {
                 padding-block: rem(15);
