@@ -20,10 +20,9 @@
                 <div class="grid">
                     <div class="col-start-8 col-span-5">
                         <div class="interviews__copy">
-                            {# {{text|raw}} #}
                             {% include "subviews/subview_text.html" with { 
                             size: "larger",
-                            text: "<p>We have conducted 447 interviews with people from Civil Rights activists, to American tribal leaders, to survivors of Stonewall—before they're lost to time. Each interview was conducted in the form of an audio recording and includes a biography of the narrator and a complete transcript. We enriched many interviews with additional visual material - photos and ephemera.</p>"
+                            text: text
                             } %}
                         </div>  
                     </div>
