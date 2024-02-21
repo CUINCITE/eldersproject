@@ -13,7 +13,6 @@
 
 
     &--404 {
-
         height: 100%;
 
         @include breakpoint(desktop) {
@@ -33,6 +32,7 @@
             max-width: 100%;
         }
     }
+
 
     &--text-aside {
         z-index: 0;
