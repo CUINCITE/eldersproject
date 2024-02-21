@@ -1,19 +1,6 @@
 .quote_panel {
     position: relative;
 
-    @include breakpoint(desktop) {
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            background-color: var(--color-bg);
-        }
-    }
-
-
-
     &__quote {
 
         h3 {
@@ -26,7 +13,9 @@
 
         .text p {
             @include breakpoint(desktop) {
-                margin-top: rem(8);
+                @include font-settings(400, 100);
+                @include font-size(17, 22.1);
+                margin-top: rem(4);
                 max-width: rem(511);
             }
         }
@@ -35,8 +24,8 @@
 
 
     &__video {
-        margin-right: calc(var(--grid-margin) * -1);
-        margin-left: (map-get($grid-gutter, desktop) / -2 ) + 1px; // grid-gap / 2
+        margin-left: calc(var(--grid-margin) * -1);
+        margin-right: rem(-1);
 
         @media (min-width: 1600px) {
             margin-right: (map-get($grid-gutter, hd) / -2 ) + 1px;

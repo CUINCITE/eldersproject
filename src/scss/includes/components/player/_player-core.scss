@@ -22,6 +22,11 @@
     }
 
 
+    &--collection {
+        margin-bottom: rem(89);
+    }
+
+
     &--audio {
         @include flex;
         @include z-index(audioplayer);
