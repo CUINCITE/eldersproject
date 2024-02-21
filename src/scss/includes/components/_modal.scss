@@ -15,14 +15,16 @@
     padding: rem(19) rem(16) rem(24) rem(20);
     text-align: left;
     display: none;
+    flex-direction: column;
+    place-content: stretch space-between;
 
     @include breakpoint(not-desktop) {
         overflow-y: auto;
     }
 
 
-    &.is-open { 
-        display: block; 
+    &.is-open {
+        display: flex;
     }
 
 
@@ -41,7 +43,7 @@
         @include breakpoint(phone) {
             inset: rem(10) rem(16) auto auto;
         }
-        
+
 
 
         .icon-close {
@@ -54,6 +56,8 @@
 
     &__wrap {
         @include flex(column, flex-start, flex-start);
+
+        flex-grow: 1;
 
         @include breakpoint(tablet) {
             margin-top: rem(98);
@@ -74,7 +78,7 @@
         @include breakpoint(desktop) {
             @include font-size(50, 41);
             @include letter-spacing(-1.25, 50);
-    
+
             margin-left: rem(-2);
         }
 
@@ -120,19 +124,29 @@
         width: 100%;
         display: grid;
         align-items: start;
+        flex-grow: 1;
+
 
         @include breakpoint(desktop) {
             grid-template-columns: auto auto auto;
             margin-top: rem(56);
+
+
+            @media (max-height: 710px) {
+                margin-top: rem(40);
+            }
         }
+
 
         @include breakpoint(not-desktop) {
             grid-template-columns: auto;
+
 
             @include breakpoint(tablet) {
                 gap: rem(42);
                 margin-bottom: rem(80);
             }
+
 
             @include breakpoint(phone) {
                 gap: rem(35);
@@ -153,11 +167,11 @@
             display: grid;
             align-content: start;
             grid-template-columns: repeat(2, 1fr);
-        } 
+        }
 
 
         &--topics {
-            
+
             @include breakpoint(desktop) {
                 display: grid;
                 align-content: start;
@@ -194,10 +208,10 @@
         @include flex(row, flex-end, center);
 
         margin-left: auto;
-        
+
 
         @include breakpoint(desktop) {
-            margin-top: rem(58);
+            margin-top: rem(30);
         }
 
 
@@ -210,7 +224,6 @@
             background-color: $color-black;
             width: 100vw;
             padding-right: rem(16);
-
         }
 
         @include breakpoint(tablet) {
@@ -262,15 +275,15 @@
     &__submit {
         @extend %modal-label;
 
-        svg { 
-            opacity: 1 !important; 
+        svg {
+            opacity: 1 !important;
         }
 
 
-        span { 
+        span {
 
             @include breakpoint(not-desktop) {
-                transform: translateX(0) !important; 
+                transform: translateX(0) !important;
             }
 
             @include breakpoint(phone) {
@@ -293,7 +306,10 @@
 
 
     &__form {
+        @include flex(column, space-between, stretch);
+
         width: 100%;
+        height: 100%;
     }
 
 
@@ -305,7 +321,7 @@
 
             margin-bottom: rem(7);
         }
-        
+
         @include breakpoint(tablet) {
             @include font-size(17, 1);
 
@@ -324,7 +340,6 @@
 
     label {
         @extend %modal-label;
-
     }
 
 
@@ -380,7 +395,7 @@
             @include breakpoint(phone) {
                 @include font-size(26.836, 0.85);
                 @include letter-spacing(-0.805, 26);
-    
+
                 height: unset;
                 padding: rem(7) rem(5.5) rem(1);
             }
@@ -388,7 +403,7 @@
             @include breakpoint(tablet) {
                 @include font-size(26.836, 0.85);
                 @include letter-spacing(-0.805, 26);
-    
+
                 height: unset;
                 padding: rem(7) rem(5.5) rem(1);
             }
