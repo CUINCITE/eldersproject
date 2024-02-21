@@ -184,8 +184,8 @@
         }
     }
 
-    &:first-of-type:not(.module--hero):not(.module--collections_images) > .box:first-of-type,
-
+    &:first-of-type:not(.module--hero):not(.module--collections_hero):not(.module--collections_images) > .box:first-of-type,
+    
     // when first module is phone-only, add padding to second's box
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
