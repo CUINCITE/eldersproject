@@ -36,85 +36,94 @@ export class PolaroidGallery extends Component {
     };
 
 
+
     private bind = (): void => {
         this.arrowNext.addEventListener('click', () => this.goTo(this.activeSlideIndex + 1));
         this.arrowPrev.addEventListener('click', () => this.goTo(this.activeSlideIndex - 1));
+        document.addEventListener('keydown', this.onKeyDown);
     };
+
+
+
+    private onKeyDown = (event: KeyboardEvent): void => {
+        if (!this.isActive || this.isAnimating) return;
+
+        if (event.key === 'ArrowRight') {
+            this.goTo(this.activeSlideIndex + 1);
+        } else if (event.key === 'ArrowLeft') {
+            this.goTo(this.activeSlideIndex - 1);
+        }
+    };
+
 
 
     private goTo = (index: number, fast?: boolean): void => {
         const direction: number = index > this.activeSlideIndex ? 1 : -1;
 
-        // this.hideSlide(this.activeSlideIndex, direction, fast);
-        // this.showSlide(index, direction, fast);
+        this.hideSlide(this.activeSlideIndex, direction, fast);
+        this.showSlide(index, direction, fast);
     };
 
 
 
-    // private hideSlide = (index: number, direction: number, fast?: boolean): void => {
-    //     const slide = this.slides[index];
-    //     const caption = this.captions[index];
+    private hideSlide = (index: number, direction: number, fast?: boolean): void => {
+        const slide = this.slides[index];
+        const caption = this.captions[index];
 
-    //     if (!slide) return;
+        if (!slide) return;
 
-    //     this.isAnimating = true;
+        this.isAnimating = true;
 
-    //     gsap.fromTo(slide, { x: 0 }, {
-    //         x: direction * (window.innerWidth * -0.75),
-    //         duration: fast ? 0 : 0.5,
-    //         ease: easing,
-    //         onComplete: () => {
-    //             slide.style.display = 'none';
-    //         },
-    //     });
+        gsap.fromTo(slide, { x: 0 }, {
+            x: direction * -50,
+            duration: fast ? 0 : 0.5,
+            ease: easing,
+            opacity: 0,
+        });
 
-    //     gsap.fromTo(caption, { y: 0 }, {
-    //         y: 200,
-    //         duration: fast ? 0 : 0.5,
-    //         ease: easing,
-    //         onComplete: () => {
-    //             caption.style.opacity = '0';
-    //             this.isAnimating = false;
-    //         },
-    //     });
-    // };
+        gsap.fromTo(caption, { y: 0 }, {
+            x: 50,
+            duration: fast ? 0 : 0.5,
+            ease: easing,
+            onComplete: () => {
+                caption.style.opacity = '0';
+                this.isAnimating = false;
+            },
+        });
+    };
 
 
 
-    // private showSlide = (index: number, direction: number, fast?: boolean): void => {
-    //     const slide = this.slides[index];
-    //     const caption = this.captions[index];
+    private showSlide = (index: number, direction: number, fast?: boolean): void => {
+        const slide = this.slides[index];
+        const caption = this.captions[index];
 
-    //     gsap.fromTo(caption, { y: 200 }, {
-    //         y: 0,
-    //         delay: 0.3,
-    //         duration: fast ? 0 : 0.5,
-    //         ease: easing,
-    //         onStart: () => {
-    //             caption.style.opacity = '1';
-    //         },
-    //     });
+        gsap.fromTo(caption, { x: 50 }, {
+            x: 0,
+            delay: 0.3,
+            duration: fast ? 0 : 0.5,
+            ease: easing,
+            onStart: () => {
+                caption.style.opacity = '1';
+            },
+        });
 
-    //     gsap.fromTo(slide, { x: direction * (window.innerWidth * 0.75) }, {
-    //         x: 0,
-    //         duration: fast ? 0.01 : 0.5,
-    //         ease: easing,
-    //         onStart: () => {
-    //             slide.style.display = 'flex';
-    //         },
-    //         onComplete: () => {
-    //             this.activeSlide = slide;
-    //             this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
-    //             this.updateArrows();
-    //         },
-    //     });
-    // };
+        gsap.fromTo(slide, { x: direction * 50 }, {
+            x: 0,
+            duration: fast ? 0.01 : 0.5,
+            ease: easing,
+            opacity: 1,
+            onComplete: () => {
+                this.activeSlide = slide;
+                this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+                this.updateArrows();
+            },
+        });
+    };
 
 
 
     private updateArrows(): void {
-        (this.arrowPrev.querySelector('.js-text') as HTMLElement).innerText = `0${this.activeSlideIndex}`;
-        (this.arrowNext.querySelector('.js-text') as HTMLElement).innerText = `0${this.activeSlideIndex + 2}`;
 
         switch (this.activeSlideIndex) {
             case 0:

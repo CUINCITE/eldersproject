@@ -1,8 +1,58 @@
 .polaroid_gallery {
+    @include breakpoint(desktop) {
+        margin-left: rem(8);
+    }
 
     &__wrapper {
         @include breakpoint(desktop) {
             @include flex(row, space-between, center);
+            margin-left: rem(-30);
+            margin-bottom: rem(10);
+        }
+    }
+
+
+    &__buttons {
+        @include breakpoint(desktop) {
+            margin-top: rem(40);
+        }
+    }
+
+
+    &__button {
+        transform: rotate(90deg);
+
+        @include breakpoint(desktop) {
+            width: rem(34);
+            height: rem(34);
+            border-radius: 50%;
+            background-color: $color-grey200;
+        }
+
+        &:first-child {
+            .is-first & {
+                pointer-events: none;
+                opacity: .5;
+            }
+        }
+
+        &:last-child {
+            transform: rotate(-90deg);
+
+            .is-last & {
+                pointer-events: none;
+                opacity: .5;
+            }
+        }
+    }
+
+    .text_wrapper__info {
+        opacity: 0;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+            left: 0;
+            bottom: rem(50);
         }
     }
 }
