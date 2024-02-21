@@ -2,7 +2,6 @@
     background-color: var(--color-box);
     margin-top: 1px;
 
-
     &[data-scroll="box"],
     [data-scroll="box"] & {
         background: none;
@@ -13,10 +12,14 @@
         }
     }
 
+
+
     [data-scroll="box"] & {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
+
+
 
     .is-404 &, .page_404 & {
 
@@ -28,8 +31,10 @@
     }
 
 
+
     &__bg {
         @include full;
+        
         background-color: var(--color-box);
         z-index: -1;
         pointer-events: none;
@@ -44,6 +49,12 @@
 
 
 
+    &__wrapper {
+        position: relative;
+    }
+
+
+
     &__placeholder {
         position: absolute;
         left: 0;
@@ -54,6 +65,7 @@
         will-change: transform;
         pointer-events: none;
     }
+
 
     @include breakpoint(desktop) {
         .text {

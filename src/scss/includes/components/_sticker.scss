@@ -64,6 +64,12 @@
         --sticker-text-color: var(--color-pink);
     }
 
+    &--blue {
+        --sticker-bg: var(--color-blue);
+        --sticker-back-bg: var(--color-red);
+        --sticker-text-color: var(--color-box);
+    }
+
     &--long_text {
         .sticker__text {
             @include breakpoint(phone) {

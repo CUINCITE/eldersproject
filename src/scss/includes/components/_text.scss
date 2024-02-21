@@ -1,6 +1,7 @@
 .text {
     @include flex(column, flex-start, flex-start);
-    @include font-family(normal, 400);
+    @include font-family(normal);
+    @include font-settings(400, 100);
 
     @include breakpoint(desktop) {
         @include font-size(14, 17.5);
@@ -61,6 +62,18 @@
         @include breakpoint(phone) {
             @include font-size(30, 28.2);
             @include letter-spacing(-1.05, 30);
+        }
+    }
+
+    &--larger {
+        @include breakpoint(desktop) {
+            @include font-size(23, 28.06);
+
+            padding-inline: 0 !important;
+
+            p {
+                max-width: unset !important;
+            }
         }
     }
 
@@ -188,7 +201,7 @@
             h2 + p {
                 @include breakpoint(desktop) {
                     margin-top: rem(12);
-                }  
+                }
             }
         }
 
@@ -223,7 +236,7 @@
                 margin-top: rem(56);
             }
 
-            h2 { 
+            h2 {
                 max-width: 20ch;
             }
         }
@@ -245,7 +258,7 @@
         @include breakpoint(tablet) {
             margin-top: rem(25);
         }
- 
+
         @include breakpoint(phone) {
             margin-top: rem(25);
         }
@@ -274,8 +287,7 @@
 
         @include breakpoint(desktop) {
             text-decoration: none;
-            background: 
-                linear-gradient(to right, currentColor, currentColor),
+            background: linear-gradient(to right, currentColor, currentColor),
                 linear-gradient(to right, transparent, transparent);
 
             background-size: 0 0.08em, 100% 0.08em;
@@ -285,8 +297,8 @@
 
             &:hover,
             &:focus {
-              background-size: 100% 0.08em, 0 0.08em;
-              background-position: 0% 98%, 0 98%;
+                background-size: 100% 0.08em, 0 0.08em;
+                background-position: 0% 98%, 0 98%;
             }
         }
     }
@@ -307,7 +319,6 @@
 
             @include breakpoint(tablet) {
                 margin-top: rem(12);
-            
             }
 
             @include breakpoint(phone) {
@@ -315,7 +326,7 @@
             }
         }
     }
-    
+
 
     b {
         @include font-settings(700, 100);
@@ -445,11 +456,11 @@
             @include breakpoint(desktop) {
                 padding-top: vw(22);
             }
-    
+
             @include breakpoint(tablet) {
                 padding-top: rem(25);
             }
-     
+
             @include breakpoint(phone) {
                 padding-top: rem(25);
             }

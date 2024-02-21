@@ -1,100 +1,96 @@
-<section class="module module--collections_images desktop-only" data-scroll="box">
-    <div class="box__bg"></div>
+<section class="module module--collections_images desktop-only" >
+    
     <div class="collections_images">
-        <section class="module">
-            <div class="box" style="border-top:0">
+
+        <div class="box box__wrapper" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="collections_images__heading">
                 <div class="grid">
                     <div class="col-span-12">
-                        <h2 class="heading heading--right">Collections</h2>
+                        <h2 class="heading heading--title">Collections</h2>
                     </div>
                 </div>
             </div>
-        </section>
-        <div class="collections_images__content {% if params.simple %}collections_images__content--simple {% elseif params.long %} collections_images__content--home{% endif %}" {% if params.home %} data-scroll="collections"{% elseif params.simple2 %} data-scroll="collectionsSimple"{% endif %} data-component="Collections">
-            <div class="col-span-1 col-start-2 collections_images__container">
-                <div class="collections_images__names js-scroll-names">
+            {% if text %}
+                <div class="collections_images__intro">
+                    <div class="grid">
+                        <div class="col-span-7">
+                            {% include "subviews/subview_text.html" with { 
+                                size: "larger",
+                                text: text
+                            } %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
 
-                    <ul class="names">
-                        {% for item in items %}
+
+        <div class="collections_images__gallery box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="collections_images__content{% if params.simple %} collections_images__content--simple{% endif %}" data-component="Collections">
+                <div class="col-span-1 col-start-2 collections_images__container">
+                    <div class="collections_images__names js-scroll-names">
+                        <ul class="names">
+                            {% for item in items %}
                                 <li class="names__name js-accordeon-item is-closed">
                                     <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <button class="names__button js-accordeon-button">
-                                            <span class="sr-only">Toggle visibility of the content</span>
-                                        </button>
-                                        <span class="names__box"{% if params.simple2 %}style="margin-top:10px"{% endif %}>
-                                            {#<span style="font-size:1.25rem;letter-spacing: 1px;margin-top:-10px">0{{loop.index}}</span>#}
+                                    <div class="names__author{% if params.simple2 %} names__author--simple{% endif %}">
+                                        <span class="names__box{% if params.simple2 %} names__box--simple{% endif %}">
                                             {{ item.label }}
                                         </span>
                                     </div>
-
-
-                                    <div class="names__expand">
-                                        <div class="names__expand-wrap">
-                                            <p class="names__claim" style="font-size:1.25rem;line-height:1.25rem">{{ item.collection_title | nl2br }}</p>
+                                    {% if params.simple2 %}
+                                        <div class="names__expand">
+                                            <p class="names__claim">{{ item.collection_title | nl2br }}</p>
                                         </div>
-                                    </div>
-                                    {% if params.long %}
-                                    <div class="names__copy js-accordeon-copy">
-                                        <!--
-                                        <div class="names__link">
-
-
-                                        </div>
-                                        -->
-                                        <button class="button button--simple button--collections">
-
-                                            {% include "./components/c_arrow_icon.html" %}
-
-                                            <span>Explore {{ item.amount }} interviews</span>
-                                        </button>
-                                        <!--
-                                        <div class="text">
-                                            <p>{{ item.lead }}</p>
-                                        </div>
-                                        -->
-                                    </div>
                                     {% endif %}
                                 </li>
-                        {% endfor %}
-                    </ul>
-
+                            {% endfor %}
+                        </ul>
+                    </div>
+    
+                    <div class="collections_images__cards js-scroll-cards">
+                        <ul class="cards">
+                            <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
+                            <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
+                            <li class="cards__card cards__card--placeholder cards__card--red"></li>
+                            <li class="cards__card cards__card--placeholder cards__card--dark-green"></li>
+                            {% for item in items | reverse %}
+                                <li class="cards__card">
+                                    {% include "subviews/subview_picture_no_retina.html" with {image:item.image} %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+    
+                {% if params.simple2 %}
+                    <div class="collections_images__button col-start-1 col-span-2"> 
+                        <a href="/collections" class="button button--simple button--reversed" data-component="Button">
+                            <span class="button__main">
+                                <i class="icon-btn-arrow arrow js-arrow">
+                                    <span class="vertical js-arrow-vertical"></span>
+                                    <span class="horizontal js-arrow-horizontal"></span>
+                                    <span class="triangle js-arrow-triangle"></span>
+                                </i> 
+                                <span class="button__text js-button-text">Explore</span>
+                                <i class="icon-btn-arrow arrow arrow--extra js-arrow-extra">
+                                    <span class="vertical js-arrow-vertical"></span>
+                                    <span class="horizontal js-arrow-horizontal"></span>
+                                    <span class="triangle js-arrow-triangle"></span>
+                                </i> 
+                                <span class="button__text button__text--duplicate js-button-duplicate-text">Explore</span>
+                            </span>
 
-                <div class="collections_images__cards js-scroll-cards">
-                    <ul class="cards">
-                        <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
-                        <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
-                        <li class="cards__card cards__card--placeholder cards__card--red"></li>
-                        <li class="cards__card cards__card--placeholder cards__card--dark-green"></li>
-                    {% for item in items | reverse %}
-                        <li class="cards__card">
-                            {% include "subviews/subview_picture_no_retina.html" with {image:item.image} %}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
+                            <span class="button__text button__text--extra"><i>all Collections</i></span>
+                        </a>
+                    </div>
+                {% endif %}
+    
+                {# <div class="collections_images__filler col-start-1 col-span-2"></div> #}
             </div>
-
-            {% if params.simple2 %}
-            <div style="position:relative;left:100%;float:right;width:100%">
-                <a href="/collections" class="button button--two_line button--overflow" data-component="Button">
-                    <i class="icon-btn-arrow arrow js-arrow" style="opacity:1">
-                        <span class="vertical js-arrow-vertical"></span>
-                        <span class="horizontal js-arrow-horizontal"></span>
-                        <span class="triangle js-arrow-triangle"></span>
-                    </i> <span class="button__text js-button-text">Explore <i>all Collections</i></span>
-                </a>
-            </div>
-            {% endif %}
-
-            <!--
-            <div class="collections_images__filler col-start-1 col-span-2"></div>
-            -->
-
-
         </div>
 
     </div>
-
 </section>

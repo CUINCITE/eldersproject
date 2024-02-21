@@ -5,8 +5,8 @@
     padding-left: unset;
 
     @include breakpoint(desktop) {
-        @include font-size(204, 157);
-        @include letter-spacing(-6.12, 204);
+        @include font-size(216, 1);
+        @include letter-spacing(-6.48, 216);
 
         position: relative;
     }
@@ -19,6 +19,14 @@
     @include breakpoint(phone) {
         @include font-size(132, 140.253);
         @include letter-spacing(-5.94, 132);
+    }
+
+
+    &--title {
+        @include breakpoint(desktop) {
+            margin-block: trim-font(1);
+            padding-block: rem(12);
+        }
     }
 
 
@@ -224,6 +232,9 @@
         @include breakpoint(desktop) {
             @include font-size(204, 175);
             @include letter-spacing(-10.2, 204);
+
+            margin-block: trim-font(175/204);
+            padding-left: 0.075em;
         }
 
         @include breakpoint(tablet) {

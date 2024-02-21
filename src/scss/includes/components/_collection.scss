@@ -219,15 +219,6 @@
                     margin-block: trim-font(1);
                 }
 
-                .arrow--extra {
-                    top: rem(9);
-                    left: 100%;
-                }
-
-                .icon-btn-arrow {
-                    padding-left: 0;
-                }
-
                 &__text {
                     display: inline-block;
 
@@ -236,11 +227,12 @@
                         top: 0;
                     }
                 }
+                
+                .arrow {
+                    padding-left: 0;
 
-                &--reversed {
-                    .arrow--extra {
+                    &--extra {
                         right: calc(100% + #{rem(6)});
-                        left: unset;
                     }
                 }
             }
