@@ -71,6 +71,10 @@
 
             padding-inline: 0 !important;
 
+            @media (max-height: 719px) {
+                @include font-size(21, 25);
+            }
+
             p {
                 max-width: unset !important;
             }
