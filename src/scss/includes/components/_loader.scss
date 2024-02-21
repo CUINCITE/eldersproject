@@ -1,7 +1,6 @@
 .loader {
     // @include z-index(loader);
     z-index: 0;
-
     position: fixed;
     inset: 0;
     background-color: var(--color-black);
@@ -38,8 +37,9 @@
 
 
         @media (max-height: 719px) {
-            @include font-size(210, 1);
-            @include letter-spacing(-7.5, 210);
+            @include font-size(170, 1);
+                
+            letter-spacing: -0.045em;
         }
 
 

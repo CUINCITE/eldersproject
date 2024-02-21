@@ -1,16 +1,20 @@
 <section class="module module--text-with-sticker box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="grid">
-        <div class="col-span-12">
-            <div class="text-sticker">
-                <div class="text-sticker__wrap">
-                    {% include "subviews/subview_text.html" with { text: text, short: true } %}
+    <div class="text-sticker">
+        <div class="grid">
+            <div class="col-span-7">
+                <div class="text-sticker__wrapper">
                     <div class="text-sticker__sticker">
                         {% include "components/c_sticker.html" with {
                             text: label,
                             modifiers: ['big']
                         } %}
                     </div>
+                </div>
+            </div>
+            <div class="col-span-5">
+                <div class="text-sticker__wrap">
+                    {% include "subviews/subview_text.html" with { text: text, short: true, size: 'larger' } %}
                 </div>
             </div>
         </div>
