@@ -15,8 +15,8 @@ $circles-colors: "green", "red", "pink";
 
     @include breakpoint(desktop) {
         @media (max-height: 719px) {
-            width: rem(204);
-            height: rem(204);
+            width: rem(182);
+            height: rem(182);
             margin-left: 0;
         }
     }
