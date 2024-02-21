@@ -6,26 +6,16 @@
         </div>
 
         <div class="about_hero__heading">
-            <section class="module">
-                <div class="box" data-scroll="box">
-                    <div class="box__bg"></div>
-                    <div class="grid">
-                        <div class="col-span-12">
-                            <h2 class="heading heading--right heading--title">
-                                {{label}}
-                            </h2>
-                        </div>
+            <div class="box" data-scroll="box">
+                <div class="box__bg"></div>
+                <div class="grid">
+                    <div class="col-span-12">
+                        <h2 class="heading heading--right heading--title">
+                            {{label}}
+                        </h2>
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <div class="about_hero__cards js-illustration">
-            {% include "subviews/subview_illustration.html" with { animate: true, shadow: item.color, image: item.image, modifier: "extraShadows" } %}
-        </div>
-
-        <div class="box" data-scroll="box">
-            <div class="box__bg"></div>
+            </div>
         </div>
 
     </div>

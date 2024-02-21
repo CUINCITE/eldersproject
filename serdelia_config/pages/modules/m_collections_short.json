@@ -2,10 +2,6 @@
   "fields": [
     {
       "tab": "Copy",
-      "field": "sublabel",
-      "label": "Sublabel"
-    },
-    {
       "field": "text",
       "label": "Copy",
       "type": "html"

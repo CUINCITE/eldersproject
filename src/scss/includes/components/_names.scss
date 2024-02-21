@@ -104,17 +104,18 @@
         display: inline-block;
 
         @include breakpoint(desktop) {
-            padding-top: rem(8);
-            padding-right: rem(28);
+            @include font-size(49, 1);
+
+            padding-top: rem(14);
+            padding-bottom: rem(8);
+            padding-right: rem(20);
         }
 
         &--simple {
             @include breakpoint(desktop) {
                 @include font-size(59, 1);
-
-                margin-block: trim-font(1);
-                padding-top: rem(18);
-                padding-bottom: rem(14);
+                padding-top: rem(14);
+                padding-bottom: 0;
             }
         }
     }

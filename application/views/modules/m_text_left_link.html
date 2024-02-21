@@ -10,7 +10,11 @@
     </div>
 
     {% if params.decor %}
-        <div class="boxes">[[svg::boxes]]</div>
+        <div class="home-text__decorator">
+            <div class="boxes" data-animation="slideUp" data-delay="0.5" data-action="pause" >
+                [[svg::boxes]]
+            </div>
+        </div>
     {% endif %}
 
     <div class="button__box">

@@ -13,7 +13,6 @@
 
 
     &--404 {
-
         height: 100%;
 
         @include breakpoint(desktop) {
@@ -33,6 +32,7 @@
             max-width: 100%;
         }
     }
+
 
     &--text-aside {
         z-index: 0;
@@ -137,9 +137,11 @@
                     padding: rem(20) 0 rem(64) 0;
                 }
 
-                .boxes {
+                .home-text__decorator {
                     position: absolute;
                     margin-top: rem(20);
+                    top: 0;
+                    left: 0;
                 }
             }
 
@@ -182,8 +184,8 @@
         }
     }
 
-    &:first-of-type:not(.module--hero):not(.module--collections_images) > .box:first-of-type,
-
+    &:first-of-type:not(.module--hero):not(.module--collections_hero):not(.module--collections_images) > .box:first-of-type,
+    
     // when first module is phone-only, add padding to second's box
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
@@ -260,6 +262,15 @@
     &--collection_hero {
         .grid {
             height: 100%;
+        }
+    }
+
+    &--about_hero + &--text-aside {
+        @include breakpoint(desktop) {
+            .heading--medium {
+                @include font-size(122, 100);
+                @include letter-spacing(-3, 122);
+            }
         }
     }
 }
