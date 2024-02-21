@@ -3,7 +3,7 @@
     <div class="interviews__main">
         <h3 class="interviews__name {% if item.label|length > 30 %} interviews__name--small {% endif %}">{{item.label|replace({',': '<br>'})|raw}}</h3>
         <p class="interviews__description" style="font-size:1rem; margin-bottom: 15px">
-            {{ item.narrator_occupation }}
+            {{ item.narrator_occupation | raw }}
         </p>
     </div>
 

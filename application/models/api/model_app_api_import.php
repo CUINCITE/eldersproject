@@ -27,7 +27,7 @@ class model_app_api_import
             default => explode(',', $action),
         };
 
-        $actionsMapping = [
+        $actions2ClassesMap = [
             'indexes' => 'IndexImporter',
             'topics' => 'TopicsImporter',
             'interviews' => 'InterviewsImporter',
@@ -41,12 +41,12 @@ class model_app_api_import
         $resultArray = [];
 
         foreach ($actions as $action) {
-            if (!isset($actionsMapping[$action])) {
+            if (!isset($actions2ClassesMap[$action])) {
                 return ['result' => false, 'message' => 'Action is not supported: ' . $action];
             }
 
-            require_once(__DIR__."/import/".$actionsMapping[$action].".php");
-            $importer = new $actionsMapping[$action]($this->parent, $this->settings);
+            require_once(__DIR__."/import/".$actions2ClassesMap[$action].".php");
+            $importer = new $actions2ClassesMap[$action]($this->parent, $this->settings);
             $actionResult = $importer->import();
 
             $resultArray[] = [
