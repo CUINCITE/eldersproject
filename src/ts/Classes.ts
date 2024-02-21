@@ -14,6 +14,7 @@ import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
 import { Map } from './components/Map/Map';
 import { Collections } from './components/Collections';
+import { PolaroidGallery } from './components/PolaroidGallery';
 
 export const components = {
     Accordeon,
@@ -31,6 +32,7 @@ export const components = {
     LightboxTranscript,
     LightboxSlider,
     WrappedText,
+    PolaroidGallery,
 };
 
 export const pages = { Page };

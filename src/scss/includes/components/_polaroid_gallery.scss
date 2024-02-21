@@ -1,0 +1,8 @@
+.polaroid_gallery {
+
+    &__wrapper {
+        @include breakpoint(desktop) {
+            @include flex(row, space-between, center);
+        }
+    }
+}
