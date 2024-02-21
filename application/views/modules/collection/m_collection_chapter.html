@@ -77,9 +77,12 @@
                         {% endif %}
 
                     {% endfor %}
-                    <div class="text_wrapper__location">
-                        <p class="">[[svg::pin-color]] Portland, Oregon and the Pacific Northwest</p>
-                    </div>
+
+                    {% if show_location %}
+                        <div class="text_wrapper__location">
+                            <p class="">[[svg::pin-color]] Portland, Oregon and the Pacific Northwest</p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

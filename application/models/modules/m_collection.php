@@ -62,8 +62,10 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                 case 'collection_chapter':
                     $modules[$k]['reversed'] = $counter % 2 != 0;
                     $modules[$k]['color'] = $parentModule['item']['color'];
-                    $counter++;
                     $modules[$k]['article'] = $this->updateArticle($v['text'], $v['media']);
+                    $modules[$k]['show_location'] = $counter == 0;
+
+                    $counter++;
                     break;
 
                 case 'quote_panel':
