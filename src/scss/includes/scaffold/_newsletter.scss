@@ -1,6 +1,7 @@
 .newsletter {
     --side-padding: var(--grid-margin);
     --input-height: #{vw(71)};
+    --color-text: var(--color-box);
 
     @include z-index(newsletter);
     @include font-family(compressed);
@@ -8,7 +9,8 @@
     grid-area: newsletter;
     position: relative;
 
-    background-color: var(--color-box);
+    background-color: var(--color-black);
+    color: var(--color-text);
 
 
     &[data-scroll] {
@@ -62,7 +64,7 @@
         @include flex;
 
         height: var(--input-height);
-        background-color: $color-white;
+        // background-color: $color-white;
         position: relative;
         padding: vw(14) 0 vw(7);
         padding-left: var(--side-padding);
@@ -402,5 +404,9 @@
                 }
             }
         }
+    }
+
+    .box__bg {
+        background-color: var(--color-black);
     }
 }

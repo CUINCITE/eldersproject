@@ -1,42 +1,60 @@
-{% set colors=['green','red','yellow'] %}{% set c=random(colors|length) %}
+<section class="module module--interviews" >
+    
+    <div class="interviews interviews--banner">
 
-<section class="module module--interviews" data-scroll="box" {% if collection_page %} id="interviews" {% endif %}>
-    <div class="box__bg"></div>
-    <div class="interviews">
-        <div class="box">
-            <div class="grid">
-                <div class="col-span-12">
-
-                    <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
-                        <div class="interviews__sticker">
-
-                            {% include 'subviews/subview_sticker.html' with {label:'Explore', modifier: "long_text"} %}
+        <div class="box__wrapper box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="interviews__title">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
+                            <h2 class="heading heading--reclined">
+                                {% if heading %}{{ heading }}{% else %}Interviews{% endif %}
+                                {% if collection_page %}<span class="heading__counter">({{items|length}})</span>{% endif %}
+                            </h2>
                         </div>
-                        <h2 class="heading heading--reclined">
-                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}{% if collection_page %} <span
-                                class="heading__counter">({{items|length}})</span>{% endif %}
-                        </h2>
                     </div>
-
                 </div>
             </div>
-            <div class="grid">
-                <div class="col-span-9">
-                    <div style="font-size:1.5rem;line-height:2rem">
-                    {{text|raw}}<br><br>
+            <div class="interviews__claim">
+                <div class="grid">
+                    <div class="col-start-8 col-span-5">
+                        <div class="interviews__copy">
+                            {# {{text|raw}} #}
+                            {% include "subviews/subview_text.html" with { 
+                            size: "larger",
+                            text: "<p>We have conducted 447 interviews with people from Civil Rights activists, to American tribal leaders, to survivors of Stonewall—before they're lost to time. Each interview was conducted in the form of an audio recording and includes a biography of the narrator and a complete transcript. We enriched many interviews with additional visual material - photos and ephemera.</p>"
+                            } %}
+                        </div>  
                     </div>
+                </div>
+                <div class="interviews__image" data-animation="slideUp" data-delay="0.2" data-action="pause">
+                    {% include "subviews/subview_picture.html" with {
+                        image: {
+                            desktop: "/public/theme/images/flag.png",
+                            mobile: "/public/theme/images/flag.png"
+                            }
+                        }
+                    %}
+                </div>
+            </div>
+        </div>
+
+        <div class="interviews__button_box box__wrapper box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid">
+                <div class="col-start-1 col-span-12">
                     <a href="/interviews" class="button button--two_line button--overflow" data-component="Button">
                         <i class="icon-btn-arrow arrow js-arrow">
                             <span class="vertical js-arrow-vertical"></span>
                             <span class="horizontal js-arrow-horizontal"></span>
                             <span class="triangle js-arrow-triangle"></span>
-                        </i> <span class="button__text js-button-text">Explore <i>474 Interviews</i></span>
+                        </i> 
+                        <span class="button__text js-button-text">Explore <i>474 Interviews</i></span>
                     </a>
-                    <br><br><br>
                 </div>        
             </div>
         </div>
-
 
     </div>
 </section>

@@ -131,10 +131,15 @@
             justify-content: flex-start;
 
             @include breakpoint(desktop) {
-                padding-top: rem(20);
+                // padding-top: rem(20);
 
                 .text {
-                    padding: rem(5) 0 rem(5) 0;
+                    padding: rem(20) 0 rem(64) 0;
+                }
+
+                .boxes {
+                    position: absolute;
+                    margin-top: rem(20);
                 }
             }
 
@@ -177,12 +182,13 @@
         }
     }
 
-    &:first-of-type:not(.module--hero) > .box:first-of-type,
+    &:first-of-type:not(.module--hero):not(.module--collections_images) > .box:first-of-type,
 
     // when first module is phone-only, add padding to second's box
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
-            padding-top: rem(27);
+            padding-top: rem(26); 
+            padding-bottom: rem(22);
         }
     }
 

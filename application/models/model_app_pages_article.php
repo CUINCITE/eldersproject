@@ -66,7 +66,7 @@ class model_app_pages_article
 
         $blocks = [
             ['html' => '[IMAGE]', 'type' => 'image'],
-//            ['html' => '[SLIDER]', 'type' => 'slider'],
+            ['html' => '[SLIDER]', 'type' => 'slider'],
 //            ['html' => '[AUDIO]', 'type' => 'audio'],
 //            ['html' => '[VIDEO]', 'type' => 'video'],
             ['html' => '[MORE]', 'html_close' => '[ENDMORE]', 'type' => 'expand_open'],

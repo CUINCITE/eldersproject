@@ -1,5 +1,6 @@
 // [data-animation]
 import { fadeUp } from './fadeUp';
+import { slideUp } from './slideUp';
 
 // [data-scroll]
 import { collectionHero } from './scroll/collectionHero';
@@ -15,7 +16,7 @@ import { collectionsSimple } from './scroll/collectionsSimple';
 import { cover } from './scroll/cover';
 
 
-export const animations = { fadeUp };
+export const animations = { fadeUp, slideUp };
 
 export const scrolls = {
     box,

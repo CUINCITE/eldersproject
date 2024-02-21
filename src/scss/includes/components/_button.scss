@@ -198,8 +198,6 @@
         &--duplicate {
             position: absolute;
 
-            // margin-block: trim-font(1);
-
             @include breakpoint(not-desktop) {
                 display: none;
             }
@@ -217,6 +215,14 @@
 
     .interviews--grid & {
         color: inherit;
+    }
+
+    &__box {
+        @include breakpoint(desktop) {
+            border-top: 1px solid $color-bg;
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+        }
     }
 }
 

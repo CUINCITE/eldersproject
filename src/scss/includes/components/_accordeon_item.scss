@@ -64,7 +64,16 @@ $grid-line-offsets: (
                 @include hover {
                     & ~ .accordeon_item__term {                                            
                         svg {
-                            translate: 0 20%;
+                            // translate: 0 20%;
+                            overflow: visible;
+
+                            path:nth-child(1) {
+                                translate: 0 30%;
+                            }
+
+                            path:nth-child(2) {
+                                scale: 1 1.4;
+                            }
                         }
                     }
                 }
@@ -101,8 +110,13 @@ $grid-line-offsets: (
         }
 
         svg {
-            transition: .3s transform ease, .3s translate ease;
+            transition: 0.3s transform ease, 0.3s translate ease;
             transform: rotateX(-180deg);
+            overflow: visible;
+
+            path {
+                transition: 0.3s scale ease, 0.3s translate ease
+            }
         }
     }
 

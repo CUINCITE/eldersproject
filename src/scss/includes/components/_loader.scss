@@ -29,8 +29,8 @@
 
     &__count {
         @include font-family(compressed);
-        @include font-size(240, 1);
-        @include letter-spacing(-8.4, 240);
+        @include font-size(216, 1);
+        @include letter-spacing(-8.4, 216);
 
         display: grid;
         grid-template-columns: 1fr;

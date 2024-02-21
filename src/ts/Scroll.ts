@@ -23,6 +23,7 @@ interface IScrollData {
     el: HTMLElement;
     type: string;
     delay?: number;
+    action?: string;
     component?: Component;
 }
 
@@ -148,11 +149,12 @@ export default class Scroll {
                 el,
                 type: el.dataset.animation,
                 delay: parseInt(el.dataset.delay, 10) || 0,
+                action: el.dataset.action || 'reset',
             }).forEach((item: IScrollData) => {
                 if (animations[item.type]) {
                     ScrollTrigger.create({
                         trigger: item.el,
-                        toggleActions: 'play pause resume reset',
+                        toggleActions: `play pause resume ${item.action}`,
                         animation: getAnimation(item.type, item.el, item.delay || 0),
                     });
                 } else {
