@@ -155,8 +155,8 @@
                 {
                     "folder": "big",
                     "label": "Big Tile",
-                    "width": 1346,
-                    "height": 1346,
+                    "width": 1540,
+                    "height": 1540,
                     "crop": true,
                     "retina": true
                 },
