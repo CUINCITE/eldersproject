@@ -137,9 +137,11 @@
                     padding: rem(20) 0 rem(64) 0;
                 }
 
-                .boxes {
+                .home-text__decorator {
                     position: absolute;
                     margin-top: rem(20);
+                    top: 0;
+                    left: 0;
                 }
             }
 
