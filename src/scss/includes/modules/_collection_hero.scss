@@ -28,10 +28,6 @@
     &__author {
         @include breakpoint(desktop) {
             padding-bottom: rem(10);
-
-            h3 {
-                // padding-top: 0;
-            }
         }
 
         @include breakpoint(tablet) {
