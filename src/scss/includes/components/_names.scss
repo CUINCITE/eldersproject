@@ -189,6 +189,7 @@
     &__claim {
         // @include font-family(reclined);
         @include font-family(normal);
+        @include font-settings(400, 100);
         @include font-size(19, 19.57);
         @include letter-spacing(-0.75, 22);
 
