@@ -52,6 +52,7 @@
                                     </div>
                                 {% endif %}
                             </div>
+
                             {% set photoCounter = photoCounter + 1 %}
 
                         {% elseif module.type == 'read_more' %}
@@ -76,19 +77,9 @@
 
                         {% elseif module.type == 'slider' %}
 
-                            {% for item in module.value %}
-
-                                <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
-                                    {% include "/components/c_polaroid.html" with {image: item.image, modifiers: ["wrapped"]} %}
-                                    {% if item.caption %}
-                                        <div class="text_wrapper__info text_wrapper__info--collections">
-                                            {% include "/subviews/subview_text.html" with {text: item.caption} %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                            {% endfor %}
-
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
+                                {% include "/components/c_polaroid_gallery.html" with {moduleValue: module.value, modifiers: ["wrapped"]} %}
+                            </div>
 
                         {% endif %}
 

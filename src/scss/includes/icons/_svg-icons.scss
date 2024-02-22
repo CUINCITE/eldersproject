@@ -192,3 +192,18 @@
         width: rem(31);
     }
 }
+
+
+.svg-arrow-small {
+    @include breakpoint(desktop) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    .polaroid_gallery & {
+        @include breakpoint(desktop) {
+            width: rem(14);
+            height: rem(23);
+        }
+    }
+}
