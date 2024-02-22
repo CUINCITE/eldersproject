@@ -53,7 +53,7 @@
         display: grid;
 
         @include breakpoint(desktop) {
-            grid-template-rows: auto vw(270);
+            grid-template-rows: auto vw(167);
             grid-template-columns: 1fr 1fr;
         }
     }
@@ -92,7 +92,7 @@
 
                 &__text {
                     display: inline-block;
-    
+
                     &--duplicate {
                         position: absolute;
                         right: calc(100% + #{rem(8)});
