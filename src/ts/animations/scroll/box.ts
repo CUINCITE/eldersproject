@@ -31,5 +31,6 @@ export const box = (el: HTMLElement) => {
             start: 'top bottom',
             invalidateOnRefresh: true,
         },
+        onComplete: () => el.classList.add('is-animated'),
     });
 };
