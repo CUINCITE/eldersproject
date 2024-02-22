@@ -187,6 +187,11 @@
             margin-block: trim-font(1);
             padding-block: rem(24);
             letter-spacing: -0.03em;
+
+            @media (max-height: 719px) {
+                @include font-size(182, 1);
+                padding-block: rem(20);
+            }
         }
     }
 

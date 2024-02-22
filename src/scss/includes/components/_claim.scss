@@ -80,9 +80,18 @@
         @include breakpoint(desktop) {
             @include font-size(122, 101.26);
             @include letter-spacing(-2.44, 122);
+
             margin-top: rem(5);
             margin-bottom: rem(13);
             max-width: 100%;
+
+            @media (max-height: 719px) {
+                @include font-size(106);
+
+                max-width: 80%;
+                line-height: 0.827;
+                letter-spacing: -0.045em;
+            }
         }
     }
 
