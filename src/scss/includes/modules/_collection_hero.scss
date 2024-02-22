@@ -28,10 +28,6 @@
     &__author {
         @include breakpoint(desktop) {
             padding-bottom: rem(10);
-
-            h3 {
-                // padding-top: 0;
-            }
         }
 
         @include breakpoint(tablet) {
@@ -68,6 +64,7 @@
             bottom: rem(100);
             opacity: 0;
             will-change: transform, opacity;
+            backface-visibility: hidden;
 
             // translate: 0 -50%;
 

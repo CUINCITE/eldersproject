@@ -10,6 +10,7 @@ $shadow-sizes: (
     position: relative;
     transform: rotate(-14.5deg);
     will-change: transform;
+    backface-visibility: hidden;
 
 
     &__front {

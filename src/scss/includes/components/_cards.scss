@@ -9,9 +9,8 @@
         position: absolute;
         transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
         will-change: transform;
+        backface-visibility: hidden;
         transform-origin: -100% 150%;
-
-        // $baseHue: random(360);
 
         @for $i from 1 through 4 {
             &:nth-last-child(#{$i}) {
