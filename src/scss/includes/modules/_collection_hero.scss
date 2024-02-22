@@ -64,6 +64,7 @@
             bottom: rem(100);
             opacity: 0;
             will-change: transform, opacity;
+            backface-visibility: hidden;
 
             // translate: 0 -50%;
 
