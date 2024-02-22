@@ -79,6 +79,9 @@ export class PolaroidGallery extends Component {
             duration: fast ? 0 : 0.5,
             ease: easing,
             opacity: 0,
+            onComplete: () => {
+                slide.style.display = 'none';
+            },
         });
 
         gsap.fromTo(caption, { y: 0 }, {
@@ -113,6 +116,9 @@ export class PolaroidGallery extends Component {
             duration: fast ? 0.01 : 0.5,
             ease: easing,
             opacity: 1,
+            onStart: () => {
+                slide.style.display = 'block';
+            },
             onComplete: () => {
                 this.activeSlide = slide;
                 this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
