@@ -1,4 +1,9 @@
 .filtered {
+    margin-top: 0;
+
+
+    &:has(li) { margin-top: 1px; }
+
     &__list {
         @include flex(row, flex-start, center);
         padding-left: map-get($grid-offset, desktop);
@@ -10,8 +15,7 @@
         }
 
         @include breakpoint(phone) {
-            row-gap: rem(4);
-            column-gap: rem(14);
+            gap: rem(4) rem(14);
             padding-top: rem(12);
             padding-inline: map-get($grid-offset, phone);
         }

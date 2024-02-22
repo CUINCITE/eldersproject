@@ -68,7 +68,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                     $counter++;
                     break;
 
-                case 'quote_panel':
+                case 'meet_interviewer':
                     $modules[$k]['bio'] = $parentModule['item']['text'];
                     $modules[$k]['heading']['text'] = $parentModule['item']['label'];
                     break;

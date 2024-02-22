@@ -3,12 +3,20 @@
     {
       "tab": "Header",
       "field": "label",
-      "label": "Header Copy"
+      "label": "Header"
+    },
+    {
+      "field": "sublabel",
+      "label": "Header Copy",
+      "type": "text",
+      "settings": {
+        "rows": 3
+      }
     },
     {
       "field": "text",
-      "label": "Copy",
-      "type": "text"
+      "label": "Text",
+      "type": "html"
     }
   ]
 }
