@@ -1,14 +1,13 @@
 .polaroid_gallery {
     @include breakpoint(desktop) {
-        margin-left: rem(8);
-        width: rem(560);
+        margin-top: rem(15);
+        margin-bottom: rem(10);
+        width: rem(553);
     }
 
     &__wrapper {
         @include breakpoint(desktop) {
             @include flex(column, space-between, flex-start);
-            margin-left: rem(-30);
-            margin-bottom: rem(10);
             width: 100%;
         }
     }
@@ -25,11 +24,9 @@
 
     &__slides {
         @include breakpoint(desktop) {
-            // @include flex(row, space-between, center);
             margin-left: rem(-30);
-            margin-bottom: rem(10);
+            margin-bottom: rem(28);
             width: 100%;
-
             display: grid;
             grid-template-columns: 50% 50%;
         }
@@ -48,6 +45,10 @@
         &:first-child {
             transform: translateX(-100%);
             z-index: 1;
+        }
+
+        &:nth-child(2) {
+            transform: rotate(20deg);
         }
 
         &:nth-child(n+3) {
@@ -83,13 +84,15 @@
 
     &__buttons {
         @include breakpoint(desktop) {
-            margin-top: rem(40);
+            // margin-top: rem(40);
         }
     }
 
 
     &__button {
+        position: relative;
         transform: rotate(90deg);
+        overflow: hidden;
 
         @include breakpoint(desktop) {
             width: rem(34);
@@ -111,6 +114,29 @@
             .is-last & {
                 pointer-events: none;
                 opacity: .5;
+            }
+        }
+
+        svg {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+                transition: none;
+
+            &:last-child {
+                transform: translate(-50%, -200%);
+            }
+        }
+
+        &:hover {
+            svg {
+                transform: translate(-50%, 100%);
+                transition: transform .5s $ease-out;
+
+                &:last-child {
+                    transform: translate(-50%, -50%);
+                }
             }
         }
     }
