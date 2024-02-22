@@ -1,7 +1,7 @@
 .polaroid_gallery {
     @include breakpoint(desktop) {
         margin-left: rem(8);
-        max-width: rem(560);
+        width: rem(560);
     }
 
     &__wrapper {
@@ -16,10 +16,13 @@
 
     &__slides {
         @include breakpoint(desktop) {
-            @include flex(row, space-between, center);
+            // @include flex(row, space-between, center);
             margin-left: rem(-30);
             margin-bottom: rem(10);
             width: 100%;
+
+            display: grid;
+            grid-template-columns: 50% 50%;
         }
     }
 
@@ -27,11 +30,12 @@
     &__slide {
         @include breakpoint(desktop) {
             left: 0;
-            width: 50%;
+            width: 100%;
+            grid-column-start: 2;
         }
 
         &:nth-child(n+3) {
-            display: none;
+            opacity: 0;
         }
     }
 

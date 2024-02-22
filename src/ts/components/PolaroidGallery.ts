@@ -12,7 +12,7 @@ export class PolaroidGallery extends Component {
     private arrowPrev: HTMLButtonElement;
     private arrowNext: HTMLButtonElement;
     private activeSlide: HTMLElement;
-    private activeSlideIndex: number;
+    private activeSlideIndex = 0;
     private isAnimating = false;
 
     constructor(protected view: HTMLElement) {
@@ -111,8 +111,8 @@ export class PolaroidGallery extends Component {
             },
         });
 
-        gsap.fromTo(slide, { x: direction * 50 }, {
-            x: 0,
+        gsap.to(slide, {
+            xPercent: direction * 100,
             duration: fast ? 0.01 : 0.5,
             ease: easing,
             opacity: 1,
