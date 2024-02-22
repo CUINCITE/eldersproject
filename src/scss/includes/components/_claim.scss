@@ -88,10 +88,9 @@
 
 
     &__copy {
-        @include font-size(23, 28.06);
-        @include font-settings(400, 100);
-        margin-left: auto;
-        max-width: rem(459);
+        .text {
+            padding-block: 0;
+        }
     }
 
 

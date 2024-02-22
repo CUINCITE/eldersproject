@@ -19,14 +19,19 @@
             <div class="grid">
                 <div class="col-span-12">
                     <div class="claim claim--collection-big{% if small %} claim--small{% endif %}" data-scroll="claim">
-                        <p>{{text | nl2br}}</p>
-                    </div>
-                    <div class="claim__copy">
-                        <p>
-                            Starting in 2022, we sent award-winning writers across America to capture oral histories and create 10 collections with extraordinary elders from all walks of life. The resulting composite portrait of American life is woven from incredible stories - many of them recorded here for the very first time.
-                        </p>
+                        <p>{{sublabel | nl2br}}</p>
                     </div>
                 </div>
+
+                <div class="col-span-5 col-start-8">
+                    <div class="claim__copy">
+                        {% include "subviews/subview_text.html" with { 
+                            size: "larger",
+                            text: text
+                          } %}
+                    </div>
+                </div>
+
                 <div class="claim__sticker">
                     {% include "components/c_sticker.html" with {'text':'Discover more'}  %}
                 </div>
