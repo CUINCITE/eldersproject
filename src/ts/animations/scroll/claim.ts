@@ -6,8 +6,8 @@ gsap.registerPlugin(SplitText);
 
 export const claim = el => {
 
-
     const splittedText = new SplitText(el.querySelector('p'), { type: 'lines, words', linesClass: 'line' });
+
     gsap.set(splittedText.words, { yPercent: 105 });
 
     gsap.fromTo(splittedText.words, { yPercent: 105 }, {

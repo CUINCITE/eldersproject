@@ -7,6 +7,9 @@
         background: none;
         position: relative;
 
+
+        &.is-animated:not(.footer__bottom) { background-color: var(--color-box); }
+
         @include breakpoint(not-desktop) {
             z-index: 1;
         }
@@ -14,7 +17,7 @@
 
 
 
-    [data-scroll="box"] & {
+    [data-scroll="box"] {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
@@ -34,7 +37,7 @@
 
     &__bg {
         @include full;
-        
+
         background-color: var(--color-box);
         z-index: -1;
         pointer-events: none;
