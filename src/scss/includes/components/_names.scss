@@ -32,11 +32,6 @@
         .collections_images__content--home & {
             padding-top: rem(20);
         }
-
-
-        @include breakpoint(desktop) {
-            letter-spacing: -0.04em;
-        }
     }
 
     &__link {
@@ -106,6 +101,7 @@
         @include breakpoint(desktop) {
             @include font-size(49, 1);
 
+            letter-spacing: -0.04em;
             padding-top: rem(14);
             padding-bottom: rem(8);
             padding-right: rem(20);
