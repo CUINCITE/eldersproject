@@ -12,7 +12,7 @@ export class PolaroidGallery extends Component {
     private arrowPrev: HTMLButtonElement;
     private arrowNext: HTMLButtonElement;
     private activeSlide: HTMLElement;
-    private activeSlideIndex: number;
+    private activeSlideIndex: number = 0;
     private isAnimating = false;
 
     constructor(protected view: HTMLElement) {
@@ -69,13 +69,17 @@ export class PolaroidGallery extends Component {
     private hideSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
+        if (!slide) return;
+        const slideWidth = slide.offsetWidth;
+
 
         if (!slide) return;
+
 
         this.isAnimating = true;
 
         gsap.fromTo(slide, { x: 0 }, {
-            x: direction * -50,
+            x: direction * -slideWidth,
             duration: fast ? 0 : 0.5,
             ease: easing,
             opacity: 0,
@@ -100,6 +104,13 @@ export class PolaroidGallery extends Component {
     private showSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
+        const slideWidth = slide.offsetWidth;
+
+        if (!slide) return;
+
+        const outerSlide = direction < 0 ? this.slides[this.activeSlideIndex - 1] : this.slides[this.activeSlideIndex + 2];
+
+        console.log(this.slides[this.activeSlideIndex - 1], this.slides[this.activeSlideIndex + 2]);
 
         gsap.fromTo(caption, { x: 50 }, {
             x: 0,
@@ -111,7 +122,7 @@ export class PolaroidGallery extends Component {
             },
         });
 
-        gsap.fromTo(slide, { x: direction * 50 }, {
+        gsap.fromTo(slide, { x: direction * slideWidth }, {
             x: 0,
             duration: fast ? 0.01 : 0.5,
             ease: easing,
@@ -124,6 +135,21 @@ export class PolaroidGallery extends Component {
                 this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
                 this.updateArrows();
             },
+        });
+
+        gsap.fromTo(outerSlide, { x: direction * slideWidth }, {
+            x: 0,
+            duration: fast ? 0.01 : 0.5,
+            ease: easing,
+            opacity: 1,
+            onStart: () => {
+                slide.style.display = 'block';
+            },
+            // onComplete: () => {
+            //     this.activeSlide = slide;
+            //     this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+            //     this.updateArrows();
+            // },
         });
     };
 
