@@ -13,7 +13,7 @@ class model_app_api_import
     public function rest($method, $params)
     {
 
-        if (!str_contains($_SERVER['HTTP_HOST'],'.lh') && getenv('SQL_HOST') !== 'localhost') {
+        if (!str_contains($_SERVER['HTTP_HOST'],'.lh') && getenv('SQL_HOST') !== 'localhost' && getenv('S3_BUCKET')) {
             exit('Import functionality is only available on localhost and for local databases.');
         }
 
