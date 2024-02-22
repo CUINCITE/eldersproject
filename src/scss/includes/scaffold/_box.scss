@@ -42,6 +42,11 @@
         z-index: -1;
         pointer-events: none;
         will-change: transform;
+
+
+        .is-animated & {
+            background: none;
+        }
     }
 
 
