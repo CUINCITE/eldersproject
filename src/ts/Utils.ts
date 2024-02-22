@@ -404,6 +404,7 @@ export function createPlaceholders(elements: IBox[]): HTMLElement[] {
     const placeholders = [];
 
     elements.forEach(item => {
+        item.element.classList.remove('is-animated');
         const placeholder = document.createElement('div');
         placeholder.classList.add('box__placeholder');
         placeholder.style.height = `${item.visibleHeight}px`;

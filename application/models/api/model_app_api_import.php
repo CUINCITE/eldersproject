@@ -18,7 +18,7 @@ class model_app_api_import
         if (!$action) return ['result' => false, 'message' => 'No Action defined'];
 
         $actions = match ($action) {
-            "standard" => ['interviews', 'sessions', 'locations'], // safe to use
+            "metadata" => ['interviews', 'sessions', 'locations'], // safe to use
             "media" => ['media'], // safe
             "sessions_files_data" => ["sessions_files_data"], //safe
             "mementos" => ["mementos"], // safe
