@@ -1,8 +1,32 @@
 .collections_images {
     position: relative;
 
+
+
+    &__heading {
+        position: relative;
+    }
+
+
+
+    &__intro {
+        position: relative;
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(70);
+            border-top: 1px solid $color-bg;
+        }
+    }
+
+
+
+    &__gallery {
+        position: relative;
+    }
+
+
+
     &__cards {
-        will-change: position;
         position: absolute;
         pointer-events: none;
         z-index: 2;
@@ -22,12 +46,14 @@
         }
     }
 
+
+
     &__content {
         position: relative;
         display: grid;
 
         @include breakpoint(desktop) {
-            grid-template-rows: auto vw(270);
+            grid-template-rows: auto vw(167);
             grid-template-columns: 1fr 1fr;
         }
     }
@@ -47,6 +73,61 @@
             width: 50%;
         }
     }
+
+
+
+    &__button {
+        @include breakpoint(desktop) {
+            border-top: 1px solid $color-bg;
+            padding-inline: var(--grid-margin);
+            width: 100%;
+            padding-top: rem(14);
+
+
+            .button {
+                gap: rem(8);
+                flex-direction: row;
+                margin-left: auto;
+                width: max-content;
+
+                &__text {
+                    display: inline-block;
+
+                    &--duplicate {
+                        position: absolute;
+                        right: calc(100% + #{rem(8)});
+                        top: 0;
+                    }
+
+                    &--extra {
+
+                    }
+                }
+
+                &__main {
+                    overflow: hidden;
+                    position: relative;
+                    gap: rem(12);
+                    padding-inline: rem(2);
+                }
+
+                .arrow {
+                    padding-left: 0;
+
+                    &--extra {
+                        top: rem(9);
+                        right: calc(100% + #{rem(6)});
+                    }
+                }
+
+                span i {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+
+
 
     &__filler {
         @include breakpoint(desktop) {

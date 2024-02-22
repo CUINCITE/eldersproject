@@ -28,10 +28,6 @@
     &__author {
         @include breakpoint(desktop) {
             padding-bottom: rem(10);
-
-            h3 {
-                // padding-top: 0;
-            }
         }
 
         @include breakpoint(tablet) {
@@ -67,7 +63,6 @@
             right: vw(40);
             bottom: rem(100);
             opacity: 0;
-            will-change: transform, opacity;
 
             // translate: 0 -50%;
 
@@ -114,9 +109,9 @@
     &__copy {
 
         @include breakpoint(desktop) {
-            @include flex(row, flex-start, flex-end);
-
             gap: rem(12);
+            max-width: rem(388);
+            height: 100%;
         }
 
 
@@ -208,6 +203,41 @@
             position: absolute;
             bottom: rem(8);
             left: 0;
+        }
+    }
+
+
+    &__intro {
+        @include breakpoint(desktop) {
+            @include flex(column, space-between, flex-start);
+            width: 100%;
+            height: 100%
+        }
+
+
+        .text--collection_hero-top {
+            @include breakpoint(desktop) {
+                @include font-size (26, 26.78);
+                text-transform: uppercase;
+            }
+
+            @include breakpoint(phone) {
+                padding-block: rem(20);
+            }
+        }
+
+        .text--collection_hero-bottom {
+            @include breakpoint(desktop) {
+                @include font-size(23, 28.06);
+                @include letter-spacing (-0.1, 23);
+                padding-right: 0;
+            }
+        }
+
+        .text p {
+            @include font-settings(400, 100);
+            max-width: 100%;
+            text-wrap: wrap;
         }
     }
 }

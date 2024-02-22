@@ -8,7 +8,7 @@
         filter: brightness(100%);
         opacity: 1;
     }
-} 
+}
 
 $background-colors: (
     "pale_green": $color-pale-green,
@@ -91,6 +91,21 @@ $background-colors: (
 
 
     &--wrapped {
+        @include breakpoint(desktop) {
+            padding: vw(25) vw(25) vw(36);
+        }
+
+        @include breakpoint(tablet) {
+            padding: vw(12.75, tablet) vw(12.75, tablet) vw(20.25, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(12.75, phone) vw(12.75, phone) vw(20.25, phone);
+        }
+    }
+
+
+    &--wrapped.polaroid--horizontal {
         @include breakpoint(desktop) {
             padding: vw(17) vw(17) vw(27);
         }

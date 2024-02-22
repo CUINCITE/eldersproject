@@ -3,11 +3,11 @@
     <div class="quote_panel">
         <div>
             <div class="grid grid--row-start">
-                <div class="quote_panel__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                <div class="quote_panel__column col-span-8 col-start-{{reversed ? '8' : '1'}}{{reversed ? '' : ' no-padding'}}">
                     {% if video.src %}
                         <div class="quote_panel__video">
-                            <figure style="margin-bottom: 40px;">
-                                <div class="player player--video" data-component="Video" data-options='{"volume": 0.7, "size": "cover", "timeFormatLong": false}'>
+                            <figure>
+                                <div class="player player--video player--collection" data-component="Video" data-options='{"volume": 0.7, "size": "cover", "timeFormatLong": false}'>
                                     <video src="{{ video.src }}" controls poster="{{ image.desktop }}"></video>
                                 </div>
                             </figure>
@@ -15,38 +15,21 @@
                     {% endif %}
                 </div>
 
-                <div class="quote_panel__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                <div class="quote_panel__column col-span-4 col-start-{{reversed ? '1' : '9z'}}{{reversed ? ' no-padding' : ''}}">
                     <div class="quote_panel__quote">
-
+                        <div class="claim__sticker">
+                            {% include "components/c_sticker.html" with {'text':'Skip to interviews', modifiers: ['grey']}  %}
+                        </div>
                         {% if bio %}
-
-                            <style>
-                                .quote_panel__quote p {
-                                    max-width: 27.375rem;
-                                }
-
-                                .quote_panel__quote h2 {
-                                    font-size: 4rem;
-                                    margin-bottom: 30px;
-                                }
-                                .quote_panel__quote h3 {
-                                    font-size: 1.6rem;
-                                    margin-bottom: 10px;
-                                }
-
-                            </style>
 
                             <div class="text text--large text--aside">
                                 {% if heading %}
                                     <h3 class="heading">Meet the interviewer</h3>
-                                    {% include 'components/c_heading.html' with { label: heading.text, small: true } %}
                                 {% endif %}
                                 {{bio|raw}}
                             </div>
 
-
-
-{#                            {% include "/subviews/subview_text.html" with {text:bio, large:true, aisde:true, heading: heading } %}#}
+                        {#{% include "/subviews/subview_text.html" with {text:bio, large:true, aisde:true, heading: heading } %}#}
 
                         {% else %}
 

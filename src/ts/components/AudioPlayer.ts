@@ -249,11 +249,10 @@ export class AudioPlayer extends Video {
 
     private animateOutCassette = (): Promise<void> => new Promise(resolve => {
         this.elements.title.innerText = 'Loading...';
-        // no cached earlier because it's rerendered in template
         gsap.to(this.cassetteEl, {
-            yPercent: 120,
-            rotate: -10,
-            duration: 0.4,
+            yPercent: 130,
+            rotate: -20,
+            duration: 0.5,
             ease: 'power2.out',
             clearProps: 'all',
             onComplete: () => {

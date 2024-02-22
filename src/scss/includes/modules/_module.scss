@@ -13,7 +13,6 @@
 
 
     &--404 {
-
         height: 100%;
 
         @include breakpoint(desktop) {
@@ -34,6 +33,7 @@
         }
     }
 
+
     &--text-aside {
         z-index: 0;
 
@@ -45,26 +45,13 @@
     }
 
 
+
     &--map {
         position: relative;
         z-index: 1;
     }
 
 
-    &--quote_panel {
-        position: relative;
-
-        @include breakpoint(desktop) {
-            &::after {
-                content: "";
-                position: absolute;
-                inset: 0 auto 0 50%;
-                transform: translateX(-50%);
-                width: 1px;
-                background-color: var(--color-bg);
-            }
-        }
-    }
 
     &--faq {
         position: relative;
@@ -144,10 +131,17 @@
             justify-content: flex-start;
 
             @include breakpoint(desktop) {
-                padding-top: rem(20);
+                // padding-top: rem(20);
 
                 .text {
-                    padding: rem(5) 0 rem(5) 0;
+                    padding: rem(20) 0 rem(64) 0;
+                }
+
+                .home-text__decorator {
+                    position: absolute;
+                    margin-top: rem(20);
+                    top: 0;
+                    left: 0;
                 }
             }
 
@@ -190,12 +184,13 @@
         }
     }
 
-    &:first-of-type:not(.module--hero) > .box:first-of-type,
-
+    &:first-of-type:not(.module--hero):not(.module--collections_images) > .box:first-of-type,
+    
     // when first module is phone-only, add padding to second's box
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
-            padding-top: rem(27);
+            padding-top: rem(26); 
+            padding-bottom: rem(22);
         }
     }
 
@@ -259,6 +254,22 @@
                 &:last-child {
                     border-bottom: unset;
                 }
+            }
+        }
+    }
+
+
+    &--collection_hero {
+        .grid {
+            height: 100%;
+        }
+    }
+
+    &--about_hero + &--text-aside {
+        @include breakpoint(desktop) {
+            .heading--medium {
+                @include font-size(122, 100);
+                @include letter-spacing(-3, 122);
             }
         }
     }

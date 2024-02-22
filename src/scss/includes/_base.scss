@@ -14,6 +14,7 @@ html {
     position: relative;
     height: 100%;
     font-size: $base-font-size;
+    overflow-x: hidden;
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
@@ -33,6 +34,9 @@ body {
     min-height: 100vh;
     color: var(--color-text);
     background: var(--color-bg);
+    overflow-x: hidden;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+    overflow-x: clip;
 
     // for collection's page
     counter-reset: collection-counter;
@@ -40,8 +44,6 @@ body {
 
 body,
 html {
-    overflow-x: hidden;
-
     &:has(.modal.is-open) { overflow: hidden; }
 
     &:has(.has-menu-open) {
@@ -64,9 +66,10 @@ html {
     grid-template-areas: "main header"
         "newsletter header"
         "footer header";
-    gap: 1px;
+    column-gap: 1px;
     align-content: start;
     margin-top: -1px; // box margin-top fix
+
 
     @include breakpoint(not-desktop) {
         z-index: unset;
@@ -75,6 +78,11 @@ html {
 
     body.is-loader-hidden & {
         background: var(--color-bg);
+    }
+
+
+    body.is-transition & {
+        background: var(--color-black);
     }
 }
 
@@ -93,22 +101,6 @@ article {
 
     body.is-homepage.is-loader-hiding & {
         background-color: var(--color-bg);
-    }
-
-    &::before {
-        @include full;
-
-        content: "";
-        z-index: 4;
-        background-color: rgba($color-bg, .5);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .3s $ease-custom;
-    }
-
-    &:has(.modal.is-open)::before {
-        opacity: 1;
-        pointer-events: all;
     }
 }
 

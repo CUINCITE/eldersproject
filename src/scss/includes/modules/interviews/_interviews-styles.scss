@@ -1,11 +1,24 @@
 .interviews {
+    &--banner {
+        .interviews__copy {
+            @include breakpoint(desktop) {
+                padding-top: unset;
+            }
+        }
+
+        p {
+            -webkit-line-clamp: unset !important;
+        }
+    }
+
+
 
     &__heading {
         @include flex(row, flex-start, flex-start);
         position: relative;
 
         @include breakpoint(desktop) {
-            padding-top: rem(10);
+            padding-block: rem(18);
         }
 
         @include breakpoint(phone) {
@@ -46,12 +59,6 @@
         }
 
         .heading {
-
-            @include breakpoint(desktop) {
-                padding-top: rem(18);
-                margin-bottom: rem(-8);
-            }
-
             @include breakpoint(tablet) {
                 padding-block: rem(12);
             }
@@ -91,6 +98,7 @@
 
     &__item {
         position: relative;
+        border-top: 1px solid var(--color-bg);
     }
 
 
@@ -234,6 +242,39 @@
 
 
             .is-grid-view & { display: none; }
+        }
+    }
+
+
+
+    &__claim {
+        @include breakpoint(desktop) {
+            position: relative;
+            border-top: 1px solid $color-bg;
+            padding-top: rem(20);
+            padding-bottom: rem(70);
+            min-height: vw(366);
+        }
+    }
+
+
+
+    &__image {
+        @include breakpoint(desktop) {
+            position: absolute;
+            left: rem(-10);
+            top: rem(-56);
+            width: vw(352);
+            height: vw(352);
+        }
+    }
+
+
+
+    &__button_box {
+        @include breakpoint(desktop) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
         }
     }
 
@@ -408,6 +449,10 @@
 
             padding-top: rem(14);
             padding-left: rem(1);
+
+            .text {
+                padding-block: 0;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -435,8 +480,8 @@
         .is-grid-view & {
             @include letter-spacing(0.07, 13);
 
-            background-color: var(--color-black);
-            color: var(--color-grey200);
+            background-color: var(--color-grey200);
+            color: var(--color-black);
             padding: rem(16) rem(16) rem(12) rem(14);
             position: absolute;
             inset: auto 0 0;

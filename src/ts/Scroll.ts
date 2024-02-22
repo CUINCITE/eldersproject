@@ -23,6 +23,7 @@ interface IScrollData {
     el: HTMLElement;
     type: string;
     delay?: number;
+    action?: string;
     component?: Component;
 }
 
@@ -115,7 +116,9 @@ export default class Scroll {
 
 
     public static scrollToCached(): void {
-        const y = Scroll.scrollCache[normalizeUrl(window.location.pathname + window.location.search)] || 0;
+        // const y = Scroll.scrollCache[normalizeUrl(window.location.pathname + window.location.search)] || 0;
+        // TEMP - testing
+        const y = 0;
         Scroll.scrollTo({ y, duration: 0 });
     }
 
@@ -146,11 +149,12 @@ export default class Scroll {
                 el,
                 type: el.dataset.animation,
                 delay: parseInt(el.dataset.delay, 10) || 0,
+                action: el.dataset.action || 'reset',
             }).forEach((item: IScrollData) => {
                 if (animations[item.type]) {
                     ScrollTrigger.create({
                         trigger: item.el,
-                        toggleActions: 'play pause resume reset',
+                        toggleActions: `play pause resume ${item.action}`,
                         animation: getAnimation(item.type, item.el, item.delay || 0),
                     });
                 } else {

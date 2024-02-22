@@ -5,9 +5,9 @@ $circles-colors: "green", "red", "pink";
 
     position: absolute;
     inset: rem(-16) auto auto rem(13);
-    width: rem(244);
-    height: rem(244);
-    margin-left: rem(-18);
+    width: rem(219.6);
+    height: rem(219.6);
+    margin-left: 0;
     opacity: 0;
     display: none;
     pointer-events: none;
@@ -15,14 +15,11 @@ $circles-colors: "green", "red", "pink";
 
     @include breakpoint(desktop) {
         @media (max-height: 719px) {
-            width: rem(212);
-            height: rem(212);
-            margin-left: rem(-14);
+            width: rem(182);
+            height: rem(182);
+            margin-left: 0;
         }
     }
-
-    // only at homepage
-    body.is-homepage & { display: block; }
 
 
 

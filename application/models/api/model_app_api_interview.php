@@ -128,13 +128,14 @@ class model_app_api_interview
             'description' => $item['narrators'][0]['occupation'],
             'collection' => $item['interviewers'][0]['label'],
             'urlCollection' => ['type' => 'collection', 'slug' => $item['interviewers'][0]['slug']],
-            'text' => substr($item['summary'], 0, 240),
+            'text' => $item['lead'],
             'tags' => $tags,
             'state' => $item['narrator_location'],
             'transcript' => $transcript,
             'info' => $interview_info,
             'downloads' => $downloads,
-            'related' => $this->getRelated($item)
+            'related' => $this->getRelated($item),
+            'contentList' => $this->getContentList($item, $sessions)
         ];
 
         if ($mainImage) {
@@ -194,7 +195,7 @@ class model_app_api_interview
     private function getRelated($interview)
     {
         $collectionId = $interview['interviewers'][0]['id'];
-        $items = $m['items']=$this->parent->getJsonModel('interviews',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
+        $items =$this->parent->getJsonModel('interviews',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
 
         $related = [];
             foreach ($items as $item) {
@@ -209,11 +210,53 @@ class model_app_api_interview
                     'title' => $item['label'],
                     'collection' => $interview['interviewers'][0]['label'] . ' Collection',
                     'urlCollection' => ['type' => 'collection', 'slug' => $interview['interviewers'][0]['slug']],
-                    'text' => substr($item['summary'], 0, 250)
+                    'text' => $item['lead']
                 ];
             }
 
         return array_slice($related, 0, 2);
+    }
+
+    private function getContentList($item, $sessions): array
+    {
+        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
+
+        $sessionMap = [];
+        foreach ($sessions as $index => $session) {
+            $sessionMap[$session['id']] = $index;
+        }
+
+        $returnItems = [];
+        foreach ($indexes as $index) {
+
+            if (isset($sessionMap[$index['session']])) {
+
+                $sessionIndex = $sessionMap[$index['session']];
+                $startTime = $this->timeToSeconds($index['start_time']);
+                
+                if ($sessionIndex > 0) {
+                    for ($i = 0; $i < $sessionIndex; $i++) {
+                        $startTime += $sessions[$i]['duration'];
+                    }
+                }
+
+                $returnItems[] = [
+                    'label' => $index['label'],
+                    'startTime' => $startTime,
+                ];
+            }
+        }
+
+        return $returnItems;
+    }
+
+
+    private function timeToSeconds($timestamp)
+    {
+        list($hours, $minutes, $seconds) = explode(':', $timestamp);
+        $total_seconds = $hours*3600 + $minutes*60 + $seconds;
+
+        return $total_seconds;
     }
 
 }

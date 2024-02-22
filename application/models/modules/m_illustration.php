@@ -1,6 +1,6 @@
 <?php
 
-class model_app_pages_modules_hero_about extends model_app_pages_modules
+class model_app_pages_modules_illustration extends model_app_pages_modules
 {
 
 	function __construct($parent,$settings)

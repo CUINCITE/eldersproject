@@ -1,0 +1,45 @@
+.illustrations {
+    @include breakpoint(desktop) {
+        height: vw(656);
+    }
+
+
+
+    .illustration {
+        transform: unset !important;
+    
+        &[data-scroll] { opacity: 0; }
+    }
+    
+
+    
+    &__cards {
+        position: absolute;
+    
+        @include breakpoint(desktop) {
+            width: vw(927);
+            max-width: vh(927);
+            aspect-ratio: 1/1;
+            transform: rotate(-7.93deg);
+            top: 5.6%;
+            right: rem(330);
+        }
+    
+        @include breakpoint(tablet) {
+            width: vw(620, tablet);
+            aspect-ratio: 1/1;
+            transform: rotate(-7deg);
+            top: 0;
+            left: vw(-8, tablet);
+        }
+    
+        @include breakpoint(phone) {
+            width: vw(289, phone);
+            height: vw(289, phone);
+            transform: rotate(-7deg);
+            top: 0;
+            left: vw(7, phone);
+        }
+    }
+}
+

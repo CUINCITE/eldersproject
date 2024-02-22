@@ -192,6 +192,9 @@ export class Lightbox {
         if (this.animating || !this.shown) return Promise.resolve();
         this.controller?.abort();
 
+        // hide lightbox tab if any of them is active
+        this.navComp?.hide();
+
         return new Promise<void>((resolve, reject) => {
             this.animating = true;
             this.view.classList.add('is-closing');
@@ -200,7 +203,7 @@ export class Lightbox {
                 opacity: 0,
 
                 // CONNECTED WITH CSS - .is-closing
-                delay: fast ? 0 : 1,
+                delay: fast ? 0 : 0.8,
                 ease: 'none',
                 onStart: () => {
                     document.body.classList.remove('has-lightbox');

@@ -1,5 +1,4 @@
 <section class="module module--hero">
-
   <div class="hero">
 
     <div class="hero__wrap">
@@ -9,18 +8,30 @@
       </div>
 
       <h1 class="hero__title">
-        <span class="box"><span class="hero__line">I see</span></span>
-        <span class="box"><span class="hero__line">My light</span></span>
-        <span class="box"><span class="hero__line"><i>Shining</i></span></span>
+          <span class="box" data-scroll="box">
+              <span class="box__bg"></span>
+              <span class="hero__line">I see</span>
+          </span>
+          <span class="box" data-scroll="box">
+              <span class="box__bg"></span>
+              <span class="hero__line">My light</span>
+          </span>
+          <span class="box" data-scroll="box">
+              <span class="box__bg"></span>
+              <span class="hero__line"><i>Shining</i></span>
+          </span>
       </h1>
 
-      <div class="box hero__subtitles">
+      <div class="hero__subtitles box" data-scroll="box">
+        <div class="box__bg"></div>
         <div class="grid">
-          <div class="col-span-12">
+          <div class="col-span-5 col-start-8">
             <div class="hero__bottom">
-              <h2 class="hero__subtitle">: Oral Histories Of Our Elders</h2>
               <div class="hero__text desktop-only">
-                {% include "subviews/subview_text.html" with {text: text} %}
+                {% include "subviews/subview_text.html" with { 
+                  size: "larger",
+                  text: text
+                } %}
               </div>
             </div>
           </div>
@@ -28,7 +39,7 @@
       </div>
 
       <div class="hero__sticker">
-        {% include 'subviews/subview_sticker.html' with {label:'Discover more'} %}
+        {% include 'subviews/subview_sticker.html' with {label:'Today\'s Highlights'} %}
       </div>
 
     </div>
@@ -42,5 +53,4 @@
     </div>
 
   </div>
-
 </section>

@@ -14,12 +14,15 @@ import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
 import { Map } from './components/Map/Map';
 import { Collections } from './components/Collections';
+import { PolaroidGallery } from './components/PolaroidGallery';
+import { Dropdown } from './components/Dropdown';
 
 export const components = {
     Accordeon,
     AccordeonList,
     Button,
     Collections,
+    Dropdown,
     FilterLetters,
     Load,
     Map,
@@ -31,6 +34,7 @@ export const components = {
     LightboxTranscript,
     LightboxSlider,
     WrappedText,
+    PolaroidGallery,
 };
 
 export const pages = { Page };

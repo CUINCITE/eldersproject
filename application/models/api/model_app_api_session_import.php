@@ -18,6 +18,8 @@ class model_app_api_session_import
 	{        
         $this->parent->cache_kill();
         $session=@_uho_fx::getGet('session');
+        if (!$session && isset($params['session'])) $session = $params['session'];
+
         if (!$session) return['result'=>false,'message'=>'No session defined'];
 		
 		$session=$this->parent->getJsonModel('sessions',['id'=>intval($session)],true);
@@ -70,7 +72,8 @@ class model_app_api_session_import
 			}
 		}
 
-		$this->parent->putJsonModel('sessions',['status_transcript'=>1,'transcript'=>strip_tags($source),'transcript_tags'=>$source],['id'=>$session['id']]);
+		$r = $this->parent->putJsonModel('sessions',['status_transcript'=>1,'transcript'=>strip_tags($source),'transcript_tags'=>$source],['id'=>$session['id']]);
+        if (!$r) return ['result' => false, 'message' => $this->parent->orm->getLastError()];
 		//exit(nl2br($source));
 		return ['result'=>true,'message'=>'Sessions converted to '.$iLines.' lines.'];
 

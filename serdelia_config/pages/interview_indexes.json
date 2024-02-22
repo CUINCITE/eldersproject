@@ -1,0 +1,62 @@
+{
+  "table": "interview_indexes",
+  "filters": {
+    "parent": "%1%"
+  },
+  "label": {
+    "page": "Interview Index",
+    "edit": "{% if not no %}New Index Item{% else %}Index: <em>{{parent.label}}, #{{no}}</em>{% endif %}"
+  },
+  "layout-temp":
+  {
+    "type":"grid",
+    "count":100,
+    "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
+  },
+  "order": "nr",
+  "buttons_edit": [
+    {
+      "label":"Helper",
+      "plugin":"session_update",
+      "on_update":true,
+      "temp-hidden":true
+    },
+    {
+      "type": "plugin",
+      "plugin": "preview",
+      "params": {
+        "url": "/interviews/{{parent.slug}}?preview=true"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "tab":"Info",
+      "label": "Index no",
+      "list": true,
+      "field": "no",
+      "required": true
+    },
+    {
+      "label":"Incite Interview Id",
+      "field":"interview_incite_id",
+      "list":true,
+      "settings":{"case":true,"code":true}
+    },
+    {
+      "label":"Incite Session Id",
+      "field":"session_incite_id",
+      "list":true,
+      "settings":{"case":true,"code":true}
+    },
+    {
+      "field":"label",
+      "label":"Label",
+      "list":true
+    },
+    {
+      "field":"start_time",
+      "label":"Timestamp"
+    }
+  ]
+}

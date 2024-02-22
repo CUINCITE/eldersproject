@@ -4,7 +4,8 @@
     grid-area: footer;
     text-transform: uppercase;
     position: relative;
-    background-color: var(--color-box);
+    background-color: var(--color-black);
+    color: var(--color-box);
 
     @include breakpoint(desktop) {
         @include font-size(10, 13.5);
@@ -49,5 +50,9 @@
 
 
         a { @include hoverable-link; }
+    }
+
+    .box__bg {
+        background-color: var(--color-black);
     }
 }

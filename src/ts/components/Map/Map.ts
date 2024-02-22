@@ -28,6 +28,7 @@ export interface IMapSettings {
     clusterRadius?: number;
     clusterMaxZoom?: number;
     zoomOnScroll?: boolean;
+    lazyLoading?: boolean;
 }
 
 
@@ -90,6 +91,7 @@ export class Map extends Component {
             zoomOnScroll: false,
             clusterMaxZoom: 14,
             clusterRadius: 50,
+            lazyLoading: false,
         };
 
         this.settings = Object.assign(this.settings, JSON.parse(this.view.getAttribute('data-options')));
@@ -106,7 +108,9 @@ export class Map extends Component {
         }
 
 
-        this.init();
+        if (this.settings.lazyLoading) {
+            setTimeout(() => this.init(), 5000);
+        } else this.init();
 
         window.addEventListener('resize', debounce(() => breakpoint.phone && !this.contentInjected && this.getTabContent()));
     }
