@@ -5,6 +5,9 @@ use Maestroerror\HeicToJpg;
 
 class MementosImporter extends model_app_api_import
 {
+
+    private bool $overwriteImages = false;
+
     public function __construct($parent, $settings)
     {
         parent::__construct($parent, $settings);
@@ -12,9 +15,39 @@ class MementosImporter extends model_app_api_import
 
     public function import()
     {
-        $items = _uho_fx::loadCsv($_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos.csv', ',');
 
+        $directory = $_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos';
+        $files = scandir($directory);
+
+        $resultArray = [];
+
+        foreach($files as $file) {
+            if($file == ".." || $file == ".") continue;
+
+            $fullFilePath = $directory . '/' . $file;
+
+            if(pathinfo($fullFilePath, PATHINFO_EXTENSION) == 'csv') {
+                $items = _uho_fx::loadCsv($fullFilePath, ',');
+
+                $resultArray[] = [
+                    'file' => $file,
+                    'result' =>  $this->importMedia($items)
+                ];
+
+            }
+        }
+
+        return $resultArray;
+
+
+    }
+
+    private function importMedia(?array $items)
+    {
         $items_count = 0;
+
+        $alreadyUploadedFilenames = [];
+
         foreach ($items as $k => $v) {
             $id = $v['Interview ID'];
             $interview = $this->parent->getJsonModel('interviews', ['incite_id' => $id], true);
@@ -24,6 +57,11 @@ class MementosImporter extends model_app_api_import
             // remove old items
             if (!empty($interview['media'])) {
                 foreach ($interview['media'] as $k2 => $media_item) {
+
+                    if (!$this->overwriteImages) {
+                        $alreadyUploadedFilenames[] = $media_item['filename_original'];
+                        continue;
+                    }
 
                     if (!empty($media_item['id']) && is_numeric($media_item['id'])) {
                         $this->parent->deleteJsonModel('media', ['id' => $media_item['id']]);
@@ -44,15 +82,27 @@ class MementosImporter extends model_app_api_import
 
         }
 
+        $skippedItems = 0;
+        $filesNotFound = [];
+        $itemsNotFound = 0;
+
         foreach ($items as $k => $v) {
+
+            if(!$this->overwriteImages && in_array($v['Filename'], $alreadyUploadedFilenames)) {
+                $skippedItems++;
+                continue;
+            }
+
             $id = $v['Interview ID'];
             $interview = $this->parent->getJsonModel('interviews', ['incite_id' => $id], true);
             // add new items
             $uid = uniqid();
 
+            $descriptionField = empty($v['Description']) ? $v['Decription'] : $v['Description'];
+
             $item = [
                 'type' => 'image',
-                'caption' => $v['Description'],
+                'caption' => $descriptionField,
                 'alt' => $v['Alt text'],
                 'uid' => $uid,
                 'model_id' => $interview['id'],
@@ -60,18 +110,24 @@ class MementosImporter extends model_app_api_import
                 'filename_original' => $v['Filename']
             ];
 
-            $postSuccess = $this->parent->postJsonModel('media', $item);
-            if (!$postSuccess) return ['message' => 'Media Item not succesfully posted: ' . $id];
-            $items_count++;
-
             $oldFile = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/' . $v['Filename'];
             $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
 
             $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.' . strtolower($ext);
 
+            if (!_uho_fx::file_exists($oldFile)) {
+                $filesNotFound[] = $v['Filename'];
+                $itemsNotFound++;
+                continue;
+            }
 
-            if (!copy($oldFile, $newFile)) {
-                return ['message' => 'Resize image not successful: ' . $v['Filename']];
+
+            try {
+                if (!copy($oldFile, $newFile)) {
+                    throw new Exception('Could not move the file: ' . $v['Filename']);
+                }
+            } catch (Exception $e) {
+                return ['message' => $e->getMessage()];
             }
 
             if (strtolower($ext) !== "jpg" && file_exists($newFile)) {
@@ -97,9 +153,13 @@ class MementosImporter extends model_app_api_import
 
             }
 
+            $postSuccess = $this->parent->postJsonModel('media', $item);
+            if (!$postSuccess) return ['message' => 'Media Item not succesfully posted: ' . $id];
+            $items_count++;
+
 
         }
 
-        return ['message' => 'Import sucessful', 'items' => $items_count];
+        return ['message' => true, 'itemsImported' => $items_count, 'skippedItems' => $skippedItems, 'notFound' => $itemsNotFound, 'filesNotFound' => $filesNotFound];
     }
 }

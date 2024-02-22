@@ -28,6 +28,11 @@
       "list": true
     },
     {
+      "label": "Original Filename",
+      "field": "filename_original",
+      "list": true
+    },
+    {
       "label": "Model Id Nr",
       "field": "model_id_order",
       "list": true
