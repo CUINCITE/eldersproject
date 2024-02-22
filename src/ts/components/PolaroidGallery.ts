@@ -1,7 +1,4 @@
-import { gsap } from 'gsap/dist/gsap';
 import { Component } from '../components/Component';
-import { easing } from '../Site';
-
 
 export class PolaroidGallery extends Component {
 
@@ -11,9 +8,7 @@ export class PolaroidGallery extends Component {
     private captions: NodeListOf<HTMLElement>;
     private arrowPrev: HTMLButtonElement;
     private arrowNext: HTMLButtonElement;
-    private activeSlide: HTMLElement;
     private activeSlideIndex = 0;
-    private isAnimating = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -24,147 +19,61 @@ export class PolaroidGallery extends Component {
         this.arrowPrev = this.view.querySelector('.js-slider-prev');
         this.arrowNext = this.view.querySelector('.js-slider-next');
 
-
-        this.init();
         this.bind();
     }
-
-
-
-    private init = (): void => {
-        this.goTo(0, true);
-    };
-
-
 
     private bind = (): void => {
         this.arrowNext.addEventListener('click', () => this.goTo(this.activeSlideIndex + 1));
         this.arrowPrev.addEventListener('click', () => this.goTo(this.activeSlideIndex - 1));
-        document.addEventListener('keydown', this.onKeyDown);
+        this.updateArrows();
     };
-
-
-
-    private onKeyDown = (event: KeyboardEvent): void => {
-        if (!this.isActive || this.isAnimating) return;
-
-        if (event.key === 'ArrowRight') {
-            this.goTo(this.activeSlideIndex + 1);
-        } else if (event.key === 'ArrowLeft') {
-            this.goTo(this.activeSlideIndex - 1);
-        }
-    };
-
 
 
     private goTo = (index: number, fast?: boolean): void => {
         const direction: number = index > this.activeSlideIndex ? 1 : -1;
 
-        this.hideSlide(this.activeSlideIndex, direction, fast);
         this.showSlide(index, direction, fast);
     };
 
 
-
-    private hideSlide = (index: number, direction: number, fast?: boolean): void => {
-        const slide = this.slides[index];
-        const caption = this.captions[index];
-        if (!slide) return;
-        const slideWidth = slide.offsetWidth;
-
-
-        if (!slide) return;
-
-
-        this.isAnimating = true;
-
-        gsap.fromTo(slide, { x: 0 }, {
-            x: direction * -slideWidth,
-            duration: fast ? 0 : 0.5,
-            ease: easing,
-            opacity: 0,
-            onComplete: () => {
-                slide.style.display = 'none';
-            },
-        });
-
-        gsap.fromTo(caption, { y: 0 }, {
-            x: 50,
-            duration: fast ? 0 : 0.5,
-            ease: easing,
-            onComplete: () => {
-                caption.style.opacity = '0';
-                this.isAnimating = false;
-            },
-        });
-    };
-
-
-
     private showSlide = (index: number, direction: number, fast?: boolean): void => {
-        const slide = this.slides[index];
-        const caption = this.captions[index];
-        const slideWidth = slide.offsetWidth;
 
-        if (!slide) return;
+        this.activeSlideIndex = (this.activeSlideIndex += direction);
 
-        const outerSlide = direction < 0 ? this.slides[this.activeSlideIndex - 1] : this.slides[this.activeSlideIndex + 2];
+        const previousSlide = this.slides[this.activeSlideIndex - 1];
+        const firstSlide = this.slides[this.activeSlideIndex];
+        const secondSlide = this.slides[this.activeSlideIndex + 1];
+        const nextSlide = this.slides[this.activeSlideIndex + 2];
 
-        console.log(this.slides[this.activeSlideIndex - 1], this.slides[this.activeSlideIndex + 2]);
-
-        gsap.fromTo(caption, { x: 50 }, {
-            x: 0,
-            delay: 0.3,
-            duration: fast ? 0 : 0.5,
-            ease: easing,
-            onStart: () => {
-                caption.style.opacity = '1';
-            },
+        this.captions.forEach((caption: HTMLElement, i: number) => {
+            caption.classList.toggle('is-active', i === this.activeSlideIndex);
         });
 
-        gsap.to(slide, {
-            xPercent: direction * 100,
-            duration: fast ? 0.01 : 0.5,
-            ease: easing,
-            opacity: 1,
-            onStart: () => {
-                slide.style.display = 'block';
-            },
-            onComplete: () => {
-                this.activeSlide = slide;
-                this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
-                this.updateArrows();
-            },
+        console.log(this.captions);
+
+        [previousSlide, firstSlide, secondSlide, nextSlide].forEach((slide: HTMLElement) => {
+            if (!slide) return;
+            const prefix = 'is-';
+            const slideClassName = slide.className.split(' ').filter(c => !c.startsWith(prefix));
+            slide.className = slideClassName.join(' ').trim();
         });
 
-        gsap.fromTo(outerSlide, { x: direction * slideWidth }, {
-            x: 0,
-            duration: fast ? 0.01 : 0.5,
-            ease: easing,
-            opacity: 1,
-            onStart: () => {
-                slide.style.display = 'block';
-            },
-            // onComplete: () => {
-            //     this.activeSlide = slide;
-            //     this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
-            //     this.updateArrows();
-            // },
-        });
+        previousSlide && previousSlide.classList.add('is-left-outer');
+        firstSlide && firstSlide.classList.add('is-first-visible');
+        secondSlide && secondSlide.classList.add('is-second-visible');
+        nextSlide && nextSlide.classList.add('is-right-outer');
+
+        this.updateArrows();
     };
-
-
 
     private updateArrows(): void {
 
         switch (this.activeSlideIndex) {
             case 0:
-                this.view.classList.add('is-first');
-                this.view.classList.remove('is-last');
+                this.view.classList.toggle('is-first');
                 break;
             case this.slides.length - 1:
-                this.view.classList.remove('is-first');
-                this.view.classList.add('is-last');
+                this.view.classList.toggle('is-last');
                 break;
             default:
                 this.view.classList.remove('is-first', 'is-last');

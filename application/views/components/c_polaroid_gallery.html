@@ -14,7 +14,7 @@
         <div class="polaroid_gallery__captions">
             {% for item in moduleValue %}
             {% if item.caption %}
-            <div class="text_wrapper__info text_wrapper__info--collections js-caption">
+            <div class="text_wrapper__info text_wrapper__info--collections js-caption{% if loop.index == 1%} is-active{% endif %}">
                 {% include "/subviews/subview_text.html" with {text: item.caption} %}
             </div>
             {% endif %}
