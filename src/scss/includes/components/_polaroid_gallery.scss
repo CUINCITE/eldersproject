@@ -35,7 +35,7 @@
 
 
     &__slide {
-        transition: transform .5s $easing, opacity .5s $easing;
+        transition: transform .5s $easing, opacity .75s $easing;
 
         @include breakpoint(desktop) {
             left: 0;
@@ -43,28 +43,25 @@
             grid-column-start: 2;
         }
 
-        &:first-child {
-            transform: translateX(-100%);
-            z-index: 1;
+        @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+                z-index: 5 - $i;
+            }
         }
 
-        &:nth-child(2) {
-            transform: rotate(20deg);
-        }
-
-        &:nth-child(n+3) {
-            opacity: 0;
-        }
+        &:first-child { transform: translateX(-100%); }
+        &:nth-child(2) { transform: rotate(20deg); }
+        &:nth-child(n+3) { opacity: 0; }
 
         &.is-left-outer {
-            transform: translateX(-110%);
+            transform: translateX(-200%);
             opacity: 0;
+            transition: transform .5s $easing, opacity .25s $easing;
         }
 
         &.is-first-visible {
             transform: translateX(-100%);
             opacity: 1;
-            z-index: 1;
         }
 
         &.is-second-visible {
