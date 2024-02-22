@@ -7,28 +7,35 @@
     position: fixed;
     inset: 0 0 0 auto;
     width: var(--GLOBAL-aside-width);
-    background-color: var(--color-box);
 
 
-    body.is-not-ready & {
-        transform: translateX(100%);
-    }
 
+    &__container {
+        width: 100%;
+        height: 100%;
+        transition: clip-path .7s $ease-custom;
+        clip-path: inset(0 0 0 0);
+        background-color: var(--color-box);
 
-    @include breakpoint(desktop) {
-        padding: rem(13) rem(6);
-    }
+        @include breakpoint(desktop) {
+            padding: rem(13) rem(6);
+        }
 
-    @include breakpoint(not-desktop) {
-        z-index: 1;
-    }
+        @include breakpoint(not-desktop) {
+            z-index: 1;
+        }
 
-    @include breakpoint(tablet) {
-        padding: vw(27, tablet) vw(18, tablet);
-    }
+        @include breakpoint(tablet) {
+            padding: vw(27, tablet) vw(18, tablet);
+        }
 
-    @include breakpoint(phone) {
-        padding: vw(13, phone) vw(4, phone);
+        @include breakpoint(phone) {
+            padding: vw(13, phone) vw(4, phone);
+        }
+
+        body.is-not-ready & {
+            clip-path: inset(0 0 0 100%);
+        }
     }
 
     &__logo {
