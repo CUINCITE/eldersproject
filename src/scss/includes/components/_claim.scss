@@ -165,6 +165,13 @@
     }
 
 
-    &[data-scroll] { opacity: 0; }
-    .line { overflow: hidden; }
+    &[data-scroll] { 
+        opacity: 0; 
+    }
+
+    .line { 
+        overflow: hidden; 
+        margin-top: -5px;
+        padding-top: 5px;
+    }
 }
