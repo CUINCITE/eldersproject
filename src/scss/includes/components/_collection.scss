@@ -270,9 +270,6 @@
 
 
     &__illustration {
-        will-change: transform;
-        backface-visibility: hidden;
-
         @include breakpoint(desktop) {
             width: vw(530);
             height: vw(530);
