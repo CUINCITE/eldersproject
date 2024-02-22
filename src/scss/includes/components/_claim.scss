@@ -171,7 +171,7 @@
 
     .line { 
         overflow: hidden; 
-        margin-top: -5px;
-        padding-top: 5px;
+        margin-top: rem(-5);
+        padding-top: rem(5);
     }
 }
