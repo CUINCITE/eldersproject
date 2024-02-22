@@ -5,6 +5,7 @@
         width: rem(553);
     }
 
+
     &__wrapper {
         @include breakpoint(desktop) {
             @include flex(column, space-between, flex-start);
@@ -34,7 +35,7 @@
 
 
     &__slide {
-        transition: transform .5s $ease-out, opacity .5s $ease-out;
+        transition: transform .5s $easing, opacity .5s $easing;
 
         @include breakpoint(desktop) {
             left: 0;
@@ -53,9 +54,6 @@
 
         &:nth-child(n+3) {
             opacity: 0;
-        }
-
-        &:nth-child(odd) {
         }
 
         &.is-left-outer {
@@ -78,13 +76,6 @@
         &.is-right-outer {
             transform: translateX(100%);
             opacity: 0;
-        }
-    }
-
-
-    &__buttons {
-        @include breakpoint(desktop) {
-            // margin-top: rem(40);
         }
     }
 
@@ -118,28 +109,28 @@
         }
 
         svg {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-                transition: none;
+            transition: none;
 
-            &:last-child {
-                transform: translate(-50%, -200%);
+            @include breakpoint(desktop) {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
             }
+
+            &:last-child { transform: translate(-50%, -200%); }
         }
 
-        &:hover {
+        @include hover {
             svg {
                 transform: translate(-50%, 100%);
                 transition: transform .5s $ease-out;
 
-                &:last-child {
-                    transform: translate(-50%, -50%);
-                }
+                &:last-child { transform: translate(-50%, -50%); }
             }
         }
     }
+
 
     .text_wrapper__info {
         opacity: 0;
