@@ -115,7 +115,7 @@ class MementosImporter extends model_app_api_import
 
             $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.' . strtolower($ext);
 
-            if (!_uho_fx::file_exists($oldFile)) {
+            if (!file_exists($oldFile)) {
                 $filesNotFound[] = $v['Filename'];
                 $itemsNotFound++;
                 continue;
