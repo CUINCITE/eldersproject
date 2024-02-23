@@ -2,6 +2,11 @@
     // common
     position: relative;
 
+
+    &--hero { z-index: 0; }
+    &--collections_images { z-index: 1; }
+
+
     &--full-height {
         height: var(--app-height);
 
@@ -184,12 +189,12 @@
         }
     }
 
-    &:first-of-type:not(.module--hero):not(.module--collections_images) > .box:first-of-type,
+    &:first-of-type:not(.module--hero, .module--collections_images) > .box:first-of-type,
+
     
-    // when first module is phone-only, add padding to second's box
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
-            padding-top: rem(26); 
+            padding-top: rem(26);
             padding-bottom: rem(22);
         }
     }
