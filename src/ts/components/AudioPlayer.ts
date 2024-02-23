@@ -92,7 +92,7 @@ export class AudioPlayer extends Video {
             title: this.view.querySelector('.js-player-title'),
         };
 
-
+        this.minimize(true);
         this.bindAudioPlayer();
     }
 
@@ -309,15 +309,16 @@ export class AudioPlayer extends Video {
 
 
 
-    private minimize = (): void => {
+    private minimize = (fast?: boolean): void => {
         // when lightbox is open, do not minimize the player - it should be always expanded
         if (Lightbox.isOpen) return;
 
         gsap.to(this.ui.playerBar, {
-            yPercent: 0,
-            duration: 0.7,
+            yPercent: 100,
+            duration: fast ? 0 : 0.7,
             ease: easing,
             onComplete: () => {
+                gsap.set(this.ui.playerBar, { y: 0, yPercent: 100 });
                 // eslint-disable-next-line max-len
                 this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
                 this.isExpanded = false;
@@ -329,7 +330,7 @@ export class AudioPlayer extends Video {
 
     private expand = (): void => {
         gsap.to(this.ui.playerBar, {
-            yPercent: -100,
+            yPercent: 0,
             duration: 0.7,
             ease: easing,
             onStart: () => {
@@ -338,6 +339,7 @@ export class AudioPlayer extends Video {
             },
             onComplete: () => {
                 this.isExpanded = true;
+                gsap.set(this.ui.playerBar, { y: 0, yPercent: 0 });
             },
         });
     };
