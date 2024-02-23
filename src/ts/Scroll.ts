@@ -220,7 +220,7 @@ export default class Scroll {
         const target = document.querySelector(hash) as HTMLElement;
 
         target
-            ? Scroll.scrollTo({ el: target })
+            ? Scroll.scrollTo({ el: target, duration: 0 })
             : console.warn('There is no %s element', hash);
     };
 }
