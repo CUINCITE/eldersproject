@@ -150,6 +150,15 @@
         margin-left: auto;
         margin-bottom: auto;
         padding-top: rem(9);
+
+
+        @include hover {
+            svg {
+                animation: slide-right .25s $ease-custom forwards !important;
+
+                &:last-of-type { animation-delay: .1s; }
+            }
+        }
     }
 
 
@@ -162,13 +171,6 @@
         position: relative;
 
 
-        .player__fullscreen & {
-            flex-shrink: 0;
-            width: rem(12);
-            height: rem(12);
-            margin-left: rem(3);
-        }
-
 
         svg {
             transition: transform $time-fast $easing;
@@ -176,6 +178,18 @@
             &:last-of-type {
                 position: absolute;
                 inset: 100% auto auto;
+            }
+        }
+
+
+        &--fullscreen {
+            flex-shrink: 0;
+            width: rem(12);
+            height: rem(12);
+            margin-left: rem(3);
+
+            svg:last-of-type {
+                inset: 100% 100% auto auto;
             }
         }
 
