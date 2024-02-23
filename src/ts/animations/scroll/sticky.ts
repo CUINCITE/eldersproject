@@ -10,7 +10,6 @@ export const sticky = el => {
             onUpdate: self => el.classList.toggle('is-hidden', self.progress > 0.90),
             pin: el,
             endTrigger,
-            markers: true,
         },
     });
 };
