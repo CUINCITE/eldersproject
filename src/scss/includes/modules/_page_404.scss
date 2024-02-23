@@ -56,10 +56,12 @@
 
             @include breakpoint(tablet) {
                 padding-top: rem(20);
+                padding-bottom: rem(84);
             }
 
             @include breakpoint(phone) {
                 padding-top: rem(3);
+                padding-bottom: rem(64);
             }
         }
     }
