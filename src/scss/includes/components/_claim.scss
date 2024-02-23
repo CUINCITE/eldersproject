@@ -9,7 +9,7 @@
         @include letter-spacing(-3.09, 103);
 
         margin-block: trim-font(104/122);
-        max-width: 65%; 
+        max-width: 65%;
     }
 
     @include breakpoint(tablet) {
@@ -156,21 +156,29 @@
             }
         }
 
-        .quote_panel__quote & {
-            right: rem(2);
-            bottom: auto;
-            top: rem(-100);
-            left: auto;
+        .collection_hero__sticker-wrapper & {
+            position: absolute;
+            inset: auto rem(25) rem(-15) auto;
+            width: fit-content;
+            transition: opacity 0.3s $easing;
+
+            &.is-hidden {
+                opacity: 0;
+            }
+        }
+
+        &:has(a) .sticker {
+            @include hover { --sticker-fold-size: 19%; }
         }
     }
 
 
-    &[data-scroll] { 
-        opacity: 0; 
+    &[data-scroll] {
+        opacity: 0;
     }
 
-    .line { 
-        overflow: hidden; 
+    .line {
+        overflow: hidden;
         margin-top: rem(-5);
         padding-top: rem(5);
     }

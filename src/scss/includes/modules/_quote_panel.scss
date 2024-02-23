@@ -1,6 +1,12 @@
 .quote_panel {
     position: relative;
 
+    &__sticker-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%
+    }
+
     &__quote {
 
         h3 {
