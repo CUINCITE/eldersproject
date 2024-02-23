@@ -1,13 +1,15 @@
 .collection_hero {
-    display: grid;
-    position: relative;
 
-    @include breakpoint(desktop) {
-        height: var(--app-height);
-        grid-template-rows: 1fr auto;
-        overflow: hidden;
+    &__container {
+        display: grid;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            height: var(--app-height);
+            grid-template-rows: 1fr auto;
+            overflow: hidden;
+        }
     }
-
 
 
     &__wrapper {
