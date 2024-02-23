@@ -61,11 +61,10 @@
                                 </ul>
                                 {% if item.items|length > 5 %}
                             </div>{# END of .results__expand #}
-                            <button class="results__expand-trigger button button--small" aria-expanded="false"
-                                    aria-controls="{{ expand_id }}" data-expanded-text="Show less"
-                                    data-hidden-text="Load more">
+                            <button class="results__expand-trigger button button--small button--overflow" data-component="Button"
+                                    aria-expanded="false" aria-controls="{{ expand_id }}" data-expanded-text="Show less" data-hidden-text="Load more">
                                 {% include "./components/c_arrow_icon.html" %}
-                                <span class="js-expand-text">Load more</span>
+                                <span class="button__text js-button-text js-expand-text">Load more</span>
                             </button>
                             {% endif %}
                         </div>

@@ -97,7 +97,9 @@
     &--medium {
 
         @include breakpoint(desktop) {
-            @include font-size(40, 30);
+            @include font-size(40, 1);
+            
+            margin-block: trim-font(1);
 
             --padding: #{rem(6)};
 
@@ -106,6 +108,7 @@
 
         @include breakpoint(tablet) {
             @include font-size(40, 30);
+            
 
             gap: rem(7);
         }
