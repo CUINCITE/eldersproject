@@ -6,11 +6,11 @@ export const sticky = el => {
     gsap.to(el, {
         scrollTrigger: {
             start: 'top 10%',
-            end: 'top 100%',
-            onLeave: () => el.classList.add('is-hidden'),
-            onEnterBack: () => el.classList.remove('is-hidden'),
+            end: 'top 10%',
+            onUpdate: self => el.classList.toggle('is-hidden', self.progress > 0.90),
             pin: el,
             endTrigger,
+            markers: true,
         },
     });
 };
