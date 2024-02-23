@@ -223,10 +223,21 @@
     }
 
     &__box {
+        border-top: 1px solid $color-bg;
+
         @include breakpoint(desktop) {
-            border-top: 1px solid $color-bg;
             padding-top: rem(14);
             padding-bottom: rem(108);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(14);
+            padding-bottom: rem(42);
         }
     }
 }

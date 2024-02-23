@@ -178,6 +178,17 @@
             margin-block: trim-font(0.84);
         }
     }
+    
+
+    &--left {
+        @include breakpoint(tablet) {
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(12);
+        }
+    }
 
 
     &--title {
@@ -192,6 +203,20 @@
                 @include font-size(182, 1);
                 padding-block: rem(20);
             }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(160, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(80, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(12);
         }
     }
 
@@ -261,25 +286,6 @@
             margin-block: trim-font(1);
         }
     }
-
-
-    &--title {
-
-        @include breakpoint(tablet) {
-            @include font-size(230, 1);
-            @include letter-spacing(-5.94, 132);
-
-            margin-block: trim-font(1);
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(132, 140.253);
-            @include letter-spacing(-5.94, 132);
-
-            margin-block: trim-font(140.253 / 132);
-        }
-    }
-
 
     &--collection {
         @include breakpoint(desktop) {

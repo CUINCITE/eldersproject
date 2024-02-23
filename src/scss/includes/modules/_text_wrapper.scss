@@ -376,6 +376,7 @@
         @include font-size(22, 19);
         @include font-family(reclined, 300);
         @include letter-spacing(-0.55, 22);
+        
         position: absolute;
         margin-left: rem(6);
         bottom: rem(17);

@@ -8,10 +8,14 @@
         position: relative;
 
 
-        &.is-animated:not(.footer__bottom) { background-color: var(--color-box); }
+        &.is-animated:not(.footer__bottom) { 
+            background-color: var(--color-box); 
+        }
 
-        @include breakpoint(not-desktop) {
-            z-index: 1;
+        &:not(.is-animated) {
+            @include breakpoint(not-desktop) {
+                z-index: 1;
+            }
         }
     }
 

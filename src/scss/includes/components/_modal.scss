@@ -6,7 +6,7 @@
     }
 
     @include breakpoint(phone) {
-        --checkmark-width: #{rem(36)};
+        --checkmark-width: #{rem(34)};
     }
 
 
@@ -374,11 +374,10 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(34.545, 0.85);
-            @include letter-spacing(-1.036, 34.545);
+            @include font-size(30, 0.85);
+            @include letter-spacing(-0.95, 30);
 
-            height: rem(39);
-            padding: rem(7) rem(3.5) 0;
+            padding: rem(7) rem(3.5) rem(2);
         }
 
 

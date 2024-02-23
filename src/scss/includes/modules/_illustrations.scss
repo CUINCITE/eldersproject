@@ -3,7 +3,13 @@
         height: vw(656);
     }
 
+    @include breakpoint(tablet) {
+        height: vw(456, tablet);
+    }
 
+    @include breakpoint(phone) {
+        height: vw(256, phone);
+    }
 
     .illustration {
         transform: unset !important;

@@ -43,14 +43,16 @@
             }
 
             @include breakpoint(tablet) {
+                position: absolute;
                 right: -1 * map-get($grid-offset, tablet);
                 padding-bottom: vw(32, tablet);
                 padding-inline: map-get($grid-offset, tablet);
-                margin-top: rem(-20);
+                margin-top: rem(122);
                 text-align: right;
 
                 &.text_aside__decorator--contact {
-                    margin-top: rem(-35);
+                    bottom: 0;
+                    margin-top: unset;
                 }
 
                 svg {
@@ -61,8 +63,6 @@
             @include breakpoint(phone) {
                 right: -1 * map-get($grid-offset, phone) - 1px;
                 padding-bottom: vw(21, phone);
-
-                // padding-inline: map-get($grid-offset, phone);
                 margin-top: rem(-40);
                 text-align: right;
 

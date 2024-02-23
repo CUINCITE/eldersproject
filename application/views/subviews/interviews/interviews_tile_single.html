@@ -2,23 +2,23 @@
     <a href="{{item.url}}" class="interviews__link"><span class="sr-only">Go to interview</span></a>
     <div class="interviews__main">
         <h3 class="interviews__name {% if item.label|length > 30 %} interviews__name--small {% endif %}">{{item.label|replace({',': '<br>'})|raw}}</h3>
-        <p class="interviews__description" style="font-size:1rem; margin-bottom: 15px">
+        <p class="interviews__description">
             {{ item.narrator_occupation | raw }}
         </p>
     </div>
 
-    <div class="interviews__locations phone-hide">
+    <div class="interviews__locations desktop-only">
         <span>{{ item.narrator_location }}</span>
     </div>
 
-    <h4 class="interviews__collection interviews__collection--grid phone-hide">{{item.interviewers.0.label}} <br> Collection</h4>
+    <h4 class="interviews__collection interviews__collection--grid desktop-only">{{item.interviewers.0.label}} <br> Collection</h4>
 
     <div class="interviews__copy">
         <p>{{item.lead}}</p>
-        <h3 class="interviews__copy-collection phone-hide">{{item.interviewer_name}} collection</h3>
+        <h3 class="interviews__copy-collection desktop-only">{{item.interviewer_name}} collection</h3>
     </div>
 
-    <div class="interviews__box desktop-hide tablet-hide">
+    <div class="interviews__box desktop-hide">
         <div class="interviews__locations">
             <span>{{ item.locations }}</span>
         </div>
