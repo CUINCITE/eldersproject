@@ -2,7 +2,7 @@
     $self: &;
 
 
-    --sticker-size: #{vw(111)};
+    --sticker-size: #{rem(111)};
     --sticker-fold-size: 0%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
@@ -27,7 +27,7 @@
     }
 
     @include breakpoint(desktop) {
-        padding: vw(30) vw(20);
+        padding: rem(30) rem(20);
     }
 
     @include breakpoint(tablet) {

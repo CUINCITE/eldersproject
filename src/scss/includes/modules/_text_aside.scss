@@ -34,7 +34,7 @@
 
             @include breakpoint(desktop) {
                 left: -1 * map-get($grid-offset, desktop);
-                top: rem(324); 
+                top: rem(324);
 
                 &.text_aside__decorator--contact {
                     top: vw(21);
@@ -61,6 +61,7 @@
             @include breakpoint(phone) {
                 right: -1 * map-get($grid-offset, phone) - 1px;
                 padding-bottom: vw(21, phone);
+
                 // padding-inline: map-get($grid-offset, phone);
                 margin-top: rem(-40);
                 text-align: right;
@@ -126,7 +127,6 @@
 
 
             &.text_aside__decorator--medium {
-
                 img {
                     @include breakpoint(desktop) {
                         width: vw(493);
@@ -140,7 +140,6 @@
 
 
             &.text_aside__decorator--center {
-
                 img {
                     @include breakpoint(desktop) {
                         right: unset;
@@ -185,8 +184,8 @@
             .polaroid {
 
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(368)};
-                    --polaroid-height: #{vw(458)};
+                    --polaroid-width: #{rem(368)};
+                    --polaroid-height: #{rem(458)};
 
                     position: absolute;
                     rotate: 7.5deg;
@@ -194,8 +193,8 @@
                     bottom: calc(100% + #{rem(42)});
 
                     &--horizontal {
-                        --polaroid-width: #{vw(481)};
-                        --polaroid-height: #{vw(366)};
+                        --polaroid-width: #{rem(481)};
+                        --polaroid-height: #{rem(366)};
 
                         rotate: 12deg;
                         bottom: calc(100% + #{rem(68)});
@@ -225,7 +224,6 @@
                     opacity: 1;
                 }
             }
-
         }
 
         .text {
@@ -252,7 +250,7 @@
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-end)
 
-                text-align: right;
+                    text-align: right;
                 max-width: rem(182);
                 padding: rem(16) 0 0 0;
             }
@@ -272,7 +270,6 @@
         }
 
         &--reversed {
-
             &.text_aside__decorator--boxes {
                 @include breakpoint(desktop) {
                     left: unset;
@@ -313,8 +310,7 @@
                 }
 
                 @include breakpoint(desktop) {
-                    @include flex(column, flex-start, flex-start)
-                }
+                    @include flex(column, flex-start, flex-start); }
             }
         }
     }

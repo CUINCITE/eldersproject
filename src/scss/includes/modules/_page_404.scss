@@ -10,9 +10,9 @@
 
         @include breakpoint(desktop) {
             position: absolute;
-            left: vw(18); 
-            top: vw(-68);
-            width: vw(295);
+            left: rem(18);
+            top: rem(-68);
+            width: rem(295);
             rotate: -4.85deg;
         }
 
@@ -23,7 +23,7 @@
                 width: vw(500, tablet);
                 top: vw(-68, tablet);
             }
-    
+
             @include breakpoint(phone) {
                 width: vw(220, phone);
                 margin-block: vw(-35, phone) vw(-35, phone);
@@ -35,11 +35,10 @@
     }
 
     &__error {
-
         // @include breakpoint(desktop) {
         //     padding-top: rem(28);
         // }
-      
+
         @include breakpoint(tablet) {
             padding-top: vw(20, tablet);
             height: vw(390, tablet);
@@ -58,7 +57,7 @@
             @include breakpoint(tablet) {
                 padding-top: rem(20);
             }
-        
+
             @include breakpoint(phone) {
                 padding-top: rem(3);
             }
