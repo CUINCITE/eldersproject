@@ -20,7 +20,7 @@
         @include breakpoint(tablet) {
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
-            
+
             gap: vw(6, tablet);
         }
 
@@ -36,6 +36,8 @@
     &--overflow {
         @include breakpoint(desktop) {
             overflow: hidden;
+            display: inline-flex;
+            padding-right: rem(10);
         }
     }
 
