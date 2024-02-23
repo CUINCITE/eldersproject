@@ -1,13 +1,15 @@
 .collection_hero {
-    display: grid;
-    position: relative;
 
-    @include breakpoint(desktop) {
-        height: var(--app-height);
-        grid-template-rows: 1fr auto;
-        overflow: hidden;
+    &__container {
+        display: grid;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            height: var(--app-height);
+            grid-template-rows: 1fr auto;
+            overflow: hidden;
+        }
     }
-
 
 
     &__wrapper {
@@ -222,6 +224,13 @@
         }
     }
 
+
+    &__sticker-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
     .text--collection_hero-top {
         text-transform: uppercase;
 
@@ -233,6 +242,7 @@
             padding-block: rem(20);
         }
     }
+
 
     .text--collection_hero-bottom {
         @include breakpoint(desktop) {

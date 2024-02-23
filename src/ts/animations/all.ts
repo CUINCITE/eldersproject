@@ -14,6 +14,7 @@ import { people } from './scroll/people';
 import { collections } from './scroll/collections';
 import { collectionsSimple } from './scroll/collectionsSimple';
 import { cover } from './scroll/cover';
+import { sticky } from './scroll/sticky';
 
 
 export const animations = { fadeUp, slideUp };
@@ -30,6 +31,7 @@ export const scrolls = {
     illustration,
     line,
     people,
+    sticky,
 };
 
 export const hovers = {};

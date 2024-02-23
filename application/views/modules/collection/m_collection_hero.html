@@ -1,49 +1,76 @@
 <section class="module module--collection_hero">
+
     <div class="collection_hero">
 
-        <div class="collection_hero__cover phone-hide tablet-hide js-illustration" data-scroll="collectionHero">
-            {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+        <div class="collection_hero__sticker-wrapper">
+            <div class="claim__sticker" data-scroll="sticky">
+                <a href="#interviews">
+                    {% include "components/c_sticker.html" with {'text':'Skip to interviews', modifiers: ['grey']}  %}
+                </a>
+            </div>
         </div>
 
-        <div class="collection_hero__wrapper">
+        <div class="collection_hero__container">
 
-            <div class="about_hero__logo desktop-hide">
-                {% include "./components/c_logo_box.html" %}
+            <div class="collection_hero__cover phone-hide tablet-hide js-illustration" data-scroll="collectionHero">
+                {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
             </div>
 
-            <div class="box collection_hero__cover_wrapper desktop-hide">
-                <div class="collection_hero__cover">
-                    {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+            <div class="collection_hero__wrapper">
+
+                <div class="about_hero__logo desktop-hide">
+                    {% include "./components/c_logo_box.html" %}
                 </div>
-            </div>
 
-            <div class="box collection_hero__author_wrapper" data-scroll="box">
-                <div class="box__bg"></div>
-                <div class="grid">
-                    <div class="col-span-12">
-                        <div class="collection_hero__author">
-                            <div class="collection_author collection_author--huge">
-                                <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
+                <div class="box collection_hero__cover_wrapper desktop-hide">
+                    <div class="collection_hero__cover">
+                        {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+                    </div>
+                </div>
 
-                                <h4 class="collection_author__collection">Collection</h4>
+                <div class="box collection_hero__author_wrapper" data-scroll="box">
+                    <div class="box__bg"></div>
+                    <div class="grid">
+                        <div class="col-span-12">
+                            <div class="collection_hero__author">
+                                <div class="collection_author collection_author--huge">
+                                    <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
+
+                                    <h4 class="collection_author__collection">Collection</h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="collection_hero__area desktop-hide">
-                            {{item.collection_title}}
+                            <div class="collection_hero__area desktop-hide">
+                                {{item.collection_title}}
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="box desktop-only">
+                    <div class="grid">
+                        <div class="col-span-12">
+                            <div class="collection_hero__copy no-padding">
+                                <div class="collection_hero__intro">
+                                    <div class="text text--collection_hero-top">
+                                        <p>{{item.collection_title|nl2br}}</p>
+                                    </div>
+                                    <div class="text text--collection_hero-bottom">
+                                        <p>{{item.lead|nl2br}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="box desktop-only">
+            <div class="box desktop-hide">
                 <div class="grid">
                     <div class="col-span-12">
                         <div class="collection_hero__copy no-padding">
                             <div class="collection_hero__intro">
-                                <div class="text text--collection_hero-top">
-                                    <p>{{item.collection_title|nl2br}}</p>
-                                </div>
                                 <div class="text text--collection_hero-bottom">
                                     <p>{{item.lead|nl2br}}</p>
                                 </div>
@@ -53,20 +80,6 @@
                 </div>
             </div>
 
-        </div>
-        
-        <div class="box desktop-hide">
-            <div class="grid">
-                <div class="col-span-12">
-                    <div class="collection_hero__copy no-padding">
-                        <div class="collection_hero__intro">
-                            <div class="text text--collection_hero-bottom">
-                                <p>{{item.lead|nl2br}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
