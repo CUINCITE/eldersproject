@@ -9,7 +9,7 @@
         @include letter-spacing(-3.09, 103);
 
         margin-block: trim-font(104/122);
-        max-width: 65%; 
+        max-width: 65%;
     }
 
     @include breakpoint(tablet) {
@@ -93,6 +93,11 @@
                 letter-spacing: -0.045em;
             }
         }
+
+
+        @include breakpoint(hd) {
+            max-width: 75%;
+        }
     }
 
 
@@ -106,7 +111,7 @@
     &__author {
         @include font-size(26, 27.3);
         @include font-settings(400, 100);
-        @include font-family(normal)
+        @include font-family(normal);
         @include flex(row, flex-start, center);
         margin-top: rem(9);
         text-transform: none;
@@ -157,20 +162,17 @@
         }
 
         .quote_panel__quote & {
-            right: rem(2);
-            bottom: auto;
-            top: rem(-100);
-            left: auto;
+            inset: rem(-100) rem(2) auto auto;
         }
     }
 
 
-    &[data-scroll] { 
-        opacity: 0; 
+    &[data-scroll] {
+        opacity: 0;
     }
 
-    .line { 
-        overflow: hidden; 
+    .line {
+        overflow: hidden;
         margin-top: rem(-5);
         padding-top: rem(5);
     }
