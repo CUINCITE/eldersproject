@@ -71,7 +71,7 @@
         @include breakpoint(desktop) {
             @include font-size(40, 37.4);
             @include letter-spacing(-1.98, 66);
-            
+
             max-width: rem(1030);
         }
     }
@@ -173,8 +173,19 @@
             }
         }
 
-        .quote_panel__quote & {
-            inset: rem(-100) rem(2) auto auto;
+        .collection_hero__sticker-wrapper & {
+            position: absolute;
+            inset: auto rem(25) rem(-15) auto;
+            width: fit-content;
+            transition: opacity 0.3s $easing;
+
+            &.is-hidden {
+                opacity: 0;
+            }
+        }
+
+        &:has(a) .sticker {
+            @include hover { --sticker-fold-size: 19%; }
         }
     }
 

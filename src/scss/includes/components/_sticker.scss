@@ -133,7 +133,7 @@
             }
         }
 
-        .quote_panel__quote & {
+        .collection_hero__sticker-wrapper & {
             @include breakpoint(desktop) {
                 padding-top: rem(2);
             }
