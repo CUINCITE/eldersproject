@@ -6,7 +6,6 @@ import { debounce } from '../Utils';
 
 gsap.registerPlugin(SplitText);
 
-
 interface IButtonSettings {
     sibling?: boolean; // If the button/link is a sibling of animated items (eg link it's empty itself)
 }
