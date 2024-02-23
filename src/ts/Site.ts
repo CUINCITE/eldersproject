@@ -136,6 +136,8 @@ class Site {
 
         this.currentPage?.resize(width, height, breakpoint, changed);
         (!browser.touch || changed) && Scroll?.resize();
+
+        this.loader?.resize();
     };
 
 

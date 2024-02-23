@@ -1,7 +1,7 @@
 .player {
     &__bar {
         position: absolute;
-        top: 100%;
+        top: 0;
         transform-origin: center bottom;
 
         // transition: transform ($time * 2) $easing;
@@ -15,7 +15,6 @@
             position: relative;
             display: grid;
             grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
-            transform: translateY(100%);
             top: auto;
             flex-grow: 1;
             will-change: transform;
