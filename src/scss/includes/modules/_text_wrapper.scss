@@ -16,7 +16,7 @@
                 @include flex(column, flex-start, flex-start);
 
                 .polaroid {
-                    translate: vw(-28) 0;
+                    translate: rem(-28) 0;
                 }
             }
         }
@@ -178,10 +178,10 @@
             position: relative;
 
             @include breakpoint(desktop) {
-                --polaroid-width: #{vw(351)};
-                --polaroid-height: #{vw(428)};
+                --polaroid-width: #{rem(351)};
+                --polaroid-height: #{rem(428)};
 
-                margin-block: vw(28);
+                margin-block: rem(28);
                 left: 4%;
                 rotate: 7.216deg;
             }
@@ -207,8 +207,8 @@
 
             &--horizontal {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(320)};
-                    --polaroid-height: #{vw(250)};
+                    --polaroid-width: #{rem(320)};
+                    --polaroid-height: #{rem(250)};
                     rotate: 11deg;
                 }
 
@@ -225,8 +225,8 @@
 
             &--square {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(386)};
-                    --polaroid-height: #{vw(386)};
+                    --polaroid-width: #{rem(386)};
+                    --polaroid-height: #{rem(386)};
                 }
 
                 @include breakpoint(tablet) {
@@ -248,7 +248,7 @@
 
                 &--horizontal {
                     @include breakpoint(desktop) {
-                        margin-bottom: vw(44);
+                        margin-bottom: rem(44);
                     }
 
                     @include breakpoint(phone) {
@@ -279,14 +279,6 @@
                 translate: -50% 0;
                 height: vw(260, phone);
             }
-        }
-
-        &--horizontal {
-
-        }
-
-        &--square {
-
         }
     }
 
@@ -384,6 +376,7 @@
         @include font-size(22, 19);
         @include font-family(reclined, 300);
         @include letter-spacing(-0.55, 22);
+        
         position: absolute;
         margin-left: rem(6);
         bottom: rem(17);

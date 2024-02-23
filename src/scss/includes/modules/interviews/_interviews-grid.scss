@@ -176,14 +176,13 @@
         }
 
         @include breakpoint(tablet) {
-            display: grid;
-            align-content: start;
-            align-items: start;
+            @include flex(column, flex-start, stretch);
 
-            // grid-template-columns: repeat(8, 1fr);
-            grid-template-columns: 2.15fr 1fr 1fr;
-            column-gap: map-get($grid-gutter, tablet);
-            padding-block: rem(20);
+            padding-top: rem(20);
+
+            .interviews__copy {
+                max-width: 75%;
+            }
         }
 
         @include breakpoint(phone) {

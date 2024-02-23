@@ -10,15 +10,17 @@
                 </i> <span class="button__text js-button-text">{{label|brackets2tag('i')|raw}}</span>
             </a>
         </div>
-        <div class="col-span-3 col-start-10">
+        <div class="home_text__copy col-span-3 col-start-10">
             <div class="text">
                 {{text|raw}}
             </div>
         </div>
     </div>
     {% if params.decor %}
-        <div class="boxes boxes--reversed">
-            [[svg::boxes]]
+        <div class="home_text__decorator">
+            <div class="boxes" data-animation="slideUp" data-delay="0.5" data-action="pause" >
+                [[svg::boxes]]
+            </div>
         </div>
     {% endif %}
 </section>

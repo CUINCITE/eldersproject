@@ -200,6 +200,16 @@
         height: rem(13);
     }
 
+    @include breakpoint(tablet) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(7);
+        height: rem(13);
+    }
+
     .polaroid_gallery & {
         @include breakpoint(desktop) {
             width: rem(14);

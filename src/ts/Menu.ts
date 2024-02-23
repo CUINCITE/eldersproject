@@ -158,7 +158,7 @@ export class Menu {
                 stagger: 0.15,
                 ease: 'power2.out',
             }, 'init')
-            .fromTo(this.links, { xPercent: 100 }, {
+            .fromTo(this.links, { xPercent: (!breakpoint.desktop ? -100 : 100) }, {
                 xPercent: 0,
                 duration: 0.6,
                 stagger: 0.1,
@@ -169,7 +169,7 @@ export class Menu {
                 duration: 0.4,
                 ease: 'power2.out',
             }, '-=.6')
-            .fromTo(this.searchLabel, { xPercent: 100 }, {
+            .fromTo(this.searchLabel, { xPercent: (!breakpoint.desktop ? -100 : 100) }, {
                 xPercent: 0,
                 duration: 0.6,
                 clearProps: 'all',

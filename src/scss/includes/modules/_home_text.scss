@@ -1,0 +1,37 @@
+.home_text {
+    &__decorator {
+        width: fit-content;
+        height: fit-content;
+        
+        @include breakpoint(desktop) {
+            position: absolute;
+            margin-top: rem(20);
+            top: 0;
+            left: 0;
+        }
+
+        @include breakpoint(tablet) {
+            margin-top: rem(-150);
+            margin-bottom: rem(20);
+
+        }
+
+        @include breakpoint(phone) {
+            position: relative;
+            margin-top: rem(-25);
+            margin-bottom: rem(20);
+            align-self: flex-end;
+
+            .boxes {
+                width: fit-content;
+                scale: -1 1;
+            }
+        }
+    }
+
+    &__copy {
+        @include breakpoint(tablet) {
+            grid-column: 3 / span 6 !important;
+        }
+    }
+}

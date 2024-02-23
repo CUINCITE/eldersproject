@@ -23,8 +23,8 @@ $background-colors: (
 );
 
 .polaroid {
-    --polaroid-width: #{vw(386)};
-    --polaroid-height: #{vw(471)};
+    --polaroid-width: #{rem(386)};
+    --polaroid-height: #{rem(471)};
 
 
     width: var(--polaroid-width);
@@ -32,7 +32,7 @@ $background-colors: (
     background-color: var(--color-grey200);
 
     @include breakpoint(desktop) {
-        padding: vw(25) vw(25) vw(37);
+        padding: rem(25) rem(25) rem(37);
     }
 
     @include breakpoint(tablet) {
@@ -50,8 +50,8 @@ $background-colors: (
 
     &--horizontal {
         @include breakpoint(desktop) {
-            --polaroid-width: #{vw(481)};
-            --polaroid-height: #{vw(366)};
+            --polaroid-width: #{rem(481)};
+            --polaroid-height: #{rem(366)};
         }
 
         @include breakpoint(phone) {
@@ -77,7 +77,7 @@ $background-colors: (
 
     &--small_frame {
         @include breakpoint(desktop) {
-            padding: vw(10);
+            padding: rem(10);
         }
 
         @include breakpoint(tablet) {
@@ -92,7 +92,7 @@ $background-colors: (
 
     &--wrapped {
         @include breakpoint(desktop) {
-            padding: vw(25) vw(25) vw(36);
+            padding: rem(25) rem(25) rem(36);
         }
 
         @include breakpoint(tablet) {
@@ -107,7 +107,7 @@ $background-colors: (
 
     &--wrapped.polaroid--horizontal {
         @include breakpoint(desktop) {
-            padding: vw(17) vw(17) vw(27);
+            padding: rem(17) rem(17) rem(27);
         }
 
         @include breakpoint(tablet) {

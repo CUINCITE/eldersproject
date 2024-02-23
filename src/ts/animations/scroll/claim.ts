@@ -18,7 +18,6 @@ export const claim = el => {
         stagger: 0.03,
         onStart: () => {
             gsap.set(el, { opacity: 1 });
-            console.log('start');
         },
         onComplete: () => {
             splittedText.revert();

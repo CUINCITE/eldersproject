@@ -31,6 +31,11 @@
       "list": true
     },
     {
+      "label": "Original Filename",
+      "field": "filename_original",
+      "list": true
+    },
+    {
       "label": "Model Id",
       "field": "model_id",
       "list": true

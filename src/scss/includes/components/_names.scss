@@ -107,11 +107,12 @@
             padding-right: rem(20);
         }
 
-        &--simple {
+        .collections_images__content--simple & {
             @include breakpoint(desktop) {
-                @include font-size(59, 1);
-                padding-top: rem(14);
+                padding-right: rem(30);
+                padding-top: rem(3);
                 padding-bottom: 0;
+                margin-bottom: -1px;
             }
         }
     }

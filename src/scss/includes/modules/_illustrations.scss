@@ -3,28 +3,34 @@
         height: vw(656);
     }
 
+    @include breakpoint(tablet) {
+        height: vw(456, tablet);
+    }
 
+    @include breakpoint(phone) {
+        height: vw(256, phone);
+    }
 
     .illustration {
         transform: unset !important;
-    
+
         &[data-scroll] { opacity: 0; }
     }
-    
 
-    
+
+
     &__cards {
         position: absolute;
-    
+
         @include breakpoint(desktop) {
             width: vw(927);
             max-width: vh(927);
             aspect-ratio: 1/1;
             transform: rotate(-7.93deg);
             top: 5.6%;
-            right: rem(330);
+            left: vw(-89);
         }
-    
+
         @include breakpoint(tablet) {
             width: vw(620, tablet);
             aspect-ratio: 1/1;
@@ -32,7 +38,7 @@
             top: 0;
             left: vw(-8, tablet);
         }
-    
+
         @include breakpoint(phone) {
             width: vw(289, phone);
             height: vw(289, phone);
