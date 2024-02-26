@@ -15,7 +15,7 @@ class MementosImporter extends model_app_api_import
 
     public function import()
     {
-
+        set_time_limit(60);
         $directory = $_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos';
         $files = scandir($directory);
 
@@ -160,6 +160,6 @@ class MementosImporter extends model_app_api_import
 
         }
 
-        return ['message' => true, 'itemsImported' => $items_count, 'skippedItems' => $skippedItems, 'notFound' => $itemsNotFound, 'filesNotFound' => $filesNotFound];
+        return ['message' => true, 'itemsImported' => $items_count, 'itemsSkipped' => $skippedItems, 'itemsNotFound' => $itemsNotFound, 'filesNotFound' => $filesNotFound];
     }
 }
