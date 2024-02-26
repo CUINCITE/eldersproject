@@ -141,7 +141,7 @@
             @include breakpoint(phone) {
                 @include flex(row, flex-start, center)
 
-                    margin-bottom: rem(-5);
+                margin-bottom: rem(-5);
             }
         }
     }
