@@ -125,7 +125,8 @@
 
 
             @include breakpoint(phone) {
-                padding-block: rem(20);
+                padding-top: rem(20);
+                padding-bottom: rem(64);
             }
         }
 
@@ -248,6 +249,7 @@
         @include breakpoint(desktop) {
             @include font-size(23, 28.06);
             @include letter-spacing (-0.1, 23);
+
             padding-right: 0;
         }
     }

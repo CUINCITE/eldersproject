@@ -3,7 +3,7 @@
 {% if image.original.width > image.original.height %} polaroid--horizontal
 {% elseif image.original.width == image.original.height %} polaroid--square
 {% endif %}
-{% endif %}">
+{% endif %} js-polaroid">
     <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">
         {% include "./subviews/subview_picture.html" with image %}
     </div>

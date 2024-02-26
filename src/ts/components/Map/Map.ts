@@ -414,9 +414,8 @@ export class Map extends Component {
 
         // Static images url here
         // eslint-disable-next-line camelcase
-        const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
-        console.log(url);
-
+        // const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+        // console.log(url);
     };
 
 
@@ -424,8 +423,9 @@ export class Map extends Component {
     private getTabContent = (): void => {
         this.locationsElements.forEach(l => {
             const coords = l.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+            const style = (this.settings.style as string).match(/mapbox:\/\/styles\/huncwoty\/(.*)/)[1];
 
-            const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+            const url = `https://api.mapbox.com/styles/v1/huncwoty/${style}/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
             const img = `<img src='${url}' class='map-image js-map-image' />
                         <div class="map__pin">
                             <div class="map__tooltip map__tooltip--marker">${l.dataset.title}</div>
