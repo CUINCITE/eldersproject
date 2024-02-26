@@ -31,18 +31,6 @@
                     right: unset;
                 }
             }
-
-            &--collections {
-                @include breakpoint(desktop) {
-                    max-width: rem(244);
-                }
-
-                .text {
-                    @include breakpoint(desktop) {
-                        @include font-size(12, 15.6);
-                    }
-                }
-            }
         }
     }
 
@@ -347,7 +335,7 @@
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end)
 
-                text-align: right;
+            text-align: right;
             max-width: rem(182);
             padding-top: rem(16);
         }
@@ -355,14 +343,24 @@
         @include breakpoint(tablet) {
             max-width: rem(260);
             padding-top: rem(16);
-
-            // margin-top: rem(16);
         }
 
         @include breakpoint(phone) {
             max-width: rem(244);
             padding-top: rem(16);
             margin-top: rem(-6);
+        }
+
+        &--collections {
+            @include breakpoint(desktop) {
+                max-width: rem(244);
+            }
+
+            .text {
+                @include breakpoint(desktop) {
+                    @include font-size(12, 15.6);
+                }
+            }
         }
 
         p {
