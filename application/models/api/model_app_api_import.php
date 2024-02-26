@@ -25,7 +25,7 @@ class model_app_api_import
             "metadata" => ['interviews', 'sessions', 'locations'], // safe to use
             "media" => ['media'], // safe
             "sessions_files_data" => ["sessions_files_data"], //safe
-            "mementos" => ["mementos"], // safe
+            "mementos" => ["mementos"], // requires resising images in serdelia after import
             "indexes" => ['indexes'], // safe
             "topics" => ['topics'], // NOT SAFE!! - overwrites manual image-to-tag assignment
             default => explode(',', $action),
