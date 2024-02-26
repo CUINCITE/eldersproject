@@ -59,7 +59,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
             @include letter-spacing(-3, 100);
 
             @media (max-height: 719px) {
-                @include font-size(94, 78);
+                @include font-size(86, 74);
 
                 letter-spacing: -0.03em;
             }
