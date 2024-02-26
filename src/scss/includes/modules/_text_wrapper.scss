@@ -178,8 +178,10 @@
             position: relative;
 
             @include breakpoint(desktop) {
-                --polaroid-width: #{rem(351)};
-                --polaroid-height: #{rem(428)};
+                --polaroid-width: #{vw(220)};
+                --polaroid-height: #{vw(274)};
+                // --polaroid-width: #{rem(351)};
+                // --polaroid-height: #{rem(428)};
 
                 margin-block: rem(28);
                 left: 4%;
@@ -203,6 +205,13 @@
                 left: 50%;
                 translate: -50% 0;
                 margin-block: vw(28, phone);
+            }
+
+            &--big {
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{rem(351)};
+                    --polaroid-height: #{rem(428)};
+                }
             }
 
             &--horizontal {
@@ -239,6 +248,8 @@
                     --polaroid-height: #{vw(165, phone)};
                 }
             }
+
+
         }
 
 
