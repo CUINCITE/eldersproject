@@ -64,26 +64,30 @@
         @include font-family(normal);
         @include font-settings(400, 100);
 
+        text-transform: uppercase;
+        position: absolute;
+
+
         @include breakpoint(desktop) {
             @include font-size(20, 32);
             @include letter-spacing(-0.6, 20);
+
+            inset: auto auto rem(4) rem(4);
         }
 
         @include breakpoint(tablet) {
             @include font-size(20, 32);
             @include letter-spacing(-0.6, 20);
+
+            inset: auto auto rem(4) rem(4);
         }
 
         @include breakpoint(phone) {
             @include font-size(20, 32);
             @include letter-spacing(-0.6, 20);
 
-            margin-top: rem(20);
+            inset: auto auto rem(-12) rem(4);
         }
-
-        text-transform: uppercase;
-        position: absolute;
-        inset: auto auto rem(4) rem(4);
     }
 
 
