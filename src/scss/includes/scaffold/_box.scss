@@ -2,14 +2,17 @@
     background-color: var(--color-box);
     margin-top: 1px;
 
+
+    &--nomargin { margin-top: 0; }
+
     &[data-scroll="box"],
     [data-scroll="box"] & {
         background: none;
         position: relative;
 
 
-        &.is-animated:not(.footer__bottom) { 
-            background-color: var(--color-box); 
+        &.is-animated:not(.footer__bottom) {
+            background-color: var(--color-box);
         }
 
         &:not(.is-animated) {
