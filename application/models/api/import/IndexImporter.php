@@ -10,6 +10,7 @@ class IndexImporter extends model_app_api_import
     public function import()
     {
         set_time_limit(60);
+        ini_set('memory_limit', '512M');
 
         $this->parent->queryOut('TRUNCATE TABLE interview_indexes');
         $interviews = $this->parent->getJsonModel('interviews');

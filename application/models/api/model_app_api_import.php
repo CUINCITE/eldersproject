@@ -39,8 +39,9 @@ class model_app_api_import
             'media' => 'FilesImporter',
             'mementos' => 'MementosImporter',
             'locations' => 'LocationsImporter',
-            "sessions_files_data" => "SessionsUpdater",
-            'update_interviews' => "InterviewsUpdater"
+
+            "sessions_files_data" => "SessionsUpdater", // UPDATER
+            'update_interviews' => "InterviewsUpdater" // UPDATER
         ];
 
         $resultArray = [];
