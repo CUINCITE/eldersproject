@@ -427,7 +427,7 @@ export class Map extends Component {
 
             const url = `https://api.mapbox.com/styles/v1/huncwoty/${style}/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
             const img = `<img src='${url}' class='map-image js-map-image' />
-                        <div class="map__pin">
+                        <div class="map__marker">
                             <div class="map__tooltip map__tooltip--marker">${l.dataset.title}</div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">
                                 <circle cx="31.6143" cy="31" r="31" fill="#548068"/>

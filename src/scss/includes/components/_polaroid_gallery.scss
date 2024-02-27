@@ -47,26 +47,26 @@
         &.is-left-outer {
             transform: translateX(-200%);
             opacity: 0;
-            z-index: 1;
+            z-index: 4;
             pointer-events: none;
         }
 
         &.is-first-visible {
             transform: translateX(-100%);
             opacity: 1;
-            z-index: 2;
+            z-index: 3;
         }
 
         &.is-second-visible {
             opacity: 1;
             transform: rotate(20deg);
-            z-index: 3;
+            z-index: 2;
         }
 
         &.is-right-outer {
             transform: translateX(100%);
             opacity: 0;
-            z-index: 4;
+            z-index: 1;
             pointer-events: none;
         }
     }

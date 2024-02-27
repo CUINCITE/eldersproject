@@ -168,22 +168,7 @@
         }
     }
 
-
-
-    &__pin {
-        @include breakpoint(phone) {
-            @include flex(column, flex-start, center);
-
-            position: absolute;
-            top: 43%;
-            left: 50%;
-            translate: -50% -50%;
-            color: $background-light-offwhite;
-            width: max-content;
-        }
-    }
-
-
+    
 
     &__location {
         border-top: 1px solid var(--color-bg);
@@ -437,8 +422,26 @@
 
 
     &__marker {
-        width: rem(40);
-        height: rem(40);
+        @include breakpoint(desktop) {
+            width: rem(40);
+            height: rem(40);
+        }
+
+        @include breakpoint(tablet) {
+            width: rem(40);
+            height: rem(40);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, center);
+
+            position: absolute;
+            top: 43%;
+            left: 50%;
+            translate: -50% -50%;
+            color: $background-light-offwhite;
+            width: max-content;
+        }
 
 
         &--single {
