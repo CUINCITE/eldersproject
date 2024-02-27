@@ -52,9 +52,6 @@
       "page": "sessions,%id%"
     },
     {
-      "field":"narrator_occupation"
-    },
-    {
       "type": "plugin",
       "plugin": "preview",
       "params": {
@@ -154,6 +151,9 @@
           "crop": true
         }
       ]
+    },
+    {
+      "field":"narrator_occupation"
     },
     {
       "field": "uid",

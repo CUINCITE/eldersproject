@@ -20,6 +20,7 @@ class InterviewsUpdater extends model_app_api_import
             if (empty($interview['uid'])) $actions[] = 'uid';
             if (empty($interview['interviewer_name'])) $actions[] = 'interviewer_name';
             if (empty($interview['interviewer_name_sort'])) $actions[] = 'interviewer_name_sort';
+            if (empty($interview['narrator_occupation'])) $actions[] = 'narrator_occupation';
 
             if (!$actions) continue;
 
@@ -34,7 +35,7 @@ class InterviewsUpdater extends model_app_api_import
             $r = $this->parent->putJsonModel('interviews_full', $result, ['id' => $interview['id']]);
             if ($r) {
                 $count++;
-            } else return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
+            } else return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError(), 'data' => $result, 'id' => $interview['id']];
         }
 
 
@@ -50,6 +51,15 @@ class InterviewsUpdater extends model_app_api_import
         }
 
         $item['label_sort'] = implode(', ', $narrators);
+        return $item;
+    }
+
+    private function narrator_occupation($item)
+    {
+        foreach ($item['narrators'] as $k => $v) {
+            $item['narrator_occupation'] = $v['occupation'];
+            break;
+        }
         return $item;
     }
 

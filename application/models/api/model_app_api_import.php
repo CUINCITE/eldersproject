@@ -41,7 +41,10 @@ class model_app_api_import
             'locations' => 'LocationsImporter',
 
             "sessions_files_data" => "SessionsUpdater", // UPDATER
-            'update_interviews' => "InterviewsUpdater" // UPDATER
+            'update_interviews' => "InterviewsUpdater", // UPDATER
+            'count_tags' => "TagCounter",
+
+            'debug' => 'Debugger'
         ];
 
         $resultArray = [];
