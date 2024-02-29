@@ -178,7 +178,7 @@
             margin-block: trim-font(0.84);
         }
     }
-    
+
 
     &--left {
         @include breakpoint(tablet) {
@@ -309,7 +309,7 @@
                 width: rem(34);
                 height: rem(34);
                 border-radius: 50%;
-                background-color: $color-pale-green;
+                background-color: var(--circle-color);
 
                 content: counter(collection-counter, decimal-leading-zero) ".";
                 font-weight: 500;
@@ -396,7 +396,6 @@
 
             inset: auto rem(30) rem(12) auto;
         }
-
     }
 
 

@@ -191,6 +191,10 @@
         margin-right: rem(8);
         width: rem(31);
     }
+
+
+    circle:first-of-type { fill: var(--pin-outer-color); }
+    path { fill: var(--pin-color); }
 }
 
 
