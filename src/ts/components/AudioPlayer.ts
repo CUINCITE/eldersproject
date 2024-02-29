@@ -416,7 +416,7 @@ export class AudioPlayer extends Video {
             onComplete: () => {
                 gsap.set(this.ui.playerBar, { y: 0, yPercent: 100 });
                 // eslint-disable-next-line max-len
-                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
+                !fast && this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
                 this.isExpanded = false;
             },
         });

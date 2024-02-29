@@ -41,9 +41,9 @@
 
 <div class="player__thumbnail js-player-thumbnail">
     <div class="player__marquee js-player-marquee">
-        <span>Shuffle</span>
-        <span>Shuffle</span>
-        <span>Shuffle</span>
+        {% for i in range(0, 6) %}
+            <span>Shuffle</span>
+        {% endfor %}
     </div>
     <div class="player__cassette" data-sound-click>
         <div class="player__cassette-bg">
