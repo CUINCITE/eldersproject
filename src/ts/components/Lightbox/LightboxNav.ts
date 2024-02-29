@@ -1,6 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
-import { easing } from '../../Site';
+import { breakpoint, easing } from '../../Site';
 import { Component } from '../../components/Component';
+import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from '../Swipe';
 
 
 export class LightboxNav extends Component {
@@ -10,11 +11,12 @@ export class LightboxNav extends Component {
     private activeTab: HTMLElement;
     private lightboxEl: HTMLElement;
     private isAnimating: boolean;
+    private swipeComp: Swipe;
 
-    constructor(protected view: HTMLElement) {
+    constructor(protected view: HTMLElement, lightboxEl: HTMLElement) {
         super(view);
 
-        this.lightboxEl = document.getElementById('lightbox');
+        this.lightboxEl = lightboxEl;
         this.navButtons = this.view.querySelectorAll('button');
         this.navTabs = document.querySelectorAll('.js-lightbox-tab');
 
@@ -30,6 +32,24 @@ export class LightboxNav extends Component {
 
     private bind = (): void => {
         [...this.navButtons].forEach(btn => btn.addEventListener('click', this.onBtnClick));
+
+        if (!breakpoint.desktop) {
+            this.swipeComp = new Swipe(this.view, { horizontal: false, vertical: true });
+
+            this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
+
+                switch (e.direction) {
+                    case SwipeDirections.UP:
+                        this.lightboxEl.classList.add('is-expanded');
+                        break;
+                    case SwipeDirections.DOWN:
+                        this.lightboxEl.classList.remove('is-expanded');
+                        break;
+                    default:
+                        console.warn('no direction');
+                }
+            });
+        }
     };
 
 
@@ -66,11 +86,12 @@ export class LightboxNav extends Component {
                 this.trigger('navUpdate', null);
                 return;
             }
-            gsap.fromTo(tab, { yPercent: 0 }, {
-                yPercent: -100,
+            gsap.fromTo(tab, { yPercent: 100 }, {
+                yPercent: 0,
                 duration: 0.6,
                 ease: easing,
                 onStart: () => {
+                    gsap.set(tab, { y: 0, yPercent: 100 });
                     this.isAnimating = true;
                     tab.classList.add('is-visible');
                 },
@@ -78,6 +99,7 @@ export class LightboxNav extends Component {
                     this.isAnimating = false;
                     this.activeTab = tab;
                     this.trigger('navUpdate', this.activeTab);
+                    gsap.set(tab, { y: 0, yPercent: 0 });
                 },
             });
         });
@@ -94,8 +116,8 @@ export class LightboxNav extends Component {
             this.lightboxEl.classList.remove('is-default');
             resolve();
         } else {
-            gsap.fromTo(tab, { yPercent: -100 }, {
-                yPercent: 0,
+            gsap.fromTo(tab, { yPercent: 0 }, {
+                yPercent: 100,
                 duration: 0.3,
                 ease: easing,
                 onStart: () => {
@@ -104,6 +126,7 @@ export class LightboxNav extends Component {
                 onComplete: () => {
                     this.isAnimating = false;
                     tab.classList.remove('is-visible');
+                    gsap.set(tab, { y: 0, yPercent: 100 });
                     resolve();
                 },
             });

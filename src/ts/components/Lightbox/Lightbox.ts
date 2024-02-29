@@ -148,7 +148,7 @@ export class Lightbox {
 
     private buildComponents(): void {
         this.transcriptComp = new LightboxTranscript(this.view.querySelector('.js-lightbox-transcript'));
-        this.navComp = new LightboxNav(this.view.querySelector('.js-lightbox-nav'));
+        this.navComp = new LightboxNav(this.view.querySelector('.js-lightbox-nav'), this.view);
         this.sliderComp = this.view.querySelector('.js-lightbox-slider') && new LightboxSlider(this.view.querySelector('.js-lightbox-slider'));
     }
 
@@ -251,9 +251,18 @@ export class Lightbox {
                     this.animating = false;
                     Lightbox.isOpen = true;
                     this.bind();
+                    this.setHeaderHeight();
                 },
             });
         });
+    }
+
+
+
+    private setHeaderHeight(): void {
+        // used for animations later, transition on flex-basis doesn't work when set to auto
+        const header = this.view.querySelector('.lightbox__header') as HTMLElement;
+        header.style.setProperty('--flex-basis', `${header.clientHeight}px`);
     }
 
 

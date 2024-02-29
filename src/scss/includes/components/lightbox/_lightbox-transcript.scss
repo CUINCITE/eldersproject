@@ -24,6 +24,13 @@
         overflow-y: auto;
         padding-top: rem(54);
         padding-bottom: rem(25);
+
+
+        @include breakpoint(not-desktop) {
+            padding-top: 50px;
+            padding-right: var(--grid-margin);
+            padding-left: var(--grid-margin);
+        }
     }
 
 
@@ -36,8 +43,13 @@
         padding-bottom: rem(16);
 
 
+        @include breakpoint(not-desktop) {
+            padding-bottom: 6px;
+        }
+
+
         &:first-of-type {
-            padding-top: rem(7);
+            @include breakpoint(desktop) { padding-top: rem(7); }
         }
 
 
@@ -55,8 +67,16 @@
         @include letter-spacing(0.04, 18);
 
         font-feature-settings: "ss02" on;
-
         padding: 0 rem(45) 0 rem(25);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(14, 20.4);
+
+            padding: 0;
+            padding-left: 22px;
+            letter-spacing: normal;
+        }
 
 
         strong {
@@ -84,6 +104,13 @@
         text-align: right;
         padding-right: rem(6);
         padding-top: rem(1);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(14, 14);
+
+            letter-spacing: -0.02em;
+        }
 
 
         .transcript__part.is-current & {

@@ -15,10 +15,19 @@
             position: relative;
             top: 0;
             display: grid;
-            grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
-            top: auto;
             flex-grow: 1;
             will-change: transform;
+
+
+            @include breakpoint(desktop) {
+                grid-template-rows: var(--top-panel-height) var(--bottom-panel-height);
+                top: auto;
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            grid-template-rows: 30px var(--bar-height);
         }
     }
 
@@ -34,6 +43,14 @@
         position: relative;
         z-index: 1;
         text-align: center;
+
+
+        @include breakpoint(phone) {
+            @include flex(row, center, stretch);
+
+            overflow: hidden;
+        }
+
 
         > * {
             height: inherit;
@@ -128,6 +145,19 @@
         text-align: center;
         margin-top: rem(5);
 
+
+        @include breakpoint(phone) {
+            @include font-size(25, 26.5);
+            @include letter-spacing(-0.5, 25);
+
+            justify-content: center;
+            position: absolute;
+            inset: 0 0 0 auto;
+            margin-top: 0;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+        }
+
         em {
             font-style: normal;
         }
@@ -138,7 +168,10 @@
     &__more {
         @extend %player-small-button;
 
-        padding-bottom: rem(10);
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(10);
+        }
     }
 
 
@@ -204,7 +237,11 @@
     &__minimize {
         @extend %player-small-button;
 
-        padding-top: rem(9);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(9);
+        }
+
 
         body.has-lightbox & {
             opacity: 0 !important;
@@ -216,6 +253,7 @@
 
     &__header {
         position: relative;
+        z-index: 2;
 
         &::after {
             content: "";
@@ -240,9 +278,11 @@
         pointer-events: none;
         text-align: center;
         text-transform: uppercase;
-
-        padding-left: 9.5%; // visually centered, like .player__buttons
         padding-top: rem(4);
+
+        @include breakpoint(desktop) {
+            padding-left: 9.5%; // visually centered, like .player__buttons
+        }
     }
 
 
@@ -254,6 +294,12 @@
             @include flex(row, center, center);
 
             aspect-ratio: 1;
+
+
+            @include breakpoint(phone) {
+                width: vw(58, phone);
+                aspect-ratio: unset;
+            }
 
 
             @include hover {
@@ -345,6 +391,11 @@
     text-transform: uppercase;
     opacity: 0;
     transition: opacity .25s $ease-custom;
+
+
+    @media (hover: none) {
+        opacity: 1;
+    }
 
 
     @include hover {

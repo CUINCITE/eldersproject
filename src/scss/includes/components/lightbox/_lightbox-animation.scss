@@ -22,7 +22,6 @@
     }
 
 
-
     &__overlay {
         position: absolute;
         inset: 0;
@@ -66,7 +65,9 @@
 
 
     &__illu {
-        @include default-transition;
+        transition: transform var(--animation-time) var(--easing), height .4s $ease-custom, flex-basis .4s $ease-custom;
+        transform-origin: left top;
+        transform: translateY(var(--distance));
 
         --darken-stagger: .47s;
 
@@ -166,7 +167,9 @@
 
 
     &__header {
-        @include default-transition(right, bottom);
+        transition: transform var(--animation-time) var(--easing), height .4s $ease-custom, flex-basis .4s $ease-custom;
+        transform-origin: right bottom;
+        transform: translateY(var(--distance));
 
         --darken-stagger: .4s;
 
@@ -183,14 +186,14 @@
 
 
     &__header-info {
-        transition: transform var(--animation-time) var(--easing);
+        transition: transform var(--animation-time) var(--easing), opacity .4s $ease-custom;
         transform: translateX(-120%);
 
 
         .is-showing & {
             transform: translateX(0);
-            transition-duration: .9s;
-            transition-delay: $content-delay;
+            transition-duration: .9s, .4s;
+            transition-delay: $content-delay, 0s;
         }
     }
 

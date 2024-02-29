@@ -6,6 +6,9 @@
     padding-bottom: rem(6);
 
 
+    @include breakpoint(phone) { display: none; }
+
+
 
     &__button {
         height: 100%;

@@ -21,4 +21,11 @@ $element: filters, header;
 .player {
     --top-panel-height: #{rem(24)};
     --bottom-panel-height: #{rem(58)};
+
+
+    @include breakpoint(phone) {
+        --top-panel-height: var(--GLOBAL-aside-width);
+        --bottom-panel-height: var(--GLOBAL-aside-width);
+        --bar-height: 76px;
+    }
 }
