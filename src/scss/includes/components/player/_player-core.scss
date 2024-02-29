@@ -41,7 +41,19 @@
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
 
-            z-index: 3;
+            body.is-not-ready & {
+                transform: translateX(100%);
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            inset: 0;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+
+            &.is-expanded { pointer-events: all; }
         }
 
         audio { display: none; }

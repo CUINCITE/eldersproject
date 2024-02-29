@@ -26,7 +26,12 @@
         }
 
         @include breakpoint(phone) {
-            --GLOBAL-aside-width: #{vw(40, phone)};
+            --GLOBAL-aside-width: 40px;
         }
+    }
+
+
+    @include breakpoint(phone) {
+        --hamburgerbar-height: 69px;
     }
 }

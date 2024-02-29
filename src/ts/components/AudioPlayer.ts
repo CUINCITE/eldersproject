@@ -1,8 +1,9 @@
 import { gsap } from 'gsap/dist/gsap';
 import { PushStates } from '../PushStates';
-import { easing } from '../Site';
+import { breakpoint, easing } from '../Site';
 import { Video } from './Player/Video';
 import { Lightbox } from './Lightbox/Lightbox';
+import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from './Swipe';
 
 
 export class AudioPlayerStatesText {
@@ -27,7 +28,7 @@ export interface IAudioPlayerResponse {
 
 
 export interface IAudioPlayerResponseElements {
-    urlLink: HTMLAnchorElement;
+    urlLinks: NodeListOf<HTMLAnchorElement>;
     nextBtn: HTMLButtonElement;
     prevBtn: HTMLButtonElement;
     title: HTMLElement;
@@ -72,6 +73,12 @@ export class AudioPlayer extends Video {
     private playerButtons: NodeListOf<HTMLButtonElement>;
     private isInitialized = false;
     private closeTimeout: any;
+    private mobileCover: HTMLElement;
+    private mobileIllustration: HTMLElement;
+    private swipeComp: Swipe;
+    private startX: number;
+    private x: number = 0;
+    private swipeMargin = 10;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -79,14 +86,16 @@ export class AudioPlayer extends Video {
         AudioPlayer.instance = this;
 
         this.ui.thumbnail = this.view.querySelector('.js-player-thumbnail');
-        this.ui.minimize = this.view.querySelector('.js-player-minimize');
+        this.ui.minimize = this.view.querySelectorAll('.js-player-minimize');
         this.cassetteTitle = this.view.querySelector('.js-player-marquee');
         this.cassetteEl = this.view.querySelector('.js-player-cassette');
+        this.mobileCover = this.view.querySelector('.js-player-cover');
+        this.mobileIllustration = this.view.querySelector('.js-player-illustration');
 
         this.apiUrl = this.view.dataset.apiUrl;
 
         this.elements = {
-            urlLink: this.view.querySelector('.js-player-url'),
+            urlLinks: this.view.querySelectorAll('.js-player-url'),
             nextBtn: this.view.querySelector('.js-player-next'),
             prevBtn: this.view.querySelector('.js-player-prev'),
             title: this.view.querySelector('.js-player-title'),
@@ -177,21 +186,72 @@ export class AudioPlayer extends Video {
 
     private bindAudioPlayer = (): void => {
         this.ui.thumbnail && this.ui.thumbnail.addEventListener('click', this.onThumbnailClick);
-        this.ui.minimize && this.ui.minimize.addEventListener('click', this.onMinimizeClick);
+        this.ui.minimize && [...this.ui.minimize].forEach(btn => btn.addEventListener('click', this.onMinimizeClick));
         this.elements.nextBtn && this.elements.nextBtn.addEventListener('click', this.onNextClick);
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
-        this.elements.urlLink && this.elements.urlLink.addEventListener('click', this.onUrlClick);
+        this.elements.urlLinks && [...this.elements.urlLinks].forEach(link => link.addEventListener('click', this.onUrlClick));
 
-        this.view.addEventListener('mouseleave', this.onMouseLeave);
-        this.view.addEventListener('mouseenter', this.onMouseEnter);
+        if (breakpoint.desktop) {
+            this.view.addEventListener('mouseleave', this.onMouseLeave);
+            this.view.addEventListener('mouseenter', this.onMouseEnter);
+        } else {
+            this.swipeComp = new Swipe(this.mobileCover, { horizontal: true, vertical: true });
+
+            this.bindSwipeEvents();
+        }
 
         if ('mediaSession' in navigator && this.settings.metadata) {
             // prev/next media buttons (keyboard)
             navigator.mediaSession.setActionHandler('previoustrack', () => this.goToPreviousTrack());
             navigator.mediaSession.setActionHandler('nexttrack', () => this.goToNextTrack());
         }
+    };
 
 
+
+    private bindSwipeEvents = (): void => {
+        this.swipeComp.on(SwipeEvents.START, e => {
+            this.startX = this.x;
+        });
+
+        this.swipeComp.on(SwipeEvents.UPDATE, e => {
+            this.x = this.startX + e.deltaX;
+
+            (Math.abs(this.x) > this.swipeMargin) && this.moveIllustration();
+        });
+
+        this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
+            this.x = 0;
+
+            switch (e.direction) {
+                case SwipeDirections.LEFT:
+                    this.onPrevClick();
+                    break;
+                case SwipeDirections.RIGHT:
+                    this.onNextClick();
+                    break;
+                case SwipeDirections.UP:
+                    PushStates.goTo(this.elements.urlLinks[0].getAttribute('href'), Lightbox.isOpen);
+                    break;
+                case SwipeDirections.DOWN:
+                    this.minimize();
+                    break;
+                default:
+                    // resetted earlier to 0, center illu when no action
+                    this.moveIllustration();
+                    console.warn('no direction');
+            }
+        });
+    };
+
+
+
+    private moveIllustration = (): void => {
+        gsap.to(this.mobileIllustration, {
+            x: this.x,
+            duration: 0.15,
+            ease: 'none',
+        });
     };
 
 
@@ -220,13 +280,15 @@ export class AudioPlayer extends Video {
 
 
 
-    private setNewAudio = (id?: string, play?: boolean, startTime?: string): void => {
+    private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean): void => {
+        this.animateOutIllustration(prevDirection);
         this.animateOutCassette()
             .then(() => this.loadAudio(id))
             .then((data: IAudioPlayerResponse) => {
                 this.updatePlayer(data);
                 this.updateColors(data.color);
                 this.animateInCassette();
+                this.animateInIllustration(prevDirection);
                 // eslint-disable-next-line max-len
                 this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
 
@@ -250,7 +312,8 @@ export class AudioPlayer extends Video {
     private animateOutCassette = (): Promise<void> => new Promise(resolve => {
         this.elements.title.innerText = 'Loading...';
         gsap.to(this.cassetteEl, {
-            yPercent: 130,
+            yPercent: breakpoint.desktop ? 130 : 0,
+            xPercent: breakpoint.desktop ? 0 : -130,
             rotate: -20,
             duration: 0.5,
             ease: 'power2.out',
@@ -264,9 +327,38 @@ export class AudioPlayer extends Video {
 
 
 
+    private animateOutIllustration = (left: boolean): void => {
+
+        gsap.to(this.mobileIllustration, {
+            x: left ? -window.innerWidth : window.innerWidth,
+            duration: 0.5,
+            ease: 'power2.out',
+            onComplete: () => {
+                this.mobileIllustration.style.opacity = '0';
+            },
+        });
+    };
+
+
+
+    private animateInIllustration = (left: boolean): void => {
+
+        gsap.fromTo(this.mobileIllustration, { x: left ? window.innerWidth / 2 : -window.innerWidth / 2 }, {
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            onStart: () => {
+                this.mobileIllustration.style.opacity = '1';
+            },
+        });
+    };
+
+
+
     private animateInCassette = (): void => {
-        gsap.fromTo(this.cassetteEl, { yPercent: 100 }, {
+        gsap.fromTo(this.cassetteEl, { yPercent: breakpoint.desktop ? 100 : 0, xPercent: breakpoint.desktop ? 0 : -100 }, {
             yPercent: 0,
+            xPercent: 0,
             duration: 0.5,
             ease: 'power2.out',
             clearProps: 'all',
@@ -280,14 +372,14 @@ export class AudioPlayer extends Video {
 
     private onNextClick = (): void => {
         const { nextId } = this.elements.nextBtn.dataset;
-        this.setNewAudio(nextId, true);
+        this.setNewAudio(nextId, true, '', false);
     };
 
 
 
     private onPrevClick = (): void => {
         const { prevId } = this.elements.prevBtn.dataset;
-        this.setNewAudio(prevId, true);
+        this.setNewAudio(prevId, true, '', true);
     };
 
 
@@ -300,7 +392,6 @@ export class AudioPlayer extends Video {
         if (!this.isInitialized) this.setNewAudio();
 
         this.isExpanded ? this.minimize() : this.expand();
-        this.view.classList.toggle('is-expanded');
     };
 
 
@@ -313,10 +404,15 @@ export class AudioPlayer extends Video {
         // when lightbox is open, do not minimize the player - it should be always expanded
         if (Lightbox.isOpen) return;
 
+        this.view.classList.remove('is-expanded');
+
         gsap.to(this.ui.playerBar, {
             yPercent: 100,
             duration: fast ? 0 : 0.7,
             ease: easing,
+            onStart: () => {
+                document.documentElement.classList.remove('is-overflow-hidden');
+            },
             onComplete: () => {
                 gsap.set(this.ui.playerBar, { y: 0, yPercent: 100 });
                 // eslint-disable-next-line max-len
@@ -329,6 +425,8 @@ export class AudioPlayer extends Video {
 
 
     private expand = (): void => {
+        this.view.classList.add('is-expanded');
+
         gsap.to(this.ui.playerBar, {
             yPercent: 0,
             duration: 0.7,
@@ -340,6 +438,7 @@ export class AudioPlayer extends Video {
             onComplete: () => {
                 this.isExpanded = true;
                 gsap.set(this.ui.playerBar, { y: 0, yPercent: 0 });
+                document.documentElement.classList.add('is-overflow-hidden');
             },
         });
     };
@@ -359,7 +458,9 @@ export class AudioPlayer extends Video {
         // TO DO - add multiple sources
         this.media.src = data.src[0].src;
         this.elements.title.innerText = data.title;
-        this.elements.urlLink.href = data.urlInterview;
+        [...this.elements.urlLinks].forEach(link => {
+            link.href = data.urlInterview;
+        });
         this.elements.nextBtn.dataset.nextId = data.nextId?.toString() || '';
         this.elements.prevBtn.dataset.prevId = data.prevId?.toString() || '';
     };

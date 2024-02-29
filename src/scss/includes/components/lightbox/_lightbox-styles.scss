@@ -13,6 +13,14 @@
     display: block;
 
 
+    @include breakpoint(phone) {
+        bottom: 106px; // audioplayer mobile height
+        height: auto;
+        z-index: 9; // to be above the audioplayer cover
+        overflow: hidden;
+    }
+
+
     &__wrap {
         @include v-center;
 
@@ -30,6 +38,15 @@
         display: grid;
         grid-column-gap: 1px;
         grid-template: "header illu logo" var(--lightbox-top-height) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
+
+
+        @include breakpoint(phone) {
+            // grid-template-areas: "illu" "header" "buttons" "main";
+            // grid-template-columns: 100%;
+            // grid-template-rows: repeat(4, auto);
+
+            @include flex(column, flex-start, stretch);
+        }
     }
 
 
@@ -40,12 +57,41 @@
         grid-area: header;
         background: var(--main-body-color);
         padding-left: var(--grid-margin);
-        margin-left: rem(-5);
+
+
+        @include breakpoint(desktop) {
+            margin-left: rem(-5);
+        }
+
+
+        @include breakpoint(phone) {
+            order: 2;
+
+            flex-basis: var(--flex-basis);
+            flex-shrink: 0;
+            overflow: hidden;
+
+
+            .is-expanded & {
+                // create a space for closer
+                height: 44px;
+                flex-basis: 44px;
+            }
+        }
 
 
         &-info {
             overflow: hidden;
-            padding-left: rem(5);
+
+
+            @include breakpoint(desktop) {
+                padding-left: rem(5);
+            }
+
+
+            @include breakpoint(phone) {
+                .is-expanded & { opacity: 0; }
+            }
         }
     }
 
@@ -58,6 +104,13 @@
         background: var(--aside-body-color);
         padding: 0 rem(4);
         color: var(--aside-text-color);
+
+
+        @include breakpoint(phone) {
+            position: absolute;
+            inset: 0 0 auto auto;
+            background: none;
+        }
 
 
         svg {
@@ -74,6 +127,22 @@
         grid-area: illu;
         background: var(--main-body-color);
         position: relative;
+
+
+        @include breakpoint(phone) {
+            height: vw(120, phone);
+            flex-basis: vw(120, phone);
+            order: 1;
+            flex-shrink: 0;
+            transition: height .4s $ease-custom, flex-basis .4s $ease-custom;
+            overflow: hidden;
+
+
+            .is-expanded & {
+                height: 0;
+                flex-basis: 0;
+            }
+        }
     }
 
 
@@ -91,7 +160,12 @@
             background: var(--main-body-color);
             position: absolute;
             inset: 0;
-            animation: lightbox-illu 6s linear infinite;
+
+
+            @include breakpoint(desktop) {
+                animation: lightbox-illu 6s linear infinite;
+            }
+
 
             img {
                 width: 100%;
@@ -133,6 +207,16 @@
 
         li { text-align: center; }
 
+
+        @include breakpoint(phone) {
+            @include flex;
+
+            order: 3;
+            padding: 8px var(--grid-margin) 4px;
+            background: var(--main-body-color);
+        }
+
+
         button {
             @include hoverable-link;
         }
@@ -169,7 +253,10 @@
 
 
         &--mementos {
-            margin-top: rem(-5);
+            @include breakpoint(desktop) {
+                margin-top: rem(-5);
+            }
+
 
             span > span {
                 @include breakpoint(desktop) {
@@ -218,6 +305,12 @@
                 }
             }
         }
+
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+        }
     }
 
 
@@ -229,11 +322,21 @@
         position: relative;
 
 
+        @include breakpoint(phone) {
+            order: 4;
+            flex-grow: 1;
+        }
+
+
         &-bg {
             @include full;
 
-            border-top: 1px solid var(--color-box);
             background: var(--main-body-color);
+
+
+            @include breakpoint(desktop) {
+                border-top: 1px solid var(--color-box);
+            }
         }
     }
 
@@ -241,9 +344,14 @@
 
     &__filters {
         @include flex(row, flex-start, center);
-        flex-wrap: nowrap;
 
         margin-top: rem(-4);
+        flex-wrap: wrap;
+
+
+        @include breakpoint(desktop) {
+            flex-wrap: nowrap;
+        }
     }
 
 
@@ -255,6 +363,12 @@
         z-index: 2;
         margin: rem(13);
         color: var(--aside-text-color);
+
+
+        @include breakpoint(phone) {
+            padding: 15px;
+            margin: 0;
+        }
 
 
         .button { width: auto; }
@@ -315,6 +429,9 @@
         z-index: 3;
         background-color: var(--color-black);
         pointer-events: none;
+
+
+        @include breakpoint(phone) { display: none; }
     }
 
 
@@ -379,6 +496,14 @@
         text-transform: uppercase;
         padding-top: rem(13);
         margin-left: rem(-5);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(50, 1);
+            @include letter-spacing(-1.5, 50);
+
+            margin-left: 0;
+        }
     }
 
 
@@ -392,15 +517,23 @@
         margin-right: rem(16);
         flex-shrink: 0;
 
-        &::before {
-            content: "";
-            width: rem(35);
-            height: 1px;
-            display: inline-block;
-            background-color: currentColor;
-            vertical-align: middle;
-            margin-right: rem(10);
-            margin-top: rem(-3);
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17.85);
+        }
+
+
+        @include breakpoint(desktop) {
+            &::before {
+                content: "";
+                width: rem(35);
+                height: 1px;
+                display: inline-block;
+                background-color: currentColor;
+                vertical-align: middle;
+                margin-right: rem(10);
+                margin-top: rem(-3);
+            }
         }
     }
 
@@ -439,9 +572,19 @@
         flex-shrink: 0;
 
 
+        @include breakpoint(not-desktop) {
+            margin-top: 4px;
+        }
+
+
         svg {
             margin-top: rem(-4);
             margin-right: rem(5);
+
+
+            @include breakpoint(not-desktop) {
+                margin-top: -2px;
+            }
         }
     }
 
@@ -465,10 +608,20 @@
 
     &__aside {
         position: absolute;
-        inset: auto var(--GLOBAL-aside-width) 0 0;
+        inset: auto 0 0;
         z-index: 3;
         margin: auto;
         width: vw(749);
+
+
+        @include breakpoint(phone) {
+            // position: relative;
+
+            // inset: auto 0 0 0;
+            width: 100%;
+            height: 100%;
+            grid-area: main;
+        }
     }
 
 
@@ -481,13 +634,18 @@
         background-color: var(--color-grey200);
         color: var(--color-black);
         pointer-events: none;
-
-        // display: none;
         transform: translateY(100%);
         display: flex;
 
         // player's height
         padding-bottom: var(--GLOBAL-player-height);
+
+
+        @include breakpoint(not-desktop) {
+            padding-bottom: 0;
+            max-height: 100%;
+            min-height: 30vh;
+        }
 
 
         &.is-visible {
@@ -500,14 +658,17 @@
             height: auto;
             position: relative;
 
-            &::after {
-                content: "";
-                position: absolute;
-                inset: 1px auto 0 var(--aside-width);
-                width: 1px;
-                background-color: var(--theme-color);
-                z-index: 3;
-                pointer-events: none;
+
+            @include breakpoint(desktop) {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 1px auto 0 var(--aside-width);
+                    width: 1px;
+                    background-color: var(--theme-color);
+                    z-index: 3;
+                    pointer-events: none;
+                }
             }
         }
 
@@ -530,6 +691,11 @@
             &:nth-of-type(2) {
                 top: rem(460);
             }
+
+
+            @include breakpoint(not-desktop) {
+                display: none;
+            }
         }
     }
 
@@ -543,8 +709,18 @@
         overflow-y: auto;
 
 
+        @include breakpoint(not-desktop) {
+            padding-left: 0;
+        }
+
+
         &-text {
             padding: rem(53) rem(143) rem(25) rem(25);
+
+
+            @include breakpoint(not-desktop) {
+                padding: 39px 26px 39px var(--grid-margin);
+            }
 
 
             h3 {
@@ -553,6 +729,11 @@
                 @include letter-spacing(-0.6, 30);
 
                 text-transform: uppercase;
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(30, 21);
+                }
             }
 
 
@@ -564,6 +745,11 @@
 
                 font-feature-settings: "ss02" on;
                 margin-top: rem(8);
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(15, 21);
+                }
             }
 
 
@@ -770,7 +956,8 @@
     &__footer {
         @include flex(row, flex-start, center);
 
-        margin-top: rem(4);
+
+        @include breakpoint(desktop) { margin-top: rem(4); }
     }
 
 
@@ -782,8 +969,18 @@
         @include flex(row, flex-start, center);
 
         text-transform: uppercase;
-        margin-top: rem(4);
         overflow: hidden;
+
+
+        @include breakpoint(desktop) { margin-top: rem(4); }
+
+        @include breakpoint(not-desktop) {
+            @include font-size(30, 30);
+
+            margin: 5px 0;
+            margin-top: 38px;
+            letter-spacing: normal;
+        }
 
 
         span {
@@ -792,11 +989,24 @@
             height: 100%;
             display: inline-block;
             transition: transform .25s $ease-out;
+
+
+            @include breakpoint(not-desktop) {
+                width: auto;
+                margin-left: 5px;
+            }
         }
 
 
         svg {
             margin-top: rem(-6);
+
+
+            @include breakpoint(not-desktop) {
+                width: 18px;
+                height: 22px;
+            }
+
 
             path {
                 transition: fill 0.3s ease;

@@ -65,7 +65,7 @@ export class Loader extends Component {
             },
             onComplete: () => {
                 document.body.classList.remove('is-loader-hiding');
-                document.body.classList.add('is-loader-hidden');
+                document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
                 // this.view.style.display = 'none';
                 this.view.style.pointerEvents = 'none';
                 this.isHidden = true;
