@@ -62,9 +62,9 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(18, 19);
-            @include letter-spacing(-0.5, 18);
+            @include font-size(16, 16.5);
 
+            letter-spacing: -0.02em;
             order: -2;
             margin-top: rem(12);
             padding-left: rem(1);
@@ -170,7 +170,7 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(16, 18.06);
+            @include font-size(14, 18.06);
 
             order: -1;
             margin-top: rem(14);

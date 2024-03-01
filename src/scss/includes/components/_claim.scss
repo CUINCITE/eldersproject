@@ -106,8 +106,9 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(50, 0.82);
+            @include font-size(49, 42);
 
+            max-width: 90%;
             margin-bottom: rem(20);
         }
     }

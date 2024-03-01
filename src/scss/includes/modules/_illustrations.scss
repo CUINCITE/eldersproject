@@ -8,7 +8,8 @@
     }
 
     @include breakpoint(phone) {
-        height: vw(256, phone);
+        height: auto;
+        padding-bottom: rem(46);
     }
 
     .illustration {
@@ -31,19 +32,19 @@
             left: vw(-89);
         }
 
-        @include breakpoint(tablet) {
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            height: auto;
             width: vw(620, tablet);
-            aspect-ratio: 1/1;
             transform: rotate(-7deg);
             top: 0;
             left: vw(-8, tablet);
         }
 
+
         @include breakpoint(phone) {
             width: vw(289, phone);
-            height: vw(289, phone);
-            transform: rotate(-7deg);
-            top: 0;
             left: vw(7, phone);
         }
     }

@@ -19,11 +19,18 @@
         overflow: visible;
         margin-bottom: $bar-height;
         padding-bottom: 56.25%;
+
+
+        @include breakpoint(not-desktop) {
+            margin-bottom: 32px;
+        }
     }
 
 
     &--collection {
-        margin-bottom: rem(89);
+        @include breakpoint(desktop) {
+            margin-bottom: rem(89);
+        }
     }
 
 

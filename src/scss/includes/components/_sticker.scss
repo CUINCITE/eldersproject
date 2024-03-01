@@ -104,11 +104,11 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(18.75, 16.5);
-            @include letter-spacing(-0.0562, 18.75);
+            @include font-size(18, 17);
+            letter-spacing: -0.03em;
 
-            padding-top: rem(12);
-            padding-right: rem(6);
+            padding: 0 rem(15);
+            padding-top: rem(2);
         }
 
         .sticker--big & {

@@ -22,7 +22,13 @@
 
     body.is-404 & { display: none; }
 
-    // & > * { background-color: var(--color-box); }
+
+
+    &__bottom {
+        @include breakpoint(not-desktop) {
+            border-top: 1px solid var(--color-white);
+        }
+    }
 
 
 

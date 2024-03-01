@@ -28,6 +28,11 @@
 
         @include breakpoint(phone) {
             grid-template-rows: 30px var(--bar-height);
+
+
+            .player--video & {
+                height: 32px;
+            }
         }
     }
 
@@ -156,6 +161,9 @@
             margin-top: 0;
             writing-mode: vertical-lr;
             transform: rotate(180deg);
+
+
+            .player--video & { display: none; }
         }
 
         em {
@@ -261,6 +269,11 @@
             inset: auto 0 0;
             height: 1px;
             background-color: #404040;
+        }
+
+
+        .player--video & {
+            @include breakpoint(phone) { display: none; }
         }
     }
 

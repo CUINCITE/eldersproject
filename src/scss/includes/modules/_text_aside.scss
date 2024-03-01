@@ -28,6 +28,7 @@
 
         @include breakpoint(not-desktop) {
             position: relative;
+            order: 2;
         }
 
         &--boxes {
@@ -42,33 +43,16 @@
                 }
             }
 
-            @include breakpoint(tablet) {
-                position: absolute;
-                right: -1 * map-get($grid-offset, tablet);
+            @include breakpoint(not-desktop) {
+                // position: absolute;
+                left: -1 * map-get($grid-offset, tablet);
                 padding-bottom: vw(32, tablet);
-                padding-inline: map-get($grid-offset, tablet);
-                margin-top: rem(122);
                 text-align: right;
+                transform: scaleX(-1);
 
                 &.text_aside__decorator--contact {
                     bottom: 0;
                     margin-top: unset;
-                }
-
-                svg {
-                    scale: -1 1;
-                }
-            }
-
-            @include breakpoint(phone) {
-                right: -1 * map-get($grid-offset, phone) - 1px;
-                padding-bottom: vw(21, phone);
-                margin-top: rem(-40);
-                text-align: right;
-
-                &.text_aside__decorator--contact {
-                    margin-top: rem(-35);
-                    padding-inline: unset;
                 }
 
                 svg {
@@ -328,6 +312,12 @@
 
         @include breakpoint(phone) {
             position: relative;
+            order: 3;
+
+
+            &:first-of-type {
+                order: 1;
+            }
 
             .text {
                 padding-bottom: 0;

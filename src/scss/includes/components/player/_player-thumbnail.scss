@@ -59,6 +59,11 @@
         transition: transform .7s $ease-out;
 
 
+        @include breakpoint(not-desktop) {
+            @include font-size(19, 1);
+        }
+
+
         @include breakpoint(phone) {
             .is-expanded & {
                 transform: translateY(100%);

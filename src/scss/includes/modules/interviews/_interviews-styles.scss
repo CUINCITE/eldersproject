@@ -260,12 +260,17 @@
 
         @include breakpoint(tablet) {
             position: relative;
-            
+
             .grid {
                 div {
                     grid-column: 3 / span 6 !important;
                 }
             }
+        }
+
+
+        @include breakpoint(phone) {
+            position: relative;
         }
     }
 
@@ -279,7 +284,6 @@
             left: rem(-10);
             top: rem(-56);
             width: vw(352);
-
         }
 
         @include breakpoint(tablet) {
@@ -287,14 +291,13 @@
             width: vw(186, tablet);
             left: rem(10);
             top: rem(10);
-
         }
 
         @include breakpoint(phone) {
-            position: relative;
-            width: vw(192, phone);
-            left: 56%;
-            translate: -50% 0;
+            position: absolute;
+            z-index: 2;
+            inset: calc(100% + #{rem(68)}) auto auto rem(28);
+            width: vw(208, phone);
             padding-bottom: rem(20);
         }
     }
@@ -348,10 +351,9 @@
         @include breakpoint(tablet) {
             @include flex(row, space-between, flex-start);
 
-            
+
 
             grid-column: span 2;
-            
         }
 
         @include breakpoint(phone) {

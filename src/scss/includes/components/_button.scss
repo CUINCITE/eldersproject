@@ -98,7 +98,7 @@
 
         @include breakpoint(desktop) {
             @include font-size(40, 1);
-            
+
             margin-block: trim-font(1);
 
             --padding: #{rem(6)};
@@ -108,7 +108,7 @@
 
         @include breakpoint(tablet) {
             @include font-size(40, 30);
-            
+
 
             gap: rem(7);
         }
@@ -238,6 +238,13 @@
         @include breakpoint(phone) {
             padding-top: rem(14);
             padding-bottom: rem(42);
+        }
+
+
+        .interviews--banner & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(167);
+            }
         }
     }
 }
