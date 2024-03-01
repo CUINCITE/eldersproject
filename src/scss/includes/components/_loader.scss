@@ -22,6 +22,11 @@
         @include flex(row, flex-start, center);
 
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            padding-top: var(--hamburgerbar-height);
+        }
     }
 
 
@@ -39,7 +44,7 @@
 
             @media (max-height: 719px) {
                 @include font-size(170, 1);
-                    
+
                 letter-spacing: -0.045em;
             }
         }
