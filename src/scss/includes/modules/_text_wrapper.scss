@@ -17,8 +17,10 @@
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-start);
 
-                .polaroid {
-                    translate: rem(-28) 0;
+                &--single {
+                    .polaroid {
+                        translate: rem(-28) 0;
+                    }
                 }
             }
         }
@@ -334,23 +336,26 @@
         }
 
         @include breakpoint(desktop) {
-            @include flex(column, flex-start, flex-end)
+            @include flex(column, flex-start, flex-end);
 
-                text-align: right;
+            text-align: right;
             max-width: rem(182);
             padding-top: rem(16);
         }
+
 
         @include breakpoint(tablet) {
             max-width: rem(260);
             padding-top: rem(16);
         }
 
+
         @include breakpoint(phone) {
             max-width: rem(244);
             padding-top: rem(16);
             margin-top: rem(-6);
         }
+
 
         &--collections {
             @include breakpoint(desktop) {
@@ -378,6 +383,11 @@
 
         .text {
             padding-inline: 0;
+
+
+            @include breakpoint(not-desktop) {
+                @include font-size(12, 15.6);
+            }
         }
     }
 
@@ -391,5 +401,20 @@
         margin-left: rem(6);
         bottom: rem(17);
         text-transform: uppercase;
+
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            bottom: auto;
+            margin-top: 60px;
+            margin-left: 0;
+            margin-bottom: -45px;
+            max-width: 80%;
+
+
+            p {
+                @include flex(row, space-between, center);
+            }
+        }
     }
 }

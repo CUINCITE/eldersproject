@@ -108,9 +108,9 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(64, 0.84);
-            @include letter-spacing(-2.35, 64);
+            @include font-size(70, 59);
 
+            letter-spacing: -0.035em;
             margin-block: trim-font(0.84);
         }
     }
@@ -328,10 +328,11 @@
             @include breakpoint(phone) {
                 @include font-size(12, 1);
 
-                bottom: rem(30);
+                bottom: rem(35);
                 width: rem(22);
                 height: rem(22);
-                padding-left: 1px;
+                margin-left: -4px;
+                padding: 1px 0 0 1px;
             }
         }
 
@@ -339,6 +340,11 @@
         @include breakpoint(desktop) {
             padding-top: rem(26);
             position: relative;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            margin-right: rem(-20);
         }
 
 
@@ -393,6 +399,11 @@
         @include breakpoint(desktop) {
             padding-top: rem(24);
             padding-bottom: rem(80);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            &::before { display: none; }
         }
 
         @include breakpoint(tablet) {

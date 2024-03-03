@@ -1,47 +1,37 @@
 .polaroid_gallery {
-    @include breakpoint(desktop) {
-        margin-top: rem(15);
-        margin-bottom: rem(10);
-        width: rem(553);
-    }
+    margin-top: rem(15);
+    margin-bottom: rem(10);
+    width: rem(360);
 
 
     &__wrapper {
-        @include breakpoint(desktop) {
-            @include flex(column, space-between, flex-start);
-            width: 100%;
-        }
+        @include flex(column, space-between, flex-start);
+        width: 100%;
     }
 
 
     &__captions {
-        @include breakpoint(desktop) {
-            position: relative;
-            width: rem(244);
-            height: rem(60);
-        }
+        position: relative;
+        width: rem(244);
+        height: rem(60);
     }
 
 
     &__slides {
-        @include breakpoint(desktop) {
-            margin-left: rem(-30);
-            margin-bottom: rem(28);
-            width: 100%;
-            display: grid;
-            grid-template-columns: 50% 50%;
-        }
+        margin-left: rem(-30);
+        margin-bottom: rem(28);
+        width: 100%;
+        display: grid;
+        grid-template-columns: 50% 50%;
     }
 
 
     &__slide {
         transition: transform .5s $easing, opacity .35s $easing;
-
-        @include breakpoint(desktop) {
-            left: 0;
-            width: 100%;
-            grid-column-start: 2;
-        }
+        left: 0;
+        width: 100%;
+        grid-column-start: 2;
+        grid-row-start: 1;
 
 
         &.is-left-outer {
@@ -76,13 +66,10 @@
         position: relative;
         transform: rotate(90deg);
         overflow: hidden;
-
-        @include breakpoint(desktop) {
-            width: rem(34);
-            height: rem(34);
-            border-radius: 50%;
-            background-color: $color-grey200;
-        }
+        width: rem(34);
+        height: rem(34);
+        border-radius: 50%;
+        background-color: $color-grey200;
 
         &:first-child {
             .is-first & {
@@ -110,7 +97,12 @@
                 transform: translate(-50%, -50%);
             }
 
-            &:last-child { transform: translate(-50%, -200%); }
+            &:last-child {
+                transform: translate(-50%, -200%);
+
+
+                @include breakpoint(not-desktop) { display: none; }
+            }
         }
 
         @include hover {
@@ -128,16 +120,14 @@
         opacity: 0;
         height: 100%;
         transition: opacity .5s $ease-out;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
 
         &.is-active {
             opacity: 1;
             transition-delay: .3s;
-        }
-
-        @include breakpoint(desktop) {
-            position: absolute;
-            left: 0;
-            bottom: 0;
         }
     }
 }

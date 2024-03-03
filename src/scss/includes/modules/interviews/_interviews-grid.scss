@@ -2,7 +2,7 @@
     &__letters {
         @include flex;
 
-        transition: padding-top .25s $ease-custom;
+        transition: opacity .25s $ease-custom;
 
         @include breakpoint(desktop) {
             padding-top: rem(38);
@@ -196,6 +196,8 @@
             @include breakpoint(desktop) {
                 @include flex(column, center, center);
             }
+
+            @include breakpoint(not-desktop) { overflow: hidden; }
 
             @include breakpoint(tablet) {
                 @include flex(column, center, flex-start);
@@ -459,6 +461,11 @@
     }
 
 
+    &__filters:not(:has(option[value$="narrators"]:checked)) ~ &__tabs &__letters {
+        opacity: 0;
+    }
+
+
 
     &__controls {
         background-color: var(--color-box);
@@ -624,8 +631,9 @@
         }
 
         @include breakpoint(phone) {
-            max-width: rem(236);
-            inset: var(--grid-margin) var(--grid-margin) auto auto;
+            max-width: rem(230);
+            inset: 0 0 auto auto;
+            transform: translateY(-25%);
         }
     }
 

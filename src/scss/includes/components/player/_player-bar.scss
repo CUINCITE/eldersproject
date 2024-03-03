@@ -193,6 +193,13 @@
         padding-top: rem(9);
 
 
+        @include breakpoint(not-desktop) {
+            .player--video & {
+                @include font-size(30, 1);
+            }
+        }
+
+
         @include hover {
             svg {
                 animation: slide-right .25s $ease-custom forwards !important;
@@ -231,6 +238,20 @@
 
             svg:last-of-type {
                 inset: 100% 100% auto auto;
+            }
+
+
+            @include breakpoint(not-desktop) {
+                .player--video & {
+                    width: 28px;
+                    height: 28px;
+
+
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
             }
         }
 
