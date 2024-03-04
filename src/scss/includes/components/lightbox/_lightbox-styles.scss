@@ -241,10 +241,11 @@
         @include breakpoint(desktop) {
             > span {
                 display: block !important;
+                line-height: 1;
 
                 span {
                     margin-block: trim-font(1);
-                    padding-block: rem(5);
+                    padding-block: 5px;
                     user-select: none;
                 }
             }
@@ -254,14 +255,14 @@
 
         &--mementos {
             @include breakpoint(desktop) {
-                margin-top: rem(-5);
+                margin-top: -5px;
             }
 
 
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(29, 1);
-                    @include letter-spacing(-0.87, 29);
+                    font-size: 29px;
+                    letter-spacing: -0.03em;
                 }
             }
         }
@@ -270,8 +271,8 @@
         &--info {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(69, 1);
-                    @include letter-spacing(-2.07, 69);
+                    font-size: 69px;
+                    letter-spacing: -0.03em;
                 }
             }
         }
@@ -280,8 +281,8 @@
         &--transcript {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(26, 1);
-                    @include letter-spacing(-0.78, 26);
+                    font-size: 26px;
+                    letter-spacing: -0.03em;
                 }
             }
         }
@@ -290,8 +291,8 @@
         &--downloads {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(25, 1);
-                    @include letter-spacing(-0.75, 25);
+                    font-size: 25px;
+                    letter-spacing: -0.03em;
                 }
             }
         }
@@ -300,8 +301,8 @@
         &--related {
             span > span {
                 @include breakpoint(desktop) {
-                    @include font-size(38, 1);
-                    @include letter-spacing(-0.76, 38);
+                    font-size: 38px;
+                    letter-spacing: -0.02em;
                 }
             }
         }
