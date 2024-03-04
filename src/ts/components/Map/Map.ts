@@ -161,6 +161,69 @@ export class Map extends Component {
         breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
 
         this.fitBounds(true);
+        this.setFilters();
+    };
+
+
+
+    private setFilters = (): void => {
+        const filter: mapboxgl.Expression = [
+            'all',
+            [
+                'match',
+                ['get', 'class'],
+                [
+                    'country',
+                    'disputed_country',
+                ],
+                [
+                    'match',
+                    ['get', 'worldview'],
+                    ['all', 'US'],
+                    true,
+                    false,
+                ],
+                false,
+            ],
+            [
+                'match',
+                ['get', 'iso_3166_1'],
+                ['US'],
+                true,
+                false,
+            ],
+            [
+                'step',
+                ['pitch'],
+                true,
+                50,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    3,
+                ],
+                60,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    4,
+                ],
+                70,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    5,
+                ],
+            ],
+        ];
+
+        this.map.setFilter('country-label', filter);
     };
 
 
