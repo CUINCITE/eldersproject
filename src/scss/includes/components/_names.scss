@@ -79,13 +79,6 @@
             }
         }
 
-
-        // @include hover {
-        //     ~ .names__expand {
-        //         grid-template-rows: 1fr;
-        //     }
-        // }
-
         // .button {
         //     @include font-family(compressed);
         //     @include flex(row, flex-end, flex-end);
@@ -206,10 +199,6 @@
 
     &__expand {
         text-align: right;
-        display: grid;
-        grid-template-rows: 1fr;
-        transition: grid-template-rows .3s $ease-out;
-
 
         & > div { overflow: hidden; }
 
@@ -231,13 +220,24 @@
         @include font-size(19, 19.57);
         @include letter-spacing(-0.75, 22);
 
-        margin-left: auto;
         text-transform: uppercase;
         padding-bottom: rem(26);
 
         @include breakpoint(desktop) {
+            margin-left: auto;
             padding-right: var(--grid-margin);
             width: rem(400);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(16, 1);
+
+            padding-top: rem(5);
+            padding-bottom: rem(19);
+            margin-left: rem(2);
+            letter-spacing: -0.02em;
+            max-width: rem(275);
         }
     }
 }

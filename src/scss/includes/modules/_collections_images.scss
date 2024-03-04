@@ -21,6 +21,11 @@
             padding-bottom: rem(70);
             border-top: 1px solid $color-bg;
         }
+
+
+        @include breakpoint(not-desktop) {
+            padding-bottom: rem(20);
+        }
     }
 
 
@@ -165,7 +170,7 @@
 
         @include breakpoint(not-desktop) {
             height: rem(125);
-            padding: rem(15) var(--grid-margin);
+            padding: rem(13) var(--grid-margin);
 
 
             .button {
