@@ -3,6 +3,7 @@
 
     text-transform: uppercase;
     padding-left: unset;
+    font-feature-settings: "ss01" on;
 
     @include breakpoint(desktop) {
         @include font-size(216, 1);

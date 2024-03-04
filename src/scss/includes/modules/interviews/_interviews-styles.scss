@@ -296,9 +296,8 @@
         @include breakpoint(phone) {
             position: absolute;
             z-index: 2;
-            inset: calc(100% + #{rem(68)}) auto auto rem(28);
-            width: vw(208, phone);
-            padding-bottom: rem(20);
+            inset: calc(100% + #{rem(37)}) auto auto rem(-21);
+            width: vw(240, phone);
         }
     }
 
