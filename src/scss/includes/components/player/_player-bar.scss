@@ -141,14 +141,15 @@
 
     &__time {
         @include font-family(compressed);
-        @include font-size(62, 60);
-        @include letter-spacing(-1.24, 62);
         @include flex(row, flex-start, flex-end);
 
+        font-size: 62px;
+        line-height: 60px;
+        letter-spacing: -0.02em;
         gap: rem(9);
         white-space: nowrap;
         text-align: center;
-        margin-top: rem(5);
+        margin-top: 5px;
 
 
         @include breakpoint(phone) {
@@ -301,18 +302,19 @@
 
 
     &__title {
-        @include font-size(16, 18);
         @include font-family(normal);
         @include font-settings(900, 900);
         @include flex(row, center, center);
 
+        font-size: 16px;
+        line-height: 18px;
         position: absolute;
         inset: 0;
         z-index: 1;
         pointer-events: none;
         text-align: center;
         text-transform: uppercase;
-        padding-top: rem(4);
+        padding-top: 4px;
 
         @include breakpoint(desktop) {
             padding-left: 9.5%; // visually centered, like .player__buttons
