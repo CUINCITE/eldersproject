@@ -1,10 +1,34 @@
 .names {
+
+    @include breakpoint(not-desktop) {
+        padding: 0 var(--grid-margin);
+
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+
     &__name {
         position: relative;
-        border-left: 1px solid $color-bg;
 
-        &:not(:last-child) {
-            border-bottom: 1px solid $color-bg;
+
+        @include breakpoint(desktop) {
+            border-left: 1px solid $color-bg;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $color-bg;
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            opacity: 0;
+            transition: opacity .4s $ease-custom;
+
+
+            &.is-current { opacity: 1; }
         }
 
 
@@ -27,6 +51,11 @@
         text-transform: uppercase;
         font-weight: 800;
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            text-align: left;
+        }
 
 
         .collections_images__content--home & {
@@ -115,6 +144,13 @@
                 margin-bottom: -1px;
             }
         }
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(57, 44);
+
+            letter-spacing: -0.03em;
+        }
     }
 
     &__button {
@@ -178,6 +214,11 @@
         & > div { overflow: hidden; }
 
 
+        @include breakpoint(not-desktop) {
+            text-align: left;
+        }
+
+
         .collections_images__content--simple & { display: none; }
     }
 
@@ -190,13 +231,13 @@
         @include font-size(19, 19.57);
         @include letter-spacing(-0.75, 22);
 
-        width: rem(400);
         margin-left: auto;
         text-transform: uppercase;
         padding-bottom: rem(26);
 
         @include breakpoint(desktop) {
             padding-right: var(--grid-margin);
+            width: rem(400);
         }
     }
 }

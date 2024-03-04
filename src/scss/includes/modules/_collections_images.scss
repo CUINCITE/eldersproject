@@ -5,6 +5,11 @@
 
     &__heading {
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            border-bottom: 1px solid var(--color-bg);
+        }
     }
 
 
@@ -27,11 +32,10 @@
 
 
     &__cards {
-        position: absolute;
-        pointer-events: none;
-        z-index: 2;
-
         @include breakpoint(desktop) {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
             width: vw(585);
             height: vw(585);
             max-width: vh(585);
@@ -44,15 +48,20 @@
         @include breakpoint(hd) {
             right: 100%;
         }
+
+
+        @include breakpoint(not-desktop) {
+            width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
+        }
     }
 
 
 
     &__content {
         position: relative;
-        display: grid;
 
         @include breakpoint(desktop) {
+            display: grid;
             grid-template-rows: auto vw(167);
             grid-template-columns: 1fr 1fr;
         }
@@ -60,8 +69,38 @@
 
 
 
+    &__dots {
+        @include flex(row, center, center);
+
+        width: 100%;
+        margin: rem(6) 0 rem(20);
+        gap: rem(7);
+    }
+
+
+
+    &__dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--color-grey200);
+        border-radius: 50%;
+        transition: background-color .4s $ease-custom;
+
+
+        &.is-current {
+            background-color: var(--color-black);
+        }
+    }
+
+
+
     &__container {
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, space-between, flex-start);
+        }
     }
 
 
@@ -77,8 +116,9 @@
 
 
     &__button {
+        border-top: 1px solid $color-bg;
+
         @include breakpoint(desktop) {
-            border-top: 1px solid $color-bg;
             padding-inline: var(--grid-margin);
             width: 100%;
             padding-top: rem(14);
@@ -97,10 +137,6 @@
                         position: absolute;
                         right: calc(100% + #{rem(8)});
                         top: 0;
-                    }
-
-                    &--extra {
-
                     }
                 }
 
@@ -123,6 +159,27 @@
                 span i {
                     padding-left: 0;
                 }
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            height: rem(125);
+            padding: rem(15) var(--grid-margin);
+
+
+            .button {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+
+
+                > .button__text { margin-top: rem(-4); margin-left: rem(-2); }
+            }
+
+
+            .button__main {
+                flex-direction: row-reverse;
             }
         }
     }
@@ -162,7 +219,7 @@
 
         &__names:has(li:nth-child(#{$i}).is-active) + div > &__cards,
         &__names:has(li:nth-child(#{$i}) a.is-visible) + div > &__cards,
-        &__names:has(li:nth-child(#{$i}).is-active) + &__cards, {
+        &__names:has(li:nth-child(#{$i}).is-active) ~ &__cards, {
             li { transform: unset !important; }
 
             @for $j from 1 through 4 {
