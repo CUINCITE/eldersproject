@@ -19,8 +19,8 @@ $scrubber-button-color: $color-white;
 $element: filters, header;
 
 .player {
-    --top-panel-height: #{rem(24)};
-    --bottom-panel-height: #{rem(58)};
+    --top-panel-height: 24px;
+    --bottom-panel-height: 58px;
 
 
     @include breakpoint(phone) {
