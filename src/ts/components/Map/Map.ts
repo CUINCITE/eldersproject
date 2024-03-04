@@ -80,7 +80,7 @@ export class Map extends Component {
         this.settings = {
             lng: -122,
             lat: 37,
-            minZoom: 8,
+            minZoom: 3.5,
             zoom: 10,
             maxZoom: 16,
             interactive: true,
@@ -125,6 +125,7 @@ export class Map extends Component {
             center: [this.settings.lng, this.settings.lat],
             zoom: this.settings.zoom,
             maxZoom: this.settings.maxZoom,
+            minZoom: this.settings.minZoom,
             renderWorldCopies: this.settings.renderWorldCopies,
             interactive: this.settings.interactive,
             dragRotate: false,
