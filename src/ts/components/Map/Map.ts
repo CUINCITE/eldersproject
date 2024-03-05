@@ -72,6 +72,7 @@ export class Map extends Component {
     private locations: IMapLocation[];
     private allFeatures: GeoJSON.Feature[];
     private geojson: mapboxgl.GeoJSONSourceRaw;
+    private style: string;
 
 
     constructor(protected view: HTMLElement) {
@@ -102,11 +103,7 @@ export class Map extends Component {
         this.locations = JSON.parse(this.view.getAttribute('data-locations')) as IMapLocation[];
 
         // find style for given modifier (if exists)
-        const style = this.view.getAttribute('data-theme-color');
-        if (style && mapStyles[style]) {
-            this.settings.style = mapStyles[style];
-        }
-
+        this.style = this.view.getAttribute('data-theme-color');
 
         if (this.settings.lazyLoading) {
             setTimeout(() => this.init(), 5000);
@@ -155,14 +152,24 @@ export class Map extends Component {
 
 
 
-    private onLoad = async() => {
+    private onLoad = async () => {
         this.map.on('idle', this.onMapIdle);
         this.bind();
         breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
 
         this.fitBounds(true);
         this.setFilters();
+        this.style !== 'main' && this.updateColors();
     };
+
+
+    private updateColors(): void {
+        const camelCaseName = this.style.split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1));
+
+        mapStyles[camelCaseName].forEach(({ name, type, color }) => {
+            this.map.setPaintProperty(name, type, color);
+        });
+    }
 
 
 
