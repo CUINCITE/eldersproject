@@ -159,7 +159,7 @@ export class Map extends Component {
 
         this.fitBounds(true);
         this.setFilters();
-        this.updateColors();
+        this.style !== 'main' && this.updateColors();
     };
 
 
