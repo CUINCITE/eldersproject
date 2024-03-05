@@ -1,6 +1,5 @@
 .box {
     background-color: var(--color-box);
-    margin-top: 1px;
 
 
     &--nomargin { margin-top: 0; }
@@ -12,8 +11,12 @@
 
 
         &.is-animated:not(.footer__bottom) {
+            border-top: 1px solid var(--color-bg);
             background-color: var(--color-box);
         }
+
+
+        &.footer__bottom { border-top: 1px solid var(--color-white); }
 
         &:not(.is-animated) {
             @include breakpoint(not-desktop) {
@@ -49,10 +52,13 @@
         z-index: -1;
         pointer-events: none;
         will-change: transform;
+        border-top: 1px solid var(--color-bg);
+
 
 
         .is-animated & {
             background: none;
+            border: none;
         }
     }
 

@@ -38,7 +38,7 @@ body {
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
-    background: var(--color-bg);
+    background: var(--color-black);
     overflow-x: hidden;
     /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
     overflow-x: clip;
@@ -82,6 +82,8 @@ html {
 
 
     body.is-loader-hidden & {
+        transition-property: transform, background;
+
         background: var(--color-bg);
     }
 
@@ -102,11 +104,6 @@ article {
     height: 100%;
     opacity: 0;
     transition: background-color .25s $ease-out;
-
-
-    body.is-homepage.is-loader-hiding & {
-        background-color: var(--color-bg);
-    }
 }
 
 

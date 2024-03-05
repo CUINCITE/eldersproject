@@ -13,6 +13,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
     color: var(--color-grey200);
     padding: 0 var(--GLOBAL-aside-width);
     counter-reset: menu -1;
+    display: none;
 
     @include breakpoint(not-desktop) {
         padding: 0;
@@ -130,7 +131,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
             }
 
             @include hover {
-                .menu__arrow { 
+                .menu__arrow {
                     opacity: 1;
 
                     transition: opacity 0s 0s;
@@ -138,7 +139,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
             }
 
             &:focus {
-                .menu__arrow { 
+                .menu__arrow {
                     opacity: 1;
 
                     transition: opacity 0s 0s;
