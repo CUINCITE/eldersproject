@@ -58,7 +58,7 @@
     <ul class="menu__footer">
       {% for item in scaffold.footer %}
       <li class="menu__link js-menu-link">
-        <a href="{{item.url}}">
+        <a href="{{item.url}}" {% if item.url|slice(0,4)=='http' %}target="_blank"{% endif %}>
           <span>
             <span>{{item.label}}</span>
             <span>{{item.label}}</span>
