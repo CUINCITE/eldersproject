@@ -18,7 +18,8 @@
         position: relative;
 
         @include breakpoint(desktop) {
-            padding-block: rem(18);
+            padding: rem(30) 0 rem(12);
+            height: rem(195);
         }
 
         @include breakpoint(phone) {
@@ -33,11 +34,6 @@
                 // padding-bottom: rem(46);
             }
 
-            .sticker {
-                @include breakpoint(desktop) {
-                    translate: -44% -60%;
-                }
-            }
 
             .interviews__sticker {
                 @include breakpoint(not-desktop) {
@@ -68,6 +64,11 @@
     &__sticker {
         position: relative;
         z-index: 2;
+
+
+        @include breakpoint(desktop) {
+            translate: -44% -78%;
+        }
 
         @include breakpoint(not-desktop) {
             position: absolute;

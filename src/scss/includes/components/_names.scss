@@ -121,16 +121,18 @@
         display: inline-block;
 
         @include breakpoint(desktop) {
-            @include font-size(49, 1);
+            @include font-size(59, 1);
 
             letter-spacing: -0.04em;
-            padding-top: rem(14);
-            padding-bottom: rem(8);
+            padding-top: rem(13);
+            padding-bottom: 0;
             padding-right: rem(20);
         }
 
         .collections_images__content--simple & {
             @include breakpoint(desktop) {
+                @include font-size(49, 1);
+
                 padding-right: rem(30);
                 padding-top: rem(3);
                 padding-bottom: 0;
@@ -218,8 +220,8 @@
         @include font-family(normal);
         @include font-settings(400, 100);
         @include font-size(19, 19.57);
-        @include letter-spacing(-0.75, 22);
 
+        letter-spacing: -0.02em;
         text-transform: uppercase;
         padding-bottom: rem(26);
 
@@ -227,6 +229,7 @@
             margin-left: auto;
             padding-right: var(--grid-margin);
             width: rem(400);
+            margin-top: rem(-3);
         }
 
 

@@ -12,6 +12,7 @@ export class Collections extends Component {
     private x: number;
     private startX: number;
     private activeIndex: number = 0;
+    private currentBreakpoint: string;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -20,33 +21,58 @@ export class Collections extends Component {
         this.cards = this.view.querySelectorAll('.js-card');
         this.dots = this.view.querySelectorAll('.js-dot');
         this.captions = this.view.querySelectorAll('.js-caption');
+        this.currentBreakpoint = breakpoint.value;
 
         this.bind();
     }
+
+
+    public resize = (wdt: number, hgt: number): void => {
+        const newBreakpoint = breakpoint.value;
+        if (newBreakpoint === this.currentBreakpoint) return;
+
+        if (!breakpoint.desktop) {
+            this.runSwipe();
+        } else this.destroySwipe();
+
+        this.currentBreakpoint = newBreakpoint;
+    };
+
+
+
+    private runSwipe(): void {
+        this.swipeComp = new Swipe(this.view.querySelector('.js-scroll-cards'), { horizontal: true, vertical: false });
+
+        this.swipeComp.on(SwipeEvents.START, e => {
+            this.startX = this.x;
+        });
+
+        this.swipeComp.on(SwipeEvents.UPDATE, e => {
+            this.x = this.startX + e.deltaX;
+            this.update();
+        });
+
+        this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
+            const x = 0;
+            if (e.direction === SwipeDirections.LEFT) this.updateCards(1);
+            if (e.direction === SwipeDirections.RIGHT) this.updateCards(-1);
+        });
+    }
+
+
+
+    private destroySwipe(): void {
+        this.swipeComp?.destroy();
+    }
+
+
 
     private bind(): void {
         this.allItems.forEach((item: HTMLElement) => {
             item.addEventListener('mouseenter', this.onItemEnter);
         });
 
-        if (!breakpoint.desktop) {
-            this.swipeComp = new Swipe(this.view.querySelector('.js-scroll-cards'), { horizontal: true, vertical: false });
-
-            this.swipeComp.on(SwipeEvents.START, e => {
-                this.startX = this.x;
-            });
-
-            this.swipeComp.on(SwipeEvents.UPDATE, e => {
-                this.x = this.startX + e.deltaX;
-                this.update();
-            });
-
-            this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
-                const x = 0;
-                if (e.direction === SwipeDirections.LEFT) this.updateCards(1);
-                if (e.direction === SwipeDirections.RIGHT) this.updateCards(-1);
-            });
-        }
+        !breakpoint.desktop && this.runSwipe();
     }
 
 

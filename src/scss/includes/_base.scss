@@ -45,13 +45,6 @@ body {
 
     // for collection's page
     counter-reset: collection-counter;
-
-
-    @include breakpoint(not-desktop) {
-        height: var(--app-height);
-        min-height: unset;
-        overflow-y: scroll;
-    }
 }
 
 body,
