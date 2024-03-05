@@ -20,8 +20,8 @@
         @include breakpoint(tablet) {
             --checkmark-width: #{rem(36)};
         }
-    
-    
+
+
         @include breakpoint(phone) {
             --checkmark-width: #{rem(36)};
         }
@@ -41,10 +41,13 @@
         position: absolute;
         inset: 100% calc(var(--grid-margin) * -1) auto 0;
         overflow-y: clip;
+        pointer-events: none;
+
+
+        .dropdown.is-open & { pointer-events: all; }
 
         @include breakpoint(desktop) {
             z-index: 0;
-
         }
 
         @include breakpoint(not-desktop) {
