@@ -219,6 +219,9 @@
         position: absolute;
         width: 100%;
         height: 100%;
+
+
+        .pin-spacer { pointer-events: none; }
     }
 
     .text--collection_hero-top {
