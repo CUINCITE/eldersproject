@@ -39,6 +39,7 @@ export class AudioPlayer extends Video {
     // eslint-disable-next-line no-use-before-define
     public static instance: AudioPlayer;
     public static currentAudioId: string;
+    public static view: HTMLElement;
 
     public static closeAudioPlayer(): void {
         AudioPlayer.instance.minimize();
@@ -84,6 +85,7 @@ export class AudioPlayer extends Video {
         super(view);
 
         AudioPlayer.instance = this;
+        AudioPlayer.view = view;
 
         this.ui.thumbnail = this.view.querySelector('.js-player-thumbnail');
         this.ui.minimize = this.view.querySelectorAll('.js-player-minimize');

@@ -199,6 +199,12 @@
         @extend %player-small-button;
 
 
+        .audioplayer.has-active-lightbox & {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+
         @include breakpoint(desktop) {
             padding-bottom: rem(10);
         }

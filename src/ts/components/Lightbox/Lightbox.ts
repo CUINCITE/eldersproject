@@ -207,6 +207,7 @@ export class Lightbox {
                 ease: 'none',
                 onStart: () => {
                     document.body.classList.remove('has-lightbox');
+                    AudioPlayer.view.classList.remove('has-active-lightbox');
                     this.view.classList.remove('is-showing');
                 },
                 onComplete: (): void => {
@@ -268,6 +269,8 @@ export class Lightbox {
 
 
     private checkPlayerState(): void {
+        AudioPlayer.view.classList.toggle('has-active-lightbox', AudioPlayer.getId() === Lightbox.getId());
+
         if (AudioPlayer.getId() === Lightbox.getId() && !AudioPlayer.isAudioPlayerPaused()) {
             this.playerBtn?.classList.add('is-playing');
         } else {
