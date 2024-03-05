@@ -1,4 +1,7 @@
 .names {
+    --line-width: #{rem(40)};
+    --line-offset: #{rem(10)};
+
 
     @include breakpoint(not-desktop) {
         padding: 0 var(--grid-margin);
@@ -79,42 +82,22 @@
             }
         }
 
-        // .button {
-        //     @include font-family(compressed);
-        //     @include flex(row, flex-end, flex-end);
 
-        //     text-transform: uppercase;
-        //     margin-top: auto;
-
-        //     @include breakpoint(desktop) {
-        //         @include font-size(30, 30);
-        //         @include letter-spacing(-0.75, 30);
-
-        //         margin-bottom: rem(-7);
-        //         margin-right: rem(11);
-        //         margin-top: rem(78);
-        //     }
+        @include hover {
+            ~ .names__author span {
+                transform: translateX(calc((var(--line-width) + var(--line-offset)) * -1));
+            }
 
 
-        //     .arrow {
+            ~ .names__author .names__box::before {
+                transform: scaleX(1);
+            }
 
-        //         @include breakpoint(desktop) {
-        //             translate: 0 rem(-6);
-        //         }
 
-        //         span.triangle {
-        //             @include breakpoint(desktop) {
-        //                 border-width: rem(11) 0 rem(11) rem(16);
-        //             }
-        //         }
-
-        //         span:nth-of-type(2) {
-        //             @include breakpoint(desktop) {
-        //                 width: rem(33);
-        //             }
-        //         }
-        //     }
-        // }
+            ~ .names__expand .names__claim {
+                transform: translateX(calc((var(--line-width) + var(--line-offset)) * -1));
+            }
+        }
     }
 
     &__box {
@@ -127,6 +110,27 @@
             padding-top: rem(13);
             padding-bottom: 0;
             padding-right: rem(20);
+            position: relative;
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: calc(50% + 1px) rem(20) auto auto;
+                margin: auto;
+                height: 1px;
+                background: currentColor;
+                width: var(--line-width);
+                transform: scaleX(0);
+                transform-origin: right;
+                transition: transform .4s $ease-custom;
+            }
+
+
+            span {
+                transition: transform .4s $ease-custom;
+                display: inline-block;
+            }
         }
 
         .collections_images__content--simple & {
@@ -137,6 +141,9 @@
                 padding-top: rem(3);
                 padding-bottom: 0;
                 margin-bottom: -1px;
+
+
+                &::before { right: rem(30); }
             }
         }
 
@@ -230,6 +237,7 @@
             padding-right: var(--grid-margin);
             width: rem(400);
             margin-top: rem(-3);
+            transition: transform .4s $ease-custom;
         }
 
 

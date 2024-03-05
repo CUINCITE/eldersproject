@@ -1,8 +1,10 @@
 .filtered {
-    margin-top: 0;
+    border-top: none !important;
 
 
-    &:has(li) { margin-top: 1px; }
+    &:has(li) {
+        border-top: 1px solid var(--color-bg);
+    }
 
     &__list {
         @include flex(row, flex-start, center);

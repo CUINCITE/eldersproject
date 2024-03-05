@@ -128,6 +128,9 @@
 
 
     &__tiles {
+        margin-top: -1px;
+
+
         .is-grid-view & {
             @include breakpoint(desktop) {
                 display: grid;
@@ -469,7 +472,8 @@
 
     &__controls {
         background-color: var(--color-box);
-        border-bottom: 1px solid $color-bg;
+
+        // border-bottom: 1px solid $color-bg;
         position: relative;
         z-index: 1;
     }
