@@ -364,6 +364,13 @@
     }
 
 
+    &--map {
+        @include font-size(204, 157);
+
+        letter-spacing: -0.03em;
+    }
+
+
 
     &__counter {
         position: absolute;

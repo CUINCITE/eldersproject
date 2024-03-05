@@ -81,7 +81,7 @@
 
 
     &__aside {
-        @include flex(column, space-between, stretch);
+        @include flex(column, flex-start, stretch);
 
         flex-shrink: 0;
         background-color: var(--color-box);
@@ -105,8 +105,8 @@
 
     &__heading {
         @include breakpoint(desktop) {
-            padding-top: rem(38);
-            padding-left: rem(16);
+            padding-top: rem(37);
+            padding-left: rem(18);
         }
 
         @include breakpoint(tablet) {
@@ -168,7 +168,7 @@
         }
     }
 
-    
+
 
     &__location {
         border-top: 1px solid var(--color-bg);
