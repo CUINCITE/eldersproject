@@ -191,14 +191,7 @@
 
 
         input {
-            @include breakpoint(desktop) {
-                // causes weird jump upon clicking when form is scrollable on mobile
-                position: absolute;
-            }
-
-            @include breakpoint(not-desktop) {
-                display: inline;
-            }
+            position: absolute;
         }
     }
 

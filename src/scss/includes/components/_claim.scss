@@ -147,6 +147,7 @@
         left: 0;
         bottom: calc(100% - #{rem(10)});
         z-index: 5;
+        pointer-events: all;
 
 
         .is-404 &, .page_404 & {

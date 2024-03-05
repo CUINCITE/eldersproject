@@ -82,6 +82,14 @@
     height: 43px;
 
 
+    @include breakpoint(not-desktop) {
+        .player--video & {
+            width: 18px;
+            height: 21px;
+        }
+    }
+
+
     path, rect { fill: currentColor; }
 
 

@@ -37,7 +37,7 @@
     }
 
     @include breakpoint(phone) {
-        --sticker-size: #{vw(83.25, phone)};
+        --sticker-size: #{rem(82)};
     }
 
     // to do: refactor this
@@ -107,8 +107,7 @@
             @include font-size(18, 17);
             letter-spacing: -0.03em;
 
-            padding: 0 rem(15);
-            padding-top: rem(2);
+            padding: rem(12) rem(15) 0 rem(10);
         }
 
         .sticker--big & {

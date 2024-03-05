@@ -8,6 +8,11 @@
     inset: 0 0 0 auto;
     width: var(--GLOBAL-aside-width);
 
+
+    @include breakpoint(not-desktop) {
+        bottom: auto;
+    }
+
     body.has-open-modal & {
         @include breakpoint(not-desktop) {
             z-index: 0;

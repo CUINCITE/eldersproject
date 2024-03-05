@@ -48,8 +48,17 @@
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
 
+            transition-property: transform, opacity;
+            transition-duration: .7s, .1s;
+
             body.is-not-ready & {
                 transform: translateX(100%);
+            }
+
+
+            body.has-open-modal & {
+                opacity: 0;
+                pointer-events: none;
             }
         }
 

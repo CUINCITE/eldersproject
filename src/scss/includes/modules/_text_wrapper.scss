@@ -71,6 +71,14 @@
 
 
 
+    &__title {
+        @include breakpoint(not-desktop) {
+            min-height: rem(133);
+        }
+    }
+
+
+
     &__module {
         @include breakpoint(desktop) {
             z-index: 1;
