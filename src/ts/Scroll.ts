@@ -140,6 +140,7 @@ export default class Scroll {
         // if (browser.safari) { return; }
 
         Scroll.matchMedia = (gsap as any).matchMedia();
+        ScrollTrigger.normalizeScroll({ type: 'touch' });
         // Scroll.matchMedia.add('(min-width: 1024px)', () => {}
 
 
