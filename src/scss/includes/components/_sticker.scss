@@ -21,6 +21,12 @@
     overflow: hidden;
     backface-visibility: hidden;
 
+    // updated with js later
+
+    &[data-scroll] {
+        opacity: 0;
+        will-change: opacity, transform;
+    }
 
     &.is-visible {
         --sticker-fold-size: 11%;
@@ -39,9 +45,6 @@
     @include breakpoint(phone) {
         --sticker-size: #{rem(82)};
     }
-
-    // to do: refactor this
-    * { transition: all 0.5s ease-in-out; }
 
 
     &--yellow {
@@ -169,6 +172,7 @@
         width: var(--sticker-size);
         height: var(--sticker-size);
         border-radius: 50%;
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -176,6 +180,7 @@
     &__back {
         height: var(--sticker-fold-size);
         top: calc(var(--sticker-fold-size) * 1);
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -190,6 +195,7 @@
     &__front {
         bottom: 0;
         top: calc(var(--sticker-fold-size) * 2);
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -198,30 +204,4 @@
         margin-top: calc(var(--sticker-fold-size) * -1);
         background: var(--sticker-bg);
     }
-
-
-    // @include breakpoint(desktop) {
-    //     @include hover {
-    //         #{$self}__back {
-    //             height: 0;
-    //             top: 0;
-
-
-    //             #{$self}__circle {
-    //                 margin-top: calc(var(--sticker-size) * -1);
-    //             }
-    //         }
-
-
-    //         #{$self}__front {
-    //             top: 0;
-    //             height: var(--sticker-size);
-
-
-    //             #{$self}__circle {
-    //                 margin-top: 0;
-    //             }
-    //         }
-    //     }
-    // }
 }
