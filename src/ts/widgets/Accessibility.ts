@@ -18,8 +18,8 @@ export class Accessibility {
                 Accessibility.tabbedAmunt += 1;
                 if (debug) { console.log('%caccessibility', 'background: yellow; color: black', document.activeElement); }
                 html.classList.toggle('accessibility', Accessibility.tabbedAmunt >= 2);
+                Accessibility.tabbedAmunt >= 2 && !Accessibility.isOn && Analytics.sendCustomEvent({ event: 'accessibility_on' });
                 Accessibility.isOn = html.classList.contains('accessibility');
-                Accessibility.tabbedAmunt >= 2 && !!Accessibility.isOn && Analytics.sendCustomEvent({ event: 'accessibility_on' });
             }
         });
 
