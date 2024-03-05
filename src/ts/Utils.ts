@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+import { gsap } from 'gsap/dist/gsap';
 
 
 export function generateUID(): string {
@@ -420,4 +421,16 @@ export function createPlaceholders(elements: IBox[]): HTMLElement[] {
         placeholders.push(placeholder);
     });
     return placeholders;
+}
+
+
+
+export function shake(el): void {
+    gsap.fromTo(el, { x: -10 }, {
+        duration: 0.5,
+        x: 0,
+        clearProps: 'transform',
+        ease: 'elastic.out(2, 0.2)',
+    });
+    navigator.vibrate([40, 20, 40, 20, 40]);
 }

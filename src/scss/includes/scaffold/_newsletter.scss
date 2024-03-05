@@ -137,6 +137,9 @@
         animation: search-label-down .5s $ease-custom forwards;
 
 
+        span { display: inline-block; }
+
+
         @include breakpoint(desktop) {
             @include font-size(50, 50);
         }

@@ -2,7 +2,7 @@
 /* eslint-disable no-case-declarations */
 import { PushStates } from '../PushStates';
 import { Recaptcha } from './Recaptcha';
-import { serializeObject } from '../Utils';
+import { serializeObject, shake } from '../Utils';
 
 export interface IApiData {
     url?: string;
@@ -49,27 +49,18 @@ export class API {
                         if (!re.test(value) || !value.length) {
                             passed = false;
                             input.parentElement.classList.add('is-error');
-                            message = value.length > 0 ? "It seems there's an issue with the email you entered. <br> Please double-check and try again." : 'Required field';
+                            message = value.length > 0 ? 'Invalid format of email address you entered. Please double-check and try again.' : 'Required field';
                             input.closest('fieldset').querySelector('.js-error').innerHTML = message;
+                            shake([
+                                input,
+                                input.nextElementSibling.querySelector('span'),
+                                input.closest('fieldset').querySelector('.js-error'),
+                            ]);
+                            // should be label's span
                         } else {
                             input.parentElement.classList.remove('is-error');
                             input.closest('fieldset').querySelector('.js-error').innerHTML = '';
                         }
-                        break;
-
-                    case 'password':
-                        const pass = (input as HTMLInputElement).value;
-
-                        if (pass.length > 5) {
-                            input.parentElement.classList.remove('is-error');
-                            input.parentElement.querySelector('.js-error').innerHTML = '';
-                        } else {
-                            passed = false;
-                            input.parentElement.classList.add('is-error');
-                            message = pass.length > 0 ? 'invalid-pass' : 'Required field';
-                            input.parentElement.querySelector('.js-error').innerHTML = message;
-                        }
-
                         break;
 
                     case 'checkbox':
@@ -98,18 +89,6 @@ export class API {
 
                     default:
                         break;
-                }
-            });
-
-            el.querySelectorAll('textarea[required]').forEach(textarea => {
-                if ((textarea as HTMLTextAreaElement).value.length > 0) {
-                    textarea.parentElement.classList.remove('is-error');
-                    textarea.parentElement.querySelector('.js-error').innerHTML = '';
-                } else {
-                    passed = false;
-                    textarea.parentElement.classList.add('is-error');
-                    message = 'Required field';
-                    textarea.parentElement.querySelector('.js-error').innerHTML = message;
                 }
             });
 
@@ -154,27 +133,17 @@ export class API {
                         if (!re.test(value) || !value.length) {
                             passed = false;
                             input.parentElement.classList.add('is-error');
-                            message = value.length > 0 ? 'NOT VALID E-MAIL FORMAT' : 'Required field';
+                            message = value.length > 0 ? 'Invalid format of email address you entered. Please double-check and try again.' : 'Required field';
                             input.closest('fieldset').querySelector('.js-error').innerHTML = message;
+                            shake([
+                                input,
+                                input.nextElementSibling.querySelector('span'),
+                                input.closest('fieldset').querySelector('.js-error'),
+                            ]);
                         } else {
                             input.parentElement.classList.remove('is-error');
                             input.closest('fieldset').querySelector('.js-error').innerHTML = '';
                         }
-                        break;
-
-                    case 'password':
-                        const pass = (input as HTMLInputElement).value;
-
-                        if (pass.length > 5) {
-                            input.parentElement.classList.remove('is-error');
-                            input.parentElement.querySelector('.js-error').innerHTML = '';
-                        } else {
-                            passed = false;
-                            input.parentElement.classList.add('is-error');
-                            message = pass.length > 0 ? 'invalid-pass' : 'Required field';
-                            input.parentElement.querySelector('.js-error').innerHTML = message;
-                        }
-
                         break;
 
                     case 'checkbox':
@@ -203,18 +172,6 @@ export class API {
 
                     default:
                         break;
-                }
-            });
-
-            el.querySelectorAll('textarea[required]').forEach(textarea => {
-                if ((textarea as HTMLTextAreaElement).value.length > 0) {
-                    textarea.parentElement.classList.remove('is-error');
-                    textarea.parentElement.querySelector('.js-error').innerHTML = '';
-                } else {
-                    passed = false;
-                    textarea.parentElement.classList.add('is-error');
-                    message = 'Required field';
-                    textarea.parentElement.querySelector('.js-error').innerHTML = message;
                 }
             });
 
@@ -342,6 +299,36 @@ export class API {
     }
 
 
+
+    public static refresh = () => {
+        const forms = [...document.querySelectorAll('form')];
+
+        forms.forEach(form => {
+            const inputs = form.querySelectorAll('input');
+            const errors = [...form.querySelectorAll('.is-error'), ...form.querySelectorAll('.has-errors')];
+            const errorMessages = form.querySelectorAll('.js-error');
+            form.classList.remove('is-doing-request', 'is-completed', 'has-errors');
+
+
+            // eslint-disable-next-line no-restricted-syntax
+            for (const message of errorMessages) {
+                message.innerHTML = '';
+            }
+
+            // eslint-disable-next-line no-restricted-syntax
+            for (const input of inputs) {
+                input.value = '';
+            }
+
+            // eslint-disable-next-line no-restricted-syntax
+            for (const err of errors) {
+                err.classList.remove('is-error', 'has-errors');
+            }
+        });
+    };
+
+
+
     private static preprocessData(data: IApiData, el: HTMLElement): IApiData {
         // get data if api called on form element:
         if (el.matches('form')) {
@@ -396,33 +383,5 @@ export class API {
                 API.callbacks[data.callback](data, el, response);
             }
         }
-    };
-
-
-    public static refresh = () => {
-        const forms = [...document.querySelectorAll('form')];
-
-        forms.forEach(form => {
-            const inputs = form.querySelectorAll('input');
-            const errors = [...form.querySelectorAll('.is-error'), ...form.querySelectorAll('.has-errors')];
-            const errorMessages = form.querySelectorAll('.js-error');
-            form.classList.remove('is-doing-request', 'is-completed', 'has-errors');
-
-
-            // eslint-disable-next-line no-restricted-syntax
-            for (const message of errorMessages) {
-                message.innerHTML = '';
-            }
-
-            // eslint-disable-next-line no-restricted-syntax
-            for (const input of inputs) {
-                input.value = '';
-            }
-
-            // eslint-disable-next-line no-restricted-syntax
-            for (const err of errors) {
-                err.classList.remove('is-error', 'has-errors');
-            }
-        });
     };
 }
