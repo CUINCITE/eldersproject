@@ -180,10 +180,6 @@
             inset: auto rem(25) rem(-15) auto;
             width: fit-content;
             transition: opacity 0.3s $easing;
-
-            &.is-hidden {
-                opacity: 0;
-            }
         }
 
         &:has(a) .sticker {
