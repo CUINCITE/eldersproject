@@ -45,25 +45,23 @@
                         {% endfor %}
                     {% endif %}">
 
-                        {% if params.decor == "boxes" %}
-                            <section class="module module--boxes">
-                                <div class="boxes">[[svg::boxes]]</div>
-                            </section>
-                        {% endif %}
+                    {% if params.decor == "boxes" %}
+                        <div class="boxes">[[svg::boxes]]</div>
+                    {% endif %}
 
-                        {% if params.decor.type == "illustration" %}
-                            {% include "subviews/subview_picture.html" with { image: decor.image } %}
-                        {% endif %}
+                    {% if params.decor.type == "illustration" %}
+                        {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                    {% endif %}
 
-                        {% if params.decor.type == "photo" %}
-                            {% include "./components/c_polaroid.html" with decor.photo %}
-                        {% endif %}
+                    {% if params.decor.type == "photo" %}
+                        {% include "./components/c_polaroid.html" with decor.photo %}
+                    {% endif %}
 
-                        {% if params.decor.text %}
-                            <div class="text text--small">
-                                {{ params.decor.text|raw }}
-                            </div>
-                        {% endif %}
+                    {% if params.decor.text %}
+                        <div class="text text--small">
+                            {{ params.decor.text|raw }}
+                        </div>
+                    {% endif %}
 
                     </div>
                 {% endif %}

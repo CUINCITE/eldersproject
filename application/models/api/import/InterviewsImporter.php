@@ -33,7 +33,7 @@ class InterviewsImporter extends model_app_api_import
             'Brief Narrator Bio',           // --> narrator.bio
             'Bio summary (Byline)',                  // --> narrator.occupation
             'Brief Interview Summary',      // --> summary
-            '230 Character Summary',        // ---> lead
+            'Interview summary (Byline)',        // ---> lead
             'Language of Interview',        // --> languages
             'Session Count',                //skip
             '1st Narrator: Full Name',      // --> narrators
@@ -59,7 +59,7 @@ class InterviewsImporter extends model_app_api_import
 
         foreach ($items as $k => $v) {
 
-            $topics = explode(',', str_replace('; ', ';', $v['Topic(s)']));
+            $topics = explode(';', $v['Topic(s)']);
 
             foreach ($topics as $kk => $vv) {
                 $vv = trim($vv);
@@ -125,8 +125,10 @@ class InterviewsImporter extends model_app_api_import
                 'Jenna "J" Wortham' => 'Jenna Wortham'
             ];
 
+            $unsetItems = [];
+
             // ID=narrator id
-            if (@$id) {
+            if ($id) {
                 $i = [];
                 if (@$v['Interviewer: Full Name']) $i[] = $v['Interviewer: Full Name'];
                 if (@$v['2nd Interviewer: Full Name']) $i[] = $v['2nd Interviewer: Full Name'];
@@ -144,18 +146,35 @@ class InterviewsImporter extends model_app_api_import
                 }
 
                 $languages = $v['Language of Interview'];
+                if (!$languages) $languages = 'English';
                 $languages = str_replace(';', ',', $languages);
                 $languages = str_replace(' and ', ', ', $languages);
+                $languages = str_replace(' & ', ', ', $languages);
+                $languages = explode(',', $languages);
 
-                if (!$languages || $languages == 'English') $languages = [1];
-                elseif ($languages == 'Spanish') $languages = [2];
-                elseif ($languages == 'English, Spanish') $languages = [1, 2];
-                else return ['result' => false, 'message' => 'Unknown languages: ' . $languages];
+//                if (!$languages || $languages == 'English') $languages = [1];
+//                elseif ($languages == 'Spanish') $languages = [2];
+//                elseif ($languages == 'English, Spanish') $languages = [1, 2];
+//                else return ['result' => false, 'message' => 'Unknown languages: ' . $languages];
+
+                $languageToID = ['English' => 1, 'Spanish' => 2, 'Yaqui Language' => 3, 'Hawaiian' => 4];
+
+                $languages = is_array($languages) ? $languages : [$languages];
+                $output = [];
+                foreach($languages as $language){
+                    if(array_key_exists(trim($language), $languageToID)){
+                        $output[] = $languageToID[trim($language)];
+                    } else {
+                        return ['result' => false, 'message' => 'Unknown languages: ' . $language];
+                    }
+                }
+
+                $languages = $output;
 
                 $items[$k] = [
                     'incite_id' => $v['Interview ID'],
                     'narrators' => $n,
-                    'lead' => $v['230 Character Summary'],
+                    'lead' => $v['Interview summary (Byline)'],
                     'label' => $name,
                     'languages' => $languages,
                     'interviewers' => $i,
@@ -163,18 +182,34 @@ class InterviewsImporter extends model_app_api_import
                     'topics' => $topics,
                     'active' => 1
                 ];
-            } else unset($items[$k]);
+            } else {
+                $unsetItems[] = $v['Interview ID'];
+                unset($items[$k]);
+            }
         }
 
+
+        $interviewsAdded = 0;
         $this->parent->queryOut('UPDATE interviews SET active=0');
         foreach ($items as $k => $v) {
-            $r = $this->parent->putJsonModel('interviews', $v, ['incite_id' => $v['incite_id']]);
-            if (!$r) return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
+            $interviewGet = $this->parent->getJsonModel('interviews_list', ['incite_id' => $v['incite_id']], true);
+            if ($interviewGet) {
+                $r = $this->parent->putJsonModel('interviews', $v, ['incite_id' => $v['incite_id']]);
+                if (!$r) return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
+            } else {
+                $v['slug'] = $this->slugify($v['label']);
+                $postSuccess = $this->parent->postJsonModel('interviews', $v);
+                if ($postSuccess) $interviewsAdded++;
+                else return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
+            }
         }
 
         $message[] = 'Added narrators: ' . $n_added;
         $message[] = 'Updated narrators: ' . $n_updated;
         $message[] = 'Activated interviews: ' . count($items);
-        return ['result' => true, 'message' => implode(' ... ', $message)];
+        $message[] = 'Added interviews: ' . $interviewsAdded;
+//        $message[] = ['Unset Items' => $unsetItems];
+        return ['result' => true, 'message' => implode(' ... ', $message), 'unsetItems' => $unsetItems];
     }
+
 }

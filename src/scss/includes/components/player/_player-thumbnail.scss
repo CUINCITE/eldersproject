@@ -11,13 +11,33 @@
         flex-shrink: 0;
         pointer-events: all;
         cursor: pointer;
-        transition: transform .7s $ease-custom;
+
         background-color: var(--color-box);
+
+
+        @include breakpoint(phone) {
+            @include flex(row-reverse, space-between, stretch);
+
+            position: absolute;
+            inset: auto auto 0 100%;
+            height: var(--GLOBAL-aside-width);
+            width: calc(var(--app-height) - var(--hamburgerbar-height));
+            transform: rotate(-90deg);
+            transform-origin: left bottom;
+            border-left: none;
+            background: none;
+        }
+
 
 
         body.is-not-ready & {
             transform: translateY(100%);
             transition: none;
+        }
+
+
+        body.is-fully-loaded & {
+            transition: transform .7s $ease-custom;
         }
     }
 
@@ -36,12 +56,30 @@
         padding-top: rem(4);
         overflow: hidden;
         width: 100%;
+        transition: transform .7s $ease-out;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(19, 1);
+        }
+
+
+        @include breakpoint(phone) {
+            .is-expanded & {
+                transform: translateY(100%);
+            }
+        }
 
 
         span {
             will-change: transform;
             padding-right: rem(15);
             animation: marquee 6s linear infinite;
+
+
+            @include breakpoint(phone) {
+                padding-right: 40px;
+            }
         }
     }
 
@@ -50,7 +88,6 @@
     &__cassette {
         border-top: 1px solid var(--color-black);
         position: relative;
-        overflow: hidden;
 
 
         &-bg, &-wrap {
@@ -70,6 +107,35 @@
             background-color: var(--cassette-bg-color);
         }
 
+
+
+        @include breakpoint(desktop) {
+            overflow: hidden;
+            border-top: 1px solid var(--color-black);
+        }
+
+
+        @include breakpoint(phone) {
+            flex-basis: var(--bar-height);
+            flex-shrink: 0;
+            border-top: none;
+            transition: transform .7s cubic-bezier(.5, 0, .1, 1);
+            background-color: var(--color-box);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: -7px 0 100%;
+                background-color: var(--cassette-bg-color);
+                border-bottom: 1px solid var(--color-bg);
+            }
+
+
+            .is-expanded & {
+                transform: translateY(calc(-100vw + var(--GLOBAL-aside-width)));
+            }
+        }
 
         svg {
             width: 100%;

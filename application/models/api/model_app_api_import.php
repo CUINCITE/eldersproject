@@ -13,15 +13,19 @@ class model_app_api_import
     public function rest($method, $params)
     {
 
+        if (!str_contains($_SERVER['HTTP_HOST'],'.lh') && getenv('SQL_HOST') !== 'localhost' && getenv('S3_BUCKET')) {
+            exit('Import functionality is only available on localhost and for local databases.');
+        }
+
         $this->parent->cache_kill();
         $action = @_uho_fx::getGet('action');
         if (!$action) return ['result' => false, 'message' => 'No Action defined'];
 
         $actions = match ($action) {
-            "standard" => ['interviews', 'sessions', 'locations'], // safe to use
+            "metadata" => ['interviews', 'update_interviews', 'sessions', 'locations'], // safe to use
             "media" => ['media'], // safe
             "sessions_files_data" => ["sessions_files_data"], //safe
-            "mementos" => ["mementos"], // safe
+            "mementos" => ["mementos"], // requires resising images in serdelia after import
             "indexes" => ['indexes'], // safe
             "topics" => ['topics'], // NOT SAFE!! - overwrites manual image-to-tag assignment
             default => explode(',', $action),
@@ -35,7 +39,12 @@ class model_app_api_import
             'media' => 'FilesImporter',
             'mementos' => 'MementosImporter',
             'locations' => 'LocationsImporter',
-            "sessions_files_data" => "SessionsUpdater"
+
+            "sessions_files_data" => "SessionsUpdater", // UPDATER
+            'update_interviews' => "InterviewsUpdater", // UPDATER
+            'count_tags' => "TagCounter",
+
+            'debug' => 'Debugger'
         ];
 
         $resultArray = [];

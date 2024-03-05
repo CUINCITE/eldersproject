@@ -70,16 +70,24 @@
 
 
 .svg-prevnext {
-    width: rem(34);
-    height: rem(42);
+    width: 34px;
+    height: 42px;
 
     path, rect { fill: currentColor; }
 }
 
 
 .svg-play {
-    width: rem(37);
-    height: rem(43);
+    width: 37px;
+    height: 43px;
+
+
+    @include breakpoint(not-desktop) {
+        .player--video & {
+            width: 18px;
+            height: 21px;
+        }
+    }
 
 
     path, rect { fill: currentColor; }
@@ -108,8 +116,8 @@
 
 
 .svg-rewind {
-    width: rem(30);
-    height: rem(25);
+    width: 30px;
+    height: 25px;
 
     path:first-of-type { stroke: currentColor; stroke-width: 2.25; }
     path:last-of-type { fill: currentColor; }
@@ -187,8 +195,41 @@
 }
 
 .svg-pin-color {
+    width: rem(31);
+    margin-right: rem(8);
+    flex-shrink: 0;
+
+    circle:first-of-type { fill: var(--pin-outer-color); }
+    path { fill: var(--pin-color); }
+}
+
+
+.svg-arrow-small {
     @include breakpoint(desktop) {
-        margin-right: rem(8);
-        width: rem(31);
+        width: rem(7);
+        height: rem(13);
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    .polaroid_gallery & {
+        @include breakpoint(desktop) {
+            width: rem(14);
+            height: rem(23);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            width: 14px;
+            height: 23px;
+        }
     }
 }

@@ -70,7 +70,7 @@ export abstract class Player extends Component {
         playPauseBtn?: HTMLElement,
         bottomPanel?: HTMLElement,
         thumbnail?: HTMLElement;
-        minimize?: HTMLElement;
+        minimize?: NodeListOf<HTMLElement>;
         playerBar?: HTMLElement;
         rewindBtn?: HTMLElement;
         forwardBtn?: HTMLElement;

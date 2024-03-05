@@ -2,7 +2,7 @@
     $self: &;
 
 
-    --sticker-size: #{vw(111)};
+    --sticker-size: #{rem(111)};
     --sticker-fold-size: 0%;
     --sticker-bg: var(--color-red);
     --sticker-back-bg: var(--color-pink);
@@ -21,13 +21,19 @@
     overflow: hidden;
     backface-visibility: hidden;
 
+    // updated with js later
+
+    &[data-scroll] {
+        opacity: 0;
+        will-change: opacity, transform;
+    }
 
     &.is-visible {
         --sticker-fold-size: 11%;
     }
 
     @include breakpoint(desktop) {
-        padding: vw(30) vw(20);
+        padding: rem(30) rem(20);
     }
 
     @include breakpoint(tablet) {
@@ -37,11 +43,8 @@
     }
 
     @include breakpoint(phone) {
-        --sticker-size: #{vw(83.25, phone)};
+        --sticker-size: #{rem(82)};
     }
-
-    // to do: refactor this
-    * { transition: all 0.5s ease-in-out; }
 
 
     &--yellow {
@@ -104,11 +107,10 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(18.75, 16.5);
-            @include letter-spacing(-0.0562, 18.75);
+            @include font-size(18, 17);
+            letter-spacing: -0.03em;
 
-            padding-top: rem(12);
-            padding-right: rem(6);
+            padding: rem(12) rem(15) 0 rem(10);
         }
 
         .sticker--big & {
@@ -133,7 +135,7 @@
             }
         }
 
-        .quote_panel__quote & {
+        .collection_hero__sticker-wrapper & {
             @include breakpoint(desktop) {
                 padding-top: rem(2);
             }
@@ -170,6 +172,7 @@
         width: var(--sticker-size);
         height: var(--sticker-size);
         border-radius: 50%;
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -177,6 +180,7 @@
     &__back {
         height: var(--sticker-fold-size);
         top: calc(var(--sticker-fold-size) * 1);
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -191,6 +195,7 @@
     &__front {
         bottom: 0;
         top: calc(var(--sticker-fold-size) * 2);
+        transition: all 0.5s ease-in-out;
     }
 
 
@@ -199,30 +204,4 @@
         margin-top: calc(var(--sticker-fold-size) * -1);
         background: var(--sticker-bg);
     }
-
-
-    // @include breakpoint(desktop) {
-    //     @include hover {
-    //         #{$self}__back {
-    //             height: 0;
-    //             top: 0;
-
-
-    //             #{$self}__circle {
-    //                 margin-top: calc(var(--sticker-size) * -1);
-    //             }
-    //         }
-
-
-    //         #{$self}__front {
-    //             top: 0;
-    //             height: var(--sticker-size);
-
-
-    //             #{$self}__circle {
-    //                 margin-top: 0;
-    //             }
-    //         }
-    //     }
-    // }
 }

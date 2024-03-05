@@ -16,7 +16,7 @@ class TopicsImporter extends model_app_api_import
 
         foreach ($items as $k=>$interview) {
             $interviewTopics = $interview['Topic(s)'];
-            $interviewTopics = explode(',', $interviewTopics);
+            $interviewTopics = explode(';', $interviewTopics);
             foreach ($interviewTopics as $topic) {
                 $topic = trim($topic);
                 if (!in_array($topic, $topics)) $topics[] = $topic;

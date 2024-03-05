@@ -1,18 +1,20 @@
 .logo_box {
 
     @include breakpoint(tablet) {
-        svg { 
-            width: vw(150, tablet); 
+        svg {
+            width: vw(150, tablet);
             margin: vw(13, tablet) 0 vw(9, tablet) calc(#{map-get($grid-offset, tablet)} - #{vw(7, tablet)});
-            height: auto; 
+            height: auto;
         }
     }
 
     @include breakpoint(phone) {
-        svg { 
-            width: vw(80, phone); 
+        height: var(--hamburgerbar-height);
+
+        svg {
+            width: vw(79, phone);
             margin: vw(13, phone) 0 vw(9, phone) vw(13, phone);
-            height: auto; 
+            height: auto;
         }
     }
 }

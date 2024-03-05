@@ -72,6 +72,7 @@ export class Map extends Component {
     private locations: IMapLocation[];
     private allFeatures: GeoJSON.Feature[];
     private geojson: mapboxgl.GeoJSONSourceRaw;
+    private style: string;
 
 
     constructor(protected view: HTMLElement) {
@@ -80,7 +81,7 @@ export class Map extends Component {
         this.settings = {
             lng: -122,
             lat: 37,
-            minZoom: 8,
+            minZoom: 3.5,
             zoom: 10,
             maxZoom: 16,
             interactive: true,
@@ -102,11 +103,7 @@ export class Map extends Component {
         this.locations = JSON.parse(this.view.getAttribute('data-locations')) as IMapLocation[];
 
         // find style for given modifier (if exists)
-        const style = this.view.getAttribute('data-theme-color');
-        if (style && mapStyles[style]) {
-            this.settings.style = mapStyles[style];
-        }
-
+        this.style = this.view.getAttribute('data-theme-color');
 
         if (this.settings.lazyLoading) {
             setTimeout(() => this.init(), 5000);
@@ -125,6 +122,7 @@ export class Map extends Component {
             center: [this.settings.lng, this.settings.lat],
             zoom: this.settings.zoom,
             maxZoom: this.settings.maxZoom,
+            minZoom: this.settings.minZoom,
             renderWorldCopies: this.settings.renderWorldCopies,
             interactive: this.settings.interactive,
             dragRotate: false,
@@ -154,12 +152,85 @@ export class Map extends Component {
 
 
 
-    private onLoad = async() => {
+    private onLoad = async () => {
         this.map.on('idle', this.onMapIdle);
         this.bind();
         breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
 
         this.fitBounds(true);
+        this.setFilters();
+        this.style !== 'main' && this.updateColors();
+    };
+
+
+    private updateColors(): void {
+        const camelCaseName = this.style.split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1));
+
+        mapStyles[camelCaseName].forEach(({ name, type, color }) => {
+            this.map.setPaintProperty(name, type, color);
+        });
+    }
+
+
+
+    private setFilters = (): void => {
+        const filter: mapboxgl.Expression = [
+            'all',
+            [
+                'match',
+                ['get', 'class'],
+                [
+                    'country',
+                    'disputed_country',
+                ],
+                [
+                    'match',
+                    ['get', 'worldview'],
+                    ['all', 'US'],
+                    true,
+                    false,
+                ],
+                false,
+            ],
+            [
+                'match',
+                ['get', 'iso_3166_1'],
+                ['US'],
+                true,
+                false,
+            ],
+            [
+                'step',
+                ['pitch'],
+                true,
+                50,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    3,
+                ],
+                60,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    4,
+                ],
+                70,
+                [
+                    '<',
+                    [
+                        'distance-from-center',
+                    ],
+                    5,
+                ],
+            ],
+        ];
+
+        this.map.setFilter('country-label', filter);
     };
 
 
@@ -414,9 +485,8 @@ export class Map extends Component {
 
         // Static images url here
         // eslint-disable-next-line camelcase
-        const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
-        console.log(url);
-
+        // const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+        // console.log(url);
     };
 
 
@@ -424,10 +494,11 @@ export class Map extends Component {
     private getTabContent = (): void => {
         this.locationsElements.forEach(l => {
             const coords = l.getAttribute('data-coords').split(',').map(el => parseFloat(el));
+            const style = (this.settings.style as string).match(/mapbox:\/\/styles\/huncwoty\/(.*)/)[1];
 
-            const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
+            const url = `https://api.mapbox.com/styles/v1/huncwoty/${style}/static/${coords[1]},${coords[0]},16,0,${this.map.getPitch()}}/400x400?access_token=${token}`;
             const img = `<img src='${url}' class='map-image js-map-image' />
-                        <div class="map__pin">
+                        <div class="map__marker">
                             <div class="map__tooltip map__tooltip--marker">${l.dataset.title}</div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">
                                 <circle cx="31.6143" cy="31" r="31" fill="#548068"/>

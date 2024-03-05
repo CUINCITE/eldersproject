@@ -16,20 +16,18 @@
             </div>
             <div class="interviews__claim">
                 <div class="grid">
-                    <div class="col-start-8 col-span-5">
-                        <div class="interviews__copy">
-                            {% include "subviews/subview_text.html" with { 
-                            size: "larger",
-                            text: text
-                            } %}
-                        </div>  
-                    </div>
+                    <div class="interviews__copy col-start-8 col-span-5">
+                        {% include "subviews/subview_text.html" with { 
+                        size: "larger",
+                        text: text
+                        } %}
+                    </div>  
                 </div>
                 <div class="interviews__image" data-animation="slideUp" data-delay="0.2" data-action="pause">
                     {% include "subviews/subview_picture.html" with {
                         image: {
-                            desktop: "/public/theme/images/flag.png",
-                            mobile: "/public/theme/images/flag.png"
+                                desktop: "/public/theme/images/flag.png",
+                                mobile: "/public/theme/images/flag.png"
                             }
                         }
                     %}
@@ -37,7 +35,7 @@
             </div>
         </div>
 
-        <div class="interviews__button_box box__wrapper box" data-scroll="box">
+        <div class="button__box box__wrapper box" data-scroll="box">
             <div class="box__bg"></div>
             <div class="grid">
                 <div class="col-start-1 col-span-12">

@@ -140,6 +140,7 @@ export default class Scroll {
         // if (browser.safari) { return; }
 
         Scroll.matchMedia = (gsap as any).matchMedia();
+        ScrollTrigger.normalizeScroll({ type: 'touch' });
         // Scroll.matchMedia.add('(min-width: 1024px)', () => {}
 
 
@@ -220,7 +221,7 @@ export default class Scroll {
         const target = document.querySelector(hash) as HTMLElement;
 
         target
-            ? Scroll.scrollTo({ el: target })
+            ? Scroll.scrollTo({ el: target, duration: 0 })
             : console.warn('There is no %s element', hash);
     };
 }

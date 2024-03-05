@@ -44,7 +44,7 @@ class model_app extends _uho_model
         $this->orm->setImageSizes(true);
 
 //        if (cache or $_SERVER['REQUEST_URI'] === '/interviews') {
-        if (true && $_SERVER['REQUEST_URI'] !== '/api/player') {
+        if (true && $_SERVER['REQUEST_URI'] !== '/api/player' && $_SERVER['REQUEST_URI'] !== '/api/import') {
             $this->sql->cacheSet('7g!',
                 [
                     'users','users_newsletter'

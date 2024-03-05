@@ -7,6 +7,12 @@
     transform: rotate(0);
     transition: transform $time-fast $easing;
 
+
+    @include breakpoint(phone) {
+        width: 14px;
+        height: 14px;
+    }
+
     // top: -1px;
 
     // html.mac & { top: 1px; }
@@ -660,11 +666,11 @@
 .icon-volume {
     @include flex(row, center, flex-end);
 
-    height: rem(30);
-    gap: rem(2);
+    height: 30px;
+    gap: 2px;
 
     span {
-        width: rem(5);
+        width: 5px;
         background-color: currentColor;
         height: 100%;
         transition: height .25s $ease-custom, opacity .25s $ease-custom;
@@ -681,7 +687,7 @@
 
     .is-muted & {
         span {
-            height: rem(6);
+            height: 6px;
             opacity: 0.5;
         }
     }
@@ -691,14 +697,23 @@
 .icon-cassette {
     @include flex(row, center, center);
 
-    width: rem(30);
-    height: rem(30);
+    width: 30px;
+    height: 30px;
     background-color: var(--color-black);
     border-radius: 50%;
     position: relative;
     z-index: -1;
 
+
+    @include breakpoint(not-desktop) {
+        width: 12px;
+        height: 12px;
+    }
+
     span {
+        --inset-value: -52%;
+
+
         position: absolute;
         width: 80%;
         height: 80%;
@@ -707,10 +722,18 @@
         margin: auto;
 
 
-        &:first-child { inset: -52% auto auto; }
-        &:nth-child(2) { inset: auto auto -52%; }
-        &:nth-child(3) { inset: auto -52% auto auto; }
-        &:nth-child(4) { inset: auto auto auto -52%; }
+        @include breakpoint(not-desktop) {
+            --inset-value: -60%;
+
+            width: 85%;
+            height: 85%;
+        }
+
+
+        &:first-child { inset: var(--inset-value) auto auto; }
+        &:nth-child(2) { inset: auto auto var(--inset-value); }
+        &:nth-child(3) { inset: auto var(--inset-value) auto auto; }
+        &:nth-child(4) { inset: auto auto auto var(--inset-value); }
     }
 }
 

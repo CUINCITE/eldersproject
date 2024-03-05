@@ -20,7 +20,7 @@
         @include breakpoint(tablet) {
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
-            
+
             gap: vw(6, tablet);
         }
 
@@ -36,6 +36,8 @@
     &--overflow {
         @include breakpoint(desktop) {
             overflow: hidden;
+            display: inline-flex;
+            padding-right: rem(10);
         }
     }
 
@@ -95,7 +97,9 @@
     &--medium {
 
         @include breakpoint(desktop) {
-            @include font-size(40, 30);
+            @include font-size(40, 1);
+
+            margin-block: trim-font(1);
 
             --padding: #{rem(6)};
 
@@ -104,6 +108,7 @@
 
         @include breakpoint(tablet) {
             @include font-size(40, 30);
+
 
             gap: rem(7);
         }
@@ -218,10 +223,29 @@
     }
 
     &__box {
+
         @include breakpoint(desktop) {
-            border-top: 1px solid $color-bg;
             padding-top: rem(14);
             padding-bottom: rem(108);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+            border-top: 1px solid $color-bg;
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(14);
+            padding-bottom: rem(42);
+            border-top: 1px solid $color-bg;
+        }
+
+
+        .interviews--banner & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(167);
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 .faq {
-
     &__heading {
         @include breakpoint(not-desktop) {
             position: relative;
@@ -24,6 +23,7 @@
         display: inline-block;
         position: absolute;
         inset: 0 auto 0 50%;
+        z-index: 1;
         transform: translateX(-50%);
         width: 1px;
         background-color: var(--color-bg);

@@ -1,14 +1,14 @@
 .quote {
     @include font-family(normal, 400);
     @include font-settings(700, 100);
- 
+
     &--big {
         @include font-family(compressed);
 
         text-transform: uppercase;
         position: relative;
         font-variation-settings: unset;
-    
+
         @include breakpoint(desktop) {
             @include font-size(40, 37.4);
             @include letter-spacing(-1.2, 40);
@@ -18,19 +18,19 @@
             @include font-size(36, 0.94);
             @include letter-spacing(-0.98 , 36);
         }
-    
+
         @include breakpoint(phone) {
             @include font-size(28, 0.94);
             @include letter-spacing(-0.84, 28);
         }
-    
+
         &::before {
             // content: url("./public/theme/images/svg/quote-icon.svg");
             content: url("./images/svg/quote-icon.svg");
             display: inline-block;
             aspect-ratio: 1/1;
             overflow: hidden;
-    
+
             @include breakpoint(desktop) {
                 width: rem(29);
                 margin-bottom: rem(4);
@@ -42,13 +42,13 @@
                 margin-bottom: rem(4);
                 margin-left: rem(1);
             }
-    
+
             @include breakpoint(phone) {
                 width: rem(28);
-                margin-bottom: rem(4);
+                margin-bottom: 0;
                 margin-left: rem(1);
             }
-        } 
+        }
 
         p {
             @include breakpoint(desktop) {
@@ -108,14 +108,13 @@
                 width: rem(26);
                 margin-right: rem(10);
             }
-
         }
     }
 
     &__cassette {
         display: inline-flex;
         vertical-align: middle;
-        position: relative; 
+        position: relative;
         z-index: 1;
         margin-inline: 0.15em;
 
@@ -129,20 +128,20 @@
             path {
                 animation: cassette 4s linear infinite;
                 animation-play-state: paused;
-    
+
                 &:first-of-type {
                     transform-origin: 29px 29px;
                 }
-    
+
                 &:last-of-type {
                     transform-origin: 81px 29px;
                 }
             }
         }
 
-        &:after {
+        &::after {
             display: block;
-            content: '';
+            content: "";
             top: 0;
             left: 0;
             width: 100%;
@@ -165,7 +164,7 @@
                 font-size: 1.4em;
                 margin-top: -0.1em;
                 color: $color-gold;
-                content: 'PLAY';
+                content: "PLAY";
                 position: absolute;
                 display: block;
                 width: 140%;
@@ -205,13 +204,14 @@
             width: rem(38);
             height: rem(20);
         }
- 
+
         .quote--big & {
             vertical-align: baseline;
 
             @include breakpoint(desktop) {
                 width: rem(57);
                 height: rem(30);
+
                 // margin-right: 1em;
 
                 &::before {

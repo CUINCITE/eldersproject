@@ -12,6 +12,10 @@
 
     @include breakpoint(desktop) {
         @include font-size(50, 1);
+
+        @media (max-height: 719px) {
+            --search-height: #{vw(100)};
+        }
     }
 
     @include breakpoint(tablet) {

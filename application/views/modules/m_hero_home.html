@@ -28,7 +28,7 @@
           <div class="col-span-5 col-start-8">
             <div class="hero__bottom">
               <div class="hero__text desktop-only">
-                {% include "subviews/subview_text.html" with { 
+                {% include "subviews/subview_text.html" with {
                   size: "larger",
                   text: text
                 } %}
@@ -39,18 +39,21 @@
       </div>
 
       <div class="hero__sticker">
-        {% include 'subviews/subview_sticker.html' with {label:'Today\'s Highlights'} %}
+        {% include 'subviews/subview_sticker.html' with { label:'Today\'s Highlights', modifier: 'long_text', delay: '.5' } %}
       </div>
 
     </div>
 
-    <div class="box desktop-hide">
+
+    <div class="box desktop-hide" data-scroll="box">
+      <div class="box__bg"></div>
       <div class="grid">
         <div class="hero__text">
           {% include "subviews/subview_text.html" with {text: text} %}
         </div>
       </div>
     </div>
+
 
   </div>
 </section>

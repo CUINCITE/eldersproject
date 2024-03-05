@@ -23,6 +23,11 @@ html {
     @include breakpoint(hd) {
         font-size: $base-font-size * $size-hd / $size-design;
     }
+
+
+    @include breakpoint(not-desktop) {
+        &.is-overflow-hidden { overflow: hidden; }
+    }
 }
 
 body {
@@ -102,22 +107,6 @@ article {
     body.is-homepage.is-loader-hiding & {
         background-color: var(--color-bg);
     }
-
-    &::before {
-        @include full;
-
-        content: "";
-        z-index: 4;
-        background-color: rgba($color-bg, .5);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .3s $ease-custom;
-    }
-
-    &:has(.modal.is-open)::before {
-        opacity: 1;
-        pointer-events: all;
-    }
 }
 
 
@@ -167,6 +156,8 @@ a {
 
 b,
 strong {
+    @include font-settings(700, 100);
+
     font-weight: 700;
 }
 

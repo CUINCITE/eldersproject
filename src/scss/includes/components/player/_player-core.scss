@@ -19,11 +19,18 @@
         overflow: visible;
         margin-bottom: $bar-height;
         padding-bottom: 56.25%;
+
+
+        @include breakpoint(not-desktop) {
+            margin-bottom: 32px;
+        }
     }
 
 
     &--collection {
-        margin-bottom: rem(89);
+        @include breakpoint(desktop) {
+            margin-bottom: rem(89);
+        }
     }
 
 
@@ -41,7 +48,28 @@
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
 
-            z-index: 3;
+            transition-property: transform, opacity;
+            transition-duration: .7s, .1s;
+
+            body.is-not-ready & {
+                transform: translateX(100%);
+            }
+
+
+            body.has-open-modal & {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            inset: 0;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+
+            &.is-expanded { pointer-events: all; }
         }
 
         audio { display: none; }

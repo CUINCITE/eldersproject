@@ -1,6 +1,6 @@
 {
     "name": "elder-project",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "private": true,
     "description": "Elder Project",
     "homepage": "https://elder.sunship.one/",
@@ -92,10 +92,10 @@
         "yargs": "^15.1.0"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.14.0",
-        "@typescript-eslint/parser": "^5.14.0",
         "@types/geojson": "^7946.0.8",
         "@types/imagesloaded": "^4.1.2",
-        "@types/mapbox-gl": "^2.4.2"
+        "@types/mapbox-gl": "^2.4.2",
+        "@typescript-eslint/eslint-plugin": "^5.14.0",
+        "@typescript-eslint/parser": "^5.14.0"
     }
 }

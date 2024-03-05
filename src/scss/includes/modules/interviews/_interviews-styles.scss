@@ -1,5 +1,4 @@
 .interviews {
-
     &--banner {
         .interviews__copy {
             @include breakpoint(desktop) {
@@ -19,7 +18,8 @@
         position: relative;
 
         @include breakpoint(desktop) {
-            padding-block: rem(18);
+            padding: rem(30) 0 rem(12);
+            height: rem(195);
         }
 
         @include breakpoint(phone) {
@@ -34,11 +34,6 @@
                 // padding-bottom: rem(46);
             }
 
-            .sticker {
-                @include breakpoint(desktop) {
-                    translate: -44% -60%;
-                }
-            }
 
             .interviews__sticker {
                 @include breakpoint(not-desktop) {
@@ -70,6 +65,11 @@
         position: relative;
         z-index: 2;
 
+
+        @include breakpoint(desktop) {
+            translate: -44% -78%;
+        }
+
         @include breakpoint(not-desktop) {
             position: absolute;
 
@@ -99,13 +99,15 @@
 
     &__item {
         position: relative;
+        border-top: 1px solid var(--color-bg);
     }
 
 
 
-    &__main {}
+    &__main {
+    }
 
- 
+
 
     &__list {
         &--collection {
@@ -248,24 +250,55 @@
 
 
     &__claim {
+        border-top: 1px solid $color-bg;
+
         @include breakpoint(desktop) {
             position: relative;
-            border-top: 1px solid $color-bg;
             padding-top: rem(20);
             padding-bottom: rem(70);
             min-height: vw(366);
+        }
+
+        @include breakpoint(tablet) {
+            position: relative;
+
+            .grid {
+                div {
+                    grid-column: 3 / span 6 !important;
+                }
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            position: relative;
         }
     }
 
 
 
     &__image {
+        aspect-ratio: 1/1;
+
         @include breakpoint(desktop) {
             position: absolute;
             left: rem(-10);
             top: rem(-56);
             width: vw(352);
-            height: vw(352);
+        }
+
+        @include breakpoint(tablet) {
+            position: absolute;
+            width: vw(186, tablet);
+            left: rem(10);
+            top: rem(10);
+        }
+
+        @include breakpoint(phone) {
+            position: absolute;
+            z-index: 2;
+            inset: calc(100% + #{rem(37)}) auto auto rem(-21);
+            width: vw(240, phone);
         }
     }
 
@@ -316,12 +349,11 @@
         @include flex(row, flex-end, center);
 
         @include breakpoint(tablet) {
-            grid-column: 1 / span 8 !important;
-            margin-top: rem(18);
-            display: grid;
-            align-items: start;
-            grid-template-columns: repeat(map-get($grid-columns, tablet), minmax(0, 1fr));
-            column-gap: map-get($grid-gutter, tablet);
+            @include flex(row, space-between, flex-start);
+
+
+
+            grid-column: span 2;
         }
 
         @include breakpoint(phone) {
@@ -334,6 +366,12 @@
                 border-left: 1px solid var(--color-bg);
                 margin-right: calc(var(--grid-margin) * -1);
             }
+
+            // @include breakpoint(tablet) {
+            //     .interview-box {
+            //         width: rem(344);
+            //     }
+            // }
         }
     }
 
@@ -458,8 +496,7 @@
         @include breakpoint(tablet) {
             @include font-size(16, 18);
 
-            grid-column: span 3;
-            margin-top: rem(32);
+            padding-block: rem(20);
         }
 
         @include breakpoint(phone) {
@@ -480,8 +517,8 @@
         .is-grid-view & {
             @include letter-spacing(0.07, 13);
 
-            background-color: var(--color-black);
-            color: var(--color-grey200);
+            background-color: var(--color-grey200);
+            color: var(--color-black);
             padding: rem(16) rem(16) rem(12) rem(14);
             position: absolute;
             inset: auto 0 0;

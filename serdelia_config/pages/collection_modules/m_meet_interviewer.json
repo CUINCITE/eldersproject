@@ -28,8 +28,7 @@
       "images": [
         {
           "folder": "desktop",
-          "width": 864,
-          "height": 486,
+          "width": 1060,
           "label": "Desktop",
           "retina": true
         },

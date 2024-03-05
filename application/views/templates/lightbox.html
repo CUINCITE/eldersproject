@@ -34,7 +34,7 @@
                     <div class="lightbox__state">[[svg::pin]]{{state}}</div>
                 </div>
                 {% if tags %}
-                <ul class="lightbox__tags">
+                <ul class="lightbox__tags desktop-only">
                     {% for tag in tags %}
                     <li><a href="{{tag.url}}">{{tag.label}}</a></li>
                     {% endfor %}
@@ -42,7 +42,7 @@
                 {% endif %}
                 <div class="lightbox__footer">
                     <button class="lightbox__play js-player-btn" data-audio-player="{{id}}">[[svg::play]]<span>PLAY</span></button>
-                    <div class="lightbox__text">{{text}}</div>
+                    <div class="lightbox__text desktop-only">{{text}}</div>
                 </div>
             </div>
         </div>
@@ -152,6 +152,118 @@
                     </picture>
                 </div>
             {% endif %}
+            <aside class="lightbox__aside">
+                <div id="lightbox-transcript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab js-lightbox-transcript">
+                    <div class="lightbox__tab-content">
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="transcript">
+                            <div class="transcript__top">
+                                <form class="transcript__search js-transcript-search">
+                                    <div class="transcript__input js-transcript-input-wrap">
+                                        <span class="transcript__hiddenspan js-transcript-span"></span>
+                                        <input type="search" name="transcript" id="" autocomplete="off" placeholder="Search">
+                                    </div>
+                                    <div class="transcript__nav js-transcript-nav">
+                                        <span class="transcript__counters js-transcript-counters"></span>
+                                        <button type="button" class="transcript__nav-button transcript__nav-button--prev js-transcript-prev">
+                                            [[svg::lightbox-arrow-small]]
+                                        </button>
+                                        <button type="button" class="transcript__nav-button transcript__nav-button--next js-transcript-next">
+                                            [[svg::lightbox-arrow-small]]
+                                        </button>
+                                        <button type="button" class="js-transcript-close"><i class="icon-close"></i></button>
+                                    </div>
+                                </form>
+                                {% if transcript and transcript.spanish %}
+                                <button class="transcript__button js-transcript-switch" data-main-lang="english" data-alternate-lang="spanish">Spanish</button>
+                                {% endif %}
+                            </div>
+                            <div class="transcript__wrap js-scrolled">
+                                {% if transcript %}
+                                    {% if transcript.english %}
+                                        <div class="transcript__lang js-transcript-lang is-active" data-lang="english">
+                                        {% for part in transcript.english %}
+                                            <div class="transcript__part js-transcript-part">
+                                                <button class="transcript__time js-transcript-btn" data-audio-player="{{id}}" data-start="{{part[0]}}">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                <div class="transcript__text">{{part[1]}}</div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    {% if transcript.spanish %}
+                                        <div class="transcript__lang js-transcript-lang" data-lang="spanish">
+                                        {% for part in transcript.spanish %}
+                                            <div class="transcript__part">
+                                                <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                <div class="transcript__text">{{part[1]}}</div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lightbox-info" class="lightbox__tab lightbox__tab--info js-lightbox-tab">
+                    <div class="lightbox__tab-content">
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__info">
+                            <div class="lightbox__info-text">{{info}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="lightbox-downloads" class="lightbox__tab lightbox__tab--downloads js-lightbox-tab">
+                    <div class="lightbox__tab-content">
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__downloads">
+                            <ul class="lightbox__downloads-list">
+                                {% for item in downloads %}
+                                    <li>
+                                        <a href="{{item.url}}">
+                                            <span class="lightbox__downloads-arrow">
+                                            [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            <span class="lightbox__downloads-arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            {{item.name}} <span class="bracket">(</span>{{item.ext}}<span class="bracket">)</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="lightbox-related" class="lightbox__tab lightbox__tab--related js-lightbox-tab">
+                    <div class="lightbox__tab-content">
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__tab-dot"></div>
+                        <div class="lightbox__related">
+                            <ul class="lightbox__related-list">
+                                {% for item in related %}
+                                    <li class="lightbox__related-item button--draw" data-component="Button">
+                                        <a class="lightbox__related-link" href="{{item.url}}"></a>
+                                        <span class="lightbox__related-arrow">
+                                            <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
+                                                <span class="vertical js-arrow-vertical"></span>
+                                                <span class="horizontal js-arrow-horizontal"></span>
+                                                <span class="triangle js-arrow-triangle"></span>
+                                            </i>
+                                        </span>
+                                        <h3 class="lightbox__related-title">{{item.title}}</h3>
+                                        <h4 class="lightbox__related-collection">{{item.collection}}</h4>
+                                        <p class="lightbox__related-text">{{item.text}}</p>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
         <div class="lightbox__logo">
             <a href="{{urlBack}}" class="lightbox__close js-close" data-history="back">
@@ -159,126 +271,14 @@
                     <i class="icon-close"></i>
                 </span>
             </a>
-            [[svg::logo]]
+            <div class="desktop-only">[[svg::logo]]</div>
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--mementos is-active"><span><span>Mementos</span><span>Mementos</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
+            <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
+            <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
         </ul>
     </div>
-    <aside class="lightbox__aside">
-        <div id="lightbox-transcript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab js-lightbox-transcript">
-            <div class="lightbox__tab-content">
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__tab-dot"></div>
-                <div class="transcript">
-                    <div class="transcript__top">
-                        <form class="transcript__search js-transcript-search">
-                            <div class="transcript__input js-transcript-input-wrap">
-                                <span class="transcript__hiddenspan js-transcript-span"></span>
-                                <input type="search" name="transcript" id="" autocomplete="off" placeholder="Search">
-                            </div>
-                            <div class="transcript__nav js-transcript-nav">
-                                <span class="transcript__counters js-transcript-counters"></span>
-                                <button type="button" class="transcript__nav-button transcript__nav-button--prev js-transcript-prev">
-                                    [[svg::lightbox-arrow-small]]
-                                </button>
-                                <button type="button" class="transcript__nav-button transcript__nav-button--next js-transcript-next">
-                                    [[svg::lightbox-arrow-small]]
-                                </button>
-                                <button type="button" class="js-transcript-close"><i class="icon-close"></i></button>
-                            </div>
-                        </form>
-                        {% if transcript and transcript.spanish %}
-                        <button class="transcript__button js-transcript-switch" data-main-lang="english" data-alternate-lang="spanish">Spanish</button>
-                        {% endif %}
-                    </div>
-                    <div class="transcript__wrap js-scrolled">
-                        {% if transcript %}
-                            {% if transcript.english %}
-                                <div class="transcript__lang js-transcript-lang is-active" data-lang="english">
-                                {% for part in transcript.english %}
-                                    <div class="transcript__part js-transcript-part">
-                                        <button class="transcript__time js-transcript-btn" data-audio-player="{{id}}" data-start="{{part[0]}}">{{ macros.secondsToMinutes(part[0]) }}</button>
-                                        <div class="transcript__text">{{part[1]}}</div>
-                                    </div>
-                                {% endfor %}
-                                </div>
-                            {% endif %}
-                            {% if transcript.spanish %}
-                                <div class="transcript__lang js-transcript-lang" data-lang="spanish">
-                                {% for part in transcript.spanish %}
-                                    <div class="transcript__part">
-                                        <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
-                                        <div class="transcript__text">{{part[1]}}</div>
-                                    </div>
-                                {% endfor %}
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="lightbox-info" class="lightbox__tab lightbox__tab--info js-lightbox-tab">
-            <div class="lightbox__tab-content">
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__info">
-                    <div class="lightbox__info-text">{{info}}</div>
-                </div>
-            </div>
-        </div>
-        <div id="lightbox-downloads" class="lightbox__tab lightbox__tab--downloads js-lightbox-tab">
-            <div class="lightbox__tab-content">
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__downloads">
-                    <ul class="lightbox__downloads-list">
-                        {% for item in downloads %}
-                            <li>
-                                <a href="{{item.url}}">
-                                    <span class="lightbox__downloads-arrow">
-                                    [[svg::lightbox-arrow-small]]
-                                    </span>
-                                    <span class="lightbox__downloads-arrow">
-                                        [[svg::lightbox-arrow-small]]
-                                    </span>
-                                    {{item.name}} <span class="bracket">(</span>{{item.ext}}<span class="bracket">)</span>
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="lightbox-related" class="lightbox__tab lightbox__tab--related js-lightbox-tab">
-            <div class="lightbox__tab-content">
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__tab-dot"></div>
-                <div class="lightbox__related">
-                    <ul class="lightbox__related-list">
-                        {% for item in related %}
-                            <li class="lightbox__related-item button--draw" data-component="Button">
-                                <a class="lightbox__related-link" href="{{item.url}}"></a>
-                                <span class="lightbox__related-arrow">
-                                    <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
-                                        <span class="vertical js-arrow-vertical"></span>
-                                        <span class="horizontal js-arrow-horizontal"></span>
-                                        <span class="triangle js-arrow-triangle"></span>
-                                    </i>
-                                </span>
-                                <h3 class="lightbox__related-title">{{item.title}}</h3>
-                                <h4 class="lightbox__related-collection">{{item.collection}}</h4>
-                                <p class="lightbox__related-text">{{item.text}}</p>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </aside>
 </li>

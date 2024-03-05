@@ -33,6 +33,7 @@
     @include breakpoint(phone) {
         --input-height: #{vw(45, phone)};
 
+        z-index: 1;
         padding-top: vw(105, phone);
     }
 
@@ -64,6 +65,7 @@
         @include flex;
 
         height: var(--input-height);
+
         // background-color: $color-white;
         position: relative;
         padding: vw(14) 0 vw(7);

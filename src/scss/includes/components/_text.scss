@@ -40,7 +40,7 @@
 
     .text-sticker & {
         @include breakpoint(desktop) {
-            padding: rem(14) rem(20) rem(37) 0;
+            padding: rem(14) rem(20) rem(26) 0;
         }
     }
 
@@ -68,8 +68,13 @@
     &--larger {
         @include breakpoint(desktop) {
             @include font-size(23, 28.06);
+            @include letter-spacing(-0.12, 23);
 
             padding-inline: 0 !important;
+
+            @media (max-height: 719px) {
+                @include font-size(21, 25);
+            }
 
             p {
                 max-width: unset !important;

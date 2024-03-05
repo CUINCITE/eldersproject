@@ -2,19 +2,29 @@
     background-color: var(--color-box);
     margin-top: 1px;
 
+
+    &--nomargin { margin-top: 0; }
+
     &[data-scroll="box"],
     [data-scroll="box"] & {
         background: none;
         position: relative;
 
-        @include breakpoint(not-desktop) {
-            z-index: 1;
+
+        &.is-animated:not(.footer__bottom) {
+            background-color: var(--color-box);
+        }
+
+        &:not(.is-animated) {
+            @include breakpoint(not-desktop) {
+                z-index: 1;
+            }
         }
     }
 
 
 
-    [data-scroll="box"] & {
+    [data-scroll="box"] {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
@@ -34,11 +44,16 @@
 
     &__bg {
         @include full;
-        
+
         background-color: var(--color-box);
         z-index: -1;
         pointer-events: none;
         will-change: transform;
+
+
+        .is-animated & {
+            background: none;
+        }
     }
 
 

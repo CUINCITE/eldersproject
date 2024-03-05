@@ -1,3 +1,5 @@
+@import "text_wrapper_colors";
+
 .text_wrapper {
     overflow: hidden;
     position: relative;
@@ -15,8 +17,10 @@
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-start);
 
-                .polaroid {
-                    translate: vw(-28) 0;
+                &--single {
+                    .polaroid {
+                        translate: rem(-28) 0;
+                    }
                 }
             }
         }
@@ -29,18 +33,6 @@
                 &::before {
                     left: 0;
                     right: unset;
-                }
-            }
-
-            &--collections {
-                @include breakpoint(desktop) {
-                    max-width: rem(244);
-                }
-
-                .text {
-                    @include breakpoint(desktop) {
-                        @include font-size(12, 15.6);
-                    }
                 }
             }
         }
@@ -79,6 +71,14 @@
 
 
 
+    &__title {
+        @include breakpoint(not-desktop) {
+            min-height: rem(133);
+        }
+    }
+
+
+
     &__module {
         @include breakpoint(desktop) {
             z-index: 1;
@@ -105,6 +105,10 @@
         .text {
             padding-block: 0 !important;
             margin-bottom: 0 !important;
+
+            @include breakpoint(desktop) {
+                @include font-size(17, 22.1);
+            }
 
             p {
 
@@ -166,6 +170,7 @@
 
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end);
+            margin-left: rem(9);
         }
 
         .polaroid {
@@ -173,10 +178,13 @@
             position: relative;
 
             @include breakpoint(desktop) {
-                --polaroid-width: #{vw(351)};
-                --polaroid-height: #{vw(428)};
+                --polaroid-width: #{vw(220)};
+                --polaroid-height: #{vw(274)};
 
-                margin-block: vw(28);
+                // --polaroid-width: #{rem(351)};
+                // --polaroid-height: #{rem(428)};
+
+                margin-block: rem(28);
                 left: 4%;
                 rotate: 7.216deg;
             }
@@ -200,10 +208,18 @@
                 margin-block: vw(28, phone);
             }
 
+            &--big {
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{rem(351)};
+                    --polaroid-height: #{rem(428)};
+                }
+            }
+
             &--horizontal {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(320)};
-                    --polaroid-height: #{vw(250)};
+                    --polaroid-width: #{rem(320)};
+                    --polaroid-height: #{rem(250)};
+                    rotate: 11deg;
                 }
 
                 @include breakpoint(tablet) {
@@ -219,8 +235,8 @@
 
             &--square {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(386)};
-                    --polaroid-height: #{vw(386)};
+                    --polaroid-width: #{rem(386)};
+                    --polaroid-height: #{rem(386)};
                 }
 
                 @include breakpoint(tablet) {
@@ -242,7 +258,7 @@
 
                 &--horizontal {
                     @include breakpoint(desktop) {
-                        margin-bottom: vw(44);
+                        margin-bottom: rem(44);
                     }
 
                     @include breakpoint(phone) {
@@ -273,14 +289,6 @@
                 translate: -50% 0;
                 height: vw(260, phone);
             }
-        }
-
-        &--horizontal {
-
-        }
-
-        &--square {
-
         }
     }
 
@@ -336,24 +344,37 @@
         }
 
         @include breakpoint(desktop) {
-            @include flex(column, flex-start, flex-end)
+            @include flex(column, flex-start, flex-end);
 
-                text-align: right;
+            text-align: right;
             max-width: rem(182);
             padding-top: rem(16);
         }
 
+
         @include breakpoint(tablet) {
             max-width: rem(260);
             padding-top: rem(16);
-
-            // margin-top: rem(16);
         }
+
 
         @include breakpoint(phone) {
             max-width: rem(244);
             padding-top: rem(16);
             margin-top: rem(-6);
+        }
+
+
+        &--collections {
+            @include breakpoint(desktop) {
+                max-width: rem(244);
+            }
+
+            .text {
+                @include breakpoint(desktop) {
+                    @include font-size(12, 15.6);
+                }
+            }
         }
 
         p {
@@ -370,6 +391,11 @@
 
         .text {
             padding-inline: 0;
+
+
+            @include breakpoint(not-desktop) {
+                @include font-size(12, 15.6);
+            }
         }
     }
 
@@ -378,9 +404,25 @@
         @include font-size(22, 19);
         @include font-family(reclined, 300);
         @include letter-spacing(-0.55, 22);
+
         position: absolute;
         margin-left: rem(6);
         bottom: rem(17);
         text-transform: uppercase;
+
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            bottom: auto;
+            margin-top: 60px;
+            margin-left: 0;
+            margin-bottom: -45px;
+            max-width: 80%;
+
+
+            p {
+                @include flex(row, space-between, center);
+            }
+        }
     }
 }

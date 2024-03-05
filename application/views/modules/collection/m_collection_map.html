@@ -1,6 +1,9 @@
 <section class="module module--map box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="map{% if params.global %} map--global{% endif %} {% if collectionColor %}map--{{collectionColor}}{% endif %}" data-component="Map" {% if params.global %}data-options='{ "lazyLoading": true, "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }'{% endif %} data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
+    <div class="map{% if params.global %} map--global{% endif %} {% if collectionColor %}map--{{collectionColor}}{% endif %}"
+        data-component="Map" data-theme-color="main" {% if params.global
+        %}data-options='{ "lazyLoading": true, "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }' {% endif %}
+        data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
             <div class="map__heading">
                 <h2 class="heading">
@@ -36,7 +39,8 @@
             <div id="map" class="map__container js-map"></div>
             <ul class="map__interviews js-interviews-list"></ul>
             <div class="map__controls">
-                <button class="map__control js-toggle-button">{% if params.global %}Full View{% else %}Zoom Out{% endif %}</button>
+                <button class="map__control js-toggle-button">{% if params.global %}Full View{% else %}Zoom Out{% endif
+                    %}</button>
             </div>
         </div>
     </div>

@@ -104,6 +104,11 @@
     100% { transform: translateY(-100%); }
 }
 
+@keyframes slide-right {
+    0% { transform: translate(0%, 0%); }
+    100% { transform: translate(100%, -100%); }
+}
+
 
 @keyframes search-label-down {
     0% { transform: translateY(0); }

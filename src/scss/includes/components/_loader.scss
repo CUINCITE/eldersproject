@@ -1,7 +1,6 @@
 .loader {
     // @include z-index(loader);
     z-index: 0;
-
     position: fixed;
     inset: 0;
     background-color: var(--color-black);
@@ -23,25 +22,40 @@
         @include flex(row, flex-start, center);
 
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            padding-top: var(--hamburgerbar-height);
+        }
     }
 
 
 
     &__count {
         @include font-family(compressed);
-        @include font-size(216, 1);
-        @include letter-spacing(-8.4, 216);
 
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
 
+        @include breakpoint(desktop) {
+            @include font-size(216, 1);
+            @include letter-spacing(-8.4, 216);
 
-        @media (max-height: 719px) {
-            @include font-size(210, 1);
-            @include letter-spacing(-7.5, 210);
+            @media (max-height: 719px) {
+                @include font-size(170, 1);
+
+                letter-spacing: -0.045em;
+            }
         }
 
+        @include breakpoint(tablet) {
+            @include font-size(180, 1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(120, 1);
+        }
 
         span {
             grid-column: 1 / 1;
@@ -54,12 +68,31 @@
     &__text {
         @include font-family(normal);
         @include font-settings(400, 100);
-        @include font-size(20, 32);
-        @include letter-spacing(-0.6, 20);
 
         text-transform: uppercase;
         position: absolute;
-        inset: auto auto rem(4) rem(4);
+
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 32);
+            @include letter-spacing(-0.6, 20);
+
+            inset: auto auto rem(4) rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 32);
+            @include letter-spacing(-0.6, 20);
+
+            inset: auto auto rem(4) rem(4);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 32);
+            @include letter-spacing(-0.6, 20);
+
+            inset: auto auto rem(-12) rem(4);
+        }
     }
 
 

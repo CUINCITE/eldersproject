@@ -12,7 +12,7 @@
 
                                     <div class="collection__image desktop-hide">
                                         <div class="collection__illustration">
-                                            {% include "./subviews/subview_illustration.html" with { shadow: item.shadow, image: item.image } %}
+                                            {% include "./subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
                                         </div>
                                     </div>
 
@@ -38,7 +38,9 @@
                                             <div class="collection__states">
                                                {{ item.collection_title | nl2br }}
                                             </div>
-                                            <div class="collection__text" style="font-size:1rem">{{ item.lead }}</div>
+                                            <div class="collection__text">
+                                                {{ item.lead }}
+                                            </div>
                                             <div class="collection__button">
                                                 {% set reversedModifier = (loop.index is even) ? "reversed" : "" %}
                                                 {% include "./components/c_link.html" with {

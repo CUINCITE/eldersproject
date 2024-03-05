@@ -18,6 +18,7 @@ export class Loader extends Component {
     private lineEl: HTMLElement;
     private counterWidth: number;
     private circleComp: Circle;
+    private isHidden = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -38,6 +39,9 @@ export class Loader extends Component {
         this.circleComp?.onState();
         return false;
     }
+
+
+    public resize = (): void => this.updatePositions(true);
 
 
 
@@ -61,8 +65,10 @@ export class Loader extends Component {
             },
             onComplete: () => {
                 document.body.classList.remove('is-loader-hiding');
-                document.body.classList.add('is-loader-hidden');
-                this.view.style.display = 'none';
+                document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
+                // this.view.style.display = 'none';
+                this.view.style.pointerEvents = 'none';
+                this.isHidden = true;
 
                 Utils.setSessionStorageItem('loaded', '1');
             },
@@ -118,8 +124,8 @@ export class Loader extends Component {
     private updatePositions = (fast?: boolean, value?: number): void => {
         const newCounterWidth = this.countEl.clientWidth;
 
-        // prevent sliding images' wrapper back when new counter is narrower than previous
-        if (newCounterWidth >= this.counterWidth) {
+        // prevent sliding images' wrapper back when new counter is narrower than previous - ONLY when loader is animating
+        if (newCounterWidth >= this.counterWidth || this.isHidden) {
             this.counterWidth = newCounterWidth;
             this.circleComp.updatePosition(this.counterWidth, fast);
         }

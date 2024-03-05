@@ -6,12 +6,16 @@ import { debounce } from '../Utils';
 export class WrappedText extends Component {
 
     private allImages: HTMLDivElement[];
+    private allPhotos: HTMLDivElement[];
     private title: HTMLHeadingElement;
     private content: HTMLDivElement;
 
+
     constructor(protected view: HTMLElement) {
         super(view);
+
         this.bind();
+        this.checkPhotoCount();
         this.checkCollisions();
 
         window.addEventListener('resize', debounce(() => this.checkCollisions()));
@@ -20,6 +24,7 @@ export class WrappedText extends Component {
 
     private bind(): void {
         this.allImages = [...this.view.querySelectorAll('.js-wrapped-image')] as HTMLDivElement[];
+        this.allPhotos = [...this.view.querySelectorAll('.js-wrapped-photo')] as HTMLDivElement[];
         this.title = this.view.querySelector('.js-wrapped-title .heading');
         this.content = this.view.querySelector('.js-wrapped-content');
     }
@@ -28,6 +33,14 @@ export class WrappedText extends Component {
     private checkOverflow(element: HTMLDivElement, containerHeight: number): void {
         if ((element.offsetTop + element.offsetHeight) > containerHeight) {
             element.style.top = `${containerHeight - element.offsetHeight - parseInt(window.getComputedStyle(element).marginTop.replace('px', ''), 10)}px`;
+        }
+    }
+
+    private checkPhotoCount(): void {
+        if (this.allPhotos.length < 4) {
+            this.allPhotos.forEach(element => {
+                element.querySelector('.js-polaroid')?.classList.add('polaroid--big');
+            });
         }
     }
 
