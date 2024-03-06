@@ -127,9 +127,6 @@
 
 
     &__tiles {
-        margin-top: -1px;
-
-
         .is-grid-view & {
             @include breakpoint(desktop) {
                 display: grid;

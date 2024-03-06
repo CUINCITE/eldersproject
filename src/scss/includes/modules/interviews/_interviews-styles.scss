@@ -1,4 +1,10 @@
 .interviews {
+    &--grid {
+        // box doubled border fix
+        margin-top: -1px;
+    }
+
+
     &--banner {
         .interviews__copy {
             @include breakpoint(desktop) {
