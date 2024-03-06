@@ -238,6 +238,7 @@
             @include breakpoint(desktop) {
                 padding-top: rem(15);
                 margin-left: rem(1);
+                max-width: rem(115);
             }
 
             &::before { content: none; }
