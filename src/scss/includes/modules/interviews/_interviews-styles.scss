@@ -416,7 +416,7 @@
 
 
             ~ .interviews__copy .interviews__copy-content {
-                transition-delay: .15s;
+                transition-delay: .05s;
                 transform: translateY(0);
             }
 
@@ -575,7 +575,7 @@
                 z-index: 0;
                 transition: transform .55s $ease-custom;
                 transform: translateY(100%);
-                transition-delay: .15s;
+                transition-delay: .025s;
             }
 
 
