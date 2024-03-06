@@ -94,19 +94,43 @@
             @include font-size(17, 17);
             @include letter-spacing(-0.17, 17);
 
-            transition: background-color .4s ease-in-out;
             border-radius: 10px;
             padding: 0 rem(2);
+            position: relative;
+            z-index: 1;
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: lighten($color-yellow, 30);
+                border-radius: rem(30);
+                z-index: -1;
+                opacity: 0;
+                transition: opacity .25s ease-in-out;
+            }
 
 
             span {
-                background-color: var(--color-yellow);
-                border-radius: rem(30);
+                position: relative;
+                display: inline-block;
+                padding: 0 rem(3);
+
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: rem(-2) rem(-3) rem(-1);
+                    background-color: var(--color-yellow);
+                    border-radius: rem(30);
+                    z-index: -1;
+                }
             }
 
 
             @include hover {
-                background-color: lighten($color-yellow, 30);
+                &::before { opacity: 1; }
             }
         }
     }
