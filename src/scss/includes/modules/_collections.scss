@@ -1,16 +1,59 @@
 .collections {
+    --line-width: #{rem(24)};
+    --line-offset: #{rem(6)};
+
+
 
     &__item {
         border-bottom: 1px solid var(--color-bg);
-        padding: rem(13) 0 rem(29);
+
+
+        &:last-of-type { border-bottom: none; }
     }
+
+
 
     &__link {
         @include font-family(compressed);
         @include font-size(40, 38);
         @include letter-spacing(-1, 40);
 
+        width: 100%;
+        display: inline-block;
         text-transform: uppercase;
-        padding: 0 var(--grid-margin);
+        padding: rem(13) var(--grid-margin) rem(29);
+        position: relative;
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: rem(28) auto auto var(--grid-margin);
+            margin: auto;
+            height: 1px;
+            background: currentColor;
+            width: var(--line-width);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s $ease-custom;
+        }
+
+
+        span {
+            transition: transform .4s $ease-custom;
+            display: inline-block;
+        }
+
+
+        @include hover {
+            span {
+                transform: translateX(calc(var(--line-width) + var(--line-offset)));
+            }
+
+
+            &::before {
+                transform: scaleX(1);
+            }
+        }
     }
 }

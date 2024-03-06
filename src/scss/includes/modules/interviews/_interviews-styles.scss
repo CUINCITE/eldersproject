@@ -1,4 +1,13 @@
 .interviews {
+    &--grid {
+        --line-width: #{rem(24)};
+        --line-offset: #{rem(6)};
+
+        // box doubled border fix
+        margin-top: -1px;
+    }
+
+
     &--banner {
         .interviews__copy {
             @include breakpoint(desktop) {
@@ -156,6 +165,33 @@
         .is-grid-view & {
             padding-top: rem(21);
             margin-left: rem(2);
+        }
+
+
+        .is-list-view & {
+            @include breakpoint(desktop) {
+                position: relative;
+
+
+                span {
+                    display: inline-block;
+                    transition: transform .4s $ease-custom;
+                }
+
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: rem(31) auto auto 0;
+                    margin: auto;
+                    height: 1px;
+                    background: currentColor;
+                    width: var(--line-width);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform .4s $ease-custom;
+                }
+            }
         }
 
 
@@ -394,6 +430,21 @@
             ~ .interviews__copy .interviews__copy-overlay {
                 transition-delay: 0s;
                 transform: translateY(0);
+            }
+        }
+
+
+        .is-list-view & {
+            @include hover {
+                ~ .interviews__main .interviews__name {
+                    span {
+                        transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                    }
+
+                    &::before {
+                        transform: scaleX(1);
+                    }
+                }
             }
         }
     }

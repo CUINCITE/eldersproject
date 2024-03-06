@@ -14,11 +14,13 @@
         bottom: auto;
     }
 
+
     body.has-open-modal & {
         @include breakpoint(not-desktop) {
             z-index: 0;
         }
     }
+
 
     &__container {
         width: 100%;
@@ -27,17 +29,12 @@
         clip-path: inset(0 0 0 0);
         background-color: var(--color-box);
 
-        @include breakpoint(desktop) {
-            padding: rem(13) rem(6);
-        }
 
         @include breakpoint(not-desktop) {
             z-index: 1;
         }
 
-        @include breakpoint(tablet) {
-            padding: vw(27, tablet) vw(18, tablet);
-        }
+
 
         @include breakpoint(phone) {
             height: var(--hamburgerbar-height);
@@ -64,8 +61,15 @@
     &__trigger {
         @include flex(column, space-between, flex-start);
 
+
+        @include breakpoint(desktop) {
+            padding: rem(13) rem(6);
+        }
+
+
         @include breakpoint(tablet) {
             width: 100%;
+            padding: vw(27, tablet) vw(18, tablet);
         }
     }
 

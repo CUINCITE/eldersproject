@@ -163,7 +163,7 @@
 
 
             @include breakpoint(desktop) {
-                animation: lightbox-illu 6s linear infinite;
+                // animation: lightbox-illu 6s linear infinite;
             }
 
 
@@ -190,8 +190,8 @@
 
 
         @include hover {
-            & + .lightbox__picture { opacity: 0; }
-            & + .lightbox__picture picture { animation: none; opacity: 0; }
+            // & + .lightbox__picture { opacity: 0; }
+            // & + .lightbox__picture picture { animation: none; opacity: 0; }
         }
     }
 
