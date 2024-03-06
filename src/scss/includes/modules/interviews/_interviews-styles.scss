@@ -191,13 +191,12 @@
     &__text {
         @include font-family(normal);
 
-
         @include breakpoint(desktop) {
             @include font-size(14, 16);
-
             padding-top: rem(15);
             opacity: 0;
-            transition: opacity .15s $ease-custom;
+            transform: translate(rem(-20), 0);
+            transition: opacity .3s $ease-custom, transform .5s $easing;
         }
 
         @include breakpoint(tablet) {
@@ -382,17 +381,15 @@
                 @extend %box-hover;
             }
 
-
             ~ .interviews__right .interviews__text {
+                transform: translate(0, 0);
                 opacity: 1;
             }
-
 
             ~ .interviews__copy .interviews__copy-content {
                 transition-delay: .05s;
                 transform: translateY(0);
             }
-
 
             ~ .interviews__copy .interviews__copy-overlay {
                 transition-delay: 0s;
