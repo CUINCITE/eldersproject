@@ -17,23 +17,6 @@
                                 <div class="col-span-12">
                                     <div class="interviews-grid__header">
                                         {% include "subviews/subview_interviews_modal.html" %}
-                                        {# <div class="interviews-grid__sort-button desktop-hide tablet-hide">
-                                            <legend>Sort by:</legend>
-                                            <button type="button" aria-controls="modal-sort" class="js-modal js-mobile-modal-button{% if '!' in sort.selected %} button--inversed{% endif %}">
-                                                <span class="sr-only">show sorting</span>
-                                                <i>[[svg::arrow-small]]</i>
-                                                <span class="js-current-sorting">
-                                                    {% if 'collections' in sort.selected %}
-                                                        collections
-                                                    {% elseif 'locations' in sort.selected %}
-                                                        locations
-                                                    {% else %}
-                                                        narrators
-                                                    {% endif %}
-                                                </span>
-                                            </button>
-                                        </div>
-                                        {% include "./subviews/subview_interviews_modal_sort.html" %} #}
                                     </div>
 
                                     <form action="" data-component="Load"

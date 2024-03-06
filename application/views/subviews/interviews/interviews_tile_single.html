@@ -11,11 +11,15 @@
         <span>{{ item.narrator_location }}</span>
     </div>
 
-    <h4 class="interviews__collection interviews__collection--grid desktop-only">{{item.interviewers.0.label}} <br> Collection</h4>
+    <h4 class="interviews__collection interviews__collection--grid desktop-only">
+        {{item.interviewer_name}} {% if item.interviewer_name %}<br>{% endif %} Collection</h4>
 
     <div class="interviews__copy">
-        <p>{{item.lead}}</p>
-        <h3 class="interviews__copy-collection desktop-only">{{item.interviewer_name}} collection</h3>
+        <div class="interviews__copy-overlay"></div>
+        <div class="interviews__copy-content">
+            <p>{{item.lead}}</p>
+            <h3 class="interviews__copy-collection desktop-only">{{item.interviewer_name}} collection</h3>
+        </div>
     </div>
 
     <div class="interviews__box desktop-hide">
