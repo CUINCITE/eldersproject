@@ -1,5 +1,8 @@
 .interviews {
     &--grid {
+        --line-width: #{rem(24)};
+        --line-offset: #{rem(6)};
+
         // box doubled border fix
         margin-top: -1px;
     }

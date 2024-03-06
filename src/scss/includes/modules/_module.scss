@@ -164,11 +164,10 @@
             padding-bottom: rem(22);
         }
     }
-    
+
 
     &--results {
         .collections__item {
-            border-bottom: unset;
 
             @include breakpoint(phone) {
                 padding-top: rem(10);

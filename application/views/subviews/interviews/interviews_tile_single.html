@@ -12,7 +12,13 @@
     </div>
 
     <h4 class="interviews__collection interviews__collection--grid desktop-only">
-        {{item.interviewer_name}} {% if item.interviewer_name %}<br>{% endif %} Collection</h4>
+        {% if item.interviewers.0.label %}
+            {{item.interviewers.0.label}} <br>
+        {% elseif item.interviewer_name %}
+            {{item.interviewer_name}} <br>
+        {% endif %}
+        Collection
+    </h4>
 
     <div class="interviews__copy">
         <div class="interviews__copy-overlay"></div>

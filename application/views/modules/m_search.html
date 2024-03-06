@@ -23,7 +23,7 @@
         </div>
         <div class="box" data-scroll="box">
             <div class="box__bg"></div>
-            <div class="interviews interviews--grid">
+            <div class="interviews interviews--grid is-list-view">
                 {% for interview in categories.narrators.items %}
                     {% include 'subviews/interviews/interviews_tile_single.html' with { item: interview } %}
                 {% endfor %}
@@ -40,8 +40,7 @@
             <div class="collections">
                 {% for item in categories.collections.items %}
                     <div class="collections__item">
-                        <a href="{{ item.url }}"
-                           class="collections__link">{{ item.first_name }} {{ item.last_name }}</a>
+                        <a href="{{ item.url }}" class="collections__link"><span>{{ item.first_name }} {{ item.last_name }}</span></a>
                     </div>
                 {% endfor %}
             </div>
