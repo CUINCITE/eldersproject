@@ -9,7 +9,6 @@ export const sticky = (el: HTMLElement) => {
             end: `top ${el.clientHeight + 50}px`,
             pin: el,
             endTrigger,
-            markers: true,
         },
     });
 };
