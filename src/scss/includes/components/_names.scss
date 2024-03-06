@@ -1,6 +1,6 @@
 .names {
-    --line-width: #{rem(40)};
-    --line-offset: #{rem(10)};
+    --line-width: #{rem(35)};
+    --line-offset: #{rem(12)};
 
 
     @include breakpoint(not-desktop) {
