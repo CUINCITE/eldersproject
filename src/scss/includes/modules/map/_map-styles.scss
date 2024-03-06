@@ -182,10 +182,6 @@
             padding: 0 rem(16) 0 rem(28);
         }
 
-        @include breakpoint(phone) {
-
-        }
-
         &-button {
             @include full;
 

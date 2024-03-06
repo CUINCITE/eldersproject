@@ -50,6 +50,7 @@ $shadow-sizes: (
     }
 
 
+
     &__shadow {
         position: absolute;
 
@@ -58,7 +59,7 @@ $shadow-sizes: (
             @include breakpoint($bp) {
                 @for $i from 1 through 10 {
                     &:nth-child(#{$i}) {
-                        inset: vw($value * $i, #{$bp}) vw(-$value  * $i, #{$bp}) vw(-$value  * $i, #{$bp}) vw($value  * $i, #{$bp});
+                        inset: vw($value * $i, #{$bp}) vw(-$value * $i, #{$bp}) vw(-$value * $i, #{$bp}) vw($value * $i, #{$bp});
                         z-index: -1 * $i;
                     }
                 }
