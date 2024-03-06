@@ -59,17 +59,22 @@ export class Button extends Component {
                 this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.05,
+                        ease: easing,
                     }, 'arrow')
                     .to(this.arrow, {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        ease: easing,
                     }, 'arrow');
 
                 arrowExtra && this.tl
                     .to(arrowExtra, {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.1,
+                        ease: easing,
                     }, 'arrow');
 
             } else {
@@ -78,46 +83,23 @@ export class Button extends Component {
                 this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.splitText.words[0].offsetWidth * 1.06,
-                        duration: 0.4,
+                        duration: 0.6,
+                        ease: easing,
                     }, 'arrow')
                     .to(this.arrow, {
                         transformOrigin: 'right center',
                         x: () => this.splitText.words[0].offsetWidth * 1.06,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.05,
+                        ease: easing,
                     }, 'arrow');
 
                 duplicateText && this.tl.to(duplicateText, {
                     x: () => this.splitText.words[0].offsetWidth * 1.06,
-                    duration: 0.4,
+                    duration: 0.6,
+                    delay: 0.1,
+                    ease: easing,
                 }, 'arrow');
-
-                // this.tl
-                //     .to(this.horizontal, {
-                //         transformOrigin: 'right center',
-                //         scaleX: ((wordsWidth * 1.06) / this.horizontal.offsetWidth) + 1,
-                //         duration: 0,
-                //     })
-                //     .to(this.splitText.words[0], {
-                //         x: wordsWidth * 1.06,
-                //         duration: 0.4,
-                //     }, 'arrow')
-                //     .to(this.arrow, {
-                //         transformOrigin: 'right center',
-                //         x: wordsWidth * 1.06,
-                //         duration: 0.4,
-                //     }, 'arrow')
-                //     .to(this.horizontal, {
-                //         transformOrigin: 'right center',
-                //         scaleX: 1,
-                //         duration: 0.4,
-                //         delay: -0.35,
-                //     }, 'shrink');
-
-                // duplicateText && this.tl.to(duplicateText, {
-                //     x: wordsWidth * 1.06,
-                //     duration: 0.4,
-                //     delay: -0.3,
-                // }, 'shrink');
             }
         } else if (this.button.classList.contains('button--draw')) {
 
