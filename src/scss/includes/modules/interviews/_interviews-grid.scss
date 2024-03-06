@@ -1,4 +1,9 @@
 .interviews-grid {
+    --line-width: #{rem(24)};
+    --line-offset: #{rem(6)};
+
+
+
     &__letters {
         @include flex;
 
