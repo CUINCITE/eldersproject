@@ -104,6 +104,9 @@
 
 
     &__heading {
+        border-bottom: 1px solid var(--color-bg);
+
+
         @include breakpoint(desktop) {
             padding-top: rem(37);
             padding-left: rem(18);
@@ -174,13 +177,19 @@
         border-top: 1px solid var(--color-bg);
         position: relative;
 
+
+        &:first-of-type { border-top: none; }
+
+
         @include breakpoint(desktop) {
             padding: 0 rem(16);
         }
 
+
         @include breakpoint(tablet) {
             padding: 0 rem(16) 0 rem(28);
         }
+
 
         &-button {
             @include full;
