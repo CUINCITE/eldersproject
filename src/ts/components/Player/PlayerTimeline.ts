@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { Sounds } from '../../widgets/Sounds';
 import { Handler } from '../../Handler';
 import { browser } from '../../Site';
 
@@ -111,6 +112,7 @@ export class PlayerTimeline extends Handler {
             e.stopPropagation();
             const { seek } = this.getPosition(e);
             this.trigger(PlayerTimelineEvents.SEEK, seek);
+            Sounds.play('playerRewinding');
         }
         this.isScrubbing = false;
         this.playerEl.classList.remove('is-scrubbing');
@@ -129,6 +131,7 @@ export class PlayerTimeline extends Handler {
         e.stopPropagation();
         const { seek } = this.getPosition(e);
         this.trigger(PlayerTimelineEvents.SEEK, seek);
+        Sounds.play('playerRewinding');
         gsap.killTweensOf(this.currentEl);
         gsap.set(this.currentEl, { width: `${seek * 100}%` });
     };

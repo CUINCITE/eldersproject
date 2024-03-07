@@ -7,11 +7,10 @@ export class Sounds {
     private static canPlay: boolean = Sounds.supportsAudio();
     private static muted: boolean = false;
     private static sources = {
-        click: 'tick.mp3',
-        hover: 'tap-smallest.mp3',
-        menu: 'tap-kissy.mp3',
-        playerBtn: '627848__francoistjp__rew-musique-stop-off_02.mp3',
-        playerRewind: '627848__francoistjp__rew-musique-stop-off_01.mp3',
+        click: 'tick_silent.mp3',
+        playerBtn: '627848__francoistjp__rew-musique-stop-off_02_silent.mp3',
+        playerRewind: '627848__francoistjp__rew-musique-stop-off_01_silent.mp3',
+        playerRewinding: '627848__francoistjp__rew-musique-stop-off_01_crop_silent.mp3',
     };
 
     private static sounds: { [key: string]: Sound };
