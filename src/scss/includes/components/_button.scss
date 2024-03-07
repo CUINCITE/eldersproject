@@ -223,6 +223,8 @@
     }
 
     &__box {
+        border-top: 1px solid var(--color-bg);
+
 
         @include breakpoint(desktop) {
             padding-top: rem(14);
