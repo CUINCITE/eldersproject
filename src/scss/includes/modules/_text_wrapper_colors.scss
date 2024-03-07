@@ -2,7 +2,7 @@
     // Caro De Robertis
 
     &--pink {
-        --circle-color: var(--color-green);
+        --circle-color: var(--color-pink);
         --pin-color: var(--color-brown);
         --pin-outer-color: var(--color-green);
     }
@@ -11,7 +11,7 @@
     // Natalie Diaz
 
     &--orange {
-        --circle-color: var(--color-pale-purple);
+        --circle-color: var(--color-orange);
         --pin-color: var(--color-red);
         --pin-outer-color: var(--color-pale-purple);
     }
@@ -20,7 +20,7 @@
     // Eve Ewing
 
     &--pale-blue {
-        --circle-color: var(--color-orange);
+        --circle-color: var(--color-pale-blue);
         --pin-color: var(--color-purple);
         --pin-outer-color: var(--color-orange);
     }
@@ -29,7 +29,7 @@
     // Denice Frohman
 
     &--brown {
-        --circle-color: var(--color-red);
+        --circle-color: var(--color-brown);
         --pin-color: var(--color-pale-purple);
         --pin-outer-color: var(--color-red);
     }
@@ -38,7 +38,8 @@
     // Caleb Gayle
 
     &--purple {
-        --circle-color: var(--color-yellow);
+        --circle-color: var(--color-purple);
+        --circle-text-color: var(--color-grey200);
         --pin-color: var(--color-pale-purple);
         --pin-outer-color: var(--color-yellow);
     }
@@ -47,7 +48,7 @@
     // Robin Coste Lewis
 
     &--green {
-        --circle-color: var(--color-red);
+        --circle-color: var(--color-green);
         --pin-color: var(--color-purple);
         --pin-outer-color: var(--color-red);
     }
@@ -56,7 +57,7 @@
     // April Reign
 
     &--default {
-        --circle-color: var(--color-blue);
+        --circle-color: var(--color-red);
         --pin-color: var(--color-dark-green);
         --pin-outer-color: var(--color-blue);
     }
@@ -65,7 +66,7 @@
     // Ellery Washington
 
     &--dark-green {
-        --circle-color: var(--color-pale-purple);
+        --circle-color: var(--color-dark-green);
         --pin-color: var(--color-orange);
         --pin-outer-color: var(--color-pale-purple);
     }
@@ -83,7 +84,7 @@
     // Jenna Wortham
 
     &--pale-purple {
-        --circle-color: var(--color-green);
+        --circle-color: var(--color-pale-purple);
         --pin-color: var(--color-red);
         --pin-outer-color: var(--color-green);
     }

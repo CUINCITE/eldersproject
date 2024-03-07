@@ -1,7 +1,8 @@
 .player {
 
     &.is-muted .svg-volume { @extend %svg-volume-muted !optional; }
-    &.is-started .player__toggle { display: none; }
+
+    // &.is-started .player__toggle { display: none; }
 
 
     &:not(.is-started),
