@@ -10,7 +10,7 @@
         "build": "gulp",
         "dev": "gulp watch",
         "lint:scripts": "eslint --ext .ts,.js .",
-        "lint:styles": "stylelint \"**/*.{css,scss}\"",
+        "lint:styles": "stylelint \"src/**/*.scss\"",
         "lint": "npm-run-all lint:*",
         "fix:scripts": "eslint --ext .ts . --fix",
         "fix:styles": "stylelint \"**/*.scss\" --fix",
