@@ -301,6 +301,8 @@
             @include font-family(normal);
             @include font-settings(500, 100);
 
+            content: counter(collection-counter, decimal-leading-zero) ".";
+
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -314,8 +316,7 @@
             height: rem(34);
             border-radius: 50%;
             background-color: var(--circle-color);
-
-            content: counter(collection-counter, decimal-leading-zero) ".";
+            color: var(--circle-text-color, currentColor);
             font-weight: 500;
             font-feature-settings: "ss03" on;
             counter-increment: collection-counter;
