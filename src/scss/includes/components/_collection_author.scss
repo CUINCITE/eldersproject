@@ -6,6 +6,7 @@
                 @include font-size(100, 85);
                 @include letter-spacing(-3, 100);
 
+                padding-top: rem(24);
                 margin-bottom: rem(-5);
                 margin-left: 0;
             }
@@ -77,7 +78,7 @@
             @include font-size(58, 56);
             @include letter-spacing(-1.45, 58);
 
-            padding-top: rem(24);
+            padding-top: rem(13);
             margin-left: rem(-6);
         }
 
@@ -149,7 +150,7 @@
             @include letter-spacing(-0.19, 19);
 
             max-width: unset;
-            margin-top: rem(-2);
+            margin-top: rem(0);
         }
 
         @include breakpoint(tablet) {
