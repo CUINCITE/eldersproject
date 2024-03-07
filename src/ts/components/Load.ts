@@ -19,6 +19,7 @@ interface ILoadSettings {
     scrollTo?: string; // scroll to given element when reloading filters
     updateCurrentSorting?: boolean // manually updates currently selected sorting on mobile
     externalLinks?: string; // external links with [data-filters] attribute to reload filters
+    setStorage?: boolean; // set storage item with current view (grid/list view)
 }
 
 
@@ -41,6 +42,7 @@ export class Load extends Component {
     private components: Array<Component>;
     private section: HTMLElement;
     private content: HTMLElement;
+    private storageSlug = 'interviewsView';
 
 
 
@@ -63,17 +65,10 @@ export class Load extends Component {
         this.section = document.getElementById('interviews');
         this.content = document.getElementById('interviews-grid');
 
-        if (!breakpoint.desktop) {
-            this.content?.classList.remove('is-grid-view');
-            this.content?.classList.add('is-list-view');
-        } else if (this.section.classList.contains('is-list')) {
-            this.content?.classList.remove('is-list-view', 'is-grid-view');
-            this.content?.classList.add('is-list-view');
-        }
-
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
 
+        this.settings.setStorage && this.checkStorage();
         this.updateFiltered();
         this.bind();
 
@@ -170,12 +165,28 @@ export class Load extends Component {
     protected onViewBtnClick = (e): void => {
         const { currentTarget: button } = e;
         const { view } = button.dataset;
+
+        Utils.setStorageItem(this.storageSlug, view);
+
         this.hideContent().then(() => {
-            this.contentElement.classList.remove('is-list-view', 'is-grid-view');
-            this.contentElement.classList.add(`is-${view}-view`);
-            this.section?.classList.remove('is-list', 'is-grid');
-            this.section?.classList.add(`is-${view}`);
+            this.toggleView(view);
         }).then(this.showContent);
+    };
+
+
+
+    protected checkStorage = (): void => {
+        const view = Utils.getStorageItem(this.storageSlug);
+        view && this.toggleView(view);
+    };
+
+
+
+    protected toggleView = (view: string): void => {
+        this.contentElement.classList.remove('is-list-view', 'is-grid-view');
+        this.contentElement.classList.add(`is-${view}-view`);
+        this.section?.classList.remove('is-list', 'is-grid');
+        this.section?.classList.add(`is-${view}`);
     };
 
 

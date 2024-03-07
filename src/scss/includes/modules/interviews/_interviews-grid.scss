@@ -249,14 +249,16 @@
         }
 
 
-        .is-grid-view & {
-            @include flex(column, flex-start, flex-start);
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                @include flex(column, flex-start, flex-start);
 
-            min-height: vw(236);
+                min-height: vw(236);
 
-            &:nth-child(3n + 1),
-            &:nth-child(3n + 2) {
-                border-right: 1px solid var(--color-bg);
+                &:nth-child(3n + 1),
+                &:nth-child(3n + 2) {
+                    border-right: 1px solid var(--color-bg);
+                }
             }
         }
     }

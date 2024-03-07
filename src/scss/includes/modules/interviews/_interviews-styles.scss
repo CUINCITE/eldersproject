@@ -169,8 +169,10 @@
             }
         }
 
-        .is-grid-view & {
-            padding-top: rem(21);
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                padding-top: rem(21);
+            }
         }
 
 
@@ -275,12 +277,12 @@
                 padding-top: rem(15);
                 margin-left: rem(1);
                 max-width: rem(115);
+
+
+                .is-grid-view & { display: none; }
             }
 
             &::before { content: none; }
-
-
-            .is-grid-view & { display: none; }
         }
     }
 
@@ -568,45 +570,47 @@
             display: none;
         }
 
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                @include letter-spacing(0.07, 13);
 
-        .is-grid-view & {
-            @include letter-spacing(0.07, 13);
-
-            color: var(--color-black);
-            padding: 0;
-            position: absolute;
-            inset: auto 0 0;
-
-
-            &-overlay {
-                background-color: var(--color-grey200);
+                color: var(--color-black);
+                padding: 0;
                 position: absolute;
-                inset: 0;
-                z-index: 0;
-                transition: transform .55s $ease-custom;
-                transform: translateY(100%);
-                transition-delay: .025s;
-            }
+                inset: auto 0 0;
 
 
-            &-content {
-                padding: rem(16) rem(16) rem(12) rem(14);
-                transition: transform .55s $ease-custom;
-                transform: translateY(100%);
-            }
+                &-overlay {
+                    background-color: var(--color-grey200);
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                    transition: transform .55s $ease-custom;
+                    transform: translateY(100%);
+                    transition-delay: .025s;
+                }
+
+
+                &-content {
+                    padding: rem(16) rem(16) rem(12) rem(14);
+                    transition: transform .55s $ease-custom;
+                    transform: translateY(100%);
+                }
 
 
 
-            &-collection {
-                display: block;
-                margin-top: rem(10);
-            }
+                &-collection {
+                    display: block;
+                    margin-top: rem(10);
+                }
 
 
-            p {
-                -webkit-line-clamp: 4;
+                p {
+                    -webkit-line-clamp: 4;
+                }
             }
         }
+
 
 
         p {
