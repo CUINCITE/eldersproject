@@ -13,7 +13,7 @@
     &--orange {
         --circle-color: var(--color-orange);
         --pin-color: var(--color-red);
-        --pin-outer-color: var(--color-pale-purple);
+        --pin-outer-color: var(--color-purple);
     }
 
 
@@ -30,7 +30,8 @@
 
     &--brown {
         --circle-color: var(--color-brown);
-        --pin-color: var(--color-pale-purple);
+        --circle-text-color: var(--color-grey200);
+        --pin-color: var(--color-brown);
         --pin-outer-color: var(--color-red);
     }
 
@@ -40,7 +41,7 @@
     &--purple {
         --circle-color: var(--color-purple);
         --circle-text-color: var(--color-grey200);
-        --pin-color: var(--color-pale-purple);
+        --pin-color: var(--color-purple);
         --pin-outer-color: var(--color-yellow);
     }
 
@@ -49,6 +50,7 @@
 
     &--green {
         --circle-color: var(--color-green);
+        --circle-text-color: var(--color-grey200);
         --pin-color: var(--color-purple);
         --pin-outer-color: var(--color-red);
     }
@@ -58,6 +60,7 @@
 
     &--default {
         --circle-color: var(--color-red);
+        --circle-text-color: var(--color-grey200);
         --pin-color: var(--color-dark-green);
         --pin-outer-color: var(--color-blue);
     }
@@ -67,8 +70,9 @@
 
     &--dark-green {
         --circle-color: var(--color-dark-green);
+        --circle-text-color: var(--color-grey200);
         --pin-color: var(--color-orange);
-        --pin-outer-color: var(--color-pale-purple);
+        --pin-outer-color: var(--color-purple);
     }
 
 
@@ -77,7 +81,7 @@
     &--pale-green {
         --circle-color: var(--color-pale-green);
         --pin-color: var(--color-red);
-        --pin-outer-color: var(--color-pale-green);
+        --pin-outer-color: var(--color-yellow);
     }
 
 
@@ -85,7 +89,8 @@
 
     &--pale-purple {
         --circle-color: var(--color-pale-purple);
+        --circle-text-color: var(--color-grey200);
         --pin-color: var(--color-red);
-        --pin-outer-color: var(--color-green);
+        --pin-outer-color: var(--color-dark-green);
     }
 }

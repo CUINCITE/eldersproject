@@ -20,7 +20,7 @@
 
     &--orange {
         --pin-color: var(--color-red);
-        --pin-outer-color: var(--color-pale-purple);
+        --pin-outer-color: var(--color-purple);
         --map-button-color: var(--color-orange);
     }
 
@@ -37,7 +37,7 @@
     // Denice Frohman
 
     &--brown {
-        --pin-color: var(--color-pale-purple);
+        --pin-color: var(--color-brown);
         --pin-outer-color: var(--color-red);
         --map-button-color: var(--color-brown);
         --map-text-color: var(--color-purple);
@@ -47,7 +47,7 @@
     // Caleb Gayle
 
     &--purple {
-        --pin-color: var(--color-pale-purple);
+        --pin-color: var(--color-purple);
         --pin-outer-color: var(--color-yellow);
         --map-button-color: var(--color-yellow);
         --map-text-color: var(--color-red);
@@ -75,7 +75,7 @@
 
     &--dark-green {
         --pin-color: var(--color-orange);
-        --pin-outer-color: var(--color-pale-purple);
+        --pin-outer-color: var(--color-purple);
         --map-button-color: var(--color-purple);
     }
 
@@ -93,7 +93,7 @@
 
     &--pale-purple {
         --pin-color: var(--color-red);
-        --pin-outer-color: var(--color-green);
+        --pin-outer-color: var(--color-dark-green);
         --map-button-color: var(--color-red);
     }
 }
