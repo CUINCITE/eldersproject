@@ -1,4 +1,8 @@
 .map {
+    --line-width: #{rem(10)};
+    --line-offset: #{rem(4)};
+
+
     @include flex(row, space-between, stretch);
     @include font-family(compressed);
 
@@ -194,8 +198,22 @@
         &-button {
             @include full;
 
+            z-index: 1;
+
 
             &.is-active { pointer-events: none; }
+
+
+            @include hover {
+                ~ .map__place .map__title-text span {
+                    transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                }
+
+
+                ~ .map__place .map__title-text::before {
+                    transform: scaleX(1);
+                }
+            }
         }
     }
 
@@ -221,6 +239,31 @@
 
             @include breakpoint(phone) {
                 margin-right: rem(5);
+            }
+        }
+
+
+        &-text {
+            position: relative;
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: rem(12) auto auto 0;
+                margin: auto;
+                height: 1px;
+                background: currentColor;
+                width: var(--line-width);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform .4s $ease-custom;
+            }
+
+
+            span {
+                transition: transform .4s $ease-custom;
+                display: inline-block;
             }
         }
     }

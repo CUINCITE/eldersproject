@@ -17,16 +17,22 @@
                         data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}"
                         data-interviews="{{item.quotes|json_encode}}"></button>
                     <div class="map__place">
-                        <div class="map__title">{{item.label}}</div>
+                        <div class="map__title">
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                        </div>
                         {% if params.global %}
                         <span class="map__address">[[svg::pin]] {{item.address}}</span>
                         {% endif %}
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
+                            {% if item.description %}
                             <div class="map__description">
                                 <p>{{item.description}}</p>
                             </div>
+                            {% endif %}
                             <div class="map__image_wrapper js-map-image-wrapper desktop-hide tablet-hide"></div>
                             <ul class="map__interviews js-interviews-inner-list desktop-hide tablet-hide"></ul>
                         </div>
