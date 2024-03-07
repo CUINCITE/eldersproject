@@ -6,6 +6,7 @@
 
         @include breakpoint(desktop) {
             padding-top: rem(38);
+            margin: 0 rem(-8);
         }
 
         @include breakpoint(tablet) {
@@ -252,8 +253,6 @@
             @include flex(column, flex-start, flex-start);
 
             min-height: vw(236);
-            padding: 0 rem(13);
-
 
             &:nth-child(3n + 1),
             &:nth-child(3n + 2) {
@@ -378,7 +377,6 @@
     &__dropdown {
         @include flex(row, space-between, flex-start);
 
-        margin-right: rem(-1);
         position: relative;
     }
 

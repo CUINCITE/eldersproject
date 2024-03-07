@@ -171,7 +171,6 @@
 
         .is-grid-view & {
             padding-top: rem(21);
-            margin-left: rem(2);
         }
 
 
@@ -477,7 +476,6 @@
                 @include letter-spacing(0.4, 17);
 
                 padding-top: rem(4);
-                padding-left: rem(4);
                 flex-direction: row;
                 gap: rem(4);
                 position: relative;
@@ -513,7 +511,6 @@
 
             .is-grid-view & {
                 margin-top: rem(8);
-                margin-left: rem(2);
             }
         }
 
