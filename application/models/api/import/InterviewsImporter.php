@@ -57,32 +57,40 @@ class InterviewsImporter extends model_app_api_import
         $dict_topics = $this->parent->getJsonModel('topics');
 
 
+        // loop through interviews from the XML
+        $unsetItems = [];
+
         foreach ($items as $k => $v) {
 
             $topics = explode(';', $v['Topic(s)']);
 
+            // topics assignment
             foreach ($topics as $kk => $vv) {
                 $vv = trim($vv);
-                if ($vv) {
+                if (!empty($vv)) {
+                    $tag = $vv;
                     $vv = _uho_fx::array_filter($dict_topics, 'label', $vv, ['first' => true]);
                     if (!$vv) {
-                        return ['result' => false, 'message' => 'Topic not found: ' . $vv];
+                        return ['result' => false, 'message' => 'Topic not found: ' . $tag];
                     }
                     $topics[$kk] = $vv['id'];
                 } else unset($topics[$kk]);
             }
+
             if (!$topics) $topics = [];
             else $topics = array_values($topics);
 
 
+            // narrators
             $n = [];
             if (@$v['1st Narrator: Full Name']) $n[] = $v['1st Narrator: Full Name'];
             if (@$v['2nd Narrator: Full Name']) $n[] = $v['2nd Narrator: Full Name'];
             if (@$v['3rd Narrator: Full Name']) $n[] = $v['3rd Narrator: Full Name'];
             $name = implode(', ', $n);
 
+            // updating & adding new narrators
 
-            // narrators
+            $r = false;
             foreach ($n as $kk => $vv) {
                 $id = _uho_fx::array_filter($narrators, 'name', $vv, ['first' => true]);
                 if (!$id) {
@@ -125,14 +133,16 @@ class InterviewsImporter extends model_app_api_import
                 'Jenna "J" Wortham' => 'Jenna Wortham'
             ];
 
-            $unsetItems = [];
-
             // ID=narrator id
             if ($id) {
+
+                // interviewers
                 $i = [];
                 if (@$v['Interviewer: Full Name']) $i[] = $v['Interviewer: Full Name'];
                 if (@$v['2nd Interviewer: Full Name']) $i[] = $v['2nd Interviewer: Full Name'];
                 if (@$v['3rd Interviewer: Full Name']) $i[] = $v['3rd Interviewer: Full Name'];
+
+
                 foreach ($i as $kk => $vv) {
                     $id = _uho_fx::array_filter($interviewers, 'name', $vv, ['first' => true]);
                     if (!$id) {
@@ -145,6 +155,7 @@ class InterviewsImporter extends model_app_api_import
                     $i[$kk] = $id['id'];
                 }
 
+                // languages
                 $languages = $v['Language of Interview'];
                 if (!$languages) $languages = 'English';
                 $languages = str_replace(';', ',', $languages);
@@ -171,6 +182,7 @@ class InterviewsImporter extends model_app_api_import
 
                 $languages = $output;
 
+                // updating the original items array
                 $items[$k] = [
                     'incite_id' => $v['Interview ID'],
                     'narrators' => $n,
@@ -191,25 +203,35 @@ class InterviewsImporter extends model_app_api_import
 
         $interviewsAdded = 0;
         $this->parent->queryOut('UPDATE interviews SET active=0');
+
+        $updatedInterviews = 0;
+
+        $notAdded = [];
+
         foreach ($items as $k => $v) {
             $interviewGet = $this->parent->getJsonModel('interviews_list', ['incite_id' => $v['incite_id']], true);
             if ($interviewGet) {
                 $r = $this->parent->putJsonModel('interviews', $v, ['incite_id' => $v['incite_id']]);
+                $updatedInterviews++;
                 if (!$r) return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
-            } else {
+            }
+
+            else {
                 $v['slug'] = $this->slugify($v['label']);
                 $postSuccess = $this->parent->postJsonModel('interviews', $v);
                 if ($postSuccess) $interviewsAdded++;
                 else return ['result' => false, 'message' => 'Error updating interview: ' . $this->parent->orm->getLastError()];
             }
+
         }
 
         $message[] = 'Added narrators: ' . $n_added;
         $message[] = 'Updated narrators: ' . $n_updated;
         $message[] = 'Activated interviews: ' . count($items);
-        $message[] = 'Added interviews: ' . $interviewsAdded;
+        $message[] = 'Updated interviews: ' . $updatedInterviews;
+        $message[] = 'Interviews not added: ' . count($unsetItems);
 //        $message[] = ['Unset Items' => $unsetItems];
-        return ['result' => true, 'message' => implode(' ... ', $message), 'unsetItems' => $unsetItems];
+        return ['result' => true, 'message' => implode(' ... ', $message), 'unsetItems' => $unsetItems, 'notAdded' => $notAdded];
     }
 
 }
