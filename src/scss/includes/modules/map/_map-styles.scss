@@ -40,6 +40,18 @@
 
 
 
+    &__count {
+        @include font-family(normal);
+        @include font-settings(500, 100);
+        @include font-size(17, 18);
+        letter-spacing: normal;
+
+        border-bottom: 1px solid var(--color-bg);
+        padding: rem(17) rem(18) rem(13);
+    }
+
+
+
     &__controls {
         @include flex(column, flex-start, stretch);
 
@@ -56,7 +68,8 @@
         width: rem(120);
         text-align: center;
         padding-top: rem(4);
-        background-color: var(--color-box);
+        background-color: var(--color-black);
+        color: var(--color-off-white);
         text-transform: uppercase;
         transition: opacity .3s $ease-out;
         opacity: 0;
@@ -222,6 +235,12 @@
     &__title {
         @include flex(row, flex-start, flex-start);
 
+
+        .map--global & {
+            flex-wrap: wrap;
+        }
+
+
         &::before {
             @include font-settings(200, 100);
             content: counter(map-locations, decimal-leading-zero) ".";
@@ -244,7 +263,15 @@
 
 
         &-text {
+            @include font-size(30, 27);
+
             position: relative;
+
+
+            .map--global & {
+                flex: 1 1 100%;
+                margin-top: rem(12);
+            }
 
 
             &::before {
@@ -433,6 +460,11 @@
             padding-block: rem(20);
             min-height: rem(64);
             margin-block: trim-font(1);
+
+
+            .map--global & {
+                padding-block: rem(14) rem(22);
+            }
         }
 
         @include breakpoint(tablet) {
@@ -452,19 +484,11 @@
 
     &__address {
         @include font-family(reclined);
-        @include font-size(16, 16);
+        @include font-size(15, 15);
 
+        letter-spacing: -0.025em;
         padding-top: rem(4);
-        letter-spacing: normal;
-
-
-        svg {
-            height: rem(13);
-            width: auto;
-            position: relative;
-            top: -2px;
-            margin-right: rem(5);
-        }
+        max-width: rem(140);
     }
 
 
