@@ -81,6 +81,22 @@
                                 {% include "/components/c_polaroid_gallery.html" with {moduleValue: module.value, modifiers: ["wrapped"]} %}
                             </div>
 
+                        {% elseif module.type == 'playlist' %}
+
+                            PLAYLIST:
+
+                            {% for item in module.value %}
+                                <br>
+                                ====<br>
+
+                                ID: {{ item.id }}<br>
+                                Label: {{ item.label }}<br>
+                                Time start: {{ item.start_time }}<br>
+
+                                ====
+                                <br>
+                            {% endfor %}
+
                         {% endif %}
 
                     {% endfor %}

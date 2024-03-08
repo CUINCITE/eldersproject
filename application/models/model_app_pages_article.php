@@ -33,7 +33,7 @@ class model_app_pages_article
      * @param string $lead
      * @return array updated article
      */
-    public function convert($text, &$media, $lead = null)
+    public function convert($text, &$media, $playlist, $lead = null)
     {
 
         if (_uho_fx::getGet('debug')) {
@@ -47,7 +47,7 @@ class model_app_pages_article
         // images
 
         $text = str_replace('<img src="/serdelia/public/ckeditor/plugins/uho_media/icons/uho_media.png" />', '[IMAGE]', $text);
-        $text = str_replace('<img src="/serdelia/public/ckeditor/plugins/uho_audio/icons/uho_audio.png" />', '[AUDIO]', $text);
+        $text = str_replace('<img src="/serdelia/public/ckeditor/plugins/uho_audio/icons/uho_audio.png" />', '[PLAYLIST]', $text);
         $text = str_replace('<img src="/serdelia/public/ckeditor/plugins/uho_video/icons/uho_video.png" />', '[VIDEO]', $text);
 
         // splitter
@@ -67,6 +67,7 @@ class model_app_pages_article
         $blocks = [
             ['html' => '[IMAGE]', 'type' => 'image'],
             ['html' => '[SLIDER]', 'type' => 'slider'],
+            ['html' => '[PLAYLIST]', 'type' => 'playlist'],
 //            ['html' => '[AUDIO]', 'type' => 'audio'],
 //            ['html' => '[VIDEO]', 'type' => 'video'],
             ['html' => '[MORE]', 'html_close' => '[ENDMORE]', 'type' => 'expand_open'],
@@ -115,6 +116,45 @@ class model_app_pages_article
 //                        $m[] = ['type' => 'expand_close', 'value' => $iExpand];
 //                        $text = substr($text, strlen("[ENDMORE]"));
 //                        break;
+
+                    case "playlist":
+
+                        if ($playlist) {
+                            $ids = [];
+
+                            foreach ($playlist as $k=>$playlistItem) {
+                                if (!preg_match("/^([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/", $playlistItem[1])) {
+                                    unset($playlist[$k]);
+                                }
+
+                                $ids[] = $playlistItem[0];
+                            }
+
+                            $interviews = $this->parent->getJsonModel('interviews_list', ['active' => 1, 'id' => $ids]);
+
+                            $items = [];
+
+                            foreach ($playlist as $playlistItem) {
+                                $interview = _uho_fx::array_filter($interviews, 'id', $playlistItem[0], ['first' => true]);
+                                if (!$interview) continue;
+
+                                $items[] = [
+                                    'id' => $interview['id'],
+                                    'label' => $interview['label'],
+                                    'start_time' =>$playlistItem[1]
+                                ];
+                            }
+
+                            $m[] = ['type' => 'playlist', 'value' => $items];
+
+
+                        }
+
+                        $i2 = strpos($text, ']');
+                        $text = substr($text, $i2 + 1);
+                        $text = trim($text);
+                        $text = _uho_fx::trim($text, '<br />');
+                        break;
 
                     case "clip":
 

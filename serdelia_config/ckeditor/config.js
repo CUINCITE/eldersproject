@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', 'Blockquote' ] },
 	'/',
-	{ name: 'styles', items: [ 'Format','Styles','uho_media' ] },
+	{ name: 'styles', items: [ 'Format','Styles','uho_media', 'uho_audio' ] },
 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] }
   
   
@@ -93,7 +93,7 @@ config.allowedContent = {
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
     //config.extraPlugins = 'timestamp';
-    config.extraPlugins = 'onchange,uho_customkeyboardshortcuts,uho_media';
+    config.extraPlugins = 'onchange,uho_customkeyboardshortcuts,uho_media,uho_audio';
     //config.embed_provider='//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 };

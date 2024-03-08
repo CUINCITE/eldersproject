@@ -137,6 +137,18 @@
       "field": "image_sizes",
       "type": "json","edit":false,
       "label": "Image sizes"
+    },
+    {
+      "help": "Time format 00:10:12",
+      "field": "playlist",
+      "label": "Playlist",
+      "type": "table",
+      "settings": {
+        "header": [
+          "ID",
+          "Time Start"
+        ]
+      }
     }
   ]
 }

@@ -29,18 +29,6 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         
         // get interviews
         $m['items'] = $this->parent->getJsonModel('interviews_list', ['interviewers' => $m['item']['id'], 'active' => 1], false, 'label');
-        
-
-//        temporary workaround - ORM error
-/*
-        foreach ($m['items'] as $k => $v) {
-            foreach ($v['interviewers'] as $k2 => $v2) {
-                if ($v2['id'] != $m['item']['id']) {
-                    unset($m['items'][$k]);
-                    break;
-                }
-            }
-        }*/
 
         // get storytelling modules
         $m['modules'] = $this->parent->getJsonModel('collection_modules', ['parent' => $m['item']['id'], 'active' => 1]);
@@ -62,8 +50,7 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                 case 'collection_chapter':
                     $modules[$k]['reversed'] = $counter % 2 != 0;
                     $modules[$k]['color'] = $parentModule['item']['color'];
-                    $modules[$k]['article'] = $this->updateArticle($v['text'], $v['media']);
-                    $modules[$k]['show_location'] = $counter == 0;
+                    $modules[$k]['article'] = $this->updateArticle($v['text'], $v['media'], $v['playlist']);
 
                     $counter++;
                     break;
@@ -79,12 +66,12 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         return $modules;
     }
 
-    public function updateArticle($article, $article_media)
+    public function updateArticle($article, $article_media, $playlist)
     {
 
         $article = $this->processAudioTag($article);
 
-        return $this->articleUpdate($article, $article_media);
+        return $this->articleUpdate($article, $article_media, $playlist);
     }
 
     private function processAudioTag($content): string
