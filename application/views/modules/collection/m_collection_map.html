@@ -5,11 +5,13 @@
         %}data-options='{ "lazyLoading": true, "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }' {% endif %}
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
+            {% if params.global %}
+                <div class="map__count">{{items|length}} locations:</div>
+            {% else %}
             <div class="map__heading">
-                <h2 class="heading heading--map">
-                    Map
-                </h2>
+                <h2 class="heading heading--map">Map</h2>
             </div>
+            {% endif %}
             <ul class="map__locations">
                 {% for item in items %}
                 <li class="map__location js-location-wrapper">
@@ -18,13 +20,13 @@
                         data-interviews="{{item.quotes|json_encode}}"></button>
                     <div class="map__place">
                         <div class="map__title">
+                            {% if params.global %}
+                            <span class="map__address">{{item.address}}</span>
+                            {% endif %}
                             <div class="map__title-text">
                                 <span>{{item.label}}</span>
                             </div>
                         </div>
-                        {% if params.global %}
-                        <span class="map__address">[[svg::pin]] {{item.address}}</span>
-                        {% endif %}
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
