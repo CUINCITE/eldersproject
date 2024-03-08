@@ -114,13 +114,5 @@
     @include breakpoint(not-desktop) {
         position: relative;
         z-index: 1;
-
-        // > div {
-        //     z-index: 1;
-        // }
-
-        // .box__bg {
-        //     z-index: unset;
-        // }
     }
 }

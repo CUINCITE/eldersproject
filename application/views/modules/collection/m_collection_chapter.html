@@ -82,20 +82,39 @@
                             </div>
 
                         {% elseif module.type == 'playlist' %}
+                            <div class="text_wrapper__module text_wrapper__playlist">
+                                <div class="playlist">
+                                    <div class="playlist__title">
+                                        Playlist: <br>
+                                        {{label}}
+                                    </div>
+                                    <ul class="playlist__items">
+                                        {% for item in module.value %}
+                                        <li class="playlist__item">
+                                            <button class="playlist__button" data-audio-player="{{item.id}}" data-start=""><span class="sr-only">Play interview:</span></button>
+                                            {{item.label}} <span class="playlist__duration">{{item.start_time}}</span>
+                                            <i class="playlist__icon">[[svg::play]]</i>
+                                        </li>
+                                            {% if module.value|length > 5 and loop.index == 5 %}
+                                            </ul>
+                                            <div class="playlist__expand expand" data-expand id="playlist-items">
+                                                <ul class="playlist__items">
+                                            {% endif %}
+                                        {% endfor %}
+                                        </ul>
 
-                            PLAYLIST:
+                                    {% if module.value|length > 8 %}
+                                        </div>{# END of .playlist__expand #}
+                                        <div class="playlist__wrap">
+                                            <button class="playlist__trigger button button--small button--overflow" data-component="Button" aria-expanded="false" aria-controls="playlist-items" data-expanded-text="Show less" data-hidden-text="Load more">
+                                                {% include "./components/c_arrow_icon.html" %}
+                                                <span class="button__text js-button-text js-expand-text">Load more</span>
+                                            </button>
+                                        </div>
+                                    {% endif %}
 
-                            {% for item in module.value %}
-                                <br>
-                                ====<br>
-
-                                ID: {{ item.id }}<br>
-                                Label: {{ item.label }}<br>
-                                Time start: {{ item.start_time }}<br>
-
-                                ====
-                                <br>
-                            {% endfor %}
+                                </div>
+                            </div>
 
                         {% endif %}
 

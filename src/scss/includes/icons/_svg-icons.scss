@@ -101,7 +101,8 @@
             opacity: 0;
 
 
-            .is-playing & { opacity: 1; }
+            .is-playing &,
+            .is-playing ~ i & { opacity: 1; }
         }
 
 
@@ -109,7 +110,8 @@
             opacity: 1;
 
 
-            .is-playing & { opacity: 0; }
+            .is-playing &,
+            .is-playing ~ i & { opacity: 0; }
         }
     }
 }

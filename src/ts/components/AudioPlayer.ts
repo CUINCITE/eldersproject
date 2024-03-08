@@ -168,6 +168,9 @@ export class AudioPlayer extends Video {
 
 
     private togglePlayerButtons = (isPlaying: boolean): void => {
+        // set all buttons to paused state
+        document.querySelectorAll('[data-audio-player]').forEach(btn => btn.classList.remove('is-playing'));
+
         this.playerButtons = document.querySelectorAll(`[data-audio-player="${AudioPlayer.currentAudioId}"]`);
         this.playerButtons.forEach(btn => btn.classList.toggle('is-playing', isPlaying));
     };
