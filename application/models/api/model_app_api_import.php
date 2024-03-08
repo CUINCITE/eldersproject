@@ -22,12 +22,25 @@ class model_app_api_import
         if (!$action) return ['result' => false, 'message' => 'No Action defined'];
 
         $actions = match ($action) {
-            "metadata" => ['interviews', 'update_interviews', 'sessions', 'locations'], // safe to use
-            "media" => ['media'], // safe
-            "sessions_files_data" => ["sessions_files_data"], //safe
-            "mementos" => ["mementos"], // requires resising images in serdelia after import
-            "indexes" => ['indexes'], // safe
-            "topics" => ['topics'], // NOT SAFE!! - overwrites manual image-to-tag assignment
+
+            // safe to use, updates interviews' metadata
+            "metadata" => ['interviews', 'update_interviews', 'sessions', 'locations'],
+
+            // safe to use, imports mp3 files, transcripts
+            "media" => ['media'],
+
+            // safe to use, updates sessions' records based on new transcripts files etc.
+            "sessions_files_data" => ["sessions_files_data"],
+
+            // NOT QUITE SAFE as it requires resizing images in the CMS after import
+            "mementos" => ["mementos"],
+
+            // safe to use, updates interviews indexes
+            "indexes" => ['indexes'],
+
+            // NOT SAFE!! - overwrites manual image-to-tag assignment
+            "topics" => ['topics'],
+
             default => explode(',', $action),
         };
 
