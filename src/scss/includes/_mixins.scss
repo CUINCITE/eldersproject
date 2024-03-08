@@ -22,9 +22,12 @@
 }
 
 
-@function trim-font($line-height, $trim-value: $font-trim) {
-
-    @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+@function trim-font($line-height, $capitals: 'true', $trim-value: $font-trim) {
+    @if ($capitals == 'true') { 
+        @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base-cap") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+    } @else {
+        @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+    }
 }
 
 
@@ -44,9 +47,7 @@
 
 @function z($list, $element) {
     $z-index: index($list, $element);
-    @if $z-index {
-        @return $z-index;
-    }
+    @if $z-index { @return $z-index; }
     @warn 'There is no item "#{$element}" in this list; choose one of: #{$list}';
     @return null;
 }

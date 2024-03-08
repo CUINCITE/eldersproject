@@ -8,7 +8,7 @@
         @include font-size(122, 104);
         @include letter-spacing(-3.09, 103);
 
-        margin-block: trim-font(104/122);
+        margin-block: trim-font(104 / 122);
         max-width: 65%;
     }
 
