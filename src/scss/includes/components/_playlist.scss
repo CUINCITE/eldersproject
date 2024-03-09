@@ -1,5 +1,12 @@
 .playlist {
-    --element-side-padding: calc(10px + #{rem(11)}); // half of grid-gap + prev sibling padding (to align)
+    @include breakpoint(desktop) {
+        --element-side-padding: calc(10px + #{rem(11)}); // half of grid-gap + prev sibling padding (to align)
+    }
+
+
+    @include breakpoint(not-desktop) {
+        --element-side-padding: 16px; // grid side margin
+    }
 
 
     &__title {
@@ -11,6 +18,14 @@
         text-transform: uppercase;
         border-top: 1px solid var(--color-bg);
         padding: rem(19) var(--element-side-padding) rem(35);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17.5);
+
+            min-height: rem(81);
+            padding: rem(13) var(--element-side-padding) rem(20);
+        }
     }
 
 
@@ -26,6 +41,15 @@
         border-top: 1px solid var(--color-bg);
         margin-left: rem(-3);
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(30, 30);
+
+            min-height: rem(47);
+            padding-top: rem(11);
+            margin-left: rem(-1);
+        }
 
 
         &:first-of-type {
@@ -51,6 +75,12 @@
         transition: transform .5s $ease-custom;
         transform: translateX(100%);
         pointer-events: none;
+
+
+        @include breakpoint(not-desktop) {
+            width: rem(28);
+            height: rem(28);
+        }
 
 
         .is-playing ~ & {
@@ -79,6 +109,11 @@
         letter-spacing: -0.07em; // TEMP beacause of wrong font
         font-weight: 200;
         margin-left: rem(5);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17);
+        }
     }
 
 

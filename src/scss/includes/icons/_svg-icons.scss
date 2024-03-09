@@ -83,7 +83,8 @@
 
 
     @include breakpoint(not-desktop) {
-        .player--video & {
+        .player--video &,
+        .playlist & {
             width: 18px;
             height: 21px;
         }

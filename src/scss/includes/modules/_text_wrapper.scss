@@ -308,6 +308,12 @@
             margin-left: -10px; // grid-gap / 2
             margin-right: calc((#{rem(36.5)} + 20px) * -1); // parent padding-right + grid offset
         }
+
+
+        @include breakpoint(not-desktop) {
+            margin-left: -16px; // grid side margin
+            margin-right: calc((#{rem(36.5)} + 16px) * -1); // parent padding-right + grid side margin
+        }
     }
 
 
