@@ -186,8 +186,8 @@
         font-style: normal;
 
         @include breakpoint(desktop) {
-            @include letter-spacing(-1.75, 50);
             padding-left: var(--padding, rem(9));
+            letter-spacing: -0.025em;
         }
 
         @include breakpoint(tablet) {

@@ -30,7 +30,7 @@
 
 
     &__wrap {
-        @include flex(row, flex-end, flex-end);
+        @include flex(row, center, flex-end);
 
         width: 100%;
         height: 100%;
@@ -64,8 +64,11 @@
 
     &__control {
         @include font-family(compressed);
+        @include font-size(30, 1);
 
-        width: rem(120);
+        letter-spacing: -0.025em;
+        width: rem(126);
+        height: rem(53);
         text-align: center;
         padding-top: rem(4);
         background-color: var(--color-black);
@@ -172,6 +175,21 @@
 
 
     &__image {
+        margin-bottom: rem(20);
+
+
+        @include breakpoint(desktop) {
+            height: rem(190);
+
+
+            picture, img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+
         &_wrapper {
             @include breakpoint(phone) {
                 height: vw(294, phone);
@@ -416,6 +434,7 @@
         display: grid;
         grid-template-rows: 0fr;
         transition: grid-template-rows .4s $ease-out;
+        margin: 0 rem(-16);
 
         .is-active ~ & { grid-template-rows: 1fr; }
 
@@ -436,6 +455,8 @@
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
+
+            padding: 0 rem(16);
         }
 
         @include breakpoint(tablet) {
@@ -486,8 +507,9 @@
         @include font-family(reclined);
         @include font-size(15, 15);
 
+        font-weight: 300;
         letter-spacing: -0.025em;
-        padding-top: rem(4);
+        padding-top: rem(1);
         max-width: rem(140);
     }
 

@@ -152,7 +152,7 @@ export class Map extends Component {
 
 
 
-    private onLoad = async () => {
+    private onLoad = async() => {
         this.map.on('idle', this.onMapIdle);
         this.bind();
         breakpoint.phone && this.locationsElements.length && this.goToLocation(this.locations[0]);
@@ -166,7 +166,7 @@ export class Map extends Component {
     private updateColors(): void {
         const camelCaseName = this.style.split('-').reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1));
 
-        mapStyles[camelCaseName].forEach(({ name, type, color }) => {
+        mapStyles[camelCaseName] && mapStyles[camelCaseName].forEach(({ name, type, color }) => {
             this.map.setPaintProperty(name, type, color);
         });
     }

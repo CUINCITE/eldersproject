@@ -2,7 +2,7 @@
     <div class="box__bg"></div>
     <div class="map{% if params.global %} map--global{% endif %} {% if collectionColor %}map--{{collectionColor}}{% endif %}"
         data-component="Map" {% if params.global
-        %}data-options='{ "lazyLoading": true, "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }' {% endif %}
+        %}data-options='{ {% if not params.global %} "lazyLoading": true,{% endif %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }' {% endif %}
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
             {% if params.global %}
@@ -30,6 +30,11 @@
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
+                            {% if item.image %}
+                            <div class="map__image">
+                                {% include "./subviews/subview_picture.html" with { image: item.image } %}
+                            </div>
+                            {% endif %}
                             {% if item.description %}
                             <div class="map__description">
                                 <p>{{item.description}}</p>
@@ -47,8 +52,7 @@
             <div id="map" class="map__container js-map"></div>
             <ul class="map__interviews js-interviews-list"></ul>
             <div class="map__controls">
-                <button class="map__control js-toggle-button">{% if params.global %}Full View{% else %}Zoom Out{% endif
-                    %}</button>
+                <button class="map__control js-toggle-button">Zoom Out</button>
             </div>
         </div>
     </div>
