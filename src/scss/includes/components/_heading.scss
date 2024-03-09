@@ -276,7 +276,7 @@
             @include letter-spacing(-10.2, 204);
 
             margin-block: trim-font(175/204);
-            padding-left: 0.075em;
+            padding-left: rem(12);
         }
 
         @include breakpoint(tablet) {

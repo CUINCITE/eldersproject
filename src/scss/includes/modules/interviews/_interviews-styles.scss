@@ -27,8 +27,8 @@
         position: relative;
 
         @include breakpoint(desktop) {
-            padding: rem(30) 0 rem(12);
-            height: rem(195);
+            padding: rem(18) 0 rem(10);
+            height: rem(178);
         }
 
         @include breakpoint(phone) {
@@ -96,7 +96,7 @@
 
         // TEMP because we don't have content for all collections yet and the sticker is overlapping video player
 
-        .module--quote_panel ~ .module--interviews & {
+        .module--quote_panel + .module--interviews & {
             translate: -24% -45%;
         }
     }
