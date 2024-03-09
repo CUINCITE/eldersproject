@@ -565,11 +565,12 @@
     &__state {
         @include font-family(reclined);
         @include font-size(17, 19);
-        @include letter-spacing(0.54, 17);
         @include flex(row, flex-start, center);
 
+        letter-spacing: -0.02em;
+        font-weight: 300;
         text-transform: uppercase;
-        margin-top: rem(2);
+        margin-top: rem(1);
         flex-shrink: 0;
 
 
@@ -579,8 +580,8 @@
 
 
         svg {
-            margin-top: rem(-4);
-            margin-right: rem(5);
+            margin-top: rem(-3);
+            margin-right: rem(4);
 
 
             @include breakpoint(not-desktop) {
