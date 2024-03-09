@@ -6,7 +6,7 @@
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
             {% if params.global %}
-                <div class="map__count">{{items|length}} locations:</div>
+                <div class="map__count desktop-only">{{items|length}} locations:</div>
             {% else %}
             <div class="map__heading">
                 <h2 class="heading heading--map">Map</h2>

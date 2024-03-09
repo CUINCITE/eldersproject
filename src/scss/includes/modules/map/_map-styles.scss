@@ -176,17 +176,13 @@
 
     &__image {
         margin-bottom: rem(20);
+        height: rem(190);
 
 
-        @include breakpoint(desktop) {
-            height: rem(190);
-
-
-            picture, img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        picture, img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
 
@@ -284,11 +280,17 @@
             @include font-size(30, 27);
 
             position: relative;
+            letter-spacing: -0.025em;
 
 
             .map--global & {
                 flex: 1 1 100%;
                 margin-top: rem(12);
+
+
+                @include breakpoint(not-desktop) {
+                    max-width: 90%;
+                }
             }
 
 
@@ -434,7 +436,12 @@
         display: grid;
         grid-template-rows: 0fr;
         transition: grid-template-rows .4s $ease-out;
-        margin: 0 rem(-16);
+
+
+        @include breakpoint(desktop) {
+            margin: 0 rem(-16);
+        }
+
 
         .is-active ~ & { grid-template-rows: 1fr; }
 
@@ -452,11 +459,10 @@
 
         letter-spacing: normal;
         text-transform: none;
+        padding: 0 rem(16);
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
-
-            padding: 0 rem(16);
         }
 
         @include breakpoint(tablet) {
@@ -465,8 +471,6 @@
 
         @include breakpoint(phone) {
             @include font-size(14, 16);
-
-            padding-inline: map-get($grid-offset, phone);
         }
 
         p { padding-bottom: rem(18); }
