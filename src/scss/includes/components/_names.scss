@@ -17,6 +17,11 @@
 
         @include breakpoint(desktop) {
             border-left: 1px solid $color-bg;
+            min-height: rem(135);
+
+
+            .stack__content--simple & { min-height: unset; }
+
 
             &:not(:last-child) {
                 border-bottom: 1px solid $color-bg;
