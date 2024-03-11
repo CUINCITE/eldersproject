@@ -156,7 +156,7 @@ class model_app_pages_search
 
                 $sort = $label = 'label';
                 unset($f['label']);
-                $fields_to_read=['label','narrators_states','uid','occupation','summary','slug', 'interviewers', 'narrators'];
+                $fields_to_read=['label','narrator_occupation','lead','slug', 'interviewers','narrator_location'];
 
                 break;
 
