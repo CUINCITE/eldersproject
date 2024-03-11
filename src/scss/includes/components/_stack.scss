@@ -101,6 +101,15 @@
 
         position: absolute;
         transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+        transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9);
+
+
+        &:nth-last-child(1) {
+            transform: rotate(-8deg) translate(0, 0) !important;
+
+
+            &::after { opacity: 0; }
+        }
 
 
         &::after {
