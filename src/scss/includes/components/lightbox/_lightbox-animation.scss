@@ -146,13 +146,13 @@
 
         .is-showing &,
         .is-default & {
-            transition-duration: .6s;
+            transition-duration: .9s;
             transform: translateY(0);
             transition-delay: $content-delay;
         }
 
 
-        .is-default & { transition-delay: 0s; }
+        .is-default & { transition-delay: 0s; transition-duration: .6s; }
 
 
         .is-closing &,
