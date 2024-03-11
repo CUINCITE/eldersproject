@@ -28,6 +28,11 @@
     src: url("./fonts/Pangram Sans/PPPangramSans-SlimMediumReclined.woff2") format("woff2");
     font-weight: 300;
 }
+@font-face {
+    font-family: "Pangram Sans Slim";
+    src: url("./fonts/Pangram Sans/PPPangramSans-SlimExtralight.woff2") format("woff2");
+    font-weight: 300;
+}
 
 
 /* stylelint-disable-next-line scss/dollar-variable-first-in-block */
@@ -36,6 +41,7 @@ $fonts: (
     compact: ("Pangram Sans Compact", sans-serif),
     compressed: ("Pangram Sans Compressed", sans-serif),
     reclined: ("Pangram Sans Reclined", sans-serif),
+    slim: ("Pangram Sans Slim", sans-serif),
 );
 
 

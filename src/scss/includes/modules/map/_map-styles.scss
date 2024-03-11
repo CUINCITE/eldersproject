@@ -213,7 +213,7 @@
 
 
         @include breakpoint(desktop) {
-            padding: 0 rem(16);
+            padding: 0 rem(15);
         }
 
 
@@ -252,18 +252,31 @@
 
         .map--global & {
             flex-wrap: wrap;
+
+
+            &::before {
+                @include font-size(37, 33);
+            }
         }
 
 
         &::before {
-            @include font-settings(200, 100);
+            @include font-family(slim);
+            @include font-size(30, 30);
+
             content: counter(map-locations, decimal-leading-zero) ".";
+            letter-spacing: -0.025em;
             counter-increment: map-locations;
-            font-weight: 200;
             font-feature-settings: "ss03" on;
 
             @include breakpoint(desktop) {
-                margin-right: rem(5);
+                margin-right: rem(7);
+                margin-top: rem(-1);
+
+                .map--global & {
+                    margin-right: rem(10);
+                    margin-top: 0;
+                }
             }
 
             @include breakpoint(tablet) {
@@ -285,7 +298,7 @@
 
             .map--global & {
                 flex: 1 1 100%;
-                margin-top: rem(12);
+                margin-top: rem(6);
 
 
                 @include breakpoint(not-desktop) {
@@ -374,14 +387,14 @@
 
         &-title {
             margin-block: trim-font(1);
+            padding-top: rem(1);
         }
 
 
         &-duration {
-            @include font-settings(200, 100);
-            @include font-family(normal);
+            @include font-family(slim);
 
-            font-weight: 200;
+            font-weight: 300;
 
             @include breakpoint(desktop) {
                 margin-block: trim-font(1);
@@ -488,7 +501,7 @@
 
 
             .map--global & {
-                padding-block: rem(14) rem(22);
+                padding-block: rem(20);
             }
         }
 

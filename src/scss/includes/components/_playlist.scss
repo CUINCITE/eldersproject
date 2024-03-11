@@ -102,13 +102,12 @@
 
 
     &__duration {
-        @include font-family(normal);
-        @include font-settings(200, 100);
+        @include font-family(slim);
         @include font-size(28, 30);
 
-        letter-spacing: -0.07em; // TEMP beacause of wrong font
-        font-weight: 200;
-        margin-left: rem(5);
+        letter-spacing: -0.025em;
+        margin-left: rem(7);
+        margin-top: rem(-2);
 
 
         @include breakpoint(not-desktop) {
