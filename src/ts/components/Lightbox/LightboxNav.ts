@@ -79,7 +79,7 @@ export class LightboxNav extends Component {
 
         this.closeTab(this.activeTab).then(() => {
             if (!tab) {
-                // for animate image
+                // for animate intro
                 this.lightboxEl.classList.add('is-default');
                 this.lightboxEl.classList.remove('is-not-default');
                 this.activeTab = null;
@@ -111,7 +111,7 @@ export class LightboxNav extends Component {
         if (this.isAnimating) resolve();
 
         if (!tab) {
-            // for animate image
+            // for animate intro
             this.lightboxEl.classList.add('is-not-default');
             this.lightboxEl.classList.remove('is-default');
             resolve();

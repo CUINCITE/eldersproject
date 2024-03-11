@@ -7,6 +7,7 @@ import { AudioPlayer } from '../../components/AudioPlayer';
 import { LightboxTranscript } from './LightboxTranscript';
 import { LightboxNav } from './LightboxNav';
 import { LightboxSlider } from './LightboxSlider';
+import { LightboxContents } from './LightboxContents';
 
 
 
@@ -42,6 +43,7 @@ export class Lightbox {
     private transcriptComp: LightboxTranscript;
     private navComp: LightboxNav;
     private sliderComp: LightboxSlider;
+    private contentsComp: LightboxContents;
 
     constructor() {
         Lightbox.instance = this;
@@ -148,6 +150,7 @@ export class Lightbox {
 
     private buildComponents(): void {
         this.transcriptComp = new LightboxTranscript(this.view.querySelector('.js-lightbox-transcript'));
+        this.contentsComp = new LightboxContents(this.view.querySelector('.js-lightbox-contents'));
         this.navComp = new LightboxNav(this.view.querySelector('.js-lightbox-nav'), this.view);
         this.sliderComp = this.view.querySelector('.js-lightbox-slider') && new LightboxSlider(this.view.querySelector('.js-lightbox-slider'));
     }
@@ -289,5 +292,6 @@ export class Lightbox {
 
     private tryToUpdateTranscript(time: number): void {
         this.transcriptComp.update(time);
+        this.contentsComp.update(time);
     }
 }
