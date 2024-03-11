@@ -24,7 +24,7 @@ class model_app_api_import
         $actions = match ($action) {
 
             // safe to use, updates interviews' metadata
-            "metadata" => ['interviews', 'update_interviews', 'sessions', 'locations'],
+            "metadata" => ['interviews', 'update_interviews', 'sessions', 'locations', 'count_tags'],
 
             // safe to use, imports mp3 files, transcripts
             "media" => ['media'],

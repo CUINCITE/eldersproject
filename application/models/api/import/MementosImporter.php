@@ -16,7 +16,7 @@ class MementosImporter extends model_app_api_import
     public function import()
     {
         set_time_limit(60);
-        $directory = $_SERVER['DOCUMENT_ROOT'] . '/_data/_csv/mementos';
+        $directory = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/csv';
         $files = scandir($directory);
 
         $resultArray = [];
@@ -31,7 +31,7 @@ class MementosImporter extends model_app_api_import
 
                 $resultArray[] = [
                     'file' => $file,
-                    'result' =>  $this->importMedia($items)
+                    'result' =>  $this->importMedia($items, str_replace('.csv', '', $file))
                 ];
 
             }
@@ -42,7 +42,7 @@ class MementosImporter extends model_app_api_import
 
     }
 
-    private function importMedia(?array $items)
+    private function importMedia(?array $items, $directory)
     {
         $items_count = 0;
 
@@ -110,7 +110,7 @@ class MementosImporter extends model_app_api_import
                 'filename_original' => $v['Filename']
             ];
 
-            $oldFile = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/' . $v['Filename'];
+            $oldFile = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/files/' . $directory . '/' . $v['Filename'];
             $ext = pathinfo($oldFile, PATHINFO_EXTENSION);
 
             $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $uid . '.' . strtolower($ext);
