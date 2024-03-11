@@ -76,6 +76,9 @@ html {
     margin-top: -1px; // box margin-top fix
 
 
+    body.has-lightbox & { margin-top: 0; }
+
+
     @include breakpoint(not-desktop) {
         z-index: unset;
     }
