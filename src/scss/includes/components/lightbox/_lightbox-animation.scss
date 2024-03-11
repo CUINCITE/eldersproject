@@ -169,8 +169,11 @@
     &__intro-description {
         .is-showing &,
         .is-default & {
-            transition-delay: .1s;
+            transition-delay: .85s;
         }
+
+
+        .is-default & { transition-delay: .1s; }
 
 
         .is-closing &,
