@@ -34,8 +34,11 @@ class controller_app extends _uho_controller
 
         $this->data['head']['url']=rtrim($this->route->getUrlNow(),'/');
 
-        $this->data['hide_mobile_logo'] = $this->model->hide_mobile_logo;
+        $this->data['content']['show_mobile_logo'] = false;
 
+        if (!empty($this->data['content']['slug'] && in_array($this->data['content']['slug'], ['contact', 'about', 'search']))) {
+            $this->data['content']['show_mobile_logo'] = true;
+        }
 
     }
 

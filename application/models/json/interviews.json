@@ -319,6 +319,12 @@
       "source": {
         "model": "interview_illustrations_all"
       }
+    },
+    {
+      "field": "narrator_occupation"
+    },
+    {
+      "field": "lead"
     }
   ]
 }
