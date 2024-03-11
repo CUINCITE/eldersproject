@@ -10,7 +10,7 @@ class model_app_pages extends model_app
 	private $parent_vars=[];
 	var $isError;
 
-    public bool $hide_mobile_logo = false;
+    public bool $show_mobile_logo = false;
 
 	// ----------------------------------------------------------------------------------------------------------------
 	// get Page content

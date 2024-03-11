@@ -28,16 +28,6 @@
     <div class="wrapper" id="wrapper">
         <main id="content" class="content">
 
-            {% if not hide_mobile_logo %}
-                {# pls remove comment when fixed, now it's doubled almost everywhere :)
-
-                <section class="module module--logo_box desktop-hide">
-                    {% include "components/c_logo_box.html" %}
-                </section>
-                #}
-
-            {% endif %}
-
             {{content|raw}}
 
         </main>
