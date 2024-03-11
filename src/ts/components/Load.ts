@@ -334,10 +334,11 @@ export class Load extends Component {
 
         // always find inputs in main form with filters, sometimes it's executed in outer form
         const selectedInputs: HTMLInputElement[] = [...document.getElementById('main-form').querySelectorAll('input')].filter(input => input.checked);
-        const filteredItems = selectedInputs.map(input => `
-            <li class="filtered__label">
-                <label for="${input.id}">${input.dataset.name}<i class="icon-close"></i></label>
-            </li>`);
+        const filteredItems = selectedInputs.map(input => {
+            const count = input.dataset.count ? `<span>${input.dataset.count}</span>` : '';
+            // eslint-disable-next-line max-len
+            return `<li class="filtered__label"><label for="${input.id}">${input.dataset.name}${count} <i class="icon-close"></i></label></li>`;
+        });
         this.filteredEl.innerHTML = filteredItems.join('');
 
         setTimeout(() => {
