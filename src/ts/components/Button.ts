@@ -49,7 +49,7 @@ export class Button extends Component {
         if ([this.vertical, this.horizontal, this.triangle, this.arrow].some(el => !el)) return;
 
         this.tl && this.tl.kill();
-        this.tl = gsap.timeline({ paused: true, defaults: { ease: easing } });
+        this.tl = gsap.timeline({ paused: true, ease: easing });
 
         if (this.button.classList.contains('button--simple')) {
 
@@ -122,7 +122,7 @@ export class Button extends Component {
                         scaleX: 1,
                         duration,
                         transformOrigin: 'left center',
-                    }, 'arrow')
+                    }, '-=.05')
                     .fromTo(
                         this.triangle,
                         { x: () => -this.horizontal.offsetWidth },
@@ -132,7 +132,7 @@ export class Button extends Component {
                             duration,
                             transformOrigin: 'left center',
                         },
-                        'arrow',
+                        '-=.3',
                     );
             });
 
