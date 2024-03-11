@@ -11,8 +11,18 @@
         flex-shrink: 0;
         pointer-events: all;
         cursor: pointer;
-
         background-color: var(--color-box);
+
+
+        @include breakpoint(desktop) {
+            transform: translateY(100%);
+
+
+            body.is-fully-loaded & {
+                transition: transform .6s $ease-custom;
+                transform: translateY(0);
+            }
+        }
 
 
         @include breakpoint(phone) {
@@ -26,18 +36,6 @@
             transform-origin: left bottom;
             border-left: none;
             background: none;
-        }
-
-
-
-        body.is-not-ready & {
-            transform: translateY(100%);
-            transition: none;
-        }
-
-
-        body.is-fully-loaded & {
-            transition: transform .7s $ease-custom;
         }
     }
 
