@@ -239,6 +239,7 @@
         &-description {
             width: rem(350);
             background-color: var(--aside-body-color);
+            color: var(--color-black);
             padding: rem(64) rem(16) rem(41);
             position: relative;
             z-index: 1;
@@ -274,6 +275,7 @@
         &-contents {
             width: rem(691);
             background-color: var(--color-grey200);
+            color: var(--color-black);
             height: 100%;
             padding-top: rem(60);
             position: relative;
