@@ -104,9 +104,23 @@
                                 <li class="stack__dot js-dot{% if loop.first %} is-current{% endif %}"><span></span></li>
                             {% endfor %}
                         </ul>
-                        <div class="stack__cards js-scroll-cards">
-                            <ul class="stack__polaroids"></ul>
-                        </div>
+                        <ul class="stack__polaroids js-scroll-cards">
+                            <li class="stack__polaroid js-card">
+                                {% include "./components/c_polaroid.html" with {} %}
+                            </li>
+                            <li class="stack__polaroid js-card">
+                                {% include "./components/c_polaroid.html" with {} %}
+                            </li>
+                            <li class="stack__polaroid js-card">
+                                {% include "./components/c_polaroid.html" with {} %}
+                            </li>
+                            <li class="stack__polaroid js-card">
+                                {% include "./components/c_polaroid.html" with {} %}
+                            </li>
+                            <li class="stack__polaroid js-card">
+                                {% include "./components/c_polaroid.html" with {} %}
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="stack__button col-start-1 col-span-2">

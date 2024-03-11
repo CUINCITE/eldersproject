@@ -79,6 +79,41 @@
 
 
 
+    &__polaroids {
+        width: 100%;
+        height: 100%;
+
+
+        @include breakpoint(desktop) {
+            @include flex(row, center, center);
+
+            position: absolute;
+            inset: 0 100% 0 auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+    }
+
+
+
+    &__polaroid {
+        @include flex(row, center, center);
+
+        position: absolute;
+        transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba($color-grey800, .1);
+            transition: opacity .25s cubic-bezier(.5, 0, .2, 1);
+        }
+    }
+
+
+
     &__button {
         border-top: 1px solid $color-bg;
 
@@ -159,34 +194,17 @@
 
 
     @include breakpoint(desktop) {
+        // COLLECTIONS IMAGES (COVERS)
+
         @for $i from 1 through 10 {
-            &__names:has(li:nth-child(#{$i}):focus-within) + &__cards,
-            &__names:has(li:nth-child(#{$i}):focus-within) + div > &__cards, {
+            &__names:has(li:nth-child(#{$i}):focus-within) + &__cards {
                 li:nth-last-child(-n + #{$i - 1} + 3) {
                     transform: rotate(-15deg) translate(-50vw, -50%);
                 }
             }
 
-            // &__names:has(li:nth-child(#{$i}):hover) + &__cards,
-            // &__names:has(li:nth-child(#{$i}):hover) + div > &__cards, {
-            //     li { transform: unset !important; }
 
-            //     @for $j from 1 through 4 {
-            //         li:nth-last-child(#{4 - $j + $i}) {
-            //             transform: translate($j * -10px, $j * -10px) !important;
-            //         }
-            //     }
-
-            //     li:nth-last-child(-n + #{$i - 1}) {
-            //         transform: rotate(-15deg) translate(-50vw, -50%) !important;
-            //     }
-            // }
-
-
-
-            &__names:has(li:nth-child(#{$i}).is-active) + div > &__cards,
-            &__names:has(li:nth-child(#{$i}) a.is-visible) + div > &__cards,
-            &__names:has(li:nth-child(#{$i}).is-active) ~ &__cards, {
+            &__names:has(li:nth-child(#{$i}).is-active) ~ &__cards {
                 li { transform: unset !important; }
 
                 @for $j from 1 through 4 {
@@ -197,6 +215,28 @@
 
                 li:nth-last-child(-n + #{$i - 1}) {
                     transform: rotate(-15deg) translate(-50vw, -50%) !important;
+                }
+            }
+        }
+
+        // INTERVIEWS POLAROIDS
+
+        @for $i from 1 through 10 {
+            &__names:has(li:nth-child(#{$i}).is-active) ~ &__polaroids {
+                li { transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9) !important; }
+
+                li:nth-last-child(#{$i}) {
+                    transform: rotate(-8deg) translate(0, 0) !important;
+
+
+                    &::after { opacity: 0; }
+                }
+
+                li:nth-last-child(-n + #{$i - 1}) {
+                    transform: rotate(-15deg) translate(-50vw, -50%) !important;
+
+
+                    &::after { opacity: 0; }
                 }
             }
         }
