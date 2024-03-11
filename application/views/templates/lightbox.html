@@ -83,8 +83,8 @@
                 </div>
             </div>
             <aside class="lightbox__aside">
-                <div id="lightbox-mementos" class="lightbox__tab lightbox__tab--mementos js-lightbox-tab" data-tab-animation="mementos">
-                    {% if images %}
+                {% if images %}
+                    <div id="lightbox-mementos" class="lightbox__tab lightbox__tab--mementos js-lightbox-tab" data-tab-animation="mementos">
                         {% if images|length > 1 %}
                         <!-- slider -->
                         <div class="lightbox__slider slider js-lightbox-slider">
@@ -160,20 +160,8 @@
                         </div>
                         <!-- single photo -->
                         {% endif %}
-                    {% endif %}
-                    <!-- cover's part when no images -->
-                    {% if mainImage %}
-                        {% set image = mainImage.image %}
-                        <div class="lightbox__image">
-                            <!-- subview_picture -->
-                            <picture>
-                                <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
-                                <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
-                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
-                            </picture>
-                        </div>
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
                 <div id="lightbox-transcript" class="lightbox__tab lightbox__tab--transcript js-lightbox-tab js-lightbox-transcript" data-tab-animation="simple">
                     <div class="lightbox__tab-content">
                         <div class="lightbox__tab-dot"></div>
@@ -296,7 +284,9 @@
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
+            {% if images %}
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
+            {% endif %}
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
             <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
