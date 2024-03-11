@@ -134,6 +134,10 @@ class model_app_pages_article
 
                             $items = [];
 
+                            $start_time = $playlistItem[1];
+                            list($hours, $minutes, $seconds) = explode(':', $start_time);
+                            $total_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+
                             foreach ($playlist as $playlistItem) {
                                 $interview = _uho_fx::array_filter($interviews, 'id', $playlistItem[0], ['first' => true]);
                                 if (!$interview) continue;
@@ -141,7 +145,8 @@ class model_app_pages_article
                                 $items[] = [
                                     'id' => $interview['id'],
                                     'label' => $interview['label'],
-                                    'start_time' =>$playlistItem[1]
+                                    'total_seconds' => $total_seconds,
+                                    'start_time' => $start_time
                                 ];
                             }
 
