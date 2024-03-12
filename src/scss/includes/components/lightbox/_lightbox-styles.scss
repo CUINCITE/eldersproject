@@ -236,6 +236,12 @@
         }
 
 
+        &-btn {
+            @include font-size(16, 16);
+            @include flex(row, flex-end, center);
+        }
+
+
         &-description {
             width: rem(350);
             background-color: var(--aside-body-color);
@@ -297,11 +303,6 @@
         &-part {
             display: grid;
             grid-template-columns: var(--aside-width) 1fr;
-            opacity: 0.2;
-            transition: opacity .3s $ease-custom;
-
-
-            &.is-current { opacity: 1; }
         }
 
 
@@ -312,12 +313,22 @@
             letter-spacing: -0.02em;
             text-align: right;
             padding-right: rem(7);
+            opacity: 0.2;
+            transition: opacity .3s $ease-custom;
+
+
+            .is-current & { opacity: 1; }
 
 
             span {
                 display: inline-block;
                 width: rem(44);
                 text-align: left;
+            }
+
+
+            @include hover {
+                opacity: 1;
             }
         }
 
@@ -326,6 +337,11 @@
             @include font-size(16, 19.84);
 
             padding-left: rem(22);
+            opacity: 0.2;
+            transition: opacity .3s $ease-custom;
+
+
+            .is-current & { opacity: 1; }
         }
     }
 

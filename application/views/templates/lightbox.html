@@ -74,7 +74,9 @@
                         <ul class="lightbox__intro-contentlist js-scrolled">
                             {% for item in contentList %}
                                 <li class="lightbox__intro-part js-contents-part">
-                                    <button class="lightbox__intro-time" data-audio-player="{{id}}" data-start="{{item.startTime}}"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></button>
+                                    <div class="lightbox__intro-btn">
+                                        <button class="lightbox__intro-time" data-audio-player="{{id}}" data-start="{{item.startTime}}"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></button>
+                                    </div>
                                     <div class="lightbox__intro-text">{{item.label}}</div>
                                 </li>
                             {% endfor %}
@@ -194,7 +196,9 @@
                                         <div class="transcript__lang js-transcript-lang is-active" data-lang="english">
                                         {% for part in transcript.english %}
                                             <div class="transcript__part js-transcript-part">
-                                                <button class="transcript__time js-transcript-btn" data-audio-player="{{id}}" data-start="{{part[0]}}">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                <div class="transcript__btn">
+                                                    <button class="transcript__time js-transcript-btn" data-audio-player="{{id}}" data-start="{{part[0]}}">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                </div>
                                                 <div class="transcript__text">{{part[1]}}</div>
                                             </div>
                                         {% endfor %}
@@ -204,7 +208,9 @@
                                         <div class="transcript__lang js-transcript-lang" data-lang="spanish">
                                         {% for part in transcript.spanish %}
                                             <div class="transcript__part">
-                                                <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                <div class="transcript__btn">
+                                                    <button class="transcript__time">{{ macros.secondsToMinutes(part[0]) }}</button>
+                                                </div>
                                                 <div class="transcript__text">{{part[1]}}</div>
                                             </div>
                                         {% endfor %}
