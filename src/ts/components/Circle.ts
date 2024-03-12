@@ -52,14 +52,16 @@ export class Circle extends Component {
 
     public show = (): void => {
         this.view.style.display = 'block';
+        this.view.style.opacity = '0';
+
         gsap.fromTo(this.view, { scale: 0.6 }, {
             scale: 1,
             duration: 0.3,
             ease: 'sine',
             onStart: () => {
+                this.circlesTimeline?.play();
                 this.view.style.opacity = '1';
             },
-            onComplete: () => this.circlesTimeline.play(),
         });
     };
 
@@ -127,11 +129,12 @@ export class Circle extends Component {
 
 
     private loop = (): void => {
-        this.circlesTimeline = gsap.timeline({ repeat: -1 });
+        this.circlesTimeline = gsap.timeline({ repeat: -1, repeatDelay: 1.7 });
 
         this.circlesTimeline.set([this.circles], { opacity: 0 });
 
         [...this.circles].forEach((circle, index) => {
+            const delay = index === 0 ? '0' : '1.7';
             this.circlesTimeline.fromTo(circle, { scale: 0.6 }, {
                 scale: 1,
                 duration: 0.3,
@@ -148,7 +151,7 @@ export class Circle extends Component {
                 onComplete: () => {
                     gsap.set([...this.circles].filter(c => c !== this.circles[index]), { opacity: 0 });
                 },
-            }, '+=1.7');
+            }, `+=${delay}`);
         });
     };
 
