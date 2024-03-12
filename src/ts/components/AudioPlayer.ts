@@ -287,12 +287,12 @@ export class AudioPlayer extends Video {
 
     private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean): void => {
         this.animateOutIllustration(prevDirection);
-        this.animateOutCassette()
-            .then(() => this.loadAudio(id))
+        this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
+                this.animateOutCassette();
                 this.updatePlayer(data);
                 this.updateColors(data.color);
-                this.animateInCassette();
+                // this.animateInCassette();
                 this.animateInIllustration(prevDirection);
                 // eslint-disable-next-line max-len
                 this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
@@ -323,8 +323,11 @@ export class AudioPlayer extends Video {
             duration: 0.5,
             ease: 'power2.out',
             clearProps: 'all',
+            onStart: () => {
+                this.cassetteEl.style.zIndex = '2';
+            },
             onComplete: () => {
-                this.cassetteEl.style.opacity = '0';
+                this.cassetteEl.style.zIndex = '0';
                 resolve();
             },
         });

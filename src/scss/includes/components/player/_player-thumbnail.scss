@@ -103,6 +103,12 @@
         &-wrap {
             z-index: 1;
             background-color: var(--cassette-bg-color);
+
+
+            &--front {
+                transition: background-color .01s;
+                transition-delay: .6s;
+            }
         }
 
 
