@@ -339,8 +339,8 @@ export class Map extends Component {
             }
             if (props.cluster) {
                 marker.getElement().innerHTML = `<span>${props.point_count}</span>`;
-                marker.getElement().style.width = '40px';
-                marker.getElement().style.height = '40px';
+                marker.getElement().style.width = '46px';
+                marker.getElement().style.height = '46px';
             } else {
                 marker.getElement().innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="63" height="76" viewBox="0 0 63 76" fill="none">

@@ -534,8 +534,8 @@
 
     &__marker {
         @include breakpoint(desktop) {
-            width: rem(40);
-            height: rem(40);
+            width: rem(46);
+            height: rem(46);
         }
 
         @include breakpoint(tablet) {
@@ -563,7 +563,7 @@
         &--cluster {
             @include font-family(compressed);
             @include flex(row, center, center);
-            @include font-size(20, 1);
+            @include font-size(26, 1);
 
             text-align: center;
             border-radius: 50%;
