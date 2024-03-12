@@ -75,29 +75,17 @@
     &__text {
         @include font-family(normal);
         @include font-settings(400, 100);
+        @include font-size(20, 32);
+        @include letter-spacing(-0.6, 20);
 
         text-transform: uppercase;
         position: absolute;
+        inset: auto auto rem(4) rem(4);
 
+        .is-loader-hiding & { opacity: 0; }
 
-        @include breakpoint(desktop) {
-            @include font-size(20, 32);
-            @include letter-spacing(-0.6, 20);
-
-            inset: auto auto rem(4) rem(4);
-        }
-
-        @include breakpoint(tablet) {
-            @include font-size(20, 32);
-            @include letter-spacing(-0.6, 20);
-
-            inset: auto auto rem(4) rem(4);
-        }
 
         @include breakpoint(phone) {
-            @include font-size(20, 32);
-            @include letter-spacing(-0.6, 20);
-
             inset: auto auto rem(-12) rem(4);
         }
     }
