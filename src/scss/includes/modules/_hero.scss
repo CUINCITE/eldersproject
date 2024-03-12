@@ -30,14 +30,14 @@
             position: relative;
             z-index: 1;
 
-            @media (max-height: 719px) {
+            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
                 @include font-size(170, 1);
 
                 letter-spacing: -0.045em;
             }
 
 
-            @media (max-height: 720px) and (max-aspect-ratio: 1280/720) {
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
                 @include font-size(204, 1);
 
                 letter-spacing: -0.045em;
@@ -134,7 +134,7 @@
             }
 
 
-            @media (max-height: 720px) and (max-aspect-ratio: 1280/720) {
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
                 padding-top: rem(12);
                 padding-bottom: rem(38);
             }
