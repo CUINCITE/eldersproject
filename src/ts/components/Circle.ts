@@ -1,19 +1,33 @@
 import { gsap } from 'gsap/dist/gsap';
 import { Component } from './Component';
+import { Images } from '../widgets/Images';
+
+
+export interface ICircleItems {
+    items: [{
+        id: number;
+        src: string;
+        color: string;
+    }]
+}
 
 export class Circle extends Component {
 
     private circles: NodeListOf<HTMLElement>;
     private images: NodeListOf<HTMLElement>;
     private circlesTimeline: any;
+    private circlesWrapper: HTMLElement;
+    private illusWrapper: HTMLElement;
+    private mainWrapper: HTMLElement;
 
     constructor(protected view: HTMLElement) {
         super(view);
 
-        this.circles = this.view.querySelectorAll('.js-circle');
-        this.images = this.view.querySelectorAll('.js-illu');
+        this.mainWrapper = this.view.querySelector('.js-circle-wrap');
+        this.circlesWrapper = this.view.querySelector('.js-circle-circles');
+        this.illusWrapper = this.view.querySelector('.js-circle-illus');
 
-        this.loop();
+        this.init();
     }
 
 
@@ -51,6 +65,67 @@ export class Circle extends Component {
 
 
 
+    private init = (): void => {
+        this.getImages().then((data: ICircleItems) => {
+            const itemsArray = data.items;
+
+            // sort the array randomly
+            const shuffledArray = itemsArray.sort(() => Math.random() - 0.5);
+
+            // get 6 items to loop. but filter out items with same color
+            const seenColors = new Set();
+            const uniqueColorItems = shuffledArray.filter(item => {
+                if (seenColors.has(item.color)) {
+                    return false;
+                }
+                seenColors.add(item.color);
+                return true;
+
+            });
+            const chosenItems = uniqueColorItems.slice(0, 6);
+
+
+
+            this.mainWrapper.style.backgroundColor = `var(--color-${chosenItems[5].color})`;
+
+            const circlesHtml = chosenItems.map(item => `
+                    <div class="circle__circle js-circle circle__circle--${item.color}"></div>
+                `);
+            this.circlesWrapper.innerHTML = circlesHtml.join('');
+
+            const illusHtml = chosenItems.map(item => `
+                    <div class="circle__illu js-illu">
+                        <img src="${item.src}" alt="Illustration ${item.id}" />
+                    </div>
+                `);
+            this.illusWrapper.innerHTML = illusHtml.join('');
+
+            this.circles = this.view.querySelectorAll('.js-circle');
+            this.images = this.view.querySelectorAll('.js-illu');
+
+
+            Images.preload(this.view.querySelectorAll('img'))
+                .then(() => {
+                    this.loop();
+                });
+        });
+    };
+
+
+
+    private async getImages(): Promise<ICircleItems> {
+        try {
+            const response = await fetch(this.view.dataset.items, { method: 'POST' });
+            const data = response.json();
+            return data;
+        } catch (error) {
+            this.view.classList.remove('is-fetching');
+            throw new Error(error);
+        }
+    }
+
+
+
     private loop = (): void => {
         this.circlesTimeline = gsap.timeline({ repeat: -1 });
 
@@ -69,6 +144,9 @@ export class Circle extends Component {
                         ease: 'sine',
                     });
                     gsap.set([...this.images].filter(img => img !== this.images[index]), { opacity: 0 });
+                },
+                onComplete: () => {
+                    gsap.set([...this.circles].filter(c => c !== this.circles[index]), { opacity: 0 });
                 },
             }, '+=1.7');
         });
