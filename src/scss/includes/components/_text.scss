@@ -76,6 +76,11 @@
                 @include font-size(21, 25);
             }
 
+
+            @media (max-height: 720px) and (max-aspect-ratio: 1280 / 720) {
+                @include font-size(21, 25);
+            }
+
             p {
                 max-width: unset !important;
             }

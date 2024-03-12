@@ -47,6 +47,13 @@
 
                 letter-spacing: -0.045em;
             }
+
+
+            @media (max-height: 720px) and (max-aspect-ratio: 1280 / 720) {
+                @include font-size(204, 1);
+
+                letter-spacing: -0.045em;
+            }
         }
 
         @include breakpoint(tablet) {

@@ -35,6 +35,13 @@
 
                 letter-spacing: -0.045em;
             }
+
+
+            @media (max-height: 720px) and (max-aspect-ratio: 1280/720) {
+                @include font-size(204, 1);
+
+                letter-spacing: -0.045em;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -113,10 +120,23 @@
         @include flex(row, space-between, flex-start);
 
         @include breakpoint(desktop) {
-            padding-top: rem(18);
+            padding-top: rem(16);
+            padding-bottom: rem(47);
 
             .text {
                 padding-bottom: rem(18) !important;
+            }
+
+
+            @media (max-height: 719px) {
+                padding-top: rem(12);
+                padding-bottom: rem(38);
+            }
+
+
+            @media (max-height: 720px) and (max-aspect-ratio: 1280/720) {
+                padding-top: rem(12);
+                padding-bottom: rem(38);
             }
         }
 
