@@ -47,14 +47,14 @@ body {
     counter-reset: collection-counter;
 }
 
+
 body,
 html {
     &:has(.modal.is-open) { overflow: hidden; }
 
-    &:has(.has-menu-open) {
-        @include breakpoint(not-desktop) {
-            overflow: hidden;
-        }
+    &:has(.has-menu-open),
+    &.has-menu-open {
+        overflow: hidden;
     }
 }
 

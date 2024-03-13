@@ -1,4 +1,9 @@
 .livesearch {
+    --line-width: #{rem(12)};
+    --line-offset: #{rem(4)};
+
+
+
     position: absolute;
     inset: 100% 0 auto;
     color: var(--color-black);
@@ -274,29 +279,101 @@
 
 
 
+    &__results {
+        &--simple {
+            a {
+                @include breakpoint(desktop) {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: rem(12) auto auto 0;
+                        margin: auto;
+                        height: 1px;
+                        background: currentColor;
+                        width: var(--line-width);
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: transform .4s $ease-custom;
+                    }
+
+
+                    span {
+                        transition: transform .4s $ease-custom;
+                        display: inline-block;
+                    }
+
+
+                    @include hover {
+                        span {
+                            transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                        }
+
+
+                        &::before {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        &--transcripts {
+            li {
+                @include flex(column, flex-start, flex-start);
+
+
+                a {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background-color: lighten($color-yellow, 30);
+                        border-radius: rem(30);
+                        z-index: -1;
+                        opacity: 0;
+                        transition: opacity .15s ease-in-out;
+                    }
+
+
+                    @include hover {
+                        &::before { opacity: 1; }
+                    }
+                }
+            }
+        }
+    }
+
+
+
     &__fragment {
         @include font-family(normal);
 
         text-transform: none;
         display: block;
-        transition: background-color .3s $easing;
         letter-spacing: normal;
+
 
         @include breakpoint(desktop) {
             @include font-size(14, 18);
         }
 
+
         @include breakpoint(tablet) {
             @include font-size(20, 24);
         }
+
 
         @include breakpoint(phone) {
             @include font-size(14, 18.9);
         }
 
-        @include hover {
-            background-color: $color-white;
-        }
 
         // highlighted part
 
