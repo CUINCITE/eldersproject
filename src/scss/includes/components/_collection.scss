@@ -277,6 +277,7 @@
             width: vw(530);
             margin-top: vw(-18);
             margin-left: vw(18);
+            will-change: transform;
         }
 
         @include breakpoint(tablet) {
