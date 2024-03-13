@@ -37,6 +37,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
+        margin: 0;
 
         @include breakpoint(desktop) {
             @include font-size(216, 1);
@@ -74,6 +75,11 @@
         span {
             grid-column: 1 / 1;
             grid-row: 1 / 1;
+            opacity: 0;
+            transition: opacity .15s $ease-out;
+
+
+            html.wf-active & { opacity: 1; }
         }
     }
 
@@ -88,6 +94,7 @@
         text-transform: uppercase;
         position: absolute;
         inset: auto auto rem(4) rem(4);
+        margin: 0;
 
         .is-loader-hiding & { opacity: 0; }
 
