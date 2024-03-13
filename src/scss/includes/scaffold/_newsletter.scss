@@ -119,6 +119,16 @@
                 // transform: translateY(150%) rotate(-15deg);
                 animation: search-label-down .5s $ease-custom forwards;
             }
+
+
+            @include accessibility {
+                max-width: fit-content;
+
+                &::placeholder {
+                    opacity: 1;
+                    color: yellow;
+                }
+            }
         }
     }
 
@@ -410,6 +420,7 @@
             }
         }
     }
+
 
     .box__bg {
         background-color: var(--color-black);

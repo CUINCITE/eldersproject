@@ -22,6 +22,8 @@ $theme-colors: ("orange", "red", "blue", "pink");
         height: 100lvh;
     }
 
+    // .has-menu-open & { visibility: visible; }
+
     &__wrap {
         @include flex(column, flex-start, flex-end);
 

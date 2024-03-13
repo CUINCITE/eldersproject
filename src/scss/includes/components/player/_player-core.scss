@@ -44,6 +44,7 @@
         overflow: visible;
 
         pointer-events: none;
+        justify-content: flex-end;
 
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;

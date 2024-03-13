@@ -25,6 +25,14 @@
 <li class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
     <div class="lightbox__grid">
+        <div class="lightbox__logo">
+            <a href="{{urlBack}}" class="lightbox__close js-close" data-history="back">
+                <span class="button button--lightbox">
+                    <i class="icon-close"></i>
+                </span>
+            </a>
+            [[svg::logo]]
+        </div>
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">

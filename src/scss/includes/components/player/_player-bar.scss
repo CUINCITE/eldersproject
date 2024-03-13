@@ -99,6 +99,18 @@
         }
 
         @include hover { opacity: 1; }
+
+        span {
+            &:first-child {
+                .is-playing & { display: none; }
+            }
+
+            &:nth-child(2) {
+                display: none;
+
+                .is-playing & { display: block; }
+            }
+        }
     }
 
 

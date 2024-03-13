@@ -88,6 +88,15 @@
         }
 
 
+        @include accessibility {
+            ~ * {
+                position: relative;
+                color: yellow;
+                z-index: 2;
+            }
+        }
+
+
         @include hover {
             ~ .names__author span {
                 transform: translateX(calc((var(--line-width) + var(--line-offset)) * -1));
@@ -160,15 +169,6 @@
         }
     }
 
-    &__button {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        right: 0;
-
-        cursor: pointer;
-    }
 
     &__copy {
         @include flex(column, flex-start, flex-end);

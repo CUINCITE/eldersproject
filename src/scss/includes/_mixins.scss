@@ -91,18 +91,18 @@ $line-height: 1.4;
 
 @mixin hover {
     .mod_no-touchevents &:hover,
-    // .touchevents &:active,
+    .mod_no-touchevents &:focus-visible,
     .accessibility &:focus {
         @content;
     }
 }
 
 @mixin accessibility {
+    .accessibility &:focus-within,
     .accessibility &:focus {
         @content;
     }
 }
-
 
 @mixin v-center {
     display: flex;
@@ -163,6 +163,8 @@ $line-height: 1.4;
             animation: hover-link .4s $ease-in-out forwards;
         }
     }
+
+    .accessibility & span{ animation: none; }
 }
 
 

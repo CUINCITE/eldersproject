@@ -1,5 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
 import { SplitText } from 'gsap/dist/SplitText';
+import { Accessibility } from '../widgets/Accessibility';
 import { Component } from './Component';
 import { breakpoint, easing } from '../Site';
 import { debounce } from '../Utils';
@@ -20,6 +21,7 @@ export class Button extends Component {
     private arrow: HTMLElement;
     private tl: gsap.core.Timeline;
     private settings: IButtonSettings;
+    private duration: number;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -142,18 +144,21 @@ export class Button extends Component {
                     yPercent: 150,
                     rotate: -15,
                     duration: 0.5,
+                    ease: easing,
                 })
                 .to(this.horizontal, {
                     transformOrigin: 'left center',
                     scaleX: () => (this.splitText.words[0].offsetWidth / this.horizontal.offsetWidth) + 1.01,
                     delay: -0.5,
                     duration: 0.65,
+                    ease: easing,
                 }, 'arrow')
                 .to(this.triangle, {
                     transformOrigin: 'left center',
                     x: () => this.splitText.words[0].offsetWidth,
                     delay: -0.5,
                     duration: 0.65,
+                    ease: easing,
                 }, 'arrow');
         }
 
@@ -161,6 +166,7 @@ export class Button extends Component {
 
     private setupListeners(): void {
         this.view.addEventListener('mouseenter', () => {
+            if (Accessibility.isOn) this.tl.play(1);
             breakpoint.desktop && this.tl.play();
         });
 
@@ -169,6 +175,7 @@ export class Button extends Component {
         });
 
         this.view.addEventListener('focus', () => {
+            if (Accessibility.isOn) this.tl.play(1);
             breakpoint.desktop && this.tl.play();
         });
 

@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header__container">
     <div class="header__wrap">
-      <button class="header__trigger js-toggle-menu" aria-label="Open Menu">
+      <button class="header__trigger js-menu-toggle" aria-label="Open Menu">
         <div class="hamburger">
           <span class="hamburger__line"></span>
           <span class="hamburger__line"></span>
@@ -14,7 +14,8 @@
     </div>
   </div>
 </header>
-<div class="menu js-menu">
+<div class="menu js-menu" id="menu">
+  <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
   <div class="menu__wrap">
     <div class="search" id="search">
       <div class="search__content js-search-content">
@@ -68,5 +69,4 @@
       {% endfor %}
     </ul>
   </div>
-  <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
 </div>

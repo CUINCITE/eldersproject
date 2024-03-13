@@ -455,6 +455,28 @@
                 }
             }
         }
+
+        @include accessibility {
+            z-index: 1;
+
+            & ~ * {
+                position: relative;
+                z-index: 1;
+                color: yellow;
+            }
+
+            & ~ .interviews__box {
+
+                .interview-box__layer:last-child {
+                    background-color: yellow;
+                }
+
+                .interview-box__text {
+                    color: black;
+                }
+            }
+
+        }
     }
 
 

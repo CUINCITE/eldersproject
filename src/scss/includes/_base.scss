@@ -84,6 +84,13 @@ html {
     }
 
 
+    .has-lightbox & {
+        .accessibility & {
+            display: none;
+        }
+    }
+
+
     body.is-loader-hidden & {
         transition-property: transform, background;
 

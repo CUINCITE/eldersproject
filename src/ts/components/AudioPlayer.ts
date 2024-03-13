@@ -426,6 +426,7 @@ export class AudioPlayer extends Video {
                 // eslint-disable-next-line max-len
                 !fast && this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
                 this.isExpanded = false;
+                this.ui.playerBar.style.display = 'none';
             },
         });
     };
@@ -433,6 +434,7 @@ export class AudioPlayer extends Video {
 
 
     private expand = (): void => {
+        this.ui.playerBar.style.display = 'grid';
         this.view.classList.add('is-expanded');
 
         gsap.to(this.ui.playerBar, {

@@ -1,4 +1,5 @@
-<div class="menu js-menu">
+<div class="menu js-menu" id="menu">
+    <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
     <div class="menu__wrap">
         {% include './scaffold/search.html' %}
         <nav class="menu__nav">
@@ -29,5 +30,4 @@
             {% endfor %}
         </ul>
     </div>
-    <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
 </div>

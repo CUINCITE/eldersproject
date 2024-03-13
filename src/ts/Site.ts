@@ -113,6 +113,12 @@ class Site {
         });
 
         window.addEventListener('orientationchange', debounce(() => this.onResize(true)));
+
+        window.addEventListener('keyup', e => {
+            const { key } = e;
+
+            if (key === 'Escape') this.setFocusOnFirstFocusableElement();
+        });
     }
 
 
@@ -282,6 +288,12 @@ class Site {
         });
 
         document.querySelectorAll(`a[href="${pathname}/"], a[href="${pathname}"]`).forEach(link => link?.classList.add('is-active'));
+    }
+
+
+    private setFocusOnFirstFocusableElement(): void {
+        const focusable = document.querySelector('a, button, input, textarea, select') as HTMLElement;
+        focusable && focusable.focus();
     }
 }
 

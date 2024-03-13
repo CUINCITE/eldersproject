@@ -1099,6 +1099,15 @@
         &-link {
             @include full;
 
+            @include accessibility {
+                z-index: 0;
+
+                & ~ *:nth-child(n+3) {
+                    position: relative;
+                    color: yellow;
+                }
+            }
+
             // @include hover {
             //     ~ .lightbox__related-arrow {
             //         opacity: 1;

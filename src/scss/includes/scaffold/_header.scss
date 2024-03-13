@@ -83,6 +83,16 @@
             width: 100%;
             padding: vw(27, tablet) vw(18, tablet);
         }
+
+        @include accessibility {
+            path {
+                fill: yellow;
+            }
+
+            .hamburger__line {
+                background-color: yellow;
+            }
+        }
     }
 
     &__wrap {

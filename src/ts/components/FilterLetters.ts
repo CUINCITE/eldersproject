@@ -1,3 +1,4 @@
+import { Accessibility } from '../widgets/Accessibility';
 import Scroll from '../Scroll';
 import { Component } from './Component';
 
@@ -61,6 +62,8 @@ export class FilterLetters extends Component {
             el: letterItem,
             offsetY: this.view.closest('.js-panel').clientHeight - 1, // prevent double border
         });
+
+        Accessibility.isOn && letterItem.querySelector('a').focus();
     };
 
 
