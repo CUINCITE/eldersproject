@@ -136,8 +136,6 @@ export class Search {
         this.liveLi = this.view.querySelectorAll('.js-livesearch-item');
         this.allLink = this.view.querySelector('.js-livesearch-all');
 
-        // set max-height of livesearch wrap - prevent growing outside viewport
-        const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
         const tl = gsap.timeline();
 
         tl.to(this.liveList.parentElement, {
@@ -158,9 +156,13 @@ export class Search {
 
         this.allLink && tl.fromTo(
             this.allLink,
-            { opacity: this.isLiveShown ? 1 : 0 },
+            {
+                opacity: this.isLiveShown ? 1 : 0,
+                yPercent: this.isLiveShown ? 0 : 100,
+            },
             {
                 opacity: 1,
+                yPercent: 0,
                 duration: 0.5,
                 ease: easing,
             },
