@@ -5,6 +5,6 @@
 {% endif %}
 {% endif %} js-polaroid">
     <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">
-        {% include "./subviews/subview_picture.html" with image %}
+        {% include "./subviews/subview_picture.html" with { image, lazy: true } %}
     </div>
 </div>

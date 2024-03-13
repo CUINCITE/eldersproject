@@ -19,6 +19,7 @@ export class Circle extends Component {
     private circlesWrapper: HTMLElement;
     private illusWrapper: HTMLElement;
     private mainWrapper: HTMLElement;
+    private isLoaded: boolean = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -26,8 +27,6 @@ export class Circle extends Component {
         this.mainWrapper = this.view.querySelector('.js-circle-wrap');
         this.circlesWrapper = this.view.querySelector('.js-circle-circles');
         this.illusWrapper = this.view.querySelector('.js-circle-illus');
-
-        this.init();
     }
 
 
@@ -51,6 +50,9 @@ export class Circle extends Component {
 
 
     public show = (): void => {
+        // load the images only when needed
+        if (!this.isLoaded) this.init();
+
         this.view.style.display = 'block';
         this.view.style.opacity = '0';
 
@@ -109,6 +111,7 @@ export class Circle extends Component {
             Images.preload(this.view.querySelectorAll('img'))
                 .then(() => {
                     this.loop();
+                    this.isLoaded = true;
                 });
         });
     };
@@ -163,6 +166,6 @@ export class Circle extends Component {
             duration: 0.25,
             ease: 'sine',
         });
-        this.circlesTimeline.pause();
+        this.circlesTimeline?.pause();
     };
 }

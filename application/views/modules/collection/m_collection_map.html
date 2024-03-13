@@ -1,8 +1,10 @@
 <section class="module module--map box" data-scroll="box">
     <div class="box__bg"></div>
-    <div class="map{% if params.global %} map--global{% endif %} {% if collectionColor %}map--{{collectionColor}}{% endif %}"
-        data-component="Map" {% if params.global
-        %}data-options='{ {% if not params.global %} "lazyLoading": true,{% endif %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 }' {% endif %}
+    <div class="map
+        {% if params.global %} map--global{% endif %}
+        {% if collectionColor %}map--{{collectionColor}}{% endif %}"
+        data-component="Map"
+        data-options='{ {% if params.global %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 {% else %} "lazyLoading": true {% endif %}}'
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
             {% if params.global %}

@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 import mapboxgl from 'mapbox-gl';
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { debounce } from '../../Utils';
 import { Component } from '../Component';
 import { breakpoint, easing, local } from '../../Site';
@@ -12,6 +13,8 @@ import { mapStyles } from './Map.styles';
 
 export const token = local ? 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA'
     : 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export interface IMapSettings {
     lat: number;
@@ -105,9 +108,7 @@ export class Map extends Component {
         // find style for given modifier (if exists)
         this.style = this.view.getAttribute('data-theme-color');
 
-        if (this.settings.lazyLoading) {
-            setTimeout(() => this.init(), 5000);
-        } else this.init();
+        this.settings.lazyLoading ? this.setScroll() : this.init();
 
         window.addEventListener('resize', debounce(() => breakpoint.phone && !this.contentInjected && this.getTabContent()));
     }
@@ -149,6 +150,18 @@ export class Map extends Component {
             this.onLoad();
         });
     });
+
+
+
+    private setScroll = (): void => {
+        ScrollTrigger.create({
+            trigger: this.view,
+            start: 'top 200%',
+            once: true,
+            end: 'bottom bottom',
+            onEnter: () => this.init(),
+        });
+    };
 
 
 
