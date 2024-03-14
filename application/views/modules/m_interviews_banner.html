@@ -42,61 +42,19 @@
                     <div class="col-span-1 col-start-2 stack__container">
                         <div class="stack__names js-scroll-names">
                             <ul class="names">
-                                <li class="names__name js-accordeon-item js-caption is-closed is-current">
-                                    <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <div class="names__box">
-                                            <span>CAMELIA ADKINS</span>
+                                {% for item in items %}
+                                    <li class="names__name js-accordeon-item js-caption is-closed is-current">
+                                        <a href="{{ item.url }}" class="names__link"></a>
+                                        <div class="names__author">
+                                            <div class="names__box">
+                                                <span>{{ item.label }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="names__expand">
-                                        <p class="names__claim">Texas native and civil rights advocate</p>
-                                    </div>
-                                </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed">
-                                    <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <div class="names__box">
-                                            <span>kim black</span>
+                                        <div class="names__expand">
+                                            <p class="names__claim">{{ item.narrator_occupation }}</p>
                                         </div>
-                                    </div>
-                                    <div class="names__expand">
-                                        <p class="names__claim">Pastor, community service provider, and bereavement minister</p>
-                                    </div>
-                                </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed">
-                                    <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <div class="names__box">
-                                            <span>BILLIE COOPER</span>
-                                        </div>
-                                    </div>
-                                    <div class="names__expand">
-                                        <p class="names__claim">Black trans activist, veteran, and San Francisco community leader</p>
-                                    </div>
-                                </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed">
-                                    <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <div class="names__box">
-                                            <span>SHARON JONES</span>
-                                        </div>
-                                    </div>
-                                    <div class="names__expand">
-                                        <p class="names__claim">Educator, musician, and family historian</p>
-                                    </div>
-                                </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed">
-                                    <a href="{{ item.url }}" class="names__link"></a>
-                                    <div class="names__author">
-                                        <div class="names__box">
-                                            <span>BEVERLY THOMPSON</span>
-                                        </div>
-                                    </div>
-                                    <div class="names__expand">
-                                        <p class="names__claim">Former Tulsa pastor, entrepreneur, and public school administrator</p>
-                                    </div>
-                                </li>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <ul class="stack__dots desktop-hide">
@@ -107,21 +65,11 @@
                             <li class="stack__dot js-dot"><span></span></li>
                         </ul>
                         <ul class="stack__polaroids js-scroll-cards">
-                            <li class="stack__polaroid js-card is-current">
-                                {% include "./components/c_polaroid.html" with {} %}
-                            </li>
-                            <li class="stack__polaroid js-card is-next">
-                                {% include "./components/c_polaroid.html" with {} %}
-                            </li>
-                            <li class="stack__polaroid js-card is-after-next">
-                                {% include "./components/c_polaroid.html" with {} %}
-                            </li>
-                            <li class="stack__polaroid js-card">
-                                {% include "./components/c_polaroid.html" with {} %}
-                            </li>
-                            <li class="stack__polaroid js-card">
-                                {% include "./components/c_polaroid.html" with {} %}
-                            </li>
+                            {% for item in items %}
+                                <li class="stack__polaroid js-card is-current">
+                                    {% include "./components/c_polaroid.html" with {image: item.media.0.image} %}
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
 

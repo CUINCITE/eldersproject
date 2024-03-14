@@ -343,6 +343,14 @@
       "list": "edit",
       "search": true,
       "hr": true
+    },
+    {
+      "label": "Featured",
+      "field": "featured",
+      "type": "boolean",
+      "list": "edit",
+      "search": true,
+      "hr": true
     }
   ]
 }
