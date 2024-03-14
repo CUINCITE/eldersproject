@@ -1,9 +1,13 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { Button } from 'components/Button';
 import { Accessibility } from './widgets/Accessibility';
 import { AudioPlayer } from './components/AudioPlayer';
 import { breakpoint, easing } from './Site';
 import { debounce } from './Utils';
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 export class Menu {
     private isOpen = false;
@@ -160,7 +164,7 @@ export class Menu {
             this.closeBtn.focus();
         }
 
-        !Accessibility.isOn && gsap.timeline()
+        !Accessibility.isOn && gsap.timeline({ onStart: () => ScrollTrigger.normalizeScroll(false) })
             .addLabel('init')
             .fromTo(this.labels, { yPercent: 120 }, {
                 yPercent: 0,
@@ -203,6 +207,7 @@ export class Menu {
         this.isAnimating = true;
         this.isOpen = false;
         document.body.classList.remove('has-menu-open');
+        ScrollTrigger.normalizeScroll({ type: 'touch' });
 
         // TEMP - js animation later
         if (Accessibility.isOn) this.isAnimating = false;

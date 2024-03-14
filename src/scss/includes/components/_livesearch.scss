@@ -14,32 +14,33 @@
         height: 0;
 
         @include breakpoint(not-desktop) {
-            overflow-y: auto;
+            // overflow-y: auto;
         }
 
         .has-value & {
-            @include breakpoint(desktop) {
-                height: max-content;
-                max-height: calc(var(--app-height) - var(--search-height));
-                padding-bottom: rem(40);
-                overflow-y: auto;
-            }
+            height: max-content;
+            max-height: calc(var(--app-height) - var(--search-height));
+            padding-bottom: rem(40);
+            overflow-y: auto;
 
-            @include breakpoint(tablet) {
-                height: calc(100vh - #{rem(146)});
+            // @include breakpoint(desktop) {
+            // }
 
-                @supports(height: 100dvh) {
-                    height: calc(100dvh - #{rem(146)});
-                }
-            }
+            // @include breakpoint(tablet) {
+            //     height: calc(100vh - #{rem(146)});
 
-            @include breakpoint(phone) {
-                height: calc(100vh - #{rem(100)});
+            //     @supports(height: 100dvh) {
+            //         height: calc(100dvh - #{rem(146)});
+            //     }
+            // }
 
-                @supports(height: 100dvh) {
-                    height: calc(100dvh - #{rem(100)});
-                }
-            }
+            // @include breakpoint(phone) {
+            //     height: calc(100vh - #{rem(100)});
+
+            //     @supports(height: 100dvh) {
+            //         height: calc(100dvh - #{rem(100)});
+            //     }
+            // }
         }
     }
 
@@ -58,7 +59,7 @@
         }
 
         @include breakpoint(not-desktop) {
-            height: 100%;
+            // height: 100%;
 
             // overflow-y: auto;
 

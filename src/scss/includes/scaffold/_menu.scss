@@ -312,7 +312,7 @@ $theme-colors: ("orange", "red", "blue", "pink");
         }
 
         @include breakpoint(not-desktop) {
-            z-index: 2;
+            z-index: 3;
 
             @include breakpoint(tablet) {
                 right: map-get($grid-offset, tablet);
