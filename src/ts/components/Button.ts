@@ -37,15 +37,38 @@ export class Button extends Component {
     private bind(): void {
 
 
-        this.splitText = new SplitText(this.button.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
         this.horizontal = this.button.querySelector('.js-arrow-horizontal');
         this.vertical = this.button.querySelector('.js-arrow-vertical');
         this.triangle = this.button.querySelector('.js-arrow-triangle');
         this.arrow = this.button.querySelector('.js-arrow');
 
+        this.button.addEventListener('click', () => {
+            this.onButtonClick();
+        });
+
+        this.setSplitText();
         this.setupTimeline();
         this.setupListeners();
     }
+
+
+
+    private onButtonClick(): void {
+        if (this.button.hasAttribute('aria-controls')) {
+            setTimeout(() => {
+                this.setSplitText();
+                this.setupTimeline();
+            }, 800);
+        }
+    }
+
+
+
+    private setSplitText(): void {
+        this.splitText = new SplitText(this.button.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
+    }
+
+
 
     private setupTimeline(): void {
         if ([this.vertical, this.horizontal, this.triangle, this.arrow].some(el => !el)) return;
