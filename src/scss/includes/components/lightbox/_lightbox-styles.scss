@@ -237,8 +237,17 @@
 
 
         &-btn {
-            @include font-size(16, 16);
-            @include flex(row, flex-end, center);
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+
+
+            @include hover {
+                ~ .lightbox__intro-time,
+                ~ .lightbox__intro-text {
+                    opacity: 1;
+                }
+            }
         }
 
 
@@ -302,13 +311,16 @@
 
         &-part {
             display: grid;
-            grid-template-columns: var(--aside-width) 1fr;
+            grid-template-columns: auto calc(100% - var(--aside-width));
+            place-content: center end;
+            position: relative;
         }
 
 
         &-time {
             @include font-family(compressed);
             @include font-size(16, 16);
+            @include flex(row, center, center);
 
             letter-spacing: -0.02em;
             text-align: right;
@@ -324,11 +336,6 @@
                 display: inline-block;
                 width: rem(44);
                 text-align: left;
-            }
-
-
-            @include hover {
-                opacity: 1;
             }
         }
 

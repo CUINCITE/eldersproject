@@ -82,9 +82,8 @@
                         <ul class="lightbox__intro-contentlist js-scrolled">
                             {% for item in contentList %}
                                 <li class="lightbox__intro-part js-contents-part">
-                                    <div class="lightbox__intro-btn">
-                                        <button class="lightbox__intro-time" data-audio-player="{{id}}" data-start="{{item.startTime}}"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></button>
-                                    </div>
+                                    <button class="lightbox__intro-btn" data-audio-player="{{id}}" data-start="{{item.startTime}}"></button>
+                                    <div class="lightbox__intro-time"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></div>
                                     <div class="lightbox__intro-text">{{item.label}}</div>
                                 </li>
                             {% endfor %}
