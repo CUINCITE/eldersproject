@@ -65,7 +65,7 @@
                             <li class="stack__dot js-dot"><span></span></li>
                         </ul>
                         <ul class="stack__polaroids js-scroll-cards">
-                            {% for item in items %}
+                            {% for item in items | reverse %}
                                 <li class="stack__polaroid js-card is-current">
                                     {% include "./components/c_polaroid.html" with {image: item.media.0.image} %}
                                 </li>
