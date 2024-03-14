@@ -369,6 +369,13 @@
         @include font-size(204, 157);
 
         letter-spacing: -0.03em;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(132, 140);
+
+            letter-spacing: -0.045em;
+        }
     }
 
 

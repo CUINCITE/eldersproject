@@ -107,6 +107,14 @@
                 content: counter(interviews, decimal-leading-zero) ". ";
                 counter-increment: interviews;
                 font-feature-settings: "ss03" on;
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(40, 30);
+
+                    margin-right: rem(4);
+                    letter-spacing: -0.025em;
+                }
             }
         }
     }

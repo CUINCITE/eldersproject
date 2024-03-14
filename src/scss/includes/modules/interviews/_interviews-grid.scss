@@ -170,6 +170,13 @@
             grid-template-columns: 34% 23.5% 17% 1fr;
         }
 
+
+        @include breakpoint(not-desktop) {
+            &:first-child {
+                border-top: none;
+            }
+        }
+
         @include breakpoint(tablet) {
             @include flex(column, flex-start, stretch);
 
