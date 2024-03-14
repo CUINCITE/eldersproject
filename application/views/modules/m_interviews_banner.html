@@ -43,7 +43,7 @@
                         <div class="stack__names js-scroll-names">
                             <ul class="names">
                                 {% for item in items %}
-                                    <li class="names__name js-accordeon-item js-caption is-closed is-current">
+                                    <li class="names__name js-accordeon-item js-caption is-closed {% if loop.first %}is-current{% endif %}">
                                         <a href="{{ item.url }}" class="names__link"></a>
                                         <div class="names__author">
                                             <div class="names__box">
@@ -58,15 +58,17 @@
                             </ul>
                         </div>
                         <ul class="stack__dots desktop-hide">
-                            <li class="stack__dot js-dot is-current"><span></span></li>
-                            <li class="stack__dot js-dot"><span></span></li>
-                            <li class="stack__dot js-dot"><span></span></li>
-                            <li class="stack__dot js-dot"><span></span></li>
-                            <li class="stack__dot js-dot"><span></span></li>
+                            {% for item in items %}
+                            <li class="stack__dot js-dot {% if loop.first %}is-current{% endif %}"><span></span></li>
+                            {% endfor %}
                         </ul>
                         <ul class="stack__polaroids js-scroll-cards">
                             {% for item in items | reverse %}
-                                <li class="stack__polaroid js-card is-current">
+                                <li class="stack__polaroid js-card
+                                    {% if loop.first %}is-current{% endif %}
+                                    {% if loop.index == 2 %} is-next{% endif %}
+                                    {% if loop.index == 3 %} is-after-next{% endif %}
+                                ">
                                     {% include "./components/c_polaroid.html" with {image: item.media.0.image} %}
                                 </li>
                             {% endfor %}
