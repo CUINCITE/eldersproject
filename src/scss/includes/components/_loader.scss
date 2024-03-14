@@ -95,6 +95,11 @@
         position: absolute;
         inset: auto auto rem(4) rem(4);
         margin: 0;
+        opacity: 0;
+        transition: opacity .15s $ease-out;
+
+
+        html.wf-active & { opacity: 1; }
 
         .is-loader-hiding & { opacity: 0; }
 
