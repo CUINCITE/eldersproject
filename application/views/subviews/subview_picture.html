@@ -1,16 +1,25 @@
 <picture>
+    {% if image.mobile_webp is defined %}
+        <source media="(max-width: 1023px)" srcset="{{image.mobile_webp}}, {{image.mobile_x2_webp}} 2x" type="image/webp">
+    {% endif %}
     {% if image.mobile is defined and image.mobile.src is defined %}
         <source media="(max-width: 1023px)" srcset="{{image.mobile.src}}{% if image.mobile.width is defined %}, {{image.mobile.width}}w, {{image.mobile.height}}h{% endif %},  {{image.mobile_x2.src}} 2x">
     {% elseif image.mobile is defined  %}
         <source media="(max-width: 1023px)" srcset="{{image.mobile}}, {{image.mobile_x2}} 2x">
     {% endif %}
 
+    {% if image.desktop_webp is defined %}
+        <source media="(min-width: 1023px)" srcset="{{image.desktop_webp}}, {{image.desktop_x2_webp}} 2x" type="image/webp">
+    {% endif %}
     {% if image.desktop is defined and image.desktop.src is defined %}
         <source media="(min-width: 1023px)" srcset="{{image.desktop.src}}{% if image.desktop.width is defined %}, {{image.desktop.width}}w, {{image.desktop.height}}h{% endif %},  {{image.desktop_x2.src}} 2x">
     {% elseif image.desktop is defined %}
         <source media="(min-width: 1023px)" srcset="{{image.desktop}}, {{image.desktop_x2}} 2x">
     {% endif %}
 
+    {% if image.hd_webp is defined %}
+        <source media="(min-width: 1920px)" srcset="{{image.hd_webp}}, {{image.hd_x2_webp}} 2x" type="image/webp">
+    {% endif %}
     {% if image.hd is defined and image.hd.src is defined %}
         <source media="(min-width: 1920px)" srcset="{{image.hd.src}}{% if image.hd.width is defined %}, {{image.hd.width}}w, {{image.hd.height}}h{% endif %},  {{image.hd_x2.src}} 2x">
     {% elseif image.hd is defined %}
