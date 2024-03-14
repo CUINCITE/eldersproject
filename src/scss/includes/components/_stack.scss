@@ -92,6 +92,14 @@
             pointer-events: none;
             z-index: 2;
         }
+
+
+        @include breakpoint(not-desktop) {
+            display: grid;
+            grid-template-columns: 1fr;
+            width: 100%;
+            margin-left: rem(-20);
+        }
     }
 
 
@@ -103,21 +111,72 @@
         transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
         transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9);
 
+        @include breakpoint(desktop) {
+            &:nth-last-child(1) {
+                transform: rotate(-8deg) translate(0, 0) !important;
 
-        &:nth-last-child(1) {
-            transform: rotate(-8deg) translate(0, 0) !important;
 
+                &::after { opacity: 0; }
+            }
+        }
 
-            &::after { opacity: 0; }
+        @include breakpoint(desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgba($color-grey800, .1);
+                transition: opacity .25s cubic-bezier(.5, 0, .2, 1);
+            }
         }
 
 
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-color: rgba($color-grey800, .1);
-            transition: opacity .25s cubic-bezier(.5, 0, .2, 1);
+        @include breakpoint(not-desktop) {
+            position: relative;
+            width: rem(290);
+            height: 100%;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            display: none;
+            transform: none;
+
+
+            .polaroid {
+                --polaroid-width: #{rem(270)};
+                --polaroid-height: #{rem(280)};
+
+                transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+            }
+
+
+            &.is-current,
+            &.is-previous {
+                display: block;
+
+                .polaroid {
+                    transform: rotate(-11deg);
+                }
+            }
+
+
+            &.is-next {
+                display: block;
+                transform: translateX(100%);
+
+                .polaroid {
+                    transform: translateY(#{rem(15)}) rotate(11deg);
+                }
+            }
+
+
+            &.is-after-next {
+                display: block;
+                transform: translateX(200%);
+
+                .polaroid {
+                    transform: rotate(-11deg);
+                }
+            }
         }
     }
 

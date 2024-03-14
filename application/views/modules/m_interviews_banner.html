@@ -64,7 +64,7 @@
                                         <p class="names__claim">Pastor, community service provider, and bereavement minister</p>
                                     </div>
                                 </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed is-current">
+                                <li class="names__name js-accordeon-item js-caption is-closed">
                                     <a href="{{ item.url }}" class="names__link"></a>
                                     <div class="names__author">
                                         <div class="names__box">
@@ -75,7 +75,7 @@
                                         <p class="names__claim">Black trans activist, veteran, and San Francisco community leader</p>
                                     </div>
                                 </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed is-current">
+                                <li class="names__name js-accordeon-item js-caption is-closed">
                                     <a href="{{ item.url }}" class="names__link"></a>
                                     <div class="names__author">
                                         <div class="names__box">
@@ -86,7 +86,7 @@
                                         <p class="names__claim">Educator, musician, and family historian</p>
                                     </div>
                                 </li>
-                                <li class="names__name js-accordeon-item js-caption is-closed is-current">
+                                <li class="names__name js-accordeon-item js-caption is-closed">
                                     <a href="{{ item.url }}" class="names__link"></a>
                                     <div class="names__author">
                                         <div class="names__box">
@@ -100,18 +100,20 @@
                             </ul>
                         </div>
                         <ul class="stack__dots desktop-hide">
-                            {% for item in items %}
-                                <li class="stack__dot js-dot{% if loop.first %} is-current{% endif %}"><span></span></li>
-                            {% endfor %}
+                            <li class="stack__dot js-dot is-current"><span></span></li>
+                            <li class="stack__dot js-dot"><span></span></li>
+                            <li class="stack__dot js-dot"><span></span></li>
+                            <li class="stack__dot js-dot"><span></span></li>
+                            <li class="stack__dot js-dot"><span></span></li>
                         </ul>
                         <ul class="stack__polaroids js-scroll-cards">
-                            <li class="stack__polaroid js-card">
+                            <li class="stack__polaroid js-card is-current">
                                 {% include "./components/c_polaroid.html" with {} %}
                             </li>
-                            <li class="stack__polaroid js-card">
+                            <li class="stack__polaroid js-card is-next">
                                 {% include "./components/c_polaroid.html" with {} %}
                             </li>
-                            <li class="stack__polaroid js-card">
+                            <li class="stack__polaroid js-card is-after-next">
                                 {% include "./components/c_polaroid.html" with {} %}
                             </li>
                             <li class="stack__polaroid js-card">

@@ -63,6 +63,11 @@
 
         @include breakpoint(not-desktop) {
             text-align: left;
+
+
+            .interviews & {
+                max-width: 75%;
+            }
         }
 
 

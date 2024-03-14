@@ -290,27 +290,27 @@
 
     &__claim {
         border-top: 1px solid $color-bg;
+        position: relative;
 
         @include breakpoint(desktop) {
-            position: relative;
             padding-top: rem(20);
             padding-bottom: rem(70);
             min-height: vw(366);
         }
 
-        @include breakpoint(tablet) {
-            position: relative;
 
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, flex-start, stretch);
+
+            padding-bottom: rem(60);
+        }
+
+        @include breakpoint(tablet) {
             .grid {
                 div {
                     grid-column: 3 / span 6 !important;
                 }
             }
-        }
-
-
-        @include breakpoint(phone) {
-            position: relative;
         }
     }
 
@@ -326,18 +326,21 @@
             width: vw(352);
         }
 
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            inset: auto;
+        }
+
         @include breakpoint(tablet) {
-            position: absolute;
             width: vw(186, tablet);
-            left: rem(10);
-            top: rem(10);
         }
 
         @include breakpoint(phone) {
-            position: absolute;
             z-index: 2;
-            inset: calc(100% + #{rem(37)}) auto auto rem(-21);
-            width: vw(240, phone);
+            left: rem(28);
+            top: rem(-12);
+            width: vw(208, phone);
         }
     }
 
@@ -466,7 +469,6 @@
             }
 
             & ~ .interviews__box {
-
                 .interview-box__layer:last-child {
                     background-color: yellow;
                 }
@@ -475,7 +477,6 @@
                     color: black;
                 }
             }
-
         }
     }
 
