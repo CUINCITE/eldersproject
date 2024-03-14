@@ -140,12 +140,10 @@ export class AudioPlayer extends Video {
         } else {
             // if button has the same id as current audio, only toggle player
             // eslint-disable-next-line no-lonely-if
-            if (startTime) {
-                this.media.currentTime = parseInt(startTime, 10);
+            if (startTime && this.isPaused()) {
+                this.media.currentTime = Math.max(this.media.currentTime, parseInt(startTime, 10));
                 this.play();
-            } else {
-                this.isPaused() ? this.play() : this.pause();
-            }
+            } else this.isPaused() ? this.play() : this.pause();
         }
     };
 
