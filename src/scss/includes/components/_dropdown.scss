@@ -104,9 +104,12 @@
         @include font-size(17, 18);
 
         text-transform: uppercase;
+        position: relative;
 
         i {
             margin: 0 rem(5) 0 rem(7);
+            position: relative;
+            top: rem(-1);
         }
     }
 

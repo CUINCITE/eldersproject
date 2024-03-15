@@ -1,8 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { interviews } from '../animations/scroll/interviews';
-import { breakpoint } from '../Site';
-import Scroll from '../Scroll';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
 import { PushStates } from '../PushStates';
@@ -200,7 +198,6 @@ export class Load extends Component {
         PushStates.changePath(url, true);
 
         if (this.settings.filtered) this.updateFiltered();
-        if (this.settings.scrollTo) this.scrollToContainer();
 
         // eslint-disable-next-line consistent-return
         return fetch(url, {
@@ -277,32 +274,7 @@ export class Load extends Component {
 
         let loadPath = this.view.getAttribute('action') || this.view.dataset.api || window.location.pathname;
 
-        let extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
-        const extraFormsMobile = this.settings.extraMobile
-            ? ([...document.querySelectorAll(this.settings.extraMobile)] as HTMLFormElement[])
-            : null;
-
-        if (extraFormsMobile && window.matchMedia('(orientation: portrait) and (max-width: 659px)').matches) {
-            extraForms = extraFormsMobile;
-        }
-
-        if (this.settings.updateCurrentSorting) {
-            const indicator = document.querySelector('.js-current-sorting');
-
-            if (indicator) {
-                const sorting = Utils.getQueryString([this.view as HTMLFormElement]).replace('sort=', '');
-                const arrow = document.querySelector('.js-mobile-modal-button');
-
-                if (sorting.includes('!') && arrow) {
-                    arrow.classList.add('button--inversed');
-                } else {
-                    arrow.classList.remove('button--inversed');
-                }
-
-                indicator.innerHTML = sorting.replace('!', '');
-            }
-        }
-
+        const extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
         const formData = Utils.getQueryString([...extraForms, this.view as HTMLFormElement]);
 
         if (formData) {
@@ -359,24 +331,6 @@ export class Load extends Component {
                 // submit needs to be triggered manually for closing modal on submit event
                 setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
             });
-        });
-    };
-
-
-
-    private scrollToContainer = (): void => {
-        const elem = document.querySelector(this.settings.scrollTo) as HTMLElement;
-        if (!elem) {
-            console.error(`element ${this.settings.scrollTo} doesn't exist!`);
-            return;
-        }
-
-        Scroll.scrollTo({
-            el: elem,
-            duration: 1,
-            onComplete: (): void => {
-                ScrollTrigger.refresh();
-            },
         });
     };
 
