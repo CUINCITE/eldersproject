@@ -80,6 +80,7 @@ export class AudioPlayer extends Video {
     private startX: number;
     private x: number = 0;
     private swipeMargin = 10;
+    private timeout: ReturnType<typeof setTimeout>;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -193,6 +194,8 @@ export class AudioPlayer extends Video {
         this.elements.nextBtn && this.elements.nextBtn.addEventListener('click', this.onNextClick);
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
         this.elements.urlLinks && [...this.elements.urlLinks].forEach(link => link.addEventListener('click', this.onUrlClick));
+        this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseenter', this.onCassetteMouseEnter);
+        this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseleave', this.onCassetteMouseLeave);
 
         if (breakpoint.desktop) {
             this.view.addEventListener('mouseleave', this.onMouseLeave);
@@ -208,6 +211,23 @@ export class AudioPlayer extends Video {
             navigator.mediaSession.setActionHandler('previoustrack', () => this.goToPreviousTrack());
             navigator.mediaSession.setActionHandler('nexttrack', () => this.goToNextTrack());
         }
+    };
+
+
+
+    private onCassetteMouseEnter = (): void => {
+        this.view.classList.add('is-mouseover');
+
+        this.timeout = setTimeout(() => {
+            this.view.classList.remove('is-mouseover');
+        }, 600);
+    };
+
+
+
+    private onCassetteMouseLeave = (): void => {
+        window.clearTimeout(this.timeout);
+        this.view.classList.remove('is-mouseover');
     };
 
 

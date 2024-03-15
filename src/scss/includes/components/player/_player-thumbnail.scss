@@ -160,8 +160,22 @@
                 }
 
 
+                .player.is-mouseover & {
+                    animation-play-state: running;
+                    animation-duration: .8s;
+                }
+
+
+                .player.is-expanded &,
+                .player-is-paused & {
+                    animation-duration: 4s;
+                    animation-play-state: paused;
+                }
+
+
                 .player.is-playing & {
                     animation-play-state: running;
+                    animation-duration: 4s;
                 }
             }
         }
