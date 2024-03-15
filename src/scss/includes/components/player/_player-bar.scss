@@ -264,9 +264,15 @@
     &__icon {
         @include flex(column, flex-start, center);
 
-        margin-bottom: rem(3);
         overflow: hidden;
         position: relative;
+        top: -1px;
+
+
+        /* stylelint-disable-next-line media-feature-name-no-vendor-prefix */
+        @media (-webkit-min-device-pixel-ratio: 2) {
+            top: -2px;
+        }
 
 
 
@@ -308,6 +314,13 @@
 
         .player__minimize & {
             transform: scaleY(-1);
+            top: 0;
+
+
+            /* stylelint-disable-next-line media-feature-name-no-vendor-prefix */
+            @media (-webkit-min-device-pixel-ratio: 2) {
+                top: -1px;
+            }
         }
     }
 
