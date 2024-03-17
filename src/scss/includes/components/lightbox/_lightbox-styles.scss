@@ -239,7 +239,7 @@
         &-description {
             width: rem(350);
             background-color: var(--aside-body-color);
-            color: var(--color-black);
+            color: var(--description-color, var(--color-black));
             padding: rem(64) rem(16) rem(41);
             position: relative;
             z-index: 1;
@@ -266,7 +266,6 @@
 
 
         &-contentlist {
-            height: 100%;
             padding-bottom: rem(41);
         }
 

@@ -33,6 +33,12 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         --main-body-color: var(--theme-color);
 
 
+        &--default {
+            --description-color: var(--color-grey200);
+        }
+
+        // Caro De Robertis
+
         &--pink {
             --theme-color: var(--color-pale-pink);
             --main-text-color: var(--color-black);
@@ -42,6 +48,8 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         }
 
 
+        // Robin Coste Lewis
+
         &--green {
             --theme-color: var(--color-green);
             --main-text-color: var(--color-pale-pink);
@@ -50,7 +58,9 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
             --alt-text-color: var(--color-black);
         }
 
- 
+
+        // Jenna Wortham
+
         &--pale-purple {
             --theme-color: var(--color-pale-purple);
             --main-text-color: var(--color-pale-pink);
@@ -60,14 +70,19 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         }
 
 
+        // Natalie Diaz
+
         &--orange {
             --theme-color: var(--color-orange);
             --main-text-color: var(--color-pale-pink);
             --aside-body-color: var(--color-purple);
             --aside-text-color: var(--color-pale-pink);
             --alt-text-color: var(--color-black);
+            --description-color: var(--color-grey200);
         }
 
+
+        // Eve Ewing
 
         &--pale-blue {
             --theme-color: var(--color-pale-blue);
@@ -78,14 +93,19 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         }
 
 
+        // Denice Frohman
+
         &--brown {
             --theme-color: var(--color-brown);
             --main-text-color: var(--color-black);
             --aside-body-color: var(--color-purple);
             --aside-text-color: var(--color-grey200);
             --alt-text-color: var(--color-black);
+            --description-color: var(--color-grey200);
         }
 
+
+        // Ellery Washington
 
         &--dark-green {
             --theme-color: var(--color-dark-green);
@@ -96,6 +116,8 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         }
 
 
+        // Renee Watson
+
         &--pale-green {
             --theme-color: var(--color-pale-green);
             --main-text-color: var(--color-black);
@@ -104,6 +126,8 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
             --alt-text-color: var(--color-grey200);
         }
 
+
+        // Caleb Gayle
 
         &--purple {
             --theme-color: var(--color-purple);
