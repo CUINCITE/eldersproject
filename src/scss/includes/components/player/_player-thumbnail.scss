@@ -25,17 +25,28 @@
         }
 
 
+        @include breakpoint(not-desktop) {
+            background: none;
+
+
+            .player.is-expanded & {
+                pointer-events: none;
+            }
+        }
+
+
         @include breakpoint(phone) {
             @include flex(row-reverse, space-between, stretch);
 
-            position: absolute;
+            position: fixed;
             inset: auto auto 0 100%;
             height: var(--GLOBAL-aside-width);
-            width: calc(var(--app-height) - var(--hamburgerbar-height));
+            width: 100vh;
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+            width: 100dvh;
             transform: rotate(-90deg);
             transform-origin: left bottom;
             border-left: none;
-            background: none;
         }
     }
 
@@ -54,17 +65,15 @@
         padding-top: rem(4);
         overflow: hidden;
         width: 100%;
-        transition: transform .7s $ease-out;
+        transition: opacity .4s $ease-out;
 
 
         @include breakpoint(not-desktop) {
             @include font-size(19, 1);
-        }
 
 
-        @include breakpoint(phone) {
             .is-expanded & {
-                transform: translateY(100%);
+                opacity: 0;
             }
         }
 
@@ -116,6 +125,13 @@
         @include breakpoint(desktop) {
             overflow: hidden;
             border-top: 1px solid var(--color-black);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            .is-expanded & {
+                pointer-events: all;
+            }
         }
 
 

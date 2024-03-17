@@ -96,6 +96,17 @@ html {
         transition-property: transform, background;
 
         background: var(--color-bg);
+
+
+        @include breakpoint(not-desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 0 0 auto;
+                width: var(--GLOBAL-aside-width);
+                background-color: var(--color-black);
+            }
+        }
     }
 
 
