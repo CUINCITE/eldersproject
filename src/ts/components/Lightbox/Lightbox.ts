@@ -291,6 +291,9 @@ export class Lightbox {
 
 
     private tryToUpdateTranscript(time: number): void {
+        // update only when lightbox is open and audio player is connected to it
+        if (AudioPlayer.getId() !== Lightbox.getId()) return;
+
         this.transcriptComp.update(time);
         this.contentsComp.update(time);
     }
