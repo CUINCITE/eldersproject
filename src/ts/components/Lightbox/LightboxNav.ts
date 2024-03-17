@@ -12,6 +12,7 @@ export class LightboxNav extends Component {
     private lightboxEl: HTMLElement;
     private isAnimating: boolean;
     private swipeComp: Swipe;
+    private indicator: HTMLElement;
 
     constructor(protected view: HTMLElement, lightboxEl: HTMLElement) {
         super(view);
@@ -19,6 +20,7 @@ export class LightboxNav extends Component {
         this.lightboxEl = lightboxEl;
         this.navButtons = this.view.querySelectorAll('button');
         this.navTabs = document.querySelectorAll('.js-lightbox-tab');
+        this.indicator = this.view.querySelector('.js-nav-indicator');
 
         this.bind();
     }
@@ -64,12 +66,25 @@ export class LightboxNav extends Component {
 
         this.showTab(tabToOpen);
 
+        this.updateIndicator(button);
+
         [...this.navButtons].forEach(btn => {
             btn.classList.remove('is-active');
             btn.setAttribute('aria-selected', 'false');
         });
         button.classList.add('is-active');
         button.setAttribute('aria-selected', 'true');
+    };
+
+
+
+    private updateIndicator = (button: HTMLElement): void => {
+        if (!button) return;
+
+        const { offsetTop, clientHeight } = button;
+        const y = offsetTop + ((clientHeight - this.indicator.clientHeight) / 2);
+
+        gsap.to(this.indicator, { y, duration: 0.3, ease: easing });
     };
 
 
