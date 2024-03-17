@@ -76,18 +76,20 @@
                         <p>{{text}}</p>
                     </div>
                     <div class="lightbox__intro-contents js-lightbox-contents">
-                        <div class="lightbox__intro-top js-contents-header">
-                            <h3>Memories shared</h3>
+                        <div class="lightbox__intro-container">
+                            <div class="lightbox__intro-top js-contents-header">
+                                <h3>Memories shared</h3>
+                            </div>
+                            <ul class="lightbox__intro-contentlist js-scrolled">
+                                {% for item in contentList %}
+                                    <li class="lightbox__intro-part js-contents-part">
+                                        <button class="lightbox__intro-btn" data-audio-player="{{id}}" data-start="{{item.startTime}}"></button>
+                                        <div class="lightbox__intro-time"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></div>
+                                        <div class="lightbox__intro-text">{{item.label}}</div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
-                        <ul class="lightbox__intro-contentlist js-scrolled">
-                            {% for item in contentList %}
-                                <li class="lightbox__intro-part js-contents-part">
-                                    <button class="lightbox__intro-btn" data-audio-player="{{id}}" data-start="{{item.startTime}}"></button>
-                                    <div class="lightbox__intro-time"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></div>
-                                    <div class="lightbox__intro-text">{{item.label}}</div>
-                                </li>
-                            {% endfor %}
-                        </ul>
                     </div>
                 </div>
             </div>

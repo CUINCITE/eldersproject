@@ -199,22 +199,6 @@
 
 
         &-top {
-            position: absolute;
-            inset: 0 0 auto;
-            background-color: var(--color-grey200);
-
-
-            &::before {
-                content: "";
-                position: absolute;
-                inset: rem(27) auto auto rem(12);
-                width: rem(20);
-                height: rem(20);
-                border-radius: 50%;
-                background-color: var(--main-body-color);
-            }
-
-
             h3 {
                 @include font-family(compressed);
                 @include font-size(22, 16);
@@ -283,7 +267,6 @@
 
         &-contentlist {
             height: 100%;
-            overflow-y: auto;
             padding-bottom: rem(41);
         }
 
@@ -293,9 +276,19 @@
             background-color: var(--color-grey200);
             color: var(--color-black);
             height: 100%;
-            padding-top: rem(60);
             position: relative;
             margin-left: rem(-45);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: rem(27) auto auto rem(12);
+                width: rem(20);
+                height: rem(20);
+                border-radius: 50%;
+                background-color: var(--main-body-color);
+            }
 
 
             &::after {
@@ -307,6 +300,12 @@
                 z-index: 3;
                 pointer-events: none;
             }
+        }
+
+
+        &-container {
+            height: 100%;
+            overflow-y: auto;
         }
 
 
