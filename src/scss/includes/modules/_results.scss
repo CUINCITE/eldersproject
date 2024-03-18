@@ -1,7 +1,7 @@
 .results {
     &__label {
         @include font-settings(400, 100);
-        
+
         background-color: var(--color-box);
         text-transform: uppercase;
 
@@ -73,12 +73,12 @@
     &__counter {
         color: var(--color-red);
         vertical-align: top;
-        
+
 
         @include breakpoint(desktop) {
             @include font-size(30, 1);
             @include letter-spacing(-1.05, 30);
-            
+
             margin-left: rem(1);
         }
 
@@ -87,7 +87,7 @@
         }
 
         @include breakpoint(tablet) {
-            @include font-size(28, 1); 
+            @include font-size(28, 1);
             @include letter-spacing(-0.7, 20);
 
             margin-block: trim-font(1);
@@ -161,44 +161,11 @@
 
         &-trigger {
             @include font-family(compressed);
+            @include font-size(20, 14);
+            @include letter-spacing(-0.6, 20);
 
+            padding: rem(28) 0 0;
             text-transform: uppercase;
-
-            @include breakpoint(desktop) {
-                @include font-size(20, 14);
-                @include letter-spacing(-0.6, 20);
-
-                padding: rem(28) 0 0;
-            }
-
-            @include breakpoint(tablet) {
-                @include font-size(20, 14);
-                @include letter-spacing(-0.6, 20);
-
-                padding: rem(28) 0 0;
-            }
-
-            @include breakpoint(phone) {
-                @include font-size(20, 14);
-                @include letter-spacing(-0.6, 20);
-
-                padding: rem(28) 0 0;
-            }
-
-            i { 
-                @include breakpoint(desktop) {
-                    margin-top: rem(-2);
-
-                }
-
-                @include breakpoint(tablet) {
-                    margin-top: rem(-2);
-                }
-
-                @include breakpoint(phone) {
-                    margin-top: rem(-2); 
-                }
-            }
         }
     }
 
@@ -214,7 +181,7 @@
         }
 
         @include breakpoint(phone) {
-            padding: rem(12) var(--grid-margin); 
+            padding: rem(12) var(--grid-margin);
             margin-top: 0;
         }
     }

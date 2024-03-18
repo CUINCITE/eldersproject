@@ -147,6 +147,11 @@
 
             gap: rem(3);
         }
+
+
+        i {
+            margin-top: rem(-2);
+        }
     }
 
     &--big {
@@ -206,6 +211,11 @@
             @include breakpoint(not-desktop) {
                 display: none;
             }
+        }
+
+
+        .button--small & {
+            padding-top: rem(1);
         }
     }
 
