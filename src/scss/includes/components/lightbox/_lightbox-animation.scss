@@ -267,6 +267,26 @@
     }
 
 
+
+    &__indicator i {
+        --animation-time: .4s;
+
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateX(100%) rotate(45deg);
+
+
+        .is-showing & {
+            transform: translateX(0) rotate(45deg);
+            transition-delay: 1.8s;
+        }
+
+        .is-closing & {
+            transform: translateX(100%) rotate(45deg);
+            transition-delay: 0s;
+        }
+    }
+
+
     &__darken {
         transition: transform var(--animation-time) var(--easing);
         transform-origin: center top;
