@@ -18,11 +18,14 @@ class model_app_api_import_map
 
     public function rest($method, $action)
     {
+        set_time_limit(60);
+        ini_set('memory_limit', '512M');
+
         $result = false;
         $message = [];
 
         require(__DIR__ . '/../../library/vendor/autoload.php');
-        $xls=$_SERVER['DOCUMENT_ROOT'].'/_data/_map/map-20230206.xlsx';
+        $xls=$_SERVER['DOCUMENT_ROOT'].'/_data/_map/Map locations and excerpts.xlsx';
         $spreadsheet = ExcelIOFactory::load($xls);
 
         $collections=$this->parent->getJsonModel('interviewers');
@@ -30,9 +33,10 @@ class model_app_api_import_map
         foreach ($collections as $k=>$v)
         {
             $label=$v['label'];
-            if ($label=='Caro De Robertis') $label='Carolina De Robertis';
+            if ($label=='Caro De Robertis') $label='Caro De Robertis';
             if ($label=='Eve L. Ewing') $label='Eve Ewing';
             if ($label=='Renée Watson') $label='Renee Watson';
+            if ($label=='Jenna Wortham') $label='J Wortham';
             
             $item=$spreadsheet->getSheetByName($label);
             if ($item)
