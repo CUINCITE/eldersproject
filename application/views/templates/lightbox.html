@@ -22,7 +22,7 @@
 {% import _self as macros %}
 
 
-<li class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
+<div class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
     <div class="lightbox__grid">
         <div class="lightbox__logo">
@@ -76,18 +76,20 @@
                         <p>{{text}}</p>
                     </div>
                     <div class="lightbox__intro-contents js-lightbox-contents">
-                        <div class="lightbox__intro-top js-contents-header">
-                            <h3>Memories shared</h3>
+                        <div class="lightbox__intro-container">
+                            <div class="lightbox__intro-top js-contents-header">
+                                <h3>Memories shared</h3>
+                            </div>
+                            <ul class="lightbox__intro-contentlist js-scrolled">
+                                {% for item in contentList %}
+                                    <li class="lightbox__intro-part js-contents-part">
+                                        <button class="lightbox__intro-btn" data-audio-player="{{id}}" data-start="{{item.startTime}}"></button>
+                                        <div class="lightbox__intro-time"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></div>
+                                        <div class="lightbox__intro-text">{{item.label}}</div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
-                        <ul class="lightbox__intro-contentlist js-scrolled">
-                            {% for item in contentList %}
-                                <li class="lightbox__intro-part js-contents-part">
-                                    <button class="lightbox__intro-btn" data-audio-player="{{id}}" data-start="{{item.startTime}}"></button>
-                                    <div class="lightbox__intro-time"><span>{{ macros.secondsToMinutes(item.startTime) }}</span></div>
-                                    <div class="lightbox__intro-text">{{item.label}}</div>
-                                </li>
-                            {% endfor %}
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -296,6 +298,7 @@
             <div class="desktop-only">[[svg::logo]]</div>
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
+            <span class="lightbox__indicator js-nav-indicator"></span>
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
             {% if images %}
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
@@ -306,4 +309,4 @@
             <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
         </ul>
     </div>
-</li>
+</div>

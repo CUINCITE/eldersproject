@@ -20,14 +20,11 @@
 
     @include breakpoint(not-desktop) {
         --GLOBAL-content-width: 100vw;
+    }
 
-        @include breakpoint(tablet) {
-            --GLOBAL-aside-width: #{vw(80, tablet)};
-        }
 
-        @include breakpoint(phone) {
-            --GLOBAL-aside-width: 40px;
-        }
+    @include breakpoint(phone) {
+        --GLOBAL-aside-width: 40px;
     }
 
 

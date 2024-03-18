@@ -199,22 +199,6 @@
 
 
         &-top {
-            position: absolute;
-            inset: 0 0 auto;
-            background-color: var(--color-grey200);
-
-
-            &::before {
-                content: "";
-                position: absolute;
-                inset: rem(27) auto auto rem(12);
-                width: rem(20);
-                height: rem(20);
-                border-radius: 50%;
-                background-color: var(--main-body-color);
-            }
-
-
             h3 {
                 @include font-family(compressed);
                 @include font-size(22, 16);
@@ -255,7 +239,7 @@
         &-description {
             width: rem(350);
             background-color: var(--aside-body-color);
-            color: var(--color-black);
+            color: var(--description-color, var(--color-black));
             padding: rem(64) rem(16) rem(41);
             position: relative;
             z-index: 1;
@@ -282,8 +266,6 @@
 
 
         &-contentlist {
-            height: 100%;
-            overflow-y: auto;
             padding-bottom: rem(41);
         }
 
@@ -293,9 +275,19 @@
             background-color: var(--color-grey200);
             color: var(--color-black);
             height: 100%;
-            padding-top: rem(60);
             position: relative;
             margin-left: rem(-45);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: rem(27) auto auto rem(12);
+                width: rem(20);
+                height: rem(20);
+                border-radius: 50%;
+                background-color: var(--main-body-color);
+            }
 
 
             &::after {
@@ -307,6 +299,12 @@
                 z-index: 3;
                 pointer-events: none;
             }
+        }
+
+
+        &-container {
+            height: 100%;
+            overflow-y: auto;
         }
 
 
@@ -362,6 +360,7 @@
         background: var(--aside-body-color);
         padding-top: rem(7);
         border-top: 1px solid var(--color-box);
+        position: relative;
 
         li { text-align: center; }
 
@@ -488,6 +487,18 @@
             @include font-size(30, 1);
             @include letter-spacing(-0.9, 30);
         }
+    }
+
+
+
+    &__indicator {
+        position: absolute;
+        z-index: 2;
+        inset: 0 auto auto -8px;
+        width: 15px;
+        height: 15px;
+        transform: translateY(20px) rotate(45deg);
+        background-color: var(--aside-body-color);
     }
 
 

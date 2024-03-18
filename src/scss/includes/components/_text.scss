@@ -9,7 +9,7 @@
         padding: rem(20) rem(11);
     }
 
-    @include breakpoint(tablet) {
+    @include breakpoint(not-desktop) {
         @include font-size(17, 1.3);
 
         padding-top: rem(20);
@@ -17,10 +17,7 @@
     }
 
     @include breakpoint(phone) {
-        @include font-size(17, 1.3);
-
         padding-top: rem(12);
-        padding-bottom: rem(20);
     }
 
 

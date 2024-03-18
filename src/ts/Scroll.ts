@@ -3,10 +3,8 @@ import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 import { Component } from './components/Component';
-import { browser } from './Site';
 import { getAnimation } from './Animate';
 import { animations, scrolls } from './animations/all';
-import { normalizeUrl } from './Utils';
 
 
 export type ScrollToProps = {
@@ -140,7 +138,8 @@ export default class Scroll {
         // if (browser.safari) { return; }
 
         Scroll.matchMedia = (gsap as any).matchMedia();
-        ScrollTrigger.normalizeScroll({ type: 'touch' });
+        // ScrollTrigger.normalizeScroll({ type: 'touch' });
+
         // Scroll.matchMedia.add('(min-width: 1024px)', () => {}
 
 
