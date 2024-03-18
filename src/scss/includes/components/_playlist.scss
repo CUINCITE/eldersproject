@@ -41,6 +41,7 @@
         border-top: 1px solid var(--color-bg);
         margin-left: rem(-3);
         position: relative;
+        overflow: hidden;
 
 
         @include breakpoint(not-desktop) {

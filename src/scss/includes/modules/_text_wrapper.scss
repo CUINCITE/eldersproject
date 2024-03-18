@@ -307,6 +307,12 @@
         @include breakpoint(desktop) {
             margin-left: -10px; // grid-gap / 2
             margin-right: calc((#{rem(36.5)} + 20px) * -1); // parent padding-right + grid offset
+
+
+            .text_wrapper--reversed & {
+                margin-left: -20px;
+                margin-right: calc((#{rem(36.5)} + 10px) * -1); // parent padding-right + grid offset
+            }
         }
 
 
