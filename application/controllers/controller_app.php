@@ -37,7 +37,6 @@ class controller_app extends _uho_controller
         $this->data['content']['show_mobile_logo'] = false;
 
         if (!empty($this->data['content']['slug'] && in_array($this->data['content']['slug'], ['contact', 'search']))) {
-            dd($this->data['content']['slug']);
             $this->data['content']['show_mobile_logo'] = true;
         }
 
