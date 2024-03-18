@@ -114,6 +114,7 @@
     &__tabs {
         background-color: var(--color-box);
         margin-top: 0;
+        border-bottom: 1px solid var(--color-bg);
 
         @include breakpoint(not-desktop) {
             overflow: hidden;
@@ -170,12 +171,15 @@
             grid-template-columns: 34% 23.5% 17% 1fr;
         }
 
-
-        @include breakpoint(not-desktop) {
-            &:first-child {
-                border-top: none;
-            }
+        &:first-child {
+            border-top: none;
         }
+
+
+        .is-grid-view & {
+            &:nth-child(-n + 3) { border-top: none; }
+        }
+
 
         @include breakpoint(tablet) {
             @include flex(column, flex-start, stretch);
@@ -453,6 +457,7 @@
     &__interviews {
         margin-top: 0;
         z-index: 1;
+        border-top-color: rgba($color-transparent, 0) !important;
     }
 
 
