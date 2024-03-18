@@ -416,7 +416,7 @@
         &-text {
             @include font-size(16, 19.84);
 
-            padding-left: rem(22);
+            padding: 0 rem(22);
             opacity: 0.2;
             transition: opacity .3s $ease-custom;
 
