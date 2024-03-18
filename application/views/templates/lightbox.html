@@ -25,14 +25,6 @@
 <div class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
     <div class="lightbox__grid">
-        <div class="lightbox__logo">
-            <a href="{{urlBack}}" class="lightbox__close js-close" data-history="back">
-                <span class="button button--lightbox">
-                    <i class="icon-close"></i>
-                </span>
-            </a>
-            [[svg::logo]]
-        </div>
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
@@ -298,7 +290,7 @@
             <div class="desktop-only">[[svg::logo]]</div>
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
-            <span class="lightbox__indicator js-nav-indicator"></span>
+            <span class="lightbox__indicator js-nav-indicator desktop-only"></span>
             <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
             {% if images %}
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
