@@ -381,13 +381,16 @@
 
 
     &__counter {
+        @include font-family(slim);
+
+        font-weight: 300;
         position: absolute;
 
         @include breakpoint(desktop) {
             @include font-size(50, 1);
 
             letter-spacing: -0.035em;
-            inset: auto auto rem(18) calc(100% + #{rem(22)});
+            inset: auto auto rem(24) calc(100% + #{rem(18)});
         }
 
         @include breakpoint(tablet) {
