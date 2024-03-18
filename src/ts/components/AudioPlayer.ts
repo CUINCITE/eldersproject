@@ -305,6 +305,7 @@ export class AudioPlayer extends Video {
 
     private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean): void => {
         this.animateOutIllustration(prevDirection);
+        this.elements.title.innerText = 'Loading...';
         this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
                 this.animateOutCassette();
@@ -333,7 +334,6 @@ export class AudioPlayer extends Video {
 
 
     private animateOutCassette = (): Promise<void> => new Promise(resolve => {
-        this.elements.title.innerText = 'Loading...';
         gsap.to(this.cassetteEl, {
             yPercent: breakpoint.desktop ? 130 : 0,
             xPercent: breakpoint.desktop ? 0 : -130,

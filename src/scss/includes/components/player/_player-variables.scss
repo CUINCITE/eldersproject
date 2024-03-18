@@ -23,6 +23,12 @@ $element: filters, header;
     --bottom-panel-height: 58px;
 
 
+    @include breakpoint(not-desktop) {
+        --bar-height: 58px;
+    }
+
+
+
     @include breakpoint(phone) {
         --top-panel-height: var(--GLOBAL-aside-width);
         --bottom-panel-height: var(--GLOBAL-aside-width);

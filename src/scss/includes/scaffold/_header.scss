@@ -10,7 +10,7 @@
     border-left: 1px solid var(--color-bg);
 
 
-    @include breakpoint(not-desktop) {
+    @include breakpoint(phone) {
         z-index: 9;
         bottom: auto;
         top: -1px;

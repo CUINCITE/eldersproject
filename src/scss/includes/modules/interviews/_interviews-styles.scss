@@ -318,25 +318,19 @@
 
     &__image {
         aspect-ratio: 1/1;
+        position: absolute;
+        left: rem(-10);
+        top: rem(-56);
+        width: vw(352);
 
-        @include breakpoint(desktop) {
-            position: absolute;
-            left: rem(-10);
-            top: rem(-56);
-            width: vw(352);
-        }
-
-
-        @include breakpoint(not-desktop) {
-            position: relative;
-            inset: auto;
-        }
 
         @include breakpoint(tablet) {
             width: vw(186, tablet);
+            top: rem(-20);
         }
 
         @include breakpoint(phone) {
+            position: relative;
             z-index: 2;
             left: rem(28);
             top: rem(-12);

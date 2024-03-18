@@ -26,6 +26,8 @@
 
 
         @include breakpoint(not-desktop) {
+            grid-template-rows: 30px var(--bar-height);
+            height: auto;
             background: none;
 
 
@@ -70,8 +72,10 @@
 
         @include breakpoint(not-desktop) {
             @include font-size(19, 1);
+        }
 
 
+        @include breakpoint(phone) {
             .is-expanded & {
                 opacity: 0;
             }
