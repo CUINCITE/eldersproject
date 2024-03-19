@@ -14,6 +14,7 @@ import { Search } from './Search';
 import { AudioPlayer } from './components/AudioPlayer';
 import { Loader } from './components/Loader';
 import { Lightbox } from './components/Lightbox/Lightbox';
+import { Curtain } from './Curtain';
 
 import Widgets from './widgets/All';
 
@@ -41,8 +42,9 @@ class Site {
     private search: Search;
     private audioPlayer: AudioPlayer;
     private loader: Loader;
+    private curtain: Curtain;
 
-    private isInitialized: boolean = false;
+    private isFirstTime: boolean = true;
     private resizingTimeout: ReturnType<typeof setTimeout>;
 
 
@@ -77,6 +79,7 @@ class Site {
         this.newsletterButton = new Button(document.querySelector('.js-newsletter-button'));
 
         this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
+        this.curtain = new Curtain(document.querySelector('.js-curtain'));
 
         if (browser.ie) {
             console.warn('This browser is outdated!');
@@ -161,6 +164,7 @@ class Site {
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
+                this.curtain.show(),
                 this.pushStates.load(),
                 this.currentPage.animateOut(),
             ]).then(this.render);
@@ -195,18 +199,21 @@ class Site {
      */
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
+        if (!this.isFirstTime) this.curtain.makeOverlay();
         const isHome: boolean = !!document.body.querySelector('[data-home]');
-        this.currentPage.animateIn(0).then(() => {
+        this.scroll.load();
+        Scroll.start();
+
+        this.currentPage.animateIn(this.isFirstTime, 0).then(() => {
+            this.curtain.hide(this.isFirstTime);
             this.loader.hide();
-            !this.isInitialized && Scroll.scrollToTop(true);
-            this.scroll.load();
-            Scroll.start();
+            !this.isFirstTime && Scroll.scrollToTop(true);
             // delay after animateIn
             setTimeout(() => this.loader.check(isHome), 150);
+            this.isFirstTime = false;
         });
         PushStates.setTitle();
         this.audioPlayer.bindButtons();
-        this.isInitialized = true;
     };
 
 

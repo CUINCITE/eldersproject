@@ -1,0 +1,56 @@
+.curtain {
+    @include menuShiftedElement;
+
+    position: fixed;
+    inset: 0;
+    right: calc(var(--GLOBAL-aside-width) + 1px);
+
+    display: none;
+    z-index: 0;
+
+
+    body.is-fully-loaded & {
+        display: block;
+    }
+
+
+    &.is-active {
+        @include z-index(curtain);
+    }
+
+
+    &__bg {
+        @include full;
+
+        z-index: -1;
+        background-color: var(--color-black);
+    }
+
+
+
+    &__wrap {
+        @include flex(row, center, center);
+
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+
+
+    &__circle {
+        position: absolute;
+        z-index: -1;
+        width: rem(228);
+        height: rem(228);
+        border-radius: 50%;
+        background-color: var(--color-red);
+    }
+
+
+
+    &__image {
+        width: rem(316);
+        height: rem(316);
+    }
+}
