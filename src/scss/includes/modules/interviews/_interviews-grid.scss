@@ -613,6 +613,8 @@
             top: 0;
             width: 100vw;
             height: var(--app-height);
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+            height: 100dvh;
             z-index: 99;
         }
     }

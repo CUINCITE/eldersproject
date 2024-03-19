@@ -80,7 +80,7 @@ html {
 
 
     @include breakpoint(not-desktop) {
-        z-index: unset;
+        // z-index: unset;
         overflow-x: hidden;
     }
 

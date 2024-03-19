@@ -31,7 +31,8 @@
             background: none;
 
 
-            .player.is-expanded & {
+            .player.is-expanded &,
+            body.has-open-modal & {
                 pointer-events: none;
             }
         }
