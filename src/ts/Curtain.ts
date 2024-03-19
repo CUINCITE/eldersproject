@@ -9,6 +9,7 @@ export class Curtain {
     private bg: HTMLElement;
     private imageWrap: HTMLElement;
     private circle: HTMLElement;
+    private lead: HTMLElement;
 
 
 
@@ -17,22 +18,36 @@ export class Curtain {
         this.bg = this.view.querySelector('.js-curtain-bg');
         this.imageWrap = this.view.querySelector('.js-curtain-image');
         this.circle = this.view.querySelector('.js-curtain-circle');
+        this.lead = this.view.querySelector('.js-curtain-lead');
     }
 
 
 
     public show = (): Promise<void> => new Promise(resolve => {
         this.view.style.display = 'block';
-        gsap.set(this.imageWrap, { y: 0, rotate: 0 });
-        gsap.set(this.circle, { scale: 1, y: 0 });
+        gsap.set(this.imageWrap, { scale: 1, opacity: 1 });
+        gsap.set(this.circle, { scale: 1, opacity: 1 });
+        gsap.set(this.lead, { xPercent: -120 });
 
         gsap.fromTo(this.view, { opacity: 0 }, {
             opacity: 1,
             duration: 0.1,
             ease: 'sine',
+        });
+        gsap.fromTo(this.circle, { scale: 1 }, {
+            scale: 1.2,
+            duration: 0.8,
+            delay: 1.2,
+            ease: easing,
             onComplete: () => {
                 resolve();
             },
+        });
+        gsap.fromTo(this.lead, { xPercent: -120 }, {
+            xPercent: 0,
+            duration: 0.8,
+            delay: 1.2,
+            ease: easing,
         });
     });
 
@@ -43,29 +58,34 @@ export class Curtain {
 
         gsap.set(this.bg, { transformOrigin: 'center bottom' });
 
-        gsap.to(this.imageWrap, {
-            y: window.innerHeight,
-            rotate: 10,
-            duration: 0.9,
-            delay: 0.2,
+        gsap.fromTo(this.lead, { xPercent: 0 }, {
+            xPercent: -120,
+            duration: 0.6,
             ease: easing,
         });
-        gsap.fromTo(this.circle, { scale: 1 }, {
-            scale: 0,
-            duration: 0.9,
-            delay: 0.05,
+        gsap.fromTo(this.imageWrap, { opacity: 1 }, {
+            opacity: 0,
+            duration: 0.8,
             ease: easing,
         });
-        gsap.fromTo(this.circle, { y: 0 }, {
-            y: window.innerHeight,
-            duration: 0.9,
-            delay: 0.2,
+        gsap.fromTo(this.imageWrap, { scale: 1 }, {
+            scale: 0.3,
+            duration: 0.8,
+            ease: easing,
+        });
+        gsap.fromTo(this.circle, { scale: 1.2 }, {
+            scale: 0.3,
+            duration: 0.8,
+            ease: easing,
+        });
+        gsap.fromTo(this.circle, { opacity: 1 }, {
+            opacity: 0,
+            duration: 0.8,
             ease: easing,
         });
         gsap.fromTo(this.bg, { scaleY: 1 }, {
             scaleY: 0,
-            duration: 1,
-            delay: 0.35,
+            duration: 0.7,
             ease: easing,
             clearProps: 'transform',
             onComplete: () => {
