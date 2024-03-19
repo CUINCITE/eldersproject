@@ -316,6 +316,17 @@
         }
 
 
+        @include breakpoint(hd) {
+            margin-left: -22px; // grid-gap / 2
+            margin-right: calc((#{rem(36.5)} + 30px) * -1); // parent padding-right + grid offset
+
+
+            .text_wrapper--reversed & {
+                margin-left: -30px;
+                margin-right: calc((#{rem(36.5)} + 22px) * -1); // parent padding-right + grid offset
+            }
+        }
+
         @include breakpoint(not-desktop) {
             margin-left: -16px; // grid side margin
             margin-right: calc((#{rem(36.5)} + 16px) * -1); // parent padding-right + grid side margin
