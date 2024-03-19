@@ -171,7 +171,7 @@ export default class Scroll {
                 el,
                 type: el.dataset.scroll,
                 delay: parseInt(el.dataset.delay, 10) || 0,
-                duration: this.firstLoad ? false : el.getBoundingClientRect().top < window.innerHeight,
+                quick: this.firstLoad ? false : el.getBoundingClientRect().top < window.innerHeight,
             }).forEach((item: IScrollData) => {
                 if (scrolls[item.type]) {
                     scrolls[item.type](item.el, item.delay, item.quick);
