@@ -15,7 +15,7 @@ class MementosImporter extends model_app_api_import
 
     public function import()
     {
-        set_time_limit(60);
+        set_time_limit(512);
         $directory = $_SERVER['DOCUMENT_ROOT'] . '/_data/_mementos/csv';
         $files = scandir($directory);
 
