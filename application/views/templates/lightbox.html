@@ -282,7 +282,7 @@
                                 {% for item in related %}
                                     <li class="lightbox__related-item button--draw" data-component="Button">
                                         <a class="lightbox__related-link" href="{{item.url}}"></a>
-                                        <span class="lightbox__related-arrow">
+                                        <span class="lightbox__related-arrow desktop-only">
                                             <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
                                                 <span class="vertical js-arrow-vertical"></span>
                                                 <span class="horizontal js-arrow-horizontal"></span>
@@ -316,8 +316,8 @@
             {% endif %}
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
             <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
-            <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
-            <li class="desktop-only"><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
+            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
         </ul>
     </div>
 </div>

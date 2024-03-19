@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
@@ -9,6 +10,8 @@ import { LightboxNav } from './LightboxNav';
 import { LightboxSlider } from './LightboxSlider';
 import { LightboxContents } from './LightboxContents';
 
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 export class Lightbox {
@@ -256,9 +259,34 @@ export class Lightbox {
                     Lightbox.isOpen = true;
                     this.bind();
                     this.setHeaderHeight();
+                    // this.setupScroll();
                 },
             });
         });
+    }
+
+
+
+    private setupScroll(): void {
+        this.view.classList.add('has-scrolltrigger');
+
+        setTimeout(() => {
+            gsap.timeline({
+                scrollTrigger: {
+                    // scroller: this.view.querySelector('.lightbox__grid'),
+                    trigger: this.view,
+                    start: 'top top',
+                    end: 'top 44px',
+                    endTrigger: this.view.querySelector('.js-lightbox-nav'),
+                    markers: true,
+                    scrub: true,
+                    onToggle: self => {
+                        this.view.classList.toggle('is-sticky', self.isActive);
+                    },
+                },
+            })
+                .to(this.view.querySelector('.lightbox__header'), { flexBasis: '44px' });
+        }, 1000);
     }
 
 

@@ -39,6 +39,11 @@
         color: var(--color-grey200);
 
 
+        @include breakpoint(not-desktop) {
+            opacity: 0;
+        }
+
+
         i {
             @include font-family(reclined);
 
