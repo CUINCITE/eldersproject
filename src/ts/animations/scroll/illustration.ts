@@ -1,7 +1,8 @@
 import { gsap } from 'gsap/dist/gsap';
 import { easing } from '../../Site';
 
-export const illustration = (el: HTMLElement) => {
+export const illustration = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) return;
 
     const { subtle } = el.dataset;
 

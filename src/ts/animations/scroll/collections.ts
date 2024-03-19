@@ -3,7 +3,9 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const collections = (el: HTMLElement) => {
+export const collections = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) return;
+
     const cardsWrap: HTMLElement = el.querySelector('.js-scroll-cards');
     const namesWrap: HTMLElement = el.querySelector('.js-scroll-names');
     const offset = (window.innerHeight - cardsWrap.clientHeight) / 2;

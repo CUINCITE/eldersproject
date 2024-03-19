@@ -1,6 +1,8 @@
 import gsap from 'gsap';
 
-export const cover = el => {
+export const cover = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) return;
+
     gsap.set(el, { transformOrigin: '50% 50%' });
 
 
