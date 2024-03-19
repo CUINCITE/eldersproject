@@ -65,27 +65,30 @@ export class Curtain {
         });
         gsap.fromTo(this.imageWrap, { opacity: 1 }, {
             opacity: 0,
-            duration: 0.8,
+            duration: 0.6,
+            delay: 0.05,
             ease: easing,
         });
         gsap.fromTo(this.imageWrap, { scale: 1 }, {
             scale: 0.3,
-            duration: 0.8,
+            duration: 0.6,
+            delay: 0.05,
             ease: easing,
         });
         gsap.fromTo(this.circle, { scale: 1.2 }, {
             scale: 0.3,
-            duration: 0.8,
+            duration: 0.55,
             ease: easing,
         });
         gsap.fromTo(this.circle, { opacity: 1 }, {
             opacity: 0,
-            duration: 0.8,
+            duration: 0.55,
             ease: easing,
         });
         gsap.fromTo(this.bg, { scaleY: 1 }, {
             scaleY: 0,
-            duration: 0.7,
+            duration: 0.8,
+            delay: 0.15,
             ease: easing,
             clearProps: 'transform',
             onComplete: () => {
