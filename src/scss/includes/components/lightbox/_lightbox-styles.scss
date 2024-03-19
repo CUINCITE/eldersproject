@@ -727,9 +727,12 @@
 
     &__image {
         --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
-        margin-bottom: var(--GLOBAL-player-height);
 
-        height: var(--container-height);
+        @include flex(row, center, flex-start);
+
+        width: 100%;
+        padding-bottom: var(--GLOBAL-player-height);
+
 
 
         @include breakpoint(not-desktop) {
@@ -738,8 +741,13 @@
 
 
         &--polaroid {
-            height: 100%;
-            transform: rotate(-7.5deg);
+            position: relative;
+            height: calc(100% + var(--GLOBAL-player-height));
+
+
+            .polaroid {
+                transform: rotate(-7.5deg);
+            }
         }
 
 

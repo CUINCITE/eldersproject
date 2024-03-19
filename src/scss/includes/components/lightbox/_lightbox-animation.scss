@@ -109,7 +109,7 @@
 
     &__image {
         transition: transform var(--animation-time) var(--easing);
-        transform: translateY(var(--distance)) rotate(-25deg);
+        transform: translateY(var(--distance)) rotate(-15deg);
 
 
         .is-showing &,
@@ -118,7 +118,7 @@
 
             transition-duration: .9s;
 
-            transform: translateY(0) rotate(-7.5deg);
+            transform: translateY(0) rotate(0);
             transition-delay: $content-delay;
         }
 
@@ -126,12 +126,11 @@
         .is-default & { transition-delay: 0s; }
 
 
-        .is-closing &,
-        .is-not-default & {
+        .is-closing & {
             --easing: cubic-bezier(.65, .1, .3, .6);
 
             transition-duration: .6s;
-            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-25deg);
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height))) rotate(-15deg);
             transition-delay: 0s;
         }
     }

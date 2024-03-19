@@ -147,19 +147,38 @@
                         <!-- slider -->
                         {% else %}
                         <!-- single photo -->
-                        {% set image = images[0] %}
+                        {% set image = images[0].image %}
                         <div class="lightbox__image lightbox__image--polaroid js-rotate">
                             <!-- components/c_polaroid -->
                             <div class="polaroid polaroid--horizontal">
                                 <figure class="polaroid__image">
                                     <!-- subview_picture -->
                                     <picture>
-                                        <source media="(max-width: 1023px)" srcset="{{image.mobile}}">
-                                        <source media="(min-width: 1024px)" srcset="{{image.desktop}}">
-                                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" class="is-loading">
+                                        {% if image.mobile is defined and image.mobile.src is defined %}
+                                            <source media="(max-width: 479px)" srcset="{{image.mobile.src}}{% if image.mobile.width is defined %}, {{image.mobile.width}}w, {{image.mobile.height}}h{% endif %},  {{image.mobile_x2.src}} 2x">
+                                        {% elseif image.mobile is defined  %}
+                                            <source media="(max-width: 479px)" srcset="{{image.mobile}}, {{image.mobile_x2}} 2x">
+                                        {% endif %}
+
+                                        {% if image.hd is defined and image.hd.src is defined %}
+                                            <source media="(min-width: 480px) and (max-width: 768px)" srcset="{{image.hd.src}}{% if image.hd.width is defined %}, {{image.hd.width}}w, {{image.hd.height}}h{% endif %},  {{image.hd_x2.src}} 2x">
+                                        {% elseif image.hd is defined %}
+                                            <source media="(min-width: 480px) and (max-width: 768px)" srcset="{{image.hd}}, {{image.hd_x2}} 2x">
+                                        {% endif %}
+
+                                        {% if image.desktop is defined and image.desktop.src is defined %}
+                                            <source media="(min-width: 769px)" srcset="{{image.desktop.src}}{% if image.desktop.width is defined %}, {{image.desktop.width}}w, {{image.desktop.height}}h{% endif %},  {{image.desktop_x2.src}} 2x">
+                                        {% elseif image.desktop is defined %}
+                                            <source media="(min-width: 769px)" srcset="{{image.desktop}}, {{image.desktop_x2}} 2x">
+                                        {% endif %}
+
+                                        <img src="{% if image.desktop is defined and image.desktop.height is defined and image.desktop.width is defined %}data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {{ image.desktop.width }} {{ image.desktop.height }}' width='{{ image.desktop.width }}px' height='{{ image.desktop.height }}px' %3E%3C/svg%3E{% else %}data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs={% endif %}" alt="{{ alt }}" class="is-loading{% if preload %} preload{% endif %}">
                                     </picture>
                                 </figure>
                             </div>
+                            {% if images[0].description %}
+                                <div class="lightbox__caption" style="opacity: 1">{{images[0].description}}</div>
+                            {% endif %}
                         </div>
                         <!-- single photo -->
                         {% endif %}
