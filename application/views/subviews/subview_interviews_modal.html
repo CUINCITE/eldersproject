@@ -29,7 +29,7 @@
                     <legend>Locations</legend>
                     {% for state in states %}
                         <div>
-                            <input type="checkbox" name="states" id="state-{{ state.slug }}" value="{{ state.slug }}" data-name="{{ state.label }} ({{state.count_interviews}})"{% if state.selected %} checked{% endif %}>
+                            <input type="checkbox" name="states" id="state-{{ state.slug }}" value="{{ state.slug }}" data-count="{{ state.count_interviews }}" data-name="{{ state.label }}"{% if state.selected %} checked{% endif %}>
                             <label for="state-{{ state.slug }}"><i class="checkmark">[[svg::checkmark]]</i><span>{{ state.label }}</span></label>
                         </div>
                     {% endfor %}
