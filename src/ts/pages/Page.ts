@@ -74,39 +74,50 @@ export class Page extends Handler {
      * page entering animation
      * @param {number} delay animation delay
      */
-    public animateIn(delay?: number): Promise<void> {
+    public animateIn(boxes?: boolean, delay?: number): Promise<void> {
         return new Promise(resolve => {
             for (let i = 0; i < this.components.length; i += 1) {
                 this.components[i].animateIn(i, delay);
             }
 
-            const boxes = Utils.findVisibleBoxes(document.querySelectorAll('[data-scroll="box"], .box'));
-            const pseudoVariable = { value: 0 };
+            if (boxes) {
+                const boxesToShow = Utils.findVisibleBoxes(document.querySelectorAll('[data-scroll="box"], .box'));
+                const pseudoVariable = { value: 0 };
 
-            // used to run scroll animation a bit before boxes' animation (better feeling)
-            gsap.fromTo(pseudoVariable, { value: 0 }, {
-                value: 1,
-                duration: 0.5,
-                ease: 'power2.out',
-                onComplete: () => resolve(),
-            });
+                // used to run scroll animation a bit before boxes' animation (better feeling)
+                gsap.fromTo(pseudoVariable, { value: 0 }, {
+                    value: 1,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    onComplete: () => resolve(),
+                });
 
-            gsap.fromTo(boxes, { y: window.innerHeight }, {
-                y: 0,
-                duration: 0.75,
-                stagger: 0.1,
-                ease: 'power2.out',
-                clearProps: 'all',
-                onStart: () => {
-                    gsap.set(this.view, { opacity: 1 });
-                    // prevent double animation
-                    boxes.forEach(box => box.classList.add('is-animated'));
-                },
-                onComplete: () => {
-                    document.body.classList.remove('is-transition');
-                    // resolve();
-                },
-            });
+                gsap.fromTo(boxesToShow, { y: window.innerHeight }, {
+                    y: 0,
+                    duration: 0.75,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                    clearProps: 'all',
+                    onStart: () => {
+                        gsap.set(this.view, { opacity: 1 });
+                        // prevent double animation
+                        boxesToShow.forEach(box => box.classList.add('is-animated'));
+                    },
+                    onComplete: () => {
+                        document.body.classList.remove('is-transition');
+                        // resolve();
+                    },
+                });
+            } else {
+                gsap.to(this.view, {
+                    duration: 0.3,
+                    opacity: 1,
+                    onComplete: () => {
+                        document.body.classList.remove('is-transition');
+                        resolve();
+                    },
+                });
+            }
         });
     }
 
