@@ -1,7 +1,14 @@
 import { gsap } from 'gsap/dist/gsap';
-import { Images } from './widgets/Images';
 import { easing } from './Site';
 
+
+export interface IImages {
+    items: [{
+        id: number;
+        src: string;
+        color: string;
+    }]
+}
 
 export class Curtain {
 
@@ -10,6 +17,7 @@ export class Curtain {
     private imageWrap: HTMLElement;
     private circle: HTMLElement;
     private lead: HTMLElement;
+    private images = [];
 
 
 
@@ -19,6 +27,8 @@ export class Curtain {
         this.imageWrap = this.view.querySelector('.js-curtain-image');
         this.circle = this.view.querySelector('.js-curtain-circle');
         this.lead = this.view.querySelector('.js-curtain-lead');
+
+        this.init();
     }
 
 
@@ -54,7 +64,10 @@ export class Curtain {
 
 
     public hide = (abort?: boolean): void => {
-        if (abort) return;
+        if (abort) {
+            this.getNewImage();
+            return;
+        }
 
         gsap.set(this.bg, { transformOrigin: 'center bottom' });
 
@@ -94,6 +107,7 @@ export class Curtain {
             onComplete: () => {
                 // this.view.style.display = 'none';
                 this.view.classList.remove('is-active');
+                this.getNewImage();
             },
         });
     };
@@ -106,14 +120,30 @@ export class Curtain {
 
 
 
-    // private async getImages(): Promise<ICircleItems> {
-    //     try {
-    //         const response = await fetch(this.view.dataset.items, { method: 'POST' });
-    //         const data = response.json();
-    //         return data;
-    //     } catch (error) {
-    //         this.view.classList.remove('is-fetching');
-    //         throw new Error(error);
-    //     }
-    // }
+    private getNewImage = (): void => {
+        const image = this.images[Math.floor(Math.random() * this.images.length)];
+
+        this.imageWrap.querySelector('img').src = image.src;
+        this.circle.style.backgroundColor = `var(--color-${image.color})`;
+    };
+
+
+
+    private init = async(): Promise<void> => {
+        this.getImages().then(data => {
+            this.images = data.items;
+        });
+    };
+
+
+
+    private async getImages(): Promise<IImages> {
+        try {
+            const response = await fetch(this.view.dataset.items, { method: 'POST' });
+            const data = response.json();
+            return data;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
 }
