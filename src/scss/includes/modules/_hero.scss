@@ -152,7 +152,7 @@
         z-index: 5;
 
         @include breakpoint(desktop) {
-            bottom: rem(-15);
+            bottom: rem(-30);
             left: rem(20);
         }
 
