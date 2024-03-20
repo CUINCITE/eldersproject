@@ -1,7 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
-import { breakpoint, easing } from '../../Site';
+import { easing } from '../../Site';
 import { Component } from '../../components/Component';
-import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from '../Swipe';
 
 
 export class LightboxNav extends Component {
@@ -11,7 +10,6 @@ export class LightboxNav extends Component {
     private activeTab: HTMLElement;
     private lightboxEl: HTMLElement;
     private isAnimating: boolean;
-    private swipeComp: Swipe;
     private indicator: HTMLElement;
 
     constructor(protected view: HTMLElement, lightboxEl: HTMLElement) {
@@ -34,24 +32,6 @@ export class LightboxNav extends Component {
 
     private bind = (): void => {
         [...this.navButtons].forEach(btn => btn.addEventListener('click', this.onBtnClick));
-
-        if (!breakpoint.desktop) {
-            this.swipeComp = new Swipe(this.view, { horizontal: false, vertical: true });
-
-            this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
-
-                switch (e.direction) {
-                    case SwipeDirections.UP:
-                        this.lightboxEl.classList.add('is-expanded');
-                        break;
-                    case SwipeDirections.DOWN:
-                        this.lightboxEl.classList.remove('is-expanded');
-                        break;
-                    default:
-                        console.warn('no direction');
-                }
-            });
-        }
     };
 
 

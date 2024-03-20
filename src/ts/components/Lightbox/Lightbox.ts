@@ -9,6 +9,7 @@ import { LightboxTranscript } from './LightboxTranscript';
 import { LightboxNav } from './LightboxNav';
 import { LightboxSlider } from './LightboxSlider';
 import { LightboxContents } from './LightboxContents';
+import { lightboxColors } from './Lightbox.colors';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -201,6 +202,9 @@ export class Lightbox {
         // hide lightbox tab if any of them is active
         this.navComp?.hide();
 
+
+        this.setThemeColor('#000');
+
         return new Promise<void>((resolve, reject) => {
             this.animating = true;
             this.view.classList.add('is-closing');
@@ -244,6 +248,8 @@ export class Lightbox {
             this.view.style.opacity = '1';
             this.view.style.display = 'block';
 
+            this.setThemeColor();
+
             gsap.to(this.view, {
                 duration: 0.1,
                 ease: 'none',
@@ -260,8 +266,6 @@ export class Lightbox {
                     this.animating = false;
                     Lightbox.isOpen = true;
                     this.bind();
-                    this.setHeaderHeight();
-                    // this.setupScroll();
                 },
             });
         });
@@ -269,34 +273,12 @@ export class Lightbox {
 
 
 
-    private setupScroll(): void {
-        this.view.classList.add('has-scrolltrigger');
-
-        setTimeout(() => {
-            gsap.timeline({
-                scrollTrigger: {
-                    // scroller: this.view.querySelector('.lightbox__grid'),
-                    trigger: this.view,
-                    start: 'top top',
-                    end: 'top 44px',
-                    endTrigger: this.view.querySelector('.js-lightbox-nav'),
-                    markers: true,
-                    scrub: true,
-                    onToggle: self => {
-                        this.view.classList.toggle('is-sticky', self.isActive);
-                    },
-                },
-            })
-                .to(this.view.querySelector('.lightbox__header'), { flexBasis: '44px' });
-        }, 1000);
-    }
-
-
-
-    private setHeaderHeight(): void {
-        // used for animations later, transition on flex-basis doesn't work when set to auto
-        const header = this.view.querySelector('.lightbox__header') as HTMLElement;
-        header.style.setProperty('--flex-basis', `${header.clientHeight}px`);
+    private setThemeColor(color?: string): void {
+        const themeColor = color || this.view.firstElementChild.getAttribute('data-theme-color');
+        const newColor = lightboxColors[themeColor] || themeColor;
+        if (themeColor) {
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', newColor);
+        }
     }
 
 
