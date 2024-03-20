@@ -10,6 +10,7 @@ $shadow-sizes: (
     position: relative;
     transform: rotate(-14.5deg);
 
+
     &__front {
         position: relative;
         z-index: 1;
@@ -23,6 +24,7 @@ $shadow-sizes: (
             object-fit: cover;
         }
     }
+
 
 
     &__back {
@@ -64,6 +66,25 @@ $shadow-sizes: (
                     }
                 }
             }
+        }
+    }
+
+
+    a  &__front,
+    a  &__back {
+        cursor: pointer;
+        transition: transform 0.45s $easing;
+    }
+}
+
+a {
+    @include hover {
+        .illustration__front {
+            transform: translate(-5px, -5px);
+        }
+
+        .illustration__back {
+            transform: translate(5px, 5px);
         }
     }
 }

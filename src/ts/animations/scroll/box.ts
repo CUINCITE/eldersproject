@@ -20,7 +20,6 @@ export const box = (el: HTMLElement, delay?: number, quick?: number) => {
             pinSpacing: false,
             start: 'top bottom',
             invalidateOnRefresh: true,
-
         },
     });
 
