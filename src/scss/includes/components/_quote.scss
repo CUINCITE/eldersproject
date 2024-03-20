@@ -1,6 +1,6 @@
 .quote {
-    @include font-family(normal, 400);
-    @include font-settings(700, 100);
+    @include font-family(normal);
+    @include font-settings(500, 100);
 
     &--big {
         @include font-family(compressed);
@@ -125,16 +125,20 @@
             z-index: 2;
             position: relative;
 
-            path {
-                animation: cassette 4s linear infinite;
-                animation-play-state: paused;
 
-                &:first-of-type {
+            g {
+                &:first-of-type path {
                     transform-origin: 29px 29px;
                 }
 
-                &:last-of-type {
+                &:last-of-type path {
                     transform-origin: 81px 29px;
+                }
+
+
+                path {
+                    animation: cassette 4s linear infinite;
+                    animation-play-state: paused;
                 }
             }
         }

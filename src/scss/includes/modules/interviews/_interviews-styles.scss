@@ -231,6 +231,7 @@
 
     &__text {
         @include font-family(normal);
+        @include font-settings(400, 100);
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
