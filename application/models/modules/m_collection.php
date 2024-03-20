@@ -112,13 +112,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     private function getMap($collection)
     {
-        $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug']]);
+        $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug', 'incite_id']]);
         $items = $this->parent->getJsonModel('map_locations', ['active' => 1, 'collection_hide'=>0,'collection' => $collection]);
 
         foreach ($items as $k => $v)
             if ($v['quotes'])
                 foreach ($v['quotes'] as $kk => $vv) {
-                    $i = _uho_fx::array_filter($interviews, 'label', $vv[0], ['first' => true]);
+                    $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true]);
                     if ($i && $vv[1]) {
 
                         $time = explode(':', $vv[1]);
