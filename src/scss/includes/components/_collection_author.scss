@@ -83,10 +83,11 @@
         }
 
         @include breakpoint(tablet) {
-            @include font-size(49, 68);
+            @include font-size(49, 1);
             @include letter-spacing(-1.5, 60);
 
-            padding-top: rem(18);
+            padding-block: rem(18);
+            margin-block: trim-font(1);
         }
 
         @include breakpoint(phone) {

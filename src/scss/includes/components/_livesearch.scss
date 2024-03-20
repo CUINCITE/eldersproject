@@ -13,9 +13,6 @@
     &__wrap {
         height: 0;
 
-        @include breakpoint(not-desktop) {
-            // overflow-y: auto;
-        }
 
         .has-value & {
             height: max-content;
@@ -24,15 +21,17 @@
             overflow-y: auto;
 
             // @include breakpoint(desktop) {
+            //
             // }
 
-            // @include breakpoint(tablet) {
-            //     height: calc(100vh - #{rem(146)});
+            @include breakpoint(tablet) {
+                height: calc(100vh - #{rem(146)});
+                padding-bottom: 0;
 
-            //     @supports(height: 100dvh) {
-            //         height: calc(100dvh - #{rem(146)});
-            //     }
-            // }
+                @supports(height: 100dvh) {
+                    height: calc(100dvh - #{rem(146)});
+                }
+            }
 
             // @include breakpoint(phone) {
             //     height: calc(100vh - #{rem(100)});
@@ -64,6 +63,8 @@
             // overflow-y: auto;
 
             @include breakpoint(tablet) {
+                height: 100%;
+
                 // height: calc(100vh - #{rem(102)});
             }
 

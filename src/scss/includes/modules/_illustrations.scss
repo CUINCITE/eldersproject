@@ -3,14 +3,19 @@
         height: vw(656);
     }
 
-    @include breakpoint(tablet) {
-        height: vw(456, tablet);
+    @include breakpoint(not-desktop) {
+        height: auto;
+
+        @include breakpoint(tablet) {
+            padding-bottom: rem(84);
+        }
+    
+        @include breakpoint(phone) {
+            padding-bottom: rem(46);
+        }
     }
 
-    @include breakpoint(phone) {
-        height: auto;
-        padding-bottom: rem(46);
-    }
+
 
     .illustration {
         transform: unset !important;

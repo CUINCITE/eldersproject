@@ -28,6 +28,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
     --aside-width: #{vw(123)};
     --lightbox-top-height: #{rem(195)};
 
+    @include breakpoint(tablet) {
+        --aside-width: #{vw(60, tablet)};
+    }
+
 
     &__item {
         --main-body-color: var(--theme-color);
