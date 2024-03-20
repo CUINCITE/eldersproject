@@ -24,10 +24,6 @@
     &--text-aside, &--text_wrapper {
         position: relative;
 
-        @include breakpoint(desktop) {
-
-        }
-
         @include breakpoint(phone) {
             max-width: 100%;
         }
@@ -139,6 +135,12 @@
                 }
             }
         }
+
+        .module--claim + & {
+            @include breakpoint(not-desktop) {
+                border-top: unset !important;
+            }
+        }
     }
 
 
@@ -187,15 +189,10 @@
                 display: none;
             }
 
-            .interviews__locations {
-
-            }
-
             .interviews__description {
                 padding-bottom: rem(20);
             }
 
-            s
             .interviews__collection {
                 br {
                     display: none;

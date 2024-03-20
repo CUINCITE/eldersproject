@@ -9,6 +9,12 @@ export const sticky = (el: HTMLElement) => {
             end: `top ${el.clientHeight + 50}px`,
             pin: el,
             endTrigger,
+            onLeave: () => {
+                gsap.to(el, { opacity: 0, duration: 0.3 });
+            },
+            onEnterBack: () => {
+                gsap.to(el, { opacity: 1, duration: 0.3 });
+            },
         },
     });
 };

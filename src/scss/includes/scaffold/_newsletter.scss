@@ -339,7 +339,7 @@
         @include breakpoint(tablet) {
             @include font-size(11, 1);
 
-            padding: vw(160, tablet) 0 vw(20, tablet);
+            padding: vw(160, tablet) 0 vw(40, tablet);
         }
 
         @include breakpoint(phone) {
