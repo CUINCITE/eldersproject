@@ -26,16 +26,13 @@
     }
     
 
-    &[data-scroll="box"]:not(.is-animated) {
-        opacity: 0;
-    }
-
 
     [data-scroll="box"] {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
     
+
 
     .is-404 &, .page_404 & {
 
