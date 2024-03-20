@@ -119,13 +119,19 @@ class model_app_pages_modules_collection extends model_app_pages_modules
             if ($v['quotes'])
                 foreach ($v['quotes'] as $kk => $vv) {
                     $i = _uho_fx::array_filter($interviews, 'label', $vv[0], ['first' => true]);
-                    if ($i) $items[$k]['quotes'][$kk] =
-                        [
-                            'title' => $i['label'],
-                            'duration' => $vv[1],
-                            'start' => $this->time2seconds($vv[1]),
-                            'id' => $i['id']
-                        ];
+                    if ($i && $vv[1]) {
+
+                        $time = explode(':', $vv[1]);
+                        $time=_uho_fx::dozeruj($time[0],2).':'._uho_fx::dozeruj($time[1],2).':'._uho_fx::dozeruj($time[2],2);
+
+                        $items[$k]['quotes'][$kk] =
+                            [
+                                'title' => $i['label'],
+                                'duration' => $time,
+                                'start' => $this->time2seconds($time),
+                                'id' => $i['id']
+                            ];
+                    }
                     else unset($items[$k]['quotes'][$kk]);
 
                 }
