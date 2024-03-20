@@ -4,6 +4,8 @@ export const box = (el: HTMLElement, delay?: number, quick?: number) => {
     // prevent double animation
     if (el.classList.contains('is-animated') || quick) return;
 
+    gsap.set(el, { opacity: 0 });
+
     const bg = el.querySelector('.box__bg');
     const children: Element[] = [...el.children].filter(child => child !== bg);
 
@@ -20,7 +22,6 @@ export const box = (el: HTMLElement, delay?: number, quick?: number) => {
             pinSpacing: false,
             start: 'top bottom',
             invalidateOnRefresh: true,
-
         },
     });
 
