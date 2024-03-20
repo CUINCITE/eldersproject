@@ -106,14 +106,14 @@ export class Loader extends Component {
 
         gsap.to(oldValue, {
             opacity: 0,
-            duration: fast ? 0 : 0.6,
+            duration: fast ? 0 : 0,
             ease: 'sine',
             onComplete: () => oldValue.remove(),
         });
 
         gsap.fromTo(newValue, { opacity: 0 }, {
             opacity: 1,
-            duration: fast ? 0 : 0.6,
+            duration: fast ? 0 : 0,
             ease: 'sine',
         });
     };
