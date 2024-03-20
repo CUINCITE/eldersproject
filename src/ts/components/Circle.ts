@@ -20,6 +20,7 @@ export class Circle extends Component {
     private illusWrapper: HTMLElement;
     private mainWrapper: HTMLElement;
     private isLoaded: boolean = false;
+    private isShown: boolean = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -51,6 +52,7 @@ export class Circle extends Component {
 
     public show = (): void => {
         // load the images only when needed
+        if (this.isShown) return;
         if (!this.isLoaded) this.init();
 
         this.view.style.display = 'block';
@@ -59,17 +61,31 @@ export class Circle extends Component {
         gsap.fromTo(this.view, { scale: 0.6 }, {
             scale: 1,
             duration: 0.3,
+            delay: 0.3,
             ease: 'sine',
             onStart: () => {
                 this.circlesTimeline?.play();
                 this.view.style.opacity = '1';
+                this.isShown = true;
             },
         });
     };
 
 
 
-    private init = (): void => {
+    public hide = (): void => {
+        gsap.to(this.view, {
+            opacity: 0,
+            duration: 0.25,
+            ease: 'sine',
+        });
+        this.circlesTimeline?.pause();
+        this.isShown = false;
+    };
+
+
+
+    public init = (): Promise<void> => new Promise(resolve => {
         this.getImages().then((data: ICircleItems) => {
             const itemsArray = data.items;
 
@@ -93,15 +109,15 @@ export class Circle extends Component {
             this.mainWrapper.style.backgroundColor = `var(--color-${chosenItems[5].color})`;
 
             const circlesHtml = chosenItems.map(item => `
-                    <div class="circle__circle js-circle circle__circle--${item.color}"></div>
-                `);
+                        <div class="circle__circle js-circle circle__circle--${item.color}"></div>
+                    `);
             this.circlesWrapper.innerHTML = circlesHtml.join('');
 
             const illusHtml = chosenItems.map(item => `
-                    <div class="circle__illu js-illu">
-                        <img src="${item.src}" alt="Illustration ${item.id}" />
-                    </div>
-                `);
+                        <div class="circle__illu js-illu">
+                            <img src="${item.src}" alt="Illustration ${item.id}" />
+                        </div>
+                    `);
             this.illusWrapper.innerHTML = illusHtml.join('');
 
             this.circles = this.view.querySelectorAll('.js-circle');
@@ -112,9 +128,10 @@ export class Circle extends Component {
                 .then(() => {
                     this.loop();
                     this.isLoaded = true;
+                    resolve();
                 });
         });
-    };
+    });
 
 
 
@@ -132,7 +149,7 @@ export class Circle extends Component {
 
 
     private loop = (): void => {
-        this.circlesTimeline = gsap.timeline({ repeat: -1, repeatDelay: 1.7 });
+        this.circlesTimeline = gsap.timeline({ repeat: -1, repeatDelay: 1.7, onStart: () => this.show() });
 
         this.circlesTimeline.set([this.circles], { opacity: 0 });
 
@@ -156,16 +173,5 @@ export class Circle extends Component {
                 },
             }, `+=${delay}`);
         });
-    };
-
-
-
-    private hide = (): void => {
-        gsap.to(this.view, {
-            opacity: 0,
-            duration: 0.25,
-            ease: 'sine',
-        });
-        this.circlesTimeline?.pause();
     };
 }

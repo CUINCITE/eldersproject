@@ -1,9 +1,8 @@
 $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pale-purple", "orange", "green", "red", "pink";
 
 .circle {
-    @include z-index(circle);
-
     position: absolute;
+    z-index: 0;
     inset: rem(-16) auto auto rem(13);
     width: rem(219.6);
     height: rem(219.6);
@@ -18,6 +17,11 @@ $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pa
             width: rem(182);
             height: rem(182);
             margin-left: 0;
+        }
+
+
+        body.is-homepage & {
+            @include z-index(circle);
         }
     }
 

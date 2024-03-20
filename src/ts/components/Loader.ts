@@ -2,7 +2,6 @@ import { gsap } from 'gsap/dist/gsap';
 import { isActiveSession } from '../Site';
 import { Component } from './Component';
 import { Circle } from './Circle';
-import * as Utils from '../Utils';
 
 export class LoaderEvents {
     public static LOADED: string = 'loaded';
@@ -45,12 +44,12 @@ export class Loader extends Component {
 
 
 
-    public animate = (): Promise<void> => this.setCounterLoop();
+    public animate = (): Promise<void> => this.circleComp.init().then(() => this.setCounterLoop());
 
 
 
     public check = (isHomePage: boolean): void => {
-        isHomePage && this.circleComp.show();
+        isHomePage ? this.circleComp.show() : this.circleComp.hide();
     };
 
 
@@ -70,7 +69,7 @@ export class Loader extends Component {
                 this.view.style.pointerEvents = 'none';
                 this.isHidden = true;
 
-                Utils.setSessionStorageItem('loaded', '1');
+                // Utils.setSessionStorageItem('loaded', '1');
             },
         });
     };
@@ -92,7 +91,7 @@ export class Loader extends Component {
 
             this.updateHtml(steps[count]);
 
-        }, 700);
+        }, 900);
     });
 
 

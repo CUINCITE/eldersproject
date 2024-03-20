@@ -90,7 +90,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
-            // !isActiveSession && this.loader.animate(),
+            !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -209,7 +209,7 @@ class Site {
             this.loader.hide();
             !this.isFirstTime && Scroll.scrollToTop(true);
             // delay after animateIn
-            setTimeout(() => this.loader.check(isHome), 150);
+            setTimeout(() => this.loader.check(isHome), 50);
             this.isFirstTime = false;
         });
         PushStates.setTitle();
@@ -268,7 +268,7 @@ class Site {
         Scroll.scrollToCached();
         ScrollTrigger.refresh();
 
-        this.lightbox?.check();
+        // this.lightbox?.check();
 
         return page.preload();
     }

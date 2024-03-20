@@ -133,12 +133,13 @@
         padding: 0 rem(6) rem(13); // like .header
         position: relative;
         width: 100%;
-        transition: height .7s $ease-out;
+        transition: height .7s $easing;
         will-change: height;
 
         // WHEN HIDDEN LOADER
-        // height: 0;
-        height: 99%;
+        height: 0;
+
+        // height: 99%;
 
         // logo height + bottom padding
         min-height: rem(60 + 12);
@@ -157,12 +158,13 @@
         width: 1px;
         background-color: var(--color-white);
 
-        transition: height .7s $ease-out;
+        transition: height .7s $easing;
         will-change: height;
 
         // WHEN HIDDEN LOADER
-        // height: 0;
-        height: 100%;
+        height: 0;
+
+        // height: 100%;
 
         // logo height + bottom padding
         min-height: rem(60 + 12);
