@@ -32,7 +32,7 @@
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
-                            {% if item.image %}
+                            {% if item.image.desktop %}
                             <div class="map__image">
                                 {% include "./subviews/subview_picture.html" with { image: item.image } %}
                             </div>
