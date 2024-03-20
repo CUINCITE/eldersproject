@@ -104,29 +104,7 @@ $background-colors: (
 
     &--wrapped {
         @include breakpoint(desktop) {
-            padding: rem(20) rem(16) rem(26);
-        }
-
-        @include breakpoint(tablet) {
-            padding: vw(12.75, tablet) vw(12.75, tablet) vw(20.25, tablet);
-        }
-
-        @include breakpoint(phone) {
-            padding: vw(12.75, phone) vw(12.75, phone) vw(20.25, phone);
-        }
-    }
-
-
-    &--wrapped.polaroid--big {
-        @include breakpoint(desktop) {
-            padding: rem(25) rem(25) rem(36);
-        }
-    }
-
-
-    &--wrapped.polaroid--horizontal {
-        @include breakpoint(desktop) {
-            padding: rem(17) rem(17) rem(27);
+            padding: rem(20) rem(20) rem(30);
         }
 
         @include breakpoint(tablet) {
