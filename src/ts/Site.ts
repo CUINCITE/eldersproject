@@ -268,7 +268,7 @@ class Site {
         Scroll.scrollToCached();
         ScrollTrigger.refresh();
 
-        // this.lightbox?.check();
+        this.lightbox?.check();
 
         return page.preload();
     }
