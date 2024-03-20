@@ -53,6 +53,9 @@
 
             @include flex(column, flex-start, stretch);
 
+            flex-grow: 1;
+            height: auto;
+
             // overflow-y: auto;
         }
     }
@@ -642,6 +645,7 @@
 
             // height: 100%;
             align-items: flex-start;
+            justify-content: flex-start;
             z-index: 1;
 
             // padding-bottom: 106px;
@@ -769,6 +773,8 @@
 
         @include breakpoint(not-desktop) {
             height: unset;
+            min-height: 100%;
+            align-items: stretch;
         }
     }
 
@@ -995,6 +1001,7 @@
             position: relative;
             inset: auto;
             padding-bottom: 0;
+            min-height: unset;
             max-height: 100%;
             height: 100%;
             width: 100%;
@@ -1354,7 +1361,7 @@
 
 
             @include breakpoint(not-desktop) {
-                --container-height: 50vh;
+                --container-height: 40vh;
                 margin-top: 0;
             }
         }
