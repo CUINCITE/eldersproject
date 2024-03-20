@@ -26,7 +26,7 @@ html {
 
 
     @include breakpoint(phone) {
-        &.is-overflow-hidden { overflow: hidden; }
+        // &.is-overflow-hidden { overflow: hidden; }
     }
 }
 
@@ -82,6 +82,11 @@ html {
     @include breakpoint(not-desktop) {
         // z-index: unset;
         overflow-x: hidden;
+
+
+        body.is-lightbox-open & {
+            display: none;
+        }
     }
 
 
