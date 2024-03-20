@@ -82,7 +82,15 @@
     height: 43px;
 
 
-    @include breakpoint(not-desktop) {
+    @include breakpoint(tablet) {
+        .player--video & {
+            width: 40px;
+            height: 44px;
+        }
+    }
+
+
+    @include breakpoint(phone) {
         .player--video &,
         .playlist & {
             width: 18px;

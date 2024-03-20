@@ -73,6 +73,14 @@
             }
         }
 
+        @include breakpoint(tablet-landscape) {
+            width: vw(400, tablet);
+            height: vw(400, tablet);
+            bottom: 50%;
+            translate: 0 50%;
+        }
+
+
         @include breakpoint(not-desktop) {
             position: relative;
 
@@ -244,6 +252,10 @@
             @include letter-spacing (-0.1, 23);
 
             padding-right: 0;
+        }
+
+        @include breakpoint(tablet) {
+            padding-bottom: rem(110);
         }
     }
 }

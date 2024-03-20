@@ -27,6 +27,8 @@
         @media (orientation: landscape) { @content; }
     } @else if $point == retina {
         @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-width: $size-desktop){ @content; }
+    } @else if $point == tablet-landscape {
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (pointer: coarse) { @content; }
     }
 }
 /* stylelint-enable */

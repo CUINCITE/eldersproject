@@ -46,6 +46,11 @@
         grid-template: "header illu logo" var(--lightbox-top-height) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
 
 
+        @include breakpoint(tablet) {
+            grid-column-gap: 0;
+        }
+
+
         @include breakpoint(phone) {
             // grid-template-areas: "illu" "header" "buttons" "main";
             // grid-template-columns: 100%;
@@ -74,6 +79,9 @@
             margin-left: rem(-5);
         }
 
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+        }
 
         @include breakpoint(phone) {
             order: 2;
@@ -117,6 +125,9 @@
         padding: 0 rem(4);
         color: var(--aside-text-color);
 
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+        }
 
         @include breakpoint(phone) {
             position: absolute;
@@ -139,6 +150,12 @@
         grid-area: illu;
         background: var(--main-body-color);
         position: relative;
+
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+            border-left: 1px solid var(--color-box);
+            border-right: 1px solid var(--color-box);
+        }
 
 
         @include breakpoint(phone) {
@@ -213,7 +230,7 @@
         }
 
 
-        @include breakpoint(not-desktop) {
+        @include breakpoint(phone) {
             height: auto;
 
             .is-not-default & { display: none; }
@@ -256,6 +273,11 @@
             @include breakpoint(not-desktop) {
                 display: grid;
                 grid-template-columns: 1fr;
+
+                @include breakpoint(tablet) {
+                    align-content: start;
+                    grid-template-rows: auto 1fr;
+                }
             }
         }
 
@@ -468,6 +490,10 @@
 
         li { text-align: center; }
 
+        @include breakpoint(tablet) {
+            border-top: unset;
+        }
+
 
         @include breakpoint(phone) {
             @include flex;
@@ -512,7 +538,7 @@
             pointer-events: none;
         }
 
-        @include breakpoint(desktop) {
+        @include breakpoint(not-phone) {
             > span {
                 display: block !important;
                 line-height: 1;
@@ -528,9 +554,17 @@
 
         &--intro {
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 53px;
-                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 55px;
                 }
             }
         }
@@ -539,9 +573,17 @@
 
         &--mementos {
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 29px;
-                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 32px;
                 }
             }
         }
@@ -553,9 +595,17 @@
             }
 
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 69px;
-                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 72px;
                 }
             }
         }
@@ -563,9 +613,17 @@
 
         &--transcript {
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 26px;
-                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 27.2px;
                 }
             }
         }
@@ -577,9 +635,17 @@
             }
 
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 25px;
-                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 26px;
                 }
             }
         }
@@ -592,9 +658,17 @@
 
 
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.02em;
+                }
+
                 @include breakpoint(desktop) {
                     font-size: 38px;
-                    letter-spacing: -0.02em;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 38.5px;
                 }
             }
         }
@@ -678,6 +752,10 @@
 
         @include breakpoint(desktop) {
             flex-wrap: nowrap;
+        }
+
+        @include breakpoint(tablet) {
+            @include flex(column, flex-start, flex-start);
         }
     }
 
@@ -955,12 +1033,18 @@
         z-index: 3;
         margin: auto;
 
+        @include breakpoint(tablet) {
+            inset: 0;
+            border-right: 1px solid var(--color-box);
+        }
+
 
         @include breakpoint(phone) {
             // position: relative;
 
             // inset: auto 0 0 0;
             position: relative;
+            flex-grow: 1;
 
             // top: 0;
             // bottom: 104px;

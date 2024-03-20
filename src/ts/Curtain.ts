@@ -37,7 +37,7 @@ export class Curtain {
         this.view.style.display = 'block';
         gsap.set(this.imageWrap, { scale: 1, opacity: 1 });
         gsap.set(this.circle, { scale: 1, opacity: 1 });
-        gsap.set(this.lead, { xPercent: -120 });
+        gsap.set(this.lead, { opacity: 1, xPercent: -120 });
 
         gsap.fromTo(this.view, { opacity: 0 }, {
             opacity: 1,
@@ -71,10 +71,11 @@ export class Curtain {
 
         gsap.set(this.bg, { transformOrigin: 'center bottom' });
 
-        gsap.fromTo(this.lead, { xPercent: 0 }, {
-            xPercent: -120,
-            duration: 0.6,
+        gsap.fromTo(this.lead, { opacity: 1 }, {
+            opacity: 0,
+            duration: 0.2,
             ease: easing,
+            delay: 0.3,
         });
         gsap.fromTo(this.imageWrap, { opacity: 1 }, {
             opacity: 0,

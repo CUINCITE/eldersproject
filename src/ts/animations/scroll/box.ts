@@ -12,11 +12,15 @@ export const box = (el: HTMLElement, delay?: number, quick?: number) => {
         duration: 0.8,
         ease: 'power2.out',
         clearProps: 'all',
+        onStart: () => {
+            gsap.set(el, { opacity: 1 });
+        },
         scrollTrigger: {
             trigger: el,
             pinSpacing: false,
             start: 'top bottom',
             invalidateOnRefresh: true,
+
         },
     });
 

@@ -107,7 +107,7 @@
                                         </div>{# END of .playlist__expand #}
                                         <div class="playlist__wrap">
                                             <button class="playlist__trigger button button--small button--overflow" data-component="Button" aria-expanded="false" aria-controls="playlist-items" data-expanded-text="Show less" data-hidden-text="Load more">
-                                                {% include "./components/c_arrow_icon.html" %}
+                                                {% include "./components/c_arrow_icon.html" with { reversed: false } %}
                                                 <span class="button__text js-button-text js-expand-text">Load more</span>
                                             </button>
                                         </div>

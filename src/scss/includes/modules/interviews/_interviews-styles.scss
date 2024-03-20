@@ -47,9 +47,9 @@
                     bottom: unset;
                     z-index: 5;
 
-                    @include breakpoint(tablet) {
-                        right: rem(98);
-                        bottom: calc(100% - #{rem(34)});
+                    @include breakpoint(tablet) { 
+                        right: rem(72);
+                        bottom: calc(100% - #{rem(28)});
                     }
 
                     @include breakpoint(phone) {
@@ -94,7 +94,9 @@
         // TEMP because we don't have content for all collections yet and the sticker is overlapping video player
 
         .module--quote_panel + .module--interviews & {
-            translate: -24% -45%;
+            @include breakpoint(desktop) {
+                translate: -24% -45%;
+            }
         }
     }
 
@@ -231,6 +233,7 @@
 
     &__text {
         @include font-family(normal);
+        @include font-settings(400, 100);
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
@@ -384,13 +387,13 @@
         @include breakpoint(tablet) {
             @include flex(row, space-between, flex-start);
 
-
-
-            grid-column: span 2;
+            grid-column: 1 / span 8 !important;
+            margin-top: rem(12);
         }
 
         @include breakpoint(phone) {
             @include flex(row, space-between, flex-start);
+
             margin-top: rem(8);
         }
 
