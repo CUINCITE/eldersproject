@@ -130,7 +130,7 @@
         }
 
         @include breakpoint(phone) {
-            position: absolute;
+            position: fixed;
             inset: 0 0 auto auto;
             background: none;
         }
@@ -479,18 +479,18 @@
 
 
     &__buttons {
-        @include flex(column, flex-start, center);
+        @include flex(column, flex-start, flex-start);
 
         grid-area: buttons;
         background: var(--aside-body-color);
-        padding-top: rem(7);
+
         border-top: 1px solid var(--color-box);
         position: relative;
 
 
         li { text-align: center; }
 
-        @include breakpoint(tablet) {
+        @include breakpoint(not-desktop) {
             border-top: unset;
         }
 
@@ -503,16 +503,48 @@
             gap: 0;
             order: 3;
             overflow-x: scroll;
-            padding: 8px 0 4px;
             background: var(--main-body-color);
             position: sticky;
-            top: 44px;
+            top: 0;
+            padding-top: 44px;
+            margin-top: -44px;
+
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
 
 
             li {
                 width: 33vw;
                 flex-shrink: 0;
                 text-align: center;
+            }
+        }
+
+
+        &-scroller {
+            @include flex(column, flex-start, center);
+
+            width: 100%;
+            position: relative;
+            padding-top: rem(7);
+
+
+            @include breakpoint(phone) {
+                @include flex;
+
+                width: auto;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0 auto auto 0;
+                    width: 100%;
+                    height: 1px;
+                    background-color: var(--color-box);
+                }
             }
         }
 
@@ -940,6 +972,8 @@
 
         @include breakpoint(not-desktop) {
             @include font-size(17, 17.85);
+
+            flex-shrink: 1;
         }
 
 

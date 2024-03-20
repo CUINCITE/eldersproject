@@ -309,15 +309,17 @@
             <div class="desktop-only">[[svg::logo]]</div>
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
-            <span class="lightbox__indicator js-nav-indicator desktop-only"><i></i></span>
-            <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
-            {% if images %}
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
-            {% endif %}
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
-            <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
+            <div class="lightbox__buttons-scroller">
+                <span class="lightbox__indicator js-nav-indicator desktop-only"><i></i></span>
+                <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
+                {% if images %}
+                <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
+                {% endif %}
+                <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-info" class="lightbox__button lightbox__button--info"><span><span>Info</span><span>Info</span></span></button></li>
+                <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-transcript" class="lightbox__button lightbox__button--transcript"><span><span>Transcript</span><span>Transcript</span></span></button></li>
+                <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-downloads" class="lightbox__button lightbox__button--downloads"><span><span>Downloads</span><span>Downloads</span></span></button></li>
+                <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-related" class="lightbox__button lightbox__button--related"><span><span>Related</span><span>Related</span></span></button></li>
+            </div>
         </ul>
     </div>
 </div>
