@@ -214,6 +214,7 @@ export class Lightbox {
                 onStart: () => {
                     document.body.classList.remove('has-lightbox');
                     AudioPlayer.view.classList.remove('has-active-lightbox');
+                    document.body.classList.remove('is-lightbox-open');
                     this.view.classList.remove('is-showing');
                 },
                 onComplete: (): void => {
@@ -253,6 +254,7 @@ export class Lightbox {
                 // that class runs CSS animation
                 onComplete: () => {
                     this.view.classList.add('is-showing');
+                    document.body.classList.add('is-lightbox-open');
                     // audioplayer should be always expanded when lightbox is open
                     AudioPlayer.openAudioPlayer(true);
                     this.animating = false;
