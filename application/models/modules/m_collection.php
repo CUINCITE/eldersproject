@@ -115,26 +115,34 @@ class model_app_pages_modules_collection extends model_app_pages_modules
         $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug', 'incite_id']]);
         $items = $this->parent->getJsonModel('map_locations', ['active' => 1, 'collection_hide'=>0,'collection' => $collection]);
 
-        foreach ($items as $k => $v)
+        foreach ($items as $k => $v) {
+            $quotes = [];
+
             if ($v['quotes'])
+            {
                 foreach ($v['quotes'] as $kk => $vv) {
                     $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true]);
                     if ($i && $vv[1]) {
 
                         $time = explode(':', $vv[1]);
-                        $time=_uho_fx::dozeruj($time[0],2).':'._uho_fx::dozeruj($time[1],2).':'._uho_fx::dozeruj($time[2],2);
+                        $time = _uho_fx::dozeruj($time[0], 2) . ':' . _uho_fx::dozeruj($time[1], 2) . ':' . _uho_fx::dozeruj($time[2], 2);
 
-                        $items[$k]['quotes'][$kk] =
-                            [
-                                'title' => $i['label'],
-                                'duration' => $time,
-                                'start' => $this->time2seconds($time),
-                                'id' => $i['id']
-                            ];
-                    }
-                    else unset($items[$k]['quotes'][$kk]);
+                        $quotes[] = [
+                            'title' => $i['label'],
+                            'duration' => $time,
+                            'start' => $this->time2seconds($time),
+                            'id' => $i['id']
+                        ];
+
+                    } else unset($items[$k]['quotes'][$kk]);
 
                 }
+            }
+
+            if ($quotes) {
+                $items[$k]['quotes'] = $quotes;
+            }
+        }
 
         return $items;
     }
