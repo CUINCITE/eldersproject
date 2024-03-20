@@ -2,7 +2,11 @@ import { gsap } from 'gsap/dist/gsap';
 
 export const box = (el: HTMLElement, delay?: number, quick?: number) => {
     // prevent double animation
-    if (el.classList.contains('is-animated') || quick) return;
+    if (el.classList.contains('is-animated')) return;
+    if (quick) {
+        el.classList.add('is-animated');
+        return;
+    }
 
     gsap.set(el, { opacity: 0 });
 

@@ -49,8 +49,14 @@ export class Menu {
 
 
 
+    public resize(): void {
+        this.elToggle = document.querySelectorAll('.js-menu-toggle');
+        this.bindToggleButtons();
+    }
+
+
+
     private bind(): void {
-        this.elToggle.length && [...this.elToggle].forEach(btn => btn.addEventListener('click', this.onToggle));
         this.closeBtn && this.closeBtn.addEventListener('click', this.close);
 
         window.addEventListener('keyup', e => {
@@ -66,6 +72,12 @@ export class Menu {
             this.onAnimationEnd();
         });
         window.addEventListener('resize', debounce(() => this.timelines.forEach(tl => tl.invalidate())));
+    }
+
+
+
+    private bindToggleButtons(): void {
+        this.elToggle.length && [...this.elToggle].forEach(btn => btn.addEventListener('click', this.onToggle));
     }
 
 
@@ -143,13 +155,15 @@ export class Menu {
 
 
 
-    private onToggle = (): void => {
-        this.isOpen ? this.close() : this.open();
+    private onToggle = (e): void => {
+        const { currentTarget } = e;
+        const isSearchBtn = currentTarget.hasAttribute('data-search');
+        this.isOpen ? this.close() : this.open(isSearchBtn);
     };
 
 
 
-    private open = (): void => {
+    private open = (focusOnSearch?: boolean): void => {
         if (this.isAnimating) return;
 
         this.isAnimating = true;
@@ -163,7 +177,14 @@ export class Menu {
             this.closeBtn.focus();
         }
 
-        !Accessibility.isOn && gsap.timeline()
+        !Accessibility.isOn && gsap.timeline({
+            onComplete: () => {
+                if (focusOnSearch) {
+                    const input: HTMLInputElement = this.searchLabel.closest('form').querySelector('input[type="search"]');
+                    input && input.focus();
+                }
+            },
+        })
             .addLabel('init')
             .fromTo(this.labels, { yPercent: 120 }, {
                 yPercent: 0,

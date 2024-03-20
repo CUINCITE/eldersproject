@@ -213,6 +213,7 @@ class Site {
             this.isFirstTime = false;
         });
         PushStates.setTitle();
+        this.menu.resize();
         this.audioPlayer.bindButtons();
     };
 
