@@ -23,6 +23,7 @@ interface IScrollData {
     delay?: number;
     action?: string;
     component?: Component;
+    quick?: boolean;
 }
 
 interface IParallaxData {
@@ -42,6 +43,7 @@ export default class Scroll {
 
     private static enabled: boolean = true;
     private static scrollCache: { [key: string]: number } = {};
+    private firstLoad: boolean = true;
 
 
     public static resize(): void {
@@ -169,9 +171,10 @@ export default class Scroll {
                 el,
                 type: el.dataset.scroll,
                 delay: parseInt(el.dataset.delay, 10) || 0,
+                quick: this.firstLoad ? false : el.getBoundingClientRect().top < window.innerHeight,
             }).forEach((item: IScrollData) => {
                 if (scrolls[item.type]) {
-                    scrolls[item.type](item.el, item.delay);
+                    scrolls[item.type](item.el, item.delay, item.quick);
                 } else {
                     console.warn(`scroll type "${item.type}" does not exist`, item.el);
                 }
@@ -194,6 +197,9 @@ export default class Scroll {
                     },
                 });
             });
+
+
+        this.firstLoad = false;
     }
 
 

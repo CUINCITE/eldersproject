@@ -20,6 +20,10 @@
                 &--single {
                     .polaroid {
                         translate: rem(-28) 0;
+
+                        &--big {
+                            margin-inline: unset !important;
+                        }
                     }
                 }
             }
@@ -170,6 +174,7 @@
 
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end);
+
             margin-left: rem(9);
         }
 
@@ -184,7 +189,7 @@
                 // --polaroid-width: #{rem(351)};
                 // --polaroid-height: #{rem(428)};
 
-                margin-block: rem(28);
+                margin-block: rem(38) rem(48);
                 left: 4%;
                 rotate: 7.216deg;
             }
@@ -212,6 +217,13 @@
                 @include breakpoint(desktop) {
                     --polaroid-width: #{rem(351)};
                     --polaroid-height: #{rem(428)};
+
+                    margin-inline: rem(5);
+
+                    &:not(.polaroid--horizontal) {
+                        margin-inline: rem(15);
+                        rotate: 7.2deg;
+                    } 
                 }
             }
 
@@ -219,6 +231,7 @@
                 @include breakpoint(desktop) {
                     --polaroid-width: #{rem(320)};
                     --polaroid-height: #{rem(250)};
+
                     rotate: 11deg;
                 }
 
@@ -263,6 +276,12 @@
 
                     @include breakpoint(phone) {
                         margin-bottom: vw(44, phone);
+                    }
+                }
+
+                &--big {
+                    @include breakpoint(desktop) {
+                        rotate: -7.2deg;
                     }
                 }
             }
@@ -315,6 +334,17 @@
             }
         }
 
+
+        @include breakpoint(hd) {
+            margin-left: -22px; // grid-gap / 2
+            margin-right: calc((#{rem(36.5)} + 30px) * -1); // parent padding-right + grid offset
+
+
+            .text_wrapper--reversed & {
+                margin-left: -30px;
+                margin-right: calc((#{rem(36.5)} + 22px) * -1); // parent padding-right + grid offset
+            }
+        }
 
         @include breakpoint(not-desktop) {
             margin-left: -16px; // grid side margin

@@ -1,6 +1,8 @@
 import { gsap } from 'gsap/dist/gsap';
 
-export const line = (el: HTMLElement) => {
+export const line = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) return;
+
     gsap.set(el, { transformOrigin: 'bottom center' });
     gsap.fromTo(el, { scaleY: 0 }, {
         scaleY: 1,

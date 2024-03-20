@@ -13,7 +13,9 @@
     &__captions {
         position: relative;
         width: rem(244);
-        height: rem(60);
+        display: grid;
+        grid-template-columns: auto;
+        margin-bottom: rem(9);
     }
 
 
@@ -87,8 +89,12 @@
             }
         }
 
-        svg {
-            transition: none;
+
+        span {
+            @include flex(row, center, center);
+            width: 100%;
+            height: 100%;
+
 
             @include breakpoint(desktop) {
                 position: absolute;
@@ -98,16 +104,21 @@
             }
 
             &:last-child {
-                transform: translate(-50%, -200%);
+                transform: translate(-50%, -150%);
 
 
                 @include breakpoint(not-desktop) { display: none; }
             }
         }
 
+        svg {
+            transition: none;
+            transform: rotate(90deg);
+        }
+
         @include hover {
-            svg {
-                transform: translate(-50%, 100%);
+            span {
+                transform: translate(-50%, 50%);
                 transition: transform .5s $ease-out;
 
                 &:last-child { transform: translate(-50%, -50%); }
@@ -120,9 +131,7 @@
         opacity: 0;
         height: 100%;
         transition: opacity .5s $ease-out;
-        position: absolute;
-        left: 0;
-        bottom: 0;
+        grid-column: 1 / 2;
 
 
         &.is-active {

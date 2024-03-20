@@ -4,7 +4,11 @@ import { easing } from '../../Site';
 
 gsap.registerPlugin(SplitText);
 
-export const claim = el => {
+export const claim = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) {
+        gsap.set(el, { opacity: 1 });
+        return;
+    }
 
     const splittedText = new SplitText(el.querySelector('p'), { type: 'lines, words', linesClass: 'line' });
 

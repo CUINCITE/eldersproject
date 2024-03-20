@@ -31,7 +31,8 @@
             background: none;
 
 
-            .player.is-expanded & {
+            .player.is-expanded &,
+            body.has-open-modal & {
                 pointer-events: none;
             }
         }
@@ -166,36 +167,55 @@
             height: 100%;
 
 
-            path {
-                animation: cassette 4s linear infinite;
+            g {
+                animation: cassette 1s $easing infinite;
                 animation-play-state: paused;
-
-                &:first-of-type {
-                    transform-origin: 29px 29px;
-                }
-
-
-                &:last-of-type {
-                    transform-origin: 81px 29px;
-                }
 
 
                 .player.is-mouseover & {
                     animation-play-state: running;
-                    animation-duration: .8s;
                 }
 
 
                 .player.is-expanded &,
-                .player-is-paused & {
-                    animation-duration: 4s;
+                .player-is-playing & {
                     animation-play-state: paused;
                 }
 
 
-                .player.is-playing & {
+                .player.is-rewinding & {
                     animation-play-state: running;
-                    animation-duration: 4s;
+                }
+
+
+                path {
+                    animation: cassette 4s linear infinite;
+                    animation-play-state: paused;
+
+
+                    .player.is-expanded &,
+                    .player-is-paused & {
+                        animation-duration: 4s;
+                        animation-play-state: paused;
+                    }
+
+
+                    .player.is-playing & {
+                        animation-play-state: running;
+                        animation-duration: 4s;
+                    }
+                }
+
+
+                &:first-of-type,
+                &:first-of-type path {
+                    transform-origin: 29px 29px;
+                }
+
+
+                &:last-of-type,
+                &:last-of-type path {
+                    transform-origin: 81px 29px;
                 }
             }
         }

@@ -1,11 +1,17 @@
 import { gsap } from 'gsap/dist/gsap';
 
-export const sticker = el => {
+export const sticker = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) {
+        gsap.set(el, { opacity: 1 });
+        el.classList.add('is-visible');
+        return;
+    }
+
     // default delay is .5s
-    const delay: number = parseFloat(el.getAttribute('data-delay')) || 0.5;
+    const stickerDelay: number = parseFloat(el.getAttribute('data-delay')) || 0.5;
 
     gsap.timeline({
-        delay,
+        delay: stickerDelay,
         scrollTrigger: {
             trigger: el,
             pinSpacing: false,

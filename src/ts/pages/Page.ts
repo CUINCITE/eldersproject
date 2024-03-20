@@ -110,7 +110,7 @@ export class Page extends Handler {
                 });
             } else {
                 gsap.to(this.view, {
-                    duration: 0.3,
+                    duration: 0.01,
                     opacity: 1,
                     onComplete: () => {
                         document.body.classList.remove('is-transition');

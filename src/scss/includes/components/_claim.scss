@@ -94,6 +94,12 @@
                 letter-spacing: -0.045em;
             }
 
+
+            @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
+                @include font-size(110, 92);
+                max-width: 80%;
+            }
+
             @include breakpoint(hd) {
                 max-width: 75%;
             }

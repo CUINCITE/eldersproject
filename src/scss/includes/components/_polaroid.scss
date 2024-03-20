@@ -92,7 +92,7 @@ $background-colors: (
 
     &--wrapped {
         @include breakpoint(desktop) {
-            padding: rem(20) rem(20) rem(30);
+            padding: rem(20) rem(16) rem(26);
         }
 
         @include breakpoint(tablet) {
@@ -115,7 +115,7 @@ $background-colors: (
     &--wrapped.polaroid--horizontal {
         @include breakpoint(desktop) {
             padding: rem(17) rem(17) rem(27);
-            margin-bottom: rem(36);
+            margin-bottom: rem(42);
         }
 
         @include breakpoint(tablet) {

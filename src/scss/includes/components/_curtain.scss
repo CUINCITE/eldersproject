@@ -28,6 +28,31 @@
 
 
 
+    &__lead {
+        @include font-family(compressed);
+        @include font-size(30, 30);
+
+        text-transform: uppercase;
+        position: absolute;
+        inset: 50% auto auto var(--grid-margin);
+        transform: translateY(-50%);
+        color: var(--color-grey200);
+
+
+        @include breakpoint(not-desktop) {
+            opacity: 0;
+        }
+
+
+        i {
+            @include font-family(reclined);
+
+            margin-left: rem(4);
+        }
+    }
+
+
+
     &__wrap {
         @include flex(row, center, center);
 

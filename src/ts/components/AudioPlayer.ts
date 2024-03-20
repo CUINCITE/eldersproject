@@ -4,6 +4,7 @@ import { breakpoint, easing } from '../Site';
 import { Video } from './Player/Video';
 import { Lightbox } from './Lightbox/Lightbox';
 import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from './Swipe';
+import { Images } from '../widgets/Images';
 
 
 export class AudioPlayerStatesText {
@@ -24,6 +25,11 @@ export interface IAudioPlayerResponse {
     color: string;
     nextId?: string;
     prevId?: string;
+    collectionImage: {
+        original: string;
+        mobile_x2: string;
+        mobile_x2_webp: string;
+    }
 }
 
 
@@ -195,7 +201,6 @@ export class AudioPlayer extends Video {
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
         this.elements.urlLinks && [...this.elements.urlLinks].forEach(link => link.addEventListener('click', this.onUrlClick));
         this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseenter', this.onCassetteMouseEnter);
-        this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseleave', this.onCassetteMouseLeave);
 
         if (breakpoint.desktop) {
             this.view.addEventListener('mouseleave', this.onMouseLeave);
@@ -220,14 +225,7 @@ export class AudioPlayer extends Video {
 
         this.timeout = setTimeout(() => {
             this.view.classList.remove('is-mouseover');
-        }, 600);
-    };
-
-
-
-    private onCassetteMouseLeave = (): void => {
-        window.clearTimeout(this.timeout);
-        this.view.classList.remove('is-mouseover');
+        }, 1000);
     };
 
 
@@ -312,22 +310,24 @@ export class AudioPlayer extends Video {
                 this.updatePlayer(data);
                 this.updateColors(data.color);
                 // this.animateInCassette();
-                this.animateInIllustration(prevDirection);
-                // eslint-disable-next-line max-len
-                this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
+                Images.preload(this.mobileIllustration.querySelectorAll('img')).then(() => {
+                    this.animateInIllustration(prevDirection);
+                    // eslint-disable-next-line max-len
+                    this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
 
-                // check if lightbox is open and has the same id as audio player
-                Lightbox.checkPlayerState();
+                    // check if lightbox is open and has the same id as audio player
+                    Lightbox.checkPlayerState();
 
-                // at first load, check if URL has start time for audio
-                const hasParams = this.isInitialized ? false : this.seekToParams();
-                // play audio when it has been already initialized
-                if (play) {
-                    !this.isExpanded && this.expand();
-                    if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
-                    this.play();
-                }
-                this.isInitialized = true;
+                    // at first load, check if URL has start time for audio
+                    const hasParams = this.isInitialized ? false : this.seekToParams();
+                    // play audio when it has been already initialized
+                    if (play) {
+                        !this.isExpanded && this.expand();
+                        if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                        this.play();
+                    }
+                    this.isInitialized = true;
+                });
             });
     };
 
@@ -489,6 +489,7 @@ export class AudioPlayer extends Video {
         [...this.elements.urlLinks].forEach(link => {
             link.href = data.urlInterview;
         });
+        this.mobileIllustration.querySelector('img').src = data.collectionImage.mobile_x2;
         this.elements.nextBtn.dataset.nextId = data.nextId?.toString() || '';
         this.elements.prevBtn.dataset.prevId = data.prevId?.toString() || '';
     };

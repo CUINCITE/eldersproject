@@ -6,6 +6,12 @@
     padding-bottom: var(--GLOBAL-player-height);
 
 
+    @include breakpoint(not-desktop) {
+        height: 100%;
+        padding-bottom: 0;
+    }
+
+
 
     &__wrap {
         @include flex(row, center, center);
@@ -13,6 +19,11 @@
         position: relative;
         height: 100%;
         margin-top: rem(-41);
+
+
+        @include breakpoint(not-desktop) {
+            margin-top: 0;
+        }
     }
 
 

@@ -1,6 +1,11 @@
 import gsap from 'gsap';
 
-export const collectionHero = el => {
+export const collectionHero = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) {
+        gsap.set(el, { opacity: 1 });
+        return;
+    }
+
     gsap.set(el, {
         opacity: 0,
         transformOrigin: '50% 50%',

@@ -1,8 +1,8 @@
 import { gsap } from 'gsap/dist/gsap';
 
-export const box = (el: HTMLElement) => {
+export const box = (el: HTMLElement, delay?: number, quick?: number) => {
     // prevent double animation
-    if (el.classList.contains('is-animated')) return;
+    if (el.classList.contains('is-animated') || quick) return;
 
     const bg = el.querySelector('.box__bg');
     const children: Element[] = [...el.children].filter(child => child !== bg);
