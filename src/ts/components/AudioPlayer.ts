@@ -201,7 +201,6 @@ export class AudioPlayer extends Video {
         this.elements.prevBtn && this.elements.prevBtn.addEventListener('click', this.onPrevClick);
         this.elements.urlLinks && [...this.elements.urlLinks].forEach(link => link.addEventListener('click', this.onUrlClick));
         this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseenter', this.onCassetteMouseEnter);
-        this.ui.thumbnail && this.ui.thumbnail.addEventListener('mouseleave', this.onCassetteMouseLeave);
 
         if (breakpoint.desktop) {
             this.view.addEventListener('mouseleave', this.onMouseLeave);
@@ -226,14 +225,7 @@ export class AudioPlayer extends Video {
 
         this.timeout = setTimeout(() => {
             this.view.classList.remove('is-mouseover');
-        }, 600);
-    };
-
-
-
-    private onCassetteMouseLeave = (): void => {
-        window.clearTimeout(this.timeout);
-        this.view.classList.remove('is-mouseover');
+        }, 1000);
     };
 
 
