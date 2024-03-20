@@ -20,9 +20,12 @@
                 &--single {
                     .polaroid {
                         translate: rem(-28) 0;
+                        margin-bottom: rem(32);
+                    }
 
-                        &--big {
-                            margin-inline: unset !important;
+                    &.text_wrapper__photo--reversed {
+                        .polaroid {
+                            margin-bottom: rem(52);
                         }
                     }
                 }
@@ -88,7 +91,7 @@
             z-index: 1;
         }
 
-        & + & {
+        & + &, .text + & {
             @include breakpoint(desktop) {
                 margin-top: rem(25);
             }
@@ -175,7 +178,7 @@
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end);
 
-            margin-left: rem(9);
+            margin-inline: rem(8);
         }
 
         .polaroid {
@@ -218,10 +221,9 @@
                     --polaroid-width: #{rem(351)};
                     --polaroid-height: #{rem(428)};
 
-                    margin-inline: rem(5);
+                    margin-bottom: rem(52);
 
                     &:not(.polaroid--horizontal) {
-                        margin-inline: rem(15);
                         rotate: 7.2deg;
                     } 
                 }
@@ -233,6 +235,7 @@
                     --polaroid-height: #{rem(250)};
 
                     rotate: 11deg;
+                    margin-bottom: rem(52);
                 }
 
                 @include breakpoint(tablet) {
@@ -269,10 +272,11 @@
             .polaroid {
                 rotate: -11deg;
 
+                @include breakpoint(desktop) {
+                    margin-bottom: rem(32);
+                }
+
                 &--horizontal {
-                    @include breakpoint(desktop) {
-                        margin-bottom: rem(44);
-                    }
 
                     @include breakpoint(phone) {
                         margin-bottom: vw(44, phone);
@@ -281,7 +285,9 @@
 
                 &--big {
                     @include breakpoint(desktop) {
-                        rotate: -7.2deg;
+                        &:not(.polaroid--horizontal) {
+                            rotate: -7.2deg;
+                        } 
                     }
                 }
             }

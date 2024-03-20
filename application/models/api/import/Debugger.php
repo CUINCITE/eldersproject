@@ -108,11 +108,12 @@ class Debugger extends model_app_api_import
     {
         $report = [];
 
-        $this->checkDuplicates('interviews', ['incite_id', 'label'], $report);
-        $this->checkDuplicates('sessions', ['incite_id'], $report);
-        $this->checkCombinedDuplicates('narrators', ['name', 'surname'], $report);
-        $this->checkFiles($report);
-        $this->checkSessions($report);
+//        $this->checkDuplicates('interviews', ['incite_id', 'label'], $report);
+//        $this->checkDuplicates('sessions', ['incite_id'], $report);
+//        $this->checkCombinedDuplicates('narrators', ['name', 'surname'], $report);
+//        $this->checkFiles($report);
+//        $this->checkSessions($report);
+        $this->checkLocations($report);
 
         if (!empty(_uho_fx::getGet('pdf'))) {
 
@@ -144,5 +145,50 @@ class Debugger extends model_app_api_import
         } else {
             return $data;
         }
+    }
+
+    private function checkLocations(&$report)
+    {
+        $wrong_locations = [];
+        $locations = $this->parent->getJsonModel('map_locations');
+
+        $interviewers = $this->parent->getJsonModel('interviewers');
+
+        foreach ($locations as $location) {
+
+            $collection = _uho_fx::array_filter($interviewers, 'id', $location['collection'], ['first' => true]);
+
+            $collection_label = $collection['label'];
+
+            if (empty($location['gps_lat']) || empty($location['gps_lng'])) {
+                $wrong_locations[$collection_label]['no coordinates'][] = $location['label'];
+            } else {
+                if ($this->isOutsideUS($location['gps_lat'], $location['gps_lng'])) {
+                    $wrong_locations[$collection_label]['outside US'][] = $location['label'];
+                }
+            }
+        }
+
+        dd($wrong_locations);
+
+
+        return $wrong_locations;
+
+
+    }
+
+    private function isOutsideUS($lat, $lng) {
+        // Define a approximate bounding box for the continental United States
+        $min_lat = 24.396308;
+        $max_lat = 49.384358;
+        $min_lng = -125.000000;
+        $max_lng = -66.934570;
+
+        // Check if the provided coordinates fall outside the bounding box
+        if ($lat < $min_lat || $lat > $max_lat || $lng < $min_lng || $lng > $max_lng) {
+            return true;
+        }
+
+        return false;
     }
 }
