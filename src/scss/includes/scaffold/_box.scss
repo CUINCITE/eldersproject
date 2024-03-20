@@ -2,7 +2,7 @@
     background-color: var(--color-box);
 
 
-    &--nomargin { margin-top: 0; }
+    &--nomargin { border-top: none !important; }
 
     &[data-scroll="box"],
     [data-scroll="box"] & {
