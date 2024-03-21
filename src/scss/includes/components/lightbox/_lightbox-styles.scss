@@ -1478,6 +1478,17 @@
             --polaroid-height: var(--container-height) !important;
 
 
+            &.polaroid--horizontal {
+                --polaroid-width: var(--container-height) !important;
+                --polaroid-height: calc(var(--container-height) * .75) !important;
+            }
+
+
+            &.polaroid--square {
+                --polaroid-width: var(--container-height) !important;
+                --polaroid-height: var(--container-height) !important;
+            }
+
             @include breakpoint(not-desktop) {
                 --container-height: 40vh;
                 margin-top: 0;

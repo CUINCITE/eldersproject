@@ -102,7 +102,12 @@
                                     {% set image = item.image %}
                                     <div class="lightbox__slide js-slide">
                                         <!-- components/c_polaroid -->
-                                        <div class="lightbox__slide-image polaroid">
+                                        <div class="lightbox__slide-image polaroid
+                                        {% if image.original.width and image.original.height %}
+                                        {% if image.original.width > image.original.height %} polaroid--horizontal
+                                        {% elseif image.original.width == image.original.height %} polaroid--square
+                                        {% endif %}
+                                        {% endif %}">
                                             <figure class="polaroid__image">
                                                 <!-- subview_picture -->
                                                 <picture>
