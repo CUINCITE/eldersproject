@@ -21,6 +21,12 @@
             display: grid;
             grid-template-rows: auto auto 1fr;
             height: var(--app-height);
+
+            @include breakpoint(phone) {
+                @media (max-height: 580px) {
+                    height: calc(var(--app-height) * 1.1);
+                }
+            }
         }
     }
 
