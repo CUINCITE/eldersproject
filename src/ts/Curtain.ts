@@ -131,9 +131,7 @@ export class Curtain {
 
 
     private init = async(): Promise<void> => {
-        this.getImages().then(data => {
-            this.images = data.items;
-        });
+        this.images = JSON.parse(this.view.dataset.items).items;
     };
 
 
