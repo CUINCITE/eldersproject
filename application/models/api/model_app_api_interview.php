@@ -221,6 +221,20 @@ class model_app_api_interview
     {
         $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
 
+        $sessionsOrder = [];
+        foreach ($sessions as $index => $session) {
+            $sessionsOrder[$session['id']] = $index;
+        }
+
+        usort($indexes, function ($a, $b) use ($sessionsOrder) {
+            $sessionDiff = $sessionsOrder[$a['session']] <=> $sessionsOrder[$b['session']];
+            if ($sessionDiff !== 0) {
+                return $sessionDiff;
+            }
+
+        });
+
+
         $sessionMap = [];
         foreach ($sessions as $index => $session) {
             $sessionMap[$session['id']] = $index;
