@@ -371,7 +371,7 @@
 
                 gap: rem(5);
                 width: rem(286);
-                padding: rem(8) rem(14);
+                padding: rem(13);
             }
 
             @include breakpoint(tablet) {
@@ -434,7 +434,7 @@
                 @include font-size(30, 24);
                 @include flex(row, center, center);
 
-                padding: rem(16) rem(15) rem(13);
+                padding: rem(15) rem(15) rem(12);
                 align-self: stretch;
             }
 
