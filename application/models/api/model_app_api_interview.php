@@ -229,6 +229,10 @@ class model_app_api_interview
         $returnItems = [];
         foreach ($indexes as $index) {
 
+            if (empty($index['label'])) {
+                continue;
+            }
+
             if (isset($sessionMap[$index['session']])) {
 
                 $sessionIndex = $sessionMap[$index['session']];
