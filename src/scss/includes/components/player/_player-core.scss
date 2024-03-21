@@ -31,6 +31,11 @@
         @include breakpoint(desktop) {
             margin-bottom: rem(89);
         }
+
+
+        @include breakpoint(hd) {
+            margin-bottom: rem(80);
+        }
     }
 
 

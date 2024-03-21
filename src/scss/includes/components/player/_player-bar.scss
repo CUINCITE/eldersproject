@@ -26,6 +26,20 @@
         }
 
 
+        @include breakpoint(desktop) {
+            .player--video & {
+                height: rem(89);
+            }
+        }
+
+
+        @include breakpoint(hd) {
+            .player--video & {
+                height: rem(80);
+            }
+        }
+
+
         @include breakpoint(not-desktop) {
             grid-template-rows: 30px var(--bar-height);
 
@@ -49,6 +63,11 @@
         position: relative;
         z-index: 1;
         text-align: center;
+
+
+        .player--video & {
+            height: unset;
+        }
 
 
         @include breakpoint(not-desktop) {
