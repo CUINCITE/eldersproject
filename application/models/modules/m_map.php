@@ -55,6 +55,8 @@ class model_app_pages_modules_map extends model_app_pages_modules
 
             }
 
+            $items[$k]['address'] = $v['state'];
+
             $items[$k]['quotes'] = $quotes;
         }
 
