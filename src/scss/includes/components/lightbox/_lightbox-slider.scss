@@ -21,6 +21,9 @@
         height: 100%;
         margin-top: rem(-41);
 
+        @include breakpoint(desktop) {
+            width: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});;
+        }
 
         @include breakpoint(not-desktop) {
             margin-top: 0;

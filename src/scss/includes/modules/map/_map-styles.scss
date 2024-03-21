@@ -371,7 +371,7 @@
 
                 gap: rem(5);
                 width: rem(286);
-                padding: 0 rem(14);
+                padding: rem(13);
             }
 
             @include breakpoint(tablet) {
@@ -394,6 +394,14 @@
         &-title {
             margin-block: trim-font(1);
             padding-top: rem(1);
+
+
+            @include breakpoint(desktop) {
+                @include font-size(30, 24);
+
+                margin-bottom: rem(-2);
+                padding-top: rem(4);
+            }
         }
 
 
@@ -424,8 +432,10 @@
 
             @include breakpoint(desktop) {
                 @include font-size(30, 24);
+                @include flex(row, center, center);
 
-                padding: rem(16) rem(15) rem(13);
+                padding: rem(15) rem(15) rem(12);
+                align-self: stretch;
             }
 
             @include breakpoint(tablet) {

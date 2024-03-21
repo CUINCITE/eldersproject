@@ -52,8 +52,8 @@ body,
 html {
     &:has(.modal.is-open) { overflow: hidden; }
 
-    &:has(.has-menu-open),
-    &.has-menu-open {
+    &:has(.has-menu-open, .is-transition),
+    &.has-menu-open,  &.is-transition {
         @include breakpoint(not-desktop) {
             overflow: hidden;
         }
