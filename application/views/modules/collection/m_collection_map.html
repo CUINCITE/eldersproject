@@ -14,7 +14,7 @@
                 <h2 class="heading heading--map">Map</h2>
             </div>
             {% endif %}
-            <ul class="map__locations">
+            <ul class="map__locations js-scrolled">
                 {% for item in items %}
                 <li class="map__location js-location-wrapper">
                     <button class="map__location-button js-location" data-id="{{item.id}}" data-title="{{item.label}}"
@@ -33,7 +33,7 @@
                     <div class="map__content">
                         <div class="map__content-wrapper">
                             {% if item.image.desktop %}
-                            <div class="map__image">
+                            <div class="map__image {% if item.image.original.height >= item.image.original.width %} map__image--square {% endif %}">
                                 {% include "./subviews/subview_picture.html" with { image: item.image } %}
                             </div>
                             {% endif %}

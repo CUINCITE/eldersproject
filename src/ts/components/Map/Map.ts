@@ -14,7 +14,8 @@ import { mapStyles } from './Map.styles';
 export const token = local ? 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA'
     : 'pk.eyJ1IjoiaHVuY3dvdHkiLCJhIjoiY2lwcW04em50MDA1OWkxbnBldXVoMXFrdCJ9.kQro-nPHRoqP_XKLLsR3gA';
 
-gsap.registerPlugin(ScrollTrigger);
+declare let ScrollToPlugin;
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export interface IMapSettings {
     lat: number;
@@ -76,6 +77,7 @@ export class Map extends Component {
     private allFeatures: GeoJSON.Feature[];
     private geojson: mapboxgl.GeoJSONSourceRaw;
     private style: string;
+    private scrolledContainer: HTMLElement;
 
 
     constructor(protected view: HTMLElement) {
@@ -104,6 +106,7 @@ export class Map extends Component {
         this.contentInjected = false;
         this.toggleButton = this.view.querySelector('.js-toggle-button');
         this.locations = JSON.parse(this.view.getAttribute('data-locations')) as IMapLocation[];
+        this.scrolledContainer = this.view.querySelector('.js-scrolled');
 
         // find style for given modifier (if exists)
         this.style = this.view.getAttribute('data-theme-color');
@@ -460,9 +463,15 @@ export class Map extends Component {
 
     private onLocationClick = (e: Event): void => {
         const location = e.currentTarget as HTMLElement;
+        const locationParent = location.parentElement as HTMLElement;
+
         const foundLocation: IMapLocation = [...this.locations].filter(l => l.id === location.getAttribute('data-id'))[0];
 
         this.goToLocation(foundLocation);
+
+        setTimeout(() => {
+            this.scrollToElement(locationParent, false);
+        }, 500);
     };
 
 
@@ -500,6 +509,16 @@ export class Map extends Component {
         // eslint-disable-next-line camelcase
         // const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
         // console.log(url);
+    };
+
+
+
+    private scrollToElement = (element: HTMLElement, fast: boolean): void => {
+        gsap.to(this.scrolledContainer, {
+            scrollTo: { y: element, offsetY: -1 },
+            duration: fast ? 0.01 : 1,
+            ease: 'power2.inOut',
+        });
     };
 
 
