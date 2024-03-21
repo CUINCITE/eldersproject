@@ -91,17 +91,25 @@
 
                 max-width: 80%;
                 line-height: 0.827;
-                letter-spacing: -0.045em;
+                letter-spacing: -0.035em;
+            }
+
+
+            @media (max-height: 700px) and (max-aspect-ratio: 1440 / 900) {
+                @include font-size(96, 80);
+
+                max-width: 85%;
+                letter-spacing: -0.025em;
             }
 
 
             @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
-                @include font-size(110, 92);
-                max-width: 80%;
+                @include font-size(104, 88);
+                max-width: 85%;
             }
 
             @include breakpoint(hd) {
-                max-width: 75%;
+                max-width: 80%;
             }
         }
 
