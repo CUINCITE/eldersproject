@@ -1,10 +1,54 @@
 {
-    "table": "s_states",
-    "order": "label",
-    "model":{"label":"{{label}} ({{slug}})"},
-    "fields" :
-    [
-        {"field":"label"},
-        {"field":"slug"}
-    ]
+  "table": "s_states",
+  "order": "label",
+  "model": {
+    "label": "{{label}} ({{slug}})"
+  },
+  "fields": [
+    {
+      "field": "label",
+      "list": true,
+      "label": "Label"
+    },
+    {
+      "field": "type",
+      "label": "Type",
+      "type": "select",
+      "list": true
+    },
+    {
+      "label": "Interviews count",
+      "field": "count_interviews",
+      "edit": false,
+      "list": true
+    },
+    {
+      "label": "Collection Theme (color)",
+      "field": "color",
+      "type": "select"
+    },
+    {
+      "label": "Illustration",
+      "field": "illustration",
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all"
+      },
+      "list": {
+        "position_after": "label",
+        "height": 140,
+        "src_blank": "blank.png"
+      }
+    },
+    {
+      "field": "slug"
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "hr": true
+    }
+  ]
 }

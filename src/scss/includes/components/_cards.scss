@@ -1,0 +1,97 @@
+.cards {
+    width: 100%;
+    height: 100%;
+    rotate: -8deg;
+
+
+    @include breakpoint(not-desktop) {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        rotate: 0deg;
+        margin: -30px 0 0;
+        padding: 30px 0;
+    }
+
+
+    &__card {
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+        transform-origin: -100% 150%;
+
+
+        @include breakpoint(desktop) {
+            @for $i from 1 through 4 {
+                &:nth-last-child(#{$i}) {
+                    // margin: ((5 - $i) * -10px);
+                    transform: translate(((5 - $i) * -10px), ((5 - $i) * -10px));
+                }
+            };
+        }
+
+
+        &--red { background-color: var(--color-red); }
+        &--yellow { background-color: var(--color-yellow); }
+        &--lightblue { background-color: var(--color-light-blue); }
+        &--dark-green { background-color: var(--color-dark-green); }
+
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            width: 290px;
+            height: 290px;
+            transform-origin: center;
+            flex-shrink: 0;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            rotate: 0deg;
+            display: none;
+
+
+            &--placeholder { display: none; }
+
+            picture {
+                display: block;
+                transition: rotate 0.4s cubic-bezier(.5, 0, .2, 1);
+            }
+
+
+            &.is-current,
+            &.is-previous {
+                display: block;
+
+                picture {
+                    rotate: 7.5deg;
+                }
+            }
+
+
+            &.is-next {
+                display: block;
+                transform: translateX(100%);
+
+                picture {
+                    rotate: -13.5deg;
+                }
+            }
+
+
+            &.is-after-next {
+                display: block;
+                transform: translateX(200%);
+
+                picture {
+                    rotate: 8deg;
+                }
+            }
+        }
+
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+};

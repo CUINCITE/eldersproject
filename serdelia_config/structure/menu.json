@@ -30,35 +30,64 @@
         ]
     },
     {
-        "label":"Interviews",
-        "submenu":[
-            {"label":"Interviews","page":"interviews"},
-            {},
-            {"label":"Narrators","page":"narrators"},
-            {"label":"Interviewers (Collections)","page":"interviewers"},            
-            {},
-            {"label":"Sessions (all)","page":"sessions_all"},
-            {"label":"Narrators Categories","page":"narrators_categories"}
-            
+        "label": "Pages",
+        "submenu": [
+            {"label":"Homepage","page":"pages_modules,1"},
+            {"label":"Collections","page":"pages_modules,10"},
+            {"label":"Interviews","page":"pages_modules,13"},
+            {
+                "label": "About",
+                "submenu": [
+                    {"label":"About page"},
+                    {"label":"FAQ","page":"faq"},
+                    {"label":"People - sections","page":"people_sections"},
+                    {"label":"People - portraits","page":"people"},
+                    {
+                        "label": "Logotypes",
+                        "page": "logotypes"
+                    }        
+                ]
+            },
+            {"label":"Contact","page":"pages_modules,15"}
         ]
-        
-    },    
-    {
-        "label":"Topics",
-        "page":"topics"
     },
     {
-        "label":"About page",
-        "submenu":
-        [
+        "label": "Collections","page": "interviewers"
+    },
+    {
+        "label": "Interviews",
+        "submenu": [
             {
-                "label":"FAQ",
-                "page":"faq"
+                "label": "All Interviews",
+                "page": "interviews"
             },
             {
-                "label":"Logotypes",
-                "page":"logotypes"
+                "label": "All Sessions",
+                "page": "sessions_all"
+            },
+            {},
+            {
+                "label": "Topics",
+                "page": "topics"
+            },
+            {},
+            {
+                "label": "Narrators",
+                "page": "narrators"
+            },
+            {
+                "label": "Narrators Categories",
+                "page": "narrators_categories"
+            },
+            {},
+            {
+                "label":"Locations","page":"s_states"
+            },
+            {
+                "label":"Map Locations","page":"map_locations"
             }
+            
+            
         ]
     },
     

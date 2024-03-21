@@ -1,0 +1,32 @@
+{
+    "table": "people_sections",
+    "order": "nr",
+    "fields": [
+        {
+            "field": "nr",
+            "type": "order",
+            "list": "order",
+            "label": "Nr"
+        },
+        {
+            "field": "label",
+            "list": true,
+            "label": "Label"
+        },
+        {
+            "field":"people",
+            "label":"People",
+            "type":"elements",
+            "source":
+            {
+                "model":"people"
+            }
+        },
+        {
+            "field": "active",
+            "type": "boolean",
+            "label": "Active",
+            "list": "edit"
+        }
+    ]
+}

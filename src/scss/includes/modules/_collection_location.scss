@@ -1,0 +1,7 @@
+.collection_quote {
+
+    &__claim {
+        padding: rem(22) 0 rem(36);
+        @include font-size(40, 37.4);
+    }
+}

@@ -1,0 +1,26 @@
+<section class="module module--home-text module--home-text--link box" data-scroll="box">
+    <div class="box__bg"></div>
+    <div class="grid">
+        <div class="col-span-9">
+            <a href="{{url}}" class="button button--two_line button--overflow" data-component="Button">
+                <i class="icon-btn-arrow arrow js-arrow">
+                    <span class="vertical js-arrow-vertical"></span>
+                    <span class="horizontal js-arrow-horizontal"></span>
+                    <span class="triangle js-arrow-triangle"></span>
+                </i> <span class="button__text js-button-text">{{label|brackets2tag('i')|raw}}</span>
+            </a>
+        </div>
+        <div class="home_text__copy col-span-3 col-start-10">
+            <div class="text">
+                {{text|raw}}
+            </div>
+        </div>
+    </div>
+    {% if params.decor %}
+        <div class="home_text__decorator">
+            <div class="boxes" data-animation="slideUp" data-delay="0.5" data-action="pause" >
+                [[svg::boxes]]
+            </div>
+        </div>
+    {% endif %}
+</section>

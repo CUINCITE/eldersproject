@@ -1,20 +1,63 @@
 .newsletter {
     --side-padding: var(--grid-margin);
     --input-height: #{vw(71)};
+    --color-text: var(--color-box);
 
-
+    @include z-index(newsletter);
     @include font-family(compressed);
 
     grid-area: newsletter;
-    padding-top: vw(200);
     position: relative;
-    background-color: var(--color-box);
+
+    background-color: var(--color-black);
+    color: var(--color-text);
+
+
+    &[data-scroll] {
+        background: none;
+    }
+
+    @include breakpoint(desktop) {
+        @include flex(column, space-between, stretch);
+
+        padding-top: vw(175);
+        height: calc(var(--app-height) - #{rem(82 + 1)});
+    }
+
+    @include breakpoint(tablet) {
+        --input-height: #{vw(65, tablet)};
+
+        padding-top: vw(164, tablet);
+    }
+
+    @include breakpoint(phone) {
+        --input-height: #{vw(45, phone)};
+
+        z-index: 1;
+        padding-top: vw(105, phone);
+    }
+
+
+    body.is-404 & { display: none; }
+
+    &.has-errors legend {
+        transform: translateY(#{rem(-23)});
+    }
 
 
 
     &__wrap {
         position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            width: 100%;
+        }
     }
+
+
+
+    &__top { position: relative; }
 
 
 
@@ -22,11 +65,14 @@
         @include flex;
 
         height: var(--input-height);
-        background-color: $color-white;
+
+        // background-color: $color-white;
         position: relative;
         padding: vw(14) 0 vw(7);
         padding-left: var(--side-padding);
         border-top: 1px solid var(--color-bg);
+        border-bottom: 1px solid var(--color-bg);
+        overflow: hidden;
 
 
         &.is-error { color: var(--color-red); }
@@ -41,31 +87,79 @@
 
         input {
             @include font-family(compressed);
-            @include font-size(50, 50);
 
             text-transform: uppercase;
             width: 100%;
             color: currentColor;
             font-weight: bold;
 
+            @include breakpoint(desktop) {
+                @include font-size(50, 50);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(40, 1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(20, 20);
+            }
+
 
             .is-completed & { opacity: 0; }
 
 
+            &:placeholder-shown + label {
+                // opacity: 1;
+                animation: search-label-alt .5s $ease-custom forwards;
+            }
 
-            &::placeholder {
-                @include letter-spacing(-1.75, 50);
-
-                opacity: 1;
-                color: currentColor;
-                font-weight: bold;
-                transition: opacity $time-fast;
+            &:focus + label {
+                // opacity: 0;
+                // transform: translateY(150%) rotate(-15deg);
+                animation: search-label-down .5s $ease-custom forwards;
             }
 
 
-            &:focus::placeholder {
-                opacity: 0;
+            @include accessibility {
+                max-width: fit-content;
+
+                &::placeholder {
+                    opacity: 1;
+                    color: yellow;
+                }
             }
+        }
+    }
+
+
+
+    &__label {
+        @include font-family(compressed);
+        @include letter-spacing(-1.75, 50);
+
+        text-transform: uppercase;
+        width: 100%;
+        color: currentColor;
+        font-weight: bold;
+        position: absolute;
+        pointer-events: none;
+        animation: search-label-down .5s $ease-custom forwards;
+
+
+        span { display: inline-block; }
+
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 50);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 20);
         }
     }
 
@@ -73,9 +167,27 @@
 
     &__button {
         position: absolute;
-        inset: auto vw(16) auto auto;
         margin: auto;
 
+        @include breakpoint(desktop) {
+            inset: auto vw(16) auto auto;
+        }
+
+        @include breakpoint(tablet) {
+            inset: auto rem(26) auto auto;
+
+            .button {
+                margin-top: rem(1);
+            }
+        }
+
+        @include breakpoint(phone) {
+            inset: auto rem(9) auto auto;
+
+            .button {
+                margin-top: rem(1);
+            }
+        }
 
         .is-completed & { display: none; }
     }
@@ -83,14 +195,45 @@
 
 
     &__heading {
-        @include font-size(103, 73);
-        @include letter-spacing(-3.09, 103);
-
         position: absolute;
-        inset: auto vw(18) 100% auto;
         font-weight: bold;
         text-align: right;
         text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(103, 73);
+            @include letter-spacing(-3.09, 103);
+
+            inset: auto vw(18) var(--input-height) auto;
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            text-align: left;
+            order: -1;
+
+            @include breakpoint(tablet) {
+                @include font-size(60, 0.935);
+                @include letter-spacing(-1.57, 60);
+
+
+                inset: auto 100% auto rem(26);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(49, 0.935);
+                @include letter-spacing(-1.47, 49);
+
+                inset: auto 100% auto rem(14);
+            }
+        }
+    }
+
+    &__fields {
+
+        @include breakpoint(not-desktop) {
+            @include flex(column, flex-start, flex-start);
+        }
     }
 
 
@@ -102,7 +245,34 @@
         padding-left: var(--side-padding);
         color: var(--color-red);
 
-        .has-errors & { margin-bottom: vw(7); }
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+
+            position: absolute;
+            inset: auto auto 100% 0;
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 16);
+        }
+
+        .has-errors & {
+            @include breakpoint(desktop) {
+                margin-bottom: vw(7);
+            }
+
+            @include breakpoint(tablet) {
+                margin-bottom: vw(9, tablet);
+            }
+
+            @include breakpoint(phone) {
+                margin-bottom: vw(9, phone);
+            }
+        }
     }
 
 
@@ -112,47 +282,147 @@
         inset: 0 0 auto var(--side-padding);
         min-height: var(--input-height);
         pointer-events: none;
+
+        // .sticker {
+        //     pointer-events: all;
+        // }
     }
 
 
 
     &__sticker {
         position: absolute;
-        inset: calc(100% - 6px) auto auto 0;
 
+        @include breakpoint(desktop) {
+            inset: calc(100% - 6px) auto auto 0;
+        }
+
+        @include breakpoint(tablet) {
+            inset: calc(100% - #{rem(5)}) auto auto 0;
+        }
+
+        @include breakpoint(phone) {
+            inset: calc(100% - #{rem(3)}) auto auto 0;
+        }
 
         .is-completed & {
-            top: calc(100% - 12px);
+            @include breakpoint(desktop) {
+                top: calc(100% - 12px);
+            }
+
+            @include breakpoint(tablet) {
+                top: calc(100% - 12px);
+            }
+
+            @include breakpoint(phone) {
+                top: calc(100% - 8px);
+            }
+        }
+    }
+
+
+
+    &__copy {
+        @include font-family(normal, 500);
+        @include font-settings(500, 100);
+
+        text-transform: uppercase;
+
+
+        @include breakpoint(desktop) {
+            @include font-size(8, 1);
+
+            margin-block: trim-font(1);
+            padding: vw(100) 0 vw(21);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(11, 1);
+
+            padding: vw(160, tablet) 0 vw(40, tablet);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(10, 13.5);
+
+            padding: vw(282, phone) 0 vw(11, phone);
         }
     }
 
 
     legend {
         @include font-family(normal);
-        @include font-size(14, 16);
-
         padding-left: var(--side-padding);
-        margin-bottom: vw(4);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+
+            margin-bottom: vw(4);
+            transition: transform .25s $ease-out;
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 1.1);
+
+            padding-top: vw(4, tablet) ;
+            margin-bottom: vw(8, tablet) ;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 18.9);
+
+            max-width: rem(234);
+            padding-top: vw(4, phone);
+            margin-bottom: vw(13, phone);
+        }
     }
 
 
 
     .message {
         @include font-family(compressed);
-        @include font-size(50, 50);
-
 
         text-transform: uppercase;
         max-width: 55%;
 
+        @include breakpoint(desktop) {
+            @include font-size(50, 50);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 22);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 22);
+        }
 
         p {
             &:first-of-type {
                 @include flex;
-                padding-top: vw(7);
-                margin-bottom: vw(8);
+
                 height: var(--input-height);
+
+                @include breakpoint(desktop) {
+                    padding-top: vw(7);
+                    margin-bottom: vw(8);
+                }
+
+                @include breakpoint(tablet) {
+                    padding-top: vw(7, tablet);
+                    margin-bottom: vw(12, tablet);
+                }
+
+                @include breakpoint(phone) {
+                    padding-top: vw(7, phone);
+                    margin-bottom: vw(12, phone);
+                }
             }
         }
+    }
+
+
+    .box__bg {
+        background-color: var(--color-black);
     }
 }

@@ -1,0 +1,283 @@
+.transcript {
+    height: 100%;
+    color: var(--color-black);
+
+
+
+    &__top {
+        @include flex;
+
+        position: absolute;
+        z-index: 2;
+        inset: 0 0 auto;
+        padding-left: var(--aside-width);
+
+
+        @include breakpoint(tablet) {
+            padding-left: var(--grid-margin);
+        }
+
+
+        @include breakpoint(phone) {
+            padding-left: calc(var(--aside-width) + 22px + var(--grid-margin));
+        }
+    }
+
+
+
+    &__wrap {
+        @include flex(column, flex-start, flex-end);
+
+        position: relative;
+        height: 100%;
+        overflow-y: auto;
+        padding-top: rem(54);
+        padding-bottom: rem(25);
+
+
+        @include breakpoint(not-desktop) {
+            padding-top: 50px;
+            padding-right: var(--grid-margin);
+            padding-left: var(--grid-margin);
+
+            @include breakpoint(tablet) {
+                padding-top: unset;
+                margin-top: 50px;
+            }
+        }
+    }
+
+
+
+    &__part {
+        width: 100%;
+        display: grid;
+        grid-template-columns: var(--aside-width) 1fr;
+        align-items: start;
+        padding-bottom: rem(16);
+
+
+        @include breakpoint(not-desktop) {
+            padding-bottom: 6px;
+        }
+
+
+        &:first-of-type {
+            @include breakpoint(desktop) { padding-top: rem(7); }
+        }
+
+
+        &:last-of-type {
+            padding-bottom: 0;
+        }
+    }
+
+
+
+    &__text {
+        @include font-family(normal, 300);
+        @include font-settings(200, 100);
+        @include font-size(18, 27);
+        @include letter-spacing(0.04, 18);
+
+        // font-feature-settings: "ss02" on;
+        padding: 0 rem(45) 0 rem(25);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(14, 20.4);
+
+            padding: 0;
+            padding-left: 22px;
+            letter-spacing: normal;
+        }
+
+
+        strong {
+            @include font-settings(700, 100);
+        }
+
+
+        mark {
+            @include font-settings(500, 100);
+
+            background-color: var(--theme-color);
+            color: var(--color-grey200);
+            border-radius: rem(30);
+            padding: rem(1) rem(4);
+        }
+    }
+
+
+
+    &__btn {
+        @include flex(row, flex-end, center);
+    }
+
+
+
+    &__time {
+        @include font-family(compressed);
+        @include font-size(22, 1);
+        @include letter-spacing(-0.44, 22);
+
+        text-align: right;
+        padding-right: rem(6);
+        padding-top: rem(1);
+        transition: color .2s $ease-custom;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(14, 14);
+
+            letter-spacing: -0.02em;
+        }
+
+
+        .transcript__part.is-current & {
+            color: var(--theme-color);
+        }
+
+
+        @include hover {
+            color: var(--theme-color);
+        }
+    }
+
+
+
+    &__search {
+        @include flex(row, flex-start, center);
+
+        width: calc(100% - var(--aside-width) - #{rem(50)});
+        padding: rem(12) rem(25);
+
+        @include breakpoint(tablet) {
+            width: 100%;
+            padding-left: rem(82);
+        }
+
+
+        @include breakpoint(phone) {
+            padding-left: 0;
+        }
+    }
+
+
+
+    &__input {
+        @include flex;
+
+        height: rem(20);
+        color: var(--color-grey200);
+        background-color: var(--theme-color);
+        border-radius: 10px;
+        min-width: rem(69);
+        position: relative;
+        z-index: 1;
+
+
+        input {
+            @include font-family(normal);
+            @include font-settings(500, 100);
+            @include font-size(16, 11);
+
+            font-feature-settings: "ss02" on;
+            position: absolute;
+            inset: 0 auto 0 0;
+            white-space: nowrap;
+            min-width: 100%;
+            padding: 0 rem(12);
+            padding-top: 2px;
+
+            &::placeholder {
+                @include font-settings(300, 100);
+
+                color: currentColor;
+                transform: translateX(#{rem(-2)});
+            }
+        }
+    }
+
+
+
+    &__nav {
+        @include flex;
+
+        gap: rem(23);
+        height: rem(20);
+        background-color: var(--theme-color);
+        color: var(--color-grey200);
+        border-radius: rem(10);
+        padding: rem(4) rem(12) rem(3) rem(78);
+        z-index: 0;
+        position: relative;
+        opacity: 0;
+        pointer-events: none;
+        margin-left: rem(-20);
+
+
+        &.is-active { opacity: 1; pointer-events: all; }
+
+
+        .icon-close {
+            width: rem(11);
+            height: rem(11);
+        }
+
+
+        &-button {
+            svg {
+                width: rem(8);
+                height: rem(14);
+            }
+
+
+            &--prev {
+                svg { transform: scaleY(-1); }
+            }
+        }
+    }
+
+
+
+    &__button {
+        @include flex;
+        @include font-family(normal, 300);
+        @include font-settings(200, 100);
+        @include font-size(16, 11);
+
+
+        height: rem(20);
+        color: var(--color-grey200);
+        background-color: var(--color-black);
+        border-radius: 10px;
+        position: relative;
+        padding: 0 rem(9);
+        margin-right: rem(45);
+        text-transform: capitalize;
+    }
+
+
+
+    &__hiddenspan {
+        @include font-family(normal, 300);
+        @include font-settings(200, 100);
+        @include font-size(16, 11);
+
+        position: fixed;
+        opacity: 0;
+        pointer-events: all;
+        z-index: -100;
+        padding: 0 rem(9);
+    }
+
+
+
+    &__lang {
+        display: none;
+
+
+        &.is-active { display: block; }
+    }
+}

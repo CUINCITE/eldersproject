@@ -1,17 +1,22 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { CustomEase } from 'gsap/dist/CustomEase';
 import Scroll from './Scroll';
 import { pages as Pages } from './Classes';
-import { stats, debounce, setAppHeight } from './Utils';
+import { stats, debounce, setAppHeight, setVwUnit, getSessionStorageItem } from './Utils';
 import { IBrowser, getBrowser } from './Browser';
 import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
 import { Page, PageEvents } from './pages/Page';
-import { Offscreen } from './Offscreen';
 import { Menu } from './Menu';
-import { CSSAnimate } from './widgets/CSSAnimate';
-import { API } from './widgets/Api';
-import { Recaptcha } from './widgets/Recaptcha';
+import { Button } from './components/Button';
+import { Search } from './Search';
+import { AudioPlayer } from './components/AudioPlayer';
+import { Loader } from './components/Loader';
+import { Lightbox } from './components/Lightbox/Lightbox';
+import { Curtain } from './Curtain';
+
+import Widgets from './widgets/All';
 
 export const local = !!window.location.hostname.match(/(localhost|\.lh|192\.168\.)/g);
 export const debug = window.location.search.indexOf('debug') >= 0;
@@ -21,6 +26,7 @@ export let pixelRatio: number;
 export let easing: string;
 export let browser: IBrowser;
 export let breakpoint: IBreakpoint;
+export let isActiveSession: boolean;
 
 gsap.registerPlugin(CustomEase);
 
@@ -31,9 +37,14 @@ class Site {
     private pushStates: PushStates;
     private scroll: Scroll;
     private menu: Menu;
-    private offscreen: Offscreen;
+    private newsletterButton: Button;
+    private lightbox: Lightbox;
+    private search: Search;
+    private audioPlayer: AudioPlayer;
+    private loader: Loader;
+    private curtain: Curtain;
 
-    private isInitialized: boolean = false;
+    private isFirstTime: boolean = true;
     private resizingTimeout: ReturnType<typeof setTimeout>;
 
 
@@ -47,9 +58,13 @@ class Site {
         easing = CustomEase.create('custom', '0.5, 0, 0.1, 1');
         lang = document.documentElement.getAttribute('lang');
         pixelRatio = Math.min(2, window.devicePixelRatio || 1);
+        // set in Loader after first page load in session
+        isActiveSession = !!getSessionStorageItem('loaded');
 
         this.bind();
+        setVwUnit();
         setAppHeight();
+
         debug && stats();
 
         this.pushStates = new PushStates();
@@ -57,8 +72,14 @@ class Site {
 
         this.scroll = new Scroll();
 
-        this.offscreen = new Offscreen(document.querySelector('.js-offscreen'));
+        this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
+        this.search = new Search(document.getElementById('search'));
+        this.loader = new Loader(document.querySelector('.js-loader'));
+        this.newsletterButton = new Button(document.querySelector('.js-newsletter-button'));
+
+        this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
+        this.curtain = new Curtain(document.querySelector('.js-curtain'));
 
         if (browser.ie) {
             console.warn('This browser is outdated!');
@@ -69,6 +90,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
+            !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -94,6 +116,12 @@ class Site {
         });
 
         window.addEventListener('orientationchange', debounce(() => this.onResize(true)));
+
+        window.addEventListener('keyup', e => {
+            const { key } = e;
+
+            if (key === 'Escape') this.setFocusOnFirstFocusableElement();
+        });
     }
 
 
@@ -101,6 +129,9 @@ class Site {
      * resize handler
      */
     private onResize = (isOrientationChanged?: boolean): void => {
+
+        setVwUnit();
+
         const oldBreakpoint = breakpoint ? breakpoint.value : null;
         breakpoint = getBreakpoint();
 
@@ -111,8 +142,11 @@ class Site {
         !browser.touch && setAppHeight();
         isOrientationChanged && setAppHeight();
 
+
         this.currentPage?.resize(width, height, breakpoint, changed);
         (!browser.touch || changed) && Scroll?.resize();
+
+        this.loader?.resize();
     };
 
 
@@ -123,11 +157,14 @@ class Site {
     private onState = () => {
         const isRendered = this.pushStates.isRendered();
         const pageChangedState = this.currentPage.onState();
-        const offscreenOnstate = this.offscreen.onState();
+        const lightboxChangedState = this.lightbox.onState(isRendered);
         this.menu?.onState();
+        this.search?.onState();
+        this.loader?.onState();
 
-        if (!isRendered && !pageChangedState && !offscreenOnstate) {
+        if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
+                this.curtain.show(),
                 this.pushStates.load(),
                 this.currentPage.animateOut(),
             ]).then(this.render);
@@ -162,13 +199,22 @@ class Site {
      */
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
-        this.currentPage.animateIn(0);
-        !this.isInitialized && Scroll.scrollToTop(true);
-        Scroll.scrollToCached();
+        if (!this.isFirstTime) this.curtain.makeOverlay();
+        const isHome: boolean = !!document.body.querySelector('[data-home]');
         this.scroll.load();
         Scroll.start();
+
+        this.currentPage.animateIn(this.isFirstTime, 0).then(() => {
+            this.curtain.hide(this.isFirstTime);
+            this.loader.hide();
+            !this.isFirstTime && Scroll.scrollToTop(true);
+            // delay after animateIn
+            setTimeout(() => this.loader.check(isHome), 50);
+            this.isFirstTime = false;
+        });
         PushStates.setTitle();
-        this.isInitialized = true;
+        this.menu.resize();
+        this.audioPlayer.bindButtons();
     };
 
 
@@ -203,6 +249,10 @@ class Site {
             pageEl = articleEl || contentEl!.firstChild as HTMLElement;
         }
 
+        // set custom classes to body based on <article> parameters
+        document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
+        document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
+
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);
         this.currentPage = page;
@@ -211,14 +261,15 @@ class Site {
         page.on(PageEvents.CHANGE, this.onPageAppend);
 
         // bind widgets:
-        Recaptcha.bind();
-        API.bind();
-        CSSAnimate.bind();
+        Widgets.bind();
 
         // update links:
         this.setActiveLinks();
 
-        this.offscreen?.reload();
+        Scroll.scrollToCached();
+        ScrollTrigger.refresh();
+
+        this.lightbox?.check();
 
         return page.preload();
     }
@@ -229,7 +280,6 @@ class Site {
      */
     private onPageAppend = (el: HTMLElement): void => {
         PushStates.bind(el);
-        CSSAnimate.bind();
         this.scroll.load();
     };
 
@@ -246,6 +296,12 @@ class Site {
         });
 
         document.querySelectorAll(`a[href="${pathname}/"], a[href="${pathname}"]`).forEach(link => link?.classList.add('is-active'));
+    }
+
+
+    private setFocusOnFirstFocusableElement(): void {
+        const focusable = document.querySelector('a, button, input, textarea, select') as HTMLElement;
+        focusable && focusable.focus();
     }
 }
 

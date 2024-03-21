@@ -1,0 +1,50 @@
+<section class="module module--text-aside">
+    <div class="text_aside">
+        <i class="text_aside__line desktop-only" data-scroll="line"></i>
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid grid--row-start">
+
+                {% if mainText %}
+                    <div class="text_aside__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                        {% include "./components/c_heading.html" with mainText %}
+                    </div>
+                {% endif %}
+
+                <div class="text_aside__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                    {% if texts %}
+                    {% for item in texts %}
+                        {% include "./subviews/subview_text.html" with item %}
+                    {% endfor %}
+                    {% elseif text %}
+                        {% include "./subviews/subview_text.html" with { text:text, wide:true, heading:heading} %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+            {% if decor %}
+                <div class="text_aside__decorator text_aside__decorator--{{decor.type}}{% if decor.modifiers %}{% for modifier in decor.modifiers %} text_aside__decorator--{{modifier}}{% endfor %}{% endif %}{% if reversed %} text_aside__decorator--reversed{% endif %}">
+
+                    {% if decor.type == "boxes" %}
+                        {% include "./modules/m_boxes.html" with { reversed: reversed } %}
+                    {% endif %}
+
+                    {% if decor.type == "illustration" %}
+                        {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                    {% endif %}
+
+                    {% if decor.type == "photo" %}
+                            {% include "./components/c_polaroid.html" with decor.photo %}
+                    {% endif %}
+
+                    {% if decor.text %}
+                        {% include "./subviews/subview_text.html" with decor.text %}
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,53 @@
+.audioplayer {
+    --cassette-bg-color: var(--color-yellow, yellow);
+
+
+    &--default {
+        --cassette-bg-color: var(--color-blue);
+    }
+
+
+    &--green {
+        --cassette-bg-color: var(--color-purple);
+    }
+
+
+    &--pale-purple {
+        --cassette-bg-color: var(--color-dark-green);
+    }
+
+
+    &--pink {
+        --cassette-bg-color: var(--color-dark-green);
+    }
+
+
+    &--orange {
+        --cassette-bg-color: var(--color-red);
+    }
+
+
+    &--pale-blue {
+        --cassette-bg-color: var(--color-purple);
+    }
+
+
+    &--brown {
+        --cassette-bg-color: var(--color-red);
+    }
+
+
+    &--dark-green {
+        --cassette-bg-color: var(--color-purple);
+    }
+
+
+    &--pale-green {
+        --cassette-bg-color: var(--color-pink);
+    }
+
+
+    &--purple {
+        --cassette-bg-color: var(--color-red);
+    }
+}

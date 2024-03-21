@@ -1,0 +1,16 @@
+{
+  "fields" :
+  [
+    {
+      "tab": "Sticker",
+      "field":"label",
+      "label":"Sticker Text"
+    },
+    {
+      "field":"text",
+      "label":"Text",
+      "type":"html"
+    }
+
+  ]
+}

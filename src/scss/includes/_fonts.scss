@@ -5,23 +5,33 @@
 
 @font-face {
     font-family: "Pangram Sans";
-    src: url("./fonts/Pangram Sans/pangram-sans-normal-variable.woff2") format("woff2-variations");
-    font-weight: 100 900;
+    src: url("/public/theme/fonts/Pangram Sans/pangram-sans-normal-variable.woff2") format("woff2-variations");
+    font-weight: 100 500 700 900;
 }
 @font-face {
     font-family: "Pangram Sans Compact";
-    src: url("./fonts/Pangram Sans/PPPangramSans-CompactRegular.woff2") format("woff2");
+    src: url("/public/theme/fonts/Pangram Sans/PPPangramSans-CompactRegular.woff2") format("woff2");
     font-weight: normal;
 }
 @font-face {
     font-family: "Pangram Sans Compressed";
-    src: url("./fonts/Pangram Sans/PPPangramSans-CompressedExtrabold.woff2") format("woff2");
+    src: url("/public/theme/fonts/Pangram Sans/PPPangramSans-CompressedExtrabold.woff2") format("woff2");
     font-weight: 900;
 }
 @font-face {
     font-family: "Pangram Sans Reclined";
-    src: url("./fonts/Pangram Sans/PPPangramSans-CompressedMediumReclined.woff2") format("woff2");
+    src: url("/public/theme/fonts/Pangram Sans/PPPangramSans-CompressedMediumReclined.woff2") format("woff2");
     font-weight: 500;
+}
+@font-face {
+    font-family: "Pangram Sans Reclined";
+    src: url("/public/theme/fonts/Pangram Sans/PPPangramSans-SlimMediumReclined.woff2") format("woff2");
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Pangram Sans Slim";
+    src: url("/public/theme/fonts/Pangram Sans/PPPangramSans-SlimExtralight.woff2") format("woff2");
+    font-weight: 300;
 }
 
 
@@ -31,6 +41,7 @@ $fonts: (
     compact: ("Pangram Sans Compact", sans-serif),
     compressed: ("Pangram Sans Compressed", sans-serif),
     reclined: ("Pangram Sans Reclined", sans-serif),
+    slim: ("Pangram Sans Slim", sans-serif),
 );
 
 

@@ -1,0 +1,57 @@
+<section class="module module--text_wrapper box" data-component="WrappedText" data-scroll="box">
+    <div class="box__bg"></div>
+    <div class="text_wrapper{% if reversed %} text_wrapper--reversed{% endif %}">
+        <i class="text_wrapper__line desktop-only" data-scroll="line"></i>
+        <div>
+            <div class="grid grid--row-start">
+
+                {% if title %}
+                    <div class="text_wrapper__title js-wrapped-title text_wrapper__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                        {% include "./components/c_heading.html" with title %}
+                    </div>
+                {% endif %}
+
+                <div
+                    class="text_wrapper__content text_wrapper__column js-wrapped-content col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                    {% set photoCounter = 0 %}
+
+                    {% for module in wrappedModules %}
+
+                        {% if module.type == "text" %}
+                            <div class="text_wrapper__module text_wrapper__text">
+                                {% include "./subviews/subview_text.html" with module.text %}
+                            </div>
+                        {% endif %}
+
+                        {% if module.type == "quote" %}
+                            <div
+                                class="text_wrapper__module text_wrapper__quote{% if module.quote.mini %} text_wrapper__quote--mini{% endif %}">
+                                {% include "./components/c_quote.html" with module.quote %}
+                            </div>
+                        {% endif %}
+
+                        {% if module.type == "illustration" %}
+                            <div
+                                class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.image.width and module.image.height %}{% if module.image.width > module.image.height %} text_wrapper__illustration--horizontal{% elseif module.image.width == module.image.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
+                                {% include "subviews/subview_picture.html" with { image: module.image } %}
+                            </div>
+                        {% endif %}
+
+                        {% if module.type == "photo" %}
+                            <div
+                                class="text_wrapper__module js-wrapped-image js-wrapped-photo text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">
+                                {% include "./components/c_polaroid.html" with module.photo|merge({modifiers: ["wrapped"]}) %}
+                                {% if module.text %}
+                                <div class="text_wrapper__info">
+                                    {% include "./subviews/subview_text.html" with module.text %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% set photoCounter = photoCounter + 1 %}
+                        {% endif %}
+
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

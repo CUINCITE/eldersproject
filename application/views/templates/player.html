@@ -1,58 +1,42 @@
-<div class="player__poster"></div>
-<div class="player__loader">
-    <svg width="60" height="60"><circle cx="30" cy="30" r="29" fill="none" stroke="#fff"></circle></svg>
-</div>
-<div class="player__play">
-    <svg width="60" height="60"><circle cx="30" cy="30" r="29" fill="none" stroke="#fff"></circle>        
-        <path stroke="#fff" fill="none" d="M0,0"/>
-        <polygon stroke="#fff" fill="none" points="23.2,16.2 23.2,43 44.5,29.4 "/>
-    </svg>
-</div>
-
-<div class="player__bar">{% spaceless %}
-
-    <div class="player__controls">
-
-        <div class="player__time">
-            <em class="player__played">00:00</em>
-        </div>
-
-        <div class="player__playpause"><button aria-label="Play/Pause"><i class="icon-playpause"></i></button></div>
-
+<div class="player__poster js-player-poster"></div>
+<button class="player__toggle js-player-toggle"></button>
+<div class="player__bar js-player-bar">{% spaceless %}
+    <div class="player__header">
         <div class="player__scrubber-wrap">
-            <div class="player__scrubber">
-                <div class="player__loaded"></div>
-                <div class="player__progress"></div>
+            <div class="player__scrubber js-player-timeline">
+                <div class="player__loaded js-player-loaded"></div>
+                <div class="player__progress js-player-progress"></div>
             </div>
         </div>
-
+    </div>
+    <div class="player__controls">
+        <div class="player__buttons">
+            <button class="player__playpause js-player-playpause" data-sound-click="playerBtn">[[svg::play]]<span class="desktop-hide">Play</span></button>
+        </div>
         <div class="player__time">
-            <strong class="player__duration">00:00</strong>
+            <span class="player__played js-player-time">01:40</span>
         </div>
-
-        <div class="player__cc cc">
-            <button class="cc__button js-cc" aria-label="CC"></button>
-            <ul class="cc__list"></ul>
-        </div>
-
-        <div class="player__volume volume">
-            <button class="volume__button" aria-label="Volume">[[svg::volume]]</button>
-            <div class="volume__bar">
-                <span class="volume__value"></span>
-            </div>
-        </div>
-
-        <div class="player__full">
-            <button aria-label="Fullscreen">
-                <i class="icon-full"><span></span><span></span><span></span><span></span></i>
+        <!--
+        <div class="player__volume volume js-player-volume">
+            <button class="player__minimize js-player-minimize" data-sound-click>
+                <i class="player__icon">
+                    [[svg::arrow-player-small]]
+                    [[svg::arrow-player-small]]
+                </i>
+                Minimize
             </button>
+            <button class="volume__button js-volume-btn" aria-label="Volume" data-sound-click><i class="icon-volume"><span></span><span></span><span></span><span></span><span></span></i></button>
         </div>
-
-        <div class="player__prev"></div>
-        <div class="player__next"></div>
+        -->
+        <button aria-label="Fullscreen" class="player__fullscreen js-player-fullscreen">
+            Fullscreen
+            <i class="player__icon player__icon--fullscreen">
+                [[svg::arrow-oblique]]
+                [[svg::arrow-oblique]]
+            </i>
+        </button>
 
     </div>
-    <div class="player__captions"></div>
 {% endspaceless %}</div>
 
 

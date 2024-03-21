@@ -1,0 +1,305 @@
+.collection {
+
+    @include breakpoint(desktop) {
+        text-align: right;
+    }
+
+    &--reversed {
+        @include breakpoint(desktop) {
+            text-align: left;
+        }
+    }
+
+
+
+    &__name {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(100, 1);
+            @include letter-spacing(-4, 100);
+
+            padding-block: rem(12);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(100, 0.78);
+            @include letter-spacing(-4, 100);
+
+            margin-block: trim-font(0.78);
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(57, 0.775);
+            @include letter-spacing(-1.71, 57);
+
+            margin-bottom: rem(6);
+        }
+    }
+
+
+
+    &__states {
+        @include font-settings(400, 100);
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(19, 19.57);
+            @include letter-spacing(-0.38, 19);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(22, 0.94);
+            @include letter-spacing(-0.5, 22);
+
+            order: -2;
+            margin-top: rem(20);
+            padding-left: rem(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(16, 16.5);
+
+            letter-spacing: -0.02em;
+            order: -2;
+            margin-top: rem(12);
+            padding-left: rem(1);
+        }
+    }
+
+
+
+    &__data {
+        height: auto;
+
+        @include breakpoint(desktop) {
+            @include flex(column, space-between, flex-end);
+
+            max-width: rem(450);
+            padding: rem(15) 0 rem(26);
+            flex-basis: 50%;
+
+            .collection--reversed & { align-items: flex-start; }
+        }
+
+        @include breakpoint(tablet) {
+            @include flex(column, flex-start, flex-start);
+
+            max-width: rem(480);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+        }
+    }
+
+
+
+    &__wrap {
+        @include breakpoint(desktop) {
+            @include flex(row, space-between, stretch);
+
+            min-height: vw(597);
+
+            .collection--reversed & {
+                flex-direction: row-reverse;
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-bottom: rem(74);
+        }
+
+        @include breakpoint(phone) {
+            padding-bottom: rem(74);
+        }
+    }
+
+
+
+    &__count {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+        display: inline-block;
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 50);
+            @include letter-spacing(-1.25, 50);
+
+            margin-top: rem(-8);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1.2, 40);
+
+            margin-top: rem(-6);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 30);
+            @include letter-spacing(-0.75, 30);
+
+            margin-top: rem(-6);
+        }
+    }
+
+
+
+    &__text {
+        @include breakpoint(desktop) {
+            @include font-size(17, 22.1);
+            @include font-family(normal);
+            @include font-settings(400, 100);
+
+            margin-top: auto;
+            margin-bottom: rem(22);
+            max-width: rem(320);
+        }
+
+        @include breakpoint(not-desktop) {
+            @include font-size(16, 1.1);
+
+            order: -1;
+            margin-top: rem(16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 18.06);
+
+            order: -1;
+            margin-top: rem(14);
+        }
+    }
+
+
+
+    &__image {
+        flex-basis: 50%;
+
+        @include breakpoint(desktop) {
+            border-right: 1px solid var(--color-bg);
+
+            .collection--reversed & {
+                border-right: none;
+                border-left: 1px solid var(--color-bg);
+            }
+        }
+
+        &-link {
+            cursor: default;
+        }
+    }
+
+
+
+    &__button {
+        .button {
+            flex-wrap: wrap;
+        }
+
+        @include breakpoint(desktop) {
+            margin-bottom: rem(12);
+
+            .button {
+                max-width: rem(238);
+                row-gap: rem(6);
+
+                &__main {
+                    display: flex;
+                    overflow: hidden;
+                    position: relative;
+                    gap: rem(8);
+                    padding-inline: rem(2);
+                }
+
+                &__extra, &__main {
+                    margin-block: trim-font(1);
+                }
+
+                &__text {
+                    display: inline-block;
+
+                    &--duplicate {
+                        right: calc(100% + #{rem(8)});
+                        top: 0;
+                    }
+                }
+
+                .arrow {
+                    padding-left: 0;
+
+                    &--extra {
+                        right: calc(100% + #{rem(6)});
+                    }
+                }
+            }
+        }
+
+        @include breakpoint(not-desktop) {
+            .button {
+                flex-direction: row-reverse;
+                justify-content: flex-end;
+
+                &__main {
+                    flex-direction: row-reverse;
+                    justify-content: flex-end;
+                }
+
+                &__extra, &__main {
+                    margin-block: trim-font(1);
+                }
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(24);
+                max-width: rem(240);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(16);
+                max-width: rem(140);
+
+                .button {
+                    row-gap: rem(4);
+                }
+            }
+        }
+    }
+
+
+
+    &__illustration {
+        aspect-ratio: 1/1;
+
+        @include breakpoint(desktop) {
+            width: vw(530);
+            margin-top: vw(-18);
+            margin-left: vw(18);
+            will-change: transform;
+        }
+
+        @include breakpoint(tablet) {
+            width: vw(600, tablet);
+            aspect-ratio: 1/1;
+            margin-top: vw(-16, tablet);
+            margin-bottom: vw(75, tablet);
+        }
+
+        @include breakpoint(phone) {
+            width: vw(314, phone);
+            margin-top: vw(-16, phone);
+            margin-left: vw(-8, phone);
+            margin-bottom: vw(35, phone);
+
+            .illustration {
+                transform: rotate(-7deg);
+            }
+        }
+    }
+}

@@ -1,73 +1,478 @@
-
 .livesearch {
+    --line-width: #{rem(12)};
+    --line-offset: #{rem(4)};
+
+
+
     position: absolute;
-    left: 0;
-    top: 100%;
-    width: 100%;
+    inset: 100% 0 auto;
+    color: var(--color-black);
 
-    * {
-        pointer-events: none;
+
+
+    &__wrap {
+        height: 0;
+
+
+        .has-value & {
+            height: max-content;
+            max-height: calc(var(--app-height) - var(--search-height));
+            padding-bottom: rem(40);
+            overflow-y: auto;
+
+            // @include breakpoint(desktop) {
+            //
+            // }
+
+            @include breakpoint(tablet) {
+                height: calc(100vh - #{rem(146)});
+                padding-bottom: 0;
+
+                @supports(height: 100dvh) {
+                    height: calc(100dvh - #{rem(146)});
+                }
+            }
+
+            // @include breakpoint(phone) {
+            //     height: calc(100vh - #{rem(100)});
+
+            //     @supports(height: 100dvh) {
+            //         height: calc(100dvh - #{rem(100)});
+            //     }
+            // }
+        }
     }
 
 
-    ul,
-    li {
-        width: 100%;
-    }
 
-    li {
-        height: vw(39px);
-        @include flex(row, flex-start, center);
+    &__list {
+        @include flex(column, flex-start, stretch);
+
         position: relative;
-        background-color: $color-blue-dark-3;
-        transition: background-color 0.3s $ease-custom;
-        margin-top: -1px;
 
-        &:first-of-type::before {
-            content: "";
-            background-color: $color-blue-dark-3;
-            width: 100%;
-            height: 50%;
-            @include full;
-            top: -10px;
-            transition: background-color 0.3s $ease-custom; 
+        // background: var(--color-bg);
+        // overflow: hidden;
+
+        @include breakpoint(desktop) {
+            padding-left: 1px;
+        }
+
+        @include breakpoint(not-desktop) {
+            // height: 100%;
+
+            // overflow-y: auto;
+
+            @include breakpoint(tablet) {
+                height: 100%;
+
+                // height: calc(100vh - #{rem(102)});
+            }
+
+            @include breakpoint(phone) {
+                // height: calc(100vh - #{rem(54)});
+            }
+        }
+    }
+
+
+
+    &__category {
+        @include font-family(normal, 400);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 15);
+
+            padding-bottom: rem(8);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(14);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 1);
+
+            margin-block: trim-font(1);
+            padding-bottom: rem(11);
+        }
+
+
+
+        .livesearch__item--transcripts & {
+            @include breakpoint(desktop) {
+                padding-bottom: rem(11);
+            }
+        }
+    }
+
+
+
+    &__item {
+        background-color: var(--color-box);
+        border: 1px solid var(--color-bg);
+        border-bottom: none;
+        border-right: none;
+
+        @include breakpoint(desktop) {
+            padding: rem(12) rem(14) rem(47);
+        }
+
+        @include breakpoint(tablet) {
+            padding: rem(12) map-get($grid-offset, tablet) rem(68);
+        }
+
+        @include breakpoint(phone) {
+            padding: rem(13) map-get($grid-offset, phone) rem(48);
+        }
+
+
+        &:first-of-type {
+            @include breakpoint(desktop) {
+                padding-bottom: rem(37);
+            }
         }
 
         &:last-of-type {
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
+            @include breakpoint(phone) {
+                padding-bottom: rem(54);
+            }
         }
 
-        button {
-            color: $color-primary;
-            opacity: 0.5;
-            font-weight: 400;
-            @include font-size(22, 26);
-            position: relative;
-            z-index: 1;
-            @include full;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            padding: 0 46px;
-            transition: opacity 0.3s $ease-custom; 
-            pointer-events: auto;
+
+
+        ul {
+            li {
+                @include breakpoint(desktop) {
+                    @include font-size(30, 28);
+                    @include letter-spacing(-0.9, 30);
+                }
+
+                @include breakpoint(tablet) {
+                    @include font-size(50, 1);
+                    @include letter-spacing(-1.5, 50);
+
+                    margin-block: trim-font(1);
+                }
+
+                @include breakpoint(phone) {
+                    @include font-size(30, 1);
+                    @include letter-spacing(-0.9, 30);
+
+                    margin-block: trim-font(1);
+                }
+
+                p {
+                    @include breakpoint(not-desktop) {
+                        display: inline-block;
+                        margin-block: trim-font(1) !important;
+
+                        @include breakpoint(tablet) {
+                            padding-bottom: rem(14);
+                        }
+
+                        @include breakpoint(phone) {
+                            padding-bottom: rem(10);
+                        }
+                    }
+                }
+            }
+
+            li + li {
+                @include breakpoint(tablet) {
+                    margin-top: rem(9);
+                }
+
+                @include breakpoint(phone) {
+                    margin-top: rem(6);
+                }
+            }
         }
 
+
+        &--transcripts {
+
+            @include breakpoint(not-desktop) {
+                flex-grow: 1;
+            }
+
+            ul {
+                li + li {
+                    @include breakpoint(desktop) {
+                        margin-top: rem(25);
+                    }
+
+                    @include breakpoint(tablet) {
+                        margin-top: rem(30);
+                    }
+
+                    @include breakpoint(phone) {
+                        margin-top: rem(17);
+                    }
+                }
+
+                p {
+                    @include breakpoint(desktop) {
+                        @include font-size(30, 28);
+
+                        margin-bottom: rem(6);
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+
+        &--empty {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
+
+            @include breakpoint(desktop) {
+                min-height: vw(128);
+            }
+
+
+            @include breakpoint(tablet) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1.5, 50);
+            }
+
+
+            p:last-of-type {
+                @include font-family(normal);
+
+                letter-spacing: normal;
+                text-transform: none;
+
+                @include breakpoint(desktop) {
+                    @include font-size(14, 18);
+
+                    margin-top: rem(8);
+                }
+
+                @include breakpoint(tablet) {
+                    @include font-size(20, 1);
+
+                    margin-top: rem(16);
+                }
+
+                @include breakpoint(phone) {
+                    @include font-size(14, 18);
+
+                    margin-top: rem(12);
+                }
+            }
+
+            @include breakpoint(not-desktop) {
+                color: $background-light-offwhite;
+                background-color: var(--color-black);
+                border: unset;
+                border-top: 1px solid $color-bg;
+                flex-grow: 1;
+            }
+        }
+    }
+
+
+
+    &__results {
+        &--simple {
+            a {
+                @include breakpoint(desktop) {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: rem(12) auto auto 0;
+                        margin: auto;
+                        height: 1px;
+                        background: currentColor;
+                        width: var(--line-width);
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: transform .4s $ease-custom;
+                    }
+
+
+                    span {
+                        transition: transform .4s $ease-custom;
+                        display: inline-block;
+                    }
+
+
+                    @include hover {
+                        span {
+                            transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                        }
+
+
+                        &::before {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        &--transcripts {
+            li {
+                @include flex(column, flex-start, flex-start);
+
+
+                a {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background-color: lighten($color-yellow, 30);
+                        border-radius: rem(30);
+                        z-index: -1;
+                        opacity: 0;
+                        transition: opacity .15s ease-in-out;
+                    }
+
+
+                    @include hover {
+                        &::before { opacity: 1; }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    &__fragment {
+        @include font-family(normal);
+
+        text-transform: none;
+        display: block;
+        letter-spacing: normal;
+
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 18);
+        }
+
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 24);
+        }
+
+
+        @include breakpoint(phone) {
+            @include font-size(14, 18.9);
+        }
+
+
+        // highlighted part
+
+        span {
+            background-color: var(--color-yellow);
+            padding: 1px 3px;
+            border-radius: 30px;
+        }
+    }
+
+
+
+    &__noresults-head {
+        @include font-size(20, 12);
+        @include letter-spacing(-0.6, 20);
+
+        @include breakpoint(phone) {
+            margin-top: rem(10);
+        }
+    }
+
+
+
+    &__noresults-info {
+        @include font-size(13, 18);
+
+        margin-bottom: rem(12);
+        margin-top: rem(4);
+
+        @include breakpoint(not-phone) {
+            margin-top: rem(10);
+            margin-bottom: rem(-4);
+        }
+    }
+
+
+
+    &__all {
+        @include font-family(compressed);
+
+        position: absolute;
+        color: var(--color-grey200);
+
+        @include breakpoint(desktop) {
+            @include flex(row, flex-end, center);
+            @include font-size(17.727, 13.636);
+            @include letter-spacing(-0.532, 17.727);
+
+            inset: auto 0 0;
+            height: rem(40);
+            padding: 0 rem(9);
+            z-index: 2;
+            background-color: var(--color-black);
+        }
 
         @include breakpoint(not-desktop) {
-            height: 44px;
-        }
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            color: $background-light-offwhite;
+            background-color: $color-black;
+            text-align: right;
 
+            @include breakpoint(tablet) {
+                @include font-size(30, 1);
 
-        @include hover {
-            &, &::before {
-                background-color: darken($color-blue-dark-3, 5%);
+                margin-block: trim-font(1);
+                padding: rem(14) map-get($grid-offset, tablet);
+
+                svg {
+                    width: rem(15);
+                    height: rem(30);
+                    translate: -15% 0;
+                }
             }
 
-            button {
-                opacity: 1;
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+
+                margin-block: trim-font(1);
+                padding: rem(12) map-get($grid-offset, phone);
+
+                svg {
+                    width: rem(15);
+                    height: rem(30);
+                    translate: -15% 0;
+                }
             }
         }
+    }
+
+
+
+    &__arrow {
+        display: inline-block;
+        position: relative;
+        top: rem(-1);
+        transform: rotate(90deg);
+        margin-right: rem(6);
     }
 }

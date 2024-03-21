@@ -1,0 +1,13 @@
+<div class="sticker{% if color %} sticker--{{color}}{% endif %}{% if modifier %} sticker--{{modifier}}{% endif %} js-illustration" data-scroll="sticker" {% if delay %}data-delay="{{delay}}"{% endif %}>
+  <div class="sticker__layer">
+    <div class="sticker__front sticker__wrap">
+      <div class="sticker__circle"></div>
+    </div>
+  </div>
+  <span class="sticker__text">{{label}}</span>
+  <div class="sticker__layer">
+    <div class="sticker__back sticker__wrap">
+      <div class="sticker__circle"></div>
+    </div>
+  </div>
+</div>

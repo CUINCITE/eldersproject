@@ -1,0 +1,29 @@
+<div class="polaroid_gallery" data-component="PolaroidGallery">
+    <div class="polaroid_gallery__wrapper js-slider-wrap">
+        <div class="polaroid_gallery__slides">
+            {% for item in moduleValue %}
+            <div class="polaroid_gallery__slide {% if loop.first %}is-first-visible {% elseif loop.index == 2 %} is-second-visible {% else %} is-right-outer {% endif %}  js-slide">
+                <div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}{% if image.original.width and image.original.height %}{% if image.original.width > image.original.height %} polaroid--horizontal{% elseif image.original.width == image.original.height %} polaroid--square{% endif %}{% endif %}">
+                    <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">
+                        {% include "./subviews/subview_picture.html" with {image: item.image} %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="polaroid_gallery__captions">
+            {% for item in moduleValue %}
+            {% if item.caption %}
+            <div class="text_wrapper__info text_wrapper__info--collections js-caption{% if loop.index == 1%} is-active{% endif %}">
+                {% include "/subviews/subview_text.html" with {text: item.caption} %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="polaroid_gallery__buttons js-polaroid-gallery-buttons">
+        <button class="polaroid_gallery__button js-slider-prev"><span>[[svg::arrow-gallery]]</span><span>[[svg::arrow-gallery]]</span></button>
+        <button class="polaroid_gallery__button js-slider-next"><span>[[svg::arrow-gallery]]</span><span>[[svg::arrow-gallery]]</span></button>
+    </div>
+</div>

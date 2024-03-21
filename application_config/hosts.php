@@ -10,6 +10,7 @@ $cfg_domains = [
 		'sql_user' =>                                       getenv('SQL_USER'),
 		'sql_pass' =>                                       getenv('SQL_PASS'),
 		'sql_base' =>                                       getenv('SQL_BASE'),
+        'upload_server' =>                                  getenv('UPLOAD_SERVER'),
 		'smtp' =>
 		[
 			'server' => getenv('SMTP_SERVER'),
@@ -31,15 +32,23 @@ $cfg_domains = [
             'mailchimp' => [
                 'key' => getenv('MAILCHIMP_KEY'),
                 'list_id' => getenv('MAILCHIMP_LIST_ID')
-            ]
+			],
+			'mapbox'=> [
+                'token' => getenv('MAPBOX_TOKEN')
+			]
         ],
 		'clients' =>
 		[
 			'google' => [getenv('GOOGLE_OAUTH_ID'),getenv('GOOGLE_OAUTH_SECRET')],
 			'facebook' => [getenv('FACEBOOK_OAUTH_ID'),getenv('FACEBOOK_OAUTH_SECRET')],
 			'ga' => getenv('GOOGLE_ANALYTICS_TAG')			
-		],
-		's3'=>
+		]		
+	]
+];
+
+
+if (getenv('S3_HOST'))
+$cfg_domains[getenv('DOMAIN')]['s3']=
 		[
 			'host' =>	getenv('S3_HOST'),
 			'key' =>	getenv('S3_KEY'),
@@ -47,8 +56,6 @@ $cfg_domains = [
 			'bucket' =>	getenv('S3_BUCKET'),
 			'region' =>	getenv('S3_REGION'),
 			'folder' =>	getenv('S3_FOLDER'),
-			'cache' => '/cache/s3.files'			]
-	]
-];
+			'cache' => '/cache/s3.files'			];
 
 $cfg_domains['localhost']=$cfg_domains[getenv('DOMAIN')];

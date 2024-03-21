@@ -17,7 +17,7 @@ class model_app_pages_modules
     	$this->lang=$m->lang;
 
 	}
-	
+
 	// ----------------------------------------------------------------------------------------------------------------
 	// update single module
 	// ----------------------------------------------------------------------------------------------------------------
@@ -41,12 +41,19 @@ class model_app_pages_modules
 		$f_title=$f_label=$filters;
 		$f_label=['label'.$this->lang_add=>['operator'=>'!=','value'=>'']];
 		$f_title=['title'.$this->lang_add=>['operator'=>'!=','value'=>'']];
-		
+
 		// module params
 		if ($m['params'])
 		{
-			$m['params']=array_flip(explode(',',$m['params']));
-			foreach ($m['params'] as $k=>$v) $m['params'][$k]=1;
+			$p=explode(',',$m['params']);
+			$m['params']=[];
+			foreach ($p as $k=>$v)
+			{
+				$v=explode('=',$v);
+				if (empty($v[1])) $v[1]=1;
+				$m['params'][$v[0]]=$v[1];
+				unset($m['params'][$k]);
+			}
 		}
 
 		$settings=[
@@ -69,7 +76,9 @@ class model_app_pages_modules
 
 
 		];
-		
+
+        $m['module_index'] = $this->iModule - 1;
+
 
 		if (_uho_fx::file_exists('/application/models/modules/m_'.$self.'.php'))
 		{
@@ -79,7 +88,7 @@ class model_app_pages_modules
 			$m=$class->updateModel($m,$url);
 			if ($m && isset($m['og'])) $this->parent->ogSet($m['og']['title'],$m['og']['description'],$m['og']['image']);
 		}
-			
+
 
 
 		return $m;
@@ -95,7 +104,33 @@ class model_app_pages_modules
 		$this->m->setLightboxSlug($slug);
 	}
 
-		
+    function copyValues($array, $originalKeyPart, $newKeyPart){
+        foreach($array as $key => $value){
+            if(str_contains($key, $originalKeyPart)){
+                $new_key = str_replace($originalKeyPart, $newKeyPart, $key);
+                $array[$new_key] = $value;
+            }
+        }
+        return $array;
+    }
+
+    function getSeedRandomElement($array) {
+        $today_timestamp = strtotime(date('Y-m-d'));
+        srand($today_timestamp);
+        $keys = array_keys($array);
+        $random_index = rand(0, count($keys) - 1);
+        return $array[$keys[$random_index]];
+    }
+
+    protected function articleUpdate($text,&$media, $playlist)
+    {
+        require_once (__DIR__.'/model_app_pages_article.php');
+        $article=new model_app_pages_article($this->parent);
+        $article=$article->convert($text,$media, $playlist);
+        return $article;
+    }
+
+
 }
 
 ?>

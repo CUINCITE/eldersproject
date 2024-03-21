@@ -1,0 +1,15 @@
+<div class="interviews-grid__tile interviews-grid__tile--group interviews-grid__tile--{{item.modifier}}">
+    <a class="interviews__link" href="{{item.url}}" data-filters data-component="Button" data-options='{"sibling": true}'></a>
+    <h3 class="interviews__name"># {{item.name}}</h3>
+
+    <button class="button button--small button--overflow">
+        {% include "./components/c_arrow_icon.html" with { small } %}
+        <span class="button__text js-button-text">Explore <i> {{item.count}} interviews</i></span>
+    </button>
+
+    {% if item.image %}
+        <div class="interviews-grid__image">
+            {% include "./subviews/subview_picture.html" with {image: item.image} %}
+        </div>
+    {% endif %}
+</div>

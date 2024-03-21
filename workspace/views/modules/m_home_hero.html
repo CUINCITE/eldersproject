@@ -1,0 +1,56 @@
+<section class="module module--hero">
+
+    <div class="hero">
+
+        <div class="hero__wrap">
+
+            <div class="hero__logo desktop-hide">
+                {% include "./components/c_logo_box.html" %}
+            </div>
+
+            <h1 class="hero__title">
+                <span class="box" data-scroll="box">
+                    <span class="box__bg"></span>
+                    <span class="hero__line">I see</span>
+                </span>
+                <span class="box" data-scroll="box">
+                    <span class="box__bg"></span>
+                    <span class="hero__line">My light</span>
+                </span>
+                <span class="box" data-scroll="box">
+                    <span class="box__bg"></span>
+                    <span class="hero__line"><i>Shining</i></span>
+                </span>
+            </h1>
+
+            <div class="box hero__subtitles">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="hero__bottom">
+                            <h2 class="hero__subtitle">: Oral Histories Of Our Elders</h2>
+                            <div class="hero__text desktop-only">
+                                {% include "./subviews/subview_text.html" with text %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if sticker %}
+                <div class="hero__sticker">
+                    {% include "./components/c_sticker.html" with sticker %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="box desktop-hide">
+            <div class="grid">
+                <div class="hero__text">
+                    {% include "./subviews/subview_text.html" with text %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>

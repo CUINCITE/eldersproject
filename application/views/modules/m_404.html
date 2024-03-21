@@ -1,10 +1,51 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h1 class="jumbotron-heading">404</h1>
-      <p class="lead text-muted">Page not found.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-      </p>
+<section class="module module--404 page_404">
+
+    <div class="page_404__logo desktop-hide">
+        {% include "./components/c_logo_box.html" %}
     </div>
-  </section>
+
+    <div class="box page_404__error" data-scroll="box">
+        <div class="box__bg"></div>
+        <div class="grid">
+            <div class="col-span-12">
+                <div class="box__wrap">
+                    <div class="page_404__image">
+                        {% include "subviews/subview_picture.html" with {
+                            image: {
+                                desktop: "/public/theme/images/megaphone.png",
+                                mobile: "/public/theme/images/megaphone.png"
+                                }
+                            }
+                        %}
+                    </div>
+                    {% include "components/c_heading.html" with { reclined: true, label: "404" } %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box page_404__text" data-scroll="box">
+        <div class="box__bg"></div>
+        <div class="grid">
+            <div class="col-span-12">
+                {% include "components/c_claim.html" with {
+                    small: true,
+                    text: "The page you are looking for could not be found.",
+                    sticker: {
+                        modifiers: ["purple", "long_text"],
+                        text: "Page not found"
+                    }
+                } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="box page_404__link" data-scroll="box">
+        <div class="box__bg"></div>
+        <div class="grid">
+            <div class="col-span-12">
+                {% include "components/c_link.html" with { url: "/", text: "Back to <i>Homepage</i>", modifiers: ["big", "overflow"], animate: true } %}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,83 @@
+.interview-box {
+    --interview-bg: var(--color-red);
+    --interview-first-layer-bg: var(--color-pink);
+    --interview-second-layer-bg: var(--color-dark-green);
+    --interview-third-layer-bg: var(--color-blue);
+    --interview-text-color: var(--color-pink);
+
+
+
+    &--pink {
+        --interview-bg: var(--color-pink);
+        --interview-first-layer-bg: var(--color-green);
+        --interview-second-layer-bg: var(--color-brown);
+        --interview-third-layer-bg: var(--color-purple);
+    }
+
+
+    &--green {
+        --interview-bg: var(--color-purple);
+        --interview-first-layer-bg: var(--color-red);
+        --interview-second-layer-bg: var(--color-pink);
+        --interview-third-layer-bg: var(--color-green);
+        --interview-text-color: var(--color-pink);
+    }
+
+
+    &--pale-purple {
+        --interview-bg: var(--color-dark-green);
+        --interview-first-layer-bg: var(--color-pale-purple);
+        --interview-second-layer-bg: var(--color-pink);
+        --interview-third-layer-bg: var(--color-red);
+    }
+
+
+    &--orange {
+        --interview-bg: var(--color-red);
+        --interview-first-layer-bg: var(--color-pink);
+        --interview-second-layer-bg: var(--color-purple);
+        --interview-third-layer-bg: var(--color-orange);
+    }
+
+
+    &--pale-blue {
+        --interview-bg: var(--color-orange);
+        --interview-first-layer-bg: var(--color-purple);
+        --interview-second-layer-bg: var(--color-pink);
+        --interview-third-layer-bg: var(--color-pale-blue);
+    }
+
+
+    &--brown {
+        --interview-bg: var(--color-purple);
+        --interview-first-layer-bg: var(--color-pink);
+        --interview-second-layer-bg: var(--color-red);
+        --interview-third-layer-bg: var(--color-brown);
+        --interview-text-color: var(--color-purple);
+    }
+
+
+    &--dark-green {
+        --interview-bg: var(--color-orange);
+        --interview-first-layer-bg: var(--color-pink);
+        --interview-second-layer-bg: var(--color-dark-green);
+        --interview-third-layer-bg: var(--color-purple);
+    }
+
+
+    &--pale-green {
+        --interview-bg: var(--color-pale-green);
+        --interview-first-layer-bg: var(--color-yellow);
+        --interview-second-layer-bg: var(--color-pink);
+        --interview-third-layer-bg: var(--color-red);
+    }
+
+
+    &--purple {
+        --interview-bg: var(--color-purple);
+        --interview-first-layer-bg: var(--color-red);
+        --interview-second-layer-bg: var(--color-pink);
+        --interview-third-layer-bg: var(--color-yellow);
+        --interview-text-color: var(--color-red);
+    }
+}

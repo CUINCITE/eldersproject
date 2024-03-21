@@ -1,0 +1,20 @@
+<section class="module module--faq">
+    <div class="faq">
+        <i class="faq__line desktop-only" data-scroll="line"></i>
+        <div class="box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="grid">
+                <div class="faq__heading col-span-6 no-padding">
+                    {% include "./components/c_heading.html" with title %}
+                </div>
+                <div class="faq__content col-span-6 col-start-7">
+                    <ul class="faq__accordeon" >
+                        {% for term in terms %}
+                            {% include "./components/c_accordeon_item.html" with term %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

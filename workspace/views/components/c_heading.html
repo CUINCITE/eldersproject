@@ -1,1 +1,9 @@
-komponent
+<h2 class="heading
+{% if reclined %} heading--reclined{% endif %}
+{% if aside %} heading--aside{% endif %}
+{% if size %} heading--{{size}}{% endif %}
+{% if align %} heading--{{align}}{% endif %}
+{% if modifiers %}{% for modifier in modifiers %} heading--{{modifier}}{% endfor %}{% endif %}"
+>
+{{label|raw}}
+</h2>

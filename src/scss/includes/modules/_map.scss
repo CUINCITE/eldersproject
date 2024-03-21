@@ -1,10 +1,2 @@
-.map {
-    &__wrap {
-        width: 100%;
-        height: var(--app-height);
-
-        @include breakpoint(not-desktop) {
-            height: calc(var(--app-height) * .56);
-        }
-    }
-}
+@import "./map/map-variables";
+@import "./map/map-styles";

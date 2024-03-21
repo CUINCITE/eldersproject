@@ -1,5 +1,504 @@
-
-
 .text {
-    // @include font-family("text", 400);
+    @include flex(column, flex-start, flex-start);
+    @include font-family(normal);
+    @include font-settings(400, 100);
+
+    @include breakpoint(desktop) {
+        @include font-size(14, 17.5);
+
+        padding: rem(20) rem(11);
+    }
+
+    @include breakpoint(not-desktop) {
+        @include font-size(17, 1.3);
+
+        padding-top: rem(20);
+        padding-bottom: rem(20);
+    }
+
+    @include breakpoint(phone) {
+        padding-top: rem(12);
+    }
+
+
+    .hero__text & {
+        @include breakpoint(desktop) {
+            padding: 0;
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: rem(14) rem(68);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(14) rem(68);
+        }
+    }
+
+    .text-sticker & {
+        @include breakpoint(desktop) {
+            padding: rem(14) rem(20) rem(26) 0;
+        }
+    }
+
+
+    &--huge {
+        @include font-family(compressed, 800);
+
+        @include breakpoint(desktop) {
+            @include font-size(30, 30);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(30, 1);
+            @include letter-spacing(-1.05, 30);
+
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 28.2);
+            @include letter-spacing(-1.05, 30);
+        }
+    }
+
+    &--larger {
+        @include breakpoint(desktop) {
+            @include font-size(23, 28.06);
+            @include letter-spacing(-0.12, 23);
+
+            padding-inline: 0 !important;
+
+            @media (max-height: 719px) {
+                @include font-size(21, 25);
+            }
+
+
+            @media (max-height: 720px) and (max-aspect-ratio: 1280 / 720) {
+                @include font-size(21, 25);
+            }
+
+            p {
+                max-width: unset !important;
+            }
+        }
+    }
+
+
+    &--large {
+        @include breakpoint(desktop) {
+            @include font-size(17, 22.1);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(17, 1.3);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 1.3);
+        }
+    }
+
+
+    &--small {
+        @include breakpoint(desktop) {
+            @include font-size(12, 1.3);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(12, 1.3);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(12, 1.3);
+        }
+    }
+
+
+    &--short {
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+
+            p {
+                max-width: rem(252);
+            }
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 1.3);
+
+            p {
+                max-width: rem(301);
+            }
+
+            .text-sticker__wrap & {
+                @include font-size(14, 1.4);
+
+                padding-block: rem(9) rem(40);
+            }
+        }
+    }
+
+
+    &--wide {
+        @include breakpoint(desktop) {
+            padding-left: rem(13);
+
+            p, ul, a, ol {
+                max-width: rem(312);
+            }
+
+            & + & {
+                margin-top: rem(10);
+                padding-bottom: rem(4);
+            }
+        }
+    }
+
+
+    &--aside {
+        @include breakpoint(tablet) {
+            margin-bottom: rem(60);
+        }
+
+        @include breakpoint(phone) {
+            margin-bottom: rem(60);
+        }
+
+        p + h2,
+        a + h2 {
+
+            @include breakpoint(desktop) {
+                margin-top: rem(32) !important;
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(32) !important;
+                margin-bottom: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(32) !important;
+                margin-bottom: rem(5);
+            }
+        }
+    }
+
+
+    &--contact {
+        @include breakpoint(phone) {
+            margin-bottom: 0;
+
+            p:first-child {
+                margin-bottom: rem(22);
+            }
+
+            h2 {
+                max-width: 20ch;
+            }
+        }
+    }
+
+
+    &--privacy {
+        @include breakpoint(desktop) {
+            padding-bottom: 0;
+            margin-bottom: rem(-20);
+
+            h2 + p {
+                @include breakpoint(desktop) {
+                    margin-top: rem(12);
+                }
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(20);
+
+            p, ul, a, ol {
+                max-width: rem(480);
+            }
+
+            h2 + p {
+                margin-top: rem(12);
+            }
+
+            p + h2 {
+                margin-top: rem(56);
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            @include font-size(14, 19.9);
+
+            padding-bottom: rem(78) !important;
+            padding-top: rem(20);
+
+            h2 + p {
+                margin-top: rem(12);
+            }
+
+            p + h2 {
+                margin-top: rem(56);
+            }
+
+            h2 {
+                max-width: 20ch;
+            }
+        }
+    }
+
+
+    &--no-padding {
+        @include breakpoint(desktop) {
+            padding-inline-start: 0;
+        }
+    }
+
+
+    :is(p, q, blockquote, .quote) + :is(p, q, blockquote, .quote) {
+        @include breakpoint(desktop) {
+            margin-top: vw(22);
+        }
+
+        @include breakpoint(tablet) {
+            margin-top: rem(25);
+        }
+
+        @include breakpoint(phone) {
+            margin-top: rem(25);
+        }
+    }
+
+
+    p, a {
+
+        @include breakpoint(desktop) {
+            max-width: rem(267);
+        }
+
+        @include breakpoint(tablet) {
+            max-width: rem(480);
+        }
+
+        @include breakpoint(phone) {
+            max-width: rem(301);
+        }
+    }
+
+
+    a {
+        display: inline-block;
+        margin-top: rem(3);
+
+        @include breakpoint(desktop) {
+            text-decoration: none;
+            background: linear-gradient(to right, currentColor, currentColor),
+                linear-gradient(to right, transparent, transparent);
+
+            background-size: 0 0.08em, 100% 0.08em;
+            background-position: 100% 98%, 0 98%;
+            background-repeat: no-repeat;
+            transition: background-size .4s $ease-custom;
+
+            &:hover,
+            &:focus {
+                background-size: 100% 0.08em, 0 0.08em;
+                background-position: 0% 98%, 0 98%;
+            }
+        }
+    }
+
+
+    a + a {
+        margin-top: rem(8);
+    }
+
+    h2 {
+        @extend .heading;
+        @extend .heading--small;
+
+        & + ol {
+            @include breakpoint(desktop) {
+                margin-top: rem(12);
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(12);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(12);
+            }
+        }
+    }
+
+
+    b {
+        @include font-settings(700, 100);
+    }
+
+
+    ul {
+        list-style-type: square;
+
+        @include breakpoint(desktop) {
+            padding-inline-start: rem(16);
+            margin-top: rem(13);
+            margin-bottom: rem(32);
+
+            & + h2 {
+                margin-top: rem(14);
+            }
+
+            li + li {
+                margin-top: rem(12);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-inline-start: rem(16);
+            margin-top: rem(6);
+            margin-bottom: rem(28);
+
+            & + h2 {
+                margin-top: rem(14);
+            }
+
+            li + li {
+                margin-top: rem(2);
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-inline-start: rem(16);
+            margin-top: rem(6);
+            margin-bottom: rem(28);
+
+            & + h2 {
+                margin-top: rem(14);
+            }
+
+            li + li {
+                margin-top: rem(2);
+            }
+        }
+    }
+
+
+    ol {
+        list-style-type: numeric;
+
+        @include breakpoint(desktop) {
+            padding-inline-start: rem(16);
+
+            ul {
+                padding-inline-start: 0;
+                margin-bottom: rem(32);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-inline-start: rem(16);
+
+            ul {
+                padding-inline-start: 0;
+                margin-bottom: rem(16);
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-inline-start: rem(16);
+
+            ul {
+                padding-inline-start: 0;
+                margin-bottom: rem(16);
+            }
+        }
+    }
+
+
+    ul:last-of-type, ol:last-of-type {
+        li:last-of-type {
+            ul:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+
+
+    &__expand {
+        overflow: hidden;
+        transition: max-height 0.6s $ease-custom;
+        will-change: max-height;
+
+        &:not(.is-expanded) {
+            max-height: 0 !important;
+        }
+
+
+        ul {
+            @include breakpoint(desktop) {
+                padding-top: rem(25);
+            }
+
+            @include breakpoint(tablet) {
+                padding-top: rem(25);
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(20);
+            }
+        }
+
+
+        p, q, blockquote {
+            margin-top: unset !important;
+        }
+
+
+        p {
+            @include breakpoint(desktop) {
+                padding-top: vw(22);
+            }
+
+            @include breakpoint(tablet) {
+                padding-top: rem(25);
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(25);
+            }
+        }
+
+
+        &-trigger {
+            @include font-family(compressed);
+
+            text-transform: uppercase;
+
+            @include breakpoint(desktop) {
+                @include font-size(20, 14);
+                @include letter-spacing(-0.6, 20);
+
+                margin-top: rem(8);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(20, 14);
+                @include letter-spacing(-0.6, 20);
+
+                margin-top: rem(8);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(20, 14);
+                @include letter-spacing(-0.6, 20);
+
+                margin-top: rem(8);
+            }
+        }
+    }
 }

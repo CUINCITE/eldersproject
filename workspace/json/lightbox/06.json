@@ -1,0 +1,19 @@
+{
+    "url": "/workspace/lightbox/06",
+    "backUrl": "/workspace",
+    "modifier": "pale-blue",
+    "mainImage": {
+        "type": "polaroid",
+        "image": {
+            "desktop": "http://assets.huncwot.net/deepzoom.jpg",
+            "mobile": "http://assets.huncwot.net/deepzoom.jpg"
+        }
+    },
+    "title": "Joan Benoit",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Renée Watson collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Short bio here. Nascetur ridiculus mus mauris vitae ultricies. Ultrices vitae auctor eu augue ut lectus. Vulputate eu scelerisque felis.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX"
+}

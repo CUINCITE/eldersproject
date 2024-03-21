@@ -24,6 +24,9 @@
             "list": true
         },
         {
+            "field":"header"
+        },
+        {
             "label": "Opis modułu",
             "list": true,
             "field": "description"

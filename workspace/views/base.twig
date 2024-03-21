@@ -6,29 +6,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title>{{ title }}</title>
 
-        <link rel="stylesheet" href="/public/theme/styles.css?v=0.0.0" />
-        <script src="/public/theme/libs.min.js?v=0.0.0" defer></script>
-        <script src="/public/theme/scripts.min.js?v=0.0.0" defer></script>
+        {% include 'scaffold/critical.html' %}
+
+        <link rel="stylesheet" href="/public/theme/styles.css?v=0.0.16" />
+        <script src="/public/theme/libs.min.js?v=0.0.16" defer></script>
+        <script src="/public/theme/scripts.min.js?v=0.0.16" defer></script>
     </head>
-    <body>
+    <body class="is-not-ready">
 {% endif %}
 
-{% include "scaffold/header.html" %}
+    {% include "scaffold/quick-access.html" %}
+    {% include "scaffold/header.html" %}
+    {% include "scaffold/menu.html" %}
 
     <div class="wrapper" id="wrapper">
         <main id="content" class="content">
-            <article data-page data-title="{{title}}">
+            <article {% if title is same as ('404') %} data-not-found {% endif %} {% if title is same as ('Homepage') %} data-home {% endif %} data-page data-title="{{title}}">
                 {% for module in modules %}
                     {% include 'modules/m_'~module.type~'.html' with module %}
                 {% endfor %}
             </article>
             {% include "scaffold/dev-grid.html" %}
         </main>
-    </div>
 
-{% include 'scaffold/newsletter.html' %}
-{% include 'scaffold/footer.html' %}
-{% include 'scaffold/offscreen.html' %}
+        {% include 'scaffold/newsletter.html' %}
+        {% include 'scaffold/footer.html' %}
+    </div>
+    <div id="lightbox" class="lightbox js-lightbox"></div>
+
+    {% include 'scaffold/audioplayer.html' %}
+    {% include 'scaffold/loader.html' %}
+    {% include 'scaffold/circle.html' %}
+
+    [[templates]]
 
 
 {% if not is_ajax %}

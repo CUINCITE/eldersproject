@@ -1,0 +1,68 @@
+.page_404 {
+
+    @include breakpoint(not-desktop) {
+        @include flex(column, flex-start, stretch);
+    }
+
+    &__image {
+        z-index: 1;
+        aspect-ratio: 1/1;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+            left: rem(18);
+            top: rem(-68);
+            width: rem(295);
+            rotate: -4.85deg;
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+
+            @include breakpoint(tablet) {
+                width: vw(500, tablet);
+                top: vw(-68, tablet);
+            }
+
+            @include breakpoint(phone) {
+                width: vw(220, phone);
+                margin-block: vw(-35, phone) vw(-35, phone);
+                rotate: -4.85deg;
+                right: vw(5, phone);
+                bottom: vw(-15, phone);
+            }
+        }
+    }
+
+    &__error {
+        // @include breakpoint(desktop) {
+        //     padding-top: rem(28);
+        // }
+
+        @include breakpoint(tablet) {
+            padding-top: vw(20, tablet);
+            height: vw(390, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: vw(6, phone);
+            height: vw(177, phone);
+        }
+    }
+
+    &__link {
+        @include breakpoint(not-desktop) {
+            flex-grow: 1;
+
+            @include breakpoint(tablet) {
+                padding-top: rem(20);
+                padding-bottom: rem(84);
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(3);
+                padding-bottom: rem(64);
+            }
+        }
+    }
+}

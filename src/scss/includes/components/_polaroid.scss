@@ -1,26 +1,119 @@
+@keyframes polaroid {
+    0% {
+        filter: brightness(300%);
+        opacity: 0;
+    }
+
+    100% {
+        filter: brightness(100%);
+        opacity: 1;
+    }
+}
+
+$background-colors: (
+    "pale_green": $color-pale-green,
+    "green": $color-green,
+    "light_blue": $color-light-blue,
+    "pale_blue": $color-pale-blue,
+    "pale_purple": $color-pale-purple,
+    "pink": $color-pale-pink,
+    "yellow": $color-gold,
+    "orange": $color-orange,
+    "brown": $color-brown,
+);
+
 .polaroid {
-    --polaroid-width: #{vw(386)};
-    --polaroid-height: #{vw(471)};
+    --polaroid-width: #{rem(386)};
+    --polaroid-height: #{rem(471)};
 
 
     width: var(--polaroid-width);
     height: var(--polaroid-height);
     background-color: var(--color-grey200);
-    padding: vw(25) vw(25) vw(37);
+
+    @include breakpoint(desktop) {
+        padding: rem(20) rem(20) rem(32);
 
 
+        .stack__polaroids & {
+            --polaroid-width: #{rem(310)};
+            --polaroid-height: #{rem(420)};
+        }
+    }
+
+    @include breakpoint(tablet) {
+        padding: vw(18, tablet) vw(18, tablet) vw(27, tablet);
+    }
+
+    @include breakpoint(phone) {
+        padding: vw(18, phone) vw(18, phone) vw(27, phone);
+    }
 
     &--square {
-        // ratio 1
-
         --polaroid-height: var(--polaroid-width);
     }
 
 
-
     &--horizontal {
-        --polaroid-width: #{vw(481)};
-        --polaroid-height: #{vw(366)};
+        @include breakpoint(desktop) {
+            --polaroid-width: #{rem(481)};
+            --polaroid-height: #{rem(366)};
+
+
+            .stack__polaroids & {
+                --polaroid-width: #{rem(420)};
+                --polaroid-height: #{rem(310)};
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(14, phone) vw(14, phone) vw(18, phone);
+        }
+    }
+
+
+    &--fit {
+        width: 100%;
+        height: 100%;
+
+        .polaroid__image {
+            overflow: hidden;
+
+            img {
+                opacity: 1;
+                object-position: 50% 30%;
+            }
+        }
+    }
+
+
+    &--small_frame {
+        @include breakpoint(desktop) {
+            padding: rem(10);
+        }
+
+        @include breakpoint(tablet) {
+            padding: vw(10, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(10, phone);
+        }
+    }
+
+
+    &--wrapped {
+        @include breakpoint(desktop) {
+            padding: rem(20) rem(20) rem(30);
+        }
+
+        @include breakpoint(tablet) {
+            padding: vw(12.75, tablet) vw(12.75, tablet) vw(20.25, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(12.75, phone) vw(12.75, phone) vw(20.25, phone);
+        }
     }
 
 
@@ -29,6 +122,13 @@
         width: 100%;
         height: 100%;
 
+        @each $name, $color in $background-colors {
+
+            &--#{$name} {
+                background-color: $color;
+            }
+        }
+
 
         picture, img {
             width: 100%;
@@ -36,4 +136,12 @@
             object-fit: cover;
         }
     }
+
+
+    // maybe on scroll later
+    // @include hover {
+    //     img {
+    //         animation: polaroid 1.5s linear forwards;
+    //     }
+    // }
 }

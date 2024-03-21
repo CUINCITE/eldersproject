@@ -1,0 +1,666 @@
+.map {
+    --line-width: #{rem(10)};
+    --line-offset: #{rem(4)};
+
+
+    @include flex(row, space-between, stretch);
+    @include font-family(compressed);
+
+    text-transform: uppercase;
+
+    @include breakpoint(desktop) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        height: var(--app-height);
+    }
+
+    @include breakpoint(tablet) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+
+        height: calc(var(--app-height) * 0.66);
+    }
+
+
+    @include breakpoint(phone) {
+        @include font-size(30, 1);
+        @include letter-spacing(-0.75, 30);
+    }
+
+
+    &__wrap {
+        @include flex(row, center, flex-end);
+
+        width: 100%;
+        height: 100%;
+        position: relative;
+        background-color: var(--color-bg);
+    }
+
+
+
+    &__count {
+        @include font-family(normal);
+        @include font-settings(500, 100);
+        @include font-size(17, 18);
+        letter-spacing: normal;
+
+        border-bottom: 1px solid var(--color-bg);
+        padding: rem(17) rem(18) rem(13);
+    }
+
+
+
+    &__controls {
+        @include flex(column, flex-start, stretch);
+
+        gap: 1px;
+        position: absolute;
+        inset: 0 0 auto auto;
+    }
+
+
+
+    &__control {
+        @include font-family(compressed);
+        @include font-size(30, 1);
+
+        letter-spacing: -0.025em;
+        width: rem(126);
+        height: rem(53);
+        text-align: center;
+        padding-top: rem(4);
+        background-color: var(--color-black);
+        color: var(--color-off-white);
+        text-transform: uppercase;
+        transition: opacity .3s $ease-out;
+        opacity: 0;
+        pointer-events: none;
+
+
+        .is-zoomed & {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        // .map--global & { display: none; }
+    }
+
+
+
+    &__container {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity .3s $ease-out;
+
+        // z-index: -1;
+    }
+
+
+
+    &__aside {
+        @include flex(column, flex-start, stretch);
+
+        flex-shrink: 0;
+        background-color: var(--color-box);
+
+        @include breakpoint(desktop) {
+            flex-basis: vw(308);
+            border-right: 1px solid var(--color-bg);
+        }
+
+        @include breakpoint(tablet) {
+            flex-basis: vw(254, tablet);
+            border-right: 1px solid var(--color-bg);
+        }
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
+    }
+
+
+
+    &__heading {
+        border-bottom: 1px solid var(--color-bg);
+
+
+        @include breakpoint(desktop) {
+            padding-top: rem(37);
+            padding-left: rem(18);
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: map-get($grid-offset, tablet);
+            padding-left: map-get($grid-offset, tablet);
+
+            .heading {
+                margin-block: trim-font(1);
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(8);
+            padding-left: map-get($grid-offset, phone);
+
+            .heading {
+                margin-block: trim-font(140.253 / 132);
+                margin-left: rem(-5);
+            }
+        }
+    }
+
+
+
+    &__locations {
+        text-transform: uppercase;
+        counter-reset: map-locations;
+
+        @include breakpoint(desktop) {
+            overflow-y: auto;
+        }
+
+        @include breakpoint(tablet) {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        @include breakpoint(phone) {
+            flex-grow: 1;
+        }
+    }
+
+
+
+    &__image {
+        margin-bottom: rem(20);
+        height: rem(190);
+
+
+        picture, img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        &_wrapper {
+            @include breakpoint(phone) {
+                height: vw(294, phone);
+                object-fit: contain;
+                position: relative;
+
+                img {
+                    object-fit: cover;
+                    object-position: center;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+
+
+    &__location {
+        border-top: 1px solid var(--color-bg);
+        position: relative;
+
+
+        &:first-of-type { border-top: none; }
+
+
+        @include breakpoint(desktop) {
+            padding: 0 rem(15);
+        }
+
+
+        @include breakpoint(tablet) {
+            padding: 0 rem(16) 0 rem(28);
+        }
+
+
+        &-button {
+            @include full;
+
+            z-index: 1;
+
+
+            &.is-active { pointer-events: none; }
+
+
+            @include hover {
+                ~ .map__place .map__title-text span {
+                    transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                }
+
+
+                ~ .map__place .map__title-text::before {
+                    transform: scaleX(1);
+                }
+            }
+        }
+    }
+
+
+
+    &__title {
+        @include flex(row, flex-start, flex-end);
+
+
+        .map--global & {
+            flex-wrap: wrap;
+
+
+            &::before {
+                @include font-size(37, 33);
+            }
+        }
+
+
+        &::before {
+            @include font-family(slim);
+            @include font-size(30, 30);
+
+            content: counter(map-locations, decimal-leading-zero) ".";
+            letter-spacing: -0.025em;
+            counter-increment: map-locations;
+            font-feature-settings: "ss03" on;
+
+            @include breakpoint(desktop) {
+                margin-right: rem(6);
+                margin-top: rem(-1);
+
+                .map--global & {
+                    margin-right: rem(6);
+                    margin-top: 0;
+                }
+            }
+
+            @include breakpoint(tablet) {
+                margin-right: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                margin-right: rem(5);
+            }
+        }
+
+
+        &-text {
+            @include font-size(30, 27);
+
+            position: relative;
+            letter-spacing: -0.025em;
+            padding-bottom: rem(2);
+
+
+            .map--global & {
+                flex: 1 1 100%;
+                margin-top: rem(6);
+                padding-bottom: 0;
+
+
+                @include breakpoint(not-desktop) {
+                    max-width: 90%;
+                }
+            }
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: rem(12) auto auto 0;
+                margin: auto;
+                height: 1px;
+                background: currentColor;
+                width: var(--line-width);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform .4s $ease-custom;
+            }
+
+
+            span {
+                transition: transform .4s $ease-custom;
+                display: inline-block;
+            }
+        }
+    }
+
+
+
+    &__interviews {
+        @include flex(column, flex-end, stretch);
+
+        gap: 1px;
+
+        @include breakpoint(phone) {
+            margin-top: 1px;
+        }
+    }
+
+
+
+    &__interview {
+        background-color: var(--color-box);
+        position: relative;
+
+        @include breakpoint(phone) {
+            background-color: $color-black;
+            color: var(--color-box);
+        }
+
+
+        &-wrap {
+            @include flex;
+        }
+
+
+        &-data {
+            @include flex(column, space-between, flex-start);
+
+            @include breakpoint(desktop) {
+                @include font-size(30, 1);
+
+                gap: rem(5);
+                width: rem(286);
+                padding: 0 rem(14);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(30, 1);
+
+                gap: rem(5);
+                width: rem(286);
+                padding: 0 rem(14);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+
+                gap: rem(6);
+                padding: map-get($grid-offset, phone);
+            }
+        }
+
+
+        &-title {
+            margin-block: trim-font(1);
+            padding-top: rem(1);
+        }
+
+
+        &-duration {
+            @include font-family(slim);
+
+            font-weight: 300;
+
+            @include breakpoint(desktop) {
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(tablet) {
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(28, 1);
+
+                margin-block: trim-font(1);
+            }
+        }
+
+
+        &-button {
+            background-color: var(--map-button-color, var(--color-green));
+            color: var(--map-text-color, var(--color-pink));
+
+            @include breakpoint(desktop) {
+                @include font-size(30, 24);
+
+                padding: rem(16) rem(15) rem(13);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(30, 24);
+
+                padding: rem(16) rem(15) rem(13);
+            }
+
+            @include breakpoint(phone) {
+                @include flex;
+                @include font-size(30, 24);
+
+                align-self: stretch;
+                padding-inline: map-get($grid-offset, phone);
+            }
+        }
+    }
+
+
+
+    &__button {
+        @include full;
+    }
+
+
+    &__content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows .4s $ease-out;
+
+
+        @include breakpoint(desktop) {
+            margin: 0 rem(-16);
+        }
+
+
+        .is-active ~ & { grid-template-rows: 1fr; }
+
+
+        & > div { overflow: hidden; }
+
+
+        p { padding-bottom: rem(18); }
+    }
+
+
+    &__description {
+        @include font-family(normal);
+        @include font-settings(400, 100);
+
+        letter-spacing: normal;
+        text-transform: none;
+        padding: 0 rem(16);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(14, 16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 16);
+        }
+
+        p { padding-bottom: rem(18); }
+    }
+
+
+
+    &__place {
+        @include flex(column, flex-start, flex-start);
+
+        @include breakpoint(desktop) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+
+
+            .map--global & {
+                padding-block: rem(20);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: rem(20);
+            min-height: rem(64);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(20);
+            padding-inline: map-get($grid-offset, phone);
+            margin-block: trim-font(1);
+        }
+    }
+
+
+
+    &__address {
+        @include font-family(reclined);
+        @include font-size(15, 15);
+
+        font-weight: 300;
+        letter-spacing: -0.025em;
+        padding-bottom: rem(3);
+        max-width: rem(160);
+    }
+
+
+
+    &__marker {
+        @include breakpoint(desktop) {
+            width: rem(46);
+            height: rem(46);
+        }
+
+        @include breakpoint(tablet) {
+            width: rem(40);
+            height: rem(40);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, center);
+
+            position: absolute;
+            top: 43%;
+            left: 50%;
+            translate: -50% -50%;
+            color: $background-light-offwhite;
+            width: max-content;
+        }
+
+
+        &--single {
+            width: rem(63);
+        }
+
+
+        &--cluster {
+            @include font-family(compressed);
+            @include flex(row, center, center);
+            @include font-size(26, 1);
+
+            text-align: center;
+            border-radius: 50%;
+            background-color: var(--pin-color);
+            outline: 8px solid var(--pin-outer-color);
+            color: var(--cluster-text-color, var(--color-pink));
+
+
+            span { padding-top: rem(2); }
+        }
+
+
+        svg {
+            circle:first-of-type {
+                fill: var(--pin-outer-color);
+            }
+
+
+            path {
+                fill: var(--pin-color);
+            }
+        }
+    }
+
+
+
+    &__tooltip {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.75, 30);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.75, 30);
+        }
+
+        @include breakpoint(phone) {
+            max-width: vw(320, phone);
+            text-align: center;
+        }
+
+        &-location {
+            @include font-family(normal, 400);
+            @include font-settings(400, 100);
+
+            letter-spacing: normal;
+            position: absolute;
+            text-transform: none;
+
+            @include breakpoint(desktop) {
+                @include font-size(14, 16);
+
+                inset: calc(100% + #{rem(79)}) 0 auto;
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(14, 16);
+
+                inset: calc(100% + #{rem(79)}) 0 auto;
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(14, 16);
+
+                text-align: center;
+                width: max-content;
+                top: calc(100% + #{rem(12)});
+                left: 50%;
+                translate: -50% 0;
+            }
+        }
+    }
+
+
+    // mapbox elements
+
+    .mapboxgl-popup.is-active .mapboxgl-popup-content {
+        opacity: 1;
+    }
+
+
+    .mapboxgl-popup-tip { display: none; }
+
+    .mapboxgl-popup-content {
+        background: none;
+        box-shadow: none;
+        color: var(--color-box);
+        text-align: center;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .3s $ease-out;
+    }
+}

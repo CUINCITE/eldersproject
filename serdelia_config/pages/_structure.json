@@ -5,6 +5,10 @@
         ],
         "interviews": [
             "sessions"
+        ],
+        "interviewers": [
+            "collection_modules",
+            "interview_illustrations"
         ]
     }
 }

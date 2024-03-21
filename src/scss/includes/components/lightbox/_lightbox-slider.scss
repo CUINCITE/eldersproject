@@ -1,0 +1,140 @@
+.slider {
+    @include flex(row, center, center);
+
+    width: 100%;
+    height: calc(100% + var(--GLOBAL-player-height));
+    padding-bottom: var(--GLOBAL-player-height);
+
+
+    @include breakpoint(not-desktop) {
+        height: 100%;
+        padding-bottom: 0;
+        padding: 30px 0;
+    }
+
+
+
+    &__wrap {
+        @include flex(row, center, center);
+
+        position: relative;
+        height: 100%;
+        margin-top: rem(-41);
+
+
+        @include breakpoint(not-desktop) {
+            margin-top: 0;
+        }
+    }
+
+
+
+    &__slides {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        position: relative;
+        justify-items: center;
+    }
+
+
+
+    &__arrows {
+        position: absolute;
+        inset: 0;
+    }
+
+
+
+    &__arrow {
+        @include flex(column, center, flex-start);
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        color: var(--color-black);
+
+
+        &--prev {
+            left: rem(-74);
+            right: 50%;
+
+            svg { transform: scaleX(-1); }
+
+            .is-first & { display: none; }
+        }
+
+
+        &--next {
+            align-items: flex-end;
+            left: 50%;
+            right: rem(-74);
+
+            .is-last & { display: none; }
+        }
+
+
+        span {
+            opacity: 0;
+            transition: opacity .25s $ease-custom;
+        }
+
+        svg {
+            *:nth-child(1) {
+                scale: 0;
+                transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
+                transform-origin: 60% center;
+            }
+
+            *:nth-child(2) {
+                scale: 1 0;
+                transition: scale 0.25s 0.05s $ease-custom;
+                transform-origin: left center;
+            }
+
+            *:nth-child(3) {
+                scale: 0 1;
+                transition: scale 0.25s 0.25s $ease-custom;
+                transform-origin: 10% center;
+            }
+        }
+
+        .button {
+            @include breakpoint(desktop) {
+                @include hover {
+                    svg {
+                        *:nth-child(1) {
+                            translate: 5% 0;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        @include hover {
+            .button {
+                span {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+                *:nth-child(1) {
+                    scale: 1;
+                    transition: scale 0.25s 0.25s $ease-custom, translate 0.2s $ease-custom;
+                }
+
+                *:nth-child(2) {
+                    scale: 1;
+                    transition: scale 0.25s 0.2s $ease-custom;
+                }
+
+                *:nth-child(3) {
+                    scale: 1;
+                    transition: scale 0.25s $ease-custom;
+                }
+            }
+        }
+    }
+}

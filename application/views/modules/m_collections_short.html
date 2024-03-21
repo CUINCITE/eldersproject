@@ -1,10 +1,104 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Collections</h2>
-      <ol>
-        {% for item in items %}      
-        <li><a href="{{item.url}}">{{item.label}} ({{item.amount}})</a></li>
-        {% endfor %}
-      </ol>
+<section class="module module--collections_images">
+
+    <div class="collections_images">
+
+        <div class="box box__wrapper" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="collections_images__heading">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <h2 class="heading heading--title">Collections</h2>
+                    </div>
+                </div>
+            </div>
+            {% if text %}
+                <div class="collections_images__intro">
+                    <div class="grid">
+                        <div class="col-span-7">
+                            {% include "subviews/subview_text.html" with {
+                                size: "larger",
+                                text: text
+                            } %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="stack box" data-scroll="box">
+            <div class="box__bg"></div>
+            <div class="stack__gallery">
+                <div class="stack__content{% if params.simple %} stack__content--simple{% endif %}" data-component="Collections">
+                    <div class="col-span-1 col-start-2 stack__container">
+                        <div class="stack__names js-scroll-names">
+                            <ul class="names">
+                                {% for item in items %}
+                                    <li class="names__name js-accordeon-item js-caption is-closed{% if loop.first %} is-current{% endif %}">
+                                        <a href="{{ item.url }}" class="names__link"></a>
+                                        <div class="names__author{% if params.simple2 %} names__author--simple{% endif %}">
+                                            <div class="names__box{% if params.simple2 %} names__box--simple{% endif %}">
+                                                <span>{{ item.label }}</span>
+                                            </div>
+                                        </div>
+                                        {% if params.simple2 %}
+                                            <div class="names__expand">
+                                                <p class="names__claim">{{ item.collection_title }}</p>
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <ul class="stack__dots desktop-hide">
+                            {% for item in items %}
+                                <li class="stack__dot js-dot{% if loop.first %} is-current{% endif %}"><span></span></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="stack__cards js-scroll-cards">
+                            <ul class="cards">
+                                <li class="cards__card cards__card--placeholder cards__card--lightblue"></li>
+                                <li class="cards__card cards__card--placeholder cards__card--yellow"></li>
+                                <li class="cards__card cards__card--placeholder cards__card--red"></li>
+                                <li class="cards__card cards__card--placeholder cards__card--dark-green"></li>
+                                {% for item in items | reverse %}
+                                    <li class="cards__card js-card
+                                        {% if loop.first %}is-current{% endif %}
+                                        {% if loop.index == 2 %} is-next{% endif %}
+                                        {% if loop.index == 3 %} is-after-next{% endif %}
+                                    ">
+                                        {% include "subviews/subview_picture_no_retina.html" with {image:item.image} %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {% if params.simple2 %}
+                        <div class="stack__button col-start-1 col-span-2">
+                            <a href="/collections" class="button button--simple button--reversed" data-component="Button">
+                                <span class="button__main">
+                                    <i class="icon-btn-arrow arrow js-arrow">
+                                        <span class="vertical js-arrow-vertical"></span>
+                                        <span class="horizontal js-arrow-horizontal"></span>
+                                        <span class="triangle js-arrow-triangle"></span>
+                                    </i>
+                                    <span class="button__text js-button-text">Explore</span>
+                                    <i class="icon-btn-arrow arrow arrow--extra js-arrow-extra">
+                                        <span class="vertical js-arrow-vertical"></span>
+                                        <span class="horizontal js-arrow-horizontal"></span>
+                                        <span class="triangle js-arrow-triangle"></span>
+                                    </i>
+                                    <span class="button__text button__text--duplicate js-button-duplicate-text">Explore</span>
+                                </span>
+
+                                <span class="button__text button__text--extra"><i>all Collections</i></span>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="stack__filler col-start-1 col-span-2"></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</section>

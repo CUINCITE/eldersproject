@@ -1,0 +1,141 @@
+{
+    "title": "Search Results",
+    "modules": [
+        {
+            "type": "logo_box"
+        },
+        {
+            "type": "results",
+            "collections": [
+                {
+                    "label": "Carolina De Robertis",
+                    "url": "/workspace/collection"
+                }
+            ],
+            "interviews": [
+                {
+                    "name": "Carol Adams",
+                    "description": "Dedicated teacher, long-time Albuquerque resident",
+                    "url": "/workspace/interview-single",
+                    "collection": "Natalie Diaz",
+                    "locations": ["San Francisco, CA", "Oakland, CA"],
+                    "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque. "
+                }
+            ],
+            "transcripts": [
+                {
+                    "label": "Tina Valentín Aguirre",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Felicia Anderson",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Gina Anderson",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lobortis mattis aliquam faucibus. Eu augue <span>Carolina</span> Tellus pellentesque tincidunt tortor aliquam..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Tina Valentín Aguirre",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        },
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Felicia Anderson",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Gina Anderson",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lobortis mattis aliquam faucibus. Eu augue <span>Carolina</span> Tellus pellentesque tincidunt tortor aliquam..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Tina Valentín Aguirre",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...Eget felis eget nunc lobortis mattis aliquam <span>Carolina</span> augue ut lectus arcu. Tellus car pellente eu..."
+                        }
+                    ]
+                },
+                {
+                    "label": "Felicia Anderson",
+                    "items": [
+                        {
+                            "path": "/workspace/home/interview",
+                            "text": "...lectus arcu. Tellus pellentesque eu tincidun <span>Carolina</span> ortor aliquam. Mauris vitae ultricies  integer..."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

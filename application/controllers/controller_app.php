@@ -8,6 +8,7 @@ class controller_app extends _uho_controller
 
     public function getData()
     {
+        $this->model->dictInit();
         //$ajax=$this->route->isAjax() || _uho_fx::getGet('partial');
         //if ($ajax) $this->view->renderHtmlRoot=false;
         if (isset($this->cfg['serdelia']['serdelia_keys']))
@@ -26,11 +27,18 @@ class controller_app extends _uho_controller
         $this->data['head']['http']=$this->route->getDomain();
         
         if ($this->model->is404) $this->outputType='404';
+        $this->data['content']['is_404'] = $this->model->is404;
 
         if (isset($lang)) $this->data['langs']=$lang;
         $this->data=$this->urlUpdate($this->data);
 
         $this->data['head']['url']=rtrim($this->route->getUrlNow(),'/');
+
+        $this->data['content']['show_mobile_logo'] = false;
+
+        if (!empty($this->data['content']['slug'] && in_array($this->data['content']['slug'], ['contact', 'search']))) {
+            $this->data['content']['show_mobile_logo'] = true;
+        }
 
     }
 
@@ -101,7 +109,26 @@ class controller_app extends _uho_controller
                             $v='collections/'.$v['slug'];
                         break;
                         case "interview":
-                            $v='interviews/'.$v['slug'];
+                            $v = 'interviews/' . $v['slug'];
+                            $p=[];
+                            if (!empty($vv['time'])) $p['time']=$vv['time'];
+                            if (!empty($vv['session'])) $p['session']=$vv['session'];
+                            if ($p) $v.='?'.http_build_query($p);
+                            break;
+
+                        case "interviews":
+                            $v = 'interviews';
+                            if (!isset($vv['filters'])) $vv['filters'] = [];
+                            if (@$vv['page']) $vv['filters']['page'] = $vv['page'];
+                            if (@$vv['sort']) $vv['filters']['sort'] = $vv['sort'];
+                            if (@$vv['topics']) $vv['filters']['topics'] = implode(',',$vv['topics']);
+                            if (@$vv['states']) $vv['filters']['states'] = implode(',',$vv['states']);
+                            
+                            if (!empty($vv['filters'])) $v .= '?' . http_build_query($vv['filters']);
+                            break;
+
+                        case "interview_filter":
+                            $v='interviews?'.$v['filter_type'].'='.$v['slug'];
                         break;
 
 

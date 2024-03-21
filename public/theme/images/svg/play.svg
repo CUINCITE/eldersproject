@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 43" fill="none">
+    <g class="play">
+        <path d="M36.2656 21.0621L0.265625 0.0621338V42.0621L36.2656 21.0621Z" fill=""/>
+    </g>
+    <g class="pause">
+        <rect x="21.2637" width="14" height="42" fill=""/>
+        <rect x="0.263672" width="14" height="42" fill=""/>
+    </g>
+</svg>

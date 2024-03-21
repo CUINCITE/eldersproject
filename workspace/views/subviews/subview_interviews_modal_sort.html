@@ -1,0 +1,31 @@
+<div id="modal-sort" class="interviews-grid__modal modal" data-component="Modal">
+    <div class="modal__bar js-modal-bar">
+        <button class="modal__close js-modal-close" aria-label="Close filters modal"><i class="icon-close"></i></button>
+        <h3 class="modal__title">Sort by</h3>
+    </div>
+
+    <div class="modal__wrap js-modal-wrap">
+        <form action="" data-component="Load" data-options='{"contentSelector": "#interviews-grid", "live": true, "updateCurrentSorting": "true", "extra": ".js-interviews-filters"}' class="modal__form js-interviews-sort-mobile">
+            <div class="modal__grid">
+                <fieldset class="modal__group">
+                    <div>
+                        <input type="radio" checked name="sort" id="narrators-modal" value="narrators">
+                        <label for="narrators-modal"><i class="checkmark">[[svg::checkmark]]</i><span>Narrators A-Z</span></label>
+                    </div>
+                    <div>
+                        <input type="radio" name="sort" id="narrators-modal-za" value="!narrators">
+                        <label for="narrators-modal-za"><i class="checkmark">[[svg::checkmark]]</i><span>Narrators Z-A</span></label>
+                    </div>
+                    <div>
+                        <input type="radio" name="sort" id="locations-modal" value="locations">
+                        <label for="locations-modal"><i class="checkmark">[[svg::checkmark]]</i><span>Locations</span></label>
+                    </div>
+                    <div>
+                        <input type="radio" name="sort" id="collections-modal" value="collections">
+                        <label for="collections-modal"><i class="checkmark">[[svg::checkmark]]</i><span>Collections</span></label>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+</div>

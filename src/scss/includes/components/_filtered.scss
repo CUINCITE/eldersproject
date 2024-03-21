@@ -1,0 +1,76 @@
+.filtered {
+    border-top: none !important;
+
+
+    &:has(li) {
+        border-top: 1px solid var(--color-bg);
+    }
+
+    &__list {
+        @include flex(row, flex-start, center);
+
+        padding-left: calc(var(--grid-margin) - 1px);
+        gap: rem(16);
+        flex-wrap: wrap;
+
+        @include breakpoint(tablet) {
+            padding-inline: map-get($grid-offset, tablet);
+        }
+
+        @include breakpoint(phone) {
+            gap: rem(4) rem(14);
+            padding-top: rem(12);
+            padding-inline: map-get($grid-offset, phone);
+        }
+
+        &:has(li) {
+            padding-bottom: rem(25);
+            border-top: 1px solid var(--color-bg);
+        }
+    }
+
+
+
+    &__label {
+        @include font-family(compressed);
+        @include font-size(21, 19);
+        @include letter-spacing(-0.525, 21);
+
+        text-transform: uppercase;
+
+
+        label {
+            @include flex(row, flex-start, center);
+
+            margin-top: rem(10);
+            gap: rem(4);
+
+            @include breakpoint(phone) {
+                margin-top: rem(5);
+            }
+
+
+            span {
+                @include flex(row, center, center);
+                @include font-family(normal);
+                @include font-size(12, 12);
+
+                letter-spacing: -0.01em;
+                width: rem(22);
+                height: rem(22);
+                background-color: var(--color-grey300);
+                border-radius: 50%;
+                position: relative;
+                top: rem(-1);
+                padding-top: rem(1);
+            }
+        }
+
+
+        .icon-close {
+            top: -1px;
+            width: rem(14);
+            height: rem(14);
+        }
+    }
+}

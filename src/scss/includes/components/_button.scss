@@ -1,46 +1,268 @@
 .button {
     @include font-family(compressed);
-    @include font-size(50, 1);
-    @include letter-spacing(-1.25, 50);
     @include flex(row, flex-start, center);
 
     position: relative;
-    gap: vw(9);
     text-transform: uppercase;
     font-weight: bold;
-    transition: background $time-fast ease-out, color $time-fast ease-out;
     color: var(--color-text);
 
+    @include breakpoint(desktop) {
+        @include font-size(50, 1);
+        @include letter-spacing(-1.75, 50);
+
+        gap: vw(9);
+    }
+
+    @include breakpoint(not-desktop) {
+        // @include flex(row-reverse, flex-end, center);
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1.2, 40);
+
+            gap: vw(6, tablet);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
+            gap: vw(4, phone);
+        }
+    }
+
+
+    &--overflow {
+        @include breakpoint(desktop) {
+            overflow: hidden;
+            display: inline-flex;
+            padding-right: rem(10);
+        }
+    }
+
+
     &--reversed {
-        flex-direction: row-reverse;
-        gap: vw(3);
+        @include breakpoint(desktop) {
+            flex-direction: row-reverse;
+
+            .button__main {
+                flex-direction: row-reverse !important;
+            }
+        }
+    }
+
+
+    &--simple {
+        @include breakpoint(desktop) {
+            justify-content: flex-end;
+        }
+    }
+
+
+    &--inversed {
+        svg {
+            rotate: 180deg;
+        }
+    }
+
+
+    &--collection {
+        overflow: hidden;
     }
 
 
     &--lightbox {
         @include font-size(30, 1);
         letter-spacing: normal;
+        color: inherit;
+        width: rem(74);
 
         // text inside button
 
         > span {
             position: absolute;
-            left: 0;
-            top: vw(23);
+            right: rem(6);
+            top: rem(26);
         }
 
 
         &.button--reversed {
             .button__arrow { transform: scaleX(-1); }
-            > span { left: auto; right: 0; }
+            > span { right: auto; left: rem(6); }
         }
+    }
+
+
+    &--medium {
+
+        @include breakpoint(desktop) {
+            @include font-size(40, 1);
+
+            margin-block: trim-font(1);
+
+            --padding: #{rem(6)};
+
+            gap: rem(7);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 30);
+
+
+            gap: rem(7);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+
+            margin-block: trim-font(1);
+            gap: rem(4);
+        }
+    }
+
+
+    &--small {
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 1);
+            @include letter-spacing(-0.6, 20);
+
+            --padding: #{rem(3)};
+            gap: vw(2);
+            padding-right: rem(2);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(20, 16);
+            @include letter-spacing(-0.6, 20);
+
+            --padding: #{rem(3)};
+            gap: rem(2);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 16);
+            @include letter-spacing(-0.6, 20);
+
+            gap: rem(3);
+        }
+
+
+        i {
+            margin-top: rem(-2);
+        }
+    }
+
+    &--big {
+
+        @include breakpoint(tablet) {
+            @include font-size(50, 1);
+            @include letter-spacing(-1.5, 50);
+
+            gap: vw(6, phone);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(40, 50);
+            @include letter-spacing(-1.4, 40);
+
+            gap: vw(6, phone);
+        }
+    }
+
+    &--two_line {
+        @include breakpoint(phone) {
+            margin-bottom: vw(3, phone);
+
+            .arrow {
+                align-self: start;
+                translate: 0 30%;
+            }
+        }
+    }
+
+
+
+    span i {
+        @include font-family(reclined, 500);
+
+        font-style: normal;
+
+        @include breakpoint(desktop) {
+            padding-left: var(--padding, rem(9));
+            letter-spacing: -0.025em;
+        }
+
+        @include breakpoint(tablet) {
+            padding-left: var(--padding, rem(5));
+        }
+
+        @include breakpoint(phone) {
+            padding-left: rem(3);
+        }
+    }
+
+    &__text {
+        &--duplicate {
+            position: absolute;
+
+            @include breakpoint(not-desktop) {
+                display: none;
+            }
+        }
+
+
+        .button--small & {
+            padding-top: rem(1);
+        }
+    }
+
+    &__main {
+        @include flex(row, flex-start, center);
     }
 
     @include hover {
         // @extend %button-hover;
     }
+
+
+    .interviews--grid & {
+        color: inherit;
+    }
+
+    &__box {
+        border-top: 1px solid var(--color-bg);
+
+
+        @include breakpoint(desktop) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+            border-top: 1px solid $color-bg;
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(14);
+            padding-bottom: rem(42);
+            border-top: 1px solid $color-bg;
+        }
+
+
+        .interviews--banner & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(167);
+            }
+        }
+    }
 }
 
-%button-hover {
 
-}
+// %button-hover {
+
+// }

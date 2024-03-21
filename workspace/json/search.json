@@ -1,0 +1,48 @@
+{
+    "query": "pizza",
+    "results": [
+        {
+            "category": "organizations",
+            "label": "Collections",
+            "items": [
+                {
+                    "id": 665,
+                    "label": "Carol Adams",
+                    "url": "/workspace/topic-single"
+                }
+            ]
+        },
+        {
+            "category": "topics",
+            "label": "Interviews",
+            "items": [
+                {
+                    "id": 99,
+                    "label": "C. Njoube Dugas",
+                    "url": "/workspace/topic-single"
+                },
+                {
+                    "id": 98,
+                    "label": "Patricia Welch",
+                    "url": "/workspace/topic-single"
+                }
+            ]
+        },
+        {
+            "category": "transcripts",
+            "label": "Transcripts",
+            "items": [
+                {
+                    "label": "Joan Benoit",
+                    "text": "Eget felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus <br> <span>car</span> pellente eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.",
+                    "path": "/workspace/home/interview"
+                },
+                {
+                    "label": "Felicia Anderson",
+                    "text": "Felis eget nunc lobortis mattis aliquam faucibus. Eu augue ut lectus arcu. Tellus <br> <span>car</span> pellente eu tincidunt tortor aliquam. Mauris vitae ultricies leo integer malesuada.",
+                    "path": "/workspace/home/interview"
+                }
+            ]
+        }
+    ]
+}

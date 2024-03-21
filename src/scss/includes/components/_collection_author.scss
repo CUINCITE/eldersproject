@@ -1,0 +1,185 @@
+.collection_author {
+    &--huge {
+        .collection_author__name {
+
+            @include breakpoint(desktop) {
+                @include font-size(100, 85);
+                @include letter-spacing(-3, 100);
+
+                padding-top: rem(24);
+                margin-bottom: rem(-5);
+                margin-left: 0;
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(120, 0.84);
+                @include letter-spacing(-4, 120);
+
+                margin-block: trim-font(0.84);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(82, 0.84);
+                @include letter-spacing(-2.87, 82);
+            }
+        }
+
+        .collection_author__collection {
+
+            @include breakpoint(desktop) {
+                @include font-size(26, 1.05);
+                @include letter-spacing(-0.26, 26);
+
+                margin-left: 0;
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(25, 1.05);
+                @include letter-spacing(-0.25, 25);
+
+                margin-block: trim-font(1.05);
+
+                padding-left: rem(3);
+                padding-top: rem(12);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(20, 21);
+                @include letter-spacing(-0.2, 20);
+
+                margin-left: 0;
+            }
+
+            &::before {
+                @include breakpoint(desktop) {
+                    width: rem(35);
+                    margin-right: rem(16);
+                }
+
+                @include breakpoint(tablet) {
+                    width: rem(32);
+                    margin-right: rem(10);
+                }
+
+                @include breakpoint(phone) {
+                    width: rem(26);
+                    margin-right: rem(8);
+                }
+            }
+        }
+    }
+
+    &__name {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(58, 56);
+            @include letter-spacing(-1.45, 58);
+
+            padding-top: rem(13);
+            margin-left: rem(-6);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(49, 1);
+            @include letter-spacing(-1.5, 60);
+
+            padding-block: rem(18);
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(40, 38);
+            @include letter-spacing(-1, 40);
+
+            padding-top: rem(18);
+        }
+
+
+        .interviews__list--collection & {
+            &::before {
+                @include font-family(slim);
+                @include font-size(58, 30);
+
+                font-weight: 300;
+                letter-spacing: -0.03em;
+                content: counter(interviews, decimal-leading-zero) ". ";
+                counter-increment: interviews;
+                font-feature-settings: "ss03" on;
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(40, 30);
+
+                    margin-right: rem(4);
+                    letter-spacing: -0.025em;
+                }
+            }
+        }
+    }
+
+
+    &__collection {
+        @include font-family(compact);
+        @include font-settings(400, 100);
+        @include flex(row, flex-start, center);
+
+        font-weight: 400;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            @include font-size(17, 12);
+            @include letter-spacing(-0.17, 17);
+
+            margin-top: rem(3);
+            margin-left: rem(-4);
+        }
+
+        &::before {
+            content: "";
+            display: inline-flex;
+            height: 1px;
+            background-color: currentColor;
+
+            @include breakpoint(desktop) {
+                width: rem(19);
+                margin-right: rem(8);
+            }
+        }
+    }
+
+
+    &__title {
+        @extend .collection_author__collection;
+
+        @include breakpoint(desktop) {
+            @include font-size(19, 1.05);
+            @include letter-spacing(-0.19, 19);
+
+            max-width: unset;
+            margin-top: rem(0);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(18, 1.05);
+            @include letter-spacing(-0.18, 18);
+
+            margin-top: rem(2);
+            margin-bottom: rem(28);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 1.05);
+            @include letter-spacing(-0.14, 14);
+
+            margin-top: rem(2);
+            margin-bottom: rem(24);
+        }
+
+        &::before {
+            all: unset;
+        }
+    }
+}

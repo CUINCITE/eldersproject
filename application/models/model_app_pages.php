@@ -10,6 +10,8 @@ class model_app_pages extends model_app
 	private $parent_vars=[];
 	var $isError;
 
+    public bool $show_mobile_logo = false;
+
 	// ----------------------------------------------------------------------------------------------------------------
 	// get Page content
 	// ----------------------------------------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ class model_app_pages extends model_app
 		
 		if ($page)
 		{
-			$this->ogSet($page['title'],$page['description'],$page['image']['medium']);
+			$this->ogSet(@$page['title'],@$page['description'],@$page['image']['medium']);
 			if (substr($urlArr[0],0,17)=='serdelia-preview-') $urlArr=explode('/',$page['url']);
 			$page=$this->updatePage($page,$urlArr,$params['get']);
 		}
@@ -49,7 +51,7 @@ class model_app_pages extends model_app
 
 		if (!$page || !$page['modules'] || $this->is404)
 		{
-			//$this->is404=true;
+			$this->is404=true;
 			$page=$this->getJsonModel('pages',['slug'=>'404'],true);
 			$page=$this->updatePage($page,$urlArr,$params['get']);
 		}

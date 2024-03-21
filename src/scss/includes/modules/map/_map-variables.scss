@@ -1,0 +1,99 @@
+.map {
+    // Default
+
+    &--global {
+        --pin-color: var(--color-brown);
+        --pin-outer-color: var(--color-pink);
+        --cluster-text-color: var(--color-pink);
+    }
+
+    // Caro De Robertis
+
+    &--pink {
+        --pin-color: var(--color-brown);
+        --pin-outer-color: var(--color-green);
+        --map-button-color: var(--color-purple);
+    }
+
+
+    // Natalie Diaz
+
+    &--orange {
+        --pin-color: var(--color-red);
+        --pin-outer-color: var(--color-purple);
+        --map-button-color: var(--color-orange);
+    }
+
+
+    // Eve Ewing
+
+    &--pale-blue {
+        --pin-color: var(--color-purple);
+        --pin-outer-color: var(--color-orange);
+        --map-button-color: var(--color-pale-blue);
+    }
+
+
+    // Denice Frohman
+
+    &--brown {
+        --pin-color: var(--color-brown);
+        --pin-outer-color: var(--color-red);
+        --map-button-color: var(--color-brown);
+        --map-text-color: var(--color-purple);
+    }
+
+
+    // Caleb Gayle
+
+    &--purple {
+        --pin-color: var(--color-purple);
+        --pin-outer-color: var(--color-yellow);
+        --map-button-color: var(--color-yellow);
+        --map-text-color: var(--color-red);
+    }
+
+
+    // Robin Coste Lewis
+
+    &--green {
+        --pin-color: var(--color-purple);
+        --pin-outer-color: var(--color-red);
+    }
+
+
+    // April Reign
+
+    &--default {
+        --pin-color: var(--color-dark-green);
+        --pin-outer-color: var(--color-blue);
+        --map-button-color: var(--color-blue);
+    }
+
+
+    // Ellery Washington
+
+    &--dark-green {
+        --pin-color: var(--color-orange);
+        --pin-outer-color: var(--color-purple);
+        --map-button-color: var(--color-purple);
+    }
+
+
+    // Renee Watson
+
+    &--pale-green {
+        --pin-color: var(--color-red);
+        --pin-outer-color: var(--color-yellow);
+        --map-button-color: var(--color-red);
+    }
+
+
+    // Jenna Wortham
+
+    &--pale-purple {
+        --pin-color: var(--color-red);
+        --pin-outer-color: var(--color-dark-green);
+        --map-button-color: var(--color-red);
+    }
+}

@@ -1,0 +1,40 @@
+.collections_images {
+    position: relative;
+
+
+
+    &__heading {
+        position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            border-bottom: 1px solid var(--color-bg);
+        }
+    }
+
+
+
+    &__intro {
+        position: relative;
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(70);
+            border-top: 1px solid $color-bg;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            padding-bottom: rem(20);
+        }
+    }
+
+
+
+    &__authors {
+        @include breakpoint(desktop) {
+            position: relative;
+            right: 0;
+            width: 50%;
+        }
+    }
+}

@@ -3,3 +3,244 @@
 }
 
 
+.svg-boxes {
+    width: rem(95);
+    height: auto;
+}
+
+
+.svg-search {
+    width: rem(24);
+    height: auto;
+
+    @include breakpoint(tablet) {
+        width: rem(32);
+    }
+}
+
+
+.svg-bracket-left,
+.svg-bracket-right {
+    @include breakpoint(desktop) {
+        width: rem(5);
+        height: rem(27);
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(5);
+        height: rem(27);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(4.4);
+        height: rem(20);
+    }
+}
+
+
+.svg-bracket-left {
+
+    @include breakpoint(desktop) {
+        margin-right: rem(5);
+    }
+
+    @include breakpoint(tablet) {
+        margin-right: rem(4);
+    }
+
+    @include breakpoint(phone) {
+        margin-right: rem(3);
+    }
+}
+
+
+.svg-bracket-right {
+    @include breakpoint(desktop) {
+        margin-left: rem(5);
+    }
+
+    @include breakpoint(tablet) {
+        margin-left: rem(4);
+    }
+
+    @include breakpoint(phone) {
+        margin-left: rem(3);
+    }
+}
+
+
+.svg-prevnext {
+    width: 34px;
+    height: 42px;
+
+    path, rect { fill: currentColor; }
+}
+
+
+.svg-play {
+    width: 37px;
+    height: 43px;
+
+
+    @include breakpoint(tablet) {
+        .player--video & {
+            width: 40px;
+            height: 44px;
+        }
+    }
+
+
+    @include breakpoint(phone) {
+        .player--video &,
+        .playlist & {
+            width: 18px;
+            height: 21px;
+        }
+    }
+
+
+    path, rect { fill: currentColor; }
+
+
+    g {
+        // transition: opacity .25s $ease-custom;
+
+
+        &.pause {
+            opacity: 0;
+
+
+            .is-playing &,
+            .is-playing ~ i & { opacity: 1; }
+        }
+
+
+        &.play {
+            opacity: 1;
+
+
+            .is-playing &,
+            .is-playing ~ i & { opacity: 0; }
+        }
+    }
+}
+
+
+.svg-rewind {
+    width: 30px;
+    height: 25px;
+
+    path:first-of-type { stroke: currentColor; stroke-width: 2.25; }
+    path:last-of-type { fill: currentColor; }
+}
+
+
+.svg-pin {
+    width: rem(12);
+    height: rem(16);
+
+    path { fill: currentColor; }
+}
+
+
+.svg-lightbox-arrow-small {
+    width: rem(14);
+    height: rem(23);
+
+    path:first-of-type { stroke: currentColor; }
+    path:last-of-type { fill: currentColor; }
+}
+
+
+.svg-apply {
+    @include breakpoint(desktop) {
+        height: rem(16);
+        width: rem(16);
+    }
+
+    @include breakpoint(tablet) {
+        height: rem(21);
+        width: rem(21);
+    }
+
+    @include breakpoint(phone) {
+        height: rem(21);
+        width: rem(21);
+    }
+}
+
+.svg-checkmark {
+    @include breakpoint(desktop) {
+        width: rem(16) !important;
+        height: rem(16) !important;
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(26) !important;
+        height: rem(26) !important;
+    }
+
+    @include breakpoint(phone) {
+        width: rem(24) !important;
+        height: rem(24) !important;
+    }
+}
+
+.svg-arrow-player-small {
+    width: rem(8);
+    height: rem(14);
+}
+
+
+.svg-arrow-oblique {
+    width: rem(12);
+    height: rem(12);
+}
+
+.svg-quote-icon {
+    .claim & {
+        display: block;
+        margin-bottom: rem(5);
+        width: rem(29);
+    }
+}
+
+.svg-pin-color {
+    width: rem(31);
+    margin-right: rem(8);
+    flex-shrink: 0;
+
+    circle:first-of-type { fill: var(--pin-outer-color); }
+    path { fill: var(--pin-color); }
+}
+
+
+.svg-arrow-small {
+    @include breakpoint(desktop) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(7);
+        height: rem(13);
+    }
+
+    .polaroid_gallery & {
+        @include breakpoint(desktop) {
+            width: rem(14);
+            height: rem(23);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            width: 14px;
+            height: 23px;
+        }
+    }
+}

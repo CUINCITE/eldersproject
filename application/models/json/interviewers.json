@@ -42,11 +42,18 @@
             "required": true
         },
         {
+            "label": "Collection Title",
+            "field": "collection_title"
+        },
+        {
             "label": "Position",
             "list": true,
             "field": "position",
             "type":"text",
             "settings":{"rows":2}
+        },
+        {
+            "field":"color","label":"color"
         },
         {"field":"amount"},
         {
@@ -60,6 +67,7 @@
                 "pattern": "{{first_name}} {{last_name}}"
             }
         },
+        
         {
             "label": "Publish",
             "field": "active",
@@ -119,6 +127,21 @@
                     "height": 120,
                     "crop": true,
                     "retina": true
+                },
+                {
+                    "folder": "big",
+                    "label": "Big Tile",
+                    "width": 1346,
+                    "height": 1346,
+                    "crop": true,
+                    "retina": true
+                },
+                {
+                    "folder": "og",
+                    "label": "OG Image",
+                    "width": 1200,
+                    "height": 630,
+                    "crop": true
                 }
             ]
         },

@@ -1,23 +1,26 @@
 .hamburger {
     @include flex(column);
+
     overflow: hidden;
-    gap: vw(3);
-    margin-left: vw(3);
+
+    @include breakpoint(desktop) {
+        gap: vw(3);
+        margin-left: vw(3);
+    }
+
 
     @include breakpoint(not-desktop) {
         top: 22px;
         right: $mobile;
-
         transition: transform $time-fast $ease-custom;
-    }
 
-    @include hover {
-        .hamburger__line {
-            transform: translateX(-7px);
-
-            &:nth-of-type(2) {
-                transform: translateX(7px);
-            }
+        @include breakpoint(tablet) {
+            width: 100%;
+            gap: 8px;
+        }
+          
+        @include breakpoint(phone) {
+            gap: 4px;
         }
     }
 
@@ -54,6 +57,32 @@
             margin-left: 0;
             margin-right: auto;
             opacity: 1;
+        }
+
+        @include breakpoint(tablet) {
+            width: 100%;
+        };
+
+        @include breakpoint(phone) {
+            width: 32px;
+        }
+    }
+}
+
+button {
+    @include hover {
+        .hamburger {
+            @extend %hamburger-hover;
+        }
+    }
+}
+
+%hamburger-hover {
+    .hamburger__line {
+        transform: translateX(-7px);
+
+        &:nth-of-type(2) {
+            transform: translateX(7px);
         }
     }
 }

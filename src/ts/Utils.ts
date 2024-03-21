@@ -1,22 +1,12 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+import { gsap } from 'gsap/dist/gsap';
 
 
 export function generateUID(): string {
     return `${(new Date()).getTime()}${Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)}`;
 }
 
-
-export function preloadImages(images: string[]): Promise<void[]> {
-    return Promise.all(images.map((image): Promise<void> => new Promise<void>(resolve => {
-        const img = new Image();
-        img.onload = () => resolve();
-        img.onerror = () => resolve();
-        img.onabort = () => resolve();
-        img.src = image;
-        if (img.complete && img.clientHeight > 0) { resolve(); }
-    })));
-}
 
 
 export const debounce = (callback: Function, timeout: number = 300) => {
@@ -34,6 +24,11 @@ export const debounce = (callback: Function, timeout: number = 300) => {
 
 export function setAppHeight(): void {
     document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+}
+
+
+export function setVwUnit(): void {
+    document.documentElement.style.setProperty('--vw', `${document.documentElement.clientWidth}px`);
 }
 
 
@@ -269,16 +264,173 @@ export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
-export function parseToTime(sec: number): string {
-    const totalSec = parseInt(`${sec}`, 10);
-    const hours = parseInt(`${totalSec / 3600}`, 10) % 24;
-    const minutes = parseInt(`${totalSec / 60}`, 10) % 60;
-    const seconds = totalSec % 60;
-    const hrsDisplay = `${hours < 10 ? `0${hours}` : hours}:`;
-
-    return `${(hours > 0 ? hrsDisplay : '') + (minutes < 10 ? `0${minutes}` : minutes)}:${seconds < 10 ? `0${seconds}` : seconds}`;
-}
 
 export function normalizeUrl(url: string): string {
-    return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
+    // without search query parameter - needed for reloading search results' page with different query
+    return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '')}`;
+
+    // old version - let's leave it just in case
+    // return `/${url.replace(/#.*$/, '').replace(/^\/|\/$/g, '').replace(/\?.*$/, '')}`;
+}
+
+
+export const getQueryString = (forms: HTMLFormElement | HTMLFormElement[]): string => {
+
+    const formData = new FormData();
+
+    (Array.isArray(forms) ? forms : [forms])
+        .filter((e, i, a) => a.indexOf(e) === i) // remove duplicates
+        .forEach(form => {
+            new URLSearchParams(new FormData(form) as any)
+                .forEach((value, key) => formData.append(key, value));
+        });
+
+
+    const formParams = new URLSearchParams(formData as any);
+
+    // filter empty values from form
+    const keysForDel = [];
+    formParams.forEach((value, key) => {
+        if (!value) keysForDel.push(key);
+    });
+
+    // remove empty fields from query
+    keysForDel.forEach(key => formParams.delete(key));
+
+    // set new URLSearchParams Object for final converted data
+    const finalFormData: URLSearchParams = new URLSearchParams();
+
+    // when query has same name parameters with different values (eg multi checkboxes), merge values into one key (for URL prettify & backend purposes)
+    formParams.forEach((value, key) => {
+        if (finalFormData.has(key)) {
+            finalFormData.set(key, `${finalFormData.get(key)},${value}`);
+        } else finalFormData.set(key, value);
+    });
+
+
+    return decodeURIComponent(finalFormData.toString());
+};
+
+
+
+export function removeTags(str) {
+    if ((str === null) || (str === '')) return false;
+    // eslint-disable-next-line no-param-reassign
+    str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/ig, '');
+}
+
+
+
+export function setStorageItem(key: string, value: string): void {
+    try {
+        localStorage.setItem(key, value);
+    } catch (error) {
+        console.warn(error);
+    }
+}
+
+
+export function setSessionStorageItem(key: string, value: string): void {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (error) {
+        console.warn(error);
+    }
+}
+
+
+export function getStorageItem(key: string): string {
+    return localStorage.getItem(key);
+}
+
+
+export function getSessionStorageItem(key: string): string {
+    return sessionStorage.getItem(key);
+}
+
+
+export function findVisibleBoxes(boxes: NodeListOf<HTMLElement>): HTMLElement[] {
+    const visibleBoxes = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+
+        if (rect.top < (window.innerHeight + window.scrollY) && rect.bottom > window.scrollY) {
+            visibleBoxes.push(box);
+        }
+    });
+
+    return visibleBoxes;
+}
+
+
+export interface IBox {
+    element: HTMLElement;
+    visibleHeight: number;
+    isTopPart: boolean;
+    topOffset: number;
+}
+
+
+export function getVisibleItems(boxes: Element[]): IBox[] {
+    const visibleBoxes: IBox[] = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+        const { scrollTop } = document.documentElement;
+
+        const topFromDocument = rect.top + scrollTop;
+        const bottomFromDocument = rect.bottom + scrollTop;
+
+        if (topFromDocument < (window.innerHeight + scrollTop) && bottomFromDocument > scrollTop) {
+            visibleBoxes.push({
+                element: box as HTMLElement,
+                visibleHeight: Math.min(bottomFromDocument, window.innerHeight + scrollTop) - Math.max(topFromDocument, scrollTop),
+                isTopPart: topFromDocument > scrollTop,
+                topOffset: topFromDocument - scrollTop,
+            });
+        }
+    });
+
+    return visibleBoxes;
+}
+
+
+export function createPlaceholders(elements: IBox[]): HTMLElement[] {
+    const placeholders = [];
+
+    elements.forEach(item => {
+        item.element.classList.remove('is-animated');
+        const placeholder = document.createElement('div');
+        placeholder.classList.add('box__placeholder');
+        placeholder.style.height = `${item.visibleHeight}px`;
+
+        // when box is higher than viewport, make it equal to viewport height
+        if (item.visibleHeight >= window.innerHeight) {
+            placeholder.style.top = `${Math.abs(item.topOffset)}px`;
+        } else {
+            const position = item.isTopPart ? 'top' : 'bottom';
+            placeholder.style[position] = '0px';
+        }
+        item.element.appendChild(placeholder);
+        placeholders.push(placeholder);
+    });
+    return placeholders;
+}
+
+
+
+export function shake(el): void {
+    gsap.fromTo(el, { x: -10 }, {
+        duration: 0.5,
+        x: 0,
+        clearProps: 'transform',
+        ease: 'elastic.out(2, 0.2)',
+    });
+    navigator.vibrate([40, 20, 40, 20, 40]);
 }

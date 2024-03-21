@@ -1,0 +1,26 @@
+.collections_hero {
+    display: grid;
+    position: relative;
+
+    @include breakpoint(desktop) {
+        min-height: var(--app-height);
+        grid-template-rows: auto 1fr;
+    }
+
+    @include breakpoint(not-desktop) {
+        z-index: 0;
+    }
+
+
+    .claim__sticker {
+
+        @include breakpoint(desktop) {
+            bottom: vw(-8);
+            left: vw(20);
+        }
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
+    }
+}

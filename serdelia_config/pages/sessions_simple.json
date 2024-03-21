@@ -57,7 +57,8 @@
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "list":true
+            "list":true,
+            "settings":{"case":true,"code":true}
         },
         {
             "field":"narrator_location",
@@ -141,6 +142,26 @@
             "type": "boolean",
             "list": "edit",
             "hr": true
+        },
+        {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true
+        },
+        {
+            "field": "doc",
+            "label": "DOCX Transcript file",
+            "type": "file",
+            "extension":"docx",
+            "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true
         },
         {
             "tab":"Transcript",
