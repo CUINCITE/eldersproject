@@ -54,7 +54,9 @@ html {
 
     &:has(.has-menu-open),
     &.has-menu-open {
-        // overflow: hidden;
+        @include breakpoint(not-desktop) {
+            overflow: hidden;
+        }
     }
 }
 
