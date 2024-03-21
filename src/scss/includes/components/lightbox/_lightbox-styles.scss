@@ -167,6 +167,7 @@
             flex-shrink: 0;
             transition: height .4s $ease-custom, flex-basis .4s $ease-custom;
             overflow: hidden;
+            margin-top: 10px;
 
 
             .is-expanded & {
@@ -754,8 +755,10 @@
             justify-content: flex-start;
             z-index: 1;
             overflow: hidden;
-            min-height: 66vh;
-            padding-bottom: vw(100, phone);
+
+            // min-height: 66vh;
+
+            // padding-bottom: vw(100, phone);
 
             // padding-bottom: 106px;
 

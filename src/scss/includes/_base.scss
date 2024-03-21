@@ -58,6 +58,16 @@ html {
             overflow: hidden;
         }
     }
+
+
+    @include breakpoint(not-desktop) {
+        &.is-transition { pointer-events: none; }
+    }
+
+
+    @include breakpoint(phone) {
+        &.has-audio-player-expanded { overflow: hidden; }
+    }
 }
 
 

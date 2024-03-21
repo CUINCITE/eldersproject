@@ -410,6 +410,11 @@
         @include breakpoint(desktop) {
             padding-left: 9.5%; // visually centered, like .player__buttons
         }
+
+
+        @include breakpoint(phone) {
+            .player.is-error & { color: red; }
+        }
     }
 
 
