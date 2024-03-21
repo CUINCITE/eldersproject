@@ -176,7 +176,11 @@
 
     &__image {
         margin-bottom: rem(20);
-        height: rem(190);
+
+        // height: rem(190);
+
+
+        &--square { aspect-ratio: 1; }
 
 
         picture, img {

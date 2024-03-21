@@ -86,51 +86,49 @@ export class Circle extends Component {
 
 
     public init = (): Promise<void> => new Promise(resolve => {
-        this.getImages().then((data: ICircleItems) => {
-            const itemsArray = data.items;
+        const itemsArray = JSON.parse(this.view.dataset.items);
 
-            // sort the array randomly
-            const shuffledArray = itemsArray.sort(() => Math.random() - 0.5);
+        // sort the array randomly
+        const shuffledArray = itemsArray.items.sort(() => Math.random() - 0.5);
 
-            // get 6 items to loop. but filter out items with same color
-            const seenColors = new Set();
-            const uniqueColorItems = shuffledArray.filter(item => {
-                if (seenColors.has(item.color)) {
-                    return false;
-                }
-                seenColors.add(item.color);
-                return true;
+        // get 6 items to loop. but filter out items with same color
+        const seenColors = new Set();
+        const uniqueColorItems = shuffledArray.filter(item => {
+            if (seenColors.has(item.color)) {
+                return false;
+            }
+            seenColors.add(item.color);
+            return true;
 
-            });
-            const chosenItems = uniqueColorItems.slice(0, 6);
-
-
-
-            this.mainWrapper.style.backgroundColor = `var(--color-${chosenItems[5].color})`;
-
-            const circlesHtml = chosenItems.map(item => `
-                        <div class="circle__circle js-circle circle__circle--${item.color}"></div>
-                    `);
-            this.circlesWrapper.innerHTML = circlesHtml.join('');
-
-            const illusHtml = chosenItems.map(item => `
-                        <div class="circle__illu js-illu">
-                            <img src="${item.src}" alt="Illustration ${item.id}" />
-                        </div>
-                    `);
-            this.illusWrapper.innerHTML = illusHtml.join('');
-
-            this.circles = this.view.querySelectorAll('.js-circle');
-            this.images = this.view.querySelectorAll('.js-illu');
-
-
-            Images.preload(this.view.querySelectorAll('img'))
-                .then(() => {
-                    this.loop();
-                    this.isLoaded = true;
-                    resolve();
-                });
         });
+        const chosenItems = uniqueColorItems.slice(0, 6);
+
+
+
+        this.mainWrapper.style.backgroundColor = `var(--color-${chosenItems[5].color})`;
+
+        const circlesHtml = chosenItems.map(item => `
+                    <div class="circle__circle js-circle circle__circle--${item.color}"></div>
+                `);
+        this.circlesWrapper.innerHTML = circlesHtml.join('');
+
+        const illusHtml = chosenItems.map(item => `
+                    <div class="circle__illu js-illu">
+                        <img src="${item.src}" alt="Illustration ${item.id}" />
+                    </div>
+                `);
+        this.illusWrapper.innerHTML = illusHtml.join('');
+
+        this.circles = this.view.querySelectorAll('.js-circle');
+        this.images = this.view.querySelectorAll('.js-illu');
+
+
+        Images.preload(this.view.querySelectorAll('img'))
+            .then(() => {
+                this.loop();
+                this.isLoaded = true;
+                resolve();
+            });
     });
 
 
