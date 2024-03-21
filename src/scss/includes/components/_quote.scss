@@ -58,6 +58,11 @@
     }
 
 
+    strong {
+        @include font-settings(500, 100);
+    }
+
+
 
     footer {
         @include font-family(compact);
