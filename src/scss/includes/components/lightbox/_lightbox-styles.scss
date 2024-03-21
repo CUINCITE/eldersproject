@@ -852,6 +852,9 @@
             background-color: currentColor;
         }
 
+
+        &--empty::before { display: none; }
+
         strong {
             @include font-settings(700, 100);
 
