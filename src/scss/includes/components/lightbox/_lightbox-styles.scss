@@ -61,6 +61,8 @@
             flex-grow: 1;
             height: auto;
 
+            // padding-bottom: vw(100, phone);
+
             // overflow-y: auto;
         }
     }
@@ -748,14 +750,14 @@
             order: 4;
             flex: 1 0 auto;
             flex-direction: column;
-
-            // height: 100%;
             align-items: flex-start;
             justify-content: flex-start;
             z-index: 1;
+            overflow: hidden;
+            min-height: 66vh;
+            padding-bottom: vw(100, phone);
 
             // padding-bottom: 106px;
-
 
             // .is-sticky & { overflow-y: auto; }
         }
@@ -855,6 +857,13 @@
 
             display: block;
             margin-bottom: 2px;
+        }
+
+        @include breakpoint(phone) {
+            bottom: unset;
+            top: 100%;
+            left: 50%;
+            translate: -50% 0;
         }
     }
 
