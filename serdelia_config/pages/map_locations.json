@@ -94,20 +94,20 @@
         {
           "folder": "desktop",
           "label": "Desktop",
-          "width": 800,
-          "height": 800,
-          "crop": true,
+          "width": 421,
           "retina": true
         },
         {
           "folder": "mobile",
           "label": "Mobile",
-          "width": 375,
-          "height": 375,
-          "crop": true,
+          "width": 349,
           "retina": true
         }
-      ]
+      ],
+      "settings": {
+        "webp": true,
+        "sizes": "image_sizes"
+      }
     },
     {
       "field":"quotes","type":"json","label":"Quotes"
@@ -124,7 +124,11 @@
       "label": "Active",
       "search":true,
       "list": "edit"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json",
+      "label": "Image sizes"
     }
-    
   ]
 }
