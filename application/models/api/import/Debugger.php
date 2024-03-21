@@ -152,6 +152,63 @@ class Debugger extends model_app_api_import
         $wrong_locations = [];
         $locations = $this->parent->getJsonModel('map_locations');
 
+
+        $data = [
+            ["label" => "Freedmen Cementary", "gps_lat" => "32.814", "gps_lng" => "-96.7891", "state" => "Texas"],
+            ["label" => "Greenwood Rising", "gps_lat" => "36.1596", "gps_lng" => "-95.9861", "state" => "Oklahoma"],
+            ["label" => "Richey Elementary School", "gps_lat" => "32.2484", "gps_lng" => "-110.982", "state" => "Arizona"],
+            ["label" => "Riis Beach", "gps_lat" => "40.5671", "gps_lng" => "-73.865", "state" => "New York"],
+            ["label" => "Robert Taylor Homes", "gps_lat" => "41.8125", "gps_lng" => "-87.6275", "state" => "Illinois"],
+            ["label" => "Rusty's", "gps_lat" => "39.9486", "gps_lng" => "-75.1599", "state" => "Pennsylvania"],
+            ["label" => "Ruthie's Barber Shop", "gps_lat" => "40.6799", "gps_lng" => "-73.9753", "state" => "New York"],
+            ["label" => "Sammy's Place", "gps_lat" => "39.9739", "gps_lng" => "-75.144", "state" => "Pennsylvania"],
+            ["label" => "San Francisco Sentinel", "gps_lat" => "37.7783", "gps_lng" => "-122.404", "state" => "California"],
+            ["label" => "Santa Cruz River", "gps_lat" => "32.2488", "gps_lng" => "-110.982", "state" => "Arizona"],
+            ["label" => "Second Baptist Church", "gps_lat" => "34.0212", "gps_lng" => "-118.256", "state" => "California"],
+            ["label" => "South Broadway", "gps_lat" => "35.07", "gps_lng" => "-106.645", "state" => "New Mexico"],
+            ["label" => "South Central", "gps_lat" => "33.9908", "gps_lng" => "-118.297", "state" => "California"],
+            ["label" => "South Side", "gps_lat" => "41.7509", "gps_lng" => "-87.6375", "state" => "Illinois"],
+            ["label" => "Spiderwoman theater", "gps_lat" => "40.6832", "gps_lng" => "-73.9933", "state" => "New York"],
+            ["label" => "Stateway Gardens", "gps_lat" => "41.8272", "gps_lng" => "-87.6278", "state" => "Illinois"],
+            ["label" => "The Castro", "gps_lat" => "37.762", "gps_lng" => "-122.435", "state" => "California"],
+            ["label" => "The Mission", "gps_lat" => "37.7636", "gps_lng" => "-122.417", "state" => "California"],
+            ["label" => "The Tenderloin", "gps_lat" => "37.7857", "gps_lng" => "-122.414", "state" => "California"],
+            ["label" => "The Wilfandel Club", "gps_lat" => "34.033", "gps_lng" => "-118.322", "state" => "California"],
+            ["label" => "University of New Mexico", "gps_lat" => "35.0902", "gps_lng" => "-106.62", "state" => "New Mexico"],
+            ["label" => "University of Texas", "gps_lat" => "30.289", "gps_lng" => "-97.7366", "state" => "Texas"],
+            ["label" => "Valencia Rose", "gps_lat" => "37.7607", "gps_lng" => "-122.422", "state" => "California"],
+            ["label" => "Vanport", "gps_lat" => "45.593", "gps_lng" => "-122.69", "state" => "Oregon"],
+            ["label" => "Wall of Respect", "gps_lat" => "41.8169", "gps_lng" => "-87.6092", "state" => "Illinois"],
+            ["label" => "Washington Square Methodist Church", "gps_lat" => "40.7314", "gps_lng" => "-74", "state" => "New York"],
+            ["label" => "Watts", "gps_lat" => "33.9389", "gps_lng" => "-118.238", "state" => "California"],
+            ["label" => "West Side", "gps_lat" => "41.8792", "gps_lng" => "-87.7186", "state" => "Illinois"],
+        ];
+
+        $new_locations = [];
+
+        $updated = 0;
+
+        foreach ($locations as $k=>$v) {
+//            if ($v['state'] == 0) {
+//                $new_locations[] = [
+//                    'label' => $v['label'],
+//                    'gps_lat' => $v['gps_lat'],
+//                    'gps_lng' => $v['gps_lng']
+//                ];
+//            }
+            $label = $v['label'];
+            foreach ($data as $k2=>$v2) {
+                if ($label == $v2['label']) {
+                    $put_success = $this->parent->putJsonModel('map_locations', ['state' => $v2['state']], ['id' => $v['id']]);
+                    if (!$put_success) $this->parent->orm->getLastError();
+                    $updated++;
+                    continue;
+                }
+            }
+        }
+
+        dd($updated);
+
         $interviewers = $this->parent->getJsonModel('interviewers');
 
         foreach ($locations as $location) {
@@ -168,8 +225,6 @@ class Debugger extends model_app_api_import
                 }
             }
         }
-
-        dd($wrong_locations);
 
 
         return $wrong_locations;
