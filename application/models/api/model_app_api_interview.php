@@ -247,6 +247,15 @@ class model_app_api_interview
             }
         }
 
+        if (!empty($returnItems[0]) && $returnItems[0]['startTime'] != 0) {
+            $introduction = [
+                'label' => 'Introduction',
+                'startTime' => 0
+            ];
+
+            array_unshift($returnItems, $introduction);
+        }
+
         return $returnItems;
     }
 
