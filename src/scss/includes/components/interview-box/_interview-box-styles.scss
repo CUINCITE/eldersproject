@@ -6,8 +6,13 @@
     @include breakpoint(desktop) {
         aspect-ratio: 1/1;
         width: vw(196);
-        max-width: 300px;
     }
+
+
+    @include breakpoint(hd) {
+        max-width: 196px;
+    }
+
 
     @include breakpoint(not-desktop) {
         @include flex(row, center, center);
@@ -117,6 +122,13 @@
             padding: vw(14) vw(11);
             inset: 0;
         }
+
+
+        @include breakpoint(hd) {
+            @include font-size(40, 30);
+            @include letter-spacing(-1.25, 40);
+        }
+
 
         @include breakpoint(tablet) {
             @include font-size(40, 32);
