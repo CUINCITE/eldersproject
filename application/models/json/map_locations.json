@@ -40,6 +40,14 @@
       },
       {
         "hr": true,
+        "field": "state"
+      },
+      {
+        "hr": true,
+        "field": "zoom_precision"
+      },
+      {
+        "hr": true,
         "label": "Address (optional)",
         "field": "address",
         "type": "text",

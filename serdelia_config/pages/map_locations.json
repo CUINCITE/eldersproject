@@ -59,6 +59,17 @@
     },
     {
       "hr": true,
+      "label": "State",
+      "field": "state"
+    },
+    {
+      "hr": true,
+      "label": "Zoom Precision",
+      "field": "zoom_precision",
+      "type": "select"
+    },
+    {
+      "hr": true,
       "label": "Address (optional)",
       "field": "address",
       "type": "text",
