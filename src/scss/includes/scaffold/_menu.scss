@@ -270,6 +270,13 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
                 padding-bottom: vw(25, phone);
                 gap: rem(19);
+
+                @media (max-height: 580px) {
+                    margin-top: rem(8);
+                    gap: 0;
+                    padding-bottom: vw(10, phone);
+                    justify-content: space-between;
+                }
             }
         }
 
