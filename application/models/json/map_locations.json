@@ -40,6 +40,14 @@
       },
       {
         "hr": true,
+        "field": "state"
+      },
+      {
+        "hr": true,
+        "field": "zoom_precision"
+      },
+      {
+        "hr": true,
         "label": "Address (optional)",
         "field": "address",
         "type": "text",
@@ -64,20 +72,20 @@
           {
             "folder": "desktop",
             "label": "Desktop",
-            "width": 800,
-            "height": 800,
-            "crop": true,
+            "width": 421,
             "retina": true
           },
           {
             "folder": "mobile",
             "label": "Mobile",
-            "width": 375,
-            "height": 375,
-            "crop": true,
+            "width": 349,
             "retina": true
           }
-        ]
+        ],
+        "settings": {
+          "webp": true,
+          "sizes": "image_sizes"
+        }
       },
       {
         "hr": true,
@@ -95,6 +103,10 @@
       },
       {
         "field":"quotes","type":"json"
+      },
+      {
+        "field": "image_sizes",
+        "type": "json"
       }
     ]
   }
