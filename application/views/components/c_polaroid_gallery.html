@@ -3,7 +3,7 @@
         <div class="polaroid_gallery__slides">
             {% for item in moduleValue %}
             <div class="polaroid_gallery__slide {% if loop.first %}is-first-visible {% elseif loop.index == 2 %} is-second-visible {% else %} is-right-outer {% endif %}  js-slide">
-                <div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}{% if image.original.width and image.original.height %}{% if image.original.width > image.original.height %} polaroid--horizontal{% elseif image.original.width == image.original.height %} polaroid--square{% endif %}{% endif %}">
+                <div class="polaroid{% if modifiers %}{% for modifier in modifiers %} polaroid--{{modifier}}{% endfor %}{% endif %}{% if item.image.original.width and item.image.original.height %}{% if item.image.original.width > item.image.original.height %} polaroid--horizontal{% elseif item.image.original.width == item.image.original.height %} polaroid--square{% endif %}{% endif %}">
                     <div class="polaroid__image{% if color %} polaroid__image--{{color}}{% endif %}">
                         {% include "./subviews/subview_picture.html" with {image: item.image} %}
                     </div>
