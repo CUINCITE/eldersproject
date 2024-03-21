@@ -134,14 +134,12 @@ class model_app_pages_modules_collection extends model_app_pages_modules
                             'id' => $i['id']
                         ];
 
-                    } else unset($items[$k]['quotes'][$kk]);
+                    }
 
                 }
             }
 
-            if ($quotes) {
-                $items[$k]['quotes'] = $quotes;
-            }
+            $items[$k]['quotes'] = $quotes;
         }
 
         return $items;
