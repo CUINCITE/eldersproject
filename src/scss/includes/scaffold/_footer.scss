@@ -39,7 +39,7 @@
 
             height: var(--GLOBAL-player-height);
             gap: vw(24);
-            padding: vw(19) 0;
+            padding: 0 0 19px;
         }
 
         @include breakpoint(tablet) {

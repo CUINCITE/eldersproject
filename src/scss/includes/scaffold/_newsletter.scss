@@ -21,7 +21,7 @@
         @include flex(column, space-between, stretch);
 
         padding-top: vw(175);
-        height: calc(var(--app-height) - #{rem(82 + 1)});
+        height: calc(var(--app-height) - var(--GLOBAL-player-height));
     }
 
     @include breakpoint(tablet) {
