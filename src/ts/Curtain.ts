@@ -1,5 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
-import { easing } from './Site';
+import { breakpoint, easing } from './Site';
 
 
 export interface IImages {
@@ -53,7 +53,7 @@ export class Curtain {
                 resolve();
             },
         });
-        gsap.fromTo(this.lead, { xPercent: -120 }, {
+        breakpoint.desktop && gsap.fromTo(this.lead, { xPercent: -120 }, {
             xPercent: 0,
             duration: 0.8,
             delay: 1.2,
