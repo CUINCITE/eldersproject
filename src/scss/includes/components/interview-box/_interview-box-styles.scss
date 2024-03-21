@@ -4,8 +4,9 @@
     position: relative;
 
     @include breakpoint(desktop) {
+        aspect-ratio: 1/1;
         width: vw(196);
-        height: vw(196);
+        max-width: 300px;
     }
 
     @include breakpoint(not-desktop) {
