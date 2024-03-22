@@ -38,8 +38,11 @@
         </div>
       </div>
 
-      <div class="hero__sticker">
+      <div class="hero__sticker desktop-only">
         {% include 'subviews/subview_sticker.html' with { label:'Today\'s Highlights', modifier: 'long_text', delay: '.5' } %}
+      </div>
+      <div class="hero__sticker desktop-hide">
+        {% include 'subviews/subview_sticker.html' with { label:'Discover more', modifier: 'long_text', delay: '.5' } %}
       </div>
 
     </div>
