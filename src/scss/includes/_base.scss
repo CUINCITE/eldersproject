@@ -18,6 +18,8 @@ html {
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
+
+        &.is-transition { overflow: hidden; }
     }
 
     @include breakpoint(hd) {
@@ -127,7 +129,7 @@ html {
     }
 
 
-    body.is-transition & {
+    html.is-transition & {
         background: none;
     }
 }
