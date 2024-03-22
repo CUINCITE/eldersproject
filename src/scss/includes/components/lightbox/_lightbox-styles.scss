@@ -161,13 +161,13 @@
 
 
         @include breakpoint(phone) {
-            height: vw(120, phone);
-            flex-basis: vw(120, phone);
+            height: vw(130, phone);
+            flex-basis: vw(130, phone);
             order: 1;
             flex-shrink: 0;
             transition: height .4s $ease-custom, flex-basis .4s $ease-custom;
             overflow: hidden;
-            margin-top: 10px;
+            padding-top: 10px;
 
 
             .is-expanded & {
@@ -236,10 +236,10 @@
         @include breakpoint(phone) {
             height: auto;
 
-            .is-not-default & { 
+            .is-not-default & {
                 display: none;
 
-                // position: absolute; 
+                // position: absolute;
             }
         }
 
@@ -871,11 +871,12 @@
             margin-bottom: 2px;
         }
 
+
         @include breakpoint(phone) {
-            bottom: unset;
-            top: 100%;
-            left: 50%;
-            translate: -50% 0;
+            position: relative;
+            inset: auto;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
         }
     }
 

@@ -4,12 +4,17 @@
     width: 100%;
     height: calc(100% + var(--GLOBAL-player-height));
     padding-bottom: var(--GLOBAL-player-height);
-
+    -webkit-tap-highlight-color: rgba(#776886, 0.3);
 
     @include breakpoint(not-desktop) {
         height: 100%;
         padding-bottom: 0;
         padding: 30px 0;
+    }
+
+
+    @include breakpoint(phone) {
+        flex-direction: column-reverse;
     }
 
 
@@ -28,6 +33,11 @@
         @include breakpoint(not-desktop) {
             margin-top: 0;
         }
+
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
     }
 
 
@@ -39,6 +49,11 @@
         grid-template-rows: 1fr;
         position: relative;
         justify-items: center;
+
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
     }
 
 
@@ -65,6 +80,11 @@
 
             svg { transform: scaleX(-1); }
 
+
+            @include breakpoint (phone) {
+                left: 0;
+            }
+
             .is-first & { display: none; }
         }
 
@@ -73,6 +93,11 @@
             align-items: flex-end;
             left: 50%;
             right: rem(-74);
+
+
+            @include breakpoint (phone) {
+                right: 0;
+            }
 
             .is-last & { display: none; }
         }
@@ -83,23 +108,33 @@
             transition: opacity .25s $ease-custom;
         }
 
+
         svg {
-            *:nth-child(1) {
-                scale: 0;
-                transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
-                transform-origin: 60% center;
+            @include breakpoint(phone) {
+                width: 100%;
             }
+        }
 
-            *:nth-child(2) {
-                scale: 1 0;
-                transition: scale 0.25s 0.05s $ease-custom;
-                transform-origin: left center;
-            }
 
-            *:nth-child(3) {
-                scale: 0 1;
-                transition: scale 0.25s 0.25s $ease-custom;
-                transform-origin: 10% center;
+        @include breakpoint(desktop) {
+            svg {
+                *:nth-child(1) {
+                    scale: 0;
+                    transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
+                    transform-origin: 60% center;
+                }
+
+                *:nth-child(2) {
+                    scale: 1 0;
+                    transition: scale 0.25s 0.05s $ease-custom;
+                    transform-origin: left center;
+                }
+
+                *:nth-child(3) {
+                    scale: 0 1;
+                    transition: scale 0.25s 0.25s $ease-custom;
+                    transform-origin: 10% center;
+                }
             }
         }
 
@@ -138,6 +173,18 @@
                     transition: scale 0.25s $ease-custom;
                 }
             }
+        }
+    }
+
+
+
+    &__captions {
+        @include breakpoint(phone) {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-top: rem(30);
+            margin-left: auto;
+            margin-right: var(--grid-margin);
         }
     }
 }

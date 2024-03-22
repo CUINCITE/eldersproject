@@ -359,9 +359,6 @@ export class AudioPlayer extends Video {
             x: left ? -window.innerWidth : window.innerWidth,
             duration: 0.5,
             ease: 'power2.out',
-            onComplete: () => {
-                this.mobileIllustration.style.opacity = '0';
-            },
         });
     };
 
@@ -373,9 +370,7 @@ export class AudioPlayer extends Video {
             x: 0,
             duration: 0.5,
             ease: 'power2.out',
-            onStart: () => {
-                this.mobileIllustration.style.opacity = '1';
-            },
+            delay: this.isInitialized ? 0 : 0.5,
         });
     };
 

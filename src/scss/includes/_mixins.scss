@@ -23,7 +23,7 @@
 
 
 @function trim-font($line-height, $capitals: 'true', $trim-value: $font-trim) {
-    @if ($capitals == 'true') { 
+    @if ($capitals == 'true') {
         @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base-cap") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
     } @else {
         @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
@@ -148,6 +148,10 @@ $line-height: 1.4;
                 position: absolute;
                 bottom: 100%;
                 left: 0;
+
+                @media (hover: none) {
+                    display: none;
+                }
             }
         }
     }

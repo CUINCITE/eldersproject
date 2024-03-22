@@ -456,6 +456,12 @@
         // trick for proper scrolltrigger's pin
         left: 0 !important;
         height: auto !important;
+
+
+        html.is-transition & {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
 

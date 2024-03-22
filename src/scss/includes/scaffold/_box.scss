@@ -16,7 +16,13 @@
         }
 
 
-        &.footer__bottom { border-top: 1px solid var(--color-white); }
+        &.footer__bottom {
+            border-top: 1px solid var(--color-white);
+
+            .is-transition & {
+                border-top: none;
+            }
+        }
 
         &:not(.is-animated) {
             @include breakpoint(not-desktop) {
@@ -24,14 +30,14 @@
             }
         }
     }
-    
+
 
 
     [data-scroll="box"] {
         border-top: 1px solid var(--color-bg);
         margin-top: 0;
     }
-    
+
 
 
     .is-404 &, .page_404 & {
