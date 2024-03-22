@@ -161,13 +161,13 @@
 
 
         @include breakpoint(phone) {
-            height: vw(120, phone);
-            flex-basis: vw(120, phone);
+            height: vw(130, phone);
+            flex-basis: vw(130, phone);
             order: 1;
             flex-shrink: 0;
             transition: height .4s $ease-custom, flex-basis .4s $ease-custom;
             overflow: hidden;
-            margin-top: 10px;
+            padding-top: 10px;
 
 
             .is-expanded & {
