@@ -251,12 +251,12 @@ export class AudioPlayer extends Video {
                 case SwipeDirections.RIGHT:
                     this.onNextClick();
                     break;
-                case SwipeDirections.UP:
-                    PushStates.goTo(this.elements.urlLinks[0].getAttribute('href'), Lightbox.isOpen);
-                    break;
-                case SwipeDirections.DOWN:
-                    this.minimize();
-                    break;
+                // case SwipeDirections.UP:
+                //     PushStates.goTo(this.elements.urlLinks[0].getAttribute('href'), Lightbox.isOpen);
+                //     break;
+                // case SwipeDirections.DOWN:
+                //     this.minimize();
+                //     break;
                 default:
                     // resetted earlier to 0, center illu when no action
                     this.moveIllustration();
@@ -431,6 +431,7 @@ export class AudioPlayer extends Video {
         if (Lightbox.isOpen) return;
 
         this.view.classList.remove('is-expanded');
+        document.body.classList.remove('has-audio-player-expanded');
 
         gsap.to(this.ui.playerBar, {
             yPercent: 100,
@@ -454,6 +455,7 @@ export class AudioPlayer extends Video {
     private expand = (): void => {
         this.ui.playerBar.style.display = 'grid';
         this.view.classList.add('is-expanded');
+        document.body.classList.add('has-audio-player-expanded');
 
         gsap.to(this.ui.playerBar, {
             yPercent: 0,
