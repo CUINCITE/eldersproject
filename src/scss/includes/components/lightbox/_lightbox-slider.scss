@@ -4,7 +4,7 @@
     width: 100%;
     height: calc(100% + var(--GLOBAL-player-height));
     padding-bottom: var(--GLOBAL-player-height);
-
+    -webkit-tap-highlight-color: rgba(#776886, 0.3);
 
     @include breakpoint(not-desktop) {
         height: 100%;
