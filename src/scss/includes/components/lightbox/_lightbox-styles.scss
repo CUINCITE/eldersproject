@@ -1483,6 +1483,12 @@
         height: 100%;
 
 
+        @include breakpoint(phone) {
+            display: flex;
+            opacity: 0;
+        }
+
+
         &-image {
             --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
 
