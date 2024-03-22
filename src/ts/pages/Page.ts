@@ -104,6 +104,7 @@ export class Page extends Handler {
                         boxesToShow.forEach(box => box.classList.add('is-animated'));
                     },
                     onComplete: () => {
+                        document.documentElement.classList.remove('is-transition');
                         document.body.classList.remove('is-transition');
                         // resolve();
                     },
@@ -113,6 +114,7 @@ export class Page extends Handler {
                     duration: 0.01,
                     opacity: 1,
                     onComplete: () => {
+                        document.documentElement.classList.remove('is-transition');
                         document.body.classList.remove('is-transition');
                         resolve();
                     },
@@ -150,7 +152,10 @@ export class Page extends Handler {
                 opacity: 0,
                 duration: 0.3,
                 ease: 'power2.out',
-                onStart: () => document.body.classList.add('is-transition'),
+                onStart: () => {
+                    document.body.classList.add('is-transition');
+                    document.documentElement.classList.add('is-transition');
+                },
             });
 
 
