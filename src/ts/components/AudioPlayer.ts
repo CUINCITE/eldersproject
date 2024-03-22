@@ -373,6 +373,7 @@ export class AudioPlayer extends Video {
             x: 0,
             duration: 0.5,
             ease: 'power2.out',
+            delay: this.isInitialized ? 0 : 0.5,
             onStart: () => {
                 this.mobileIllustration.style.opacity = '1';
             },
