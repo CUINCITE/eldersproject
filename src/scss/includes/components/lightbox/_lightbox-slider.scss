@@ -28,6 +28,11 @@
         @include breakpoint(not-desktop) {
             margin-top: 0;
         }
+
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
     }
 
 
@@ -39,6 +44,11 @@
         grid-template-rows: 1fr;
         position: relative;
         justify-items: center;
+
+
+        @include breakpoint(phone) {
+            width: 100%;
+        }
     }
 
 
@@ -65,6 +75,11 @@
 
             svg { transform: scaleX(-1); }
 
+
+            @include breakpoint (phone) {
+                left: 0;
+            }
+
             .is-first & { display: none; }
         }
 
@@ -73,6 +88,11 @@
             align-items: flex-end;
             left: 50%;
             right: rem(-74);
+
+
+            @include breakpoint (phone) {
+                right: 0;
+            }
 
             .is-last & { display: none; }
         }
@@ -83,23 +103,33 @@
             transition: opacity .25s $ease-custom;
         }
 
+
         svg {
-            *:nth-child(1) {
-                scale: 0;
-                transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
-                transform-origin: 60% center;
+            @include breakpoint(phone) {
+                width: 100%;
             }
+        }
 
-            *:nth-child(2) {
-                scale: 1 0;
-                transition: scale 0.25s 0.05s $ease-custom;
-                transform-origin: left center;
-            }
 
-            *:nth-child(3) {
-                scale: 0 1;
-                transition: scale 0.25s 0.25s $ease-custom;
-                transform-origin: 10% center;
+        @include breakpoint(desktop) {
+            svg {
+                *:nth-child(1) {
+                    scale: 0;
+                    transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
+                    transform-origin: 60% center;
+                }
+
+                *:nth-child(2) {
+                    scale: 1 0;
+                    transition: scale 0.25s 0.05s $ease-custom;
+                    transform-origin: left center;
+                }
+
+                *:nth-child(3) {
+                    scale: 0 1;
+                    transition: scale 0.25s 0.25s $ease-custom;
+                    transform-origin: 10% center;
+                }
             }
         }
 

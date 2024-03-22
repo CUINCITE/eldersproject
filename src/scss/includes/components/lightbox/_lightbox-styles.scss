@@ -236,10 +236,10 @@
         @include breakpoint(phone) {
             height: auto;
 
-            .is-not-default & { 
+            .is-not-default & {
                 display: none;
 
-                // position: absolute; 
+                // position: absolute;
             }
         }
 
