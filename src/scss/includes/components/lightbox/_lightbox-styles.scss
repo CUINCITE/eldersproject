@@ -236,10 +236,10 @@
         @include breakpoint(phone) {
             height: auto;
 
-            .is-not-default & { 
+            .is-not-default & {
                 display: none;
 
-                // position: absolute; 
+                // position: absolute;
             }
         }
 
@@ -871,11 +871,12 @@
             margin-bottom: 2px;
         }
 
+
         @include breakpoint(phone) {
-            bottom: unset;
-            top: 100%;
-            left: 50%;
-            translate: -50% 0;
+            position: relative;
+            inset: auto;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
         }
     }
 
