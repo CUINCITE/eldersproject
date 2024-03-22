@@ -601,7 +601,7 @@ export class Map extends Component {
                 <button class="map__button" data-audio-player="${interview.id}" data-start="${interview.start}"></button>
                 <div class="map__interview-wrap">
                     <div class="map__interview-data">
-                        <div class="map__interview-title">${interview.title}</div>
+                        <div class="map__interview-title"><span>${interview.title}</span></div>
                         <div class="map__interview-duration">${interview.duration}</div>
                     </div>
                     <div class="map__interview-button">Play <br> interview</div>

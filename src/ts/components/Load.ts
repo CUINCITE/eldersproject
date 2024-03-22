@@ -199,6 +199,14 @@ export class Load extends Component {
 
         if (this.settings.filtered) this.updateFiltered();
 
+
+        if (this.settings.scrollTo && this.view.hasAttribute('data-filters')) {
+            window.scrollTo({
+                top: document.body.getBoundingClientRect().top + window.scrollY,
+                behavior: 'smooth',
+            });
+        }
+
         // eslint-disable-next-line consistent-return
         return fetch(url, {
             method: 'GET',

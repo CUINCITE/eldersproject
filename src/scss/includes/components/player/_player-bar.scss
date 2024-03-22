@@ -26,6 +26,20 @@
         }
 
 
+        @include breakpoint(desktop) {
+            .player--video & {
+                height: rem(89);
+            }
+        }
+
+
+        @include breakpoint(hd) {
+            .player--video & {
+                height: rem(80);
+            }
+        }
+
+
         @include breakpoint(not-desktop) {
             grid-template-rows: 30px var(--bar-height);
 
@@ -81,6 +95,10 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
+
+            @include breakpoint(desktop) {
+                height: unset;
+            }
         }
     }
 
@@ -255,6 +273,14 @@
                     margin-left: rem(0);
                     padding-top: rem(3);
                     padding-right: rem(2);
+
+                    @include breakpoint(phone) {
+                        padding-top: 0;
+
+                        path[stroke] {
+                            stroke-width: 0.6px;
+                        }
+                    }
                 }
             }
         }
@@ -390,6 +416,11 @@
 
         @include breakpoint(desktop) {
             padding-left: 9.5%; // visually centered, like .player__buttons
+        }
+
+
+        @include breakpoint(phone) {
+            .player.is-error & { color: red; }
         }
     }
 

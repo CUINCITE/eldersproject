@@ -1,6 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
 import { Component } from '../../components/Component';
-import { easing } from '../../Site';
+import { breakpoint, easing } from '../../Site';
+import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from '../Swipe';
 
 
 export class LightboxSlider extends Component {
@@ -14,6 +15,7 @@ export class LightboxSlider extends Component {
     private activeSlide: HTMLElement;
     private activeSlideIndex: number;
     private isAnimating = false;
+    private swipeComp: Swipe;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -41,6 +43,29 @@ export class LightboxSlider extends Component {
         this.arrowNext.addEventListener('click', () => this.goTo(this.activeSlideIndex + 1));
         this.arrowPrev.addEventListener('click', () => this.goTo(this.activeSlideIndex - 1));
         document.addEventListener('keydown', this.onKeyDown);
+
+
+        this.swipeComp = new Swipe(this.view, { horizontal: true, vertical: false });
+        this.bindSwipeEvents();
+    };
+
+
+
+    private bindSwipeEvents = (): void => {
+
+        this.swipeComp.on(SwipeEvents.END, (e: ISwipeCoordinates) => {
+
+            switch (e.direction) {
+                case SwipeDirections.LEFT:
+                    this.goTo(this.activeSlideIndex + 1);
+                    break;
+                case SwipeDirections.RIGHT:
+                    this.goTo(this.activeSlideIndex - 1);
+                    break;
+                default:
+                    console.warn('no direction');
+            }
+        });
     };
 
 
@@ -60,6 +85,8 @@ export class LightboxSlider extends Component {
     private goTo = (index: number, fast?: boolean): void => {
         const direction: number = index > this.activeSlideIndex ? 1 : -1;
 
+        if (index < 0 || index >= this.slides.length || this.isAnimating) return;
+
         this.hideSlide(this.activeSlideIndex, direction, fast);
         this.showSlide(index, direction, fast);
     };
@@ -69,17 +96,19 @@ export class LightboxSlider extends Component {
     private hideSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
+        const xPosition = direction * (window.innerWidth * (breakpoint.phone ? -1.5 : -0.75));
 
         if (!slide) return;
 
         this.isAnimating = true;
 
         gsap.fromTo(slide, { x: 0 }, {
-            x: direction * (window.innerWidth * -0.75),
+            x: xPosition,
             duration: fast ? 0 : 0.5,
             ease: easing,
             onComplete: () => {
-                slide.style.display = 'none';
+                if (breakpoint.desktop) slide.style.display = 'none';
+                else slide.style.opacity = '0';
             },
         });
 
@@ -100,6 +129,8 @@ export class LightboxSlider extends Component {
         const slide = this.slides[index];
         const caption = this.captions[index];
 
+        const xPosition = direction * (window.innerWidth * (breakpoint.phone ? 1.5 : 0.75));
+
         gsap.fromTo(caption, { y: 200 }, {
             y: 0,
             delay: 0.3,
@@ -110,12 +141,13 @@ export class LightboxSlider extends Component {
             },
         });
 
-        gsap.fromTo(slide, { x: direction * (window.innerWidth * 0.75) }, {
+        gsap.fromTo(slide, { x: xPosition }, {
             x: 0,
             duration: fast ? 0.01 : 0.5,
             ease: easing,
             onStart: () => {
-                slide.style.display = 'flex';
+                if (breakpoint.desktop) slide.style.display = 'flex';
+                else slide.style.opacity = '1';
             },
             onComplete: () => {
                 this.activeSlide = slide;

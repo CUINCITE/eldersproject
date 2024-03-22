@@ -80,6 +80,14 @@
 
         // text inside button
 
+
+        @include breakpoint(phone) {
+            width: rem(45);
+            height: rem(26);
+
+            .lightbox__close & { height: auto; }
+        }
+
         > span {
             position: absolute;
             right: rem(6);

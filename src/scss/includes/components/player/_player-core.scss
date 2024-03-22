@@ -31,6 +31,11 @@
         @include breakpoint(desktop) {
             margin-bottom: rem(89);
         }
+
+
+        @include breakpoint(hd) {
+            margin-bottom: rem(80);
+        }
     }
 
 
@@ -56,6 +61,12 @@
                 transform: translateX(100%);
             }
 
+            body.is-not-ready.is-lightbox-open & {
+                @include breakpoint(phone) {
+                    transition-delay: 0.5s, 0s;
+                    transform: translateX(0);
+                }
+            }
 
             body.has-open-modal & {
                 opacity: 0;

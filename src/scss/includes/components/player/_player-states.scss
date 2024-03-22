@@ -47,6 +47,11 @@
         cursor: not-allowed;
         pointer-events: none;
 
+
+        @include breakpoint(not-desktop) {
+            &.player--audio { pointer-events: all; }
+        }
+
         .player__play,
         .player__pause,
         .player__time,

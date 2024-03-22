@@ -221,6 +221,20 @@ class model_app_api_interview
     {
         $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
 
+        $sessionsOrder = [];
+        foreach ($sessions as $index => $session) {
+            $sessionsOrder[$session['id']] = $index;
+        }
+
+        usort($indexes, function ($a, $b) use ($sessionsOrder) {
+            $sessionDiff = $sessionsOrder[$a['session']] <=> $sessionsOrder[$b['session']];
+            if ($sessionDiff !== 0) {
+                return $sessionDiff;
+            }
+
+        });
+
+
         $sessionMap = [];
         foreach ($sessions as $index => $session) {
             $sessionMap[$session['id']] = $index;
@@ -228,6 +242,10 @@ class model_app_api_interview
 
         $returnItems = [];
         foreach ($indexes as $index) {
+
+            if (empty($index['label'])) {
+                continue;
+            }
 
             if (isset($sessionMap[$index['session']])) {
 
@@ -245,6 +263,15 @@ class model_app_api_interview
                     'startTime' => $startTime,
                 ];
             }
+        }
+
+        if (!empty($returnItems[0]) && $returnItems[0]['startTime'] != 0) {
+            $introduction = [
+                'label' => 'Introduction',
+                'startTime' => 0
+            ];
+
+            array_unshift($returnItems, $introduction);
         }
 
         return $returnItems;

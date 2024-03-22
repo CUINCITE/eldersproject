@@ -258,8 +258,18 @@
                 transform: translateX(120%);
 
 
+                @include breakpoint(phone) {
+                    transform: translateY(120%);
+                }
+
+
                 .is-showing & {
                     transform: translateX(0);
+
+
+                    @include breakpoint(phone) {
+                        transform: translateY(0);
+                    }
                 }
             }
         }

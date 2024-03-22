@@ -18,6 +18,8 @@ html {
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
+
+        &.is-transition { overflow: hidden; }
     }
 
     @include breakpoint(hd) {
@@ -52,11 +54,21 @@ body,
 html {
     &:has(.modal.is-open) { overflow: hidden; }
 
-    &:has(.has-menu-open),
-    &.has-menu-open {
+    &:has(.has-menu-open, .is-transition),
+    &.has-menu-open,  &.is-transition {
         @include breakpoint(not-desktop) {
             overflow: hidden;
         }
+    }
+
+
+    @include breakpoint(not-desktop) {
+        &.is-transition { pointer-events: none; }
+    }
+
+
+    @include breakpoint(phone) {
+        &.has-audio-player-expanded { overflow: hidden; }
     }
 }
 
@@ -117,7 +129,7 @@ html {
     }
 
 
-    body.is-transition & {
+    html.is-transition & {
         background: none;
     }
 }

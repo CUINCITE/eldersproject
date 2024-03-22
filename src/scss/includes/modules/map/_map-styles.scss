@@ -371,7 +371,7 @@
 
                 gap: rem(5);
                 width: rem(286);
-                padding: 0 rem(14);
+                padding: rem(13);
             }
 
             @include breakpoint(tablet) {
@@ -392,8 +392,41 @@
 
 
         &-title {
+            --line-width: #{rem(10)};
+            --line-offset: #{rem(4)};
+
+
             margin-block: trim-font(1);
             padding-top: rem(1);
+
+
+            @include breakpoint(desktop) {
+                @include font-size(30, 24);
+
+                margin-bottom: rem(-2);
+                padding-top: rem(4);
+                position: relative;
+
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: rem(13) auto auto 0;
+                    margin: auto;
+                    height: 1px;
+                    background: currentColor;
+                    width: var(--line-width);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform .4s $ease-custom;
+                }
+
+
+                span {
+                    display: inline-block;
+                    transition: transform .4s $ease-custom;
+                }
+            }
         }
 
 
@@ -424,8 +457,10 @@
 
             @include breakpoint(desktop) {
                 @include font-size(30, 24);
+                @include flex(row, center, center);
 
-                padding: rem(16) rem(15) rem(13);
+                padding: rem(15) rem(15) rem(12);
+                align-self: stretch;
             }
 
             @include breakpoint(tablet) {
@@ -448,6 +483,19 @@
 
     &__button {
         @include full;
+
+        z-index: 1;
+
+
+        @include hover {
+            ~ .map__interview-wrap .map__interview-title span {
+                transform: translateX(calc(var(--line-width) + var(--line-offset)));
+            }
+
+            ~ .map__interview-wrap .map__interview-title::before {
+                transform: scaleX(1);
+            }
+        }
     }
 
 
