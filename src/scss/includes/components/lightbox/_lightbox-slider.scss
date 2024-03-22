@@ -13,6 +13,11 @@
     }
 
 
+    @include breakpoint(phone) {
+        flex-direction: column-reverse;
+    }
+
+
 
     &__wrap {
         @include flex(row, center, center);
@@ -168,6 +173,18 @@
                     transition: scale 0.25s $ease-custom;
                 }
             }
+        }
+    }
+
+
+
+    &__captions {
+        @include breakpoint(phone) {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-top: rem(30);
+            margin-left: auto;
+            margin-right: var(--grid-margin);
         }
     }
 }
