@@ -1145,6 +1145,7 @@
 
             width: 100%;
             background: none;
+            height: calc(var(--app-height) - var(--lightbox-top-height));
 
 
             .polaroid {
