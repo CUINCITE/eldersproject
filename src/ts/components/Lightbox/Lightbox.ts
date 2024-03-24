@@ -1,5 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { breakpoint } from '../../Site';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
@@ -203,7 +204,7 @@ export class Lightbox {
         this.navComp?.hide();
 
 
-        this.setThemeColor('#000');
+        this.setThemeColor('black', false);
 
         return new Promise<void>((resolve, reject) => {
             this.animating = true;
@@ -248,8 +249,6 @@ export class Lightbox {
             this.view.style.opacity = '1';
             this.view.style.display = 'block';
 
-            this.setThemeColor();
-
             gsap.to(this.view, {
                 duration: 0.1,
                 ease: 'none',
@@ -266,6 +265,9 @@ export class Lightbox {
                     this.animating = false;
                     Lightbox.isOpen = true;
                     this.bind();
+                    setTimeout(() => {
+                        this.setThemeColor();
+                    }, 900);
                 },
             });
         });
@@ -273,10 +275,14 @@ export class Lightbox {
 
 
 
-    private setThemeColor(color?: string): void {
+    private setThemeColor(color?: string, lightboxBg = true): void {
+
         const themeColor = color || this.view.firstElementChild.getAttribute('data-theme-color');
         const newColor = lightboxColors[themeColor] || themeColor;
+        const lightboxBgColor = lightboxBg ? `var(--color-${themeColor})` : 'none';
+
         if (themeColor) {
+            if (breakpoint.phone) this.view.style.background = lightboxBgColor;
             document.querySelector('meta[name="theme-color"]').setAttribute('content', newColor);
         }
     }

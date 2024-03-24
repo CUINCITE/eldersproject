@@ -68,7 +68,8 @@ html {
 
 
     @include breakpoint(phone) {
-        &.has-audio-player-expanded { overflow: hidden; }
+        &.has-audio-player-expanded,
+        &.is-overflow-hidden { overflow: hidden; }
     }
 }
 
