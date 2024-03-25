@@ -1041,6 +1041,17 @@
             color: var(--main-body-color);
             height: rem(19);
             padding: rem(4) rem(3) 0;
+
+
+            a {
+                color: currentColor;
+                transition: color .25s $easing;
+
+
+                @include hover {
+                    color: var(--tags-hover-color);
+                }
+            }
         }
     }
 
@@ -1565,6 +1576,7 @@
 
         text-transform: uppercase;
         overflow: hidden;
+        transition: color .25s $easing;
 
 
         @include breakpoint(desktop) { margin-top: rem(4); }
@@ -1622,9 +1634,7 @@
 
         @include breakpoint(desktop) {
             @include hover {
-                path {
-                    // fill: var(--alt-text-color);
-                }
+                color: var(--play-hover-color);
             }
         }
     }
