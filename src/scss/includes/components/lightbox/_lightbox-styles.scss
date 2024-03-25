@@ -106,7 +106,7 @@
 
 
             @include breakpoint(desktop) {
-                padding-left: rem(5);
+                padding-left: rem(6);
                 padding-right: rem(8);
             }
 
@@ -789,7 +789,7 @@
     &__filters {
         @include flex(row, flex-start, center);
 
-        margin-top: rem(-4);
+        margin-top: rem(-2);
         flex-wrap: wrap;
 
 
@@ -997,7 +997,7 @@
         @include letter-spacing(-0.17, 17);
 
         position: relative;
-        margin-right: rem(16);
+        margin-right: rem(15);
         flex-shrink: 0;
 
 
@@ -1017,7 +1017,7 @@
                 background-color: currentColor;
                 vertical-align: middle;
                 margin-right: rem(10);
-                margin-top: rem(-3);
+                margin-top: rem(-7);
             }
         }
     }
@@ -1030,7 +1030,7 @@
 
         gap: rem(5);
         text-transform: uppercase;
-        margin-top: rem(4);
+        margin-top: rem(3);
 
 
         li {
@@ -1563,23 +1563,23 @@
         @include flex(row, flex-start, center);
 
 
-        @include breakpoint(desktop) { margin-top: rem(4); }
+        @include breakpoint(desktop) { margin-top: rem(9); margin-left: rem(1); }
     }
 
 
 
     &__play {
         @include font-family(compressed);
-        @include font-size(62, 60);
-        @include letter-spacing(-1.24, 62);
+        @include font-size(29.73, 25);
         @include flex(row, flex-start, center);
 
+        letter-spacing: -0.02em;
         text-transform: uppercase;
         overflow: hidden;
         transition: color .25s $easing;
 
 
-        @include breakpoint(desktop) { margin-top: rem(4); }
+        @include breakpoint(desktop) { margin-top: rem(1); }
 
         @include breakpoint(not-desktop) {
             @include font-size(30, 30);
@@ -1595,12 +1595,22 @@
         }
 
 
-        span {
+        > span {
+            @include flex(column, flex-start, flex-start);
+
             width: var(--lightbox-play-width);
-            margin-left: rem(13);
+            margin-left: rem(11);
             height: 100%;
-            display: inline-block;
-            transition: transform .25s $ease-out;
+            transition: transform .35s $easing;
+
+
+            @include breakpoint(desktop) {
+                margin-top: rem(1);
+
+                span:last-of-type {
+                    @include font-size(27, 23);
+                }
+            }
 
 
             @include breakpoint(not-desktop) {
@@ -1611,9 +1621,6 @@
 
 
         svg {
-            margin-top: rem(-6);
-
-
             @include breakpoint(not-desktop) {
                 width: 18px;
                 height: 22px;
@@ -1627,8 +1634,8 @@
 
 
         &.is-playing {
-            span {
-                transform: translateY(100%);
+            > span {
+                transform: translateY(105%);
             }
         }
 
