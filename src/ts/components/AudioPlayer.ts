@@ -141,6 +141,8 @@ export class AudioPlayer extends Videos {
 
         const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
         const startTime = (e.currentTarget as HTMLElement).dataset.start;
+        const isToggle = (e.currentTarget as HTMLElement).hasAttribute('data-toggle');
+
         if (!id) return;
 
         if (id !== AudioPlayer.currentAudioId) {
@@ -149,10 +151,17 @@ export class AudioPlayer extends Videos {
         } else {
             // if button has the same id as current audio, only toggle player
             // eslint-disable-next-line no-lonely-if
-            if (startTime && this.isPaused()) {
-                this.media.currentTime = Math.max(this.media.currentTime, parseInt(startTime, 10));
-                this.play();
-            } else this.isPaused() ? this.play() : this.pause();
+            if (startTime) {
+                if (isToggle) {
+                    this.seekToTime(Math.max(this.media.currentTime, parseInt(startTime, 10)));
+                    this.isPaused() ? this.play() : this.pause();
+                } else {
+                    this.seekToTime(parseInt(startTime, 10));
+                    this.play();
+                }
+            } else {
+                this.isPaused() ? this.play() : this.pause();
+            }
         }
     };
 
@@ -330,7 +339,7 @@ export class AudioPlayer extends Videos {
                     // play audio when it has been already initialized
                     if (play) {
                         !this.isExpanded && this.expand();
-                        if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                        if (!hasParams) this.seekToTime(startTime ? parseInt(startTime, 10) : 0);
                         this.play();
                     }
                     this.isInitialized = true;
