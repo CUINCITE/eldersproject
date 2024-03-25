@@ -467,9 +467,8 @@
 
 
     &__interviews {
-        margin-top: 0;
         z-index: 1;
-        border-top-color: rgba($color-transparent, 0) !important;
+        border-top: none !important;
     }
 
 
