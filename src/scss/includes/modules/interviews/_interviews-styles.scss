@@ -47,7 +47,7 @@
                     bottom: unset;
                     z-index: 5;
 
-                    @include breakpoint(tablet) { 
+                    @include breakpoint(tablet) {
                         right: rem(72);
                         bottom: calc(100% - #{rem(28)});
                     }
@@ -171,6 +171,8 @@
         @include breakpoint(desktop) {
             .is-grid-view & {
                 padding-top: rem(21);
+                position: relative;
+                z-index: 1;
             }
         }
 
@@ -205,6 +207,15 @@
         &--small {
             @include font-size(28, 24);
             @include letter-spacing(-0.7, 28);
+        }
+
+
+        // trick to set proper height on hover
+
+        &--hidden {
+            opacity: 0;
+
+            .is-list-view & { display: none; }
         }
 
 
@@ -428,7 +439,7 @@
             }
 
             ~ .interviews__copy .interviews__copy-content {
-                transition-delay: .05s;
+                transition-delay: .125s;
                 transform: translateY(0);
             }
 
@@ -529,7 +540,20 @@
 
 
             .is-grid-view & {
+                @include font-family(normal);
+                @include font-size(13, 15);
+
+                letter-spacing: normal;
                 margin-top: rem(8);
+            }
+
+
+            &--overlay {
+                @include font-family(normal);
+                @include font-size(13, 15);
+
+                margin-top: 0;
+                letter-spacing: normal;
             }
         }
 
@@ -594,7 +618,7 @@
                 color: var(--color-black);
                 padding: 0;
                 position: absolute;
-                inset: auto 0 0;
+                inset: 0;
 
 
                 &-overlay {
@@ -602,15 +626,19 @@
                     position: absolute;
                     inset: 0;
                     z-index: 0;
-                    transition: transform .55s $ease-custom;
+                    transition: transform .65s $ease-custom;
                     transform: translateY(100%);
-                    transition-delay: .025s;
+                    transition-delay: .125s;
                 }
 
 
                 &-content {
-                    padding: rem(16) rem(16) rem(12) rem(14);
-                    transition: transform .55s $ease-custom;
+                    @include flex(column, flex-start, flex-start);
+
+                    width: 100%;
+                    height: 100%;
+                    padding: 0 var(--grid-margin) rem(12);
+                    transition: transform .65s $ease-custom;
                     transform: translateY(100%);
                 }
 
@@ -618,7 +646,7 @@
 
                 &-collection {
                     display: block;
-                    margin-top: rem(10);
+                    margin-top: auto;
                 }
 
 
