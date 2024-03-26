@@ -22,6 +22,7 @@
             align-self: flex-start;
             transform: scaleX(-1);
             order: 3;
+            margin-left: -1px;
 
             .boxes {
                 width: fit-content;

@@ -66,7 +66,7 @@
                                         {% if loop.index == 2 %} is-next{% endif %}
                                         {% if loop.index == 3 %} is-after-next{% endif %}
                                     ">
-                                        {% include "subviews/subview_picture_no_retina.html" with {image:item.image} %}
+                                        {% include "subviews/subview_picture.html" with {image:item.image} %}
                                     </li>
                                 {% endfor %}
                             </ul>
