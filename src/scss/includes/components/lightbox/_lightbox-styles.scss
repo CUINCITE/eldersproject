@@ -1613,6 +1613,16 @@
 
         &-small {
             @include font-size(27, 23);
+
+
+            @include breakpoint(desktop) {
+                margin-top: rem(-4);
+                padding-top: rem(4);
+                position: relative;
+
+                // to hide upper span under bg during hover
+                background-color: var(--theme-color);
+            }
         }
 
 
