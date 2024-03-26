@@ -193,7 +193,7 @@ class model_app_api_interview
 
     private function getTableOfContents($item, $sessions): array
     {
-        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
+        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview_incite_id' => $item['incite_id']], false, 'no');
 
         // prepare simple table with sessions order for usort below
         $sessionsOrder = [];
