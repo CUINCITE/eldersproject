@@ -41,13 +41,7 @@
 
         @include breakpoint(desktop) {
             @include font-size(216, 1);
-            @include letter-spacing(-8.4, 216);
-
-            @media (max-height: 719px) {
-                @include font-size(170, 1);
-
-                letter-spacing: -0.045em;
-            }
+            @include letter-spacing(-9.72, 216);
 
 
             @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
@@ -64,13 +58,22 @@
             }
         }
 
+
         @include breakpoint(tablet) {
-            @include font-size(180, 1);
+            @include font-size(220, .72);
+            @include letter-spacing(-9.5, 220);
+
+            padding-top: rem(30);
         }
 
+
         @include breakpoint(phone) {
-            @include font-size(120, 1);
+            @include font-size(118.8, 85.7);
+            @include letter-spacing(-10.8, 240);
+
+            padding-top: rem(13);
         }
+
 
         span {
             grid-column: 1 / 1;
@@ -103,7 +106,7 @@
 
 
         @include breakpoint(phone) {
-            inset: auto auto rem(-12) rem(4);
+            inset: auto auto rem(-22) rem(1);
         }
     }
 
