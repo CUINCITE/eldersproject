@@ -23,7 +23,8 @@
     <div class="interviews__copy">
         <div class="interviews__copy-overlay"></div>
         <div class="interviews__copy-content">
-            <p>{{item.lead}}</p>
+            <h3 class="interviews__name interviews__name--hidden {% if item.label|length > 30 %} interviews__name--small {% endif %}"><span>{{item.label|replace({',': '<br>'})|raw}}</span></h3>
+            <p class="interviews__description interviews__description--overlay">{{item.lead}}</p>
             <h3 class="interviews__copy-collection desktop-only">{{item.interviewer_name}} collection</h3>
         </div>
     </div>

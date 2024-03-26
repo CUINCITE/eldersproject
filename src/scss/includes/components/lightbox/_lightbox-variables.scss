@@ -35,6 +35,8 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
     &__item {
         --main-body-color: var(--theme-color);
+        --tags-hover-color: color-mix(in sRGB, var(--theme-color), #{$color-pure-black} 25%);
+        --play-hover-color: color-mix(in sRGB, var(--main-text-color), #{$color-white} 25%);
 
 
         &--default {

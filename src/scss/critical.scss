@@ -1,5 +1,3 @@
-* { box-sizing: border-box; }
-
 @import "includes/mixins";
 @import "includes/variables/fonts";
 @import "includes/variables/global";
@@ -13,3 +11,5 @@
 
 @import "includes/components/loader";
 @import "includes/components/circle";
+
+* { box-sizing: border-box; }

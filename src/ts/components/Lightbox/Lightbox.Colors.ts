@@ -9,4 +9,5 @@ export const lightboxColors = {
     'dark-green': '#016559',
     'pale-green': '#9AA493',
     'purple': '#5E308A',
+    'black': '#1B1B1B',
 };

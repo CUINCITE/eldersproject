@@ -106,7 +106,7 @@
 
 
             @include breakpoint(desktop) {
-                padding-left: rem(5);
+                padding-left: rem(6);
                 padding-right: rem(8);
             }
 
@@ -789,7 +789,7 @@
     &__filters {
         @include flex(row, flex-start, center);
 
-        margin-top: rem(-4);
+        margin-top: rem(-2);
         flex-wrap: wrap;
 
 
@@ -877,6 +877,15 @@
             inset: auto;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
+
+
+            // for caption with single image
+
+            .lightbox__image & {
+                margin-top: rem(30);
+                margin-left: auto;
+                margin-right: var(--grid-margin);
+            }
         }
     }
 
@@ -913,8 +922,6 @@
 
 
     &__image {
-        --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
-
         @include flex(row, center, flex-start);
 
         width: 100%;
@@ -924,6 +931,8 @@
 
         @include breakpoint(not-desktop) {
             margin-bottom: auto;
+            flex-direction: column;
+            align-items: center;
         }
 
 
@@ -988,7 +997,7 @@
         @include letter-spacing(-0.17, 17);
 
         position: relative;
-        margin-right: rem(16);
+        margin-right: rem(15);
         flex-shrink: 0;
 
 
@@ -1008,7 +1017,7 @@
                 background-color: currentColor;
                 vertical-align: middle;
                 margin-right: rem(10);
-                margin-top: rem(-3);
+                margin-top: rem(-7);
             }
         }
     }
@@ -1021,7 +1030,7 @@
 
         gap: rem(5);
         text-transform: uppercase;
-        margin-top: rem(4);
+        margin-top: rem(3);
 
 
         li {
@@ -1032,6 +1041,17 @@
             color: var(--main-body-color);
             height: rem(19);
             padding: rem(4) rem(3) 0;
+
+
+            a {
+                color: currentColor;
+                transition: color .25s $easing;
+
+
+                @include hover {
+                    color: var(--tags-hover-color);
+                }
+            }
         }
     }
 
@@ -1131,9 +1151,35 @@
 
 
         &--mementos {
+            --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
+
+
             width: 100%;
             background: none;
             height: calc(var(--app-height) - var(--lightbox-top-height));
+
+
+            .polaroid {
+                --polaroid-width: calc(var(--container-height) * .75) !important;
+                --polaroid-height: var(--container-height) !important;
+            }
+
+
+            .polaroid--horizontal {
+                --polaroid-width: var(--container-height) !important;
+                --polaroid-height: calc(var(--container-height) * .75) !important;
+            }
+
+
+            .polaroid--square {
+                --polaroid-width: var(--container-height) !important;
+                --polaroid-height: var(--container-height) !important;
+            }
+
+
+            @include breakpoint(not-desktop) {
+                --container-height: 40vh;
+            }
         }
 
 
@@ -1501,28 +1547,11 @@
 
 
         &-image {
-            --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
-
             margin-top: vh(-20);
             transform: translateY(0) rotate(-7.5deg);
 
-            --polaroid-width: calc(var(--container-height) * .75) !important;
-            --polaroid-height: var(--container-height) !important;
-
-
-            &.polaroid--horizontal {
-                --polaroid-width: var(--container-height) !important;
-                --polaroid-height: calc(var(--container-height) * .75) !important;
-            }
-
-
-            &.polaroid--square {
-                --polaroid-width: var(--container-height) !important;
-                --polaroid-height: var(--container-height) !important;
-            }
 
             @include breakpoint(not-desktop) {
-                --container-height: 40vh;
                 margin-top: 0;
             }
         }
@@ -1534,22 +1563,23 @@
         @include flex(row, flex-start, center);
 
 
-        @include breakpoint(desktop) { margin-top: rem(4); }
+        @include breakpoint(desktop) { margin-top: rem(9); margin-left: rem(1); }
     }
 
 
 
     &__play {
         @include font-family(compressed);
-        @include font-size(62, 60);
-        @include letter-spacing(-1.24, 62);
+        @include font-size(29.73, 25);
         @include flex(row, flex-start, center);
 
+        letter-spacing: -0.02em;
         text-transform: uppercase;
         overflow: hidden;
+        transition: color .25s $easing;
 
 
-        @include breakpoint(desktop) { margin-top: rem(4); }
+        @include breakpoint(desktop) { margin-top: rem(1); }
 
         @include breakpoint(not-desktop) {
             @include font-size(30, 30);
@@ -1565,12 +1595,22 @@
         }
 
 
-        span {
+        > span {
+            @include flex(column, flex-start, flex-start);
+
             width: var(--lightbox-play-width);
-            margin-left: rem(13);
+            margin-left: rem(11);
             height: 100%;
-            display: inline-block;
-            transition: transform .25s $ease-out;
+            transition: transform .35s $easing;
+
+
+            @include breakpoint(desktop) {
+                margin-top: rem(1);
+
+                span:last-of-type {
+                    @include font-size(27, 23);
+                }
+            }
 
 
             @include breakpoint(not-desktop) {
@@ -1581,9 +1621,6 @@
 
 
         svg {
-            margin-top: rem(-6);
-
-
             @include breakpoint(not-desktop) {
                 width: 18px;
                 height: 22px;
@@ -1597,16 +1634,14 @@
 
 
         &.is-playing {
-            span {
-                transform: translateY(100%);
+            > span {
+                transform: translateY(105%);
             }
         }
 
         @include breakpoint(desktop) {
             @include hover {
-                path {
-                    // fill: var(--alt-text-color);
-                }
+                color: var(--play-hover-color);
             }
         }
     }

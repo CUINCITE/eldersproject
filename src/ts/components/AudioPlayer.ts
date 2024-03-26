@@ -1,10 +1,11 @@
 import { gsap } from 'gsap/dist/gsap';
 import { PushStates } from '../PushStates';
 import { breakpoint, easing } from '../Site';
-import { Video } from './Player/Video';
+import { Videos } from './Player/Videos';
 import { Lightbox } from './Lightbox/Lightbox';
 import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from './Swipe';
 import { Images } from '../widgets/Images';
+import { PlayerEvents } from './Player/Player.types';
 
 
 export class AudioPlayerStatesText {
@@ -40,7 +41,7 @@ export interface IAudioPlayerResponseElements {
     title: HTMLElement;
 }
 
-export class AudioPlayer extends Video {
+export class AudioPlayer extends Videos {
 
     // eslint-disable-next-line no-use-before-define
     public static instance: AudioPlayer;
@@ -87,6 +88,7 @@ export class AudioPlayer extends Video {
     private x: number = 0;
     private swipeMargin = 10;
     private timeout: ReturnType<typeof setTimeout>;
+    private audioWrapper: HTMLElement;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -100,6 +102,7 @@ export class AudioPlayer extends Video {
         this.cassetteEl = this.view.querySelector('.js-player-cassette');
         this.mobileCover = this.view.querySelector('.js-player-cover');
         this.mobileIllustration = this.view.querySelector('.js-player-illustration');
+        this.audioWrapper = this.view.querySelector('.js-audio');
 
         this.apiUrl = this.view.dataset.apiUrl;
 
@@ -128,7 +131,6 @@ export class AudioPlayer extends Video {
 
     protected onTimeupdate = (): void => {
         super.onTimeupdate();
-        Lightbox.isOpen && Lightbox.tryToUpdateTranscript(this.media.currentTime);
     };
 
 
@@ -139,6 +141,8 @@ export class AudioPlayer extends Video {
 
         const id = (e.currentTarget as HTMLElement).dataset.audioPlayer;
         const startTime = (e.currentTarget as HTMLElement).dataset.start;
+        const isToggle = (e.currentTarget as HTMLElement).hasAttribute('data-toggle');
+
         if (!id) return;
 
         if (id !== AudioPlayer.currentAudioId) {
@@ -147,10 +151,17 @@ export class AudioPlayer extends Video {
         } else {
             // if button has the same id as current audio, only toggle player
             // eslint-disable-next-line no-lonely-if
-            if (startTime && this.isPaused()) {
-                this.media.currentTime = Math.max(this.media.currentTime, parseInt(startTime, 10));
-                this.play();
-            } else this.isPaused() ? this.play() : this.pause();
+            if (startTime) {
+                if (isToggle) {
+                    this.seekToTime(Math.max(this.media.currentTime, parseInt(startTime, 10)));
+                    this.isPaused() ? this.play() : this.pause();
+                } else {
+                    this.seekToTime(parseInt(startTime, 10));
+                    this.play();
+                }
+            } else {
+                this.isPaused() ? this.play() : this.pause();
+            }
         }
     };
 
@@ -216,6 +227,11 @@ export class AudioPlayer extends Video {
             navigator.mediaSession.setActionHandler('previoustrack', () => this.goToPreviousTrack());
             navigator.mediaSession.setActionHandler('nexttrack', () => this.goToNextTrack());
         }
+
+
+        this.on(PlayerEvents.TIME_UPDATE, time => {
+            Lightbox.isOpen && Lightbox.tryToUpdateTranscript(time);
+        });
     };
 
 
@@ -323,7 +339,7 @@ export class AudioPlayer extends Video {
                     // play audio when it has been already initialized
                     if (play) {
                         !this.isExpanded && this.expand();
-                        if (!hasParams) this.media.currentTime = startTime ? parseInt(startTime, 10) : 0;
+                        if (!hasParams) this.seekToTime(startTime ? parseInt(startTime, 10) : 0);
                         this.play();
                     }
                     this.isInitialized = true;
@@ -480,8 +496,9 @@ export class AudioPlayer extends Video {
 
     private updatePlayer = (data: IAudioPlayerResponse): void => {
         AudioPlayer.currentAudioId = data.id;
-        // TO DO - add multiple sources
-        this.media.src = data.src[0].src;
+        this.audioWrapper.innerHTML = data.src.map(src => `
+            <audio src="${src.src}" data-duration="${src.duration}" preload="auto"></audio>
+        `).join('');
         this.elements.title.innerText = data.title;
         [...this.elements.urlLinks].forEach(link => {
             link.href = data.urlInterview;
@@ -489,6 +506,10 @@ export class AudioPlayer extends Video {
         this.mobileIllustration.querySelector('img').src = data.collectionImage.mobile_x2;
         this.elements.nextBtn.dataset.nextId = data.nextId?.toString() || '';
         this.elements.prevBtn.dataset.prevId = data.prevId?.toString() || '';
+
+
+        // update Videos component
+        this.setup();
     };
 
 

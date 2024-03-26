@@ -18,11 +18,19 @@ $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pa
             height: rem(182);
             margin-left: 0;
         }
+    }
 
 
-        body.is-homepage & {
-            @include z-index(circle);
-        }
+    body.is-homepage & {
+        @include z-index(circle);
+    }
+
+
+    @include breakpoint(not-desktop) {
+        width: rem(110);
+        height: rem(110);
+        top: calc(var(--hamburgerbar-height) - #{rem(9)});
+        left: rem(2);
     }
 
 

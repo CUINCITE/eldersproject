@@ -91,7 +91,7 @@
                                     <ul class="playlist__items">
                                         {% for item in module.value %}
                                         <li class="playlist__item">
-                                            <button class="playlist__button" data-audio-player="{{item.id}}" data-start="{{ item.total_seconds }}"><span class="sr-only">Play interview:</span></button>
+                                            <button class="playlist__button" data-audio-player="{{item.id}}" data-start="{{ item.total_seconds }}" data-toggle><span class="sr-only">Play interview:</span></button>
                                             {{item.label}} <span class="playlist__duration">{{item.start_time}}</span>
                                             <i class="playlist__icon">[[svg::play]]</i>
                                         </li>
