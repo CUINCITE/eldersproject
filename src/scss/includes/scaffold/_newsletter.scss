@@ -40,7 +40,8 @@
 
     body.is-404 & { display: none; }
 
-    &.has-errors legend {
+    &.has-errors legend,
+    &.has-errors &__heading {
         transform: translateY(#{rem(-23)});
     }
 
@@ -211,6 +212,7 @@
             position: relative;
             text-align: left;
             order: -1;
+            transition: transform .25s $ease-out;
 
             @include breakpoint(tablet) {
                 @include font-size(60, 0.935);
@@ -242,23 +244,11 @@
         @include font-family(normal);
         @include font-size(14, 16);
 
+        position: absolute;
+        inset: auto auto 100% 0;
         padding-left: var(--side-padding);
         color: var(--color-red);
 
-        @include breakpoint(desktop) {
-            @include font-size(14, 16);
-
-            position: absolute;
-            inset: auto auto 100% 0;
-        }
-
-        @include breakpoint(tablet) {
-            @include font-size(14, 16);
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(14, 16);
-        }
 
         .has-errors & {
             @include breakpoint(desktop) {
@@ -282,10 +272,6 @@
         inset: 0 0 auto var(--side-padding);
         min-height: var(--input-height);
         pointer-events: none;
-
-        // .sticker {
-        //     pointer-events: all;
-        // }
     }
 
 
@@ -306,13 +292,8 @@
         }
 
         .is-completed & {
-            @include breakpoint(desktop) {
-                top: calc(100% - 12px);
-            }
+            top: calc(100% - 12px);
 
-            @include breakpoint(tablet) {
-                top: calc(100% - 12px);
-            }
 
             @include breakpoint(phone) {
                 top: calc(100% - 8px);
@@ -352,13 +333,14 @@
 
     legend {
         @include font-family(normal);
+
         padding-left: var(--side-padding);
+        transition: transform .25s $ease-out;
 
         @include breakpoint(desktop) {
             @include font-size(14, 16);
 
             margin-bottom: vw(4);
-            transition: transform .25s $ease-out;
         }
 
         @include breakpoint(tablet) {
@@ -371,7 +353,7 @@
         @include breakpoint(phone) {
             @include font-size(14, 18.9);
 
-            max-width: rem(234);
+            max-width: 100%;
             padding-top: vw(4, phone);
             margin-bottom: vw(13, phone);
         }
@@ -385,17 +367,16 @@
         text-transform: uppercase;
         max-width: 55%;
 
+
         @include breakpoint(desktop) {
             @include font-size(50, 50);
         }
 
-        @include breakpoint(tablet) {
+
+        @include breakpoint(not-desktop) {
             @include font-size(20, 22);
         }
 
-        @include breakpoint(phone) {
-            @include font-size(20, 22);
-        }
 
         p {
             &:first-of-type {
