@@ -63,12 +63,12 @@
             max-width: vh(585);
             max-height: vh(585);
             top: calc(#{rem(-80)} + 10 * 10px);
-            right: 29rem;
-        }
+            right: 90%;
 
 
-        @include breakpoint(hd) {
-            right: 100%;
+            @media (min-width: 1366px) {
+                right: 100%;
+            }
         }
 
 

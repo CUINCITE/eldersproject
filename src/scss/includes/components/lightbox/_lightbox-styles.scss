@@ -336,6 +336,18 @@
             }
 
 
+            @include breakpoint(desktop) {
+                @media (max-height: 719px) and (max-aspect-ratio: 1440 / 600) {
+                    padding: rem(50) rem(16) rem(30);
+
+
+                    &::before {
+                        top: rem(22);
+                    }
+                }
+            }
+
+
             @include breakpoint(not-desktop) {
                 width: 100%;
                 margin-left: 0;
@@ -358,6 +370,13 @@
                 @include font-size(18, 23);
 
                 letter-spacing: normal;
+
+
+                @include breakpoint(desktop) {
+                    @media (max-height: 719px) and (max-aspect-ratio: 1440 / 600) {
+                        @include font-size(16, 21);
+                    }
+                }
 
 
                 @include breakpoint(not-desktop) {

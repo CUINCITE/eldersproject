@@ -13,9 +13,18 @@ $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pa
 
 
     @include breakpoint(desktop) {
-        @media (max-height: 719px) {
+        @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
             width: rem(182);
             height: rem(182);
+            margin-left: 0;
+        }
+
+
+        @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
+            width: rem(196);
+            height: rem(196);
+            top: rem(-4);
+            left: rem(10);
             margin-left: 0;
         }
     }
