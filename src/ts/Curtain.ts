@@ -47,13 +47,13 @@ export class Curtain {
         gsap.fromTo(this.circle, { scale: 1 }, {
             scale: 1.2,
             duration: 0.8,
-            delay: 1.2,
+            delay: 0.9,
             ease: easing,
         });
         breakpoint.desktop && gsap.fromTo(this.lead, { xPercent: -120 }, {
             xPercent: 0,
             duration: 0.8,
-            delay: 1.2,
+            delay: 0.9,
             ease: easing,
         });
     };
