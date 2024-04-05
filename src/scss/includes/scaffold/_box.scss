@@ -1,8 +1,23 @@
 .box {
     background-color: var(--color-box);
-
+    border-top: 1px solid var(--color-bg);
+    margin-top: 0;
+    position: relative;
 
     &--nomargin { border-top: none !important; }
+
+
+    .is-transition & { background: none; border-top: none; }
+
+
+    &.footer__bottom {
+        background-color: var(--color-black);
+        border-top: 1px solid var(--color-white);
+
+        .is-transition & {
+            border-top: none;
+        }
+    }
 
     &[data-scroll="box"],
     [data-scroll="box"] & {
@@ -16,26 +31,12 @@
         }
 
 
-        &.footer__bottom {
-            border-top: 1px solid var(--color-white);
-
-            .is-transition & {
-                border-top: none;
-            }
-        }
 
         &:not(.is-animated) {
             @include breakpoint(not-desktop) {
                 // z-index: 1;
             }
         }
-    }
-
-
-
-    [data-scroll="box"] {
-        border-top: 1px solid var(--color-bg);
-        margin-top: 0;
     }
 
 
@@ -91,6 +92,7 @@
         z-index: -1;
         will-change: transform;
         pointer-events: none;
+        border-top: 1px solid var(--color-bg);
     }
 
 
