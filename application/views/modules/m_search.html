@@ -1,6 +1,6 @@
 <section class="module module--results">
-    <div class="box" data-scroll="box">
-        <div class="box__bg"></div>
+    <div class="box" >
+
         <div class="grid">
             <div class="col-span-12">
                 <div class="results">
@@ -16,12 +16,12 @@
         </div>
     </div>
     {% if categories.narrators.items %}
-        <div class="box box--nomargin" data-scroll="box">
-            <div class="box__bg"></div>
+        <div class="box box--nomargin" >
+
             <h3 class="results__label">Interviews</h3>
         </div>
-        <div class="box" data-scroll="box">
-            <div class="box__bg"></div>
+        <div class="box" >
+
             <div class="interviews interviews--grid is-list-view">
                 {% for interview in categories.narrators.items %}
                     {% include 'subviews/interviews/interviews_tile_single.html' with { item: interview } %}
@@ -30,12 +30,12 @@
         </div>
     {% endif %}
     {% if categories.collections.items %}
-        <div class="box box--nomargin" data-scroll="box">
-            <div class="box__bg"></div>
+        <div class="box box--nomargin" >
+
             <h3 class="results__label">Collections</h3>
         </div>
-        <div class="box" data-scroll="box">
-            <div class="box__bg"></div>
+        <div class="box" >
+
             <div class="collections">
                 {% for item in categories.collections.items %}
                     <div class="collections__item">
@@ -46,16 +46,16 @@
         </div>
     {% endif %}
     {% if categories.transcripts.items %}
-        <div class="box box--nomargin" data-scroll="box">
-            <div class="box__bg"></div>
+        <div class="box box--nomargin" >
+
             <h3 class="results__label">Transcripts</h3>
         </div>
         <div id="transcripts-wrap" class="transcripts">
             {% for item in categories.transcripts.items %}
                 {% set expand_id = 'transcript-results-list-' ~ item.id %}
 
-                <div class="box" data-scroll="box">
-                    <div class="box__bg"></div>
+                <div class="box" >
+
                     <div class="transcripts__item">
                         <h3 class="transcripts__label">{{ item.label }}</h3>
                         <div class="transcripts__elements">
@@ -84,8 +84,8 @@
             {% endfor %}
         </div>
         {% if categories.transcripts.url_more %}
-            <div class="results__more box" data-scroll="box">
-                <div class="box__bg"></div>
+            <div class="results__more box" >
+
                 {% include "components/c_load_more.html" with {
                     options: {
                         "contentSelector": "#transcripts-wrap",

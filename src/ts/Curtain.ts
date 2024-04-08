@@ -33,7 +33,7 @@ export class Curtain {
 
 
 
-    public show = (): Promise<void> => new Promise(resolve => {
+    public show = (): void => {
         this.view.style.display = 'block';
         gsap.set(this.imageWrap, { scale: 1, opacity: 1 });
         gsap.set(this.circle, { scale: 1, opacity: 1 });
@@ -47,19 +47,16 @@ export class Curtain {
         gsap.fromTo(this.circle, { scale: 1 }, {
             scale: 1.2,
             duration: 0.8,
-            delay: 1.2,
+            delay: 0.9,
             ease: easing,
-            onComplete: () => {
-                resolve();
-            },
         });
         breakpoint.desktop && gsap.fromTo(this.lead, { xPercent: -120 }, {
             xPercent: 0,
             duration: 0.8,
-            delay: 1.2,
+            delay: 0.9,
             ease: easing,
         });
-    });
+    };
 
 
 

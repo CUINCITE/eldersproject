@@ -6,7 +6,6 @@ import { slideUp } from './slideUp';
 import { collectionHero } from './scroll/collectionHero';
 import { interviews } from './scroll/interviews';
 import { claim } from './scroll/claim';
-import { box } from './scroll/box';
 import { sticker } from './scroll/sticker';
 import { illustration } from './scroll/illustration';
 import { line } from './scroll/line';
@@ -20,7 +19,6 @@ import { sticky } from './scroll/sticky';
 export const animations = { fadeUp, slideUp };
 
 export const scrolls = {
-    box,
     collections,
     collectionsSimple,
     collectionHero,

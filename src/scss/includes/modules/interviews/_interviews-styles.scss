@@ -654,6 +654,15 @@
                     -webkit-line-clamp: 4;
                 }
             }
+
+
+            .is-after-toggle & {
+                &-overlay,
+                &-content {
+                    transition-duration: 0s;
+                    transition-delay: 0s;
+                }
+            }
         }
 
 

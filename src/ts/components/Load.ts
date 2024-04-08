@@ -153,7 +153,7 @@ export class Load extends Component {
 
         gsap.fromTo(this.contentElement, { opacity: 0 }, {
             opacity: 1,
-            duration: 0.45,
+            duration: 0.5,
             ease: 'sine',
         });
     };
@@ -182,9 +182,14 @@ export class Load extends Component {
 
     protected toggleView = (view: string): void => {
         this.contentElement.classList.remove('is-list-view', 'is-grid-view');
-        this.contentElement.classList.add(`is-${view}-view`);
+        this.contentElement.classList.add(`is-${view}-view`, 'is-after-toggle');
         this.section?.classList.remove('is-list', 'is-grid');
         this.section?.classList.add(`is-${view}`);
+
+        setTimeout(() => {
+            // temp class to prevent transition on toggle
+            this.contentElement.classList.remove('is-after-toggle');
+        }, 100);
     };
 
 

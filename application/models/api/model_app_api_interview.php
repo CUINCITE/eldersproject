@@ -51,27 +51,6 @@ class model_app_api_interview
             }
         }
 
-        // if no mementos, display placeholder main image
-        $mainImage = false;
-        if (empty($media)) {
-
-            // this is only temporary image assignment
-            if (!empty($item['illustration']['image'])) $image = $item['illustration']['image'];
-            else $image = $this->parent->getJsonModel('interview_illustrations', ['active' => 1], true, 'rand()')['image'];
-
-            if (!$image) {
-                $image = [
-                    'desktop' => '/src/images/illu-1.png',
-                    'mobile' => '/src/images/illu-1.png'
-                ];
-            }
-
-            $mainImage = [
-                'type' => '',
-                'image' => $image
-            ];
-        }
-
         // tags
         $tags = [];
         if (!empty($item['topics'])) {
@@ -135,13 +114,8 @@ class model_app_api_interview
             'info' => $interview_info,
             'downloads' => $downloads,
             'related' => $this->getRelated($item),
-            'contentList' => $this->getContentList($item, $sessions)
+            'contentList' => $this->getTableOfContents($item, $sessions)
         ];
-
-        if ($mainImage) {
-            unset($data['images']);
-            $data['mainImage'] = $mainImage;
-        }
 
         return $data;
     }
@@ -217,31 +191,23 @@ class model_app_api_interview
         return array_slice($related, 0, 2);
     }
 
-    private function getContentList($item, $sessions): array
+    private function getTableOfContents($item, $sessions): array
     {
-        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview' => $item['id']], false, 'no');
+        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview_incite_id' => $item['incite_id']], false, 'no');
 
+        // prepare simple table with sessions order for usort below
         $sessionsOrder = [];
         foreach ($sessions as $index => $session) {
-            $sessionsOrder[$session['id']] = $index;
+            $sessionsOrder[$session['incite_id']] = $index;
         }
 
-        
-
-        usort($indexes, function ($a, $b) use ($sessionsOrder)
-        {
-            $sessionDiff = $sessionsOrder[$a['session']] <=> $sessionsOrder[$b['session']];
+        // some interviews have multiple sessions - sort the $indexes table (table of contents) according to the sessions they are in
+        usort($indexes, function ($a, $b) use ($sessionsOrder) {
+            $sessionDiff = $sessionsOrder[$a['session_incite_id']] <=> $sessionsOrder[$b['session_incite_id']];
             if ($sessionDiff !== 0) {
                 return $sessionDiff;
             }
-
         });
-
-
-        $sessionMap = [];
-        foreach ($sessions as $index => $session) {
-            $sessionMap[$session['id']] = $index;
-        }
 
         $returnItems = [];
         foreach ($indexes as $index) {
@@ -250,9 +216,9 @@ class model_app_api_interview
                 continue;
             }
 
-            if (isset($sessionMap[$index['session']])) {
+            if (isset($sessionsOrder[$index['session_incite_id']])) {
 
-                $sessionIndex = $sessionMap[$index['session']];
+                $sessionIndex = $sessionsOrder[$index['session_incite_id']];
                 $startTime = $this->timeToSeconds($index['start_time']);
                 
                 if ($sessionIndex > 0) {
