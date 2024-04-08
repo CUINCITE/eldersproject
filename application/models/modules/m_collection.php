@@ -128,10 +128,14 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             if ($v['quotes'])
             {
-                foreach ($v['quotes'] as $kk => $vv) {
-                    $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true]);
-                    if ($i && $vv[1]) {
-
+                
+                foreach ($v['quotes'] as $kk => $vv)
+                {
+                    $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true,'strict'=>true]);
+                
+                    if ($i && $vv[1])
+                    {
+                        
                         $time = explode(':', $vv[1]);
                         $time = _uho_fx::dozeruj($time[0], 2) . ':' . _uho_fx::dozeruj($time[1], 2) . ':' . _uho_fx::dozeruj($time[2], 2);
 
