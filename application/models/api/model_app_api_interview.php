@@ -226,7 +226,10 @@ class model_app_api_interview
             $sessionsOrder[$session['id']] = $index;
         }
 
-        usort($indexes, function ($a, $b) use ($sessionsOrder) {
+        
+
+        usort($indexes, function ($a, $b) use ($sessionsOrder)
+        {
             $sessionDiff = $sessionsOrder[$a['session']] <=> $sessionsOrder[$b['session']];
             if ($sessionDiff !== 0) {
                 return $sessionDiff;
