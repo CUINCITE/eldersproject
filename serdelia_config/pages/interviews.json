@@ -231,6 +231,14 @@
         {
           "label": "Caption",
           "field": "caption"
+        },
+        {
+          "label": "Alt",
+          "field": "alt"
+        },
+        {
+          "label": "Filename",
+          "field": "filename_original"
         }
       ],
       "media": {
@@ -330,11 +338,11 @@
       "search": true
     },
     {
-      "list": "read",
+      "list": true,
       "field": "status_assets",
       "label": "Status (assets)",
       "type": "boolean",
-      "search": true
+      "search": true      
     },
     {
       "label": "Publish",

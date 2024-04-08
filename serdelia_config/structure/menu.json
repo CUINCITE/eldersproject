@@ -26,6 +26,10 @@
             {
                 "label": "Pages",
                 "page": "pages"
+            },
+            {
+                "label": "Media",
+                "page": "media"
             }
         ]
     },

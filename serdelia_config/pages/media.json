@@ -60,13 +60,15 @@
     {
       "field": "uid",
       "type": "uid",
-      "list": "read"
+      "list": true,"search":true,
+      "label":"uid"
     },
     {
+      "label":"Image",
       "type": "image",
       "field": "image",
       "folder": "/public/upload/media",
-      "folder_preview": "mobile",
+      "folder_preview": "original",
       "list": {
         "position_after": "",
         "height": 120,
