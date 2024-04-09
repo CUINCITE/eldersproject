@@ -202,15 +202,30 @@
     },
     {
       "tab": "Download",
-      "field": "PDF",
-      "label": "PDF",
+      "field": "pdf_en",
+      "label": "PDF (EN)",
       "type": "file",
+      "filename":"%uid%_EN.pdf",
       "extension": "pdf",
+      "settings":{"size":"pdf_en_size"},
       "folder": "/public/upload/interviews/transcripts"
     },
     {
-      "field": "pdf_size",
-      "label": "PDF Size"
+      "field": "pdf_en_size",
+      "label": "PDF Size (EN)"
+    },
+    {
+      "field": "pdf_es",
+      "label": "PDF (ES)",
+      "type": "file",
+      "filename":"%uid%_ES.pdf",
+      "extension": "pdf",
+      "settings":{"size":"pdf_es_size"},
+      "folder": "/public/upload/interviews/transcripts"
+    },
+    {
+      "field": "pdf_es_size",
+      "label": "PDF Size (ES)"
     },
     {
       "tab": "Index",
