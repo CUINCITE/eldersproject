@@ -33,7 +33,7 @@ class model_app_api_import_map
         $locations = [];
         
         foreach ($collections as $k=>$v)
-        //if ($v['label']=='Denice Frohman')
+        if ($v['label']=='Robin Coste Lewis')
         {
             
             $label=$v['label'];
@@ -149,8 +149,7 @@ class model_app_api_import_map
     {
         foreach ($data as $k=>$v)
             if (!$v['quotes']) unset($data[$k]);
-        $data=array_values($data);
-        
+        $data=array_values($data);        
 
         $no = 0;
         foreach ($data as $k=>$location) {
@@ -163,8 +162,9 @@ class model_app_api_import_map
 
             $location['collection'] = $model_id;
             $location['quotes'] = json_encode($location['quotes']);
-            if (!empty($location['address'])) $location['active'] = 1;
-            else $location['active'] = 0;
+            //if (!empty($location['address'])) $location['active'] = 1;
+            //else $location['active'] = 0;
+            $location['active'] = 1;
 
             $filters=['collection'=>$model_id,'label'=>$location['label']];
 

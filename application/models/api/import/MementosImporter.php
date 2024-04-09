@@ -29,7 +29,8 @@ class MementosImporter extends model_app_api_import
         $xls = $_SERVER['DOCUMENT_ROOT'] . '/_data/Ephemera_Mementos.xlsx';
         $spreadsheet = ExcelIOFactory::load($xls);
         $sheets = $spreadsheet->getSheetNames();
-        //$sheets=[$sheets[9]];
+        
+        $sheets=[$sheets[8]];
         $resultArray = [];
 
         foreach ($sheets as $k => $v) {
@@ -44,7 +45,7 @@ class MementosImporter extends model_app_api_import
         }
 
         // update interviews.status_media
-        $this->parent->sql->query('UPDATE interviews,media SET interviews.status_assets=1 WHERE interviews.id=media.model_id && media.model="interviews"');
+        $this->parent->sql->queryOut('UPDATE interviews,media SET interviews.status_assets=1 WHERE interviews.id=media.model_id && media.model="interviews"');
 
         /*
             old CSV import
@@ -132,7 +133,8 @@ class MementosImporter extends model_app_api_import
 
                     $exists = _uho_fx::array_filter($interview['media'], 'filename_original', $v['Filename'], ['first' => true]);
 
-                    if ($exists) {
+                    if ($exists)
+                    {                        
                         $item['uid'] = $exists['uid'];
                         $r = $this->parent->putJsonModel('media', $item, ['id' => $exists['id']]);
                         if (!$r)
@@ -142,6 +144,7 @@ class MementosImporter extends model_app_api_import
                             $intervews_media[$interview['id']] = [];
                         $intervews_media[$interview['id']][] = $exists['id'];
                     } else {
+                        
                         $item['uid'] = uniqid();
                         $r = $this->parent->postJsonModel('media', $item);
                         if (!$r)

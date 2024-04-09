@@ -115,6 +115,9 @@
       "field": "image_sizes",
       "type": "json",
       "label": "Image sizes"
+    },
+    {
+      "field":"status","type":"select","list":true,"search":true,"label":"Status"
     }
   ]
 }
