@@ -18,6 +18,7 @@ export class Loader extends Component {
     private counterWidth: number;
     private circleComp: Circle;
     private isHidden = false;
+    private percentage = { value: 1 };
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -44,7 +45,7 @@ export class Loader extends Component {
 
 
 
-    public animate = (): Promise<void> => this.circleComp.init().then(() => this.setCounterLoop());
+    public animate = (): Promise<void> => this.circleComp.init().then(() => this.setNewAnimation());
 
 
 
@@ -76,22 +77,19 @@ export class Loader extends Component {
 
 
 
-    private setCounterLoop = (): Promise<void> => new Promise(resolve => {
-        let count = -1;
-        const interval = setInterval(() => {
-            // eslint-disable-next-line no-plusplus
-            count++;
-
-            if (count === steps.length) {
-                clearInterval(interval);
-                // this.trigger(LoaderEvents.LOADED);
+    private setNewAnimation = (): Promise<void> => new Promise(resolve => {
+        gsap.fromTo(this.percentage, { value: 1 }, {
+            value: 99,
+            duration: 2,
+            delay: 0.8,
+            ease: 'sine',
+            onUpdate: () => {
+                this.updateHtml(Math.floor(this.percentage.value));
+            },
+            onComplete: () => {
                 resolve();
-                return;
-            }
-
-            this.updateHtml(steps[count]);
-
-        }, 900);
+            },
+        });
     });
 
 
