@@ -274,14 +274,14 @@
                             <ul class="lightbox__downloads-list">
                                 {% for item in downloads %}
                                     <li>
-                                        <a href="{{item.url}}">
+                                        <a href="{{item.url}}" data-history="false" download>
                                             <span class="lightbox__downloads-arrow">
                                             [[svg::lightbox-arrow-small]]
                                             </span>
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} <span class="bracket">(</span>{{item.ext}}<span class="bracket">)</span>
+                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}, {{item.size}}<span class="bracket">)</span>
                                         </a>
                                     </li>
                                 {% endfor %}

@@ -84,14 +84,19 @@ class model_app_api_interview
 
         //downloads
         $downloads = [];
-        if (!empty($item['PDF']['src'])) {
+        $langs=['en','es'];
+        $langs2=['English','Spanish'];
+
+        foreach ($langs as $k=>$lang)        
+        if ($item['pdf_'.$lang.'_size'])
+        {
             $downloads[] =
                 [
-                    "url" => 'api/download?transcript=' . $item['id'],
-                    "name" => "Transcript",
+                    "url" => 'api/download?transcript=' . $item['id'].'&lang='.$lang,
+                    "name" => $langs2[$k]." transcript",
                     "ext" => "pdf",
-                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript.pdf",
-                    "size" => $item['pdf_size'] ? number_format($item['pdf_size'] / 1000000, 1) . 'MB' : ''
+                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript-".$lang.".pdf",
+                    "size" => $item['pdf_'.$lang.'_size'] ? number_format($item['pdf_'.$lang.'_size'] / 1000000, 2) . 'MB' : ''
                 ];
         }
 
