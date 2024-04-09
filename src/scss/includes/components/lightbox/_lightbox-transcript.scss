@@ -175,6 +175,7 @@
         min-width: rem(69);
         position: relative;
         z-index: 1;
+        overflow: hidden;
 
 
         input {
@@ -204,7 +205,7 @@
     &__nav {
         @include flex;
 
-        gap: rem(23);
+        gap: rem(16);
         height: rem(20);
         background-color: var(--theme-color);
         color: var(--color-grey200);
@@ -227,6 +228,10 @@
 
 
         &-button {
+
+            min-width: rem(20);
+
+
             svg {
                 width: rem(8);
                 height: rem(14);
