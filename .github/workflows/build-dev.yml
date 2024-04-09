@@ -2,11 +2,13 @@ on:
   push:
     branches:
       - dev
-   
+
+name: Build Dev
+
 jobs: 
   updates_repos: 
     runs-on: ubuntu-latest 
     steps: 
-      - name: h7 master call
+      - name: h8 dev call
         run: | 
-          curl -n -X PATCH "https://github.sunship.dev/?path=elder&token=${{secrets.H7_TOKEN}}&cache=true"
+          curl -n -X PATCH "https://github.sunship.one/?path=elder&token=${{secrets.H7_TOKEN}}&cache=true"

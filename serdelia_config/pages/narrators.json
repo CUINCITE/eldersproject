@@ -26,7 +26,7 @@
         
         {
             "label": "Occupation",
-            "hr":true,
+            "hr":true,"list":true,
             "field": "occupation"            
         },
         {
@@ -37,7 +37,7 @@
             "field":"narrators_categories",
             "label":"Narrators categories",
             "type":"checkboxes",
-            "hr":true,
+            "hr":true,"list":true,
             "settings":{"small":true},
             "source":
             {

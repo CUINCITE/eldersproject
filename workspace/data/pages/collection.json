@@ -1,0 +1,319 @@
+{
+    "modules": [
+        {
+            "type": "collection_hero",
+            "name": "Carolina <br>De Robertis",
+            "area": "Portland, Oregon <br class='desktop-hide'/>and the Pacific Northwest",
+            "illustration": {
+                "image": {
+                    "desktop": "carolina_de_robertis.png",
+                    "mobile": "carolina_de_robertis.png"
+                },
+                "shadow": "purple"
+            },
+            "text": {
+                "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.</p>"
+            }
+
+        },
+        {
+            "type": "collection_location",
+            "location": "Portland, Oregon and the Pacific Northwest",
+            "claim": "Though often dubbed 'America's whitest big city,' Portland has a remarkable history of Black life. This collection chronicles said history, tracing key moments of disaster and displacement, but more importantly, the enduring bonds that have come to define Black life in the Pacific Northwest."
+
+        },
+        {
+            "type": "quote_panel",
+            "video": {
+                "src": "http://assets.huncwot.net/video.mp4",
+                "poster": "/workspace/images/player-poster.jpg"
+            },
+            "quote": {
+                "text": "The cohort from whom I'll be gathering stories reflects an incredibly varied range of lived experiences, hailing from trans, lesbian, gay, non-binary, genderqueer, Black, Latinx, AAPI, and Native communities, to name a few. They are activists who blazed trails for queer visibility and rights; they are ordinary people who have lived with extraordinary courage; they are witnesses to history, agents of change, and foreparents of today’s racial and queer justice movements. Their stories are inspiring, and essential to our understanding of who we are and might collectively become.",
+                "author": "Carolina De Robertis"
+            }
+        },
+        {
+            "type": "text_wrapper",
+            "title": {
+                "size": "small-plus",
+                "aside": true,
+                "label": "Intro"
+                },
+            "wrappedModules": [
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Oregon is not usually the first place people imagine when they think of Black history. Portland, the state’s largest city, is often called the “whitest big city in America”, shaped in part by its history as a sundown town. As the only free state in the Union with discriminatory clauses in its constitution, Oregon prohibited Black people from entering, owning property, and making contracts. Laws forbidding entry lasted until 1926 and fueled Ku Klux Klan activity, perpetuating systemic racism and leaving impacts on Black Oregonian life that last to this day.</p><p>In this collection, Renée Watson journeys through the lives and experiences of Black elders from in and around Portland, Oregon. Shaped by success, sorrow, discrimination, and kinship, their lives are set in a rocky, hardened landscape whose edges are softened by the communities they inhabit. Watson is a dutiful witness to these recollections, and we’re honored to hold these powerful stories in our collection</p>"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text_wrapper",
+            "reversed": "true",
+            "title": {
+                "size": "small-plus",
+                "aside": true,
+                "label": "Refuge and racism"
+                },
+            "wrappedModules": [
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>After opening in 1926, Oregon was seen as a refuge for many Black Southerners fleeing the racial terror and economic discrimination of the American South during the Great Migration. <b>Elder Mariah Taylor</b> recalls,</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<blockquote class='quote quote--big'><p>Many of the transplants from many Southern states came for a better life; for a happier life, a more prosperous life. We came to keep my father from being lynched, again. And we came as a family. Everyone around us became the extended family <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Portland’s façade of equality began to fade as newcomers recognized racism in new forms.</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<blockquote class='quote quote--big'><p>We played outside, and we stayed outside all day until those streetlights came on, or you heard somebody’s mother calling your name from a distance. <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>In response to these subtle, impactful forms of racism, some responded with a commitment to respectability politics—the belief that Black people must work harder to prove themselves to those in power. Elder Alcena Boozer recounts a conversation with her father.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "mariah_taylor_young.png",
+                            "mobile": "mariah_taylor_young.png",
+                            "width": 200,
+                            "height": 400,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Mariah Taylor as a young woman</p>"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text_wrapper",
+            "title": {
+                "size": "small-plus",
+                "aside": true,
+                "label": "A history of displacement"
+                },
+            "wrappedModules": [
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>In the 20th century, three major events decentralized Portland’s Black community: the Vanport flood, school desegregation and bussing, and gentrification.</p><p>At the onset of World War II, Portland city officials developed Vanport, the largest public housing project in the United States, to house a growing population of shipyard workers. Built on low-lying land on the edge of the Columbia River and protected by dikes, Vanport housed over 40,000 residents at its peak, one-fourth of whom were Black. Despite underinvestment, Vanport’s Black community flourished.</p>"
+                    }
+                },
+                {
+                    "type": "illustration",
+                    "image": {
+                        "desktop": "hawaian.png",
+                        "mobile": "hawaian.png",
+                        "alt": ""
+                    },
+                    "modifiers": []
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "mariah_taylor_young.png",
+                            "mobile": "mariah_taylor_young.png",
+                            "width": 200,
+                            "height": 400,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Mariah Taylor as a young woman</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<blockquote class='quote'><p>“I grew up with over two hundred family members, again, so I had this very unique experience, because it was like, this Black, little Black utopia in the whitest city, later I found out, in the country. And I felt that later growing up and going out, when, in dominant culture settings, honors classes, you know, as I later went into high school, college, and different things, and so my orientation to who I was, was very much steeped in Black history, poetry, church, so I kind of always stood out, [laughs] in those settings, because I had a lot of confidence because I was affirmed where I was. And later, that began to erode as I had to meet up against, you know, being the only all the time, that was exhausting at times, but I could always come back to this nucleus.” <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote><blockquote class='quote quote--big'><p>[...] that gentrification bomb, it destroyed the Black community in Portland. It doesn’t exist anymore. <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote><p>Gentrification further signaled an end to a way of life for the Black community in Portland. Elder Richard Pettiford succinctly states.</p><blockquote class='quote'><p>“You knew that was going on. We talked about even when we were younger that the neighborhood was going to get gentrified. We knew it. The value of the land was just too valuable.</p></blockquote><blockquote class='quote'><p>We used to talk about it all the time. Man, why they going to let the Black community, right close to the freeway, right by the mall, right over by the coliseum. It seemed like this wouldn’t be the Black community. But we would talk about it and laugh about it. Because we only had to drive five minutes and you’re at the coliseum. Jump right on the freeway, go where you want to go. Never understood that. I didn’t understand that.</p></blockquote><blockquote class='quote'><p>But two things. The one. When they put those divides down Union Avenue, and they put those islands, like oh, okay. We’re beautifying Northeast Portland. Like okay. But it made it difficult to maneuver. And I don’t know if they were just like trying to slow people down or what they were trying. But it made it difficult to maneuver in Portland... <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote><div class='text__expand expand' data-expand='' id='expand-quote-test'><blockquote class='quote'><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.</p></blockquote><blockquote class='quote'><p>Lorem ipsum...</p></blockquote></div> <button class='text__expand-trigger button button--small' aria-expanded='false' aria-controls='expand-quote-test' data-expanded-text='Read less' data-hidden-text='Read more'><i class='icon-btn-arrow arrow'><span></span><span></span><span class='triangle'></span></i><span class='js-expand-text'>Read more</span></button></blockquote>"
+                    }
+                },
+                {
+                    "type": "illustration",
+                    "image": {
+                        "desktop": "hawaian_2.png",
+                        "mobile": "hawaian_2.png",
+                        "alt": "",
+                        "width": 400,
+                        "height": 400
+                    },
+                    "modifiers": []
+                }
+            ]
+        },
+        {
+            "type": "text_wrapper",
+            "reversed": "true",
+            "title": {
+                "size": "small-plus",
+                "aside": true,
+                "label": "A legacy of success"
+                },
+            "wrappedModules": [
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>The continuous survival and success of Black Portlanders is widely celebrated in this collection. Against incredible odds, these narrators have boldly carved new paths, changed the course of history for all Oregonians, and tirelessly preserved and promoted Black Portland’s past and future.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "shala_rene.jpg",
+                            "mobile": "shala_rene.jpg",
+                            "width": 400,
+                            "height": 200,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Shalanda Sims with Renée Watson at the grand opening of Shalanda's theater, World Stage Theater in Portland, OR</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Elder Shalanda Sims, a celebrated performer and artist, created a play titled “Vanport,” about the Vanport flood. Elder Bernie Foster founded the Skanner newspaper, one of Oregon’s oldest African American newspapers, alongside his wife, Bobbie Doré Foster.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "avel_gordly.jpg",
+                            "mobile": "avel_gordly.jpg",
+                            "width": 400,
+                            "height": 200,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Avel Gordly - photos of her in senate chamber</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Some elders have dedicated their lives to their communities through activism, organizing, and community governance. Elder Kent Ford is an activist and co-founder of the Portland chapter of Oregon’s Black Panther Party in 1969. Avel Gordly is a community organizer, activist, and former politician who became the first African-American woman to be elected to the Oregon State Senate. Margaret Carter is a former politician and the first Black woman elected to Oregon's state legislature.</p><p>Raised to understand the importance of culturally-affirming education, some of our elders turned to a life of teaching the next generation. Linda Harris is a trailblazing educator who led school desegregation efforts. Elder Ken Berry is a celebrated teacher and educator and co-founder of the Martin Luther King program.</p>"
+                    }
+                },
+                {
+                    "type": "photo",
+                    "photo": {
+                        "image": {
+                            "desktop": "judge_nelson.jpg",
+                            "mobile": "judge_nelson.jpg",
+                            "width": 200,
+                            "height": 400,
+                            "alt": ""
+                        },
+                        "modifiers": []
+                    },
+                    "text": {
+                        "size": "small",
+                        "text": "<p>Judge Adrienne Nelson</p>"
+                    }
+                },
+                {
+                    "type": "text",
+                    "text": {
+                        "size": "large",
+                        "modifiers": ["aside"],
+                        "text": "<p>Religious leaders in this collection have also contributed tirelessly to their communities. Alcena Boozer is one of the first women ordained in the Diocese of Oregon and one of only three Black women ordained in the United States Episcopal Church. Lisa Manning-Saunders has ministered to women in Portland for decades and is now the director of FaithBridge LLC, an organization that helps women emerging from trauma or experiencing a life transition to reconnect with their faith.</p><p>Asked about her hopes for the future of Black Portland, elder Raina Evans says:</p><blockquote class='quote quote--big'><p>I think my biggest hope is that future generations have places to go to learn and to know about the history. Because it’s pretty significant history. <button data-audio-player='160' data-start='80' class='quote__cassette'>[[svg::cassette]]</button></p></blockquote>"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "interviews",
+            "label": "Interviews",
+            "sticker": "from the collection",
+            "reversed": true,
+            "items": [
+                {
+                    "name": "Achy Obejas",
+                    "title": "Dedicated teacher, long-time Albuquerque resident ",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Galveston, TX",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "Andrés Ozzuna",
+                    "title": "Dedicated teacher, long-time Albuquerque resident",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Houston, TX",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "Ms Billie Cooper",
+                    "title": "Dedicated teacher, long-time Albuquerque resident",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "San Antonio, CA",
+                    "collection": "Natalie Diaz"
+                },
+                {
+                    "name": "C. Njoube Dugar",
+                    "title": "Dedicated teacher, long-time Albuquerque resident ",
+                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+                    "state": "Austin, TX",
+                    "collection": "Natalie Diaz"
+                }
+            ]
+        },
+        {
+            "type": "map"
+        }
+    ]
+  }

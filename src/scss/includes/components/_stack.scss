@@ -1,0 +1,336 @@
+.stack {
+    &__gallery {
+        position: relative;
+    }
+
+
+
+    &__content {
+        position: relative;
+
+        @include breakpoint(desktop) {
+            display: grid;
+            grid-template-rows: auto vw(167);
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+
+
+    &__container {
+        position: relative;
+
+
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, space-between, flex-start);
+        }
+    }
+
+
+
+    &__dots {
+        @include flex(row, center, center);
+
+        width: 100%;
+        margin: rem(6) 0 rem(20);
+        gap: rem(7);
+    }
+
+
+
+    &__dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--color-grey200);
+        border-radius: 50%;
+        transition: background-color .4s $ease-custom;
+
+
+        &.is-current {
+            background-color: var(--color-black);
+        }
+    }
+
+
+
+    &__cards {
+        @include breakpoint(desktop) {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+            width: vw(585);
+            height: vw(585);
+            max-width: vh(585);
+            max-height: vh(585);
+            top: calc(#{rem(-80)} + 10 * 10px);
+            right: 90%;
+
+
+            @media (min-width: 1366px) {
+                right: 100%;
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
+        }
+    }
+
+
+
+    &__polaroids {
+        width: 100%;
+        height: 100%;
+
+
+        @include breakpoint(desktop) {
+            @include flex(row, center, center);
+
+            position: absolute;
+            inset: 0 100% 0 auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            display: grid;
+            grid-template-columns: 1fr;
+            width: 100%;
+            margin-left: rem(-20);
+        }
+    }
+
+
+
+    &__polaroid {
+        @include flex(row, center, center);
+
+        position: absolute;
+        transition: transform 0.4s cubic-bezier(.5, 0, .2, 1), opacity .5s cubic-bezier(.5, 0, .2, 1);
+        transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9);
+
+        @include breakpoint(desktop) {
+            &:nth-last-child(1) {
+                transform: rotate(-8deg) translate(0, 0) !important;
+
+
+                &::after { opacity: 0; }
+            }
+        }
+
+        @include breakpoint(desktop) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgba($color-grey800, .1);
+                transition: opacity .25s cubic-bezier(.5, 0, .2, 1);
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            width: rem(290);
+            height: 100%;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            display: none;
+            transform: none;
+
+
+            .polaroid {
+                --polaroid-width: #{rem(270)};
+                --polaroid-height: #{rem(280)};
+
+                transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+            }
+
+
+            &.is-current,
+            &.is-previous {
+                display: block;
+
+                .polaroid {
+                    transform: rotate(-11deg);
+                }
+            }
+
+
+            &.is-next {
+                display: block;
+                transform: translateX(100%);
+
+                .polaroid {
+                    transform: translateY(#{rem(15)}) rotate(11deg);
+                }
+            }
+
+
+            &.is-after-next {
+                display: block;
+                transform: translateX(200%);
+
+                .polaroid {
+                    transform: rotate(-11deg);
+                }
+            }
+        }
+    }
+
+
+
+    &__button {
+        border-top: 1px solid $color-bg;
+
+        @include breakpoint(desktop) {
+            padding-inline: var(--grid-margin);
+            width: 100%;
+            padding-top: rem(14);
+
+
+            .button {
+                gap: rem(8);
+                flex-direction: row;
+                margin-left: auto;
+                width: max-content;
+
+                &__text {
+                    display: inline-block;
+
+                    &--duplicate {
+                        position: absolute;
+                        right: calc(100% + #{rem(8)});
+                        top: 0;
+                    }
+                }
+
+                &__main {
+                    overflow: hidden;
+                    position: relative;
+                    gap: rem(12);
+                    padding-inline: rem(2);
+                }
+
+                .arrow {
+                    padding-left: 0;
+
+                    &--extra {
+                        top: rem(9);
+                        right: calc(100% + #{rem(6)});
+                    }
+                }
+
+                span i {
+                    padding-left: 0;
+                }
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            height: rem(125);
+            padding: rem(13) var(--grid-margin);
+
+
+            .button {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+
+
+                > .button__text { margin-top: rem(-4); margin-left: rem(-2); }
+            }
+
+
+            .button__main {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+
+
+    &__filler {
+        @include breakpoint(desktop) {
+            border-top: 1px solid $color-bg;
+        }
+    }
+
+
+
+    @include breakpoint(desktop) {
+        // COLLECTIONS IMAGES (COVERS)
+
+        @for $i from 1 through 10 {
+            &__names:has(li:nth-child(#{$i}):focus-within) + &__cards {
+                li:nth-last-child(-n + #{$i - 1} + 3) {
+                    transform: rotate(-15deg) translate(-50vw, -50%);
+                }
+            }
+
+
+            &__names:has(li:nth-child(#{$i}).is-active) ~ &__cards {
+                li { transform: unset !important; }
+
+                @for $j from 1 through 4 {
+                    li:nth-last-child(#{4 - $j + $i}) {
+                        transform: translate($j * -10px, $j * -10px) !important;
+                    }
+                }
+
+                li:nth-last-child(-n + #{$i - 1}) {
+                    transform: rotate(-15deg) translate(-50vw, -50%) !important;
+                }
+            }
+        }
+
+        // INTERVIEWS POLAROIDS
+
+        @for $i from 1 through 10 {
+            &__names:has(li:nth-child(#{$i}).is-active) ~ &__polaroids {
+                li {
+                    transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.7) !important;
+                    opacity: 0;
+                }
+
+
+                li:nth-last-child(n + #{$i}) {
+                    transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.7) !important;
+                    opacity: 0;
+
+
+                    &::after { opacity: 0; }
+                }
+
+
+                li:nth-last-child(#{$i + 1}) {
+                    transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9) !important;
+                    opacity: 1;
+
+
+                    &::after { opacity: 0; }
+                }
+
+
+                li:nth-last-child(#{$i}) {
+                    transform: rotate(-8deg) translate(0, 0) !important;
+                    opacity: 1;
+
+
+                    &::after { opacity: 0; }
+                }
+
+                li:nth-last-child(-n + #{$i - 1}) {
+                    transform: rotate(-15deg) translate(-50vw, -50%) !important;
+                    opacity: 1;
+
+
+                    &::after { opacity: 0; }
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,25 @@
-<article {% if type=='Home' %}data-page="Page" data-home{% else %}data-page="{{type}}"{% endif %} data-title="{{title}}" data-alternate='{{langs|json_encode|raw}}' {% if serdelia_page_id %}data-serdelia-page-id="{{serdelia_page_id}}"{% endif %}>
-<h1 class="sr-only">{{title}}</h1>
-  {% for m in modules %}
-  {% include 'modules/m_'~m.type.slug~'.html' with m %}
-{% endfor %}
+<article {% if slug=='home' %}data-page="Page" data-home{% else %}data-page="{{ type }}"{% endif %}
+        {% if is_404 %} data-not-found{% endif %}
+         data-title="{{ title }}"
+         data-alternate='{{ langs|json_encode|raw }}' {% if serdelia_page_id %}data-serdelia-page-id="{{ serdelia_page_id }}"{% endif %}>
+    <h1 class="sr-only">{{ title }}</h1>
+
+    {% if show_mobile_logo %}
+
+        <section class="module module--logo_box desktop-hide">
+            {% include "components/c_logo_box.html" %}
+        </section>
+
+    {% endif %}
+
+    {% for m in modules %}
+
+        {% include 'modules/m_'~m.type.slug~'.html' with m %}
+
+    {% endfor %}
+
 </article>
-<!-- offscreen lightbox data -->
-{% if lightbox %}<aside data-lightbox-json='{{lightbox|json_encode}}'></aside>{% endif %}
+
+{% if lightbox %}
+<aside data-lightbox-json='{{ lightbox|json_encode }}'></aside>
+{% endif %}

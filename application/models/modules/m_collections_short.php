@@ -11,10 +11,19 @@ class model_app_pages_modules_collections_short extends model_app_pages_modules
 
 	public function updateModel($m,$url)
 	{
-        $m['items']=$this->parent->getJsonModel('interviewers',['active'=>1],false,'last_name');
+		$m['items']=$this->parent->dictGet('collections');
+		if (!empty($m['params']['home']))
+		{
+            $seed = date('z');
+            mt_srand($seed);
+			shuffle($m['items']);
+			$m['items']=array_slice($m['items'],0,5);
+		}
+
+        $m['text'] = str_replace("The ", "The&nbsp;", $m['text']);
+		
 		return $m;
 	}
-
 
 }
 ?>

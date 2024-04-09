@@ -1,0 +1,10 @@
+{
+    "fields": [
+        {
+            "tab": "Copy",
+            "field": "text",
+            "label": "Copy",
+            "type": "text"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+.text-sticker {
+    @include flex(row, flex-start, center);
+
+
+
+    &__wrap,
+    &__wrapper {
+        position: relative;
+    }
+
+
+
+    &__sticker {
+        position: absolute;
+        inset: rem(-39) auto auto 2px;
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
+    }
+}

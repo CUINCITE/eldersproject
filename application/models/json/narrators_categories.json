@@ -1,0 +1,47 @@
+{
+    "table": "narrators_categories",
+    "label": {
+        "page": "Narrators Categories",
+        "edit": "{% if not label %}New Narrator Category{% else %}Narrator Category: <em>{{label}}</em>{% endif %}"
+    },
+    "layout":
+    {
+        "type":"grid",            
+        "settings":{"cards":true,"height":100,"width":3}
+
+    },
+    
+    "model": {
+        "label": "{{label}}"
+    },
+    "buttons_page":
+    [
+        {"plugin":"refresh","hidden":true}
+    ],
+    "order": "label",
+    "fields": [
+        {
+            "label": "Label",
+            "list": true,
+            "field": "label"
+        },
+        {
+            "label":"amount","list":true,"field":"amount"
+        },
+        {
+            "field":"keywords","label":"Keywords","list":true
+        },
+        {
+            "label": "Url",
+            "field": "slug",
+            
+            "on_demand": true,
+            "auto": {
+                "on_null": true,
+                "unique": true,
+                "url": true,
+                "pattern": "{{label}}"
+            }
+        }
+    ]
+}

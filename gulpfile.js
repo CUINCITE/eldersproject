@@ -1,5 +1,3 @@
-
-
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')({
     // eslint-disable-next-line max-len
@@ -32,7 +30,33 @@ function stylesDefault() {
 }
 
 
-// // Copy fonts
+function errorHandler() {
+    plugins.beeper();
+    console.log('\x07');
+    return true;
+}
+
+
+function stylesCritical() {
+    return gulp.src(paths.sass.critical)
+        .pipe(plugins.newer(paths.critical.app))
+        .pipe(plugins.plumber(errorHandler))
+        .pipe(plugins.sass({ outputStyle: 'compressed' }).on('error', plugins.sass.logError))
+        .pipe(plugins.autoprefixer())
+        .pipe(plugins.insert.prepend('<style>'))
+        .pipe(plugins.insert.append('</style>'))
+        .pipe(plugins.rename({
+            basename: 'critical',
+            extname: '.html',
+        }))
+        .pipe(gulp.dest(paths.critical.workspace))
+        .pipe(gulp.dest(paths.critical.app))
+        .pipe(browserSync.stream())
+        .pipe(plugins.notify('Critical styles ready!'));
+}
+
+
+// Copy fonts
 
 function fonts() {
     return gulp
@@ -43,7 +67,17 @@ function fonts() {
 }
 
 
-// // Copy map data
+// Copy sounds
+
+function sounds() {
+    return gulp
+        .src(paths.sounds.source)
+        .pipe(plugins.newer(paths.sounds.dest))
+        .pipe(gulp.dest(paths.sounds.dest))
+        .pipe(plugins.notify({ message: 'Sound files copied!', onLast: true }));
+}
+
+// Copy map data
 
 function mapdata() {
     return gulp
@@ -53,7 +87,7 @@ function mapdata() {
         .pipe(plugins.notify({ message: 'Map data copied!', onLast: true }));
 }
 
-// // Favicons
+// Favicons
 
 function favicons() {
     return gulp
@@ -62,7 +96,7 @@ function favicons() {
         .pipe(plugins.notify({ message: 'Favicons copied!', onLast: true }));
 }
 
-// // Libs
+// Libs
 
 function libs() {
     const libFiles = paths.scripts.libs.concat(paths.scripts.plugins);
@@ -96,7 +130,7 @@ function bundle() {
     return (
         bundler
             .bundle()
-            .on('error', function (err) {
+            .on('error', function(err) {
                 fancyLog.error(err);
                 this.emit('end');
             })
@@ -149,9 +183,7 @@ function watchBundle() {
 // Clean
 
 function cleanImages() {
-    return plugins.del([paths.images.dest, paths.svg.dest, paths.svg.app], {
-        force: true
-    });
+    return plugins.del([paths.images.dest, paths.svg.dest, paths.svg.app], { force: true });
 }
 
 function clean() {
@@ -159,13 +191,11 @@ function clean() {
         paths.sass.dest,
         paths.scripts.dest,
         paths.images.dest,
-        paths.fonts.dest
-    ], {
-        force: true
-    });
+        paths.fonts.dest,
+    ], { force: true });
 }
 
-// // Images
+// Images
 function imagemin() {
     return gulp
         .src(paths.images.source)
@@ -207,8 +237,8 @@ function svgstore() {
         .pipe(plugins.svgmin({
             plugins: [
                 { removeAttrs: { attrs: '(fill|stroke)' } },
-                { addAttributesToSVGElement: { attribute: 'preserveAspectRatio="xMidYMid meet"' } }
-            ]
+                { addAttributesToSVGElement: { attribute: 'preserveAspectRatio="xMidYMid meet"' } },
+            ],
         }))
         .pipe(plugins.rename({ prefix: 'sprite-' }))
         .pipe(plugins.svgstore({ fileName: 'sprite.svg', inlineSvg: true }))
@@ -216,7 +246,7 @@ function svgstore() {
         .pipe(plugins.notify({ message: 'SVG sprite created!', onLast: true }));
 }
 
-// // Video
+// Video
 
 function videos() {
     return gulp
@@ -260,18 +290,16 @@ function bump() {
         .pipe(plugins.replace(/\?v=([^\"]+)/g, `?v=${newVer}`))
         .pipe(gulp.dest('./application/views/'));
 
-    gulp.src(['./workspace/index.html'])
+    gulp.src(['./workspace/views/base.twig'])
         .pipe(plugins.replace(/\?v=([^\"]+)/g, `?v=${newVer}`))
-        .pipe(gulp.dest('./workspace/'));
+        .pipe(gulp.dest('./workspace/views/'));
 
     gulp.src(['./src/scss/main.scss'])
         .pipe(plugins.replace(/Version: (\d+\.\d+\.\d+)/g, `Version: ${newVer}`))
         .pipe(gulp.dest('./src/scss/'));
 
     return gulp.src(['./package.json'])
-        .pipe(plugins.if(argv.release, plugins.bump({
-            version: newVer
-        })))
+        .pipe(plugins.if(argv.release, plugins.bump({ version: newVer })))
         .pipe(gulp.dest('./'));
 }
 
@@ -280,16 +308,12 @@ function bump() {
 function init() {
     gulp.src(['./package.json'])
         .pipe(
-            plugins.bump({
-                version: '0.0.0',
-            }),
+            plugins.bump({ version: '0.0.0' }),
         )
         .pipe(gulp.dest('./'));
 
     // eslint-disable-next-line max-len
-    return plugins.del(['../src/fonts/**/*', '../src/images/favicons/*', '../src/scss/includes/components/*.scss', '../src/scss/includes/scaffold/*.scss', '../src/ts/Site.ts', '../src/ts/components/*.ts'], {
-        force: true,
-    });
+    return plugins.del(['../src/fonts/**/*', '../src/images/favicons/*', '../src/scss/includes/components/*.scss', '../src/scss/includes/scaffold/*.scss', '../src/ts/Site.ts', '../src/ts/components/*.ts'], { force: true });
 }
 
 // Watch
@@ -305,25 +329,27 @@ function watch() {
             proxy: config.proxyURL,
             port: 7000,
             notify: false,
-            files: ['workspace/**/*', 'application/**/*']
+            files: ['workspace/**/*', 'application/**/*'],
         });
     });
     gulp.watch(paths.styles.main, stylesDefault);
+    gulp.watch(paths.styles.critical, stylesCritical);
     gulp.watch(paths.images.source);
     watchBundle();
 }
 
 
-exports.styles = gulp.series(stylesDefault);
+exports.styles = gulp.series(stylesDefault, stylesCritical);
 exports.scripts = bundle;
 exports.test = test;
 exports.init = init;
 exports.videos = videos;
+exports.sounds = sounds;
 exports.libs = libs;
 exports.fonts = fonts;
 exports.bump = bump;
 exports.favicons = favicons;
 exports.images = gulp.series(cleanImages, imagemin, svgnomin, svgmin, svgstore);
 // eslint-disable-next-line max-len
-exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, bump);
+exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, sounds, bump);
 exports.watch = watch;

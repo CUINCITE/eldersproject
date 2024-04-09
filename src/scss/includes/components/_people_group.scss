@@ -1,0 +1,43 @@
+.people_group {
+
+    &__title {
+        @include breakpoint(desktop) {
+            margin-top: rem(19);
+            margin-bottom: rem(40);
+        }
+
+        @include breakpoint(tablet) {
+            margin-bottom: rem(35);
+        }
+
+        @include breakpoint(phone) {
+            // margin-top: rem(5);
+            margin-bottom: rem(18);
+        }
+    }
+
+    &__people {
+        display: grid;
+
+        @include breakpoint(desktop) {
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: map-get($grid-gutter, desktop);
+            row-gap: vw(42);
+            margin-bottom: vw(56);
+        }
+
+        @include breakpoint(tablet) {
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: map-get($grid-gutter, tablet);
+            row-gap: vw(42, tablet);
+            margin-bottom: vw(56, tablet);
+        }
+
+        @include breakpoint(phone) {
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: map-get($grid-gutter, phone);
+            row-gap: vw(25, phone);
+            margin-bottom: vw(48, phone);
+        }
+    }
+}

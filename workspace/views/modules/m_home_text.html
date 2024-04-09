@@ -1,0 +1,16 @@
+<section class="module module--home-text{% if link %} module--home-text--link{% endif %} box" >
+
+    <div class="grid">
+        {% if link %}
+            <div class="col-span-9">
+                {% include "components/c_link.html" with { url: "/workspace/about", text: "Read more about <i>The Elder Project</i>", animate: true, modifiers: ["two_line", "overflow"] } %}
+            </div>
+        {% endif %}
+        <div class="col-span-3 col-start-10">
+            {% include "./subviews/subview_text.html" with text %}
+        </div>
+    </div>
+    {% if decor %}
+        {% include "./subviews/subview_boxes.html" with { reversed: true } %}
+    {% endif %}
+</section>

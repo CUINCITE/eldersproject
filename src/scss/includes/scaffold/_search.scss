@@ -1,0 +1,227 @@
+.search {
+    --search-height: #{vw(137)};
+
+
+    @include font-family(compressed);
+    @include flex(row, center, flex-end);
+
+    height: var(--search-height);
+    width: 100%;
+    position: relative;
+    z-index: 2;
+
+    @include breakpoint(desktop) {
+        @include font-size(50, 1);
+
+        @media (max-height: 719px) {
+            --search-height: #{vw(100)};
+        }
+    }
+
+    @include breakpoint(tablet) {
+        --search-height: #{vw(95, tablet)};
+
+        @include font-size(60, 37.4);
+    }
+
+    @include breakpoint(phone) {
+        --search-height: #{vw(54, phone)};
+
+        @include font-size(40, 37.4);
+    }
+
+
+
+    &__content {
+        width: 100%;
+    }
+
+
+
+    &__form {
+        width: 100%;
+        text-align: left;
+        position: relative;
+    }
+
+
+
+    &__input {
+        position: relative;
+        overflow: hidden;
+
+        @include breakpoint(desktop) {
+            margin-left: vw(15);
+        }
+
+        @include breakpoint(tablet) {
+            margin-left: map-get($grid-offset, tablet);
+        }
+
+        @include breakpoint(phone) {
+            margin-left: vw(15, phone);
+        }
+
+
+        label {
+            position: absolute;
+            left: 0;
+            pointer-events: none;
+            animation: search-label-down .5s $ease-custom forwards;
+
+            @include breakpoint(desktop) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1, 50);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(60, 1);
+                @include letter-spacing(-1, 60);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(40, 37.4);
+
+                letter-spacing: unset;
+                top: vw(4, phone);
+            }
+
+
+            > span:first-child {
+                display: inline-block;
+                overflow: hidden;
+
+                span { 
+                    display: inline-block; 
+                }
+            }
+        }
+
+
+        input {
+            @include font-family(compressed);
+
+            width: 100%;
+            text-transform: uppercase;
+
+            &:placeholder-shown + label {
+                // opacity: 1;
+                animation: search-label-alt .5s $ease-custom forwards;
+            }
+
+            &:focus + label {
+                // opacity: 0;
+                // transform: translateY(150%) rotate(-15deg);
+                animation: search-label-down .5s $ease-custom forwards;
+            }
+
+            @include breakpoint(desktop) {
+                @include font-size(50, 1);
+                @include letter-spacing(-1, 50);
+
+                height: vw(50);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(40, 37.4);
+
+                height: vw(44, phone);
+                padding-top: vw(4, phone);
+                width: 66%;
+            }
+        }
+
+
+        @include hover {
+            .search__svg svg { 
+                transform: scale(1.25); 
+            }
+        }
+    }
+
+
+
+    &__exit { position: absolute; }
+
+
+
+    &__svg {
+        position: absolute;
+        display: inline-block;
+
+        svg {
+            vertical-align: top;
+            transition: transform .3s $ease-custom;
+        }
+
+        @include breakpoint(tablet) {
+            margin-left: rem(4);
+
+            svg {
+                translate: 0 -10%;
+            }
+        }
+
+        @include breakpoint(phone) {
+            margin-left: rem(5);
+
+            svg {
+                translate: 0 -20%;
+            }
+        }
+    }
+
+
+
+    &__button {
+        @include font-family(compressed);
+
+        @include breakpoint(desktop) {
+            @include font-size(17.727, 13.636);
+            @include letter-spacing(-0.532, 17.727);
+        }
+
+        &--clear {
+            text-transform: uppercase;
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s $ease-custom;
+
+            @include breakpoint(desktop) {
+                right: rem(9);
+                bottom: rem(8);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(18, 0.9);
+
+                right: map-get($grid-offset, tablet);
+                bottom: rem(14);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(12, 10);
+
+                right: rem(16);
+                bottom: rem(6);
+            }
+
+
+            .search.has-value & {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+
+
+
+    &__arrow {
+        display: inline-block;
+        position: relative;
+        top: rem(-1);
+        transform: rotate(-90deg);
+        margin-right: rem(6);
+    }
+}

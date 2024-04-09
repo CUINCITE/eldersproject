@@ -1,0 +1,135 @@
+{
+  "table": "map_locations",
+  "order": "label",
+  "label":
+  {
+    "page":"Map Locations",
+    "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
+  },
+  "buttons_page":
+  [
+    {"type":"plugin","plugin":"refresh"}
+  ],
+  "buttons_edit":
+  [
+      {"label":"GPS Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"lat":"gps_lat","lng":"gps_lng","address":"address","name":"label"}
+      }
+  ],
+"layouts":
+  [
+    {
+      "type":"list"
+    }
+  ],
+  "fields": [
+    {
+      "field":"collection","label":"Collection","list":true,
+      "type":"select",
+      "search":true,
+      "source":
+      {
+        "model":"interviewers"
+      }
+    },
+    {
+      "label": "Location Name",
+      "field": "label",
+      "list": true
+    },
+    {
+      "label": "Location Description",
+      "field": "description",
+      "type": "text",
+      "settings": {
+        "rows": 4
+      }
+    },
+    {
+      "hr": true,
+      "label": "Latitude",
+      "field": "gps_lat",
+      
+      "list":true
+    },
+    {
+      "label": "Longitude",
+      "field": "gps_lng",
+      
+      "list":true
+    },
+    {
+      "hr": true,
+      "label": "State",
+      "field": "state"
+    },
+    {
+      "hr": true,
+      "label": "Zoom Precision",
+      "field": "zoom_precision",
+      "type": "select"
+    },
+    {
+      "hr": true,
+      "label": "Address (optional)",
+      "field": "address",
+      "type": "text",
+      "settings": {
+        "rows": 4
+      }
+    },
+    {
+      "label": "uid",
+      "field": "uid",
+      "hidden": true,
+      "type": "uid"
+    },
+    {
+      "label": "Image",
+      "type": "image",
+      "field":"image",
+      "folder": "/public/upload/locations",
+      "temp-list":{"xposition_after":"","width":50,"height":50},
+      "images":
+      [
+        {
+          "folder": "desktop",
+          "label": "Desktop",
+          "width": 421,
+          "retina": true
+        },
+        {
+          "folder": "mobile",
+          "label": "Mobile",
+          "width": 349,
+          "retina": true
+        }
+      ],
+      "settings": {
+        "webp": true,
+        "sizes": "image_sizes"
+      }
+    },
+    {
+      "field":"quotes","type":"json","label":"Quotes"
+    },
+    {
+      "hr": true,
+      "field": "collection_hide",
+      "type": "boolean",
+      "label": "Hide on collection Page"
+    },
+    {
+      "field": "active",
+      "type": "boolean",
+      "label": "Active",
+      "search":true,
+      "list": "edit"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json",
+      "label": "Image sizes"
+    }
+  ]
+}

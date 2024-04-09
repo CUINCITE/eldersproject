@@ -1,0 +1,72 @@
+// for TILES
+
+.interviews-grid__tile {
+    background-color: var(--tile-bg-color, var(--color-box));
+    color: var(--tile-text-color, var(--color-text));
+
+
+    &--group {
+        --tile-bg-color: var(--color-red);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--pink {
+        --tile-bg-color: var(--color-pink);
+        --tile-text-color: var(--color-red);
+    }
+
+
+    &--green {
+        --tile-bg-color: var(--color-green);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--pale-purple {
+        --tile-bg-color: var(--color-pale-purple);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--orange {
+        --tile-bg-color: var(--color-orange);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--pale-blue {
+        --tile-bg-color: var(--color-pale-blue);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--brown {
+        --tile-bg-color: var(--color-brown);
+        --tile-text-color: var(--color-purple);
+    }
+
+
+    &--dark-green {
+        --tile-bg-color: var(--color-dark-green);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--pale-green {
+        --tile-bg-color: var(--color-pale-green);
+        --tile-text-color: var(--color-purple);
+    }
+
+
+    &--purple {
+        --tile-bg-color: var(--color-purple);
+        --tile-text-color: var(--color-pink);
+    }
+
+
+    &--pink-alt {
+        --tile-bg-color: var(--color-pink);
+        --tile-text-color: var(--color-dark-green);
+    }
+}

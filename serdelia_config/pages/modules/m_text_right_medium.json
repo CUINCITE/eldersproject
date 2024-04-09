@@ -1,0 +1,9 @@
+{
+    "fields": [
+        {
+            "field": "text",
+            "type": "html",
+            "label": "Copy"
+        }
+    ]
+}

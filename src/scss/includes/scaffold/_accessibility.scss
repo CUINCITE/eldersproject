@@ -1,0 +1,65 @@
+.contrast,
+.accessibility {
+
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+
+
+    a:focus,
+    label:focus,
+    label:focus-within,
+    button:focus,
+    input:focus-visible + label {
+        color: yellow !important;
+        background: black !important;
+        outline: 1px solid black;
+        outline-offset: rem(5);
+        opacity: 1;
+    }
+}
+
+
+
+.quick-access {
+    @include z-index(quick-access);
+    position: fixed;
+    bottom: 100vh;
+    left: 50%;
+
+
+
+    &__list {
+        body.is-interview-open &--main,
+        body:not(.is-interview-open) &--interview {
+            display: none;
+        }
+    }
+
+
+
+    &__link {
+        bottom: 0;
+        line-height: 40px;
+        padding: 0 12px;
+        position: absolute;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        // @include font-family(sans, 400);
+
+        &:focus {
+            margin-bottom: -12px;
+            transform: translate(-50%, 100%);
+        }
+
+        body.is-not-ready &,
+        body.is-menu-open &--menu {
+            display: none;
+        }
+
+        &--contrast::before { content: attr(data-on); }
+        body.contrast &--contrast::before { content: attr(data-off); }
+    }
+
+    .has-lightbox & {
+        display: none;
+    }
+}

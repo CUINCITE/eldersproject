@@ -1,0 +1,54 @@
+{
+  "fields": [
+    {
+      "tab": "Copy",
+      "field": "label",
+      "label": "Label"
+    },
+    {
+      "field": "text",
+      "label": "Copy",
+      "type": "html"
+    },
+    {
+      "label": "Media",
+      "help": "Help goes here",
+      "field": "variant",
+      "type": "media",
+      "media": {
+        "model": "collection_media",
+        "type": [
+          "image"
+        ]
+      },
+      "captions": [
+        {
+          "label": "Caption",
+          "field": "caption"
+        },
+        {
+          "label": "ALT",
+          "field": "alt"
+        },
+        {
+          "label": "Type",
+          "field": "variant",
+          "field_type": "select",
+          "options":[{"id":"illustration","label":"Illustration"},{"id":"photograph","label":"Photograph"}]
+        }
+      ]
+    },
+    {
+      "help": "Time format 00:10:12",
+      "field": "playlist",
+      "label": "Playlist",
+      "type": "table",
+      "settings": {
+        "header": [
+          "ID",
+          "Time Start"
+        ]
+      }
+    }
+  ]
+}

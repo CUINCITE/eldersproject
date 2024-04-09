@@ -1,17 +1,72 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+<header class="header">
+  <div class="header__container">
+    <div class="header__wrap">
+      <button class="header__trigger js-menu-toggle" aria-label="Open Menu">
+        <div class="hamburger">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </div>
+        <div class="header__logo desktop-only">
+          [[svg::logo]]
+        </div>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu js-menu" id="menu">
+  <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
+  <div class="menu__wrap">
+    <div class="search" id="search">
+      <div class="search__content js-search-content">
+        <form class="search__form js-form" action="/search" novalidate autocomplete="off"
+          data-api-url="/api/search">
+          <div class="search__input">
+            <input type="search" name="q" id="search-inp" placeholder=" ">
+            <label for="search-inp">
+              <span>
+                <span class="js-menu-search-label">Search</span>
+              </span>
+              <span class="sr-only">submit</span>
+              <span class="search__svg js-menu-search-svg">[[svg::search]]</span>
+            </label>
+          </div>
+          <button aria-label="Clear Search" type="reset" class="search__button search__button--clear js-search-clear"><i class="search__arrow">[[svg::arrow-player-small]]</i> Clear Search</button>
+          <div class="livesearch js-livesearch"></div>
+        </form>
+        <button class="search__exit js-search-close"></button>
+      </div>
+    </div>
+    <nav class="menu__nav">
+      <ul>
         {% for item in scaffold.menu %}
-        {% if scaffold.user and item.class=='login' %}
-        {% elseif not scaffold.user and (item.class=='logout' or item.class=='profile') %}
-        {% else %}<li class="nav-item"><a class="nav-link" href="{{item.url}}">{{item.label}}</a></li>
-        {% endif %}
+        <li class="menu__item js-menu-item">
+          <i class="menu__line js-menu-line"></i>
+          <a href="{{item.url}}" class="js-menu-main-link">
+            <span class="menu__arrow">
+              <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
+                <span class="vertical js-arrow-vertical"></span>
+                <span class="horizontal js-arrow-horizontal"></span>
+                <span class="triangle js-arrow-triangle"></span>
+              </i>
+            </span>
+            <span class="menu__text js-menu-label">{{item.label}}</span>
+          </a>
+        </li>
         {% endfor %}
       </ul>
-    </div>
-  </nav>
+    </nav>
+    <ul class="menu__footer">
+      {% for item in scaffold.footer %}
+      <li class="menu__link js-menu-link">
+        <a href="{{item.url}}" {% if item.url|slice(0,4)=='http' %}target="_blank"{% endif %}>
+          <span>
+            <span>{{item.label}}</span>
+            <span>{{item.label}}</span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

@@ -7,10 +7,10 @@ ARG REVISION
 # APACHE + PHP
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install exif && docker-php-ext-enable exif
-RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev git
+RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev git
 RUN a2enmod rewrite
-RUN docker-php-ext-configure gd \ 
---with-freetype=/usr/include/ \ 
+RUN docker-php-ext-configure gd --with-webp \
+--with-freetype=/usr/include/ \
 --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
 
@@ -22,9 +22,12 @@ COPY ./public /var/www/html/public
 COPY ./serdelia_config /var/www/html/serdelia_config
 # RUN rm -rf /var/www/html/serdelia_config/.env
 COPY ./.htaccess /var/www/html/.htaccess
+COPY ./.htpasswd /var/www/html/.htpasswd
 COPY ./index.php /var/www/html/index.php
 COPY ./serdelia_config.php /var/www/html/serdelia_config.php
 COPY ./version.txt /var/www/html/version.txt
+COPY ./.htaccess_serdelia /var/www/html/.htaccess_serdelia
+COPY ./robots.txt /var/www/html/robots.txt
 
 # UHO8 FRAMEWORK
 RUN rm -rf ./application/_uho
@@ -42,6 +45,9 @@ RUN chown www-data /var/www/html/serdelia/reports
 RUN ln -s ../../application/_uho ./serdelia/application/_uho
 RUN mv ./serdelia/temp_to_rename ./serdelia/temp
 RUN chown -R www-data ./serdelia/temp
+
+RUN rm ./serdelia/.htaccess
+RUN mv ./.htaccess_serdelia /var/www/html/serdelia/.htaccess
 
 LABEL org.opencontainers.image.created=$DATE
 LABEL org.opencontainers.image.url="https://github.com/huncwotdigital/uhomvc8"

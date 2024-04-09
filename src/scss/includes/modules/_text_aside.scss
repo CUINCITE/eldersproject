@@ -1,0 +1,331 @@
+.text_aside {
+
+    @include breakpoint(not-desktop) {
+        position: relative;
+        max-width: calc(100vw - var(--GLOBAL-aside-width) - 1px);
+    }
+
+
+
+    &__line {
+        display: inline-block;
+        position: absolute;
+        inset: 0 auto 0 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        background-color: var(--color-bg);
+        will-change: transform;
+    }
+
+
+
+    &__decorator {
+        z-index: 5;
+
+        @include breakpoint(desktop) {
+            position: absolute;
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            order: 2;
+        }
+
+        &--boxes {
+
+            @include breakpoint(desktop) {
+                left: -1 * map-get($grid-offset, desktop);
+                top: rem(324);
+
+                &.text_aside__decorator--contact {
+                    top: vw(21);
+                    bottom: unset;
+                }
+            }
+
+            @include breakpoint(not-desktop) {
+                // position: absolute;
+                left: -1 * map-get($grid-offset, tablet);
+                padding-bottom: vw(32, tablet);
+                text-align: right;
+                transform: scaleX(-1);
+
+                &.text_aside__decorator--contact {
+                    bottom: 0;
+                    margin-top: unset;
+                }
+
+                svg {
+                    scale: -1 1;
+                }
+            }
+        }
+
+        &--illustration {
+
+            @include breakpoint(desktop) {
+                right: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
+                bottom: rem(20);
+            }
+
+            @include breakpoint(phone) {
+                margin-left: map-get($grid-gutter, phone);
+                padding-bottom: rem(32);
+
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     top: 0;
+                //     height: 1px;
+                //     background-color: $color-bg;
+                //     z-index: -1;
+
+                //     @each $bp in (tablet, phone) {
+
+                //         @include breakpoint($bp) {
+                //             left: map-get($grid-gutter, $bp) * -1;
+                //             width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                //         }
+                //     }
+                // }
+            }
+
+            img {
+                max-width: unset;
+
+                @include breakpoint(desktop) {
+                    position: absolute;
+                    right: rem(-35);
+                    width: vw(240);
+                    bottom: calc(100% + #{rem(16)});
+                }
+
+                @include breakpoint(phone) {
+                    position: relative;
+                    left: 50%;
+                    translate: -50% vw(-32, phone);
+                    margin-left: -0.5 * map-get($grid-gutter, phone);
+                }
+            }
+
+
+            &.text_aside__decorator--medium {
+                img {
+                    @include breakpoint(desktop) {
+                        width: vw(493);
+                    }
+
+                    @include breakpoint(phone) {
+                        width: vw(347, phone);
+                    }
+                }
+            }
+
+
+            &.text_aside__decorator--center {
+                img {
+                    @include breakpoint(desktop) {
+                        right: unset;
+                        left: 50% !important;
+                        translate: -50% 0;
+                    }
+                }
+            }
+        }
+
+        &--photo {
+
+            @include breakpoint(desktop) {
+                right: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
+                bottom: rem(20);
+            }
+
+            @include breakpoint(phone) {
+                margin-left: map-get($grid-gutter, phone);
+                padding-bottom: rem(32);
+                padding-top: vw(5, phone);
+
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     top: 0;
+                //     height: 1px;
+                //     background-color: $color-bg;
+                //     z-index: -1;
+
+                //     @each $bp in (tablet, phone) {
+
+                //         @include breakpoint($bp) {
+                //             left: map-get($grid-gutter, $bp) * -1;
+                //             width: calc(100% + #{map-get($grid-gutter, $bp)} + #{map-get($grid-offset, $bp)});
+                //         }
+                //     }
+                // }
+            }
+
+            .polaroid {
+
+                @include breakpoint(desktop) {
+                    --polaroid-width: #{rem(368)};
+                    --polaroid-height: #{rem(458)};
+
+                    position: absolute;
+                    rotate: 7.5deg;
+                    right: 0;
+                    bottom: calc(100% + #{rem(42)});
+
+                    &--horizontal {
+                        --polaroid-width: #{rem(481)};
+                        --polaroid-height: #{rem(366)};
+
+                        rotate: 12deg;
+                        bottom: calc(100% + #{rem(68)});
+                    }
+                }
+
+                @include breakpoint(phone) {
+                    --polaroid-width: #{vw(232, phone)};
+                    --polaroid-height: #{vw(281, phone)};
+
+                    position: relative;
+                    left: 50%;
+                    translate: -50% 0;
+                    rotate: -6.5deg;
+                    margin-left: -0.5 * map-get($grid-gutter, phone);
+                    margin-bottom: vw(32, phone);
+
+                    &--horizontal {
+                        --polaroid-width: #{vw(266, phone)};
+                        --polaroid-height: #{vw(190, phone)};
+
+                        rotate: -10deg;
+                    }
+                }
+
+                img {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .text {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                height: 1px;
+                background-color: $color-black;
+
+                @include breakpoint(desktop) {
+                    width: rem(35);
+                    right: 0;
+                }
+
+                @include breakpoint(phone) {
+                    width: rem(35);
+                    left: 0;
+                }
+            }
+
+            @include breakpoint(desktop) {
+                @include flex(column, flex-start, flex-end)
+
+                    text-align: right;
+                max-width: rem(182);
+                padding: rem(16) 0 0 0;
+            }
+
+            @include breakpoint(phone) {
+                padding: rem(16) 0 0 0;
+                max-width: rem(160 + 16);
+            }
+
+            p + p {
+                margin: 0;
+            }
+
+            b {
+                @include font-settings(700, 0);
+            }
+        }
+
+        &--reversed {
+            &.text_aside__decorator--boxes {
+                @include breakpoint(desktop) {
+                    left: unset;
+                    right: -1 * map-get($grid-offset, desktop);
+                }
+            }
+
+            &.text_aside__decorator--illustration {
+
+                @include breakpoint(desktop) {
+                    right: unset;
+                    left: calc(50% + #{rem(11)} + #{map-get($grid-gutter, desktop)} / 2);
+                }
+
+                img {
+
+                    @include breakpoint(desktop) {
+                        right: unset;
+                        left: rem(-35);
+                    }
+
+                    @include breakpoint(phone) {
+
+                    }
+                }
+            }
+
+            .text {
+                text-align: left;
+
+                &::before {
+
+                    @include breakpoint(desktop) {
+                        width: rem(35);
+                        right: unset;
+                        left: 0;
+                    }
+                }
+
+                @include breakpoint(desktop) {
+                    @include flex(column, flex-start, flex-start); }
+            }
+        }
+    }
+
+    &__column {
+
+        @include breakpoint(desktop) {
+            position: relative;
+        }
+
+        @include breakpoint(tablet) {
+            position: relative;
+            grid-column: 1 / span 8 !important;
+        }
+
+        @include breakpoint(phone) {
+            position: relative;
+            order: 3;
+
+
+            &:first-of-type {
+                order: 1;
+            }
+
+            .text {
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    a {
+        @include hoverable-link;
+    }
+}

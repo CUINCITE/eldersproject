@@ -1,0 +1,11 @@
+{
+    "fields" :
+    [
+        {
+            "tab":"Header",
+            "field":"label",
+            "label":"Label"
+        }
+
+   ]
+}

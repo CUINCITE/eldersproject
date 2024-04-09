@@ -1,0 +1,71 @@
+<section class="module module--text-aside">
+    <div class="box" >
+
+        <div class="text_aside">
+            <i class="text_aside__line desktop-only" data-scroll="line"></i>
+            <div class="grid grid--row-start">
+
+                {% if not hide_label %}
+                    <div class="col-span-6 text_aside__column col-span-6 col-start-{{reversed ? '7' : '1'}}{{reversed ? '' : ' no-padding'}}">
+                        <h2 class="heading heading--aside heading--medium">
+                            {{ label|nl2br|brackets2tag('i')|raw }}
+                        </h2>
+                    </div>
+                {% endif %}
+
+                <div class="text_aside__column col-span-6 col-start-{{reversed ? '1' : '7'}}{{reversed ? ' no-padding' : ''}}">
+                    <div class="text
+                        {% if modifiers %}
+
+                            {% for modifier in modifiers %}
+                                text--{{ modifier }}
+                            {% endfor %}
+
+                        {% else %}
+
+                            text--large
+                            text--aside
+
+                        {% endif %}">
+
+                        {% if heading %}
+                            {% include 'components/c_heading.html' with heading %}
+                        {% endif %}
+
+                        {{ text|raw }}
+                    </div>
+                </div>
+                {% if params.decor %}
+                    <div class="text_aside__decorator{% if reversed %} text_aside__decorator--reversed{% endif %}
+
+                    {% if params.decor %} text_aside__decorator--{{ params.decor }}{% endif %}
+
+                    {% if decor_modifiers %}
+                        {% for modifier in decor_modifiers %} text_aside__decorator--{{ modifier }}
+                        {% endfor %}
+                    {% endif %}">
+
+                    {% if params.decor == "boxes" %}
+                        <div class="boxes">[[svg::boxes]]</div>
+                    {% endif %}
+
+                    {% if params.decor.type == "illustration" %}
+                        {% include "subviews/subview_picture.html" with { image: decor.image } %}
+                    {% endif %}
+
+                    {% if params.decor.type == "photo" %}
+                        {% include "./components/c_polaroid.html" with decor.photo %}
+                    {% endif %}
+
+                    {% if params.decor.text %}
+                        <div class="text text--small">
+                            {{ params.decor.text|raw }}
+                        </div>
+                    {% endif %}
+
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

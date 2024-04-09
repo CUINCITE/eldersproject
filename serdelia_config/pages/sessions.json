@@ -48,8 +48,8 @@
         {
             "label":"Incite Session Id",
             "field":"incite_id",
-            "temp-list":true,
-            "settings":{"code":true}
+            "list":true,
+            "settings":{"case":true,"code":true}
         },
         {
             "field":"narrator_location",
@@ -95,11 +95,24 @@
             }
         },
         {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true
+        },
+        {
             "label": "Publish",
             "field": "active",
+            "search":true,
             "type": "boolean",
-            "list": "edit",
-            "hr": true
+            "list": "edit"            
         },
         
         {
@@ -110,14 +123,16 @@
             "extension":"mp3",
             "folder":"/public/upload/sessions/audio"
         },
+        
         {
             "field":"duration",
             "label":"Duration (seconds)",
             "help":"Clear this field to read duration from from MP3 file"
         },        
         {
-            "field":"filename","label":"WAV filename","hidden":true
+            "field":"filename_mp3","label":"MP3 filename","edit":false
         },
+        
         
         
         {
@@ -134,6 +149,17 @@
             "type": "file",
             "extension":"docx",
             "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "field":"filename_docx","label":"DOCX filename","edit":false
+        },
+        {
+            "tab":"Transcript with Tags",
+            "field":"transcript_tags",
+            "edit":false,
+            "type":"text",
+            "label":"Transcript data with Tags",
+            "settings":{"style":"json","wide":true,"rows":20}
         }
     ]
 }

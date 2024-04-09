@@ -1,9 +1,10 @@
 version: '3.8'
 services:
     deploy:
-        container_name: uhomvc8-php-apache-01
+        container_name: elder-php-apache
         environment:
             - DOMAIN
+            - DOMAIN_PROD
             - PAT
             - SQL_HOST
             - SQL_USER
@@ -24,6 +25,10 @@ services:
             - S3_SECRET
             - S3_BUCKET
             - S3_REGION
+            - GOOGLE_RECAPTCHA_PUBLIC
+            - GOOGLE_RECAPTCHA_SECRET
+            - MAILCHIMP_KEY
+            - MAILCHIMP_LIST_ID
         build:
             context: .
             dockerfile: Dockerfile

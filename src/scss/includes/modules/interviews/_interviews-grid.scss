@@ -1,0 +1,677 @@
+.interviews-grid {
+    &__letters {
+        @include flex;
+
+        transition: opacity .25s $ease-custom;
+
+        @include breakpoint(desktop) {
+            padding-top: rem(38);
+            margin: 0 rem(-8);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(36);
+            flex-wrap: wrap;
+            column-gap: rem(42);
+        }
+
+        @include breakpoint(phone) {
+            flex-wrap: wrap;
+            column-gap: 0;
+        }
+    }
+
+
+
+    &__letter {
+        text-align: center;
+
+        @include breakpoint(desktop) {
+            flex-basis: rem(27);
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                height: 1px;
+                width: 300%;
+                background-color: $color-bg;
+                bottom: 0;
+                left: 50%;
+                translate: -50%;
+            }
+
+            @include breakpoint(tablet) {
+                flex-basis: rem(36);
+                margin-top: rem(18);
+            }
+
+            @include breakpoint(phone) {
+                flex-basis: calc(100% / 6);
+                margin-top: rem(14);
+            }
+        }
+
+
+
+        button {
+            @include flex(row, center, center);
+
+            width: 100%;
+            position: relative;
+
+
+            &.is-disabled {
+                opacity: .3;
+                pointer-events: none;
+            }
+
+            @include breakpoint(desktop) {
+                @include font-size(17, 17);
+
+                height: rem(24);
+                padding-bottom: rem(4);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(22, 1);
+
+                height: rem(36);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+                height: rem(28);
+            }
+
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 100% 0 auto;
+                height: 1px;
+                background-color: var(--color-pure-black);
+                transform: scaleX(0);
+                transition: transform .3s $ease-custom;
+                transform-origin: center;
+            }
+
+
+            @include hover {
+                &::after {
+                    transform: scaleX(1);
+                }
+            }
+        }
+    }
+
+
+
+    &__tabs {
+        background-color: var(--color-box);
+        margin-top: 0;
+        border-bottom: 1px solid var(--color-bg);
+
+
+        html.is-transition & { border-bottom-color: rgba($color-white, 0); }
+
+        @include breakpoint(not-desktop) {
+            overflow: hidden;
+            border-bottom: none;
+        }
+    }
+
+
+
+    &__tiles {
+        .is-grid-view & {
+            @include breakpoint(desktop) {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .is-padded & {
+            @include breakpoint(desktop) {
+                padding-top: rem(68);
+            }
+        }
+
+
+        &::before {
+            @include full;
+
+            content: "";
+            z-index: 4;
+            background-color: rgba($background-light-offwhite, .8);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .3s $ease-custom;
+        }
+
+        body:has(.dropdown.is-open, .modal.is-open) &::before {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+
+
+    &__tile {
+        position: relative;
+        border-top: 1px solid var(--color-bg);
+        overflow: hidden;
+        padding: 0 var(--grid-margin);
+
+        @include breakpoint(desktop) {
+            min-height: vw(117);
+            display: grid;
+            align-content: start;
+            align-items: start;
+            grid-template-columns: 34% 23.5% 17% 1fr;
+        }
+
+        &:first-child {
+            border-top: none;
+        }
+
+
+        .is-grid-view & {
+            @include breakpoint(desktop) {
+                &:nth-child(-n + 3) { border-top: none; }
+            }
+        }
+
+
+        @include breakpoint(tablet) {
+            @include flex(column, flex-start, stretch);
+
+            padding-top: rem(20);
+
+            .interviews__copy {
+                max-width: 75%;
+            }
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, stretch);
+        }
+
+
+        &--group {
+            overflow: visible;
+
+            @include breakpoint(desktop) {
+                @include flex(column, center, center);
+            }
+
+            @include breakpoint(not-desktop) { overflow: hidden; }
+
+            @include breakpoint(tablet) {
+                @include flex(column, center, flex-start);
+
+                height: vw(212, tablet);
+
+                .button {
+                    margin-top: rem(10);
+                    margin-left: rem(2);
+                    gap: rem(5);
+
+                    &--small {
+                        @include font-size(26, 1);
+                        @include letter-spacing(-0.8, 26); }
+
+                    .arrow {
+                        .triangle {
+                            border-width: rem(10) 0 rem(10) rem(11);
+                        }
+                    }
+                }
+            }
+
+            @include breakpoint(phone) {
+                @include flex(column, flex-end, flex-start);
+
+                height: vw(274, phone);
+                padding-bottom: rem(24);
+
+                .button {
+                    margin-block: trim-font(1);
+                    margin-left: rem(1);
+                    gap: rem(5);
+
+                    &--small {
+                        @include font-size(30, 1);
+                        @include letter-spacing(-0.9, 30); }
+
+                    .arrow {
+                        span:nth-child(1) {
+                            height: rem(10);
+                        }
+
+                        span:nth-child(2) {
+                            width: rem(23);
+                        }
+
+                        .triangle {
+                            border-width: rem(11) 0 rem(11) rem(12);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                @include flex(column, flex-start, flex-start);
+
+                min-height: vw(236);
+
+                &:nth-child(3n + 1),
+                &:nth-child(3n + 2) {
+                    border-right: 1px solid var(--color-bg);
+                }
+            }
+        }
+    }
+
+
+
+    &__header {
+        text-align: right;
+        transition: margin-bottom .25s $ease-custom, padding-bottom .25s $ease-custom;
+
+        @include breakpoint(desktop) {
+            position: relative;
+        }
+
+        @include breakpoint(phone) {
+            @include flex(row-reverse, space-between, flex-end);
+
+            // position: absolute;
+            // bottom: rem(12);
+            // right: rem(14);
+            margin-top: rem(42);
+            margin-bottom: rem(8);
+            z-index: 2;
+            text-align: left;
+        }
+
+        .is-pinned & {
+            @include breakpoint(desktop) {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+        }
+
+
+        > button {
+            @include breakpoint(desktop) {
+                margin-right: rem(-8);
+            }
+
+            @include breakpoint(tablet) {
+                margin-right: rem(8);
+            }
+
+            @include breakpoint(phone) {
+                margin-right: rem(4);
+            }
+        }
+
+
+
+        .interviews-grid__sort-button {
+            @include font-settings(400, 100);
+
+            text-transform: uppercase;
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
+
+            legend {
+                @include breakpoint(phone) {
+                    margin-bottom: rem(2);
+                }
+            }
+
+            button {
+                @include breakpoint(phone) {
+                    @include font-family(normal);
+                    @include font-settings(800, 100);
+
+                    text-transform: uppercase;
+                }
+            }
+
+            svg {
+                @include breakpoint(phone) {
+                    translate: 0 -6%;
+                }
+            }
+
+            .button--inversed {
+                svg {
+                    @include breakpoint(phone) {
+                        translate: 0 -20%;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    &__radios {
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            margin-top: rem(30);
+            padding-bottom: rem(12);
+
+            legend {
+                padding-bottom: rem(8);
+            }
+        }
+
+
+        > div {
+            @include flex(row, flex-start, center);
+        }
+    }
+
+
+
+    &__dropdown {
+        @include flex(row, space-between, flex-start);
+
+        position: relative;
+    }
+
+
+
+    &__buttons {
+        @include flex(row, flex-start, center);
+
+        position: relative;
+        width: rem(24);
+        height: rem(24);
+
+        @include breakpoint(desktop) {
+            margin: rem(-4) rem(-4) rem(4) auto;
+            gap: rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            margin: rem(-4) rem(-13) rem(8) auto;
+            gap: rem(4);
+        }
+
+        button {
+            @include flex(row, center, center);
+
+            position: absolute;
+            inset: 0;
+            transition: opacity .5s $ease-out;
+
+
+            &.button--grid {
+                opacity: 0;
+                pointer-events: none;
+
+                .is-list & {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+            }
+
+
+            &.button--list {
+                .is-list & {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+
+
+    &__panel {
+        position: relative;
+        z-index: 4;
+        right: 0;
+
+        // trick for proper scrolltrigger's pin
+        left: 0 !important;
+        height: auto !important;
+
+
+        html.is-transition & {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+
+
+    &__interviews {
+        z-index: 1;
+        border-top: none !important;
+    }
+
+
+
+    &__filters {
+        margin-top: 0;
+        border-top: none !important;
+    }
+
+
+    &__filters:not(:has(option[value$="narrators"]:checked)) ~ &__tabs &__letters {
+        opacity: 0;
+    }
+
+
+
+    &__controls {
+        background-color: var(--color-box);
+
+        // border-bottom: 1px solid $color-bg;
+        position: relative;
+        z-index: 1;
+    }
+
+
+
+    &__trigger {
+        margin-right: auto;
+        margin-left: -1px;
+
+
+        button {
+            @include flex;
+            @include font-family(normal);
+            @include font-settings(500, 100);
+            @include font-size(17, 18);
+
+            letter-spacing: normal;
+            text-transform: uppercase;
+            gap: rem(8);
+
+
+            i { margin-top: rem(-4); }
+        }
+    }
+
+
+
+    &__form {
+        @include flex(row, flex-end, flex-start);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(15);
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+        }
+
+
+        label,
+        legend {
+            @include font-settings(400, 100);
+
+            text-transform: uppercase;
+            transition: opacity .3s $ease-custom;
+
+            @include breakpoint(desktop) {
+                @include font-size(17, 17.85);
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(17, 1);
+
+                margin-block: trim-font(1);
+            }
+
+
+            span {
+                display: inline-block;
+                transition: transform .3s $ease-custom;
+            }
+        }
+
+
+        label {
+            position: relative;
+            padding-top: rem(1);
+
+            i {
+                @include flex(row, center, center);
+
+                position: absolute;
+                inset: auto auto rem(4) 0;
+                overflow: hidden;
+
+
+                svg {
+                    transition: transform .3s $ease-custom;
+                    transform: translateY(100%);
+                }
+            }
+        }
+
+
+        legend {
+            width: max-content;
+
+            @include breakpoint(desktop) {
+                @include font-size(17, 13);
+            }
+
+            @include breakpoint(phone) {
+                padding-bottom: rem(8);
+            }
+        }
+
+
+        input:checked + label {
+            @include font-settings(800, 100);
+
+            span {
+                transform: translateX(#{rem(12)});
+            }
+
+            i svg {
+                animation: sort-arrow .3s $ease-custom .2s forwards;
+            }
+        }
+    }
+
+
+
+    &__modal {
+
+        @include breakpoint(desktop) {
+            position: absolute;
+            height: var(--app-height);
+            z-index: 4;
+            top: 0;
+            left: calc(var(--grid-margin) * -1);
+            width: calc(100vw - var(--GLOBAL-aside-width));
+        }
+
+
+        @include breakpoint(not-desktop) {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: var(--app-height);
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+            height: 100dvh;
+            z-index: 99;
+        }
+    }
+
+
+
+    &__image {
+        position: absolute;
+
+
+        @include breakpoint(desktop) {
+            max-width: rem(256);
+            inset: auto var(--grid-margin) auto auto;
+
+            .is-grid-view & {
+                inset: auto rem(-10) rem(-20) auto;
+                max-width: rem(225);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            max-width: rem(212);
+            inset: auto var(--grid-margin) auto auto;
+        }
+
+        @include breakpoint(phone) {
+            max-width: rem(230);
+            height: 60%;
+            inset: 0 0 auto auto;
+
+
+            picture, img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            // transform: translateY(-25%);
+        }
+    }
+
+
+    .pin-spacer {
+        // background-color: var(--color-box);
+    }
+}

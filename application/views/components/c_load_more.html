@@ -1,0 +1,9 @@
+<div data-component="More" data-options='{{options|json_encode()}}'>
+    {% include "components/c_link.html" with {
+        more: true,
+        animate: true,
+        modifiers: ["medium", "overflow"],
+        url: url,
+        text: text
+    } %}
+</div>

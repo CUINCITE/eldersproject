@@ -1,0 +1,21 @@
+{
+    "title": "Collections",
+    "modules": [
+        {
+            "type": "collections_hero",
+            "heading": {
+                "align": "right",
+                "label": "Collections"
+            },
+            "claim": {
+                "text": "Habitant morbi tristique senectus et netus et malesuada fames ac. Nisl purus inmollis nunc sed.",
+                "sticker": {
+                    "text": "Discover more"
+                }
+            }
+        },
+        {
+            "type": "collections"
+        }
+    ]
+}

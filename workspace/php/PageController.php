@@ -156,7 +156,7 @@ class PageController
                 $number_of_repeats = $number - count($items);
 
                 if ($number_of_repeats > 0) {
-                    for ($i=0; $i<=$number_of_repeats; $i++) {
+                    for ($i=0; $i<$number_of_repeats; $i++) {
                         $items[] = $items[rand(0, count($items)-1)];
                     }
                 }

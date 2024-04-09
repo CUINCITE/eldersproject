@@ -15,16 +15,25 @@
         phone: 375
     );
     @if map-has-key($layouts, $bp) {
-        @return strip-units($size) / map-get($layouts, $bp) * 100vw;
+        @return calc(#{strip-units($size) / map-get($layouts, $bp)} * var(--vw));
     } @else {
         @warn "Unfortunately, no value could be retrieved from `#{$bp}`.";
     }
 }
 
 
+@function trim-font($line-height, $capitals: 'true', $trim-value: $font-trim) {
+    @if ($capitals == 'true') {
+        @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base-cap") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+    } @else {
+        @return (map-get($trim-value, "top-base") + (1 - $line-height) * 10 * map-get($trim-value, "top-increment")) (map-get($trim-value, "bottom-base") + (1 - $line-height) * 10 * map-get($trim-value, "bottom-increment"));
+    }
+}
+
+
 @function vh($size, $bp: desktop) {
     $layouts: (
-        desktop: 800,
+        desktop: 720,
         tablet: 1024,
         phone: 667
     );
@@ -38,9 +47,7 @@
 
 @function z($list, $element) {
     $z-index: index($list, $element);
-    @if $z-index {
-        @return $z-index;
-    }
+    @if $z-index { @return $z-index; }
     @warn 'There is no item "#{$element}" in this list; choose one of: #{$list}';
     @return null;
 }
@@ -84,18 +91,18 @@ $line-height: 1.4;
 
 @mixin hover {
     .mod_no-touchevents &:hover,
-    // .touchevents &:active,
+    .mod_no-touchevents &:focus-visible,
     .accessibility &:focus {
         @content;
     }
 }
 
 @mixin accessibility {
+    .accessibility &:focus-within,
     .accessibility &:focus {
         @content;
     }
 }
-
 
 @mixin v-center {
     display: flex;
@@ -127,6 +134,7 @@ $line-height: 1.4;
 @mixin hoverable-link {
     overflow: hidden;
     position: relative;
+    display: inline-block;
 
     & > span {
         display: inline-block;
@@ -140,16 +148,36 @@ $line-height: 1.4;
                 position: absolute;
                 bottom: 100%;
                 left: 0;
+
+                @media (hover: none) {
+                    display: none;
+                }
             }
         }
     }
 
+    @include breakpoint(desktop) {
+        @include hover {
+            & > span {
+                animation: hover-link .4s $ease-in-out forwards;
+            }
+        }
 
-    @include hover {
-        & > span {
+        &:focus > span {
             animation: hover-link .4s $ease-in-out forwards;
         }
     }
 
+    .accessibility & span{ animation: none; }
+}
+
+
+
+@mixin menuShiftedElement {
+    transition: transform .7s $ease-custom;
+
+    body.has-menu-open & {
+        transform: translateX(calc(var(--GLOBAL-content-width) * -1));
+    }
 }
 /* stylelint-enable */

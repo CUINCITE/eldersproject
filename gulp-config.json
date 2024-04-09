@@ -11,7 +11,7 @@
         },
         "critical": {
             "app": "application/views/scaffold",
-            "workspace": "workspace/includes"
+            "workspace": "workspace/views/scaffold"
         },
         "scripts": {
             "ts": "src/ts/**/*.ts",
@@ -19,6 +19,8 @@
             "definitions": "src/ts/**/*.d.ts",
             "plugins": "src/js/plugins/*.js",
             "libs": [
+                "node_modules/gsap/dist/ScrollToPlugin.js",
+                "node_modules/imagesloaded/imagesloaded.pkgd.min.js",
                 "node_modules/screenfull/dist/screenfull.js",
                 "node_modules/twig/twig.min.js"
             ],
@@ -50,6 +52,10 @@
         "favicons": {
             "source": "src/favicons/**/*",
             "dest": "public/theme/favicons"
+        },
+        "sounds": {
+            "source": "src/sounds/**/*.mp3",
+            "dest": "public/theme/sounds"
         },
         "json": ["workspace/**/*.json"],
         "html": ["index.php", "index.html", "workspace/**/*.html", "workspace/**/*.json", "workspace/**/*.php", "application/views/**/*.html"]

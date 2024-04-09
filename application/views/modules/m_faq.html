@@ -1,0 +1,45 @@
+<section class="module module--faq">
+    <div class="faq">
+        <i class="faq__line desktop-only"></i>
+        <div class="box" >
+
+            <div class="grid">
+
+                <div class="faq__heading col-span-6 no-padding">
+                    <h2 class="heading heading--aside heading--smaller">
+                        FAQ
+                    </h2>
+                </div>
+
+                <div class="faq__content col-span-6 col-start-7">
+                    <ul class="faq__accordeon">
+                        {% for item in items %}
+                        <li class="accordeon_item js-accordeon-item is-closed" data-component="Accordeon">
+                            <button class="accordeon_item__button js-accordeon-button">
+                                <span class='sr-only'>Toggle visibility of the content</span>
+                            </button>
+                            <div class="accordeon_item__term">
+                                <div class="text text--huge">
+                                    <p>{{item.label}}</p>
+                                </div>
+                                <div class="accordeon_item__arrow">
+                                    <svg class="svg-arrow" viewBox="0 0 22 41" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 40.7l10.45-12.65H.55L11 40.7z" fill="#1B1B1B" />
+                                        <path d="M11 29.15V0" stroke="#1B1B1B" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="accordeon_item__copy js-accordeon-copy">
+                                <div class="text text--large">
+                                    {{item.text|raw}}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

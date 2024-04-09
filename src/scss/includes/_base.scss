@@ -9,21 +9,26 @@
 }
 
 
-:root {
-    --app-height: 100vh;
-}
 
 html {
     position: relative;
     height: 100%;
     font-size: $base-font-size;
+    overflow-x: hidden;
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
+
+        &.is-transition { overflow: hidden; }
     }
 
     @include breakpoint(hd) {
         font-size: $base-font-size * $size-hd / $size-design;
+    }
+
+
+    @include breakpoint(phone) {
+        // &.is-overflow-hidden { overflow: hidden; }
     }
 }
 
@@ -31,30 +36,116 @@ body {
     @include font-family(normal, 500);
     @include font-settings(500, 100);
 
-    background: var(--color-bg);
     line-height: 150%;
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
+    background: var(--color-black);
+    overflow-x: hidden;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+    overflow-x: clip;
 
-    display: grid;
-    grid-template-columns: 1fr vw(111);
-    grid-template-areas: "main header"
-        "newsletter header"
-        "footer header";
-    gap: 1px;
-    align-content: end;
+    // for collection's page
+    counter-reset: collection-counter;
 }
+
 
 body,
 html {
-    overflow-x: hidden;
+    &:has(.modal.is-open) { overflow: hidden; }
+
+    &:has(.has-menu-open, .is-transition),
+    &.has-menu-open,  &.is-transition {
+        @include breakpoint(not-desktop) {
+            overflow: hidden;
+        }
+    }
+
+
+    @include breakpoint(not-desktop) {
+        &.is-transition { pointer-events: none; }
+    }
+
+
+    @include breakpoint(phone) {
+        &.has-audio-player-expanded,
+        &.is-overflow-hidden { overflow: hidden; }
+    }
 }
 
 
 .wrapper {
+    @include menuShiftedElement;
+
+    min-height: var(--app-height);
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr var(--GLOBAL-aside-width);
+    grid-template-rows: 1fr;
+    grid-template-areas: "main header"
+        "newsletter header"
+        "footer header";
+    column-gap: 1px;
+    align-content: start;
+    margin-top: -1px; // box margin-top fix
+
+
+    body.has-lightbox & { margin-top: 0; }
+
+
+    @include breakpoint(not-desktop) {
+        // z-index: unset;
+        overflow-x: hidden;
+
+
+        body.is-lightbox-open & {
+            display: none;
+        }
+    }
+
+
+    .has-lightbox & {
+        .accessibility & {
+            display: none;
+        }
+    }
+
+
+    body.is-loader-hidden & {
+        transition-property: transform, background;
+
+        background: var(--color-bg);
+
+
+        @include breakpoint(phone) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 0 0 auto;
+                width: var(--GLOBAL-aside-width);
+                background-color: var(--color-black);
+            }
+        }
+    }
+
+
+    html.is-transition & {
+        background: none;
+    }
+}
+
+
+main {
     grid-area: main;
     position: relative;
+}
+
+
+article {
+    height: 100%;
+    opacity: 0;
+    transition: background-color .25s $ease-out;
 }
 
 
@@ -104,6 +195,8 @@ a {
 
 b,
 strong {
+    @include font-settings(700, 100);
+
     font-weight: 700;
 }
 
@@ -142,12 +235,19 @@ sup {
     text-shadow: none;
 }
 
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    @include font-settings(800, 100); }
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+    hanging-punctuation: first last;
+}
 
 textarea {
     resize: none;
@@ -193,3 +293,5 @@ ul {
     opacity: 0;
     pointer-events: none;
 }
+
+

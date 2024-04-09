@@ -1,0 +1,19 @@
+<section class="module module--about_hero">
+    <div class="about_hero">
+
+        <div class="about_hero__logo desktop-hide">
+            {% include "./components/c_logo_box.html" %}
+        </div>
+
+        <div class="about_hero__heading">
+            {% include "modules/m_heading.html" with { heading: heading } %}
+        </div>
+
+        <div class="box">
+            <div class="about_hero__cards">
+                {% include "./subviews/subview_illustration.html" with { shadow: 'green', image: image, modifier: "extraShadows" } %}
+            </div>
+        </div>
+        
+    </div>
+</section>

@@ -1,5 +1,6 @@
 .module {
     // common
+    position: relative;
 
     &--full-height {
         height: var(--app-height);
@@ -7,6 +8,237 @@
         .grid,
         [class*="grid-"] {
             height: 100%;
+        }
+    }
+
+
+    &--404 {
+        height: 100%;
+
+        @include breakpoint(desktop) {
+            @include flex(column, space-between, stretch);
+        }
+    }
+
+
+    &--text-aside, &--text_wrapper {
+        position: relative;
+
+        @include breakpoint(phone) {
+            max-width: 100%;
+        }
+    }
+
+
+    &--text-aside {
+        @include breakpoint(desktop) {
+            z-index: 0;
+
+            .box:last-of-type {
+                padding-bottom: rem(67);
+            }
+        }
+    }
+
+
+    &--map {
+        position: relative;
+        z-index: 1;
+    }
+
+
+    &--faq {
+        position: relative;
+    }
+
+
+    &--claim {
+
+        @include breakpoint(desktop) {
+            padding-block: rem(15);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(20);
+            padding-bottom: rem(92);
+
+
+            .grid {
+                div {
+                    grid-column: span 6;
+                }
+            }
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(12) rem(24);
+        }
+
+        &.no_padding_bottom_mobile {
+            @include breakpoint(tablet) {
+                padding-top: rem(22);
+                margin-bottom: rem(-5);
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(22);
+                margin-bottom: rem(-5);
+            }
+        }
+    }
+
+
+    &--home-text {
+        @include flex(column, flex-end, stretch);
+
+        @include breakpoint(desktop) {
+            min-height: vw(391);
+        }
+
+        @include breakpoint(tablet) {
+            padding-block: 0 rem(42);
+
+            .grid {
+                .text {
+                    padding-top: rem(20);
+                }
+            }
+        }
+
+        &--link {
+            justify-content: flex-start;
+
+            @include breakpoint(desktop) {
+                .text {
+                    padding: rem(20) 0 rem(64) 0;
+                }
+            }
+
+            @include breakpoint(not-desktop) {
+                // margin-top: 0 !important;
+
+                .grid {
+                    & div:first-child {
+                        grid-row-start: 2;
+                    }
+                }
+
+                .button {
+                    padding-top: 0 !important;
+                    z-index: 5;
+                }
+
+                @include breakpoint(phone) {
+                    .text {
+                        padding-bottom: rem(15);
+                    }
+                }
+            }
+        }
+
+        .module--claim + & {
+            @include breakpoint(not-desktop) {
+                border-top: unset !important;
+            }
+        }
+    }
+
+
+    &--interviews + .module--claim {
+        @include breakpoint(not-desktop) {
+            padding-bottom: 0 !important;
+
+            @include breakpoint(tablet) {
+                padding-top: rem(28);
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(20);
+            }
+        }
+    }
+
+
+    &:first-of-type:not(.module--hero, .module--collections_images) > .box:first-of-type,
+    &:first-of-type.desktop-hide + .module > .box:first-of-type {
+        @include breakpoint(desktop) {
+            padding-top: rem(26);
+            padding-bottom: rem(22);
+        }
+    }
+
+
+    &--results {
+        .collections__item {
+
+            @include breakpoint(phone) {
+                padding-top: rem(10);
+                padding-bottom: rem(40);
+            }
+        }
+
+        @include breakpoint(phone) {
+            .collections__link {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+
+                margin-block: trim-font(1);
+            }
+
+            .interviews__copy, .interviews__box {
+                display: none;
+            }
+
+            .interviews__description {
+                padding-bottom: rem(20);
+            }
+
+            .interviews__collection {
+                br {
+                    display: none;
+                }
+            }
+
+            .interviews__locations {
+                @include font-size(16, 0.969);
+
+                order: 1;
+                margin-bottom: rem(48);
+                display: block !important;
+
+                span {
+                    display: block;
+                }
+            }
+
+            .interviews__name {
+                @include font-size(30, 1);
+                @include letter-spacing(-0.9, 30);
+
+                padding-top: rem(12);
+            }
+
+            .interviews-grid__tile {
+                &:last-child {
+                    border-bottom: unset;
+                }
+            }
+        }
+    }
+
+
+    &--collection_hero {
+        .grid {
+            height: 100%;
+        }
+    }
+
+    &--about_hero + &--text-aside {
+        @include breakpoint(desktop) {
+            .heading--medium {
+                @include font-size(122, 100);
+                @include letter-spacing(-3, 122);
+            }
         }
     }
 }

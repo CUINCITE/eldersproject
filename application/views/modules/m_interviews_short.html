@@ -1,17 +1,73 @@
-<section class="jumbotron text-center">
-    <div class="container">
-      <h2>Interviews</h2>
-      <ol>
-        {% for item in items %}      
-        <li>
-          <a href="{{item.url}}">{{item.label}}</a>
-          <br>{{item.interviewers[0].label}} Collection
-          <br>{{item.locations}}
-          <br>
-          <br><em>{{item.summary}}</em>
-          <br><br>
-        </li>
-        {% endfor %}
-      </ol>
+{% set colors=['green','red','yellow'] %}{% set c=random(colors|length) %}
+
+<section class="module module--interviews{% if collection_page %} box{% endif %}" {% if collection_page %} id="interviews"{% endif %}>
+
+    <div class="interviews">
+        <div class="box">
+            <div class="grid">
+                <div class="col-span-12">
+
+                    <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
+                        <div class="interviews__sticker">
+                            {% if not stickerLabel %} {% set stickerLabel = 'Featured' %}{% endif %}
+                            {% include 'subviews/subview_sticker.html' with {label:stickerLabel, modifier: "long_text"} %}
+                        </div>
+                        <h2 class="heading heading--reclined">
+                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}{% if collection_page %} <span class="heading__counter">(&nbsp;{{items|length}}&nbsp;)</span>{% endif %}
+                        </h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <ul class="interviews__list {% if collection_page %}interviews__list--collection{% endif %}">
+            {% for item in items %}
+                <li class="interviews__item">
+
+                    <div class="grid">
+                        <a href="{{ item.url }}" class="interviews__link">
+                            <span class="sr-only">Go to the interview</span>
+                        </a>
+
+                        <div class="interviews__left col-span-6">
+                            <div class="collection_author">
+                                <h3 class="collection_author__name">{{ item.label }}</h3>
+                                {% if item.narrator_occupation %}<h4 class="collection_author__title">{{ item.narrator_occupation|raw }}</h4>{% endif %}
+                            </div>
+                            <!--
+                            <p class="interviews__state desktop-only">{{ item.narrator_location }}</p>
+                            -->
+                        </div>
+
+                        <div class="interviews__right col-span-3 col-start-7">
+                            <p class="interviews__text"> {{ item.lead }}</p>
+                            <!--
+                            {% if not collection_page %}
+                            <p class="interviews__collection desktop-only">{{ item.interviewer_name }} Collection</p>
+                            {% endif %}
+                            -->
+                        </div>
+
+                        <div class="interviews__box col-span-3 col-start-10">
+                            <p class="interviews__state desktop-hide">{{ item.narrator_location }}</p>
+                            <div class="interviews__box-wrap">
+                                <div class="interview-box {% if loop.index is divisible by (2) %}interview-box--reversed{% endif %} interview-box--{% if collectionColor %}{{ collectionColor }}{% elseif item.interviewers[0].color is defined and item.interviewers[0].color %}{{ item.interviewers[0].color }}{% else %}default{% endif %}">
+                                    <div class="interview-box__wrap">
+                                        <div class="interview-box__layer"></div>
+                                        <div class="interview-box__layer"></div>
+                                        <div class="interview-box__layer"></div>
+                                    </div>
+                                    <div class="interview-box__text">
+                                        <p>Play <br> Interview</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-  </section>
+</section>

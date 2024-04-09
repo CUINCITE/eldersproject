@@ -1,12 +1,19 @@
 .icon-close {
     display: inline-block;
     position: relative;
-    width: 14px;
-    height: 14px;
+    width: vw(28);
+    height: vw(28);
     vertical-align: middle;
     transform: rotate(0);
     transition: transform $time-fast $easing;
-    top: -1px;
+
+
+    @include breakpoint(phone) {
+        width: 14px;
+        height: 14px;
+    }
+
+    // top: -1px;
 
     // html.mac & { top: 1px; }
 
@@ -14,12 +21,12 @@
     &::after {
         content: "";
         display: block;
-        width: 20px;
-        height: 2px;
+        width: 140%;
+        height: 1px;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin: -1px -10px;
+        margin: -1px -70%;
         background: currentColor;
     }
 
@@ -37,8 +44,10 @@
 }
 
 .icon-playpause {
-    display: inline-block;
+    display: block;
     position: relative;
+    width: vw(36);
+    height: 100%;
 
     &::before {
         width: 3px;
@@ -48,7 +57,8 @@
         position: absolute;
         background: currentColor;
         left: 22px;
-        transition: opacity $time-fast $easing;
+
+        // transition: opacity $time-fast $easing;
         opacity: 0;
     }
 
@@ -56,18 +66,31 @@
         content: "";
         display: block;
         width: 0;
-        height: 14px;
+        height: 0;
         border-style: solid;
-        border-width: 7px 0 7px 15px;
+        border-width: 21px 0 21px 36.4px;
         will-change: border-width;
         border-color: transparent transparent transparent currentColor;
-        transition: all $time-fast linear;
+
+        // transition: all 2s linear;
+    }
+
+
+    .lightbox & {
+        top: rem(-2);
+
+        &::after {
+            height: rem(40);
+            border-width: rem(20) 0 rem(20) rem(36);
+        }
     }
 }
 
 %icon-playpause-active::after {
-    border-style: double;
-    border-width: 0 0 0 15px;
+    width: 100%;
+    height: 100%;
+    border-width: 0 14px;
+    border-color: currentColor;
 }
 
 .icon-cross {
@@ -385,61 +408,6 @@
 }
 
 
-.icon-btn-arrow {
-    @include flex(row, flex-start, center);
-
-    margin-top: vw(-6);
-
-
-    span {
-        background-color: currentColor;
-        display: inline-block;
-
-        &:first-of-type {
-            position: absolute;
-            inset: auto auto calc(50% + #{vw(3)}) 0;
-            width: 1px;
-            height: vw(20);
-
-            .button--simple & { display: none; }
-
-            .button--lightbox & {
-                height: vw(33);
-                transform-origin: center;
-                inset: vw(-6) auto 0 vw(32);
-            }
-
-            .button--lightbox.button--reversed & { inset: 0 auto vw(-6) vw(32); }
-        }
-
-
-        &:nth-of-type(2) {
-            width: vw(51);
-            height: 1px;
-
-            .button--lightbox & {
-                width: vw(33);
-            }
-        }
-
-
-        &.triangle {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: vw(19) 0 vw(19) vw(23);
-            border-color: transparent transparent transparent currentColor;
-            background: none;
-
-
-            .button--lightbox & {
-                border-width: vw(16.5) 0 vw(16.5) vw(22);
-                margin-left: vw(3);
-            }
-        }
-    }
-}
-
 
 .icon-more {
     width: 5px;
@@ -601,6 +569,175 @@
     }
 }
 
+
+.icon-filters {
+    @include flex(column, center, center);
+    color: inherit;
+    gap: 1px;
+    width: 19px;
+    overflow: hidden;
+
+    .row {
+        @include flex(row, center, center);
+
+        transition: transform .3s $ease-custom;
+        width: 100%;
+
+        &:first-of-type {
+            justify-content: flex-start;
+
+            .bar { margin-right: 2px; }
+        }
+
+        &:last-of-type {
+            justify-content: flex-end;
+
+            .bar { margin-left: 2px; }
+        }
+    }
+
+    .line {
+        height: 1px;
+        width: 11px;
+        flex-shrink: 0;
+        background-color: currentColor;
+    }
+
+    .bar {
+        height: 7px;
+        width: 3px;
+        flex-shrink: 0;
+        background-color: currentColor;
+    }
+}
+
+%icon-filters-hover {
+    .row {
+        &:first-of-type { transform: translateX(-7px); }
+        &:last-of-type { transform: translateX(7px); }
+    }
+}
+
+.icon-list {
+    @include flex(column, space-between, stretch);
+
+    color: inherit;
+    gap: 2px;
+
+
+    span {
+        width: 16px;
+        height: 4px;
+        background-color: currentColor;
+        transition: transform .3s $ease-custom;
+    }
+}
+
+%icon-list-hover {
+    span {
+        transform: scaleX(1.2);
+    }
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    color: inherit;
+
+    span {
+        width: 7px;
+        height: 7px;
+        background-color: currentColor;
+        transition: transform .3s $ease-custom;
+    }
+}
+
+%icon-grid-hover {
+    span {
+        &:first-of-type { transform: translate(-1px, -1px); }
+        &:nth-of-type(2) { transform: translate(1px, -1px); }
+        &:nth-of-type(3) { transform: translate(-1px, 1px); }
+        &:last-of-type { transform: translate(1px, 1px); }
+    }
+}
+
+
+.icon-volume {
+    @include flex(row, center, flex-end);
+
+    height: 30px;
+    gap: 2px;
+
+    span {
+        width: 5px;
+        background-color: currentColor;
+        height: 100%;
+        transition: height .25s $ease-custom, opacity .25s $ease-custom;
+        will-change: height, opacity;
+
+
+        @for $i from 1 through 5 {
+            &:nth-child(#{$i}) {
+                height: calc(4 * #{$i}px);
+            }
+        }
+    }
+
+
+    .is-muted & {
+        span {
+            height: 6px;
+            opacity: 0.5;
+        }
+    }
+}
+
+
+.icon-cassette {
+    @include flex(row, center, center);
+
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-black);
+    border-radius: 50%;
+    position: relative;
+    z-index: -1;
+
+
+    @include breakpoint(not-desktop) {
+        width: 12px;
+        height: 12px;
+    }
+
+    span {
+        --inset-value: -52%;
+
+
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        border-radius: 50%;
+        background-color: var(--color-box);
+        margin: auto;
+
+
+        @include breakpoint(not-desktop) {
+            --inset-value: -60%;
+
+            width: 85%;
+            height: 85%;
+        }
+
+
+        &:first-child { inset: var(--inset-value) auto auto; }
+        &:nth-child(2) { inset: auto auto var(--inset-value); }
+        &:nth-child(3) { inset: auto var(--inset-value) auto auto; }
+        &:nth-child(4) { inset: auto auto auto var(--inset-value); }
+    }
+}
+
+
 .fa {
     // &.fa-envelope {
     //     transform: translateY(-1px);
@@ -612,7 +749,8 @@
 }
 
 a,
-button {
+button,
+label {
     @include hover {
         .icon-close {
             @extend %icon-close-hover !optional;
@@ -644,6 +782,18 @@ button {
 
         .icon-dropdown {
             @extend %icon-dropdown-hover !optional;
+        }
+
+        .icon-filters {
+            @extend %icon-filters-hover !optional;
+        }
+
+        .icon-list {
+            @extend %icon-list-hover !optional;
+        }
+
+        .icon-grid {
+            @extend %icon-grid-hover !optional;
         }
     }
 }

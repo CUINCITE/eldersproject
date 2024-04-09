@@ -1,0 +1,20 @@
+<div class="interviews-grid__tile interviews-grid__tile--group interviews-grid__tile--{{item.modifier}}" data-component="Button">
+    <a class="interviews__link" href="{{item.url}}" data-filters data-component="Load" data-options='{"contentSelector": "#interviews", "scrollTo": ".module--interviews"}'></a>
+    <h3 class="interviews__name"># {{item.label}}</h3>
+
+    <button class="button button--small button--overflow">
+        {% include "./components/c_arrow_icon.html" with { small } %}
+        <span class="button__text js-button-text">Explore <i> {{item.count_interviews}} interviews</i></span>
+    </button>
+
+    {% if item.illustration %}
+        <div class="interviews-grid__image">
+
+            <picture>
+                <source srcset="{{item.illustration.image.mobile}}, {{item.illustration.image.mobile_x2}} 2x">
+                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ alt }}" class="is-loading{% if preload %} preload{% endif %}">
+            </picture>
+
+        </div>
+    {% endif %}
+</div>

@@ -8,7 +8,7 @@ class model_app extends _uho_model
     var $class = 'app';
     public $http_server, $client;
     public $serdelia_edit = false;
-    public $head_title = 'Application Name';   // używane w title i mailingu automatycznym
+    public $head_title = 'I See My Light Shining';
     public $is404 = true;
     var $head = array(
         'image' => '/public/og_image.jpg'
@@ -22,8 +22,8 @@ class model_app extends _uho_model
     //============================================================================================
     public function init()
     {
-        
-        if ($this->checkSerdeliaEdit()) {
+        if ($this->checkSerdeliaEdit())
+        {
             $preview = _uho_fx::getGet('preview');
             $this->serdelia_edit = ($preview == 'serdelia_edit');
             if ($preview == 'serdelia_edit') {
@@ -39,33 +39,23 @@ class model_app extends _uho_model
                 $this->serdelia_edit = $preview;
             } elseif (@$_SESSION['serdelia_pro']['type'] == 'pro') $this->serdelia_edit = 'serdelia_edit_pro';
         }
-
+        
         $this->orm->setLogErrors(true);
+        $this->orm->setImageSizes(true);
 
-        
-        $this->sql->cacheSet('7g!',
-            [
-                'users','users_newsletter'
-            ]);
-        
-
-        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true) {
-            $this->dict = $_SESSION['dict'];
-        } else {
-            $this->dict = array();
-            $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
-            $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
-            $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
-            
-            // uncomment for multi-lang sites
-            //$this->dict['lang'] = $this->lang;
-            
-
-
-            $_SESSION['dict'] = $this->dict;
+//        if (cache or $_SERVER['REQUEST_URI'] === '/interviews') {
+        if (true && $_SERVER['REQUEST_URI'] !== '/api/player' && $_SERVER['REQUEST_URI'] !== '/api/import') {
+            $this->sql->cacheSet('7g!',
+                [
+                    'users','users_newsletter'
+                ]);
         }
+            
+        
 
+        
 
+/*        
         $this->client = new _uho_client(
             $this->orm,
             [
@@ -92,9 +82,29 @@ class model_app extends _uho_model
                 ]
             ],
             $this->lang
-        );
+        );*/
     }
+    //============================================================================================
+    public function dictInit()
+    {
+        
+        if (!strpos($_SERVER['HTTP_HOST'], '.lh') && !strpos($_SERVER['HTTP_HOST'], 'sunship.one') && isset($_SESSION['dict']) && @$_SESSION['dict']['lang'] == $this->lang && development !== true)
+        {
+            $this->dict = $_SESSION['dict'];
+        } else {
+            $this->dict = array();
+            $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
+            $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
+            $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
+            
+            // uncomment for multi-lang sites
+            //$this->dict['lang'] = $this->lang;
+            
 
+
+            $_SESSION['dict'] = $this->dict;
+        }
+    }
     //============================================================================================
     private function dictLoad($table, $filters = null, $order = null)
     {
@@ -122,7 +132,7 @@ class model_app extends _uho_model
     //============================================================================================
     public function getClient()
     {
-        return $this->client->getData();
+        //return $this->client->getData();
     }
     //============================================================================================
     public function set404()
@@ -232,5 +242,109 @@ class model_app extends _uho_model
                     $this->updateImageCache($arr[$k][$field1][$field2]);
                 if (!$arr[$k]) unset($arr[$k]);
             }
+    }
+
+    public function updateGridInterviews($items,$full=false)
+    {
+        foreach ($items as $k=>$v)
+        {
+            if (isset($v['interview']))
+            {
+
+            } else
+            {
+
+            }
+
+        }
+
+        return $items;
+    }
+
+    public function getTimestamp($text,$i,$tag=null)
+    {
+
+        $i_original=$i;
+
+        $time=null;
+        $text=mb_substr($text,0,$i,'UTF-8');
+        $text=strip_tags($text,'<q><a>');
+
+        $i=mb_strrpos(' '.$text,'<',0,'UTF-8');
+        $j=mb_strrpos($text,'>',$i,'UTF-8');
+
+
+
+        if ($i && $j)
+        {
+            $text=mb_substr($text,$i,$j-$i,'UTF-8');
+
+            $time=$this->getFromTag($text,'T');
+
+            if ($time) $time=mb_substr($time,0,2,'UTF-8')*3600+mb_substr($time,3,2,'UTF-8')*60+mb_substr($time,6,2,'UTF-8');
+        }
+
+        return $time;
+    }
+
+    private function getFromTag($tag,$param)
+    {
+        $html='<'.$tag.'>';
+        $r=$this->cutTag($html,['Q','A']);
+        if (!empty($r['params'][$param])) return $r['params'][$param];
+
+    }
+
+    private function cutTag(&$text,$tags)
+    {
+
+        $i=-1;
+        foreach ($tags as $k=>$v)
+        {
+            $j=mb_strpos($text,'<'.$v);
+            if ($j!==false && ($i==-1 || $j<$i)) { $i=$j; $tag=$v; }
+        }
+
+        if ($i!=-1)
+        {
+            $j=mb_strpos($text,'</'.$tag,$i);
+            if (!$j) $j=mb_strlen($text,'UTF-8');
+
+            $k=mb_strpos($text,'>',$i);
+            $t=mb_substr($text,$i+1,$k-$i-1);
+
+            $t=explode(' ',$t);
+            $new_tag=array_shift($t);
+            $t=implode(' ',$t);
+            $t=explode('" ',$t);
+            $params=[];
+
+
+            foreach ($t as $kk=>$vv)
+                if (mb_strpos($vv,'='))
+                {
+                    $vv=explode('=',$vv);
+                    $params[array_shift($vv)]=str_replace('"','',implode('=',$vv));
+                } else $params[]=$vv;
+
+            $result=[
+                'tag'=>$new_tag,
+                'params'=>$params,
+                'text'=>mb_substr($text,$k+1,$j-$k-mb_strlen($tag,'UTF-8'))
+            ];
+            if (!json_encode($result['text']))
+            {
+                exit($result['text']);
+            }
+            $text=trim(mb_substr($text,$j+mb_strlen($tag,'UTF-8')+3));
+        }
+        else
+        {
+            $text='';
+            $result=[];
+        }
+        if (!json_encode($result)) exit('error at: '.$result['text']);
+        //print_r($result);
+        return $result;
     }
 }

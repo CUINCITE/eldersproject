@@ -1,0 +1,61 @@
+<section class="module module--collections">
+    <div class="collections">
+        {% if items %}
+            <div class="collections__grid">
+                {% for item in items %}
+                    <div class="collections__grid-item collection {% if loop.index is even %}collection--reversed {% endif %}">
+                        <div class="box" >
+
+                            <div class="grid">
+                                <div class="col-span-12">
+
+                                    <div class="collection__image desktop-hide">
+                                        <div class="collection__illustration">
+                                            {% include "./subviews/subview_illustration.html" with { shadow: item.shadow, image: item.image } %}
+                                        </div>
+                                    </div>
+
+                                    <h2 class="collection__name"><a href="{{item.url}}">{{item.name | raw}}</a></h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box" >
+
+                            <div class="grid">
+                                <div class="col-span-12">
+                                    <div class="collection__wrap">
+
+                                        <div class="collection__image desktop-only">
+                                            <div class="collection__illustration" data-scroll="illustration">
+                                                {% include "./subviews/subview_illustration.html" with { shadow: item.shadow, image: item.image } %}
+                                            </div>
+                                        </div>
+
+                                        <div class="collection__data">
+                                            <div class="collection__states">{{item.states}}</div>
+                                            <div class="collection__text">{{item.text}}</div>
+                                            <div class="collection__button">
+                                                {% set reversedModifier = (loop.index is even) ? "reversed" : "" %}
+                                                {% include "./components/c_link.html" with {
+                                                    url: item.url,
+                                                    modifiers: ["simple", reversedModifier],
+                                                    text: "Explore ",
+                                                    extraText: "23 interviews",
+                                                    duplicate: true,
+                                                    animate: true
+                                                } %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>

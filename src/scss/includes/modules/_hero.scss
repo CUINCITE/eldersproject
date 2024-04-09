@@ -1,0 +1,216 @@
+.hero {
+    &__wrap {
+        position: relative;
+
+        @include breakpoint(desktop) {
+            @include flex(column, flex-start, stretch);
+
+            min-height: var(--app-height);
+        }
+
+        @include breakpoint(not-desktop) {
+            @include flex(column, flex-start, stretch);
+
+            min-height: var(--app-height);
+        }
+    }
+
+
+
+    &__title {
+        @include font-family(compressed);
+        @include flex(column, flex-start, stretch);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(216, 1);
+            @include letter-spacing(-9.72, 216);
+
+            position: relative;
+            z-index: 1;
+
+            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
+                @include font-size(170, 1);
+
+                letter-spacing: -0.045em;
+            }
+
+
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
+                @include font-size(204, 1);
+
+                letter-spacing: -0.045em;
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(220, .72);
+            @include letter-spacing(-9.5, 220);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(118.8, 85.7);
+            @include letter-spacing(-10.8, 240);
+        }
+    }
+
+
+
+    &__line {
+
+        @include breakpoint(desktop) {
+            display: block;
+            margin-block: trim-font(1);
+            padding-block: rem(12);
+            padding-left: rem(13);
+        }
+
+        @include breakpoint(not-desktop) {
+            display: inline-block;
+
+            @include breakpoint(tablet) {
+                padding-top: rem(30);
+                padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(8)});
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(13);
+                padding-left: rem(13);
+            }
+        }
+    }
+
+
+
+    &__subtitles {
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
+    }
+
+
+
+    &__subtitle {
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(24, 1.5);
+            @include letter-spacing(-0.75, 24);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(28, 1);
+            @include letter-spacing(-0.9, 28);
+
+            padding-top: rem(14);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(15.3, 28.35);
+            @include letter-spacing(-0.459, 15.3);
+
+            margin-top: rem(-1);
+        }
+    }
+
+
+
+    &__bottom {
+        @include flex(row, space-between, flex-start);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(16);
+            padding-bottom: rem(47);
+
+            .text {
+                padding-bottom: rem(18) !important;
+            }
+
+
+            @media (max-height: 719px) {
+                padding-top: rem(12);
+                padding-bottom: rem(38);
+            }
+
+
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
+                padding-top: rem(12);
+                padding-bottom: rem(38);
+            }
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, space-between, flex-start);
+        }
+    }
+
+
+
+    &__sticker {
+        position: absolute;
+        z-index: 5;
+
+        @include breakpoint(desktop) {
+            bottom: rem(-30);
+            left: rem(20);
+        }
+
+        @include breakpoint(tablet) {
+            bottom: rem(-13);
+            left: rem(18);
+        }
+
+        @include breakpoint(phone) {
+            bottom: rem(-13);
+            left: rem(18);
+        }
+    }
+
+
+
+    &__logo {
+        @include breakpoint(phone) {
+            svg {
+                width: vw(80, phone);
+                margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
+                height: auto;
+            }
+        }
+    }
+
+
+
+    &__text {
+        @include breakpoint(tablet) {
+            grid-column: 3 / span 6;
+        }
+    }
+
+
+
+    i {
+        @include font-family(reclined, 300);
+        font-style: normal;
+
+        @include breakpoint(desktop) {
+            @include letter-spacing(-16.8, 240);
+
+            padding-left: rem(20);
+        }
+
+        @include breakpoint(tablet) {
+            @include letter-spacing(-16.8, 240);
+
+            padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(9)});
+        }
+
+        @include breakpoint(phone) {
+            @include letter-spacing(-8.316, 118.8);
+
+            padding-left: rem(10);
+            display: inline-block;
+            margin-top: 1px;
+        }
+    }
+}

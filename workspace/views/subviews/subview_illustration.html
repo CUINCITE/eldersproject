@@ -1,0 +1,17 @@
+<div class="illustration{% if modifier %} illustration--{{modifier}}{% endif %}{% if shadow %} illustration--{{shadow}}{% endif %}">
+    <div class="illustration__front">
+        <div class="illustration__image">
+            {% include "./subviews/subview_picture.html" with { image } %}
+        </div>
+    </div>
+    <div class="illustration__back">
+        {% if shadow %}
+            <div class="illustration__shadow"></div>
+        {% endif %}
+        {% if modifier == "extraShadows" %}
+            <div class="illustration__shadow"></div>
+            <div class="illustration__shadow"></div>
+            <div class="illustration__shadow"></div>
+        {% endif %}
+    </div>
+</div>

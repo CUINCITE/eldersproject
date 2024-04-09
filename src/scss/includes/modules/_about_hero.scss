@@ -1,0 +1,74 @@
+.about_hero {
+    display: grid;
+    position: relative;
+
+    // @include breakpoint(desktop) {
+    //     grid-template-rows: auto 1fr;
+    //     min-height: var(--app-height);
+    // }
+
+    @include breakpoint(not-desktop) {
+        // grid-template-rows: auto auto 1fr;
+
+        @include breakpoint(tablet) {
+            .heading {
+                padding-block: rem(15);
+            }
+        }
+
+        @include breakpoint(phone) {
+            .heading {
+                padding-block: rem(8);
+            }
+        }
+    }
+
+
+
+    > .box {
+        height: calc(100% - 1px);
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+        }
+    }
+
+
+    .illustration {
+        transform: unset;
+
+
+        &[data-scroll] { opacity: 0; }
+    }
+
+
+    &__cards {
+        position: absolute;
+
+        @include breakpoint(desktop) {
+            width: vw(927);
+            height: vw(927);
+            max-width: vh(927);
+            max-height: vh(927);
+            rotate: -8deg;
+            top: 10.6%;
+            right: calc(23rem + 3 * 1rem);
+        }
+
+        @include breakpoint(tablet) {
+            width: vw(620, tablet);
+            aspect-ratio: 1/1;
+            rotate: -7deg;
+            top: 0;
+            left: vw(-8, tablet);
+        }
+
+        @include breakpoint(phone) {
+            width: vw(289, phone);
+            height: vw(289, phone);
+            rotate: -7deg;
+            top: 0;
+            left: vw(7, phone);
+        }
+    }
+}

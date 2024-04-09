@@ -2,16 +2,24 @@
 <html lang="{{lang}}" class="modernizr-no-js">
 
 <head>
+    {% include 'scaffold/gtag.html' %}
     {% include 'scaffold/meta.html' %}
     {% include 'scaffold/favicons.html' %}
-    
+    {% include 'scaffold/critical.html' %}
+
     {% for item in scaffold.langs_alternate %}
     <link rel="alternate" href="{{item.url}}" hreflang="{{item.lang}}">
     {% endfor %}
 
-    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.css">
+    <meta name="theme-color" content="#000">
+
+    <link rel="stylesheet" href="/public/theme/styles.css?v=0.0.28" />
+    <script src="/public/theme/libs.min.js?v=0.0.28" defer></script>
+    <script src="/public/theme/scripts.min.js?v=0.0.28" defer></script>
     {% if scaffold.serdelia_edit %}<link rel="stylesheet" href="/serdelia/public/uho6_serdelia6/uho6.css">{% endif %}
-    
+
+    {% include 'scaffold/fonts.html' %}
+
 </head>
 
 <body class="is-not-ready">
@@ -19,19 +27,30 @@
     <iframe class="serdelia-pro-iframe" src="" style="display:none"></iframe>
     {% endif %}
 
+    {% include 'scaffold/quick-access.html' %}
+
     {% include 'scaffold/header.html' %}
 
-    <main id="content" class="content">
-        {{content|raw}}
-    </main>
+    <div class="wrapper" id="wrapper">
+        <main id="content" class="content">
 
-    {% include 'scaffold/footer.html' %}
+            {{content|raw}}
+
+        </main>
+        {% include 'scaffold/newsletter.html' %}
+        {% include 'scaffold/footer.html' %}
+    </div>
+
+
+    <div id="lightbox" class="lightbox js-lightbox"></div>
+
+    {% include 'scaffold/audioplayer.html' %}
+    {% include 'scaffold/loader.html' %}
+    {% include 'scaffold/circle.html' %}
+    {% include 'scaffold/curtain.html' %}
     {% include 'scaffold/templates.html' %}
 
-
-    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
     {% if scaffold.serdelia_edit %}<script src="/serdelia/public/uho6_serdelia6/uho6.js"></script>{% endif %}
-
 
 </body>
 </html>

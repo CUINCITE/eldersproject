@@ -1,0 +1,21 @@
+{
+    "url": "/workspace/lightbox/03",
+    "backUrl": "/workspace",
+    "modifier": "green",
+    "mainImage": {
+        "type": "",
+        "image": {
+            "desktop": "/public/theme/images/illu-1.png"
+        }
+    },
+    "illu": {
+        "desktop": "/workspace/images/lightbox-illu.png"
+    },
+    "title": "Daphne Bethel",
+    "description": "Dedicated teacher, long-time Albuquerque resident",
+    "collection": "Renée Watson collection",
+    "collectionUrl": "/workspace/collection-single",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi in nulla posuere sollicitudin. Consectetur purus ut faucibus pulvinar elementum integer enim neque.",
+    "tags": ["Inclusion", "Queer", "Activism"],
+    "state": "Houston, TX"
+}

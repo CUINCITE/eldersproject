@@ -3,124 +3,289 @@
 class model_app_pages_modules_interviews extends model_app_pages_modules
 {
 
-	function __construct($parent,$settings)
-	{
-		$this->parent=$parent;
-		$this->settings=$settings;
-	}
+    private int $itemsPerPage = 300;
 
-	public function updateModel($m,$url)
-	{
+    function __construct($parent, $settings)
+    {
+        $this->parent = $parent;
+        $this->settings = $settings;
+    }
 
-		/*
-			FILTERS
-		*/
-
-		$input=[
-			'collection'=>['collections','interviewers'],
-			'theme'=>['topics','topics'],
-			'state'=>['states','narrators_states']
-		];
-
-		$filters=['active'=>1];
-		foreach ($input as $k=>$v)
-		{
-			if (!empty($this->settings['get'][$k]))
-			{
-				$f=$this->getModelFilter($v[0],$this->settings['get'][$k]);
-				if ($f) $filters[$v[1]]=$f;
-			} else $f=[];
-			$m[$k]=$this->filterUpdate($this->parent->dictGet($v[0]),$f);
-		}
-
-		/*
-			Sort
-		*/
-		$sort=@$this->settings['get']['sort'];		
-		if (!$sort) $sort='narrators';
-		if ($sort[0]=='!') { $desc=true; $sort=substr($sort,1); } else $desc=false;
-		
-		$m['sort']=[];
-		$m['sort']['url_narrator']=$this->getSort('narrators',$sort,$desc);
-		$m['sort']['url_locations']=$this->getSort('locations',$sort,$desc);
-		$m['sort']['url_collections']=$this->getSort('collections',$sort,$desc);
-		
-		$sort_model='label_sort';
-
-		switch ($sort)
-		{
-			case "narrators":
-				$sort_model='label_sort';
-				$m['sort']['arrow_narrator']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_narrator']='↑';
-				}
-			break;
-			case "collections":
-				$sort_model='interviewer_name_sort';
-				$m['sort']['arrow_collections']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_collections']='↑';
-				}
-			break;
-			case "locations":
-				$sort_model='locations';
-				$m['sort']['arrow_locations']='↓';
-				if ($desc)
-				{
-					$sort_model.=' DESC';
-					$m['sort']['arrow_locations']='↑';
-				}
-			break;
-		}
-
-		
-		
-
-		/*
-			Get Interviews
-		*/
-
-        $m['items']=$this->parent->getJsonModel('interviews_list',$filters,false,$sort_model);
+    public function updateModel($m, $url)
+    {
         
-		return $m;
-	}
+        // return 404 if a user hits single interview url and no interview is found
+        if (!empty($url[1]))
+        {
+            $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $url[1]], true);
 
-	private function getSort($item,$sort_now,$desc_now)
-	{
-		
-		if ($item==$sort_now)
-		{			
-			$sort=$sort_now;
-			if (!$desc_now) $sort='!'.$sort;
-		}
-			else $sort=$item;
+            if (!$item) {
+                $this->parent->set404();
+                return $m;
+            }
 
-		$url=['type'=>'url_now','get'=>['sort'=>$sort]];
-		return $url;
-	}
+            else $this->parent->ogSet($item['label'], $item['lead']);
+        }
 
-	private function filterUpdate($items,$filters)
-	{
-		if ($filters && !is_array($filters)) $filters=explode(',',$filters);
-		if ($filters)
-		{
-			foreach ($items as $k=>$v)
-				$items[$k]['selected']=in_array($v['id'],$filters);
-		}
-		return $items;
-	}
+        // Calculate pagination variables
+        $itemsPerPage = $this->itemsPerPage;
+        $page = 1;
+        $isPartial = (!empty($this->settings['get']['partial']));
 
-	private function getModelFilter($dict,$slug)
-	{
-		$item=$this->parent->dictGet($dict,$slug);
-		if ($item) return $item['id'];
-	}
+        if (!empty($this->settings['get']['page']) && is_numeric($this->settings['get']['page'])) {
+            $page = (int)$this->settings['get']['page'];
+        }
 
+        // startingPage & numberOfItems variables are used in getJsonModel method later
+        $startingPage = $isPartial ? $page : 1;
+        $numberOfItems = $isPartial ? $itemsPerPage : $page * $itemsPerPage;
+        
+
+        //filters in the query
+        $input = [
+            'collections' => ['collections', 'interviewers'],
+            'topics' => ['topics', 'topics'],
+            'states' => ['states', 'narrators_states']
+        ];
+
+        $filters = ['active' => 1];
+        foreach ($input as $param => $dictionaries) {
+            $filter = false;
+
+            if (!empty($this->settings['get'][$param])) {
+                $filter = $this->getModelFilter($dictionaries[0], $this->settings['get'][$param]);
+                if (!empty($filter)) $filters[$dictionaries[1]] = $filter;
+            }
+
+            $m[$param] = $this->filterUpdate($this->parent->dictGet($dictionaries[0]), $filter);
+
+        }
+
+
+        $m['states'] = array_filter($m['states'], function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 0;
+        });
+        
+        
+        // define sort variables
+        $m['sort'] = $this->handleSortVariables();
+
+        /*
+            Get Interviews and supplement it with Filters and Load More data
+        */
+
+        
+
+        $m['items'] = $this->parent->getJsonModel('interviews_list', $filters, false, $m['sort']['sort_model'], [$startingPage, $numberOfItems]);
+
+        // remove duplicated states
+        $m['items'] = array_map(function ($item) {
+            $item['type'] = 'single';
+            if (is_array($item['narrators_states'])) {
+                $item['narrators_states'] = array_map("unserialize", array_unique(array_map("serialize", $item['narrators_states'])));
+            }
+            return $item;
+        }, $m['items']);
+
+        // Check if load more items
+        $m['load_more'] = $this->checkForMoreItems(count($m['items']), $itemsPerPage, $page, $url, $filters, $m['sort']['sort_model']);
+
+        // Add filter tags to the interview lists
+        $m['items'] = $this->addTagsToInterviews($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
+
+        
+        return $m;
+    }
+
+    private function checkForMoreItems($itemsCount, $itemsPerPage, $page, $uri, $filters, $sortModel): bool|string
+    {
+        if ($itemsCount >= $itemsPerPage) {
+            $startingPage = $page * $itemsPerPage + 1;
+            $newItem = $this->parent->getJsonModel('interviews_list', $filters, false, $sortModel, [$startingPage, 1]);
+
+            if ($newItem) {
+                return $this->getNextPageUri($page, $uri);
+            }
+        }
+
+        return false;
+    }
+
+    private function handleSortVariables(): array
+    {
+        $sort = !empty($this->settings['get']['sort']) ? $this->settings['get']['sort'] : 'narrators';
+        $returnArray = [];
+        $returnArray['selected'] = $sort;
+        if ($sort[0] == '!') {
+            $desc = true;
+            $sort = substr($sort, 1);
+        } else $desc = false;
+
+        $returnArray['url_narrator'] = $this->getSort('narrators', $sort, $desc);
+        $returnArray['url_locations'] = $this->getSort('locations', $sort, $desc);
+        $returnArray['url_collections'] = $this->getSort('collections', $sort, $desc);
+
+        $sort_model = 'label_sort';
+
+        switch ($sort) {
+            case "narrators":
+                $sort_model = 'label_sort';
+                $returnArray['arrow_narrator'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_narrator'] = '↑';
+                }
+                break;
+            case "collections":
+                $sort_model = 'interviewer_name_sort';
+                $returnArray['arrow_collections'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_collections'] = '↑';
+                }
+                break;
+            case "locations":
+                $sort_model = 'locations';
+                $returnArray['arrow_locations'] = '↓';
+                if ($desc) {
+                    $sort_model .= ' DESC';
+                    $m['sort']['arrow_locations'] = '↑';
+                }
+                break;
+        }
+
+        $returnArray['sort_model'] = $sort_model;
+
+        return $returnArray;
+    }
+
+    private function getSort($item, $sort_now, $desc_now)
+    {
+
+        if ($item == $sort_now) {
+            $sort = $sort_now;
+            if (!$desc_now) $sort = '!' . $sort;
+        } else $sort = $item;
+
+        $url = ['type' => 'url_now', 'get' => ['sort' => $sort]];
+        return $url;
+    }
+
+    private function filterUpdate($items, $filters)
+    {
+        if (!$filters) return $items;
+
+        if (!is_array($filters)) $filters = explode(',', $filters);
+
+        if ($filters) {
+            foreach ($items as $k => $v)
+                $items[$k]['selected'] = in_array($v['id'], $filters);
+        }
+        
+        return $items;
+    }
+
+    private function getModelFilter($dict, $slug)
+    {
+        $slugs = explode(',', $slug);
+        $return_array = [];
+
+        foreach ($slugs as $slug) {
+            $item = $this->parent->dictGet($dict, $slug);
+            if ($item) $return_array[] = $item['id'];
+        }
+
+        if (!empty($return_array)) {
+            return (count($return_array) == 1) ? $return_array[0] : $return_array;
+        }
+
+        return [];
+
+    }
+
+    function getNextPageUri($current_page, $url): string
+    {
+
+        $allowedParams = ['page', 'sort', 'collections', 'topics', 'states'];
+        $params = _uho_fx::getGetArray();
+
+        foreach ($params as $k => $v) {
+            if (!in_array($k, $allowedParams)) unset($params[$k]);
+        }
+
+        $params['page'] = $current_page + 1;
+        $uri = '/' . implode('/', $url);
+
+        return $uri . '?' . http_build_query($params);
+    }
+
+    private function getFilterUrl($filter): array
+    {
+        //return ['type' => 'interview_filter', 'slug' => $filter['slug'],
+        //    'filter_type' => $filter['filter_type']];
+        return['type'=>'interviews',$filter['filter_type']=>[$filter['slug']]];
+    }
+
+    private function addTagsToInterviews($items, $topics, $states) {
+
+        $states = array_filter($states, function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 10;
+        });
+
+        $filters = array_merge(
+            array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
+            array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
+        );
+
+        // Different seed every day
+        $seed = date('z');
+        mt_srand($seed);
+        shuffle($filters);
+
+        //Remove already selected filters from the list
+        $filters = array_filter($filters, fn($item) => empty($item['selected']));
+        $filters = array_values($filters);
+        
+        $newItems = [];
+        $lastLetter = null;
+        $i = 0;
+        $minimum_distance=8;
+        $last_index=-4;
+
+        $modifiers = ['default','pink','green','pale-purple','orange','pale-blue','brown','dark-green','pale-green','purple'];
+        mt_srand($seed);
+        shuffle($modifiers);
+        $modifierIndex = 0;
+
+        foreach ($items as $k=>$v) {
+
+            if ($lastLetter !== strtoupper(substr($v['label_sort'], 0, 1)))
+            {
+                $lastLetter = strtoupper(substr($v['label_sort'], 0, 1));
+                $i++;
+
+                if ($i > 1 && ($k-$last_index>=$minimum_distance))
+                {
+                    $last_index=$k;
+                    $filter = array_shift($filters);
+                    if ($filter)
+                    {
+                        if ($modifierIndex>=count($modifiers)) $modifierIndex = 0;
+                        $filter['url'] = $this->getFilterUrl($filter);
+                        $filter['modifier'] = $modifiers[$modifierIndex];
+                        $newItems[] = $filter;
+                        $modifierIndex++;
+                    }
+                }
+            }
+
+            $newItems[] = $v;
+        }
+
+        return $newItems;
+
+    }
 
 }
+
 ?>

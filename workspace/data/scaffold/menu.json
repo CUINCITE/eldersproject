@@ -1,10 +1,38 @@
-[
-  {
-    "label": "Home",
-    "url": ""
-  },
-  {
-    "label": "About",
-    "url": "about"
-  }
-]
+{
+  "nav": [
+    {
+      "label": "Home",
+      "url": "/workspace"
+    },
+    {
+      "label": "Collections",
+      "url": "/workspace/collections"
+    },
+    {
+      "label": "Interviews",
+      "url": "/workspace/interviews"
+    },
+    {
+      "label": "About",
+      "url": "/workspace/about"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Contact",
+      "url": "/workspace/contact"
+    },
+    {
+      "label": "Accesibility",
+      "url": "/"
+    },
+    {
+      "label": "Privacy Policy",
+      "url": "/workspace/privacy"
+    },
+    {
+      "label": "Terms of Use",
+      "url": "/terms"
+    }
+  ]
+}

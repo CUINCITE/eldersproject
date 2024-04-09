@@ -1,0 +1,105 @@
+{
+    "items":
+    [
+        {
+            "id": 1,
+            "src": "/workspace/images/loader_anim-1.png",
+            "color": "pale-green"
+        },
+        {
+            "id": 2,
+            "src": "/workspace/images/loader_anim-2.png",
+            "color": "green"
+        },
+        {
+            "id": 3,
+            "src": "/workspace/images/loader_anim-3.png",
+            "color": "red"
+        },
+        {
+            "id": 4,
+            "src": "/workspace/images/loader_anim-4.png",
+            "color": "red"
+        },
+        {
+            "id": 5,
+            "src": "/workspace/images/loader_anim-5.png",
+            "color": "purple"
+        },
+        {
+            "id": 6,
+            "src": "/workspace/images/loader_anim-6.png",
+            "color": "purple"
+        },
+        {
+            "id": 7,
+            "src": "/workspace/images/loader_anim-7.png",
+            "color": "pink"
+        },
+        {
+            "id": 8,
+            "src": "/workspace/images/loader_anim-8.png",
+            "color": "pink"
+        },
+        {
+            "id": 9,
+            "src": "/workspace/images/loader_anim-9.png",
+            "color": "brown"
+        },
+        {
+            "id": 10,
+            "src": "/workspace/images/loader_anim-10.png",
+            "color": "brown"
+        },
+        {
+            "id": 11,
+            "src": "/workspace/images/loader_anim-11.png",
+            "color": "dark-green"
+        },
+        {
+            "id": 12,
+            "src": "/workspace/images/loader_anim-12.png",
+            "color": "dark-green"
+        },
+        {
+            "id": 13,
+            "src": "/workspace/images/loader_anim-13.png",
+            "color": "pale-blue"
+        },
+        {
+            "id": 14,
+            "src": "/workspace/images/loader_anim-14.png",
+            "color": "pale-blue"
+        },
+        {
+            "id": 15,
+            "src": "/workspace/images/loader_anim-15.png",
+            "color": "pale-purple"
+        },
+        {
+            "id": 16,
+            "src": "/workspace/images/loader_anim-16.png",
+            "color": "pale-purple"
+        },
+        {
+            "id": 17,
+            "src": "/workspace/images/loader_anim-17.png",
+            "color": "orange"
+        },
+        {
+            "id": 18,
+            "src": "/workspace/images/loader_anim-18.png",
+            "color": "orange"
+        },
+        {
+            "id": 19,
+            "src": "/workspace/images/loader_anim-19.png",
+            "color": "pale-green"
+        },
+        {
+            "id": 20,
+            "src": "/workspace/images/loader_anim-20.png",
+            "color": "green"
+        }
+    ]
+}

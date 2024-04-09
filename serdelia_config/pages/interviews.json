@@ -1,239 +1,364 @@
 {
-    "table": "interviews",
-    "label": {
-        "page": "Interviews",
-        "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
-    },
-    "layout-temp":
+  "table": "interviews",
+  "label": {
+    "page": "All Interviews",
+    "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
+  },
+  "layout-temp": {
+    "type": "grid",
+    "count": 100,
+    "html": "{{html.image|raw}}{{html.label}}<br><small>{{html.narrator_occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+  },
+  "model": {
+    "label": "{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"
+  },
+  "order": "label_sort",
+  "buttons_page": [
     {
-        "type":"grid",
-        "count":100,
-        "html":"{{html.image|raw}}{{html.label}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+      "plugin": "refresh"
+    }
+  ],
+  "buttons_edit": [
+    {
+      "label": "Interview auto-update",
+      "type": "plugin",
+      "plugin": "interview_update",
+      "hidden": true,
+      "on_update": true
     },
-    
-
-    "model":{"label":"{% for item in narrators %}{{item.surname}}, {{item.name}} {% endfor %}"},
-    "order": "label_sort",
-    "buttons_page":
-    [
-        
-        {"plugin":"refresh"}
-    ],
-    "buttons_edit":
-    [
-        
-        {
-            "label":"Interview auto-update",
-            "type":"plugin",
-            "plugin":"interview_update",
-            "hidden":true,
-            "on_update":true
-        },
-        
-        {"label":"Sessions","type":"page","icon":"reorder","page":"sessions,%id%"},
-        {
-            "type": "plugin",
-            "plugin": "preview",
-            "params": {
-                "url": "/interviews/{{slug}}?preview=true"
-            }
-        },
-        
-        {
-            "label":"Indexes",
-            "icon":"index",
-            "hidden":true,
-            "plugin":"interview_indexes"
-        }
-        
-    ],
-    "fields": [
-        {
-            "tab":"Interview",
-            "label": "Narrators",
-            "field": "narrators",
-            "required": true,
-            "type":"elements",
-            "source":
-            {
-                "model":"narrators",
-                "model_fields":["name","surname"]
-            }
-        },
-        {
-            "label": "Narrators (full text)",
-            "edit":false,
-            "hhidden":true,
-            "field": "label",
-            
-            "auto": {
-                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
-            }
-        },
-        {
-            "label": {"page":"Narrator","edit":"Narrators (full text, sort)"},
-            "edit":false,
-            "search":true,
-            "hhidden":true,
-            "field": "label_sort",
-            "list":true,
-            "auto": {
-                "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
-            }
-        },
-
-        {
-            "hr":true,
-            "label":"Interviewers",
-            "field":"interviewers",
-            "type":"elements",
-            "source":
-            {
-                "model":"interviewers",
-                "model_fields":["first_name","last_name"]
-            }
-        },
-        {
-            "label":"Interviewers (full text)",
-            "field":"interviewer_name",
-            "edit":false,
-            "auto": {
-                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name}} {{interviewer.last_name}}{% endfor %}"
-            }
-        },
-        {
-            "label":{"edit":"Interviewers (full text, sort)","page":"Collection"},
-            "field":"interviewer_name_sort",
-            "list":true,
-            "edit":false,
-            "auto": {
-                "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
-            }
-        },
-        {
-            "hr":true,
-            "field":"locations","label":"Location"
-        },
-        {
-            "tab":"Filters",
-            "field":"narrators_states","label":"Narrators states",
-            "type":"elements",
-            "source":
-            {
-                "model":"s_states"
-            }
-        },
-        {
-            "field":"topics",
-            "label":"Topics",
-            "type":"checkboxes",
-            "settings":{"small":true},
-            "source":
-            {
-                "model":"topics",
-                "model_fields":["label"]
-            }
-        },
-        
-    {   
-        "tab":"Media",
-        "hidden":true,
-        "label": "Thumbnail",
-        "hr":true,
-        "type": "image",
-        "field":"image",
-        "folder": "/public/upload/interviews",
-        "folder_preview": "thumb",
-        "filename": "%uid%",
-        "settings":{"webp":true},
-        "images":
-        [
-          {  "folder" : "original","label":"Original image" },
-          {  "folder" : "desktop","label":"Desktop","width":520,"height":292,"crop":true,"retina":true },
-          {  "folder" : "mobile","label":"Mobile","width":320,"height":180,"crop":true,"retina":true },
-          {  "folder" : "square","label":"Square","width":512,"height":512,"crop":true }
-          
+    {
+      "label": "Sessions",
+      "type": "page",
+      "icon": "reorder",
+      "page": "sessions,%id%"
+    },
+    {
+      "type": "plugin",
+      "plugin": "preview",
+      "params": {
+        "url": "/interviews/{{slug}}?preview=true"
+      }
+    },
+    {
+      "label": "Indexes",
+      "icon": "index",
+      "hidden": true,
+      "plugin": "interview_indexes"
+    }
+  ],
+  "fields": [
+    {
+      "label": "CMS ID",
+      "edit": false,
+      "tab": "Interview",
+      "field": "ID",
+      "list": true
+    },
+    {
+      "label": "Narrators",
+      "field": "narrators",
+      "required": true,
+      "type": "elements",
+      "source": {
+        "model": "narrators",
+        "model_fields": [
+          "name",
+          "surname"
         ]
-    },   
-    {   "field": "uid","type":"uid","list":"read"    ,"search":true,"label":"UID"},
-        
-        
-
-        
+      }
+    },
+    {
+      "label": "Narrators (full text)",
+      "edit": false,
+      "field": "label",
+      "auto": {
+        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
+      }
+    },
+    {
+      "label": {
+        "page": "Narrator",
+        "edit": "Narrators (full text, sort)"
+      },
+      "edit": false,
+      "search": true,
+      "hhidden": true,
+      "field": "label_sort",
+      "list": true,
+      "auto": {
+        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
+      }
+    },
+    {
+      "label": "Narrators (occupation)",
+      
+      "on_demand":true,
+      "field": "narrator_occupation",
+      "auto": {
+        "on_null": true,
+        "pattern": "{% for item in narrators %}{% if loop.index>1 and narrators[0].occupation %}, {% endif %}{{item.occupation}}{% endfor %}"
+      }
+    },
+   
+    {
+      "hr": true,
+      "label": "Interviewers",
+      "field": "interviewers",
+      "type": "elements",
+      "source": {
+        "model": "interviewers",
+        "model_fields": [
+          "first_name",
+          "last_name"
+        ]
+      }
+    },
+    {
+      "label": "Interviewers (full text)",
+      "field": "interviewer_name",
+      "edit": false,
+      "auto": {
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name}} {{interviewer.last_name}}{% endfor %}"
+      }
+    },
+    {
+      "label": {
+        "edit": "Interviewers (full text, sort)",
+        "page": "Collection"
+      },
+      "field": "interviewer_name_sort",
+      "list": true,
+      "search":true,
+      "edit": false,
+      "auto": {
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
+      }
+    },
+    {
+      "hr": true,
+      "field": "locations",
+      "label": "Location Source",
+      "edit": false
+    },
+    {
+      "field": "narrator_location",
+      "label": "Location (narrator)"
+    },
+    {
+      "field": "interviewer_location",
+      "label": "Location (interviewer)"
+    },
+    {
+      "label": "Languages",
+      "type": "checkboxes",
+      "field": "languages",
+      "source": {
+        "model": "s_languages"
+      }
+    },
+    {
+      "tab": "Filters",
+      "field": "narrators_states",
+      "label": "Narrators states",
+      "type": "elements",
+      "source": {
+        "model": "s_states"
+      }
+    },
+    {
+      "field": "topics",
+      "label": "Topics",
+      "type": "checkboxes",
+      "settings": {
+        "small": true
+      },
+      "source": {
+        "model": "topics",
+        "model_fields": [
+          "label"
+        ]
+      }
+    },
+    {
+      "tab": "Media",
+      "hidden": true,
+      "label": "Thumbnail",
+      "hr": true,
+      "type": "image",
+      "field": "image",
+      "folder": "/public/upload/interviews",
+      "folder_preview": "thumb",
+      "filename": "%uid%",
+      "settings": {
+        "webp": true
+      },
+      "images": [
         {
-            "tab":"Copy",
-            "field":"summary",
-            "type":"html",
-            "label":"Interview Summary"
+          "folder": "original",
+          "label": "Original image"
         },
         {
-            "field":"preface",
-            "type":"html",
-            "label":"Preface"
+          "folder": "desktop",
+          "label": "Desktop",
+          "width": 520,
+          "height": 292,
+          "crop": true,
+          "retina": true
         },
         {
-            "field":"citation",
-            "type":"text",
-            "label":"Citation",
-            "settings":{"rows":5}
-        },
-        
-        {
-            "tab":"Download",
-            "field": "PDF",
-            "label": "PDF",
-            "type": "file",
-            "extension":"pdf",
-            "folder":"/public/upload/interviews/transcripts"
+          "folder": "mobile",
+          "label": "Mobile",
+          "width": 320,
+          "height": 180,
+          "crop": true,
+          "retina": true
         },
         {
-            "field":"pdf_size",
-            "label":"PDF Size"
-        },
-        
-        {
-            "tab":"Status",
-            "label": "Url",
-            "field": "slug",
-            "on_demand": true,
-            "auto": {
-                "on_null": true,
-                "unique": true,
-                "url": true,
-                "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
-            }
-        },
-        {
-            "field":"duration","label":"Duration (seconds)","edit":false
-        },
-        {
-            "field":"incite_id","label":"Incite ID","temp-list":true,
-            "settings":{"code":true}
-        },
-        {
-            "hr":true,
-            "list":true,
-            "field":"status_media","label":"Status (media)",
-            "type": "boolean",
-            "search":true
-        },
-        {
-            "list":true,
-            "field":"status_transcripts",
-            "label":"Status (transcripts)",
-            "type": "boolean",
-            "search":true
-        },
-        {
-            "label": "Publish",
-            "field": "active",
-            "type": "boolean",
-            "list": "edit",
-            "search":true,
-            "hr": true
+          "folder": "square",
+          "label": "Square",
+          "width": 512,
+          "height": 512,
+          "crop": true
         }
-
-
-
-    ]
+      ]
+    },
+    {
+      "hr": true,
+      "label": "Mementos",
+      "type": "media",
+      "field": "media",
+      "captions": [
+        {
+          "label": "Caption",
+          "field": "caption"
+        },
+        {
+          "label": "Alt",
+          "field": "alt"
+        },
+        {
+          "label": "Filename",
+          "field": "filename_original"
+        }
+      ],
+      "media": {
+        "model": "media",
+        "type": [
+          "image"
+        ]
+      }
+    },
+    {
+      "label": "Placeholder Illustration",
+      "field": "illustration",
+      "temp-required": true,
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all"
+      }
+    },
+    {
+      "field": "uid",
+      "type": "uid",
+      "list": "read",
+      "search": true,
+      "label": "UID"
+    },
+    {
+      "tab": "Copy",
+      "field": "summary",
+      "type": "text",
+      "label": "Interview Summary"
+    },
+    {
+      "field": "preface",
+      "type": "html",
+      "label": "Preface"
+    },
+    {
+      "field": "citation",
+      "type": "text",
+      "label": "Citation",
+      "settings": {
+        "rows": 5
+      }
+    },
+    {
+      "tab": "Download",
+      "field": "PDF",
+      "label": "PDF",
+      "type": "file",
+      "extension": "pdf",
+      "folder": "/public/upload/interviews/transcripts"
+    },
+    {
+      "field": "pdf_size",
+      "label": "PDF Size"
+    },
+    {
+      "tab": "Status",
+      "label": "Url",
+      "field": "slug",
+      "on_demand": true,
+      "auto": {
+        "on_null": true,
+        "unique": true,
+        "url": true,
+        "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
+      }
+    },
+    {
+      "field": "duration",
+      "label": "Duration (seconds)",
+      "edit": false
+    },
+    {
+      "field": "incite_id",
+      "label": "Incite ID",
+      "settings": {
+        "case": true,
+        "code": true
+      },
+      "search": true,
+      "list": true
+    },
+    {
+      "hr": true,
+      "list": true,
+      "field": "status_media",
+      "label": "Status (media)",
+      "type": "boolean",
+      "search": true
+    },
+    {
+      "list": true,
+      "field": "status_transcripts",
+      "label": "Status (transcripts)",
+      "type": "boolean",
+      "search": true
+    },
+    {
+      "list": true,
+      "field": "status_assets",
+      "label": "Status (assets)",
+      "type": "boolean",
+      "search": true      
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "search": true,
+      "hr": true
+    },
+    {
+      "label": "Featured",
+      "field": "featured",
+      "type": "boolean",
+      "list": "edit",
+      "search": true,
+      "hr": true
+    }
+  ]
 }

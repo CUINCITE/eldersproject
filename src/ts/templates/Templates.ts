@@ -4,6 +4,8 @@
 // eslint-disable-next-line max-classes-per-file
 export class TemplateNames {
     public static LIGHTBOX = 'lightbox';
+    public static LIVESEARCH = 'livesearch';
+    public static PLAYER = 'player';
 }
 
 export class Templates {

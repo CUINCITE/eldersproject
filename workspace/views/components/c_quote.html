@@ -1,0 +1,13 @@
+<div class="quote{% if big %} quote--big{% endif %}">
+    <blockquote>
+        <p>
+            {{text}}
+            {% if clip %}
+                <button data-audio-player="{{clip.player}}" data-start="{{clip.start}}" class="quote__cassette">[[svg::cassette]]</button>
+            {% endif %}
+        </p>
+        {% if author %}
+            <footer>{{author}}</footer>
+        {% endif %}
+    </blockquote>
+</div>

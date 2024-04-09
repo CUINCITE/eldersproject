@@ -1,0 +1,684 @@
+.interviews {
+    &--grid {
+        --line-width: #{rem(24)};
+        --line-offset: #{rem(6)};
+    }
+
+
+    &--banner {
+        .interviews__copy {
+            @include breakpoint(desktop) {
+                padding-top: unset;
+            }
+        }
+
+        p {
+            -webkit-line-clamp: unset !important;
+        }
+    }
+
+
+
+    &__heading {
+        @include flex(row, flex-start, flex-start);
+        position: relative;
+
+        @include breakpoint(desktop) {
+            padding: rem(18) 0 rem(10);
+            height: rem(178);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(12);
+        }
+
+
+        &--reversed {
+            @include flex(row-reverse, flex-end, flex-start);
+
+            @include breakpoint(phone) {
+                // padding-bottom: rem(46);
+            }
+
+
+            .interviews__sticker {
+                @include breakpoint(not-desktop) {
+                    left: unset;
+                    bottom: unset;
+                    z-index: 5;
+
+                    @include breakpoint(tablet) {
+                        right: rem(72);
+                        bottom: calc(100% - #{rem(28)});
+                    }
+
+                    @include breakpoint(phone) {
+                        right: rem(10);
+                        bottom: calc(100% - #{rem(28)});
+                    }
+                }
+            }
+        }
+
+        .heading {
+            @include breakpoint(tablet) {
+                padding-block: rem(12);
+            }
+        }
+    }
+
+    &__sticker {
+        position: relative;
+        z-index: 2;
+
+
+        @include breakpoint(desktop) {
+            translate: -44% -78%;
+        }
+
+        @include breakpoint(not-desktop) {
+            position: absolute;
+
+            @include breakpoint(tablet) {
+                bottom: calc(100% - #{rem(22)});
+                left: rem(-24);
+            }
+
+            @include breakpoint(phone) {
+                bottom: calc(100% - #{rem(22)});
+                left: rem(-24);
+            }
+        }
+
+
+        // TEMP because we don't have content for all collections yet and the sticker is overlapping video player
+
+        .module--quote_panel + .module--interviews & {
+            @include breakpoint(desktop) {
+                translate: -24% -45%;
+            }
+        }
+    }
+
+    &__left, &__right {
+        @include flex(column, space-between, flex-start);
+
+        height: 100%;
+
+        @include breakpoint(tablet) {
+            grid-column: 1 / span 6 !important;
+        }
+    }
+
+
+
+    &__item {
+        position: relative;
+        border-top: 1px solid var(--color-bg);
+    }
+
+
+
+    &__list {
+        &--collection {
+            counter-reset: interviews;
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            z-index: 0;
+        }
+    }
+
+
+
+    &__name {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 38);
+            @include letter-spacing(-1.25, 50);
+
+            padding-top: rem(17);
+            margin-left: rem(-6);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1, 40);
+
+            margin-block: trim-font(1);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(40, 1);
+            @include letter-spacing(-1, 40);
+
+            margin-block: trim-font(1);
+            padding-top: rem(18);
+        }
+
+
+        .interviews--grid & {
+            @include breakpoint(desktop) {
+                margin-left: rem(-2);
+                padding-top: rem(17);
+            }
+        }
+
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                padding-top: rem(21);
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+
+        .is-list-view & {
+            @include breakpoint(desktop) {
+                position: relative;
+
+
+                span {
+                    display: inline-block;
+                    transition: transform .4s $ease-custom;
+                }
+
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: rem(31) auto auto 0;
+                    margin: auto;
+                    height: 1px;
+                    background: currentColor;
+                    width: var(--line-width);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform .4s $ease-custom;
+                }
+            }
+        }
+
+
+        &--small {
+            @include font-size(28, 24);
+            @include letter-spacing(-0.7, 28);
+        }
+
+
+        // trick to set proper height on hover
+
+        &--hidden {
+            opacity: 0;
+
+            .is-list-view & { display: none; }
+        }
+
+
+        .interviews-grid__tile--group & {
+            .is-list-view & {
+                @include breakpoint(desktop) {
+                    padding-top: rem(4);
+                    padding-bottom: rem(6);
+                }
+
+                @include breakpoint(phone) {
+                    padding-bottom: rem(12);
+                }
+            }
+
+            .is-grid-view & {
+
+                @include breakpoint(phone) {
+                    padding-bottom: rem(10);
+                }
+            }
+        }
+    }
+
+
+
+    &__text {
+        @include font-family(normal);
+        @include font-settings(400, 100);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 16);
+            padding-top: rem(15);
+            opacity: 0;
+            transform: translate(rem(-20), 0);
+            transition: opacity .3s $ease-custom, transform .5s $easing;
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 18);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(12, 16.2);
+        }
+    }
+
+
+    &__collection {
+        @include font-family(compressed);
+
+        text-transform: uppercase;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 19);
+            @include letter-spacing(-0.5, 20);
+
+            padding-bottom: rem(17);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(18, 1);
+            @include letter-spacing(-0.425, 17);
+        }
+
+        &--grid {
+
+            @include breakpoint(desktop) {
+                padding-top: rem(15);
+                margin-left: rem(1);
+                max-width: rem(115);
+
+
+                .is-grid-view & { display: none; }
+            }
+
+            &::before { content: none; }
+        }
+    }
+
+
+
+    &__claim {
+        border-top: 1px solid $color-bg;
+        position: relative;
+
+        @include breakpoint(desktop) {
+            padding-top: rem(20);
+            padding-bottom: rem(70);
+            min-height: vw(366);
+        }
+
+
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, flex-start, stretch);
+
+            padding-bottom: rem(60);
+        }
+
+        @include breakpoint(tablet) {
+            .grid {
+                div {
+                    grid-column: 3 / span 6 !important;
+                }
+            }
+        }
+    }
+
+
+
+    &__image {
+        aspect-ratio: 1/1;
+        position: absolute;
+        left: rem(-10);
+        top: rem(-56);
+        width: vw(352);
+
+
+        @include breakpoint(tablet) {
+            width: vw(186, tablet);
+            top: rem(-20);
+        }
+
+        @include breakpoint(phone) {
+            position: relative;
+            z-index: 2;
+            left: rem(28);
+            top: rem(-12);
+            width: vw(208, phone);
+        }
+    }
+
+
+
+    &__button_box {
+        @include breakpoint(desktop) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+        }
+    }
+
+
+
+    &__state {
+        @include font-family(reclined);
+
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 19);
+            @include letter-spacing(-0.5, 20);
+
+            padding-bottom: rem(17);
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(24, 15.5);
+            @include letter-spacing(-0.525, 24);
+
+            padding-left: 0.1em;
+            padding-top: rem(3);
+            grid-column: span 6;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 15.5);
+            @include letter-spacing(-0.425, 17);
+
+            padding-left: 0.1em;
+            padding-top: rem(3);
+        }
+    }
+
+
+
+    &__box {
+        @include flex(row, flex-end, center);
+
+        @include breakpoint(tablet) {
+            @include flex(row, space-between, flex-start);
+
+            grid-column: 1 / span 8 !important;
+            margin-top: rem(12);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(row, space-between, flex-start);
+
+            margin-top: rem(8);
+        }
+
+        &-wrap {
+            @include breakpoint(desktop) {
+                border-left: 1px solid var(--color-bg);
+                margin-right: calc(var(--grid-margin) * -1);
+            }
+
+            // @include breakpoint(tablet) {
+            //     .interview-box {
+            //         width: rem(344);
+            //     }
+            // }
+        }
+    }
+
+
+
+    &__link {
+        @include full;
+        z-index: 3;
+
+        @include hover {
+            ~ .interviews__box .interview-box {
+                @extend %box-hover;
+            }
+
+            ~ .interviews__right .interviews__text {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            ~ .interviews__copy .interviews__copy-content {
+                transition-delay: .125s;
+                transform: translateY(0);
+            }
+
+            ~ .interviews__copy .interviews__copy-overlay {
+                transition-delay: 0s;
+                transform: translateY(0);
+            }
+        }
+
+
+        .is-list-view & {
+            @include hover {
+                ~ .interviews__main .interviews__name {
+                    span {
+                        transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                    }
+
+                    &::before {
+                        transform: scaleX(1);
+                    }
+                }
+            }
+        }
+
+        @include accessibility {
+            z-index: 1;
+
+            & ~ * {
+                position: relative;
+                z-index: 1;
+                color: yellow;
+            }
+
+            & ~ .interviews__box {
+                .interview-box__layer:last-child {
+                    background-color: yellow;
+                }
+
+                .interview-box__text {
+                    color: black;
+                }
+            }
+        }
+    }
+
+
+    &__locations {
+        @include flex(column, flex-start, flex-start);
+        @include font-family(reclined);
+
+        font-feature-settings: "ss03" on;
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size(20, 19);
+            @include letter-spacing(0.5, 20);
+
+            padding-top: rem(15);
+            padding-left: rem(1);
+
+
+            .is-grid-view & {
+                @include font-size(17, 19);
+                @include letter-spacing(0.4, 17);
+
+                padding-top: rem(4);
+                flex-direction: row;
+                gap: rem(4);
+                position: relative;
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(18, 1);
+            @include letter-spacing(-0.425, 17);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(17, 15.5);
+            @include letter-spacing(-0.425, 17);
+
+            padding-left: 0.1em;
+            padding-top: rem(3);
+        }
+    }
+
+
+
+    &__description {
+        @include font-family(compact);
+        @include font-settings(400, 100);
+
+        @include breakpoint(desktop) {
+            @include font-size(14, 1);
+            @include letter-spacing(-0.14, 14);
+
+            margin-top: rem(3);
+
+
+            .is-grid-view & {
+                @include font-family(normal);
+                @include font-size(13, 15);
+
+                letter-spacing: normal;
+                margin-top: rem(8);
+            }
+
+
+            &--overlay {
+                @include font-family(normal);
+                @include font-size(13, 15);
+
+                margin-top: 0;
+                letter-spacing: normal;
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(15, 1.1);
+            @include letter-spacing(-0.15, 15);
+
+            margin-block: trim-font(1.1);
+            padding-top: rem(16);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(14, 1.05);
+            @include letter-spacing(-0.14, 14);
+
+            margin-top: rem(12);
+            margin-bottom: rem(28);
+        }
+    }
+
+
+
+    &__copy {
+        @include font-settings(400, 100);
+
+        @include breakpoint(desktop) {
+            @include font-size(13, 15);
+            @include letter-spacing(0.1, 13);
+
+            padding-top: rem(14);
+            padding-left: rem(1);
+
+            .text {
+                padding-block: 0;
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 18);
+
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(12, 16.2);
+        }
+
+
+        &-collection {
+            @include font-family(compressed);
+            @include font-size(20, 19);
+            @include letter-spacing(-0.3, 20);
+
+            text-transform: uppercase;
+            display: none;
+        }
+
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                @include letter-spacing(0.07, 13);
+
+                color: var(--color-black);
+                padding: 0;
+                position: absolute;
+                inset: 0;
+
+
+                &-overlay {
+                    background-color: var(--color-grey200);
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                    transition: transform .65s $ease-custom;
+                    transform: translateY(100%);
+                    transition-delay: .125s;
+                }
+
+
+                &-content {
+                    @include flex(column, flex-start, flex-start);
+
+                    width: 100%;
+                    height: 100%;
+                    padding: 0 var(--grid-margin) rem(12);
+                    transition: transform .65s $ease-custom;
+                    transform: translateY(100%);
+                }
+
+
+
+                &-collection {
+                    display: block;
+                    margin-top: auto;
+                }
+
+
+                p {
+                    -webkit-line-clamp: 4;
+                }
+            }
+
+
+            .is-after-toggle & {
+                &-overlay,
+                &-content {
+                    transition-duration: 0s;
+                    transition-delay: 0s;
+                }
+            }
+        }
+
+
+
+        p {
+            /* stylelint-disable-next-line value-no-vendor-prefix */
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+
+
+    &__more {
+        padding: rem(16) var(--grid-margin) rem(44);
+    }
+}

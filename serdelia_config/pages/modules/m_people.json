@@ -1,0 +1,14 @@
+{
+    "fields": [
+        {
+            "field": "label",
+            "label": "Header",
+            "tab": "Content"
+        },
+        {
+            "field": "text",
+            "type": "html",
+            "label": "Copy"
+        }
+    ]
+}

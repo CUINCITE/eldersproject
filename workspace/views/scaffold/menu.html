@@ -1,11 +1,33 @@
-<div class="menu js-menu">
+<div class="menu js-menu" id="menu">
+    <button aria-label="Close menu" class="menu__close js-menu-close"><i class="icon-close"></i></button>
     <div class="menu__wrap">
-        <nav>
+        {% include './scaffold/search.html' %}
+        <nav class="menu__nav">
             <ul>
-                {% for item in scaffold.menu %}
-                    <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+                {% for item in scaffold.menu.nav %}
+                    <li class="menu__item js-menu-item">
+                        <i class="menu__line js-menu-line"></i>
+                        <a href="{{ item.url }}" class="js-menu-main-link">
+                            <span class="menu__arrow">
+                                {% include "./components/c_arrow_icon.html" with { reversed: true } %}
+                            </span>
+                            <span class="menu__text js-menu-label">{{ item.label }}</span>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </nav>
+        <ul class="menu__footer">
+            {% for item in scaffold.menu.footer %}
+                <li class="menu__link js-menu-link">
+                    <a href="{{ item.url }}">
+                        <span>
+                            <span>{{ item.label }}</span>
+                            <span>{{ item.label }}</span>
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>

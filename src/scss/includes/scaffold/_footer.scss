@@ -1,24 +1,64 @@
 .footer {
-    @include font-size(10, 13.5);
+    @include z-index(footer);
+
     grid-area: footer;
     text-transform: uppercase;
+    position: relative;
+    background-color: var(--color-black);
+    color: var(--color-box);
 
-    & > * { background-color: var(--color-box); }
+    @include breakpoint(desktop) {
+        @include font-size(10, 13.5);
+    }
+
+    @include breakpoint(tablet) {
+        @include font-size(15, 1);
+    }
+
+    @include breakpoint(phone) {
+        @include font-size(14, 18.9);
+    }
+
+
+    body.is-404 & { display: none; }
+
+
+
+    &__bottom {
+        @include breakpoint(not-desktop) {
+            border-top: 1px solid var(--color-white);
+        }
+    }
 
 
 
     &__links {
-        @include flex(row, flex-start, center);
-        gap: vw(24);
-        padding: vw(56) 0 vw(19);
+
+        @include breakpoint(desktop) {
+            @include flex(row, flex-start, flex-end);
+
+            height: var(--GLOBAL-player-height);
+            gap: vw(24);
+            padding: 0 0 19px;
+        }
+
+        @include breakpoint(tablet) {
+            @include flex(row, space-between, center);
+            padding-block: rem(22);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+
+            gap: rem(19);
+            padding-block: rem(14);
+        }
 
 
         a { @include hoverable-link; }
     }
 
-
-
-    &__copy {
-        padding: vw(409) 0 vw(19);
+    .box__bg {
+        background-color: var(--color-black);
     }
 }

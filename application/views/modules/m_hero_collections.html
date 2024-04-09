@@ -1,0 +1,42 @@
+<section class="module module--collections_hero">
+    <div class="collections_hero">
+
+        <div class="collections_hero__logo desktop-hide">
+            {% include "components/c_logo_box.html" %}
+        </div>
+
+        <div class="box" >
+
+            <div class="grid">
+                <div class="collections_hero__heading col-span-12">
+                    {% include "components/c_heading.html" with {label: label, modifiers: ["title"]} %}
+                </div>
+            </div>
+        </div>
+
+        <section class="module module--claim box" >
+
+            <div class="grid">
+                <div class="col-span-12">
+                    <div class="claim claim--collection-big{% if small %} claim--small{% endif %}" data-scroll="claim">
+                        <p>{{sublabel | nl2br}}</p>
+                    </div>
+                </div>
+
+                <div class="col-span-5 col-start-8">
+                    <div class="claim__copy">
+                        {% include "subviews/subview_text.html" with {
+                            size: "larger",
+                            text: text
+                          } %}
+                    </div>
+                </div>
+
+                <div class="claim__sticker">
+                    {% include "components/c_sticker.html" with {'text':'Discover more'}  %}
+                </div>
+            </div>
+        </section>
+
+    </div>
+</section>
