@@ -1,7 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
 import { isActiveSession } from '../Site';
 import { Component } from './Component';
-import { Circle } from './Circle';
+import { Circle } from './Circle/Circle';
 
 export class LoaderEvents {
     public static LOADED: string = 'loaded';

@@ -14,7 +14,7 @@ import { Search } from './Search';
 import { AudioPlayer } from './components/AudioPlayer';
 import { Loader } from './components/Loader';
 import { Lightbox } from './components/Lightbox/Lightbox';
-import { Curtain } from './Curtain';
+import { Curtain } from './components/Curtain/Curtain';
 
 import Widgets from './widgets/All';
 
