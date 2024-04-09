@@ -18,7 +18,14 @@ AuthName "Access denied"
 AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 </If>
-<If "%{HTTP_HOST} == 'staging.elderproject.incite.columbia.edu'">
+<If "%{HTTP_HOST} == 'staging.eldersproject.incite.columbia.edu'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
+
+<If "%{HTTP_HOST} == 'eldersproject.incite.columbia.edu'">
 AuthType Basic
 AuthName "Access denied"
 AuthUserFile /var/www/html/.htpasswd

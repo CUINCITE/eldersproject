@@ -76,11 +76,12 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
     private function processAudioTag($content): string
     {
-        $pattern = '/\[AUDIO=(\d+), ([0-9:]+)-([0-9:]+)\]/';
+        $pattern = '/\[AUDIO=([0-9_]+), ([0-9:]+)-([0-9:]+)\]/';
         if (preg_match_all($pattern, $content, $matches, PREG_SET_ORDER)) {
             $content = preg_replace_callback($pattern, function ($matches) {
-
-                $id = intval($matches[1]);
+                $audio = explode('_',$matches[1]);
+                $id = intval($audio[0]);
+                $session = isset($audio[1]) ? $audio[1] : 1;
                 $startHMS = $matches[2];
 
                 $timeParts = explode(':', $startHMS);
@@ -90,6 +91,13 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
                     if (is_numeric($h) && is_numeric($m) && is_numeric($s)) {
                         $startSeconds = $s + ($m * 60) + ($h * 3600);
+                        if ($session>1)
+                        {
+                            $sessions=$this->parent->getJsonModel('sessions',['parent'=>$id],false,'nr');
+                            foreach ($sessions as $k=>$v)
+                            if (($k+1)<$session)
+                                $startSeconds+=$v['duration'];
+                        }
                         $button = '<button data-audio-player="' . $id . '" data-start="' . $startSeconds . '" class="quote__cassette">[[svg::cassette]]</button>';
                     } else {
                         $button = '';
@@ -120,10 +128,14 @@ class model_app_pages_modules_collection extends model_app_pages_modules
 
             if ($v['quotes'])
             {
-                foreach ($v['quotes'] as $kk => $vv) {
-                    $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true]);
-                    if ($i && $vv[1]) {
-
+                
+                foreach ($v['quotes'] as $kk => $vv)
+                {
+                    $i = _uho_fx::array_filter($interviews, 'incite_id', $vv[2], ['first' => true,'strict'=>true]);
+                
+                    if ($i && $vv[1])
+                    {
+                        
                         $time = explode(':', $vv[1]);
                         $time = _uho_fx::dozeruj($time[0], 2) . ':' . _uho_fx::dozeruj($time[1], 2) . ':' . _uho_fx::dozeruj($time[2], 2);
 

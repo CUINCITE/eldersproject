@@ -26,6 +26,7 @@
     {
       "field":"collection","label":"Collection","list":true,
       "type":"select",
+      "search":true,
       "source":
       {
         "model":"interviewers"

@@ -33,7 +33,9 @@ class model_app_api_import_map
         $locations = [];
         
         foreach ($collections as $k=>$v)
+        if ($v['label']=='Robin Coste Lewis')
         {
+            
             $label=$v['label'];
             if ($label=='Caro De Robertis') $label='Caro De Robertis';
             if ($label=='Eve L. Ewing') $label='Eve Ewing';
@@ -44,7 +46,6 @@ class model_app_api_import_map
             $item=$spreadsheet->getSheetByName($label);
             if ($item)
             {
-//                $locations[] = $this->convertTable($item->toArray());
                 $item=$this->convertTable($item->toArray());
                 $message[]=$label.'='.$this->create ($v['id'],$item);
             }
@@ -146,6 +147,10 @@ class model_app_api_import_map
 
     private function create($model_id, $data)
     {
+        foreach ($data as $k=>$v)
+            if (!$v['quotes']) unset($data[$k]);
+        $data=array_values($data);        
+
         $no = 0;
         foreach ($data as $k=>$location) {
 
@@ -157,10 +162,13 @@ class model_app_api_import_map
 
             $location['collection'] = $model_id;
             $location['quotes'] = json_encode($location['quotes']);
-            if (!empty($location['address'])) $location['active'] = 1;
-            else $location['active'] = 0;
+            //if (!empty($location['address'])) $location['active'] = 1;
+            //else $location['active'] = 0;
+            $location['active'] = 1;
 
-            $put_success = $this->parent->postJsonModel('map_locations',$location);
+            $filters=['collection'=>$model_id,'label'=>$location['label']];
+
+            $put_success = $this->parent->putJsonModel('map_locations',$location,$filters);
             if (!$put_success) {
                 dd($this->parent->orm->getLastError());
             }
