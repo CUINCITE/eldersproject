@@ -500,6 +500,9 @@ export class AudioPlayer extends Videos {
             <audio src="${src.src}" data-duration="${src.duration}" preload="auto"></audio>
         `).join('');
         this.elements.title.innerText = data.title;
+        // add modifier class for long titles
+        this.elements.title.classList.toggle('player__title--long', data.title.length > 30);
+
         [...this.elements.urlLinks].forEach(link => {
             link.href = data.urlInterview;
         });

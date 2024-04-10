@@ -28,7 +28,12 @@
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
-                <h2 class="lightbox__title">{{title}}</h2>
+                <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
+                    {% set titleArray = title|split(',') %}
+                    {% for name in titleArray %}
+                        <span>{{name}}{% if not loop.last %}, {% endif %}</span>
+                    {% endfor %}
+                </h2>
                 <div class="lightbox__filters">
                     <div class="lightbox__description">{{description}}</div>
                     <div class="lightbox__state">[[svg::pin]]{{state}}</div>

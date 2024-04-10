@@ -143,8 +143,13 @@
         grid-area: illu;
         background: var(--main-body-color);
         position: relative;
-        border-left: 1px solid var(--color-box);
-        border-right: 1px solid var(--color-box);
+
+
+        @include breakpoint(desktop) {
+            border-left: 1px solid var(--color-box);
+            border-right: 1px solid var(--color-box);
+        }
+
 
         @include breakpoint(tablet) {
             border-bottom: 1px solid var(--color-box);
@@ -832,6 +837,11 @@
 
         @include breakpoint(desktop) {
             flex-wrap: nowrap;
+
+
+            .lightbox__title--long ~ & {
+                margin-top: rem(2);
+            }
         }
 
         @include breakpoint(tablet) {
@@ -1019,11 +1029,32 @@
         margin-left: rem(-5);
 
 
+        &--long {
+            @include font-size(44, 35);
+
+            letter-spacing: -0.03em;
+            max-width: rem(680);
+            text-wrap: wrap;
+            padding-top: rem(14);
+
+
+            span { white-space: nowrap; }
+        }
+
+
         @include breakpoint(not-desktop) {
             @include font-size(50, 1);
             @include letter-spacing(-1.5, 50);
 
             margin-left: 0;
+
+
+            &--long {
+                @include font-size(34, 28);
+
+                letter-spacing: -0.015em;
+                margin-bottom: rem(6);
+            }
         }
     }
 
