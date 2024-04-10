@@ -131,8 +131,11 @@ export class Page extends Handler {
      * @return {Promise<boolean>} animation promise
      */
     public animateOut(): Promise<void> {
+
         // animation of the page:
         const pageAnimationPromise = new Promise<void>(resolve => {
+
+            const isMenuOpen = document.body.classList.contains('has-menu-open');
             const illustrations = document.querySelectorAll('.js-illustration');
             const filteredBoxes = [...document.querySelectorAll('[data-scroll="box"], .box')].filter(element => {
                 let parent = element.parentElement;
@@ -146,11 +149,10 @@ export class Page extends Handler {
             const children = [...boxes].map(box => [...box.element.children]);
             const elementsToFade = [...illustrations, ...children];
 
-            const placeholders = Utils.createPlaceholders(boxes);
 
             children.length && gsap.fromTo(elementsToFade, { opacity: 1 }, {
                 opacity: 0,
-                duration: 0.3,
+                duration: isMenuOpen ? 0.001 : 0.3,
                 ease: 'power2.out',
                 onStart: () => {
                     document.body.classList.add('is-transition');
@@ -158,13 +160,20 @@ export class Page extends Handler {
                 },
             });
 
+            if (isMenuOpen) {
+                resolve();
+                return;
+            }
+
+
+            const placeholders = Utils.createPlaceholders(boxes);
 
             [...placeholders].reverse().forEach((item, index) => {
                 gsap.to(item, {
-                    y: window.innerHeight * 1.2,
+                    y: window.innerHeight * 1.3,
                     rotate: index % 2 === 0 ? 10 : -10,
-                    duration: 1.1,
-                    delay: 0.3 + (index * 0.1),
+                    duration: 1,
+                    delay: index * 0.02,
                     ease: easing,
                     onComplete: () => {
                         item.remove();

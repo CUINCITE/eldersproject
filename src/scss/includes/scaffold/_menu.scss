@@ -310,12 +310,16 @@ $theme-colors: ("orange", "red", "blue", "pink");
 
     &__close {
         position: absolute;
+        display: flex;
+        justify-content: flex-end;
 
         @include breakpoint(desktop) {
-            right: vw(12);
-            top: vw(13);
-            width: vw(28);
-            height: vw(28);
+            right: 0;
+            top: 0;
+            padding-right: vw(12);
+            padding-top: vw(13);
+            width: var(--GLOBAL-aside-width);
+            height: vw(108);
         }
 
         @include breakpoint(not-desktop) {

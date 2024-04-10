@@ -39,6 +39,12 @@ export class Circle extends Component {
     }
 
 
+    public animateIn(): void {
+        this.updatePosition(0, true);
+        this.init();
+    }
+
+
 
     public updatePosition = (value: number, fast?: boolean): void => {
         gsap.to(this.view, {

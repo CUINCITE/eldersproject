@@ -115,7 +115,7 @@ html {
     body.is-loader-hidden & {
         transition-property: transform, background;
 
-        background: var(--color-bg);
+        // background: var(--color-bg);
 
 
         @include breakpoint(phone) {

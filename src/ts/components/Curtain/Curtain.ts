@@ -24,10 +24,10 @@ export class Curtain {
 
     constructor(protected view: HTMLElement) {
 
-        this.bg = this.view.querySelector('.js-curtain-bg');
-        this.imageWrap = this.view.querySelector('.js-curtain-image');
-        this.circle = this.view.querySelector('.js-curtain-circle');
-        this.lead = this.view.querySelector('.js-curtain-lead');
+        this.bg = view.querySelector('.js-curtain-bg');
+        this.imageWrap = view.querySelector('.js-curtain-image');
+        this.circle = view.querySelector('.js-curtain-circle');
+        this.lead = view.querySelector('.js-curtain-lead');
 
         this.init();
     }
@@ -36,25 +36,33 @@ export class Curtain {
 
     public show = (): void => {
         this.view.style.display = 'block';
-        gsap.set(this.imageWrap, { scale: 1, opacity: 1 });
-        gsap.set(this.circle, { scale: 1, opacity: 1 });
-        gsap.set(this.lead, { opacity: 1, xPercent: -120 });
 
-        gsap.fromTo(this.view, { opacity: 0 }, {
+        gsap.to(this.view, {
             opacity: 1,
             duration: 0.1,
             ease: 'sine',
         });
-        gsap.fromTo(this.circle, { scale: 1 }, {
-            scale: 1.2,
+
+        gsap.to(this.imageWrap, {
+            scale: 1,
+            opacity: 1,
+            ease: easing,
+            delay: 0.2,
+            duration: 0.6,
+        });
+
+        gsap.to(this.circle, {
+            opacity: 1,
+            scale: 1,
             duration: 0.8,
-            delay: 0.9,
+            delay: 0.2,
             ease: easing,
         });
-        breakpoint.desktop && gsap.fromTo(this.lead, { xPercent: -120 }, {
+
+        breakpoint.desktop && gsap.to(this.lead, {
             xPercent: 0,
             duration: 0.8,
-            delay: 0.9,
+            delay: 0.6,
             ease: easing,
         });
     };
@@ -67,40 +75,31 @@ export class Curtain {
             return;
         }
 
-        gsap.set(this.bg, { transformOrigin: 'center bottom' });
+        gsap.set(this.bg, { transformOrigin: 'right bottom' });
 
-        gsap.fromTo(this.lead, { opacity: 1 }, {
+        gsap.to(this.lead, {
             opacity: 0,
             duration: 0.2,
             ease: easing,
-            delay: 0.3,
         });
-        gsap.fromTo(this.imageWrap, { opacity: 1 }, {
+
+        gsap.to(this.imageWrap, {
             opacity: 0,
-            duration: 0.6,
-            delay: 0.05,
-            ease: easing,
-        });
-        gsap.fromTo(this.imageWrap, { scale: 1 }, {
             scale: 0.3,
-            duration: 0.6,
-            delay: 0.05,
+            duration: 0.4,
             ease: easing,
         });
-        gsap.fromTo(this.circle, { scale: 1.2 }, {
+
+        gsap.to(this.circle, {
             scale: 0.3,
-            duration: 0.55,
-            ease: easing,
-        });
-        gsap.fromTo(this.circle, { opacity: 1 }, {
             opacity: 0,
             duration: 0.55,
             ease: easing,
         });
-        gsap.fromTo(this.bg, { scaleY: 1 }, {
-            scaleY: 0,
+
+        gsap.to(this.bg, {
+            scaleX: 0,
             duration: 0.8,
-            delay: 0.15,
             ease: easing,
             clearProps: 'transform',
             onComplete: () => {
