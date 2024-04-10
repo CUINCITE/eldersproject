@@ -132,8 +132,9 @@ export class Loader extends Component {
             this.circleComp.updatePosition(this.counterWidth, fast);
         }
 
-        if (!this.countEl) {
-            this.circleComp.updatePosition((document.querySelector('.js-hero-first-line') as HTMLElement).offsetWidth, fast);
+        const heroFirstLine = document.querySelector('.js-hero-first-line') as HTMLElement;
+        if (!this.countEl && heroFirstLine) {
+            this.circleComp.updatePosition(heroFirstLine.offsetWidth, fast);
         }
 
         this.logoWrap.style.height = `${value}%`;
