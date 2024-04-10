@@ -20,6 +20,7 @@ export class Loader extends Component {
     private isHidden = false;
     private percentage = { value: 1 };
 
+
     constructor(protected view: HTMLElement) {
         super(view);
 
@@ -27,7 +28,7 @@ export class Loader extends Component {
         this.countEl = this.view.querySelector('.js-loader-count');
         this.logoWrap = this.view.querySelector('.js-loader-logo');
         this.lineEl = this.view.querySelector('.js-loader-line');
-        this.counterWidth = this.countEl.clientWidth;
+        this.counterWidth = this.countEl?.clientWidth || 0;
 
         isActiveSession && this.updateHtml(steps[steps.length - 1]);
         this.updatePositions(true);
@@ -80,8 +81,8 @@ export class Loader extends Component {
     private setNewAnimation = (): Promise<void> => new Promise(resolve => {
         gsap.fromTo(this.percentage, { value: 1 }, {
             value: 99,
-            duration: 2,
-            delay: 0.8,
+            duration: 1,
+            // delay: 0.8,
             ease: 'sine',
             onUpdate: () => {
                 this.updateHtml(Math.floor(this.percentage.value));
@@ -95,18 +96,22 @@ export class Loader extends Component {
 
 
     private updateHtml = (value: number, fast?: boolean): void => {
-        const oldValue = this.countEl.querySelector('span');
+
+        this.updatePositions(false, value);
+
+        if (!this.countEl) { return; }
+
+        const oldValue = this.countEl?.querySelector('span');
         const newValue = document.createElement('span');
         newValue.innerHTML = `<span>${value}%</span>`;
 
-        this.countEl.insertAdjacentHTML('beforeend', newValue.outerHTML);
-        this.updatePositions(false, value);
+        this.countEl?.insertAdjacentHTML('beforeend', newValue.outerHTML);
 
         gsap.to(oldValue, {
             opacity: 0,
             duration: fast ? 0 : 0,
             ease: 'sine',
-            onComplete: () => oldValue.remove(),
+            onComplete: () => oldValue?.remove(),
         });
 
         gsap.fromTo(newValue, { opacity: 0 }, {
@@ -119,7 +124,7 @@ export class Loader extends Component {
 
 
     private updatePositions = (fast?: boolean, value?: number): void => {
-        const newCounterWidth = this.countEl.clientWidth;
+        const newCounterWidth = this.countEl?.clientWidth || 0;
 
         // prevent sliding images' wrapper back when new counter is narrower than previous - ONLY when loader is animating
         if (newCounterWidth >= this.counterWidth || this.isHidden) {
