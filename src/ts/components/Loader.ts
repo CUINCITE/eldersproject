@@ -132,6 +132,10 @@ export class Loader extends Component {
             this.circleComp.updatePosition(this.counterWidth, fast);
         }
 
+        if (!this.countEl) {
+            this.circleComp.updatePosition((document.querySelector('.js-hero-first-line') as HTMLElement).offsetWidth, fast);
+        }
+
         this.logoWrap.style.height = `${value}%`;
 
         // line should be up to 100% but loader is counting to 99
