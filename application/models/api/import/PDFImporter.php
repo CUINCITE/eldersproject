@@ -60,8 +60,8 @@ class PDFImporter extends model_app_api_import
 
         }
 
-        $this->parent->sql->queryOut('UPDATE interviews SET status_transcripts=0 WHERE pdf_en_size=0');
-        $this->parent->sql->queryOut('UPDATE interviews SET status_transcripts=1 WHERE pdf_en_size!=0');
+        $this->parent->sql->queryOut('UPDATE interviews SET status_pdf=0 WHERE pdf_en_size=0');
+        $this->parent->sql->queryOut('UPDATE interviews SET status_pdf=1 WHERE pdf_en_size!=0');
 
         return ['result' => true, 'count'=>$count,'errors'=>$errors];
     }
