@@ -40,12 +40,8 @@
             "required": true
         },
         {
-            "field":"label",
-            "edit":false,
-            "hidden":true,
-            "auto": {
-                "pattern": "{{first_name}} {{last_name}}"
-            }
+            "field":"label","label":"Label"
+            
         },
         {
             "hr": true,
