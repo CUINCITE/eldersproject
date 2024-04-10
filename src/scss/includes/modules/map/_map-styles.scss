@@ -457,7 +457,7 @@
 
             @include breakpoint(desktop) {
                 @include font-size(30, 24);
-                @include flex(row, center, center);
+                @include flex(row, center, flex-start);
 
                 padding: rem(15) rem(15) rem(12);
                 align-self: stretch;
