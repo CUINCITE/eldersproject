@@ -55,7 +55,7 @@ class Site {
 
         breakpoint = getBreakpoint();
         browser = getBrowser();
-        easing = CustomEase.create('custom', '0.5, 0, 0.1, 1');
+        easing = CustomEase.create('custom', '0.7, 0, 0.2, 1');
         lang = document.documentElement.getAttribute('lang');
         pixelRatio = Math.min(2, window.devicePixelRatio || 1);
         // set in Loader after first page load in session
@@ -90,7 +90,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
-            !isActiveSession && this.loader.animate(),
+            // !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -158,10 +158,6 @@ class Site {
         const isRendered = this.pushStates.isRendered();
         const pageChangedState = this.currentPage.onState();
         const lightboxChangedState = this.lightbox.onState(isRendered);
-        this.menu?.onState();
-        this.search?.onState();
-        this.loader?.onState();
-        this.curtain.show();
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
@@ -169,6 +165,11 @@ class Site {
                 this.currentPage.animateOut(),
             ]).then(this.render);
         }
+
+        this.menu?.onState();
+        this.search?.onState();
+        this.loader?.onState();
+        this.curtain.show();
     };
 
 
@@ -209,7 +210,7 @@ class Site {
             this.loader.hide();
             !this.isFirstTime && Scroll.scrollToTop(true);
             // delay after animateIn
-            setTimeout(() => this.loader.check(isHome), 50);
+            // setTimeout(() => this.loader.check(isHome), 50);
             this.isFirstTime = false;
         });
         PushStates.setTitle();
@@ -308,6 +309,7 @@ class Site {
 
 
 window.addEventListener('load', () => {
+    console.log('██████████████████████████████');
     const site = new Site();
     site.init();
 });

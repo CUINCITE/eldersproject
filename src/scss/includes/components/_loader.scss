@@ -165,13 +165,14 @@
         transition: height .1s $easing;
         will-change: height;
 
-        // WHEN HIDDEN LOADER
-        height: 0;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: bottom center;
 
-        // height: 100%;
+        animation: loader-line 2s $easing forwards;
 
         // logo height + bottom padding
-        min-height: rem(60 + 12);
+        // min-height: rem(60 + 12);
     }
 
 

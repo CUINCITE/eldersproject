@@ -99,6 +99,13 @@
             @include letter-spacing(-3.66, 122);
 
             margin-block: trim-font(100 / 122);
+
+
+            &.heading--longword {
+                @include font-size(80, 66);
+
+                letter-spacing: -0.03em;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -113,6 +120,13 @@
 
             letter-spacing: -0.035em;
             margin-block: trim-font(0.84);
+
+
+            &.heading--longword {
+                @include font-size(46, 40);
+
+                letter-spacing: -0.03em;
+            }
         }
     }
 
@@ -353,6 +367,19 @@
         .col-start-7 & {
             @include breakpoint(desktop) {
                 padding-left: rem(17);
+            }
+        }
+
+
+        &.heading--longword::after {
+            @include breakpoint(desktop) {
+                bottom: rem(34);
+                right: rem(-8);
+            }
+
+
+            @include breakpoint(phone) {
+                bottom: rem(16);
             }
         }
     }

@@ -421,6 +421,13 @@
 
         @include breakpoint(phone) {
             .player.is-error & { color: red; }
+
+
+            &--long {
+                font-size: 13px;
+                line-height: 15px;
+                padding-top: 1px;
+            }
         }
     }
 
