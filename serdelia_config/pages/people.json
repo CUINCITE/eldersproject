@@ -4,13 +4,13 @@
     "order":"surname,name",
     "fields": [
         {
-            "field": "name",
-            "label": "Name",
+            "field": "surname",
+            "label": "Surname",
             "list":true
         },
         {
-            "field": "surname",
-            "label": "Surname",
+            "field": "name",
+            "label": "Name",
             "list":true
         },
         {
