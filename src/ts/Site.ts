@@ -161,6 +161,7 @@ class Site {
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
+                this.curtain.show(),
                 this.pushStates.load(),
                 this.currentPage.animateOut(),
             ]).then(this.render);
@@ -169,7 +170,6 @@ class Site {
         this.menu?.onState();
         this.search?.onState();
         this.loader?.onState();
-        this.curtain.show();
     };
 
 

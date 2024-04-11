@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { easing } from '../../Site';
 import { Component } from '../Component';
 import { Images } from '../../widgets/Images';
 import { CircleData } from './CircleData';
@@ -22,6 +23,7 @@ export class Circle extends Component {
     private mainWrapper: HTMLElement;
     private isLoaded: boolean = false;
     private isShown: boolean = false;
+
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -162,14 +164,14 @@ export class Circle extends Component {
             const delay = index === 0 ? '0' : '1.7';
             this.circlesTimeline.fromTo(circle, { scale: 0.6 }, {
                 scale: 1,
-                duration: 0.3,
-                ease: 'sine',
+                duration: 0.4,
+                ease: easing,
                 onStart: () => {
                     circle.style.opacity = '1';
                     gsap.fromTo(this.images[index], { opacity: 0 }, {
                         opacity: 1,
-                        duration: 0.25,
-                        ease: 'sine',
+                        duration: 0.35,
+                        ease: easing,
                     });
                     gsap.set([...this.images].filter(img => img !== this.images[index]), { opacity: 0 });
                 },
