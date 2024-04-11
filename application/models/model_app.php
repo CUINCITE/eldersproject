@@ -94,6 +94,7 @@ class model_app extends _uho_model
         } else {
             $this->dict = array();
             $this->dict['collections']=$this->dictLoad('interviewers', ['active'=>1],'label');
+            $this->dict['collections_all']=$this->dictLoad('interviewers',[],'label');
             $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
             $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
             
