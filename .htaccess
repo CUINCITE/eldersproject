@@ -6,11 +6,14 @@ Require valid-user
 AddHandler application/x-httpd-php81 php
 </If>
 <If "%{HTTP_HOST} == 'elder.sunship.one'">
+AddHandler application/x-httpd-php81 php
+<If "%{REMOTE_ADDR} != '195.78.67.38'">
 AuthType Basic
 AuthName "Access denied"
 AuthUserFile /home/huncwot8admin/domains/elder.sunship.one/public_html/.htpasswd
 Require valid-user
-AddHandler application/x-httpd-php81 php
+</If>
+
 </If>
 <If "%{HTTP_HOST} == 'elder-stage.us-east-1.elasticbeanstalk.com'">
 AuthType Basic

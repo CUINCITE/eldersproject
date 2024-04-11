@@ -3,8 +3,8 @@
     position: relative;
 
     @include breakpoint(desktop) {
-        min-height: var(--app-height);
-        grid-template-rows: auto 1fr;
+        // min-height: var(--app-height);
+        grid-template-rows: auto auto;
     }
 
     @include breakpoint(not-desktop) {
