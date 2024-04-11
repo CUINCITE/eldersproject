@@ -65,7 +65,7 @@ function dd($var, $pre=false)
 if (cache)
 {
   require($index["root_path"].'application/_uho/_uho_cache.php');
-  $cache = new _uho_cache($index["cache_salt"]);
+  $cache = new _uho_cache($index["cache_salt"],true);
   $cache->eraseExpired();
 }
 
