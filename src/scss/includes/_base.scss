@@ -19,7 +19,7 @@ html {
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
 
-        &.is-transition { overflow: hidden; }
+        // &.is-transition { overflow: hidden; } // causes page width flickering because of the scrollbar
     }
 
     @include breakpoint(hd) {
