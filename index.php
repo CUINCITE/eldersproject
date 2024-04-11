@@ -17,7 +17,7 @@ date_default_timezone_set('Europe/Berlin');
 
 $index=[
   'time_start'=>microtime_float(),
-  'development'=>true, // strpos($_SERVER['HTTP_HOST'],'.lh') || $_SERVER['HTTP_HOST']=='localhost' ? true : false,
+  'development'=> strpos($_SERVER['HTTP_HOST'],'.lh') || $_SERVER['HTTP_HOST']=='localhost' ? true : false,
   'root_path'=>dirname(__FILE__).'/',
   'cache_salt'=>'fya'
 ];
@@ -43,7 +43,7 @@ if ($index['development'])
   ini_set('error_reporting', E_ALL ^ E_NOTICE);
 } else
 {
-  define("cache",false);  
+  define("cache",true);  
   define("debug",false);
   ini_set('display_errors', 0);
   ini_set('log_errors', 1);
