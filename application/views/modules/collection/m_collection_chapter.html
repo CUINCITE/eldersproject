@@ -6,8 +6,17 @@
             <div class="grid grid--row-start">
 
                 {% if label %}
+                    <!-- Check if the title has a long word and add a modifier -->
+                    {% set labelArray = label|split(' ') %}
+                    {% set isLongWord = false %}
+
+                    {% for word in labelArray %}
+                        {% if word|length > 13 %}
+                            {% set isLongWord = true %}
+                        {% endif %}
+                    {% endfor %}
                     <div class="text_wrapper__title js-wrapped-title text_wrapper__column col-span-6 col-start-{{ reversed ? '7' : '1' }}{{ reversed ? '' : ' no-padding' }}">
-                        {% include "/components/c_heading.html" with {label:label, aside:true, size:"small-plus", modifiers: ["collection"]} %}
+                        {% include "/components/c_heading.html" with {label:label, aside:true, isLongWord: isLongWord, size:"small-plus", modifiers: ["collection"]} %}
                     </div>
                 {% endif %}
 

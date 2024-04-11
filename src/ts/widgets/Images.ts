@@ -13,14 +13,20 @@ export class Images {
      */
     public static preload(imgElements: NodeListOf<HTMLImageElement>): Promise<void> {
 
+        console.time('preload images');
+
         if (!imgElements || !imgElements.length) {
             return Promise.resolve();
         }
 
         return new Promise<void>(resolve => {
             const il = imagesLoaded(imgElements);
+            local && console.log(imgElements);
             // (local || debug) && il.on('progress', () => console.log(il));
-            il.on('always', () => resolve());
+            il.on('always', () => {
+                console.timeEnd('preload images');
+                resolve();
+            });
         });
 
     }

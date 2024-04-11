@@ -116,6 +116,8 @@ export class LightboxTranscript extends Component {
 
 
     private goTo = (dir: number): void => {
+        if (!this.foundElements.length) return;
+
         this.currentMarkIndex += dir;
 
         if (this.currentMarkIndex > this.foundElements.length) this.currentMarkIndex = 1;
@@ -136,6 +138,10 @@ export class LightboxTranscript extends Component {
 
     private onSubmit = (e): void => {
         e.preventDefault();
+
+        // clear existing marks if any
+        this.clearMarkedElements();
+
         this.findWordInTranscript();
     };
 
@@ -155,11 +161,9 @@ export class LightboxTranscript extends Component {
         this.foundElements = this.activeLanguageWrap.querySelectorAll('mark');
 
         // if found any words, declare words' counter and show nav
-        if (this.foundElements.length) {
-            this.transcriptNavigation.classList.add('is-active');
-            this.currentMarkIndex = 1;
-            this.updateTranscriptNav();
-        }
+        this.transcriptNavigation.classList.add('is-active');
+        this.currentMarkIndex = this.foundElements.length ? 1 : 0;
+        this.updateTranscriptNav();
     };
 
 
@@ -197,7 +201,7 @@ export class LightboxTranscript extends Component {
 
 
     private clearMarkedElements = (): void => {
-        if (!this.foundElements.length) return;
+        if (!this.foundElements || !this.foundElements.length) return;
         [...this.foundElements].forEach(elem => {
             elem.replaceWith(Utils.removeTags(elem.innerHTML));
         });

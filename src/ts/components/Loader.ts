@@ -1,7 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
-import { isActiveSession } from '../Site';
+import { easing, isActiveSession } from '../Site';
 import { Component } from './Component';
-import { Circle } from './Circle';
+import { Circle } from './Circle/Circle';
 
 export class LoaderEvents {
     public static LOADED: string = 'loaded';
@@ -16,41 +16,44 @@ export class Loader extends Component {
     private logoWrap: HTMLElement;
     private lineEl: HTMLElement;
     private counterWidth: number;
-    private circleComp: Circle;
+    // private circleComp: Circle;
     private isHidden = false;
+    private percentage = { value: 1 };
+
 
     constructor(protected view: HTMLElement) {
         super(view);
 
-        this.circleComp = new Circle(document.querySelector('.js-loader-circle'));
+        // this.circleComp = new Circle(document.querySelector('.js-loader-circle'));
         this.countEl = this.view.querySelector('.js-loader-count');
         this.logoWrap = this.view.querySelector('.js-loader-logo');
         this.lineEl = this.view.querySelector('.js-loader-line');
-        this.counterWidth = this.countEl.clientWidth;
+        this.counterWidth = this.countEl?.clientWidth || 0;
 
         isActiveSession && this.updateHtml(steps[steps.length - 1]);
-        this.updatePositions(true);
+        // this.updatePositions(true);
     }
 
 
 
-    public onState(): boolean {
-        this.circleComp?.onState();
-        return false;
-    }
+    // public onState(): boolean {
+    //     this.circleComp?.onState();
+    //     return false;
+    // }
 
 
     public resize = (): void => this.updatePositions(true);
 
 
 
-    public animate = (): Promise<void> => this.circleComp.init().then(() => this.setCounterLoop());
+    // public animate = (): Promise<void> => this.circleComp.init().then(() => this.setNewAnimation());
+    public animate = (): Promise<void> => this.setNewAnimation();
 
 
 
-    public check = (isHomePage: boolean): void => {
-        isHomePage ? this.circleComp.show() : this.circleComp.hide();
-    };
+    // public check = (isHomePage: boolean): void => {
+    //     isHomePage ? this.circleComp.show() : this.circleComp.hide();
+    // };
 
 
 
@@ -76,39 +79,37 @@ export class Loader extends Component {
 
 
 
-    private setCounterLoop = (): Promise<void> => new Promise(resolve => {
-        let count = -1;
-        const interval = setInterval(() => {
-            // eslint-disable-next-line no-plusplus
-            count++;
-
-            if (count === steps.length) {
-                clearInterval(interval);
-                // this.trigger(LoaderEvents.LOADED);
-                resolve();
-                return;
-            }
-
-            this.updateHtml(steps[count]);
-
-        }, 900);
+    private setNewAnimation = (): Promise<void> => new Promise(resolve => {
+        gsap.fromTo(this.percentage, { value: 1 }, {
+            value: 99,
+            duration: 1,
+            ease: easing,
+            onUpdate: () => {
+                this.updateHtml(Math.floor(this.percentage.value));
+            },
+            onComplete: () => resolve(),
+        });
     });
 
 
 
     private updateHtml = (value: number, fast?: boolean): void => {
-        const oldValue = this.countEl.querySelector('span');
+
+        this.updatePositions(false, value);
+
+        if (!this.countEl) { return; }
+
+        const oldValue = this.countEl?.querySelector('span');
         const newValue = document.createElement('span');
         newValue.innerHTML = `<span>${value}%</span>`;
 
-        this.countEl.insertAdjacentHTML('beforeend', newValue.outerHTML);
-        this.updatePositions(false, value);
+        this.countEl?.insertAdjacentHTML('beforeend', newValue.outerHTML);
 
         gsap.to(oldValue, {
             opacity: 0,
             duration: fast ? 0 : 0,
             ease: 'sine',
-            onComplete: () => oldValue.remove(),
+            onComplete: () => oldValue?.remove(),
         });
 
         gsap.fromTo(newValue, { opacity: 0 }, {
@@ -121,17 +122,23 @@ export class Loader extends Component {
 
 
     private updatePositions = (fast?: boolean, value?: number): void => {
-        const newCounterWidth = this.countEl.clientWidth;
+        // const newCounterWidth = this.countEl?.clientWidth || 0;
 
         // prevent sliding images' wrapper back when new counter is narrower than previous - ONLY when loader is animating
-        if (newCounterWidth >= this.counterWidth || this.isHidden) {
-            this.counterWidth = newCounterWidth;
-            this.circleComp.updatePosition(this.counterWidth, fast);
-        }
+        // if (newCounterWidth >= this.counterWidth || this.isHidden) {
+        //     this.counterWidth = newCounterWidth;
+        //     this.circleComp.updatePosition(this.counterWidth, fast);
+        // }
 
-        this.logoWrap.style.height = `${value}%`;
+        // const heroFirstLine = document.querySelector('.js-hero-first-line') as HTMLElement;
+        // if (!this.countEl && heroFirstLine) {
+        //     this.circleComp.updatePosition(heroFirstLine.offsetWidth, fast);
+        // }
+
+        // this.logoWrap.style.height = `${value}%`;
 
         // line should be up to 100% but loader is counting to 99
-        this.lineEl.style.height = `${value > 95 ? 100 : value}%`;
+        // this.lineEl.style.height = `${value > 95 ? 100 : value}%`;
+        // gsap.set(this.lineEl, { scaleY: (value > 95 ? 100 : value / 100) });
     };
 }

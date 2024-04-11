@@ -34,6 +34,9 @@
             ]
         },
         {
+            "field":"alt"
+        },
+        {
             "field": "active",
             "type": "boolean",
             "label": "Active",

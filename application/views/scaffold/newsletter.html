@@ -6,7 +6,7 @@
         <h2 class="newsletter__heading">Newsletter:</h2>
 
         <fieldset class="newsletter__fields">
-            <legend>Join our mailing list to find out about Elder Project news, events, and more.</legend>
+            <legend>Join our mailing list to find out about Baldwin-Emerson Elders Project news, events, and more.</legend>
             <div class="newsletter__wrap">
                 <div class="newsletter__error js-error"></div>
                 <div class="newsletter__input">
@@ -47,7 +47,27 @@
     <div class="newsletter__bottom">
         <div class="grid">
             <div class="col-span-12">
-                <p class="newsletter__copy">&copy; Copyright {{ 'now' | date('Y') }}</p>
+                <div class="newsletter__credits">
+                    <p class="newsletter__copy">&copy; Copyright {{ 'now' | date('Y') }}</p>
+                    <a class="newsletter__link" href="https://www.baldwinforthearts.org/" target="_blank">
+                        <span class="newsletter__link-text">
+                            <span>
+                                <span>baldwinforthearts.org</span>
+                                <span>baldwinforthearts.org</span>
+                            </span>
+                        </span>
+                        
+                        <div class="newsletter__logo">
+                            {% include "subviews/subview_picture.html" with {
+                                image: {
+                                    desktop: "/public/theme/images/baldwin_logo.png",
+                                    mobile: "/public/theme/images/baldwin_logo.png"
+                                    }
+                                }
+                            %}
+                        </div>
+                    </a>
+                </div> 
             </div>
         </div>
     </div>

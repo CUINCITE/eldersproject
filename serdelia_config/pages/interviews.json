@@ -355,6 +355,13 @@
     },
     {
       "list": true,
+      "field": "status_pdf",
+      "label": "Status (PDF)",
+      "type": "boolean",
+      "search": true      
+    },
+    {
+      "list": true,
       "field": "status_assets",
       "label": "Status (assets)",
       "type": "boolean",

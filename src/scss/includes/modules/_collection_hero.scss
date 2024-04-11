@@ -34,7 +34,7 @@
 
     &__author {
         @include breakpoint(desktop) {
-            padding-bottom: rem(10);
+            padding-bottom: rem(9);
         }
 
         @include breakpoint(tablet) {
@@ -65,17 +65,15 @@
         @include breakpoint(desktop) {
             position: absolute;
             z-index: 1;
-            width: calc(var(--app-height) * .87);
-            height: calc(var(--app-height) * .87);
-            right: vw(40);
-            bottom: rem(100);
+            width: calc(var(--app-height) * .82);
+            height: calc(var(--app-height) * .82);
+            right: vw(44);
+            bottom: rem(118);
             opacity: 0;
             will-change: transform;
 
-            // translate: 0 -50%;
-
             .illustration {
-                transform: rotate(-10.2deg);
+                transform: rotate(-10.11deg);
             }
         }
 
@@ -243,7 +241,10 @@
         text-transform: uppercase;
 
         @include breakpoint(desktop) {
-            @include font-size (26, 26.78);
+            @include font-size (19, 19.57);
+
+            letter-spacing: -0.02em;
+            padding-top: rem(18);
         }
 
         @include breakpoint(phone) {
@@ -254,8 +255,8 @@
 
     .text--collection_hero-bottom {
         @include breakpoint(desktop) {
-            @include font-size(23, 28.06);
-            @include letter-spacing (-0.1, 23);
+            @include font-size(21, 25.62);
+            @include letter-spacing (-0.1, 21);
 
             padding-right: 0;
         }

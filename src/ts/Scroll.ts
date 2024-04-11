@@ -188,6 +188,7 @@ export default class Scroll {
                 parallax: parseInt(el.dataset.parallax, 10),
                 delay: el.dataset.delay || 0,
             }).forEach((item: IParallaxData) => {
+                gsap.set(item.el, { clearProps: 'all' });
                 gsap.fromTo(item.el, { y: -item.parallax * (window.innerWidth / 1280) }, {
                     y: () => item.parallax * (window.innerWidth / 1280),
                     ease: 'none',

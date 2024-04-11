@@ -23,7 +23,7 @@
                         } %}
                     </div>
                 </div>
-                <div class="interviews__image" data-animation="slideUp" data-delay="0.2" data-action="pause">
+                <div class="interviews__image" data-parallax="-60" data-action="pause">
                     {% include "subviews/subview_picture.html" with {
                         image: {
                                 desktop: "/public/theme/images/flag.png",
@@ -69,7 +69,7 @@
                                     {% if loop.index == 2 %} is-next{% endif %}
                                     {% if loop.index == 3 %} is-after-next{% endif %}
                                 ">
-                                    {% include "./components/c_polaroid.html" with {image: item.media.0.image} %}
+                                    {% include "./components/c_polaroid.html" with {image: item.media[0].image} %}
                                 </li>
                             {% endfor %}
                         </ul>

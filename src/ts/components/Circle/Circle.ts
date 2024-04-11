@@ -1,6 +1,8 @@
 import { gsap } from 'gsap/dist/gsap';
-import { Component } from './Component';
-import { Images } from '../widgets/Images';
+import { easing } from '../../Site';
+import { Component } from '../Component';
+import { Images } from '../../widgets/Images';
+import { CircleData } from './CircleData';
 
 
 export interface ICircleItems {
@@ -22,6 +24,7 @@ export class Circle extends Component {
     private isLoaded: boolean = false;
     private isShown: boolean = false;
 
+
     constructor(protected view: HTMLElement) {
         super(view);
 
@@ -35,6 +38,12 @@ export class Circle extends Component {
     public onState(): boolean {
         this.hide();
         return false;
+    }
+
+
+    public animateIn(): void {
+        this.updatePosition(0, true);
+        this.init();
     }
 
 
@@ -60,9 +69,9 @@ export class Circle extends Component {
 
         gsap.fromTo(this.view, { scale: 0.6 }, {
             scale: 1,
-            duration: 0.3,
-            delay: 0.3,
-            ease: 'sine',
+            duration: 0.7,
+            delay: 0.2,
+            ease: 'back.out(1.2)',
             onStart: () => {
                 this.circlesTimeline?.play();
                 this.view.style.opacity = '1';
@@ -86,7 +95,7 @@ export class Circle extends Component {
 
 
     public init = (): Promise<void> => new Promise(resolve => {
-        const itemsArray = JSON.parse(this.view.dataset.items);
+        const itemsArray = CircleData;
 
         // sort the array randomly
         const shuffledArray = itemsArray.items.sort(() => Math.random() - 0.5);
@@ -147,7 +156,7 @@ export class Circle extends Component {
 
 
     private loop = (): void => {
-        this.circlesTimeline = gsap.timeline({ repeat: -1, repeatDelay: 1.7, onStart: () => this.show() });
+        this.circlesTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2, onStart: () => this.show() });
 
         this.circlesTimeline.set([this.circles], { opacity: 0 });
 
@@ -155,14 +164,16 @@ export class Circle extends Component {
             const delay = index === 0 ? '0' : '1.7';
             this.circlesTimeline.fromTo(circle, { scale: 0.6 }, {
                 scale: 1,
-                duration: 0.3,
-                ease: 'sine',
+                duration: 0.7,
+                ease: 'power3',
+                delay: 0.2,
                 onStart: () => {
                     circle.style.opacity = '1';
-                    gsap.fromTo(this.images[index], { opacity: 0 }, {
+                    gsap.fromTo(this.images[index], { opacity: 0, scale: 0.9 }, {
+                        scale: 1,
                         opacity: 1,
-                        duration: 0.25,
-                        ease: 'sine',
+                        duration: 0.6,
+                        ease: 'back.out(1.4)',
                     });
                     gsap.set([...this.images].filter(img => img !== this.images[index]), { opacity: 0 });
                 },

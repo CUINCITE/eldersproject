@@ -118,8 +118,13 @@
         padding: 0 rem(4);
         color: var(--aside-text-color);
 
+        @include breakpoint(desktop) {
+            padding-bottom: rem(10);
+        }
+
         @include breakpoint(tablet) {
             border-bottom: 1px solid var(--color-box);
+            padding-bottom: rem(11);
         }
 
         @include breakpoint(phone) {
@@ -143,8 +148,13 @@
         grid-area: illu;
         background: var(--main-body-color);
         position: relative;
-        border-left: 1px solid var(--color-box);
-        border-right: 1px solid var(--color-box);
+
+
+        @include breakpoint(desktop) {
+            border-left: 1px solid var(--color-box);
+            border-right: 1px solid var(--color-box);
+        }
+
 
         @include breakpoint(tablet) {
             border-bottom: 1px solid var(--color-box);
@@ -832,6 +842,11 @@
 
         @include breakpoint(desktop) {
             flex-wrap: nowrap;
+
+
+            .lightbox__title--long ~ & {
+                margin-top: rem(2);
+            }
         }
 
         @include breakpoint(tablet) {
@@ -1019,11 +1034,32 @@
         margin-left: rem(-5);
 
 
+        &--long {
+            @include font-size(44, 35);
+
+            letter-spacing: -0.03em;
+            max-width: rem(680);
+            text-wrap: wrap;
+            padding-top: rem(14);
+
+
+            span { white-space: nowrap; }
+        }
+
+
         @include breakpoint(not-desktop) {
             @include font-size(50, 1);
             @include letter-spacing(-1.5, 50);
 
             margin-left: 0;
+
+
+            &--long {
+                @include font-size(34, 28);
+
+                letter-spacing: -0.015em;
+                margin-bottom: rem(6);
+            }
         }
     }
 
@@ -1384,7 +1420,7 @@
 
             a {
                 @include font-family(compressed);
-                @include font-size(30, 1);
+                @include font-size(30, 0.9);
                 @include letter-spacing(-1.05, 30);
                 @include flex(row, flex-start, flex-start);
 
@@ -1413,7 +1449,7 @@
 
 
         &-arrow {
-            padding-top: 1px;
+            // margin-top: 1px;
             margin-right: rem(8);
             transition: translate 0s;
 
@@ -1421,6 +1457,7 @@
 
             & + & {
                 position: absolute;
+
                 translate: 0 -100%;
 
                 @include breakpoint(not-desktop) {

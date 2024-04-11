@@ -334,6 +334,12 @@
         top: rem(-56);
         width: vw(352);
 
+        @include breakpoint(desktop) {
+            &[data-parallax] {
+                top: rem(-36);
+            }
+        }
+
 
         @include breakpoint(tablet) {
             width: vw(186, tablet);

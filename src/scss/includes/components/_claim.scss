@@ -79,37 +79,61 @@
 
     &--collection-big {
         @include breakpoint(desktop) {
-            @include font-size(122, 101.26);
-            @include letter-spacing(-2.44, 122);
+            @include font-size(100, 83);
 
-            margin-top: rem(5);
+            letter-spacing: -0.02em;
             margin-bottom: rem(13);
             max-width: 100%;
+            padding-bottom: rem(57);
 
-            @media (max-height: 719px) {
-                @include font-size(106);
+            // @media (max-height: 719px) {
+            //     @include font-size(106);
 
-                max-width: 80%;
-                line-height: 0.827;
-                letter-spacing: -0.035em;
-            }
-
-
-            @media (max-height: 700px) and (max-aspect-ratio: 1440 / 900) {
-                @include font-size(96, 80);
-
-                max-width: 85%;
-                letter-spacing: -0.025em;
-            }
+            //     max-width: 80%;
+            //     line-height: 0.827;
+            //     letter-spacing: -0.035em;
+            // }
 
 
-            @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
-                @include font-size(104, 88);
-                max-width: 85%;
-            }
+            // @media (max-height: 700px) and (max-aspect-ratio: 1440 / 900) {
+            //     @include font-size(96, 80);
 
-            @include breakpoint(hd) {
-                max-width: 80%;
+            //     max-width: 85%;
+            //     letter-spacing: -0.025em;
+            // }
+
+
+            // @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
+            //     @include font-size(104, 88);
+            //     max-width: 85%;
+            // }
+
+            // @include breakpoint(hd) {
+            //     max-width: 80%;
+            // }
+
+
+            span {
+                white-space: nowrap;
+                position: relative;
+                display: inline-block;
+
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: rem(-10) rem(-6) rem(15) auto;
+
+                    // height: 100%;
+                    width: 1px;
+                    background-color: currentColor;
+
+                    transform: rotate(28deg);
+                    transform-origin: bottom center;
+                }
+
+
+                &:last-of-type::after { content: none; }
             }
         }
 

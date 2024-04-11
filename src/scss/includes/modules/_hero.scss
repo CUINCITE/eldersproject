@@ -79,6 +79,11 @@
                 padding-left: rem(13);
             }
         }
+
+
+        .circle {
+            left: 105%;
+        }
     }
 
 
@@ -168,19 +173,7 @@
     }
 
 
-
-    &__logo {
-        @include breakpoint(phone) {
-            svg {
-                width: vw(80, phone);
-                margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
-                height: auto;
-            }
-        }
-    }
-
-
-
+    
     &__text {
         @include breakpoint(tablet) {
             grid-column: 3 / span 6;

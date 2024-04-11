@@ -16,11 +16,13 @@ import { Map } from './components/Map/Map';
 import { Collections } from './components/Collections';
 import { PolaroidGallery } from './components/PolaroidGallery';
 import { Dropdown } from './components/Dropdown';
+import { Circle } from './components/Circle/Circle';
 
 export const components = {
     Accordeon,
     AccordeonList,
     Button,
+    Circle,
     Collections,
     Dropdown,
     FilterLetters,

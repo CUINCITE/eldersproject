@@ -108,7 +108,7 @@
         @include flex(row, center, center);
 
         position: absolute;
-        transition: transform 0.4s cubic-bezier(.5, 0, .2, 1), opacity .5s cubic-bezier(.5, 0, .2, 1);
+        transition: transform 0.4s $easing, opacity .5s $easing;
         transform: rotate(8deg) translate(#{rem(50)}, #{rem(40)}) scale(.9);
 
         @include breakpoint(desktop) {
@@ -126,7 +126,7 @@
                 position: absolute;
                 inset: 0;
                 background-color: rgba($color-grey800, .1);
-                transition: opacity .25s cubic-bezier(.5, 0, .2, 1);
+                transition: opacity .25s $easing;
             }
         }
 
@@ -145,7 +145,7 @@
                 --polaroid-width: #{rem(270)};
                 --polaroid-height: #{rem(280)};
 
-                transition: transform 0.4s cubic-bezier(.5, 0, .2, 1);
+                transition: transform 0.4s $easing;
             }
 
 

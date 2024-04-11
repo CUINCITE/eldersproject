@@ -10,9 +10,17 @@
       <h1 class="hero__title">
           <span class="box" >
               <span class="box__bg"></span>
-              <span class="hero__line">I see</span>
+              <span class="hero__line"><span style="position: relative" class="js-hero-first-line">I see
+                  <div class="circle" data-component="Circle">
+                      <div class="circle__wrapper js-circle-wrap">
+                          <div class="circle__circles js-circle-circles"></div>
+                          <div class="circle__illus js-circle-illus"></div>
+                      </div>
+                  </div>
+                </span>
+              </span>
           </span>
-          <span class="box" >
+          <span class="box">
               <span class="box__bg"></span>
               <span class="hero__line">My light</span>
           </span>
@@ -39,7 +47,7 @@
       </div>
 
       <div class="hero__sticker desktop-only">
-        {% include 'subviews/subview_sticker.html' with { label:'Today\'s Highlights', modifier: 'long_text', delay: '.5' } %}
+        {% include 'subviews/subview_sticker.html' with { label:'Today\'s Highlights', modifier: 'long_text', temp_delay: '.5',parallax:true } %}
       </div>
       <div class="hero__sticker desktop-hide">
         {% include 'subviews/subview_sticker.html' with { label:'Discover more', modifier: 'long_text', delay: '.5' } %}

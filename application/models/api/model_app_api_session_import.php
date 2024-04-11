@@ -28,14 +28,18 @@ class model_app_api_session_import
 		if (empty($session['doc']['src'])) return['result'=>false,'message'=>'No DOCX found in this session'];
 
 		$docx=explode('?',$session['doc']['src'])[0];
+		$temp=$_SERVER['DOCUMENT_ROOT'].'/serdelia/temp/temp.docx';
+		copy($docx,$temp);
+		$docx=$temp;
+//		$docx=str_replace('https://elder-stage-bucket.s3.amazonaws.com',$_SERVER['DOCUMENT_ROOT'].'/public/upload',$docx);
 
 		require(__DIR__ . '/../../library/vendor/autoload.php');
 
 		try {
 			$objReader = WordIOFactory::createReader('Word2007');
-			$phpWord = $objReader->load($_SERVER['DOCUMENT_ROOT'].'/'.$docx);
+			$phpWord = $objReader->load($docx);//$_SERVER['DOCUMENT_ROOT'].'/'.$docx);
 		} catch (Exception $e) {
-			return['result'=>false,'message'=>'Error loading: ' . $docx];
+			return['result'=>false,'message'=>'objReader Error loading: ' . $docx];
 		}
 
 		$narrators=[];

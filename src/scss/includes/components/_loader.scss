@@ -136,7 +136,8 @@
         padding: 0 rem(6) rem(13); // like .header
         position: relative;
         width: 100%;
-        transition: height .7s $easing;
+
+        transition: height .1s $easing;
         will-change: height;
 
         // WHEN HIDDEN LOADER
@@ -161,16 +162,17 @@
         width: 1px;
         background-color: var(--color-white);
 
-        transition: height .7s $easing;
+        transition: height .1s $easing;
         will-change: height;
 
-        // WHEN HIDDEN LOADER
-        height: 0;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: bottom center;
 
-        // height: 100%;
+        animation: loader-line 2s $easing forwards;
 
         // logo height + bottom padding
-        min-height: rem(60 + 12);
+        // min-height: rem(60 + 12);
     }
 
 
