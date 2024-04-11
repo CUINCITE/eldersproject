@@ -244,3 +244,47 @@
         }
     }
 }
+
+
+.svg-books {
+    width: rem(74);
+    height: rem(71);
+
+
+    margin-top: rem(-15);
+    margin-left: rem(2);
+    margin-right: rem(6);
+}
+
+
+.svg-cassette {
+    .claim & {
+        width: rem(68);
+        height: rem(36);
+        margin-top: rem(18);
+        margin-left: rem(-4);
+        margin-right: rem(-2);
+
+        rect {
+            fill: var(--color-black);
+
+            &:first-of-type { fill: var(--color-pink); }
+        }
+    }
+}
+
+
+.svg-pin-color {
+    .claim & {
+        --pin-color: var(--color-brown);
+        --pin-outer-color: var(--color-red);
+
+        width: rem(62);
+        height: rem(75);
+
+
+        margin-top: rem(-16);
+        margin-left: rem(30);
+        margin-right: rem(6);
+    }
+}
