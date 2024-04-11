@@ -4,11 +4,9 @@
     overflow: hidden;
 
     @include breakpoint(desktop) {
-        gap: vw(3);
-        margin-left: vw(3);
+        gap: 4px;
     }
-
-
+ 
     @include breakpoint(not-desktop) {
         top: 22px;
         right: $mobile;
@@ -45,7 +43,7 @@
         position: relative;
         display: block;
         height: 1px;
-        width: 40px;
+        width: 32px;
         background: #444;
         margin-left: auto;
         margin-right: 0;
@@ -63,7 +61,7 @@
             width: 100%;
         };
 
-        @include breakpoint(phone) {
+        @include                                                                                                                            breakpoint(phone) {
             width: 32px;
         }
     }
@@ -81,7 +79,7 @@ button {
     .hamburger__line {
         transform: translateX(-7px);
 
-        &:nth-of-type(2) {
+        &:nth-of-type(even) {
             transform: translateX(7px);
         }
     }

@@ -27,6 +27,9 @@
         --GLOBAL-aside-width: 40px;
     }
 
+    @include breakpoint(tablet) {
+        --hamburgerbar-height: 82px;
+    }
 
     @include breakpoint(phone) {
         --hamburgerbar-height: 69px;
