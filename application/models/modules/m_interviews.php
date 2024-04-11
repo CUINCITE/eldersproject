@@ -238,14 +238,14 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         );
 
         // Different seed every day
-        $seed = date('z');
-        mt_srand($seed);
+        //$seed = date('z');
+        //mt_srand($seed);
+        
         shuffle($filters);
-
+        
         //Remove already selected filters from the list
         $filters = array_filter($filters, fn($item) => empty($item['selected']));
         $filters = array_values($filters);
-        
         $newItems = [];
         $lastLetter = null;
         $i = 0;
