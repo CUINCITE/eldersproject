@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { shuffle } from '../../Utils';
 import { breakpoint, easing } from '../../Site';
 import { CurtainData } from './CurtainData';
 
@@ -14,58 +15,71 @@ export interface IImages {
 export class Curtain {
 
 
-    private bg: HTMLElement;
+    private bg: HTMLElement[];
     private imageWrap: HTMLElement;
     private circle: HTMLElement;
     private lead: HTMLElement;
     private images = [];
+    private quotes: string[];
 
 
 
-    constructor(protected view: HTMLElement) {
+    constructor(protected view: HTMLElement, options?) {
 
-        this.bg = view.querySelector('.js-curtain-bg');
+        this.bg = [...view.querySelectorAll('.js-curtain-bg')] as HTMLElement[];
         this.imageWrap = view.querySelector('.js-curtain-image');
         this.circle = view.querySelector('.js-curtain-circle');
         this.lead = view.querySelector('.js-curtain-lead');
+
+        this.quotes = shuffle((options || JSON.parse(view.dataset.options)).quotes || []);
+        console.log(this.quotes);
 
         this.init();
     }
 
 
 
-    public show = (): void => {
-        this.view.style.display = 'block';
+    public show(): Promise<void> {
+        return new Promise(resolve => {
 
-        gsap.to(this.view, {
-            opacity: 1,
-            duration: 0.1,
-            ease: 'sine',
-        });
+            this.view.style.display = 'block';
 
-        gsap.to(this.imageWrap, {
-            scale: 1,
-            opacity: 1,
-            ease: easing,
-            delay: 0.2,
-            duration: 0.6,
-        });
+            gsap.killTweensOf(this.view);
+            gsap.to(this.view, {
+                opacity: 1,
+                duration: 0.1,
+                ease: 'sine',
+            });
 
-        gsap.to(this.circle, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.2,
-            ease: easing,
-        });
+            gsap.killTweensOf(this.imageWrap);
+            gsap.to(this.imageWrap, {
+                scale: 1,
+                opacity: 1,
+                ease: easing,
+                delay: 0.2,
+                duration: 0.6,
+            });
 
-        breakpoint.desktop && gsap.to(this.lead, {
-            xPercent: 0,
-            duration: 0.8,
-            delay: 0.6,
-            ease: easing,
+            gsap.killTweensOf(this.circle);
+            gsap.to(this.circle, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.8,
+                delay: 0.2,
+                ease: easing,
+                onComplete: () => resolve(),
+            });
+
+            gsap.killTweensOf(this.lead);
+            breakpoint.desktop && gsap.fromTo(this.lead, { x: -3 }, {
+                x: 0,
+                opacity: 1,
+                duration: 0.6,
+                delay: 0.4,
+                ease: easing,
+            });
         });
-    };
+    }
 
 
 
@@ -75,14 +89,16 @@ export class Curtain {
             return;
         }
 
-        gsap.set(this.bg, { transformOrigin: 'right bottom' });
-
+        gsap.killTweensOf(this.lead);
         gsap.to(this.lead, {
             opacity: 0,
+            x: 15,
             duration: 0.2,
             ease: easing,
+            onComplete: () => this.updateText(),
         });
 
+        gsap.killTweensOf(this.imageWrap);
         gsap.to(this.imageWrap, {
             opacity: 0,
             scale: 0.3,
@@ -90,6 +106,7 @@ export class Curtain {
             ease: easing,
         });
 
+        gsap.killTweensOf(this.circle);
         gsap.to(this.circle, {
             scale: 0.3,
             opacity: 0,
@@ -97,13 +114,16 @@ export class Curtain {
             ease: easing,
         });
 
+        gsap.killTweensOf(this.bg);
+        gsap.set(this.bg, { transformOrigin: 'right bottom' });
         gsap.to(this.bg, {
             scaleX: 0,
             duration: 0.8,
             ease: easing,
-            clearProps: 'transform',
+            stagger: -0.04,
             onComplete: () => {
                 // this.view.style.display = 'none';
+                gsap.set(this.bg, { clearProps: 'transform' });
                 this.view.classList.remove('is-active');
                 this.getNewImage();
             },
@@ -140,6 +160,14 @@ export class Curtain {
             return data;
         } catch (error) {
             throw new Error(error);
+        }
+    }
+
+
+    private updateText(): void {
+        if (this.quotes.length > 0) {
+            this.lead.innerHTML = `${this.quotes[0]}`;
+            this.quotes.push(this.quotes.shift());
         }
     }
 }
