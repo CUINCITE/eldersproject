@@ -113,6 +113,7 @@ export class Page extends Handler {
                 gsap.to(this.view, {
                     duration: 0.01,
                     opacity: 1,
+                    delay: delay || 0,
                     onComplete: () => {
                         document.documentElement.classList.remove('is-transition');
                         document.body.classList.remove('is-transition');

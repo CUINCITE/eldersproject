@@ -90,6 +90,7 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
+            this.lightbox?.preload(),
             // !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
@@ -201,11 +202,13 @@ class Site {
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
         if (!this.isFirstTime) this.curtain.makeOverlay();
-        const isHome: boolean = !!document.body.querySelector('[data-home]');
+        // const isHome: boolean = !!document.body.querySelector('[data-home]');
+        const isLightbox = document.body.classList.contains('is-loading-lightbox') || document.body.classList.contains('has-lightbox');
+        console.log({ isLightbox, bodyClass: [...document.body.classList].join('') });
         this.scroll.load();
         Scroll.start();
 
-        this.currentPage.animateIn(this.isFirstTime, 0).then(() => {
+        this.currentPage.animateIn(this.isFirstTime && !isLightbox, isLightbox ? 1 : 0).then(() => {
             this.curtain.hide(this.isFirstTime);
             this.loader.hide();
             !this.isFirstTime && Scroll.scrollToTop(true);
