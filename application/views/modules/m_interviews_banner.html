@@ -69,7 +69,7 @@
                                     {% if loop.index == 2 %} is-next{% endif %}
                                     {% if loop.index == 3 %} is-after-next{% endif %}
                                 ">
-                                    {% include "./components/c_polaroid.html" with {image: item.media.0.image} %}
+                                    {% include "./components/c_polaroid.html" with {image: item.media[0].image} %}
                                 </li>
                             {% endfor %}
                         </ul>

@@ -77,7 +77,36 @@
     }
 
 
-    &--collection-big {
+    &--authors-big {
+        span {
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 1px;
+                background-color: currentColor;
+                transform: rotate(28deg);
+                transform-origin: bottom center;
+
+                @include breakpoint(desktop) {
+                    inset: rem(-10) rem(-6) rem(15) auto;
+                }
+
+                @include breakpoint(tablet) {
+                    inset: rem(-8) rem(-6) rem(10) auto;
+                }
+
+                @include breakpoint(phone) {
+                    inset: rem(-2) rem(-4) rem(7) auto;
+                }
+            }
+
+
+            &:last-of-type::after { content: none; }
+        }
+        
         @include breakpoint(desktop) {
             @include font-size(100, 83);
 
@@ -112,28 +141,8 @@
             //     max-width: 80%;
             // }
 
-
             span {
                 white-space: nowrap;
-                position: relative;
-                display: inline-block;
-
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset: rem(-10) rem(-6) rem(15) auto;
-
-                    // height: 100%;
-                    width: 1px;
-                    background-color: currentColor;
-
-                    transform: rotate(28deg);
-                    transform-origin: bottom center;
-                }
-
-
-                &:last-of-type::after { content: none; }
             }
         }
 
@@ -141,15 +150,21 @@
             @include font-size(80, 0.82);
 
             margin-bottom: rem(20);
+
+            // max-width: 90%;
+        }
+
+        @include breakpoint(tablet-landscape) {
+            @include font-size(96, 0.82);
         }
 
         @include breakpoint(phone) {
             @include font-size(49, 42);
 
-            max-width: 90%;
             margin-bottom: rem(20);
         }
     }
+
 
 
     &__copy {
@@ -234,5 +249,11 @@
         overflow: hidden;
         margin-top: rem(-5);
         padding-top: rem(5);
+    }
+}
+
+.claim__authors_wrapper {
+    @include breakpoint(tablet) {
+        grid-column: span 8 !important;
     }
 }

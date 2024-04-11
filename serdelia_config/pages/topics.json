@@ -15,6 +15,13 @@
   },
   "buttons_edit": [
     {
+      "label":"Helper",
+      "type":"plugin",
+      "plugin":"topic_update",
+      "on_update":true,
+      "hidden":true
+  },
+    {
       "type": "plugin",
       "plugin": "preview",
       "params": {

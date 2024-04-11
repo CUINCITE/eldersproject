@@ -13,12 +13,19 @@ class model_app_pages_modules_interviews_banner extends model_app_pages_modules
     {
         $m['items'] = $this->parent->getJsonModel('interviews', ['active' => 1, 'featured' => 1], null, null, 5);
 
-        foreach ($m['items'] as $k=>$v) {
-            if (!empty($k['media'][0]['image']['desktop']['src'])) {
+        foreach ($m['items'] as $k=>$v)
+        {
+            
+            if (empty($v['media'][0]['image']['desktop']['src']))
+            {
                 unset($m['items'][$k]);
+            } else
+            {
+                //$image=$v['media'][0]['image'];
+                //print_r($image);exit();
             }
         }
-
+        
         return $m;
     }
 

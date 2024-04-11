@@ -1,6 +1,7 @@
 .footer {
     @include z-index(footer);
-
+    @include font-settings(400, 100);
+    
     grid-area: footer;
     text-transform: uppercase;
     position: relative;
@@ -39,12 +40,15 @@
 
             height: var(--GLOBAL-player-height);
             gap: vw(24);
-            padding: 0 0 19px;
+            padding: 0 0 15px;
         }
 
         @include breakpoint(tablet) {
             @include flex(row, space-between, center);
+
             padding-block: rem(22);
+            gap: rem(36) rem(18);
+            flex-wrap: wrap;
         }
 
         @include breakpoint(phone) {
@@ -55,7 +59,15 @@
         }
 
 
-        a { @include hoverable-link; }
+        a { 
+            @include hoverable-link; 
+
+            @include breakpoint(not-phone) {
+                &:last-child {
+                    margin-left: auto;
+                }
+            }
+        }
     }
 
     .box__bg {

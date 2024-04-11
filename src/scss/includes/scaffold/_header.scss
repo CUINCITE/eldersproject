@@ -72,7 +72,7 @@
         display: block;
 
         @include breakpoint(desktop) {
-            margin-top: vw(13);
+            margin-top: vw(12);
         }
 
         svg { width: 100%; height: auto; }
@@ -84,7 +84,7 @@
 
 
         @include breakpoint(desktop) {
-            padding: rem(13) rem(6);
+            padding: rem(12) rem(6) rem(13) rem(9);
         }
 
 
