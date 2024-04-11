@@ -16,9 +16,10 @@
   "buttons_edit": [
     {
       "label":"Helper",
+      "type":"plugin",
       "plugin":"topic_update",
       "on_update":true,
-      "temp-hidden":true
+      "hidden":true
   },
     {
       "type": "plugin",
