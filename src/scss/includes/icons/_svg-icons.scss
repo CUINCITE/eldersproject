@@ -216,6 +216,38 @@
 
     circle:first-of-type { fill: var(--pin-outer-color); }
     path { fill: var(--pin-color); }
+
+    .claim & {
+        --pin-color: var(--color-brown);
+        --pin-outer-color: var(--color-red);
+
+        @include breakpoint(desktop) {
+            width: rem(62);
+            height: rem(75);
+    
+
+            margin-top: rem(-16);
+            margin-left: rem(30);
+            margin-right: rem(6);
+        }
+
+        @include breakpoint(tablet) {
+            width: rem(46);
+            height: rem(62);
+
+
+            margin-top: rem(-12);
+            margin-right: rem(6);
+        }
+
+        @include breakpoint(phone) {
+            width: rem(30);
+            height: rem(38);
+
+            margin-top: rem(-8);
+            margin-right: rem(2);
+        }
+    }
 }
 
 
@@ -251,44 +283,68 @@
 
 
 .svg-books {
-    width: rem(74);
-    height: rem(71);
+    @include breakpoint(desktop) {
+        width: rem(74);
+        height: rem(71);
 
 
-    margin-top: rem(-15);
-    margin-left: rem(2);
-    margin-right: rem(6);
+        margin-top: rem(-15);
+        margin-left: rem(2);
+        margin-right: rem(6);
+    }
+
+    @include breakpoint(tablet) {
+        width: rem(60);
+        height: rem(60);
+
+
+        margin-top: rem(-15);
+        margin-left: rem(2);
+        margin-right: rem(6);
+    }
+
+    @include breakpoint(phone) {
+        width: rem(36);
+        height: rem(36);
+
+
+        margin-top: rem(-8);
+    }
 }
 
 
 .svg-cassette {
     .claim & {
-        width: rem(68);
-        height: rem(36);
-        margin-top: rem(18);
-        margin-left: rem(-4);
-        margin-right: rem(-2);
-
         rect {
             fill: var(--color-black);
 
             &:first-of-type { fill: var(--color-pale-pink); }
         }
-    }
-}
+
+        @include breakpoint(desktop) {
+            width: rem(68);
+            height: rem(36);
 
 
-.svg-pin-color {
-    .claim & {
-        --pin-color: var(--color-brown);
-        --pin-outer-color: var(--color-red);
+            margin-top: rem(18);
+            margin-left: rem(-4);
+            margin-right: rem(-2);
+        }
 
-        width: rem(62);
-        height: rem(75);
+        @include breakpoint(tablet) {
+            width: rem(56);
+            height: rem(30);
 
 
-        margin-top: rem(-16);
-        margin-left: rem(30);
-        margin-right: rem(6);
+            margin-top: rem(10);
+        }
+
+        @include breakpoint(phone) {
+            width: rem(45);
+            height: rem(30);
+
+
+            margin-top: rem(2);
+        }
     }
 }
