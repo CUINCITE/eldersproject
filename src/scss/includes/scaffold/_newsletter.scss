@@ -309,30 +309,106 @@
 
 
 
-    &__copy {
+    &__credits {
         @include font-family(normal, 500);
         @include font-settings(500, 100);
 
         text-transform: uppercase;
 
+        @include breakpoint(desktop) {
+            @include flex(row, flex-start, flex-end);
 
+            padding-bottom: vw(21);
+        }
+
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, flex-start, flex-start);
+        }
+
+        @include breakpoint(tablet) {
+            padding: vw(260, tablet) 0 vw(40, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(244, phone) 0 vw(11, phone);
+        }
+    }
+
+
+    &__copy {
         @include breakpoint(desktop) {
             @include font-size(8, 1);
 
             margin-block: trim-font(1);
-            padding: vw(100) 0 vw(21);
+            margin-right: auto;
         }
 
         @include breakpoint(tablet) {
             @include font-size(11, 1);
-
-            padding: vw(160, tablet) 0 vw(40, tablet);
         }
 
         @include breakpoint(phone) {
             @include font-size(10, 13.5);
+        }
+    }
 
-            padding: vw(282, phone) 0 vw(11, phone);
+    &__link {
+        @include flex(row, flex-start, flex-end);
+
+        cursor: default;
+
+        @include breakpoint(desktop) {
+            @include font-size(10, 1.35);
+
+            margin-bottom: vw(-5); 
+        }
+
+        @include breakpoint(not-desktop) {
+            @include flex(column-reverse, flex-start, flex-end);
+
+            position: absolute;
+        
+            @include breakpoint(tablet) {
+                @include font-size(14, 1);
+
+                bottom: vw(40, tablet);
+                right: var(--grid-margin);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(12, 1);
+    
+                bottom: vw(12, phone);
+                right: var(--grid-margin);
+            }
+        }
+
+
+
+        &-text {
+            @include hoverable-link;
+
+            cursor: pointer;
+        }
+    }
+
+    &__logo {
+        aspect-ratio: 1/1;
+        cursor: pointer;
+
+        @include breakpoint(desktop) {
+            width: vw(98);
+            margin: 0 vw(-7) vw(-3) vw(17);
+        }
+
+        @include breakpoint(tablet) {
+            width: vw(128, tablet);
+            margin: 0 vw(-9, tablet) vw(10, tablet) 0;
+        }
+
+        @include breakpoint(phone) {
+            width: vw(98, phone);
+            margin: 0 vw(-7, phone) vw(8, phone) 0;
         }
     }
 
