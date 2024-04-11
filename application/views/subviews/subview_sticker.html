@@ -1,4 +1,4 @@
-<div class="sticker{% if color %} sticker--{{color}}{% endif %}{% if modifier %} sticker--{{modifier}}{% endif %} js-illustration" data-scroll="sticker" {% if delay %}data-delay="{{delay}}"{% endif %}>
+<div class="sticker{% if color %} sticker--{{color}}{% endif %}{% if modifier %} sticker--{{modifier}}{% endif %} js-illustration" data-scroll="sticker" {% if delay %}data-delay="{{delay}}"{% endif %} {% if parallax %}data-parallax="-30" data-action="pause"{% endif %}>
   <div class="sticker__layer">
     <div class="sticker__front sticker__wrap">
       <div class="sticker__circle"></div>
