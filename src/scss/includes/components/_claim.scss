@@ -159,9 +159,26 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(49, 42);
 
-            margin-bottom: rem(20);
+
+            @include font-size(56, 46);
+
+            margin-bottom: rem(43);
+            padding-left: rem(45);
+            padding-top: rem(4);
+
+            svg {
+                position: absolute;
+                top: 50%;
+                left: unset;
+                right: calc(100% + #{rem(6)});
+                translate: 0 -50%;
+            }
+
+            .svg-cassette {
+                right: unset;
+                left: 3.06em;
+            }
         }
 
         .svg-cassette { @extend %svg-cassette-spinning !optional; }
