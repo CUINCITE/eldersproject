@@ -27,8 +27,8 @@ class model_app_api_newsletter
             $data
         );
 
-        if ($result['result'] && $result['status'] == 'subscribed') $result['message']='<p>Thank you.</p><p>You\'re already subscribed to our newsletter!</p>';
-        elseif ($result['result']&& $result['status'] == 'pending') $result['message']='<p>Thank you.</p><p>Thank you for joining our mailing list.</p>';
+        if ($result['result'] && $result['status'] == 'subscribed') $result['message']='<p>Thank you.</p><p>Looks, like you are already subscribed to our newsletter.</p>';
+        elseif ($result['result']&& $result['status'] == 'pending') $result['message']='<p>Thank you.</p><p>Please, check your e-mail to confirm your subscription.</p>';
         else $result['message'] = '<p>Something went wrong.</p><p>We were unable to process your sign-up request. Please refresh this page and try again.</p>';
 
         return $result;
