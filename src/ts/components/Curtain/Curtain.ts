@@ -58,6 +58,7 @@ export class Curtain {
                 ease: easing,
                 delay: 0.2,
                 duration: 0.6,
+                onComplete: () => resolve(),
             });
 
             gsap.killTweensOf(this.circle);
@@ -67,7 +68,6 @@ export class Curtain {
                 duration: 0.8,
                 delay: 0.2,
                 ease: easing,
-                onComplete: () => resolve(),
             });
 
             gsap.killTweensOf(this.lead);
@@ -165,7 +165,7 @@ export class Curtain {
 
 
     private updateText(): void {
-        if (this.quotes.length > 0) {
+        if (this.quotes.length > 0 && this.lead) {
             this.lead.innerHTML = `${this.quotes[0]}`;
             this.quotes.push(this.quotes.shift());
         }
