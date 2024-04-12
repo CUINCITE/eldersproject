@@ -134,7 +134,7 @@
             }
 
 
-            @media (max-height: 719px) {
+            @media (max-height: 719px) and (min-aspect-ratio: 1440 / 700) {
                 padding-top: rem(12);
                 padding-bottom: rem(38);
 
@@ -214,7 +214,15 @@
 
     &__author {
         @include breakpoint(desktop) {
-            padding-top: vw(15);
+            padding-top: rem(15);
+
+            @media (max-height: 719px) and (min-aspect-ratio: 1440 / 700) {
+                padding-top: rem(12);
+            }
+
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
+                padding-top: rem(12);
+            }
         }
 
         @include breakpoint(tablet) {
