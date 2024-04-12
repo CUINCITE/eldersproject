@@ -1,4 +1,4 @@
-<section class="module module--map box" >
+<section class="module module--map box"{% if bottomPadding %}style="padding-bottom:100px"{% endif %}>
 
     <div class="map
         {% if params.global %} map--global{% endif %}
@@ -32,9 +32,9 @@
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
-                            {% if item.image.desktop %}
+                            {% if item.alt %}
                             <div class="map__image {% if item.image.original.height >= item.image.original.width %} map__image--square {% endif %}">
-                                {% include "./subviews/subview_picture.html" with { image: item.image } %}
+                                {% include "./subviews/subview_picture.html" with { image: item.image,alt:item.alt } %}
                             </div>
                             {% endif %}
                             {% if item.description %}
