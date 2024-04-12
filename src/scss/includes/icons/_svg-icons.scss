@@ -296,6 +296,8 @@
 
 
 .svg-books {
+    overflow: visible;
+
     @include breakpoint(desktop) {
         width: rem(74);
         height: rem(71);
@@ -319,10 +321,24 @@
     @include breakpoint(phone) {
         width: rem(41);
         height: rem(41);
-
-
         margin-top: rem(-4);
     }
+
+    path {
+        transition: transform 0.5s $easing;
+
+        &:nth-last-child(3) { transition-delay: 0.02s; }
+        &:nth-last-child(4) { transition-delay: 0.04s; }
+        &:nth-last-child(5) { transition-delay: 0.06s; }
+    }
+}
+
+%svg-books-out path {
+    transition: none;
+    &:nth-last-child(2) { transform: translate(0, -10%); }
+    &:nth-last-child(3) { transform: translate(0, -25%); }
+    &:nth-last-child(4) { transform: translate(0, -40%); }
+    &:nth-last-child(5) { transform: translate(0, -60%); }
 }
 
 
