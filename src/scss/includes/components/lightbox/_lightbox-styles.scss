@@ -558,6 +558,17 @@
             padding-bottom: 8px;
             margin-bottom: -8px;
 
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 44px;
+                left: 0;
+                top: 0;
+                background-color: var(--main-body-color);
+            }
+
 
             &::-webkit-scrollbar {
                 display: none;
@@ -1447,7 +1458,7 @@
                 @include font-size(18, 27);
                 @include letter-spacing(0.04, 18);
 
-                font-feature-settings: "ss02" on;
+                // font-feature-settings: "ss02" on;
                 margin-top: rem(8);
 
 
