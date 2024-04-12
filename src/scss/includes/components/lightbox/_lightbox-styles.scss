@@ -566,7 +566,6 @@
 
 
             li {
-                // width: 33vw;
                 flex-shrink: 0;
                 text-align: center;
             }
@@ -579,8 +578,13 @@
             width: 100%;
             position: relative;
 
-            // padding-top: rem(7);
+            @include breakpoint(desktop) {
+                padding-top: rem(7);
+            }
 
+            @include breakpoint(tablet) {
+                padding-top: rem(9);
+            }
 
             @include breakpoint(phone) {
                 @include flex;

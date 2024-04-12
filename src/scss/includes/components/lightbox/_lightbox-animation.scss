@@ -244,9 +244,18 @@
 
 
         @for $i from 1 through 6 {
-            li:nth-of-type(#{$i}) span {
-                transition-duration: .75s;
-                transition-delay: calc(1.1s + 0.05 * #{$i}s);
+            @include breakpoint(not-phone) {
+                li:nth-of-type(#{$i}) span {
+                    transition-duration: .75s;
+                    transition-delay: calc(1.1s + 0.05 * #{$i}s);
+                }
+            }
+
+            @include breakpoint(phone) {
+                li:nth-of-type(#{$i}) button {
+                    transition-duration: .75s;
+                    transition-delay: calc(1.1s + 0.05 * #{$i}s);
+                }
             }
         }
 
@@ -254,22 +263,30 @@
         button {
             span {
                 display: inline-block;
-                transition: transform var(--animation-time) var(--easing);
-                transform: translateX(10%);
+            }
 
-
-                @include breakpoint(phone) {
-                    transform: translateY(120%);
+            @include breakpoint(not-phone) {
+                span {
+                    transition: transform var(--animation-time) var(--easing);
+                    transform: translateX(100%);
+    
+                    .is-showing & {
+                        transform: translateX(0);
+                    }
                 }
+            }
 
+            @include breakpoint(phone) {
+                transform: translateY(120%);
+                transition: transform .75s var(--easing);
+                transition-delay: 1.10s;
 
                 .is-showing & {
-                    transform: translateX(0);
+                    transform: translateY(0);
+                }
 
-
-                    @include breakpoint(phone) {
-                        transform: translateY(0);
-                    }
+                span {
+                    position: relative;
                 }
             }
         }
