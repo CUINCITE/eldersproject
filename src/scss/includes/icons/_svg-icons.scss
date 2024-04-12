@@ -224,7 +224,7 @@
         @include breakpoint(desktop) {
             width: rem(62);
             height: rem(75);
-    
+
 
             margin-top: rem(-16);
             margin-left: rem(30);
@@ -324,8 +324,6 @@
         @include breakpoint(desktop) {
             width: rem(68);
             height: rem(36);
-
-
             margin-top: rem(18);
             margin-left: rem(-4);
             margin-right: rem(-2);
@@ -334,17 +332,20 @@
         @include breakpoint(tablet) {
             width: rem(56);
             height: rem(30);
-
-
             margin-top: rem(10);
         }
 
         @include breakpoint(phone) {
             width: rem(45);
             height: rem(30);
-
-
             margin-top: rem(2);
         }
     }
+
+    g:first-of-type path { transform-origin: 29px 29px; }
+    g:last-of-type path { transform-origin: 81px 29px; }
+}
+
+%svg-cassette-spinning {
+    path { animation: spin 4s linear infinite; }
 }
