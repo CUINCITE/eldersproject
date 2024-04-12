@@ -110,11 +110,6 @@
 
 
 
-        .svg-cassette {
-            right: unset;
-        }
-
-
         @include breakpoint(desktop) {
             @include font-size(100, 83);
 
@@ -220,7 +215,11 @@
             }
         }
 
-        .svg-cassette { @extend %svg-cassette-spinning !optional; }
+        .svg-cassette {
+            @extend %svg-cassette-spinning !optional; 
+            
+            right: unset;
+        }
 
 
         &[data-observe].is-below .svg-pin-color { @extend %svg-pin-color-out !optional; }
