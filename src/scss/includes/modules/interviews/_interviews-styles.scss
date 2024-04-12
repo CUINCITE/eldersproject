@@ -74,6 +74,11 @@
 
         @include breakpoint(desktop) {
             translate: -44% -78%;
+
+            &[data-observe] {
+                transition: transform 0.7s $ease-out-back;
+                &.is-below { transform: scale(0.8); }
+            }
         }
 
         @include breakpoint(not-desktop) {

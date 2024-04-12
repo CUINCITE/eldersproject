@@ -8,7 +8,7 @@
                 <div class="col-span-12">
 
                     <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
-                        <div class="interviews__sticker">
+                        <div class="interviews__sticker" data-observe>
                             {% if not stickerLabel %} {% set stickerLabel = 'Featured' %}{% endif %}
                             {% include 'subviews/subview_sticker.html' with {label:stickerLabel, modifier: "long_text"} %}
                         </div>
