@@ -12,7 +12,7 @@
 
                             <div class="collection__image desktop-hide">
                                 <div class="collection__illustration">
-                                    <a class="collection__image-link" href="{{item.url}}"
+                                    <a class="collection__image-link" {% if item.active %}href="{{item.url}}"{% else %} style="cursor:default"{% endif %}
                                         aria-label="Navigate to {{item.first_name}} {{item.last_name}} collection">
                                         {% include "./subviews/subview_illustration.html" with { shadow: item.color,
                                         image: item.image } %}
@@ -20,7 +20,7 @@
                                 </div>
                             </div>
 
-                            <h2 class="collection__name"><a href="{{item.url}}">{{item.first_name}}&nbsp;<br
+                            <h2 class="collection__name"><a {% if item.active %}href="{{item.url}}"{% else %} style="cursor:default"{% endif %}>{{item.first_name}}&nbsp;<br
                                         class="desktop-hide" />{{item.last_name}}</a></h2>
 
                         </div>

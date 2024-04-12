@@ -20,6 +20,11 @@
             "hidden":true,
             "plugin":"interviews_update"
         },
+        {
+            "label":"Check all",
+            "icon":"index",
+            "plugin":"sessions_check"
+        },
         {"plugin":"refresh"}
     ],
     "buttons_edit": [        
