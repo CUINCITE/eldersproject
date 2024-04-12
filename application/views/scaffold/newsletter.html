@@ -22,10 +22,10 @@
                         </button>
                     </div>
                 </div>
-
+                {% set parallax=1 %}
                 <div class="newsletter__message">
                     <div class="newsletter__sticker" data-observe>
-                        <div class="sticker sticker--blue" data-scroll="sticker">
+                        <div class="sticker sticker--blue" data-scroll="sticker" {% if parallax %}data-parallax="-50" data-action="pause"{% endif %}>
                             <div class="sticker__layer">
                                 <div class="sticker__front sticker__wrap">
                                     <div class="sticker__circle"></div>
