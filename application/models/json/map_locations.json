@@ -105,6 +105,9 @@
         "field":"quotes","type":"json"
       },
       {
+        "field":"alt"
+      },
+      {
         "field": "image_sizes",
         "type": "json"
       }

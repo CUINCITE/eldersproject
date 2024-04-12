@@ -24,6 +24,7 @@
   ],
   "fields": [
     {
+      "tab":"Info",
       "field":"collection","label":"Collection","list":true,
       "type":"select",
       "search":true,
@@ -81,15 +82,34 @@
     {
       "label": "uid",
       "field": "uid",
+      "list":"read",
       "hidden": true,
       "type": "uid"
+    },    
+    {
+      "field":"quotes","type":"json","label":"Quotes"
     },
     {
+      "hr": true,
+      "field": "collection_hide",
+      "type": "boolean",
+      "label": "Hide on collection Page"
+    },
+    {
+      "field": "active",
+      "type": "boolean",
+      "label": "Active",
+      "search":true,
+      "list": "edit"
+    },
+    {
+      "tab":"Image",
       "label": "Image",
       "type": "image",
       "field":"image",
       "folder": "/public/upload/locations",
       "temp-list":{"xposition_after":"","width":50,"height":50},
+      "list":true,
       "images":
       [
         {
@@ -111,20 +131,8 @@
       }
     },
     {
-      "field":"quotes","type":"json","label":"Quotes"
-    },
-    {
-      "hr": true,
-      "field": "collection_hide",
-      "type": "boolean",
-      "label": "Hide on collection Page"
-    },
-    {
-      "field": "active",
-      "type": "boolean",
-      "label": "Active",
-      "search":true,
-      "list": "edit"
+      "field":"alt","label":"Alt (required)",
+      "type":"text"
     },
     {
       "field": "image_sizes",
