@@ -108,6 +108,13 @@
             &:last-of-type::after { content: none; }
         }
 
+
+
+        .svg-cassette {
+            right: unset;
+        }
+
+
         @include breakpoint(desktop) {
             @include font-size(100, 83);
 
@@ -116,68 +123,100 @@
             max-width: 100%;
             padding-bottom: rem(57);
 
-            // @media (max-height: 719px) {
-            //     @include font-size(106);
-
-            //     max-width: 80%;
-            //     line-height: 0.827;
-            //     letter-spacing: -0.035em;
-            // }
-
-
-            // @media (max-height: 700px) and (max-aspect-ratio: 1440 / 900) {
-            //     @include font-size(96, 80);
-
-            //     max-width: 85%;
-            //     letter-spacing: -0.025em;
-            // }
-
-
-            // @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
-            //     @include font-size(104, 88);
-            //     max-width: 85%;
-            // }
-
-            // @include breakpoint(hd) {
-            //     max-width: 80%;
-            // }
-
             span {
                 white-space: nowrap;
             }
+
+            .svg-cassette {
+                margin-top: rem(18);
+                margin-left: rem(-4);
+                margin-right: rem(-2);
+            }
+
+            .svg-pin-color {
+                margin-top: rem(-16);
+                margin-left: rem(30);
+                margin-right: rem(6);
+            }
+
+            .svg-books {
+                margin-top: rem(-15);
+                margin-left: rem(2);
+                margin-right: rem(6);
+            }
         }
 
-        @include breakpoint(tablet) {
-            @include font-size(80, 0.82);
-            margin-bottom: rem(20);
-
-            // max-width: 90%;
-        }
 
         @include breakpoint(tablet-landscape) {
             @include font-size(96, 0.82);
         }
 
-        @include breakpoint(phone) {
 
-
-            @include font-size(56, 46);
-
-            margin-bottom: rem(43);
-            padding-left: rem(45);
-            padding-top: rem(4);
-
+        @include breakpoint(not-desktop) {
             svg {
                 position: absolute;
                 top: 50%;
                 left: unset;
-                right: calc(100% + #{rem(6)});
                 translate: 0 -50%;
             }
 
-            .svg-cassette {
-                right: unset;
-                left: 3.06em;
+
+
+            @include breakpoint(tablet) {
+                @include font-size(80, 0.82);
+    
+                margin-bottom: rem(20);
+                padding-left: rem(68);
+                padding-top: rem(4);
+                max-width: 75%;
+    
+                svg {
+                    right: calc(100% + #{rem(2)});
+                }
+
+                .svg-cassette {
+                    left: 3.1em;
+                    margin-top: rem(10);
+                }
+
+                .svg-pin-color {
+                    margin-top: rem(-7);
+                    margin-right: rem(6);
+                }
+    
+                .svg-books {
+                    margin-top: rem(-7);
+                    margin-left: rem(2);
+                    margin-right: rem(6);
+                }
+            }
+    
+
+
+            @include breakpoint(phone) {
+                @include font-size(56, 46);
+    
+                margin-bottom: rem(43);
+                padding-left: rem(45);
+                padding-top: rem(4);
+    
+                svg {
+                    right: calc(100% + #{rem(6)});
+                }
+    
+                .svg-cassette {
+                    left: 3.06em;
+                    margin-top: rem(7);
+                }
+
+                .svg-pin-color {
+                    margin-top: rem(-4);
+                    margin-right: rem(2);
+                }
+    
+                .svg-books {
+                    margin-top: rem(-4);
+                }
             }
         }
 

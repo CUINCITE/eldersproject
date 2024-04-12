@@ -279,6 +279,17 @@
                 }
             }
         }
+
+        &.heading--medium {
+            i {
+                display: inline-block;
+                text-wrap: pretty;
+
+                @include breakpoint(desktop) {
+                    padding-left: rem(12);
+                }
+            }
+        }
     }
 
 
