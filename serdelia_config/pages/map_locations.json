@@ -14,6 +14,9 @@
   [
       {"label":"GPS Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
         "params":{"lat":"gps_lat","lng":"gps_lng","address":"address","name":"label"}
+      },
+      {"label":"City Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"action":"gps2name","lat":"gps_lat","lng":"gps_lng","city":"city"}
       }
   ],
 "layouts":
@@ -62,7 +65,15 @@
     {
       "hr": true,
       "label": "State",
-      "field": "state"
+      "field": "state","list":true
+    },
+    {
+      "label": "City",
+      "field": "city","list":true
+    },
+    {
+      "label": "Street",
+      "field": "street","list":true
     },
     {
       "hr": true,

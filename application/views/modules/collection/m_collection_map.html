@@ -23,7 +23,7 @@
                     <div class="map__place">
                         <div class="map__title">
                             {% if params.global %}
-                            <span class="map__address">{{item.address}}</span>
+                            <span class="map__address">{{item.street}}<br>{{item.city}}, {{item.state}}</span>
                             {% endif %}
                             <div class="map__title-text">
                                 <span>{{item.label}}</span>
