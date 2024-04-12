@@ -17,6 +17,12 @@ AuthName "Access denied"
 AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 </If>
+<If "%{HTTP_HOST} == 'elder-prod-env.eba-3k57a8tv.us-east-1.elasticbeanstalk.com'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
 
 RewriteEngine On
 Options -Indexes
