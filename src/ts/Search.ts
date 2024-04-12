@@ -117,7 +117,7 @@ export class Search {
 
 
     private liveResponse(data, el, response): void {
-        if (response.results) {
+        if (response.results && document.body.classList.contains('has-menu-open')) {
             this.live.innerHTML = this.liveTemplate.render(response);
             // this.trigger(ComponentEvents.CHANGE, this.live);
             this.showLiveResults();
@@ -191,7 +191,10 @@ export class Search {
 
 
     private animationHide(): void {
+        console.log('Search animationHide ?');
         if (!this.isLiveShown) return;
+        console.log('Search animationHide !');
+
 
         // hide 'all' link before hiding all li's
         gsap.to(this.allLink, {
@@ -207,6 +210,7 @@ export class Search {
                 delay: index * 0.1,
                 ease: easing,
                 onComplete: () => {
+                    console.log('Search animationHide !!!');
                     item.remove();
                     // after all tweens
                     if (index === this.liveLi.length - 1) {
@@ -217,6 +221,11 @@ export class Search {
                 },
             });
         });
+
+        if (!this.liveLi.length) {
+            this.live.innerHTML = '';
+            this.view.classList.remove('is-livesearch-shown');
+        }
 
 
         this.isLiveShown = false;
