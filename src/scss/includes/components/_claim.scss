@@ -3,6 +3,7 @@
 
     text-transform: uppercase;
     position: relative;
+    z-index: 1;
 
     @include breakpoint(desktop) {
         @include font-size(122, 104);
@@ -148,7 +149,6 @@
 
         @include breakpoint(tablet) {
             @include font-size(80, 0.82);
-
             margin-bottom: rem(20);
 
             // max-width: 90%;
@@ -182,6 +182,10 @@
         }
 
         .svg-cassette { @extend %svg-cassette-spinning !optional; }
+
+
+        &[data-observe].is-below .svg-pin-color { @extend %svg-pin-color-out !optional; }
+        &[data-observe].is-above .svg-books { @extend %svg-books-out !optional; }
     }
 
 
