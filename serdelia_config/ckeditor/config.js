@@ -32,6 +32,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.stylesSet =
 	[
         { name: 'Inline Quote',   element:'q',   attributes: { 'class': 'quote' } },
+		{ name: 'Inline Quote Big',   element:'blockquote',   attributes: { 'class': 'quote quote--big' } }		
     	
     ];
   
