@@ -106,7 +106,7 @@
 
             &:last-of-type::after { content: none; }
         }
-        
+
         @include breakpoint(desktop) {
             @include font-size(100, 83);
 
@@ -163,6 +163,8 @@
 
             margin-bottom: rem(20);
         }
+
+        .svg-cassette { @extend %svg-cassette-spinning !optional; }
     }
 
 

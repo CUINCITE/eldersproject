@@ -97,6 +97,7 @@
         background-color: var(--color-red);
         opacity: 0;
         scale: 0;
+        animation: pulse 3s infinite ease-in-out;
     }
 
 
