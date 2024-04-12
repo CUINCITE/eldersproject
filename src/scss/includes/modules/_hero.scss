@@ -30,17 +30,8 @@
             position: relative;
             z-index: 1;
 
-            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
-                @include font-size(170, 1);
-
-                letter-spacing: -0.045em;
-            }
-
-
-            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
-                @include font-size(204, 1);
-
-                letter-spacing: -0.045em;
+            @media (min-aspect-ratio: 1450 / 820) {
+                font-size: 27vh;
             }
         }
 
@@ -125,28 +116,18 @@
         @include flex(row, space-between, flex-start);
 
         @include breakpoint(desktop) {
-            padding-top: rem(16);
+            padding-top: rem(17);
+            padding-left: rem(2);
 
             .text {
                 padding-bottom: rem(18) !important;
 
-                @include font-size(21, 25);
-            }
+                @include font-size(21, 25.62);
 
 
-            @media (max-height: 719px) {
-                padding-top: rem(12);
-                padding-bottom: rem(38);
-
-                .text {
-                    @include font-size(19, 23);
+                @media (min-aspect-ratio: 1450 / 820) {
+                    font-size: 3vh;
                 }
-            }
-
-
-            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
-                padding-top: rem(12);
-                padding-bottom: rem(38);
             }
         }
 
@@ -178,7 +159,7 @@
     }
 
 
-    
+
     &__text {
         @include breakpoint(tablet) {
             grid-column: 3 / span 6;
@@ -214,7 +195,7 @@
 
     &__author {
         @include breakpoint(desktop) {
-            padding-top: vw(15);
+            padding-top: rem(17);
         }
 
         @include breakpoint(tablet) {
