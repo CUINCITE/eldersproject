@@ -69,6 +69,49 @@
         }
     }
 
+    &--hero {
+        .collection_author__collection {
+            @include font-settings(500, 100);
+
+            margin-left: 0;
+
+            @include breakpoint(desktop) {
+                @include font-size(21, 1);
+                 
+                &::before {
+                    width: vw(35); 
+                    margin-right: vw(16);
+                }
+
+                @media (max-height: 719px) {
+                    @include font-size(19, 23);
+                }
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(20, 1);
+                    
+    
+                &::before {
+                    width: vw(32, tablet); 
+                    margin-right: vw(10, tablet);
+                    margin-top: -0.2em;
+                }
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(16, 1);
+                    
+    
+                &::before {
+                    width: vw(17, phone); 
+                    margin-right: vw(10, phone);
+                    margin-top: -0.25em;
+                }
+            }
+        }
+    }
+
     &__name {
         @include font-family(compressed);
 
