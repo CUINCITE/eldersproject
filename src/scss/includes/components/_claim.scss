@@ -148,7 +148,6 @@
 
         @include breakpoint(tablet) {
             @include font-size(80, 0.82);
-
             margin-bottom: rem(20);
 
             // max-width: 90%;
@@ -165,6 +164,9 @@
         }
 
         .svg-cassette { @extend %svg-cassette-spinning !optional; }
+
+
+        &[data-observe].is-below .svg-pin-color { @extend %svg-pin-color-out !optional; }
     }
 
 

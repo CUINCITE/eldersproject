@@ -213,9 +213,17 @@
     width: rem(31);
     margin-right: rem(8);
     flex-shrink: 0;
+    transform-origin: center bottom;
+    transition: transform 0.6s $ease-out-back 0.1s;
+    overflow: visible;
 
-    circle:first-of-type { fill: var(--pin-outer-color); }
     path { fill: var(--pin-color); }
+
+    circle:first-of-type {
+        fill: var(--pin-outer-color);
+        transform-origin: 15.5px 15.5px;
+        transition: transform 0.7s $ease-out-back 0.2s;
+    }
 
     .claim & {
         --pin-color: var(--color-brown);
@@ -248,6 +256,11 @@
             margin-right: rem(2);
         }
     }
+}
+
+%svg-pin-color-out {
+    transform: scale(0.6);
+    circle:first-child { transform: scale(0.5); }
 }
 
 
