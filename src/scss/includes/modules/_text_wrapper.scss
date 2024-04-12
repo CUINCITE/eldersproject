@@ -179,6 +179,13 @@
             @include flex(column, flex-start, flex-end);
 
             margin-inline: rem(8);
+
+            &[data-observe] {
+                .polaroid { transition: rotate 0.8s; }
+                img { transition: opacity 1s 0.2s; }
+                &.is-below .polaroid { rotate: 0deg; }
+                &.is-below img { opacity: 0; }
+            }
         }
 
         .polaroid {
@@ -322,6 +329,9 @@
                 height: vw(260, phone);
             }
         }
+
+        &[data-observe] img { transition: transform 0.7s $ease-out-back; }
+        &[data-observe].is-below img { transform: scale(0.9); }
     }
 
 
