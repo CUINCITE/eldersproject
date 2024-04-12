@@ -416,7 +416,7 @@
         @include breakpoint(phone) {
             @include flex(row, space-between, flex-start);
 
-            margin-top: rem(8);
+            margin-top: rem(10);
         }
 
         &-wrap {
@@ -580,8 +580,11 @@
             @include font-size(14, 1.05);
             @include letter-spacing(-0.14, 14);
 
-            margin-top: rem(12);
-            margin-bottom: rem(28);
+            margin-top: rem(13);
+
+            &--overlay {
+                margin-top: rem(28);
+            }
         }
     }
 
