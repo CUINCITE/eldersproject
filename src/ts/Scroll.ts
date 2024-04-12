@@ -199,6 +199,24 @@ export default class Scroll {
                 });
             });
 
+        // intersection observer + css animations
+        const observer = new IntersectionObserver(
+            entries => entries.forEach(
+                entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-in-view');
+                    } else {
+                        entry.target.classList.remove('is-in-view');
+                    }
+                },
+                { threshold: 0.5 },
+            ),
+        );
+        [...document.querySelectorAll('[data-observe]')]
+            .forEach((el: HTMLElement) => {
+                observer.observe(el);
+            });
+
 
         this.firstLoad = false;
     }
