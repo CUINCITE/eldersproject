@@ -82,6 +82,10 @@
                     width: vw(35); 
                     margin-right: vw(16);
                 }
+
+                @media (max-height: 719px) {
+                    @include font-size(19, 23);
+                }
             }
 
             @include breakpoint(tablet) {

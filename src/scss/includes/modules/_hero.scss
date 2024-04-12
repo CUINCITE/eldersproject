@@ -129,6 +129,8 @@
 
             .text {
                 padding-bottom: rem(18) !important;
+
+                @include font-size(21, 25);
             }
 
 
@@ -137,7 +139,7 @@
                 padding-bottom: rem(38);
 
                 .text {
-                    @include font-size(19, 25);
+                    @include font-size(19, 23);
                 }
             }
 
