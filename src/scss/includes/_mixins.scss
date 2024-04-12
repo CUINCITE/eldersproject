@@ -152,6 +152,10 @@ $line-height: 1.4;
                 @media (hover: none) {
                     display: none;
                 }
+
+                @include breakpoint(phone) {
+                    bottom: 120%;
+                }
             }
         }
     }
