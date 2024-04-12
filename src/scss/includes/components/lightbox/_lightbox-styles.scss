@@ -628,8 +628,6 @@
                 pointer-events: none;
             }
 
-
-
             @include breakpoint(phone) {
                 &::after, &::before {
                     background-color: var(--hover-color);
@@ -652,6 +650,7 @@
                 display: block;
                 position: absolute;
                 left: 50%;
+                transition: .25s background-color $easing;
             }
 
             &::before {
