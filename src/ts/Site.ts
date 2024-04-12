@@ -208,7 +208,7 @@ class Site {
         this.scroll.load();
         Scroll.start();
 
-        this.currentPage.animateIn(this.isFirstTime && !isLightbox, isLightbox ? 1 : 0).then(() => {
+        this.currentPage.animateIn(this.isFirstTime, this.isFirstTime && !isLightbox, isLightbox ? 1 : 0).then(() => {
             this.curtain.hide(this.isFirstTime);
             this.loader.hide();
             !this.isFirstTime && Scroll.scrollToTop(true);
