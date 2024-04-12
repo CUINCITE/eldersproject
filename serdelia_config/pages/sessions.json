@@ -132,7 +132,9 @@
         {
             "field":"filename_mp3","label":"MP3 filename","edit":false
         },
-        
+        {
+            "field":"mp3_size","label":"MP3 size"
+        },
         
         
         {

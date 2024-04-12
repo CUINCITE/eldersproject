@@ -191,6 +191,9 @@
             "label":"Duration (seconds)"
         },
         {
+            "field":"mp3_size","label":"MP3 size"
+        },
+        {
             "header":"Video",
             "field": "vimeo_id",
             "label": "Vimeo ID",

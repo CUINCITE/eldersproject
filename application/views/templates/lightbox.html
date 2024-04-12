@@ -286,7 +286,7 @@
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}, {{item.size}}<span class="bracket">)</span>
+                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span>
                                         </a>
                                     </li>
                                 {% endfor %}
