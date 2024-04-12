@@ -255,7 +255,7 @@
             span {
                 display: inline-block;
                 transition: transform var(--animation-time) var(--easing);
-                transform: translateX(120%);
+                transform: translateX(10%);
 
 
                 @include breakpoint(phone) {

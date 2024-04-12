@@ -90,6 +90,9 @@
             }
         },
         {
+            "field":"mp3_size","label":"MP3 size"
+        },
+        {
             "field":"interviewer_location",
             "label":"Location (interviewer)"
         },

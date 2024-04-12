@@ -1,1 +1,5 @@
-<svg viewBox="0 0 14 23" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path d="M7 16.0405L7 1"/><path d="M7 23L14 15L0 15L7 23Z"/></g></svg>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 14 24" enable-background="new 0 0 14 24" xml:space="preserve">
+<path fill="none" d="M7,16V1"/>
+<path fill="none" d="M7,23l7-8H0L7,23z"/>
+</svg>

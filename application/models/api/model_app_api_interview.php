@@ -36,6 +36,7 @@ class model_app_api_interview
 
     private function getInterviewData($item, $sessions)
     {
+        
         //collection image
         $collectionImage = !empty($item['interviewers'][0]['image']) ? $item['interviewers'][0]['image'] : [];
 
@@ -92,13 +93,22 @@ class model_app_api_interview
         {
             $downloads[] =
                 [
-                    "url" => 'api/download?transcript=' . $item['id'].'&lang='.$lang,
+                    "url" => 'api/download?transcript=' . $item['incite_id'].'&lang='.$lang,
                     "name" => $langs2[$k]." transcript",
                     "ext" => "pdf",
                     "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript-".$lang.".pdf",
                     "size" => $item['pdf_'.$lang.'_size'] ? number_format($item['pdf_'.$lang.'_size'] / 1000000, 2) . 'MB' : ''
                 ];
         }
+        foreach ($sessions as $k=>$v)
+        $downloads[] =
+                [
+                    "url" => 'api/download?mp3=' . $v['incite_id'],
+                    "name" => 'Audio file, Session #'.$v['nr'],
+                    "ext" => "mp3",
+                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-".$v['nr']."audio.mp3",
+                    "size" => @$v['mp3_size'] ? number_format(@$v['mp3_size'] / 1000000, 2) . 'MB' : ''
+                ];
 
         // aggregate data
         $data = [

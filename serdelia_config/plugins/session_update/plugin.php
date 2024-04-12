@@ -24,6 +24,12 @@ class serdelia_plugin_session_update
         /*
          get mp3 duration
         */
+
+        $output=[
+            'status_media'=>empty($session['audio']['src']) ? 0 :1,
+            'status_transcript'=>empty($session['doc']['src']) ? 0 :1,
+        ];
+
         if (!$session['duration'] && !empty($session['audio']['src']))
         {
             require(__DIR__.'/Mp3Info.php');
@@ -32,16 +38,22 @@ class serdelia_plugin_session_update
             {
                 $audio = new Mp3Info($src);
                 $duration=intval($audio->duration);            
-                if ($duration)
-                    $this->cms->putJsonModel('sessions_simple',['duration'=>$duration],['id'=>$session['id']]);
+                if ($duration) $output['duration']=$duration;
             }
         }
+        if (!$session['mp3_size'] && !empty($session['audio']['src']))
+        {
+            $src=explode('?',$session['audio']['src'])[0];            
+            $mp3_size=$this->curl_get_file_size($src);
+            
+            if ($mp3_size) $output['mp3_size']=$mp3_size;
+        }
 
-        $this->cms->putJsonModel('sessions_simple',
-        [
-            'status_media'=>empty($session['audio']['src']) ? 0 :1,
-            'status_transcript'=>empty($session['doc']['src']) ? 0 :1,
-        ],['id'=>$session['id']]);
+        $f=['id'=>$session['id']];
+        
+        $this->cms->putJsonModel('sessions_simple',$output,$f);
+
+        return['result'=>true,'error'=>$this->parent->orm->getLastError()];
 
         $items=$this->cms->getJsonModel('sessions_simple',['parent'=>$session['parent']['id']]);
 
@@ -96,6 +108,22 @@ class serdelia_plugin_session_update
         $data=['result'=>true,'updated'=>count($items)];
         
         return $data;
+    }
+
+    private function curl_get_file_size( $url ) {
+        $ch = curl_init($url);
+
+     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+     curl_setopt($ch, CURLOPT_HEADER, TRUE);
+     curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+
+     $data = curl_exec($ch);
+     $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+
+     curl_close($ch);
+     return $size;
+    
+        
     }
 
 
