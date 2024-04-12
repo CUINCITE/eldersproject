@@ -18,13 +18,6 @@ AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 </If>
 
-<If "%{HTTP_HOST} == 'elder.lh'">
-AuthType Basic
-AuthName "Access denied"
-AuthUserFile /Projekty/columbia/elder/.htpasswd
-Require valid-user
-</If>
-
 RewriteEngine On
 Options -Indexes
 
