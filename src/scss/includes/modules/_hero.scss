@@ -126,7 +126,6 @@
 
         @include breakpoint(desktop) {
             padding-top: rem(16);
-            padding-bottom: rem(47);
 
             .text {
                 padding-bottom: rem(18) !important;
@@ -136,6 +135,10 @@
             @media (max-height: 719px) {
                 padding-top: rem(12);
                 padding-bottom: rem(38);
+
+                .text {
+                    @include font-size(19, 25);
+                }
             }
 
 
@@ -204,6 +207,20 @@
             padding-left: rem(10);
             display: inline-block;
             margin-top: 1px;
+        }
+    }
+
+    &__author {
+        @include breakpoint(desktop) {
+            padding-top: vw(15);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: vw(15, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: vw(15, phone);
         }
     }
 }
