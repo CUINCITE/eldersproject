@@ -78,6 +78,9 @@
             "list":true
         },
         {
+            "field":"mp3_size","label":"MP3 size"
+        },
+        {
             "field": "uid",
             "type": "uid",
             "list": "read"

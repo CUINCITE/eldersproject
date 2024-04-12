@@ -1,4 +1,4 @@
-<section class="module module--map box" >
+<section class="module module--map box"{% if bottomPadding %}style="padding-bottom:100px"{% endif %}>
 
     <div class="map
         {% if params.global %} map--global{% endif %}
@@ -8,7 +8,7 @@
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside">
             {% if params.global %}
-                <div class="map__count desktop-only">{{items|length}} locations:</div>
+                <div class="map__count desktop-only"><b>Map</b> / {{items|length}} locations</div>
             {% else %}
             <div class="map__heading">
                 <h2 class="heading heading--map">Map</h2>
@@ -23,7 +23,7 @@
                     <div class="map__place">
                         <div class="map__title">
                             {% if params.global %}
-                            <span class="map__address">{{item.address}}</span>
+                            <span class="map__address">{{item.street}}<br>{{item.city}}, {{item.state}}</span>
                             {% endif %}
                             <div class="map__title-text">
                                 <span>{{item.label}}</span>
@@ -32,9 +32,9 @@
                     </div>
                     <div class="map__content">
                         <div class="map__content-wrapper">
-                            {% if item.image.desktop %}
+                            {% if item.alt %}
                             <div class="map__image {% if item.image.original.height >= item.image.original.width %} map__image--square {% endif %}">
-                                {% include "./subviews/subview_picture.html" with { image: item.image } %}
+                                {% include "./subviews/subview_picture.html" with { image: item.image,alt:item.alt } %}
                             </div>
                             {% endif %}
                             {% if item.description %}

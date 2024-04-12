@@ -42,9 +42,12 @@
 
 
         @include breakpoint(desktop) {
-            transition: clip-path .7s $ease-custom;
+            // transition: clip-path .7s $ease-custom;
             clip-path: inset(0 0 0 0);
 
+            body.is-loading-lightbox & {
+                transition-delay: 1s;
+            }
 
             body.is-not-ready & {
                 clip-path: inset(0 0 0 100%);

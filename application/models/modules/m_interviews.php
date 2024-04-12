@@ -253,7 +253,7 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         $last_index=-4;
 
         $modifiers = ['default','pink','green','pale-purple','orange','pale-blue','brown','dark-green','pale-green','purple'];
-        mt_srand($seed);
+        //mt_srand($seed);
         shuffle($modifiers);
         $modifierIndex = 0;
 

@@ -74,13 +74,13 @@ export class Page extends Handler {
      * page entering animation
      * @param {number} delay animation delay
      */
-    public animateIn(boxes?: boolean, delay?: number): Promise<void> {
+    public animateIn(first?: boolean, boxes?: boolean, delay?: number): Promise<void> {
         return new Promise(resolve => {
             for (let i = 0; i < this.components.length; i += 1) {
                 this.components[i].animateIn(i, delay);
             }
 
-            if (boxes) {
+            if (boxes && window.location.search.indexOf('boxes') > -1) {
                 const boxesToShow = Utils.findVisibleBoxes(document.querySelectorAll('[data-scroll="box"], .box'));
                 const pseudoVariable = { value: 0 };
 
@@ -111,8 +111,9 @@ export class Page extends Handler {
                 });
             } else {
                 gsap.to(this.view, {
-                    duration: 0.01,
+                    duration: first ? 0.5 : 0.01,
                     opacity: 1,
+                    delay: delay || 0,
                     onComplete: () => {
                         document.documentElement.classList.remove('is-transition');
                         document.body.classList.remove('is-transition');

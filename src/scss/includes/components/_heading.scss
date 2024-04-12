@@ -352,6 +352,9 @@
             }
         }
 
+        &[data-observe]::after { transition: transform 0.7s $easing; }
+        &[data-observe]:not(.is-in-view)::after { transform: scale(0); }
+
 
         @include breakpoint(desktop) {
             padding-top: rem(26);

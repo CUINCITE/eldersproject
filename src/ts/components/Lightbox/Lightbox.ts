@@ -49,6 +49,7 @@ export class Lightbox {
     private navComp: LightboxNav;
     private sliderComp: LightboxSlider;
     private contentsComp: LightboxContents;
+    private loadingPromise: Promise<any>;
 
     constructor() {
         Lightbox.instance = this;
@@ -59,9 +60,18 @@ export class Lightbox {
 
 
 
+    public preload(): Promise<void> {
+        return this.loadingPromise;
+    }
+
+
+
     public async load(payload?: Object): Promise<LightboxData> {
         this.view.classList.add('is-fetching');
         this.controller = new AbortController();
+
+        document.body.classList.add('is-loading-lightbox');
+        console.log('load lightbox');
 
         const isWorkspace = window.location.pathname.indexOf('/workspace/') >= 0;
         // const url = isWorkspace ? this.settings.api[type] : window.location.href + window.location.search;
@@ -82,6 +92,7 @@ export class Lightbox {
 
             const data = await response.json();
             this.view.classList.remove('is-fetching');
+            console.log('lightbox loaded');
             this.controller = null;
 
             return data;
@@ -167,9 +178,11 @@ export class Lightbox {
 
         if (patternFound) {
 
+            this.loadingPromise = this.load();
+
             Promise.all([
                 this.hide(),
-                this.load(),
+                this.loadingPromise,
             ]).then(results => {
                 const data = results.filter(Boolean).reduce((p, c) => ({ ...p, ...c })) as LightboxData;
 
@@ -180,6 +193,8 @@ export class Lightbox {
 
                 // show the interview lightbox (only when there's data to show)
                 if (!this.shown && data.result !== false) { this.show(); }
+
+                this.loadingPromise = null;
 
             }).catch(() => {
                 this.hide();
@@ -253,7 +268,9 @@ export class Lightbox {
                 duration: 0.1,
                 ease: 'none',
                 onStart: () => {
+                    console.log('show lightbox');
                     document.body.classList.add('has-lightbox');
+                    document.body.classList.remove('is-loading-lightbox');
                     this.view.classList.remove('is-closing');
                 },
                 // that class runs CSS animation

@@ -42,6 +42,8 @@
         "hr": true,
         "field": "state"
       },
+      {"field":"city"},
+      {"field":"street"},
       {
         "hr": true,
         "field": "zoom_precision"
@@ -103,6 +105,9 @@
       },
       {
         "field":"quotes","type":"json"
+      },
+      {
+        "field":"alt"
       },
       {
         "field": "image_sizes",

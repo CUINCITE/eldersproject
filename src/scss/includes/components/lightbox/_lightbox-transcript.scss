@@ -31,8 +31,11 @@
         position: relative;
         height: 100%;
         overflow-y: auto;
-        padding-top: rem(54);
         padding-bottom: rem(25);
+
+        @include breakpoint(desktop) {
+            margin-top: rem(46);
+        }
 
 
         @include breakpoint(not-desktop) {
@@ -149,8 +152,13 @@
     &__search {
         @include flex(row, flex-start, center);
 
-        width: calc(100% - var(--aside-width) - #{rem(50)});
+        width: 100%;
         padding: rem(12) rem(25);
+        background-color: var(--color-grey200);
+
+        @include breakpoint(desktop) {
+            border-bottom: 1px solid var(--theme-color);
+        }
 
         @include breakpoint(tablet) {
             width: 100%;

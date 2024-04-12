@@ -83,7 +83,7 @@ export class LightboxNav extends Component {
             }
             gsap.fromTo(tab, { yPercent: 100 }, {
                 yPercent: 0,
-                duration: 0.6,
+                duration: 0.8,
                 ease: easing,
                 onStart: () => {
                     gsap.set(tab, { y: 0, yPercent: 100 });
@@ -113,7 +113,7 @@ export class LightboxNav extends Component {
         } else {
             gsap.fromTo(tab, { yPercent: 0 }, {
                 yPercent: 100,
-                duration: 0.3,
+                duration: 0.4,
                 ease: easing,
                 onStart: () => {
                     this.isAnimating = true;
