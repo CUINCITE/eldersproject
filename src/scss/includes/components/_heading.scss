@@ -352,7 +352,7 @@
             }
         }
 
-        &[data-observe]::after { transition: transform 0.7s $easing; }
+        &[data-observe]::after { transition: transform 0.7s $ease-out-back; }
         &[data-observe]:not(.is-in-view)::after { transform: scale(0); }
 
 
