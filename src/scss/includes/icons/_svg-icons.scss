@@ -249,10 +249,10 @@
         }
 
         @include breakpoint(phone) {
-            width: rem(30);
-            height: rem(38);
+            width: rem(34);
+            height: rem(42);
 
-            margin-top: rem(-8);
+            margin-top: rem(-4);
             margin-right: rem(2);
         }
     }
@@ -317,11 +317,11 @@
     }
 
     @include breakpoint(phone) {
-        width: rem(36);
-        height: rem(36);
+        width: rem(41);
+        height: rem(41);
 
 
-        margin-top: rem(-8);
+        margin-top: rem(-4);
     }
 }
 
@@ -349,9 +349,9 @@
         }
 
         @include breakpoint(phone) {
-            width: rem(45);
-            height: rem(30);
-            margin-top: rem(2);
+            width: rem(38);
+            height: rem(20);
+            margin-top: rem(7);
         }
     }
 
