@@ -47,7 +47,7 @@
 
                         {% elseif module.type == "image" and module.value.variant == 'illustration' %}
 
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}" data-parallax="100">
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}" data-parallax="100" data-observe>
                                 {% include "subviews/subview_picture.html" with { image: module.value.image, lazy: true } %}
                             </div>
 

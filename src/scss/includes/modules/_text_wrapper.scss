@@ -181,10 +181,10 @@
             margin-inline: rem(8);
 
             &[data-observe] {
-                img { transition: opacity 1s 0.2s; }
                 .polaroid { transition: rotate 0.8s; }
-                &:not(.is-in-view) .polaroid { rotate: 0deg; }
-                &:not(.is-in-view) img { opacity: 0; }
+                img { transition: opacity 1s 0.2s; }
+                &.is-below .polaroid { rotate: 0deg; }
+                &.is-below img { opacity: 0; }
             }
         }
 
@@ -329,6 +329,9 @@
                 height: vw(260, phone);
             }
         }
+
+        &[data-observe] img { transition: transform 0.7s $ease-out-back; }
+        &[data-observe].is-below img { transform: scale(0.9); }
     }
 
 
