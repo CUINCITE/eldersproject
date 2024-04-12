@@ -349,6 +349,7 @@ exports.libs = libs;
 exports.fonts = fonts;
 exports.bump = bump;
 exports.favicons = favicons;
+exports.svg = gulp.series(svgnomin, svgmin, svgstore);
 exports.images = gulp.series(cleanImages, imagemin, svgnomin, svgmin, svgstore);
 // eslint-disable-next-line max-len
 exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, sounds, bump);

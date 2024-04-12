@@ -42,6 +42,7 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         &--default {
             --description-color: var(--color-grey200);
             --tags-brightness: 50%;
+            --hover-color: var(--color-blue);
         }
 
         // Caro De Robertis

@@ -7,7 +7,7 @@
             <i class="people__line desktop-only"></i>
             <div class="grid">
                 <div class="people__photos col-span-6 no-padding">
-                    <div class="text text--large">
+                    <div class="text text--large text--extra-wide">
                         {{text|raw}}
                     </div>
 
@@ -27,7 +27,7 @@
                                 {% for person in section.people %}
                                 {% if person.alt %}
                                 {% set i_color=i_color+1 %}{% if i_color>=colors|length %}{% set i_color=0 %}{% endif %}
-                                <div class="person{% if reverse %} person--reversed{% endif %} js-person">                                    
+                                <div class="person{% if reverse %} person--reversed{% endif %} js-person">
                                     <div class="person__photo">
                                         <div class="polaroid polaroid--fit polaroid--small_frame">
                                             <div class="polaroid__image polaroid__image--{{colors[i_color]}}">

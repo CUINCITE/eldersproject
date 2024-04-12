@@ -213,9 +213,17 @@
     width: rem(31);
     margin-right: rem(8);
     flex-shrink: 0;
+    transform-origin: center bottom;
+    transition: transform 0.6s $ease-out-back 0.1s;
+    overflow: visible;
 
-    circle:first-of-type { fill: var(--pin-outer-color); }
     path { fill: var(--pin-color); }
+
+    circle:first-of-type {
+        fill: var(--pin-outer-color);
+        transform-origin: 15.5px 15.5px;
+        transition: transform 0.7s $ease-out-back 0.2s;
+    }
 
     .claim & {
         --pin-color: var(--color-brown);
@@ -241,13 +249,18 @@
         }
 
         @include breakpoint(phone) {
-            width: rem(30);
-            height: rem(38);
+            width: rem(34);
+            height: rem(42);
 
-            margin-top: rem(-8);
+            margin-top: rem(-4);
             margin-right: rem(2);
         }
     }
+}
+
+%svg-pin-color-out {
+    transform: scale(0.6);
+    circle:first-child { transform: scale(0.5); }
 }
 
 
@@ -283,6 +296,8 @@
 
 
 .svg-books {
+    overflow: visible;
+
     @include breakpoint(desktop) {
         width: rem(74);
         height: rem(71);
@@ -304,12 +319,26 @@
     }
 
     @include breakpoint(phone) {
-        width: rem(36);
-        height: rem(36);
-
-
-        margin-top: rem(-8);
+        width: rem(41);
+        height: rem(41);
+        margin-top: rem(-4);
     }
+
+    path {
+        transition: transform 0.5s $easing;
+
+        &:nth-last-child(3) { transition-delay: 0.02s; }
+        &:nth-last-child(4) { transition-delay: 0.04s; }
+        &:nth-last-child(5) { transition-delay: 0.06s; }
+    }
+}
+
+%svg-books-out path {
+    transition: none;
+    &:nth-last-child(2) { transform: translate(0, -10%); }
+    &:nth-last-child(3) { transform: translate(0, -25%); }
+    &:nth-last-child(4) { transform: translate(0, -40%); }
+    &:nth-last-child(5) { transform: translate(0, -60%); }
 }
 
 
@@ -336,9 +365,9 @@
         }
 
         @include breakpoint(phone) {
-            width: rem(45);
-            height: rem(30);
-            margin-top: rem(2);
+            width: rem(38);
+            height: rem(20);
+            margin-top: rem(7);
         }
     }
 
