@@ -179,6 +179,13 @@
             @include flex(column, flex-start, flex-end);
 
             margin-inline: rem(8);
+
+            &[data-observe] {
+                img { transition: opacity 1s 0.2s; }
+                .polaroid { transition: rotate 0.8s; }
+                &:not(.is-in-view) .polaroid { rotate: 0deg; }
+                &:not(.is-in-view) img { opacity: 0; }
+            }
         }
 
         .polaroid {

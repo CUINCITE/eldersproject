@@ -47,13 +47,13 @@
 
                         {% elseif module.type == "image" and module.value.variant == 'illustration' %}
 
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}" data-parallax="100">
                                 {% include "subviews/subview_picture.html" with { image: module.value.image, lazy: true } %}
                             </div>
 
                         {% elseif module.type == "image" %}
 
-                            <div class="text_wrapper__module js-wrapped-image js-wrapped-photo text_wrapper__photo text_wrapper__photo--single{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
+                            <div class="text_wrapper__module js-wrapped-image js-wrapped-photo text_wrapper__photo text_wrapper__photo--single{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}" data-observe>{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
                                 {% include "/components/c_polaroid.html" with {image: module.value.image, modifiers: ["wrapped"]} %}
                                 {% if module.value.caption %}
                                     <div class="text_wrapper__info text_wrapper__info--collections">
