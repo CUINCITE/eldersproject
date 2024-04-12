@@ -203,7 +203,6 @@ export default class Scroll {
         const observer = new IntersectionObserver(
             entries => entries.forEach(
                 entry => {
-                    console.log(entry, entry.boundingClientRect.top, entry.isIntersecting);
                     entry.target.classList.remove('is-in-view', 'is-below', 'is-above');
 
                     if (entry.isIntersecting) {

@@ -30,7 +30,7 @@
             position: relative;
             z-index: 1;
 
-            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
+            @media (max-height: 719px) and (min-aspect-ratio: 1440 / 700) {
                 @include font-size(170, 1);
 
                 letter-spacing: -0.045em;
@@ -126,16 +126,21 @@
 
         @include breakpoint(desktop) {
             padding-top: rem(16);
-            padding-bottom: rem(47);
 
             .text {
                 padding-bottom: rem(18) !important;
+
+                @include font-size(21, 25);
             }
 
 
-            @media (max-height: 719px) {
+            @media (max-height: 719px) and (min-aspect-ratio: 1440 / 700) {
                 padding-top: rem(12);
                 padding-bottom: rem(38);
+
+                .text {
+                    @include font-size(19, 23);
+                }
             }
 
 
@@ -204,6 +209,28 @@
             padding-left: rem(10);
             display: inline-block;
             margin-top: 1px;
+        }
+    }
+
+    &__author {
+        @include breakpoint(desktop) {
+            padding-top: rem(15);
+
+            @media (max-height: 719px) and (min-aspect-ratio: 1440 / 700) {
+                padding-top: rem(12);
+            }
+
+            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
+                padding-top: rem(12);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: vw(15, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: vw(15, phone);
         }
     }
 }

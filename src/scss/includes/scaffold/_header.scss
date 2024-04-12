@@ -85,6 +85,8 @@
 
         @include breakpoint(desktop) {
             padding: rem(12) rem(6) rem(13) rem(9);
+
+            body.is-transition & { pointer-events: none; }
         }
 
 

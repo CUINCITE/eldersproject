@@ -6,7 +6,7 @@
     @include breakpoint(desktop) {
         gap: 4px;
     }
- 
+
     @include breakpoint(not-desktop) {
         top: 22px;
         right: $mobile;
@@ -16,7 +16,7 @@
             width: 100%;
             gap: 8px;
         }
-          
+
         @include breakpoint(phone) {
             gap: 4px;
         }
@@ -44,7 +44,7 @@
         display: block;
         height: 1px;
         width: 32px;
-        background: #444;
+        background: $color-gray;
         margin-left: auto;
         margin-right: 0;
         transition: transform .4s $ease-custom, opacity .2s $ease-custom .1s;
@@ -59,9 +59,9 @@
 
         @include breakpoint(tablet) {
             width: 100%;
-        };
+        }
 
-        @include                                                                                                                            breakpoint(phone) {
+        @include breakpoint(phone) {
             width: 32px;
         }
     }
