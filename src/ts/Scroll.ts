@@ -203,13 +203,17 @@ export default class Scroll {
         const observer = new IntersectionObserver(
             entries => entries.forEach(
                 entry => {
+                    entry.target.classList.remove('is-in-view', 'is-below', 'is-above');
+
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-in-view');
+                    } else if (entry.boundingClientRect.top > 0) {
+                        entry.target.classList.add('is-below');
                     } else {
-                        entry.target.classList.remove('is-in-view');
+                        entry.target.classList.add('is-above');
                     }
                 },
-                { threshold: 0.5 },
+                { root: null, threshold: 0 },
             ),
         );
         [...document.querySelectorAll('[data-observe]')]

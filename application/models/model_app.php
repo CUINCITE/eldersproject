@@ -8,11 +8,12 @@ class model_app extends _uho_model
     var $class = 'app';
     public $http_server, $client;
     public $serdelia_edit = false;
-    public $head_title = 'I See My Light Shining';
+    public $head = [];
+    public $head_title='I See My Light Shining';
+    public $head_description = 'The Baldwin-Emerson Elders Project captures and celebrates the untold stories of activists, storytellers, and community builders who have witnessed and shaped monumental change in American public life.';
+    public $head_image= '/public/og_image.jpg';
+    
     public $is404 = true;
-    var $head = array(
-        'image' => '/public/og_image.jpg'
-    );
 
     //============================================================================================
     public function checkSerdeliaEdit()
@@ -186,9 +187,10 @@ class model_app extends _uho_model
 
     //============================================================================================
     public function headGet()
-    {
+    {        
         $t = $this->head;
-        if ($t['image'] && substr($t['image'], 0, 4) != 'http') {
+        
+        if (@$t['image'] && substr($t['image'], 0, 4) != 'http') {
             $t['image'] = explode('?', $t['image'])[0];
             $size = @getimagesize(root_path . $t['image']);
             if ($size) {
@@ -198,13 +200,16 @@ class model_app extends _uho_model
                     'height' => $size[1]
                 );
             }
-        } elseif ($t['image']) $t['image'] = ['src' => $t['image']];
+        } elseif (@$t['image']) $t['image'] = ['src' => $t['image']];
+        else $t['image']=['src'=>'https://'.$_SERVER['HTTP_HOST'].$this->head_image];
+
+        if (empty($t['description'])) $t['description']=$this->head_description;
 
 
         if (isset($t['title']) && $t['title'] == 'Home') $t['title'] = '';
-
-        if (isset($t['title']) && $t['title']) $t['title'] .= ' - ' . $this->head_title;
-        else $t['title'] = $this->head_title;
+        if (isset($t['title']) && $t['title']) $t['title'] = $this->head_title.' - ' . $this->head['title'];
+          else $t['title'] = $this->head_title;
+          
         return $t;
     }
     //============================================================================================
@@ -220,8 +225,9 @@ class model_app extends _uho_model
         }
 
         if ($title) $this->head['title'] = strip_tags(str_replace('&nbsp;', ' ', $title));
-        if ($description) $this->head['description'] = trim(_uho_fx::headDescription($description, true, 250));
+        if ($description) $this->head['description'] = trim(_uho_fx::headDescription($description, true, 250));        
         if ($img) $this->head['image'] = $img;
+        
     }
     //============================================================================================
     public function updateImageCache(&$img)

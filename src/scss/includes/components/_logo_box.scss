@@ -11,22 +11,24 @@
 
     @include breakpoint(phone) {
         svg {
-            width: vw(90, phone);
+            width: vw(78, phone);
             height: auto;
         }
     }
 
     .box {
-        @include flex;
+        @include flex(row, flex-start, flex-start);
         
         height: 100%;
 
         @include breakpoint(tablet) {
             padding-left: vw(30, tablet);
+            padding-top: vw(13, tablet);
         }
 
         @include breakpoint(phone) {
             padding-left: vw(18, phone);
+            padding-top: vw(13, phone);
         }
     }
 }

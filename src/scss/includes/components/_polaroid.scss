@@ -129,6 +129,10 @@ $background-colors: (
             }
         }
 
+        picture {
+            background: rgba($color-grey800, 0.05);
+            display: block;
+        }
 
         picture, img {
             width: 100%;
