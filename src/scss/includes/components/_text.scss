@@ -140,22 +140,6 @@
     }
 
 
-    &--wide {
-        @include breakpoint(desktop) {
-            padding-left: rem(13);
-
-            p, ul, a, ol {
-                max-width: rem(312);
-            }
-
-            & + & {
-                margin-top: rem(10);
-                padding-bottom: rem(4);
-            }
-        }
-    }
-
-
     &--aside {
         @include breakpoint(tablet) {
             margin-bottom: rem(60);
@@ -498,6 +482,31 @@
                 @include letter-spacing(-0.6, 20);
 
                 margin-top: rem(8);
+            }
+        }
+    }
+
+
+    &--wide {
+        @include breakpoint(desktop) {
+            padding-left: rem(13);
+
+            p, ul, a, ol {
+                max-width: rem(312);
+            }
+
+            & + & {
+                margin-top: rem(10);
+                padding-bottom: rem(4);
+            }
+        }
+    }
+
+
+    &--extra-wide {
+        @include breakpoint(desktop) {
+            p, ul, a, ol {
+                max-width: rem(415);
             }
         }
     }

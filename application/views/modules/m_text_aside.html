@@ -21,12 +21,7 @@
                                 text--{{ modifier }}
                             {% endfor %}
 
-                        {% else %}
-
-                            text--large
-                            text--aside
-
-                        {% endif %}">
+                        {% else -%} text--large text--aside text--extra-wide {%- endif %}">
 
                         {% if heading %}
                             {% include 'components/c_heading.html' with heading %}
