@@ -253,6 +253,9 @@
     &__title {
         @include flex(row, flex-start, flex-end);
 
+        @include breakpoint(tablet) {
+            @include flex(row, flex-start, flex-start); 
+        }
 
         .map--global & {
             flex-wrap: wrap;
