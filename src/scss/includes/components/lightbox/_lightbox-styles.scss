@@ -1353,6 +1353,12 @@
             }
         }
 
+        &--related, &--info {
+            @include breakpoint(desktop) {
+                margin-inline: vw(260) auto;
+            }
+        }
+
         &--downloads {
             @include breakpoint(desktop) {
                 margin-inline: vw(260) auto;
