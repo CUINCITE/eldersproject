@@ -230,6 +230,10 @@
         transition: transform var(--animation-time) var(--easing);
         transform: translateY(var(--distance));
 
+        @include breakpoint(tablet) {
+            z-index: 5;
+        }
+
 
         .is-showing & {
             transform: translateY(0);
@@ -244,7 +248,7 @@
 
 
         @for $i from 1 through 6 {
-            li:nth-of-type(#{$i}) span {
+            li:nth-of-type(#{$i}) button {
                 transition-duration: .75s;
                 transition-delay: calc(1.1s + 0.05 * #{$i}s);
             }
@@ -254,22 +258,28 @@
         button {
             span {
                 display: inline-block;
+            }
+
+            @include breakpoint(not-phone) {
                 transition: transform var(--animation-time) var(--easing);
-                transform: translateX(10%);
-
-
-                @include breakpoint(phone) {
-                    transform: translateY(120%);
-                }
-
+                transform: translateX(120%);
 
                 .is-showing & {
                     transform: translateX(0);
+                }
+            }
 
+            @include breakpoint(phone) {
+                transform: translateY(120%);
+                transition: transform .75s var(--easing);
+                transition-delay: 1.10s;
 
-                    @include breakpoint(phone) {
-                        transform: translateY(0);
-                    }
+                .is-showing & {
+                    transform: translateY(0);
+                }
+
+                span {
+                    position: relative;
                 }
             }
         }
@@ -277,21 +287,41 @@
 
 
 
-    &__indicator i {
+    &__indicator {
         --animation-time: .4s;
 
-        transition: transform var(--animation-time) var(--easing);
-        transform: translateX(100%) rotate(45deg);
-
-
-        .is-showing & {
-            transform: translateX(0) rotate(45deg);
-            transition-delay: 1.8s;
+        @include breakpoint(not-phone) {
+            &-inner {
+                transition: transform var(--animation-time) var(--easing);
+                transform: translateX(100%);
+    
+                .is-showing & {
+                    transform: translateX(0);
+                    transition-delay: 1.8s;
+                }
+        
+                .is-closing & {
+                    transform: translateX(100%);
+                    transition-delay: 0s;
+                }
+            }
         }
 
-        .is-closing & {
-            transform: translateX(100%) rotate(45deg);
-            transition-delay: 0s;
+        @include breakpoint(phone) {
+            &-inner {
+                translate: 0 -120%;
+                transition: translate var(--animation-time) var(--easing);
+    
+                .is-showing & {
+                    translate: 0 0;
+                    transition-delay: 1.6s;
+                }
+        
+                .is-closing & {
+                    translate: 0 -120%;
+                    transition-delay: 0s;
+                }
+            }
         }
     }
 

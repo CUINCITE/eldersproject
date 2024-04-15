@@ -382,6 +382,7 @@
 
             @include breakpoint(phone) {
                 @include font-size(10, 1);
+
                 bottom: vw(12, phone);
                 right: var(--grid-margin);
             }

@@ -221,6 +221,10 @@
             opacity: 0;
 
             .is-list-view & { display: none; }
+
+            @include breakpoint(not-desktop) {
+                display: none; 
+            }
         }
 
 
@@ -416,7 +420,7 @@
         @include breakpoint(phone) {
             @include flex(row, space-between, flex-start);
 
-            margin-top: rem(10);
+            margin-top: rem(11);
         }
 
         &-wrap {
