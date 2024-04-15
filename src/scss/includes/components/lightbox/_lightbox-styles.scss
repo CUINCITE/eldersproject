@@ -660,7 +660,7 @@
             @include font-size(30, 1);
             @include letter-spacing(-0.9, 30);
 
-            padding-block: rem(8) rem(7);
+            padding-block: rem(9) rem(5);
             padding-inline: rem(18);
             overflow: visible !important;
             color: var(--main-text-color);
