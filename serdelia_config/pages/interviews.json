@@ -95,7 +95,7 @@
       "on_demand":true,
       "field": "narrator_occupation",
       "auto": {
-        "on_null": true,
+        
         "pattern": "{% for item in narrators %}{% if loop.index>1 and narrators[0].occupation %}, {% endif %}{{item.occupation}}{% endfor %}"
       }
     },
@@ -266,6 +266,12 @@
     },
     {
       "tab": "Copy",
+      "field": "lead",
+      "type": "text",
+      "label": "Lead",
+      "settings":{"rows":5}
+    },
+    {
       "field": "summary",
       "type": "text",
       "label": "Interview Summary"
