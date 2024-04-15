@@ -595,7 +595,7 @@
                 @include flex;
 
                 width: auto;
-                gap: vw(5, phone);
+                gap: vw(1, phone);
                 padding-inline: vw(20, phone);
                 background: var(--main-body-color);
 
@@ -1848,7 +1848,7 @@
                 @include font-size(30, 1);
                 
                 letter-spacing: -0.025em;
-                margin-top: 36px;
+                margin-top: 30px;
                 margin-bottom: 6px;
                 padding-top: 2px;
             }

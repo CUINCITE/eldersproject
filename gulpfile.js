@@ -324,7 +324,7 @@ function watch() {
         browserSync.init({
             open: true,
             host: plugins.ip.address(),
-            startPath: '/workspace',
+            startPath: '/',
             ghostMode: false,
             proxy: config.proxyURL,
             port: 7000,

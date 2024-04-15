@@ -72,7 +72,7 @@ class model_app_api_interview
         }
 
         $transcript = [
-            'english' => $this->formatMultipleTranscripts($raw_transcripts, $item['narrators'], $item['interviewers']),
+            'english' => $this->formatMultipleTranscripts($raw_transcripts, $item['narrators'], $item['interviewers'],$sessions),
 //            'spanish' => $this->formatTranscript($sessions)
         ];
 
@@ -135,7 +135,7 @@ class model_app_api_interview
         return $data;
     }
 
-    private function formatMultipleTranscripts($raw_transcripts, $narrators, $interviewers): array
+    private function formatMultipleTranscripts($raw_transcripts, $narrators, $interviewers, $sessions): array
     {
         // Cumulative seconds of all previous transcripts
         $timeOffset = 0;
@@ -143,6 +143,7 @@ class model_app_api_interview
 
         $narrator = (count($narrators) == 1) ? $narrators[0]['name'].' '.$narrators[0]['surname'] : 'Answer';
         $interviewer = (count($interviewers) == 1) ? $interviewers[0]['first_name'].' '.$interviewers[0]['last_name'] : 'Question';
+        $session_nr=0;
 
         foreach ($raw_transcripts as $raw_transcript)
         {
@@ -174,8 +175,11 @@ class model_app_api_interview
                 }
             }
 
-            // Update the time offset for the next transcript
-            $timeOffset += $max_transcript_seconds;
+            // WRONG! Update the time offset for the next transcript
+            // $timeOffset += $max_transcript_seconds;
+            $timeOffset+=$sessions[$session_nr]['duration'];
+            $session_nr++;
+
         }
 
         return $result;

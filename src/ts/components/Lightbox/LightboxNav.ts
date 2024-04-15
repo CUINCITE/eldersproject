@@ -1,5 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
-import { debounce } from 'Utils';
+import { debounce } from '../../Utils';
 import { breakpoint, easing } from '../../Site';
 import { Component } from '../../components/Component';
 
