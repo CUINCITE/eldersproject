@@ -4,7 +4,7 @@ import { Sound } from './Sound';
 export class Sounds {
 
     private static root: string = '/public/theme/sounds/';
-    private static canPlay: boolean = Sounds.supportsAudio();
+    private static canPlay: boolean = false; // Sounds.supportsAudio();
     private static muted: boolean = false;
     private static sources = {
         click: 'tick_silent.mp3',
