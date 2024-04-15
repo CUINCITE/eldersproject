@@ -85,7 +85,7 @@ export class LightboxNav extends Component {
             const { offsetLeft, clientWidth } = button;
 
             gsap.to(this.indicator, { duration: 0.4, ease: easing, x: offsetLeft - 5 + (clientWidth / 2) });
-            gsap.to(this.indicatorBox, { duration: 0.4, ease: easing, scaleX: clientWidth });
+            gsap.to(this.indicatorBox, { duration: 0.4, ease: easing, scaleX: clientWidth / 100 });
         });
 
         this.mm.add('(orientation: landscape), (min-width: 660px)', () => {

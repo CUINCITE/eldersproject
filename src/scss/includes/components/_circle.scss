@@ -15,8 +15,8 @@ $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pa
 
     @include breakpoint(desktop) {
         @media (min-aspect-ratio: 1450 / 820) {
-            width: 30vh;
-            height: 30vh;
+            // width: 30vh;
+            // height: 30vh;
         }
     }
 
