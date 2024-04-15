@@ -47,11 +47,11 @@
                                         <a href="{{ item.url }}" class="names__link"></a>
                                         <div class="names__author">
                                             <div class="names__box">
-                                                <span>{{ item.label }}</span>
+                                                <span>{{ item.label|raw }}</span>
                                             </div>
                                         </div>
                                         <div class="names__expand">
-                                            <p class="names__claim">{{ item.narrator_occupation }}</p>
+                                            <p class="names__claim">{{ item.narrator_occupation|raw }}</p>
                                         </div>
                                     </li>
                                 {% endfor %}
