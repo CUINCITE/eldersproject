@@ -40,6 +40,17 @@
             background-color: var(--color-black);
             z-index: 3;
         }
+
+        &--front {
+            z-index: 10;
+            background-color: var(--color-box);
+            transform: scaleX(0);
+            transition: transform 0.7s $easing 0.2s;
+
+            body.has-menu-open & {
+                transform: scaleX(1);
+            }
+        }
     }
 
 
