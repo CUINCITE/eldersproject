@@ -18,6 +18,7 @@ export const sticker = (el: HTMLElement, delay?: number, quick?: number) => {
             start: 'top bottom',
             invalidateOnRefresh: true,
         },
+
     })
         .addLabel('start')
         .fromTo(el, { opacity: 0 }, {

@@ -50,6 +50,20 @@
             body.has-menu-open & {
                 transform: scaleX(1);
             }
+
+            &:nth-last-child(1) {
+                background-color: var(--color-box);
+            }
+
+            &:nth-last-child(2) {
+                background-color: var(--color-purple);
+                transition-delay: 0.25s;
+            }
+
+            &:nth-last-child(3) {
+                background-color: var(--color-pale-pink);
+                transition-delay: 0.3s;
+            }
         }
     }
 
