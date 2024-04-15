@@ -1,4 +1,5 @@
 import { gsap } from 'gsap/dist/gsap';
+import { debounce } from 'Utils';
 import { breakpoint, easing } from '../../Site';
 import { Component } from '../../components/Component';
 
@@ -43,6 +44,14 @@ export class LightboxNav extends Component {
                 setTimeout(() => this.updateIndicator(btn), 500);
             }
         });
+
+        window.addEventListener('resize', debounce(() => {
+            [...this.navButtons].forEach(btn => {
+                if (breakpoint.phone && btn.classList.contains('is-active')) {
+                    setTimeout(() => this.updateIndicator(btn), 500);
+                }
+            });
+        }));
     };
 
 

@@ -31,7 +31,7 @@
                 <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
                     {% set titleArray = title|split(',') %}
                     {% for name in titleArray %}
-                        <span>{{name}}{% if not loop.last %},<br class="phone-hide"> {% endif %}</span>
+                        <span>{{name}}{% if not loop.last %},<br> {% endif %}</span>
                     {% endfor %}
                 </h2>
                 <div class="lightbox__filters">
@@ -48,7 +48,7 @@
                 <div class="lightbox__footer">
                     <button class="lightbox__play js-player-btn" data-audio-player="{{id}}">
                         [[svg::play]]
-                        <span>
+                        <span class="lightbox__play-text">
                             <span>
                                 <span class="lightbox__play-mask">
                                     <span>Play</span>

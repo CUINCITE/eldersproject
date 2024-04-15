@@ -595,7 +595,7 @@
                 @include flex;
 
                 width: auto;
-                gap: vw(20, phone);
+                gap: vw(5, phone);
                 padding-inline: vw(20, phone);
                 background: var(--main-body-color);
 
@@ -651,11 +651,16 @@
             // }
         }
 
+        @include breakpoint(not-phone) {
+            padding-right: 2px;
+            margin-right: -2px;
+        }
+
         @include breakpoint(phone) {
             @include font-size(30, 1);
             @include letter-spacing(-0.9, 30);
 
-            padding-block: rem(12) rem(7);
+            padding-block: rem(8) rem(7);
             padding-inline: rem(18);
             overflow: visible !important;
             color: var(--main-text-color);
@@ -739,6 +744,7 @@
         &--info {
             @include breakpoint(desktop) {
                 margin-top: -1px;
+                margin-left: -1px;
             }
 
             span > span {
@@ -935,6 +941,10 @@
         }
 
         @include breakpoint(tablet) {
+            @include flex(column, flex-start, flex-start);
+        }
+
+        @include breakpoint(phone) {
             @include flex(column, flex-start, flex-start);
         }
     }
@@ -1138,12 +1148,17 @@
 
             margin-left: 0;
 
-
             &--long {
                 @include font-size(34, 28);
 
                 letter-spacing: -0.015em;
                 margin-bottom: rem(6);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(50, 0.82);
+
+                margin-bottom: rem(7);
             }
         }
     }
@@ -1830,12 +1845,14 @@
             letter-spacing: normal;
 
             @include breakpoint(phone) {
-                margin-top: 18px;
-                margin-bottom: 38px;
+                @include font-size(30, 1);
+                
+                letter-spacing: -0.025em;
+                margin-top: 36px;
+                margin-bottom: 6px;
                 padding-top: 2px;
             }
         }
-
 
 
         &-mask {
@@ -1843,6 +1860,10 @@
             display: inline-flex;
             overflow: hidden;
 
+            @include breakpoint(phone) {
+                padding-top: 0.2em;
+                margin-top: -0.2em;
+            }
 
             span:last-of-type {
                 position: absolute;
@@ -1871,7 +1892,13 @@
 
 
             @include breakpoint(not-desktop) {
-                @include font-size(21, 19);
+                @include breakpoint(tablet) {
+                    @include font-size(21, 19);
+                }
+
+                @include breakpoint(phone) {
+                    margin-left: 0.15em;
+                }
             }
         }
 
@@ -1894,6 +1921,10 @@
                 width: auto;
                 margin-left: 5px;
             }
+
+            @include breakpoint(phone) {
+                @include flex(row, flex-start, center);
+            }
         }
 
 
@@ -1902,6 +1933,11 @@
                 width: 30px;
                 height: 35px;
                 margin-top: -4px;
+
+                @include breakpoint(phone) {
+                    width: 18px;
+                    height: 25px;
+                }
             }
 
 

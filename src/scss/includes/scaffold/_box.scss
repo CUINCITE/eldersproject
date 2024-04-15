@@ -6,6 +6,10 @@
 
     &--nomargin { border-top: none !important; }
 
+    &--negative {
+        margin-top: -1px;
+    }
+
 
     .is-transition & { background: none; border-top: none; }
 

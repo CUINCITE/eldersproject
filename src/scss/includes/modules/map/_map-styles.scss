@@ -718,4 +718,15 @@
         opacity: 0;
         transition: opacity .3s $ease-out;
     }
+
+    .mapboxgl-marker {
+
+        @include breakpoint(desktop) {
+            top: vw(14);
+        }
+
+        @include breakpoint(tablet) {
+            top: vw(6, tablet);
+        }
+    }
 }
