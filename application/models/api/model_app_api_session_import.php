@@ -120,7 +120,9 @@ class model_app_api_session_import
 			$txt=str_replace('  ',' ',$txt);				
 			
 		}
-		if (count($narrators)==1) $txt=str_replace($narrators[0],'A',$txt);
+
+		// THAT'S WRONG - WILL CONVERT ALL NAMES, ALSO THESE INSIDE THE SENTENCE!
+		//if (count($narrators)==1) $txt=str_replace($narrators[0],'A',$txt);
 				
 		$time=substr($txt,1,8);
 		if ($time[2]==':' && $time[5]==':'); else $time=$time_last;				

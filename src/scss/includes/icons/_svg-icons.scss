@@ -232,28 +232,16 @@
         @include breakpoint(desktop) {
             width: rem(62);
             height: rem(75);
-
-
-            margin-top: rem(-16);
-            margin-left: rem(30);
-            margin-right: rem(6);
         }
 
         @include breakpoint(tablet) {
             width: rem(46);
             height: rem(62);
-
-
-            margin-top: rem(-12);
-            margin-right: rem(6);
         }
 
         @include breakpoint(phone) {
             width: rem(34);
             height: rem(42);
-
-            margin-top: rem(-4);
-            margin-right: rem(2);
         }
     }
 }
@@ -301,27 +289,16 @@
     @include breakpoint(desktop) {
         width: rem(74);
         height: rem(71);
-
-
-        margin-top: rem(-15);
-        margin-left: rem(2);
-        margin-right: rem(6);
     }
 
     @include breakpoint(tablet) {
-        width: rem(60);
-        height: rem(60);
-
-
-        margin-top: rem(-15);
-        margin-left: rem(2);
-        margin-right: rem(6);
+        width: rem(58);
+        height: rem(58);
     }
 
     @include breakpoint(phone) {
         width: rem(41);
         height: rem(41);
-        margin-top: rem(-4);
     }
 
     path {
@@ -353,15 +330,11 @@
         @include breakpoint(desktop) {
             width: rem(68);
             height: rem(36);
-            margin-top: rem(18);
-            margin-left: rem(-4);
-            margin-right: rem(-2);
         }
 
         @include breakpoint(tablet) {
             width: rem(56);
             height: rem(30);
-            margin-top: rem(10);
         }
 
         @include breakpoint(phone) {

@@ -19,7 +19,7 @@ class serdelia_plugin_interviewer_update
         $params=$this->params;
 
         
-        $items=$this->cms->getJsonModel('interviews',['interviewers'=>$params['record']],false,null,null,['count'=>true]);
+        $items=$this->cms->getJsonModel('interviews',['active'=>1,'interviewers'=>$params['record']],false,null,null,['count'=>true]);
         $r=$this->cms->putJsonModel('interviewers',['amount'=>$items],['id'=>$params['record']]);
         if (!$r) exit('error');
         //$record=$this->cms->getJsonModel('interviews',['id'=>$params['record']],true);

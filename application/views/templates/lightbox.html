@@ -331,7 +331,13 @@
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
             <div class="lightbox__buttons-scroller">
-                <span class="lightbox__indicator js-nav-indicator desktop-only"><i></i></span>
+                <span class="lightbox__indicator js-nav-indicator">
+                    <span class="lightbox__indicator-inner">
+                        <span class="lightbox__indicator-box js-nav-indicator-box tablet-hide desktop-hide"></span>
+                        <span class="lightbox__indicator-tip"></span>
+                    </span>
+                </span>
+                
                 <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
                 {% if images %}
                 <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
