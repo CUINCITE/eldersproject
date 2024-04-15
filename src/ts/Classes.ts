@@ -16,6 +16,7 @@ import { Map } from './components/Map/Map';
 import { Collections } from './components/Collections';
 import { PolaroidGallery } from './components/PolaroidGallery';
 import { Dropdown } from './components/Dropdown';
+import { SmoothScroll } from './components/SmoothScroll';
 import { Circle } from './components/Circle/Circle';
 
 export const components = {
@@ -25,6 +26,7 @@ export const components = {
     Circle,
     Collections,
     Dropdown,
+    SmoothScroll,
     FilterLetters,
     Load,
     Map,
