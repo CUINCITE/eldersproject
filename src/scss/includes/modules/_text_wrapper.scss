@@ -91,7 +91,7 @@
             z-index: 1;
         }
 
-        & + &, .text + & {
+        & + & {
             @include breakpoint(desktop) {
                 margin-top: rem(25);
             }
@@ -102,6 +102,20 @@
 
             @include breakpoint(phone) {
                 margin-top: rem(25);
+            }
+        }
+
+        .text + & {
+            @include breakpoint(desktop) {
+                margin-top: rem(25);
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: 0;
             }
         }
 
