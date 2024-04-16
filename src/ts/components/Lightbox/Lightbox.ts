@@ -71,7 +71,6 @@ export class Lightbox {
         this.controller = new AbortController();
 
         document.body.classList.add('is-loading-lightbox');
-        console.log('load lightbox');
 
         const isWorkspace = window.location.pathname.indexOf('/workspace/') >= 0;
         // const url = isWorkspace ? this.settings.api[type] : window.location.href + window.location.search;
@@ -92,7 +91,6 @@ export class Lightbox {
 
             const data = await response.json();
             this.view.classList.remove('is-fetching');
-            console.log('lightbox loaded');
             this.controller = null;
 
             return data;
@@ -178,10 +176,11 @@ export class Lightbox {
 
         if (patternFound) {
 
-            this.loadingPromise = this.load();
+            const hidingPromise = this.hide(); //
+            this.loadingPromise = this.load(); // load must be fired after hiding!
 
             Promise.all([
-                this.hide(),
+                hidingPromise,
                 this.loadingPromise,
             ]).then(results => {
                 const data = results.filter(Boolean).reduce((p, c) => ({ ...p, ...c })) as LightboxData;
@@ -221,7 +220,7 @@ export class Lightbox {
 
         this.setThemeColor('black', false);
 
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>(resolve => {
             this.animating = true;
             this.view.classList.add('is-closing');
             gsap.to(this.view, {
@@ -268,7 +267,6 @@ export class Lightbox {
                 duration: 0.1,
                 ease: 'none',
                 onStart: () => {
-                    console.log('show lightbox');
                     document.body.classList.add('has-lightbox');
                     document.body.classList.remove('is-loading-lightbox');
                     this.view.classList.remove('is-closing');

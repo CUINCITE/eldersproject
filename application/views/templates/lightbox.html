@@ -312,7 +312,7 @@
                             <ul class="lightbox__related-list">
                                 {% for item in related %}
                                     <li class="lightbox__related-item button--draw" data-component="Button">
-                                        <a class="lightbox__related-link" href="{{item.url}}"></a>
+                                        <a class="lightbox__related-link" href="{{item.url}}" data-history="replace"></a>
                                         <span class="lightbox__related-arrow desktop-only">
                                             <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
                                                 <span class="vertical js-arrow-vertical"></span>
@@ -348,8 +348,8 @@
                     </span>
                 </span>
 
-                
-                
+
+
                 <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
                 {% if images %}
                 <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>
