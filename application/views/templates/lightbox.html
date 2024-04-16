@@ -18,9 +18,9 @@
 
 {% endmacro %}
 
-
 {% import _self as macros %}
 
+{% set special_chars = ['ñ'] %}
 
 <div class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
@@ -28,7 +28,7 @@
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
-                <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
+                <h2 class="lightbox__title{% if title|length > 25 %} lightbox__title--long{% endif %}{% if title|lower matches '/\b\w*[ñéáíó]\w*\b/g' %} lightbox__title--accent{% endif %}">
                     {% set titleArray = title|split(',') %}
                     {% for name in titleArray %}
                         <span>{{name}}{% if not loop.last %},<br> {% endif %}</span>

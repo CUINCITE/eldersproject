@@ -33,7 +33,7 @@
 
         @include breakpoint(desktop) {
             width: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(22)});
-            translate: calc(var(--GLOBAL-aside-width) / 2) 0;
+            translate: vw(57) 0;
         }
 
         @include breakpoint(not-desktop) {

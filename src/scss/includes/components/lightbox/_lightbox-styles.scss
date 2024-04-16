@@ -1146,6 +1146,15 @@
             span { white-space: nowrap; }
         }
 
+        
+        // &--accent {
+        //     @include breakpoint(desktop) {
+        //         @include font-size(80, 0.78);
+
+        //         padding-top: rem(25);
+        //     }
+        // }
+
 
         @include breakpoint(not-desktop) {
             @include font-size(50, 1);
