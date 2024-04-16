@@ -109,7 +109,10 @@
                         <div class="lightbox__slider slider js-lightbox-slider">
                             <div class="slider__captions">
                                 {% for item in images %}
-                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">{{item.description}}</div>
+                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">
+                                        <div class="lightbox__counter">{% if loop.index < 10 %}0{% endif %}{{loop.index}}/{% if images.length < 10 %}0{% endif %}{{images|length}}</div>
+                                        <p>{{item.description}}</p>
+                                    </div>
                                 {% endfor %}
                             </div>
                             <div class="slider__wrap js-slider-wrap js-rotate">
@@ -121,6 +124,7 @@
                                         <div class="lightbox__slide-image polaroid
                                         {% if image.original.width and image.original.height %}
                                         {% if image.original.width > image.original.height %} polaroid--horizontal
+                                        {% elseif image.original.width > image.original.height * 1.8 %} polaroid--full-width
                                         {% elseif image.original.width == image.original.height %} polaroid--square
                                         {% endif %}
                                         {% endif %}">
@@ -296,7 +300,7 @@
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span>
+                                            {{item.name}} {% if item.name|length > 18 %}<br class="phone-only">{% endif %}<span class="size">&nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span></span>
                                         </a>
                                     </li>
                                 {% endfor %}
