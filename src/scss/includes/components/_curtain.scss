@@ -123,6 +123,11 @@
         opacity: 0;
         scale: 0;
         animation: pulse 3s infinite ease-in-out;
+
+        @include breakpoint(phone) {
+            width: rem(140);
+            height: rem(140);
+        }
     }
 
 
@@ -132,5 +137,10 @@
         height: rem(316);
         opacity: 0;
         scale: 0;
+
+        @include breakpoint(phone) {
+            width: rem(200);
+            height: rem(200);
+        }
     }
 }
