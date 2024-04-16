@@ -13,6 +13,7 @@ import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
 import { Map } from './components/Map/Map';
+import { Map2 } from './components/Map/Map2';
 import { Collections } from './components/Collections';
 import { PolaroidGallery } from './components/PolaroidGallery';
 import { Dropdown } from './components/Dropdown';
@@ -30,6 +31,7 @@ export const components = {
     FilterLetters,
     Load,
     Map,
+    Map2,
     Modal,
     More,
     Player,
