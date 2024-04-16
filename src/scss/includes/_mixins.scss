@@ -153,8 +153,8 @@ $line-height: 1.4;
                     display: none;
                 }
 
-                @include breakpoint(phone) {
-                    bottom: 120%;
+                @include breakpoint(not-desktop) {
+                    display: none;
                 }
             }
         }

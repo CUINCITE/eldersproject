@@ -31,7 +31,7 @@
                 <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
                     {% set titleArray = title|split(',') %}
                     {% for name in titleArray %}
-                        <span>{{name}}{% if not loop.last %}, {% endif %}</span>
+                        <span>{{name}}{% if not loop.last %},<br> {% endif %}</span>
                     {% endfor %}
                 </h2>
                 <div class="lightbox__filters">
@@ -48,7 +48,7 @@
                 <div class="lightbox__footer">
                     <button class="lightbox__play js-player-btn" data-audio-player="{{id}}">
                         [[svg::play]]
-                        <span>
+                        <span class="lightbox__play-text">
                             <span>
                                 <span class="lightbox__play-mask">
                                     <span>Play</span>
@@ -222,10 +222,20 @@
                                     <div class="transcript__nav js-transcript-nav">
                                         <span class="transcript__counters js-transcript-counters"></span>
                                         <button type="button" class="transcript__nav-button transcript__nav-button--prev js-transcript-prev">
-                                            [[svg::lightbox-arrow-small]]
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
                                         </button>
                                         <button type="button" class="transcript__nav-button transcript__nav-button--next js-transcript-next">
-                                            [[svg::lightbox-arrow-small]]
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
                                         </button>
                                         <button type="button" class="js-transcript-close"><i class="icon-close"></i></button>
                                     </div>
@@ -284,7 +294,7 @@
                                     <li>
                                         <a href="{{item.url}}" data-history="false" download>
                                             <span class="lightbox__downloads-arrow">
-                                            [[svg::lightbox-arrow-small]]
+                                                [[svg::lightbox-arrow-small]]
                                             </span>
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
@@ -334,7 +344,15 @@
         </div>
         <ul class="lightbox__buttons js-lightbox-nav">
             <div class="lightbox__buttons-scroller">
-                <span class="lightbox__indicator js-nav-indicator desktop-only"><i></i></span>
+                <span class="lightbox__indicator js-nav-indicator">
+                    <span class="lightbox__indicator-inner">
+                        <span class="lightbox__indicator-box js-nav-indicator-box tablet-hide desktop-hide"></span>
+                        <span class="lightbox__indicator-tip"></span>
+                    </span>
+                </span>
+
+                
+                
                 <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
                 {% if images %}
                 <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>

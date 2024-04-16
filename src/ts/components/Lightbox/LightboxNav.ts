@@ -1,5 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
-import { easing } from '../../Site';
+import { debounce } from '../../Utils';
+import { breakpoint, easing } from '../../Site';
 import { Component } from '../../components/Component';
 
 
@@ -11,6 +12,8 @@ export class LightboxNav extends Component {
     private lightboxEl: HTMLElement;
     private isAnimating: boolean;
     private indicator: HTMLElement;
+    private indicatorBox: HTMLElement;
+    private mm: gsap.MatchMedia;
 
     constructor(protected view: HTMLElement, lightboxEl: HTMLElement) {
         super(view);
@@ -19,6 +22,9 @@ export class LightboxNav extends Component {
         this.navButtons = this.view.querySelectorAll('button');
         this.navTabs = document.querySelectorAll('.js-lightbox-tab');
         this.indicator = this.view.querySelector('.js-nav-indicator');
+        this.indicatorBox = this.view.querySelector('.js-nav-indicator-box');
+
+        this.mm = gsap.matchMedia();
 
         this.bind();
     }
@@ -31,7 +37,21 @@ export class LightboxNav extends Component {
 
 
     private bind = (): void => {
-        [...this.navButtons].forEach(btn => btn.addEventListener('click', this.onBtnClick));
+        [...this.navButtons].forEach(btn => {
+            btn.addEventListener('click', this.onBtnClick);
+
+            if (breakpoint.phone && btn.classList.contains('is-active')) {
+                setTimeout(() => this.updateIndicator(btn), 500);
+            }
+        });
+
+        window.addEventListener('resize', debounce(() => {
+            [...this.navButtons].forEach(btn => {
+                if (breakpoint.phone && btn.classList.contains('is-active')) {
+                    setTimeout(() => this.updateIndicator(btn), 500);
+                }
+            });
+        }));
     };
 
 
@@ -61,10 +81,19 @@ export class LightboxNav extends Component {
     private updateIndicator = (button: HTMLElement): void => {
         if (!button) return;
 
-        const { offsetTop, clientHeight } = button;
-        const y = offsetTop + ((clientHeight - this.indicator.clientHeight) / 2);
+        this.mm.add('(orientation: portrait) and (max-width: 659px)', () => {
+            const { offsetLeft, clientWidth } = button;
 
-        gsap.to(this.indicator, { y, duration: 0.3, ease: easing });
+            gsap.to(this.indicator, { duration: 0.4, ease: easing, x: offsetLeft - 5 + (clientWidth / 2) });
+            gsap.to(this.indicatorBox, { duration: 0.4, ease: easing, scaleX: clientWidth / 100 });
+        });
+
+        this.mm.add('(orientation: landscape), (min-width: 660px)', () => {
+            const { offsetTop, clientHeight } = button;
+            const y = offsetTop + ((clientHeight - this.indicator.clientHeight) / 2);
+
+            gsap.to(this.indicator, { y, duration: 0.3, ease: easing });
+        });
     };
 
 

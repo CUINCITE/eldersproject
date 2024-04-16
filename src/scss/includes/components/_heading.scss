@@ -279,6 +279,17 @@
                 }
             }
         }
+
+        &.heading--medium {
+            i {
+                display: inline-block;
+                text-wrap: pretty;
+
+                @include breakpoint(desktop) {
+                    padding-left: rem(12);
+                }
+            }
+        }
     }
 
 
@@ -291,6 +302,12 @@
 
             margin-block: trim-font(175/204);
             padding-left: rem(12);
+        }
+
+        @include breakpoint(not-desktop) {
+            .interviews__heading & {
+                position: relative;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -428,8 +445,7 @@
             @include letter-spacing(-1, 30);
 
             margin-block: trim-font(1);
-
-            inset: auto rem(100) rem(14) auto;
+            inset: auto auto rem(44) calc(100% + #{rem(18)});
         }
 
         @include breakpoint(phone) {
@@ -437,8 +453,7 @@
             @include letter-spacing(-1, 30);
 
             margin-block: trim-font(1);
-
-            inset: auto rem(30) rem(12) auto;
+            inset: auto auto rem(20) calc(100% + #{rem(10)});
         }
     }
 

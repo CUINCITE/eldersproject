@@ -240,5 +240,13 @@
                 @include letter-spacing(-3, 122);
             }
         }
+
+        @include breakpoint(phone) {
+            .text_aside__decorator--boxes {
+                left: calc(-1 * var(--grid-margin));
+                width: calc(100vw - var(--GLOBAL-aside-width));
+                border-bottom: 1px solid var(--color-bg);
+            }
+        }
     }
 }

@@ -7,9 +7,9 @@ export const people = (el: HTMLElement) => {
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: el,
-            pinSpacing: false,
             start: 'top bottom',
             invalidateOnRefresh: true,
+            toggleActions: 'play none none reset',
         },
     });
     tl.addLabel('start');
@@ -27,7 +27,7 @@ export const people = (el: HTMLElement) => {
         }, {
             yPercent: 0,
             rotate: 0,
-            duration: 0.45,
+            duration: 0.75,
             delay: 0.1 * i,
             ease: 'power2.out',
             clearProps: 'all',

@@ -79,6 +79,8 @@
 
 
     &--authors-big {
+        letter-spacing: -0.02em;
+
         span {
             position: relative;
             display: inline-block;
@@ -108,80 +110,101 @@
             &:last-of-type::after { content: none; }
         }
 
+
+
         @include breakpoint(desktop) {
             @include font-size(100, 83);
 
-            letter-spacing: -0.02em;
             margin-bottom: rem(13);
             max-width: 100%;
             padding-bottom: rem(57);
 
-            // @media (max-height: 719px) {
-            //     @include font-size(106);
-
-            //     max-width: 80%;
-            //     line-height: 0.827;
-            //     letter-spacing: -0.035em;
-            // }
-
-
-            // @media (max-height: 700px) and (max-aspect-ratio: 1440 / 900) {
-            //     @include font-size(96, 80);
-
-            //     max-width: 85%;
-            //     letter-spacing: -0.025em;
-            // }
-
-
-            // @media (min-height: 721px) and (max-aspect-ratio: 1440 / 600) {
-            //     @include font-size(104, 88);
-            //     max-width: 85%;
-            // }
-
-            // @include breakpoint(hd) {
-            //     max-width: 80%;
-            // }
-
             span {
                 white-space: nowrap;
             }
+
+            .svg-cassette {
+                margin-top: rem(18);
+                margin-left: rem(-4);
+                margin-right: rem(-2);
+            }
+
+            .svg-pin-color {
+                margin-top: rem(-16);
+                margin-left: rem(30);
+                margin-right: rem(6);
+            }
+
+            .svg-books {
+                margin-top: rem(-15);
+                margin-left: rem(2);
+                margin-right: rem(6);
+            }
         }
 
-        @include breakpoint(tablet) {
-            @include font-size(80, 0.82);
-            margin-bottom: rem(20);
-
-            // max-width: 90%;
-        }
 
         @include breakpoint(tablet-landscape) {
             @include font-size(96, 0.82);
         }
 
-        @include breakpoint(phone) {
 
+        @include breakpoint(not-desktop) {
+            
+            @include breakpoint(tablet) {
+                @include font-size(80, 0.82);
+    
+                margin-bottom: rem(20);
+                padding-top: rem(4);
+                max-width: 75%;
 
-            @include font-size(56, 46);
+                .svg-cassette {
+                    margin-top: rem(13);
+                    margin-right: rem(-4);
+                }
 
-            margin-bottom: rem(43);
-            padding-left: rem(45);
-            padding-top: rem(4);
-
-            svg {
-                position: absolute;
-                top: 50%;
-                left: unset;
-                right: calc(100% + #{rem(6)});
-                translate: 0 -50%;
+                .svg-pin-color {
+                    margin-top: rem(-15);
+                    margin-right: rem(2);
+                }
+    
+                .svg-books {
+                    margin-top: rem(-16);
+                    margin-left: rem(2);
+                    margin-right: rem(6);
+                }
             }
+    
 
-            .svg-cassette {
-                right: unset;
-                left: 3.06em;
+
+            @include breakpoint(phone) {
+                @include font-size(56, 46);
+    
+                margin-bottom: rem(43);
+                padding-top: rem(4);
+    
+                .svg-cassette {
+                    margin-top: rem(10);
+                    margin-right: rem(-3);
+                }
+
+                .svg-pin-color {
+                    margin-top: rem(-10);
+                    margin-right: rem(2);
+                    margin-left: rem(2);
+                }
+    
+                .svg-books {
+                    margin-top: rem(-10);
+                    margin-right: rem(4);
+                }
             }
         }
 
-        .svg-cassette { @extend %svg-cassette-spinning !optional; }
+        .svg-cassette {
+            @extend %svg-cassette-spinning !optional; 
+            
+            right: unset;
+        }
 
 
         &[data-observe].is-below .svg-pin-color { @extend %svg-pin-color-out !optional; }
@@ -256,6 +279,10 @@
             inset: auto rem(25) rem(-15) auto;
             width: fit-content;
             transition: opacity 0.3s $easing;
+
+            @include breakpoint(phone) {
+                inset: auto rem(16) rem(-15) auto;
+            }
         }
 
         &:has(a) .sticker {

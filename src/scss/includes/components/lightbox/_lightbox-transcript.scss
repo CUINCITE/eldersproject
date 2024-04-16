@@ -218,12 +218,13 @@
         background-color: var(--theme-color);
         color: var(--color-grey200);
         border-radius: rem(10);
-        padding: rem(4) rem(12) rem(3) rem(78);
+        padding: rem(2) rem(12) rem(5) rem(78);
         z-index: 0;
         position: relative;
         opacity: 0;
         pointer-events: none;
         margin-left: rem(-20);
+        overflow: hidden;
 
 
         &.is-active { opacity: 1; pointer-events: all; }
@@ -238,16 +239,51 @@
         &-button {
 
             min-width: rem(20);
-
+            position: relative;
 
             svg {
                 width: rem(8);
                 height: rem(14);
             }
 
+            @include breakpoint(desktop) {
+                @include hover {
+                    .transcript__arrow {
+                        transition: translate 0.3s ease;
+
+                        &:nth-child(1) {
+                            translate: 0 120%;
+                        }
+
+                        &:nth-child(2) {
+                            translate: -50% 0;
+                        }
+                    }
+                }
+            }
+
 
             &--prev {
                 svg { transform: scaleY(-1); }
+
+                .transcript__arrow + .transcript__arrow {
+                    translate: -50% 120%;
+                }
+
+                @include breakpoint(desktop) {
+
+                    @include hover {
+                        .transcript__arrow {
+                            &:nth-child(1) {
+                                translate: 0 -120%;
+                            }
+    
+                            &:nth-child(2) {
+                                translate: -50% 0;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -292,5 +328,31 @@
 
 
         &.is-active { display: block; }
+    }
+
+    &__counters {
+        margin-top: 0.1em;
+        margin-bottom: -0.1em;
+    }
+
+    &__arrow {
+        transition: translate 0s;
+        display: block;
+        left: 0;
+        position: relative;
+        top: 0;
+
+
+        // position: relative;
+        
+        & + & {
+            position: absolute;
+            left: 50%;
+            translate: -50% -120%;
+    
+            @include breakpoint(not-desktop) {
+                display: none;
+            }
+        }
     }
 }
