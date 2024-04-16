@@ -476,6 +476,9 @@
                         transform: scaleX(1);
                     }
                 }
+                ~ .interviews__locations {
+                    transform: translateX(rem(40));
+                }
             }
         }
 
@@ -510,15 +513,16 @@
 
         @include breakpoint(desktop) {
             @include font-size(20, 19);
-            @include letter-spacing(0.5, 20);
+            @include letter-spacing(-0.25, 20);
 
             padding-top: rem(15);
             padding-left: rem(1);
+            transition: transform 0.4s $easing;
 
 
             .is-grid-view & {
                 @include font-size(17, 19);
-                @include letter-spacing(0.4, 17);
+                @include letter-spacing(-0.4, 17);
 
                 padding-top: rem(4);
                 flex-direction: row;

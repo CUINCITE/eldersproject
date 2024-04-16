@@ -426,7 +426,7 @@ export class AudioPlayer extends Videos {
         if (Lightbox.isOpen) return;
 
         // if audio player is not initialized yet, load random audio
-        if (!this.isInitialized) this.setNewAudio();
+        if (!this.isInitialized) this.setNewAudio(undefined, true);
 
         this.isExpanded ? this.minimize() : this.expand();
     };
