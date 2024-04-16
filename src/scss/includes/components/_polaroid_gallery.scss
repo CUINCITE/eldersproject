@@ -3,6 +3,14 @@
     margin-bottom: rem(10);
     width: rem(460);
 
+    @include breakpoint(tablet) {
+        margin-bottom: rem(42);
+    }
+
+    @include breakpoint(phone) {
+        margin-bottom: rem(36);
+    }
+
 
     &__wrapper {
         @include flex(column, space-between, flex-start);
@@ -16,6 +24,12 @@
         display: grid;
         grid-template-columns: auto;
         margin-bottom: rem(9);
+
+        @include breakpoint(not-desktop) {
+            div {
+                grid-row-start: 1;
+            }
+        }
     }
 
 
