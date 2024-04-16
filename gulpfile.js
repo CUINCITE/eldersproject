@@ -208,11 +208,20 @@ function imagemin() {
 
 // copy webp without minification
 // to destination folder:
-function webpcopy() {
+function webpCopy() {
     return gulp.src(paths.webp.source)
         .pipe(plugins.newer(paths.webp.dest))
         .pipe(gulp.dest(paths.webp.dest))
-        .pipe(plugins.notify({ message: 'WEBP no-min copied successfuly!', onLast: true }));
+        .pipe
+        (plugins.notify({ message: 'WEBP no-min copied successfuly!', onLast: true }));
+}
+
+// png to webp
+function imagesToWebp() {
+    return gulp.src(paths.to_webp.source)
+        .pipe(plugins.webp())
+        .pipe(gulp.dest(paths.to_webp.dest))
+        .pipe(plugins.notify({ message: 'Images converted to webp successfuly!', onLast: true }));
 }
 
 
@@ -360,7 +369,7 @@ exports.fonts = fonts;
 exports.bump = bump;
 exports.favicons = favicons;
 exports.svg = gulp.series(svgnomin, svgmin, svgstore);
-exports.images = gulp.series(cleanImages, imagemin, webpcopy, svgnomin, svgmin, svgstore);
+exports.images = gulp.series(cleanImages, imagemin, webpCopy, imagesToWebp, svgnomin, svgmin, svgstore);
 // eslint-disable-next-line max-len
 exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, sounds, bump);
 exports.watch = watch;
