@@ -78,6 +78,7 @@ export class Map2 extends Component {
     private geojson: mapboxgl.GeoJSONSourceRaw;
     private style: string;
     private scrolledContainer: HTMLElement;
+    private initZoom = 0;
 
 
     constructor(protected view: HTMLElement) {
@@ -281,9 +282,16 @@ export class Map2 extends Component {
         });
 
         this.map.on('moveend', () => {
-            if (this.map.getZoom() > 3.9) {
+            if (this.initZoom === 0) {
+                this.initZoom = this.map.getZoom();
+            }
+
+            if (this.map.getZoom() > this.initZoom) {
                 this.isGlobalView = false;
                 this.view.classList.add('is-zoomed');
+            } else {
+                this.isGlobalView = true;
+                this.view.classList.remove('is-zoomed');
             }
         });
 
