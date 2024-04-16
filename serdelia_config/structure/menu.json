@@ -89,6 +89,9 @@
             },
             {
                 "label":"Map Locations","page":"map_locations"
+            },
+            {
+                "label":"Map Locations GLOBAL","page":"map_locations_global"
             }
             
             
