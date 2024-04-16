@@ -109,7 +109,10 @@
                         <div class="lightbox__slider slider js-lightbox-slider">
                             <div class="slider__captions">
                                 {% for item in images %}
-                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">{{item.description}}</div>
+                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">
+                                        <div class="lightbox__counter">{% if loop.index < 10 %}0{% endif %}{{loop.index}}/{% if images.length < 10 %}0{% endif %}{{images|length}}</div>
+                                        <p>{{item.description}}</p>
+                                    </div>
                                 {% endfor %}
                             </div>
                             <div class="slider__wrap js-slider-wrap js-rotate">

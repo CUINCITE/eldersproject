@@ -37,6 +37,13 @@
 
 
 
+    &__counter {
+        @include font-family(compressed);
+        display: block;
+    }
+
+
+
     &__grid {
         position: relative;
         width: 100%;
@@ -1277,7 +1284,7 @@
 
             .polaroid--horizontal {
                 --polaroid-width: unset  !important;
-                --polaroid-height: calc(var(--container-height) * .75) !important;
+                --polaroid-height: var(--container-height) !important;
             }
 
 
