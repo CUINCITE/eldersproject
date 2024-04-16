@@ -484,6 +484,7 @@ export class Map2 extends Component {
 
 
         this.activeLocation = location;
+        console.log(location);
 
         this.setPopup(this.activeLocation);
         this.buildInterviews(this.activeLocation);
@@ -571,7 +572,11 @@ export class Map2 extends Component {
     private buildInterviews = (location: IMapLocation): void => {
         // empty existing list items first
         this.interviewsList.innerHTML = '';
-
+        const locationHtml = `
+        <li class="map__interview map__interview--location">
+            ${location.label}
+        </li>`;
+        this.interviewsList.insertAdjacentHTML('beforeend', locationHtml);
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
         [...interviews].forEach(interview => {
             const interviewHtml = `
