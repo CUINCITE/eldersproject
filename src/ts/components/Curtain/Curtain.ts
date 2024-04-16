@@ -32,7 +32,6 @@ export class Curtain {
         this.lead = view.querySelector('.js-curtain-lead');
 
         this.quotes = shuffle((options || JSON.parse(view.dataset.options)).quotes || []);
-        console.log(this.quotes);
 
         this.init();
     }

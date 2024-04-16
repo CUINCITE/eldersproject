@@ -204,7 +204,6 @@ class Site {
         if (!this.isFirstTime) this.curtain.makeOverlay();
         // const isHome: boolean = !!document.body.querySelector('[data-home]');
         const isLightbox = document.body.classList.contains('is-loading-lightbox') || document.body.classList.contains('has-lightbox');
-        console.log({ isLightbox, bodyClass: [...document.body.classList].join('') });
         this.scroll.load();
         Scroll.start();
 

@@ -191,9 +191,7 @@ export class Search {
 
 
     private animationHide(): void {
-        console.log('Search animationHide ?');
         if (!this.isLiveShown) return;
-        console.log('Search animationHide !');
 
 
         // hide 'all' link before hiding all li's
@@ -210,7 +208,6 @@ export class Search {
                 delay: index * 0.1,
                 ease: easing,
                 onComplete: () => {
-                    console.log('Search animationHide !!!');
                     item.remove();
                     // after all tweens
                     if (index === this.liveLi.length - 1) {

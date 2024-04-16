@@ -340,7 +340,6 @@ export class Load extends Component {
         // force form submit on each filtered label click
         [...this.filteredEl.querySelectorAll('label')].forEach(label => {
             label.addEventListener('click', () => {
-                console.log('click');
                 // submit needs to be triggered manually for closing modal on submit event
                 setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
             });
