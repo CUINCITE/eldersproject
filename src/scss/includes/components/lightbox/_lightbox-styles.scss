@@ -1602,10 +1602,10 @@
 
 
             @include breakpoint(not-desktop) {
-                padding: rem(39) 0 0 rem(28);
+                padding: rem(39) 0 rem(39) rem(28);
 
                 @include breakpoint(phone) {
-                    padding: 39px 0 0 16px;
+                    padding: 39px 0 30px 16px;
                 }
             }
 
@@ -1638,6 +1638,10 @@
                         }
                     }
                 }
+
+                @include breakpoint(phone) {
+                    display: block;
+                }
             }
 
             .bracket {
@@ -1652,6 +1656,12 @@
                 &:last-child {
                     margin-right: unset;
                     margin-left: 0.1em;
+                }
+            }
+
+            br + .size {
+                @include breakpoint(phone) {
+                    margin-left: rem(22);
                 }
             }
         }

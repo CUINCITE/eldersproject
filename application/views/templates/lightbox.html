@@ -300,7 +300,7 @@
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span>
+                                            {{item.name}} {% if item.name|length > 18 %}<br class="phone-only">{% endif %}<span class="size">&nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span></span>
                                         </a>
                                     </li>
                                 {% endfor %}

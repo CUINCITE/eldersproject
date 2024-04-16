@@ -71,6 +71,7 @@
         transition: opacity .4s $ease-out;
 
 
+
         @include breakpoint(not-desktop) {
             @include font-size(19, 1);
         }
