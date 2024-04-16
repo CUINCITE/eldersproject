@@ -281,6 +281,10 @@ export class Map2 extends Component {
             this.removeCurrentInterviews();
         });
 
+        this.map.on('click', () => {
+            this.removeCurrentInterviews();
+        });
+
         this.map.on('moveend', () => {
             if (this.initZoom === 0) {
                 this.initZoom = this.map.getZoom();
@@ -354,8 +358,9 @@ export class Map2 extends Component {
                 marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(coords[0], coords[1]));
                 this.markers[id] = marker;
 
-                marker.getElement().addEventListener('click', () => {
+                marker.getElement().addEventListener('click', e => {
                     this.onMarkerClick(marker.getElement());
+                    e.stopPropagation();
                 });
             }
             if (props.cluster) {
@@ -468,20 +473,17 @@ export class Map2 extends Component {
 
     private onLocationClick = (e: Event): void => {
         const location = e.currentTarget as HTMLElement;
-        const locationParent = location.parentElement as HTMLElement;
 
         const foundLocation: IMapLocation = [...this.locations].filter(l => l.id === location.getAttribute('data-id'))[0];
 
         this.goToLocation(foundLocation);
 
-        setTimeout(() => {
-            this.scrollToElement(locationParent, false);
-        }, 500);
     };
 
 
 
     private goToLocation = (location: IMapLocation): void => {
+        if (location === this.activeLocation) return;
         this.updateToggle();
 
         this.locationsElements.forEach(l => {
@@ -492,12 +494,9 @@ export class Map2 extends Component {
         const locationEl: HTMLElement = [...this.locationsElements].filter(l => l.getAttribute('data-id') === location.id)[0];
         locationEl?.classList.add('is-active');
         locationEl?.parentElement.classList.add('is-active-location');
-        this.removeCurrentInterviews();
-
 
         this.activeLocation = location;
 
-        this.setPopup(this.activeLocation);
         this.buildInterviews(this.activeLocation);
     };
 
@@ -543,7 +542,7 @@ export class Map2 extends Component {
                             <div class="map__interview-title">${title}</div>
                             <div class="map__interview-duration">${duration}</div>
                         </div>
-                        <div class="map__interview-button">Play <br> interview</div>
+                        <div class="map__interview-button">Play</div>
                     </div>
                 </li>`;
 
@@ -572,6 +571,7 @@ export class Map2 extends Component {
                     // after all tweens
                     if (index === interviews.length - 1) {
                         this.interviewsList.innerHTML = '';
+                        this.activeLocation = null;
                     }
                 },
             });
@@ -597,7 +597,7 @@ export class Map2 extends Component {
                     <div class="map__interview-data">
                         <div class="map__interview-title"><span>${interview.title}</span></div>
                     </div>
-                    <div class="map__interview-button">Play <br> interview</div>
+                    <div class="map__interview-button">Play</div>
                 </div>
             </li>`;
             this.interviewsList.insertAdjacentHTML('beforeend', interviewHtml);
