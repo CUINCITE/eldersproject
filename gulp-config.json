@@ -30,6 +30,10 @@
             "source": "src/images/*.+(jpg|png|gif|jpeg)",
             "dest": "public/theme/images"
         },
+        "webp": {
+            "source": "src/images/*.webp",
+            "dest": "public/theme/images"
+        },
         "tinypng": {
             "files": "src/images-compressed/**/*.+(jpg|png|gif)",
             "folder": "src/images-compressed"
