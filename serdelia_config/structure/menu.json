@@ -42,7 +42,7 @@
             {
                 "label": "About",
                 "submenu": [
-                    {"label":"About page"},
+                    {"label":"About page","page":"page/pages_modules,16"},
                     {"label":"FAQ","page":"faq"},
                     {"label":"People - sections","page":"people_sections"},
                     {"label":"People - portraits","page":"people"},
@@ -84,6 +84,9 @@
                 "page": "narrators_categories"
             },
             {},
+            {
+                "label":"Illustrations","page":"interview_illustrations_all"
+            },
             {
                 "label":"Locations","page":"s_states"
             },

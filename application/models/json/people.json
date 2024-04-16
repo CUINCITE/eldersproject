@@ -25,6 +25,7 @@
             "label": "Portrait",
             "type": "image",
             "field":"image",
+            "settings":{"webp":true},
             "folder": "/public/upload/people",
             "list":{"xposition_after":"","width":50,"height":50},
             "extensions":["png"],
