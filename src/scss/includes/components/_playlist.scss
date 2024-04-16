@@ -119,6 +119,9 @@
 
         @include breakpoint(not-desktop) {
             @include font-size(17, 17);
+
+            padding-top: 0.22em;
+            margin-left: rem(3.5);
         }
     }
 

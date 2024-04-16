@@ -1,13 +1,13 @@
 <section class="module module--map box"{% if bottomPadding %}style="padding-bottom:100px"{% endif %}>
 
     <div class="map
-        {% if params.global %} map--global{% endif %}
+        {% if params.global or params.global2 %} map--global{% endif %}
         {% if collectionColor %}map--{{collectionColor}}{% endif %}"
-        data-component="Map"
-        data-options='{ {% if params.global %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 {% else %} "lazyLoading": true {% endif %}}'
+        data-component="Map{% if params.global2 %}2{% endif %}"
+        data-options='{ {% if params.global or params.global2 %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 {% else %} "lazyLoading": true {% endif %}}'
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
-        <div class="map__aside">
-            {% if params.global %}
+        <div class="map__aside" {% if params.global2 %}style="display:none"{% endif %}>
+            {% if params.global or params.global2 %}
                 <div class="map__count desktop-only"><b>Map</b> / {{items|length}} locations</div>
             {% else %}
             <div class="map__heading">
@@ -24,10 +24,18 @@
                         <div class="map__title">
                             {% if params.global %}
                             <span class="map__address">{{item.street}}<br>{{item.city}}, {{item.state}}</span>
-                            {% endif %}
                             <div class="map__title-text">
                                 <span>{{item.label}}</span>
                             </div>
+                            {% elseif params.global2 %}
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                            {% else %}
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="map__content">

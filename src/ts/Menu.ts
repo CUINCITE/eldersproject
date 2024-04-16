@@ -158,7 +158,6 @@ export class Menu {
     private onToggle = (e): void => {
         const { currentTarget } = e;
         const isSearchBtn = currentTarget.hasAttribute('data-search');
-        console.log({ isOpen: this.isOpen });
         this.isOpen ? this.close() : this.open(isSearchBtn);
     };
 
@@ -228,7 +227,6 @@ export class Menu {
         this.isAnimating = true;
         this.isOpen = false;
         document.body.classList.remove('has-menu-open');
-        console.log('hide menu');
 
         // TEMP - js animation later
         if (Accessibility.isOn) this.isAnimating = false;

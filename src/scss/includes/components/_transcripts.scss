@@ -33,7 +33,7 @@
 
             margin-block: trim-font(1);
             padding-top: rem(12);
-            padding-bottom: rem(20);
+            padding-bottom: rem(12);
         }
     }
 
@@ -80,13 +80,6 @@
         li {
             @include font-family(compact);
             @include font-size(17, 17);
-
-
-            @include breakpoint(phone) {
-                @include font-size(14, 1.4);
-
-                margin-block: trim-font(1.4);
-            }
         }
 
 
@@ -131,6 +124,12 @@
 
             @include hover {
                 &::before { opacity: 1; }
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(14, 1.35);
+
+                margin-block: trim-font(1.35);
             }
         }
     }

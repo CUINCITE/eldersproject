@@ -18,9 +18,9 @@
 
 {% endmacro %}
 
-
 {% import _self as macros %}
 
+{% set special_chars = ['ñ'] %}
 
 <div class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
@@ -28,7 +28,7 @@
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
-                <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
+                <h2 class="lightbox__title{% if title|length > 25 %} lightbox__title--long{% endif %}{% if title|lower matches '/\b\w*[ñéáíó]\w*\b/g' %} lightbox__title--accent{% endif %}">
                     {% set titleArray = title|split(',') %}
                     {% for name in titleArray %}
                         <span>{{name}}{% if not loop.last %},<br> {% endif %}</span>
@@ -110,7 +110,7 @@
                             <div class="slider__captions">
                                 {% for item in images %}
                                     <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">
-                                        <div class="lightbox__counter">{% if loop.index < 10 %}0{% endif %}{{loop.index}}/{% if images.length < 10 %}0{% endif %}{{images|length}}</div>
+                                        <div class="lightbox__counter">{% if loop.index < 10 %}0{% endif %}{{loop.index}} / {% if images.length < 10 %}0{% endif %}{{images|length}}</div>
                                         <p>{{item.description}}</p>
                                     </div>
                                 {% endfor %}
@@ -300,7 +300,7 @@
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span>
+                                            {{item.name}} {% if item.name|length > 18 %}<br class="phone-only">{% endif %}<span class="size">&nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span></span>
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -316,8 +316,8 @@
                             <ul class="lightbox__related-list">
                                 {% for item in related %}
                                     <li class="lightbox__related-item button--draw" data-component="Button">
-                                        <a class="lightbox__related-link" href="{{item.url}}"></a>
-                                        <span class="lightbox__related-arrow desktop-only">
+                                        <a class="lightbox__related-link" href="{{item.url}}" data-history="replace"></a>
+                                        <span class="lightbox__related-arrow">
                                             <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
                                                 <span class="vertical js-arrow-vertical"></span>
                                                 <span class="horizontal js-arrow-horizontal"></span>
@@ -352,8 +352,8 @@
                     </span>
                 </span>
 
-                
-                
+
+
                 <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
                 {% if images %}
                 <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>

@@ -9,12 +9,11 @@
 
     {% if item.illustration %}
         <div class="interviews-grid__image">
-
             <picture>
+                <source srcset="{{item.illustration.image.mobile_webp}}, {{item.illustration.image.mobile_x2_webp}} 2x" type="image/webp">
                 <source srcset="{{item.illustration.image.mobile}}, {{item.illustration.image.mobile_x2}} 2x">
                 <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{ alt }}" class="is-loading{% if preload %} preload{% endif %}">
             </picture>
-
         </div>
     {% endif %}
 </div>

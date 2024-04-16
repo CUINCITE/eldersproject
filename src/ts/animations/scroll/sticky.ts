@@ -6,7 +6,7 @@ export const sticky = (el: HTMLElement) => {
     gsap.to(el, {
         scrollTrigger: {
             start: 'top 25px',
-            end: `top ${el.clientHeight + 50}px`,
+            end: 'top 75%',
             pin: el,
             endTrigger,
             onLeave: () => {
