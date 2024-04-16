@@ -24,6 +24,8 @@
 
         @include breakpoint(phone) {
             --checkmark-width: #{rem(36)};
+            
+            padding-right: 0;
         }
     }
 
@@ -123,6 +125,10 @@
         &.is-animating svg {
             transition: transform .5s $easing;
             transform: translateY(150%);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(15.3, 16.06);
         }
     }
 
