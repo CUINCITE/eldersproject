@@ -157,7 +157,15 @@
         background-color: var(--color-grey200);
 
         @include breakpoint(desktop) {
-            border-bottom: 1px solid var(--theme-color);
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 103% 0 auto;
+                height: 1px;
+                background: var(--theme-color);
+            }
         }
 
         @include breakpoint(tablet) {
