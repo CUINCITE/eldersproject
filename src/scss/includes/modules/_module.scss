@@ -71,7 +71,7 @@
         }
 
         @include breakpoint(phone) {
-            padding-block: rem(12) rem(24);
+            padding-block: rem(12) rem(50);
         }
 
         &.no_padding_bottom_mobile {

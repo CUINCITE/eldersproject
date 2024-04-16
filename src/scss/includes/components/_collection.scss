@@ -4,6 +4,12 @@
         text-align: right;
     }
 
+    @include breakpoint(phone) {
+        .box:last-of-type {
+            border: none;
+        }
+    }
+
     &--reversed {
         @include breakpoint(desktop) {
             text-align: left;
@@ -64,10 +70,20 @@
         @include breakpoint(phone) {
             @include font-size(16, 16.5);
 
+            position: relative;
             letter-spacing: -0.02em;
             order: -2;
-            margin-top: rem(12);
             padding-left: rem(1);
+            padding-bottom: rem(22);
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                width: 100vw;
+                left: rem(-16);
+                border-bottom: 1px solid var(--color-bg);
+            }
         }
     }
 
@@ -298,7 +314,7 @@
             margin-bottom: vw(35, phone);
 
             .illustration {
-                transform: rotate(-7deg);
+                transform: rotate(-6deg);
             }
         }
     }

@@ -1,0 +1,66 @@
+{
+    "table": "map_locations_global",
+    "order": "label",
+    "buttons_page":
+  [
+    {"type":"plugin","plugin":"refresh"}
+  ],
+  "buttons_edit":
+  [
+      {"label":"GPS Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"lat":"gps_lat","lng":"gps_lng","name":"label"}
+      }
+  ],
+    "label":
+    {
+      "page":"Map Locations",
+      "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
+    },
+    "layouts":
+    [
+      {
+        "type":"list"
+      }
+    ],
+    "fields": [
+      
+      {
+        "label": "Location Name",
+        "field": "label",
+        "list": true
+      },
+      {
+        "label": "City",
+        "field": "city",
+        "list": true
+      },
+      {
+        "label": "State",
+        "field": "state",
+        "list": true
+      },
+      
+      {
+        "hr": true,"type":"float",
+        "label": "Latitude",
+        "list":true,
+        "field": "gps_lat"
+      },
+      {
+        "list":true,
+        "label": "Longitude","type":"float",
+        "field": "gps_lng"
+      },
+      {
+        "field":"quotes","type":"json","label":"Quotes"
+      },
+      {
+        "hr": true,
+        "field": "active",
+        "type": "boolean",
+        "label": "Active",
+        "search":true,
+        "list": "edit"
+      }
+    ]
+  }
