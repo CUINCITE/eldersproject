@@ -1711,7 +1711,8 @@
 
             margin-top: rem(2);
             grid-area: collection;
-            font-feature-settings: "ss03" on;
+
+            // font-feature-settings: "ss03" on;
 
             &::before {
                 content: "";

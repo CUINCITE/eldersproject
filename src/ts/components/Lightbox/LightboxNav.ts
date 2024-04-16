@@ -40,14 +40,14 @@ export class LightboxNav extends Component {
         [...this.navButtons].forEach(btn => {
             btn.addEventListener('click', this.onBtnClick);
 
-            if (breakpoint.phone && btn.classList.contains('is-active')) {
+            if (btn.classList.contains('is-active')) {
                 setTimeout(() => this.updateIndicator(btn), 500);
             }
         });
 
         window.addEventListener('resize', debounce(() => {
             [...this.navButtons].forEach(btn => {
-                if (breakpoint.phone && btn.classList.contains('is-active')) {
+                if (btn.classList.contains('is-active')) {
                     setTimeout(() => this.updateIndicator(btn), 500);
                 }
             });
@@ -84,8 +84,8 @@ export class LightboxNav extends Component {
         this.mm.add('(orientation: portrait) and (max-width: 659px)', () => {
             const { offsetLeft, clientWidth } = button;
 
-            gsap.to(this.indicator, { duration: 0.4, ease: easing, x: offsetLeft - 5 + (clientWidth / 2) });
-            gsap.to(this.indicatorBox, { duration: 0.4, ease: easing, scaleX: clientWidth / 100 });
+            gsap.to(this.indicator, { duration: 0.5, ease: easing, x: offsetLeft - 5 + (clientWidth / 2) });
+            gsap.to(this.indicatorBox, { duration: 0.5, ease: easing, scaleX: clientWidth / 100 });
         });
 
         this.mm.add('(orientation: landscape), (min-width: 660px)', () => {
