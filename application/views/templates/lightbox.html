@@ -124,7 +124,7 @@
                                         <div class="lightbox__slide-image polaroid
                                         {% if image.original.width and image.original.height %}
                                         {% if image.original.width > image.original.height %} polaroid--horizontal
-                                        {% if image.original.width > image.original.height * 1.8 %} polaroid--full-width
+                                        {% elseif image.original.width > image.original.height * 1.8 %} polaroid--full-width
                                         {% elseif image.original.width == image.original.height %} polaroid--square
                                         {% endif %}
                                         {% endif %}">
