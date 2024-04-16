@@ -512,6 +512,10 @@
 
 
             i { margin-top: rem(-4); }
+
+            @include breakpoint(phone) {
+                @include font-size(15.3, 16.06);
+            }
         }
     }
 

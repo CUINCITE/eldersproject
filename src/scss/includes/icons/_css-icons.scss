@@ -577,6 +577,10 @@
     width: 19px;
     overflow: hidden;
 
+    @include breakpoint(phone) {
+        width: 17px;
+    }
+
     .row {
         @include flex(row, center, center);
 
@@ -601,6 +605,10 @@
         width: 11px;
         flex-shrink: 0;
         background-color: currentColor;
+
+        @include breakpoint(phone) {
+            width: 10px;
+        }
     }
 
     .bar {
@@ -608,6 +616,10 @@
         width: 3px;
         flex-shrink: 0;
         background-color: currentColor;
+
+        @include breakpoint(phone) {
+            height: 6px;
+        }
     }
 }
 

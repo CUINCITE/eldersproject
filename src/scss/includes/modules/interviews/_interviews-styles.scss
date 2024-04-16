@@ -565,7 +565,6 @@
 
 
             &--overlay {
-                @include font-family(normal);
                 @include font-size(13, 15);
 
                 margin-top: 0;
@@ -590,6 +589,10 @@
             &--overlay {
                 margin-top: rem(28);
             }
+        }
+
+        &--overlay {
+            @include font-family(normal);
         }
     }
 
