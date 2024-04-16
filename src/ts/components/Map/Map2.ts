@@ -280,6 +280,13 @@ export class Map2 extends Component {
             this.removeCurrentInterviews();
         });
 
+        this.map.on('moveend', () => {
+            if (this.map.getZoom() > 3.9) {
+                this.isGlobalView = false;
+                this.view.classList.add('is-zoomed');
+            }
+        });
+
         breakpoint.phone && this.getTabContent();
 
         this.toggleButton && this.toggleButton.addEventListener('click', this.onToggleButtonClick);
@@ -467,9 +474,6 @@ export class Map2 extends Component {
 
 
     private goToLocation = (location: IMapLocation): void => {
-        this.isGlobalView = false;
-        this.view.classList.add('is-zoomed');
-
         this.updateToggle();
 
         this.locationsElements.forEach(l => {
@@ -484,7 +488,6 @@ export class Map2 extends Component {
 
 
         this.activeLocation = location;
-        console.log(location);
 
         this.setPopup(this.activeLocation);
         this.buildInterviews(this.activeLocation);
