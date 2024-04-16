@@ -113,7 +113,7 @@ export class LightboxSlider extends Component {
         });
 
         gsap.fromTo(caption, { y: 0 }, {
-            y: 200,
+            y: 240,
             duration: fast ? 0 : 0.5,
             ease: easing,
             onComplete: () => {

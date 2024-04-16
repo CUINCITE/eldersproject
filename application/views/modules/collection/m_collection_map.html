@@ -3,7 +3,7 @@
     <div class="map
         {% if params.global or params.global2 %} map--global{% endif %}
         {% if collectionColor %}map--{{collectionColor}}{% endif %}"
-        data-component="Map"
+        data-component="Map{% if params.global2 %}2{% endif %}"
         data-options='{ {% if params.global or params.global2 %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 {% else %} "lazyLoading": true {% endif %}}'
         data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
         <div class="map__aside" {% if params.global2 %}style="display:none"{% endif %}>
@@ -35,7 +35,7 @@
                             <div class="map__title-text">
                                 <span>{{item.label}}</span>
                             </div>
-                            {% endif %} 
+                            {% endif %}
                         </div>
                     </div>
                     <div class="map__content">

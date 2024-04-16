@@ -254,7 +254,7 @@
         @include flex(row, flex-start, flex-end);
 
         @include breakpoint(tablet) {
-            @include flex(row, flex-start, flex-start); 
+            @include flex(row, flex-start, flex-start);
         }
 
         .map--global & {
@@ -479,6 +479,15 @@
                 align-self: stretch;
                 padding-inline: map-get($grid-offset, phone);
             }
+        }
+
+        &--location {
+            @include font-family(normal);
+            @include font-settings(500, 100);
+            @include font-size(17, 18);
+            letter-spacing: normal;
+
+            padding: rem(17) rem(13) rem(13);
         }
     }
 

@@ -476,9 +476,6 @@
                         transform: scaleX(1);
                     }
                 }
-                ~ .interviews__locations {
-                    transform: translateX(rem(40));
-                }
             }
         }
 
