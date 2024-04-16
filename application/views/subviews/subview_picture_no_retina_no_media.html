@@ -1,0 +1,5 @@
+<picture>
+        {% if image.webp %}<source srcset="{{image.webp}}" type="image/webp">{% endif %}
+        {% if image.png %}<source srcset="{{image.png}}">{% endif %}
+        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="{{alt}}" class="is-loading">
+</picture>
