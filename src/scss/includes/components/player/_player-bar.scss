@@ -367,7 +367,9 @@
 
 
         @include breakpoint(not-phone) {
-            padding-top: rem(9);
+            font-size: 17px !important;
+            line-height: 13px !important;
+            padding-top: 8px;
         }
 
 
