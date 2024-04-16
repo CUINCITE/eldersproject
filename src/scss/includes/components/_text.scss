@@ -141,13 +141,13 @@
 
 
     &--aside {
-        @include breakpoint(tablet) {
-            margin-bottom: rem(60);
-        }
+        // @include breakpoint(tablet) {
+        //     margin-bottom: rem(60);
+        // }
 
-        @include breakpoint(phone) {
-            margin-bottom: rem(60);
-        }
+        // @include breakpoint(phone) {
+        //     margin-bottom: rem(60);
+        // }
 
         p + h2,
         a + h2 {

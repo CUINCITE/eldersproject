@@ -134,9 +134,9 @@
             }
 
             &:nth-child(2) {
-                display: none;
+                display: block;
 
-                .is-playing & { display: block; }
+                .is-playing & { display: none; }
             }
         }
     }

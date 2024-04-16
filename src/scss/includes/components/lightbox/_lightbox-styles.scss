@@ -435,7 +435,7 @@
             &::after {
                 content: "";
                 position: absolute;
-                inset: 1px auto 0 var(--aside-width);
+                inset: 0 auto 0 var(--aside-width);
                 width: 1px;
                 background-color: var(--theme-color);
                 z-index: 3;
@@ -1153,6 +1153,15 @@
             span { white-space: nowrap; }
         }
 
+        
+        &--accent {
+            @include breakpoint(desktop) {
+                @include font-size(80, 0.78);
+
+                padding-top: rem(25);
+            }
+        }
+
 
         @include breakpoint(not-desktop) {
             @include font-size(50, 1);
@@ -1444,16 +1453,32 @@
             height: auto;
             position: relative;
 
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 var(--aside-width);
+                width: 1px;
+                background-color: var(--theme-color);
+                z-index: 3;
+                pointer-events: none;
 
-            @include breakpoint(desktop) {
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset: 1px auto 0 var(--aside-width);
-                    width: 1px;
-                    background-color: var(--theme-color);
-                    z-index: 3;
-                    pointer-events: none;
+                @include breakpoint(not-desktop) {
+                    display: none;
+
+                    .lightbox__tab--transcript &, .lightbox__tab--related & {
+                        display: block;
+                    }
+
+                    .lightbox__tab--transcript & {
+
+                        @include breakpoint(tablet) {
+                            inset: 0 auto 0 calc(var(--aside-width) + #{rem(35)});
+                        }
+
+                        @include breakpoint(phone) {
+                            inset: 0 auto 0 calc(var(--aside-width) + 22px);
+                        }
+                    }
                 }
             }
         }
@@ -1565,10 +1590,9 @@
         height: 100%;
         overflow-y: auto;
 
-        @include breakpoint(phone) {
-            padding-left: vw(10, phone);
+        @include breakpoint(not-desktop) {
+            padding-left: 0;
         }
-
 
         &-list {
             @include flex(column, flex-start, flex-start);
@@ -1578,10 +1602,10 @@
 
 
             @include breakpoint(not-desktop) {
-                padding: rem(24) 0 0 rem(14);
+                padding: rem(39) 0 0 rem(28);
 
                 @include breakpoint(phone) {
-                    padding: rem(24) 0 0 0;
+                    padding: 39px 0 0 16px;
                 }
             }
 
@@ -1661,6 +1685,9 @@
         height: 100%;
         overflow-y: auto;
 
+        @include breakpoint(phone) {
+            padding-left: rem(65);
+        }
 
         &-list {
             @include flex(column, flex-start, flex-start);
@@ -1668,6 +1695,10 @@
             width: 100%;
 
             padding-top: rem(32);
+
+            @include breakpoint(not-desktop) {
+                padding-top: rem(20);
+            }
         }
 
 
@@ -1681,6 +1712,8 @@
 
             @include breakpoint(not-desktop) {
                 @include flex(column, flex-start, stretch);
+
+                padding: rem(19) rem(17) rem(40) rem(19);
             }
 
 
@@ -1724,7 +1757,8 @@
 
             margin-top: rem(2);
             grid-area: collection;
-            font-feature-settings: "ss03" on;
+
+            // font-feature-settings: "ss03" on;
 
             &::before {
                 content: "";
@@ -1761,19 +1795,40 @@
 
         &-arrow {
             position: absolute;
-            inset: rem(23) 100% auto auto;
-            margin-right: rem(7);
 
-            .horizontal {
-                width: rem(35) !important;
+            @include breakpoint(desktop) {
+                inset: rem(23) 100% auto auto;
+                margin-right: rem(7);
+    
+                .horizontal {
+                    width: rem(35) !important;
+                }
+    
+                .vertical {
+                    height: rem(14) !important;
+                }
+    
+                .triangle {
+                    border-width: rem(15) 0 rem(15) rem(17) !important;
+                }
             }
 
-            .vertical {
-                height: rem(14) !important;
-            }
 
-            .triangle {
-                border-width: rem(15) 0 rem(15) rem(17) !important;
+            @include breakpoint(not-desktop) {
+                inset: rem(24) 100% auto auto;
+                margin-right: rem(9);
+    
+                .horizontal {
+                    width: rem(22) !important;
+                }
+    
+                .vertical {
+                    height: rem(11) !important;
+                }
+    
+                .triangle {
+                    border-width: rem(11) 0 rem(11) rem(12) !important;
+                }
             }
 
             // // TEMP - todo animation on icon
