@@ -1361,6 +1361,12 @@
             }
 
 
+            .polaroid--full-width {
+                --polaroid-width: unset  !important;
+                --polaroid-height: calc(var(--container-height) * 0.63) !important;
+            }
+
+
             .polaroid--square {
                 --polaroid-width: unset !important;
                 --polaroid-height: var(--container-height) !important;
