@@ -253,11 +253,19 @@
         .is-showing & {
             transform: translateY(0);
             transition-delay: $animation-stagger * 2.5;
+
+            @include breakpoint(phone) {
+                overflow: auto;
+            }
         }
 
         .is-closing & {
             transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
             transition-delay: 0s;
+
+            @include breakpoint(phone) {
+                overflow: hidden;
+            }
         }
 
 
