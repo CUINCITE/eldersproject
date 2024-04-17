@@ -63,7 +63,6 @@
 
         @include breakpoint(phone) {
             height: var(--hamburgerbar-height);
-            padding: vw(13, phone) vw(4, phone);
         }
     }
 
@@ -93,6 +92,10 @@
         @include breakpoint(tablet) {
             width: 100%;
             padding: vw(27, tablet) vw(18, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding: vw(14, phone) vw(4, phone);
         }
 
         @include accessibility {
