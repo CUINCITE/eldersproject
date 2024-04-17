@@ -36,7 +36,7 @@
         gap: rem(7);
 
         @include breakpoint(phone) {
-            margin-top: rem(40);
+            margin-top: rem(45) !important;
         }
     }
 
