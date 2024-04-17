@@ -251,7 +251,7 @@
 
 
     &__title {
-        @include flex(row, flex-start, flex-end);
+        @include flex(row, flex-start, flex-start);
 
         @include breakpoint(tablet) {
             @include flex(row, flex-start, flex-start);
