@@ -4,6 +4,16 @@
     transform: translateY(var(--distance));
 }
 
+@keyframes overflowChange {
+    0% {
+        overflow: hidden;
+    }
+
+    100% {
+        overflow: auto;
+    }
+}
+
 .lightbox {
     $animation-stagger: 0s;
     $content-delay: .75s;
@@ -223,6 +233,21 @@
     }
 
 
+    &__line {
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateY(var(--distance));
+
+        .is-showing & {
+            transform: translateY(0);
+            transition-delay: $animation-stagger * 2.5;
+        }
+
+        .is-closing & {
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
+            transition-delay: 0s;
+        }
+    }
+
 
     &__buttons {
         @include z-index(buttons, $lightbox-elements);
@@ -233,7 +258,7 @@
         @include breakpoint(tablet) {
             z-index: 5;
         }
-
+        
 
         .is-showing & {
             transform: translateY(0);

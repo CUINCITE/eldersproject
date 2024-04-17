@@ -559,7 +559,7 @@
                 flex-shrink: 0;
                 gap: 0;
                 order: 3;
-                overflow: scroll visible;
+                overflow: auto;
                 background: transparent;
                 position: sticky;
                 top: 0;
@@ -617,17 +617,17 @@
                     background-color: var(--main-body-color);
                 }
 
-                &::after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    width: calc(100% + 100px);
-                    margin-inline: -100px;
-                    height: 1px;
-                    left: 0;
-                    top: 0;
-                    background-color: var(--color-box);
-                }
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     width: calc(100% + 100px);
+                //     margin-inline: -100px;
+                //     height: 1px;
+                //     left: 0;
+                //     top: 0;
+                //     background-color: var(--color-box);
+                // }
             }
         }
 
@@ -856,7 +856,7 @@
 
             &-tip {
                 @include full;
-        
+
                 display: inline-block;
                 transform: rotate(45deg);
                 background-color: var(--aside-body-color);
@@ -1385,6 +1385,11 @@
             @include breakpoint(not-desktop) {
                 --container-height: 40vh;
             }
+
+            picture,
+            img {
+                max-height: var(--polaroid-height);
+            }
         }
 
         &--transcript {
@@ -1404,7 +1409,7 @@
             }
         }
 
-         
+
         &--related {
             @include breakpoint(desktop) {
                 .lightbox__tab-dot:nth-of-type(2) {
@@ -1809,15 +1814,15 @@
             @include breakpoint(desktop) {
                 inset: rem(23) 100% auto auto;
                 margin-right: rem(7);
-    
+
                 .horizontal {
                     width: rem(35) !important;
                 }
-    
+
                 .vertical {
                     height: rem(14) !important;
                 }
-    
+
                 .triangle {
                     border-width: rem(15) 0 rem(15) rem(17) !important;
                 }
@@ -2047,6 +2052,20 @@
                     animation: hover-link .5s $ease-custom forwards;
                 }
             }
+        }
+    }
+
+    &__line {
+        @include breakpoint(phone) {
+            display: flex;
+            height: 1px;
+            margin-bottom: -1px;
+            border-top: 1px solid var(--color-box);
+            position: sticky;
+            top: 44px;
+            order: 2;
+            z-index: 4;
+            pointer-events: none;
         }
     }
 }

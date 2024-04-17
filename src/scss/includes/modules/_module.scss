@@ -37,6 +37,24 @@
             .box:last-of-type {
                 padding-bottom: rem(67);
             }
+
+            article[data-title="I See My Light Shining - Contact"] & {
+                .box {
+                    min-height: calc(100vh - #{rem(200)});
+                }
+            }
+        }
+
+        @include breakpoint(tablet) {
+            .box:last-of-type {
+                padding-bottom: rem(80);
+            }
+        }
+
+        @include breakpoint(phone) {
+            .box:last-of-type {
+                padding-bottom: rem(60);
+            }
         }
     }
 

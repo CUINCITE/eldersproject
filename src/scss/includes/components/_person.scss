@@ -101,6 +101,15 @@
             translate: 5% 0;
         }
 
+        @include breakpoint(not-desktop) {
+            picture,
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
         @include breakpoint(tablet) {
             width: vw(135, tablet);
             height: vw(135, tablet);

@@ -251,7 +251,7 @@
 
 
     &__title {
-        @include flex(row, flex-start, flex-end);
+        @include flex(row, flex-start, flex-start);
 
         @include breakpoint(tablet) {
             @include flex(row, flex-start, flex-start);
@@ -343,6 +343,12 @@
         @include flex(column, flex-end, stretch);
 
         gap: 1px;
+
+        @include breakpoint(not-phone) {
+            justify-content: flex-start;
+            max-height: calc(#{vw(3 * 75 + 40)} + 3px);
+            overflow-y: scroll;
+        }
 
         @include breakpoint(phone) {
             margin-top: 1px;
