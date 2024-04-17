@@ -454,6 +454,7 @@
         right: 0;
 
         // trick for proper scrolltrigger's pin
+        top: -1px !important;
         left: 0 !important;
         height: auto !important;
 

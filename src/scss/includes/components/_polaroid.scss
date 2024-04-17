@@ -45,10 +45,15 @@ $background-colors: (
         }
     }
 
-    @include breakpoint(desktop) {
-        .stack__polaroids & {
-            --polaroid-width: #{rem(310)};
-            --polaroid-height: #{rem(420)};
+    .stack__polaroids & {
+        --polaroid-width: #{rem(310)};
+        --polaroid-height: #{rem(420)};
+
+        picture,
+        img {
+            width: 100%;
+            max-height: var(--polaroid-height);
+            object-fit: cover;
         }
     }
 
