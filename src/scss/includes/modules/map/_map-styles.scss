@@ -344,6 +344,12 @@
 
         gap: 1px;
 
+        @include breakpoint(not-phone) {
+            justify-content: flex-start;
+            max-height: calc(#{vw(3 * 75 + 40)} + 3px);
+            overflow-y: scroll;
+        }
+
         @include breakpoint(phone) {
             margin-top: 1px;
         }
