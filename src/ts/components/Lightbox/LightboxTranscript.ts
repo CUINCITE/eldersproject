@@ -110,8 +110,10 @@ export class LightboxTranscript extends Component {
             this.clearMarkedElements();
             if (inputValue.length > 0) {
                 this.findWordInTranscript();
+                this.inputWrap.classList.add('has-value');
             } else {
                 this.closeNav();
+                this.inputWrap.classList.remove('has-value');
             }
         }, this.livesearchTimeout);
     };
