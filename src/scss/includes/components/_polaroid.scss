@@ -31,22 +31,21 @@ $background-colors: (
     max-height: var(--polaroid-height);
     background-color: var(--color-grey200);
 
-    @include breakpoint(desktop) {
-        position: relative;
+    position: relative;
 
-        &:after {
-            content: "";
-            position: absolute;
-            inset: rem(-20) rem(-20) rem(-32);
-            background-color: var(--color-grey200);
-            z-index: -1;
+    &:after {
+        content: "";
+        position: absolute;
+        inset: rem(-20) rem(-20) rem(-32);
+        background-color: var(--color-grey200);
+        z-index: -1;
 
-            @include breakpoint(not-desktop) {
-                inset: rem(-18) rem(-18) rem(-27);
-            }
+        @include breakpoint(not-desktop) {
+            inset: rem(-18) rem(-18) rem(-27);
         }
+    }
 
-
+    @include breakpoint(desktop) {
         .stack__polaroids & {
             --polaroid-width: #{rem(310)};
             --polaroid-height: #{rem(420)};
