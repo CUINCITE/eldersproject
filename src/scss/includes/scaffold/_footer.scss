@@ -63,7 +63,7 @@
             @include hoverable-link; 
 
             @include breakpoint(not-phone) {
-                &:last-child {
+                &:nth-last-child(2) {
                     margin-left: auto;
                 }
             }
