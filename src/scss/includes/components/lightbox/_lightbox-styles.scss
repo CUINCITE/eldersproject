@@ -559,7 +559,7 @@
                 flex-shrink: 0;
                 gap: 0;
                 order: 3;
-                overflow: auto;
+                overflow: hidden;
                 background: transparent;
                 position: sticky;
                 top: 0;
@@ -567,6 +567,10 @@
                 margin-top: -44px;
                 padding-bottom: 8px;
                 margin-bottom: -8px;
+
+                .is-overflow & {
+                    overflow: auto;
+                }
     
     
                 &::-webkit-scrollbar {

@@ -235,6 +235,7 @@ export class Lightbox {
                     AudioPlayer.view.classList.remove('has-active-lightbox');
                     document.body.classList.remove('is-lightbox-open');
                     this.view.classList.remove('is-showing');
+                    this.view.classList.remove('is-overflow');
                 },
                 onComplete: (): void => {
                     this.view.style.display = 'none';
@@ -283,6 +284,9 @@ export class Lightbox {
                     setTimeout(() => {
                         this.setThemeColor();
                     }, 900);
+                    setTimeout(() => {
+                        this.view.classList.add('is-overflow');
+                    }, 2000);
                 },
             });
         });

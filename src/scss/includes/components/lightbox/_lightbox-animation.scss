@@ -8,7 +8,7 @@
     0% {
         overflow: hidden;
     }
-    
+
     100% {
         overflow: auto;
     }
@@ -258,11 +258,7 @@
         @include breakpoint(tablet) {
             z-index: 5;
         }
-
-        @include breakpoint(phone) {
-            overflow: hidden;
-            animation: overflowChange 1s 3s forwards;
-        }
+        
 
         .is-showing & {
             transform: translateY(0);
