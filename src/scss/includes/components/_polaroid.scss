@@ -133,9 +133,14 @@ $background-colors: (
         }
 
         picture, img {
-            width: 100%;
-            height: auto;
+            width: auto;
+            height: 100%;
             object-fit: contain;
+
+            .polaroid--horizontal & {
+                width: 100%;
+                height: auto;
+            }
         }
     }
 }
