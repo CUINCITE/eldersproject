@@ -12,6 +12,9 @@ class model_app_pages_modules_interviews_banner extends model_app_pages_modules
     public function updateModel($m,$url)
     {
         $m['items'] = $this->parent->getJsonModel('interviews', ['active' => 1, 'featured' => 1], false, 'RAND("'.date('i').'")', 5);
+        
+        //$page=7;
+        //$m['items'] = $this->parent->getJsonModel('interviews', ['active' => 1, 'featured' => 1], false, 'id', ($page*5).',5');
 
         foreach ($m['items'] as $k=>$v)
         {

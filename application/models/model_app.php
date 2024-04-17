@@ -132,6 +132,15 @@ class model_app extends _uho_model
     }
 
     //============================================================================================
+    public function getCollectionsIds()
+    {
+        $r=[];
+        $c=$this->dictGet('collections');
+        foreach ($c as $k=>$v) $r[$v['id']]=$v;
+        return $r;
+    }
+
+    //============================================================================================
     public function getClient()
     {
         //return $this->client->getData();

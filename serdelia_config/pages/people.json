@@ -27,6 +27,7 @@
             "field":"image",
             "folder": "/public/upload/people",
             "list":{"xposition_after":"","width":50,"height":50},
+            "settings":{"webp":true},
             "extensions":["png"],
             "images":
             [
