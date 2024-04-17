@@ -10,7 +10,6 @@
         }
 
         @include breakpoint(tablet) {
-            padding-top: rem(36);
             flex-wrap: wrap;
             column-gap: rem(42);
         }
@@ -122,6 +121,10 @@
         @include breakpoint(not-desktop) {
             overflow: hidden;
             border-bottom: none;
+
+            .hide-letters & {
+                display: none;
+            }
         }
 
         @include breakpoint(phone) {
@@ -477,8 +480,12 @@
         z-index: 1;
         border-top: none !important;
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             margin-top: -1px;
+
+            .hide-letters + & {
+                border-top: 1px solid var(--color-bg) !important;
+            }
         }
     }
 
