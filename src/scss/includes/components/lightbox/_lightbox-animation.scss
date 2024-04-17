@@ -8,13 +8,9 @@
     0% {
         overflow: hidden;
     }
-
-    99% {
-        overflow: hidden;
-    }
-
+    
     100% {
-        overflow: visible;
+        overflow: auto;
     }
 }
 
@@ -263,13 +259,14 @@
             z-index: 5;
         }
 
+        @include breakpoint(phone) {
+            overflow: hidden;
+            animation: overflowChange 1s 3s forwards;
+        }
+
         .is-showing & {
             transform: translateY(0);
             transition-delay: $animation-stagger * 2.5;
-
-            @include breakpoint(phone) {
-                animation: overflowChange 1s 2s both;
-            }
         }
 
         .is-closing & {
