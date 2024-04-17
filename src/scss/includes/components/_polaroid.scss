@@ -63,6 +63,9 @@ $background-colors: (
             --polaroid-width: #{rem(481)};
             // --polaroid-height: #{rem(366)};
 
+            @media(max-width: 1400px) {
+                // --polaroid-width: #{rem(500)};
+            }
 
             .stack__polaroids & {
                 --polaroid-width: #{rem(420)};
@@ -133,7 +136,6 @@ $background-colors: (
         picture, img {
             width: 100%;
             height: auto;
-            max-height: 400px;
             object-fit: contain;
         }
     }
