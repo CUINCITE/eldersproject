@@ -551,6 +551,14 @@
 
 
 
+    &__main {
+        @include breakpoint(desktop) {
+            padding-bottom: rem(14);
+        }
+    }
+
+
+
     &__description {
         @include font-family(compact);
         @include font-settings(400, 100);
