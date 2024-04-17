@@ -23,7 +23,7 @@
             height: var(--app-height);
 
             @include breakpoint(phone) {
-                @media (max-height: 580px) {
+                @media (max-height: 630px) {
                     height: calc(var(--app-height) * 1.1);
                 }
             }
