@@ -4,6 +4,20 @@
     transform: translateY(var(--distance));
 }
 
+@keyframes overflowChange {
+    0% {
+        overflow: hidden;
+    }
+
+    99% {
+        overflow: hidden;
+    }
+
+    100% {
+        overflow: visible;
+    }
+}
+
 .lightbox {
     $animation-stagger: 0s;
     $content-delay: .75s;
@@ -249,26 +263,18 @@
             z-index: 5;
         }
 
-        @include breakpoint(phone) {
-            overflow: hidden;
-        }
-
         .is-showing & {
             transform: translateY(0);
             transition-delay: $animation-stagger * 2.5;
 
             @include breakpoint(phone) {
-                overflow: auto;
+                animation: overflowChange 1s 2s both;
             }
         }
 
         .is-closing & {
             transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
             transition-delay: 0s;
-
-            @include breakpoint(phone) {
-                overflow: hidden;
-            }
         }
 
 
