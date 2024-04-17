@@ -91,12 +91,13 @@
     },
     {
       "label": "Narrators (occupation)",
-      
+      "type":"text",
+      "settings":{"rows":2},
       "on_demand":true,
       "field": "narrator_occupation",
       "auto": {
         
-        "pattern": "{% for item in narrators %}{% if loop.index>1 and narrators[0].occupation %}, {% endif %}{{item.occupation}}{% endfor %}"
+        "pattern": "{% for item in narrators %}{% if loop.index>1 and item.occupation!=narrators[0].occupation and narrators[0].occupation %}, {% endif %}{% if loop.index==1 or item.occupation!=narrators[0].occupation %}{{item.occupation}}{% endif %}{% endfor %}"
       }
     },
    
