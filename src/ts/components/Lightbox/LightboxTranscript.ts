@@ -27,6 +27,9 @@ export class LightboxTranscript extends Component {
 
     private currentHighlightedPart: HTMLElement;
 
+    private livesearchTimer;
+    private livesearchTimeout = 1000;
+
     constructor(protected view: HTMLElement) {
         super(view);
 
@@ -70,9 +73,7 @@ export class LightboxTranscript extends Component {
     };
 
 
-
     private getCurrentPart = (time: number): HTMLElement => [...this.transcriptParts].filter(item => parseInt((item.querySelector('[data-start]') as HTMLElement).dataset.start, 10) <= time).pop();
-
 
 
     private scrollToElement = (element: HTMLElement, fast: boolean): void => {
@@ -103,6 +104,16 @@ export class LightboxTranscript extends Component {
         // fake span is created to measure its' width & update input's width dynamically
         const inputValue: string = this.searchInput.value;
         this.updateInput(inputValue);
+
+        clearTimeout(this.livesearchTimer);
+        this.livesearchTimer = setTimeout(() => {
+            this.clearMarkedElements();
+            if (inputValue.length > 0) {
+                this.findWordInTranscript();
+            } else {
+                this.closeNav();
+            }
+        }, this.livesearchTimeout);
     };
 
 
