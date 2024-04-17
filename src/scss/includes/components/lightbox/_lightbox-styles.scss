@@ -559,7 +559,7 @@
                 flex-shrink: 0;
                 gap: 0;
                 order: 3;
-                overflow: scroll visible;
+                overflow: auto;
                 background: transparent;
                 position: sticky;
                 top: 0;
@@ -617,17 +617,17 @@
                     background-color: var(--main-body-color);
                 }
 
-                &::after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    width: calc(100% + 100px);
-                    margin-inline: -100px;
-                    height: 1px;
-                    left: 0;
-                    top: 0;
-                    background-color: var(--color-box);
-                }
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     width: calc(100% + 100px);
+                //     margin-inline: -100px;
+                //     height: 1px;
+                //     left: 0;
+                //     top: 0;
+                //     background-color: var(--color-box);
+                // }
             }
         }
 
@@ -2052,6 +2052,20 @@
                     animation: hover-link .5s $ease-custom forwards;
                 }
             }
+        }
+    }
+
+    &__line {
+        @include breakpoint(phone) {
+            display: flex;
+            height: 1px;
+            margin-bottom: -1px;
+            border-top: 1px solid var(--color-box);
+            position: sticky;
+            top: 44px;
+            order: 2;
+            z-index: 4;
+            pointer-events: none;
         }
     }
 }

@@ -49,7 +49,7 @@
             }
 
             @include breakpoint(phone) {
-                max-height: calc(100dvh - 58px - 88px - 30px - 44px);
+                max-height: calc(100dvh - 58px - 88px - 44px);
             }
         }
     }
