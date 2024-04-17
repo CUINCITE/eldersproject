@@ -585,6 +585,11 @@
 
             margin-block: trim-font(1.1);
             padding-top: rem(16);
+
+            &--overlay {
+                margin-top: rem(32);
+                line-height: 1.35;
+            }
         }
 
         @include breakpoint(phone) {
@@ -595,6 +600,7 @@
 
             &--overlay {
                 margin-top: rem(28);
+                line-height: 1.35;
             }
         }
 
