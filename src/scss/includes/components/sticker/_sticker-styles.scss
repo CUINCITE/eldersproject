@@ -30,6 +30,8 @@
 
     &.is-visible {
         --sticker-fold-size: 11%;
+
+        // opacity: 1;
     }
 
     @include breakpoint(desktop) {
