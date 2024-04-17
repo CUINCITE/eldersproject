@@ -249,6 +249,9 @@
             z-index: 5;
         }
 
+        @include breakpoint(phone) {
+            overflow: hidden;
+        }
 
         .is-showing & {
             transform: translateY(0);
