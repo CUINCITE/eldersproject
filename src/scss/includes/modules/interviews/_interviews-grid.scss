@@ -476,6 +476,10 @@
     &__interviews {
         z-index: 1;
         border-top: none !important;
+
+        @include breakpoint(phone) {
+            margin-top: -1px;
+        }
     }
 
 
