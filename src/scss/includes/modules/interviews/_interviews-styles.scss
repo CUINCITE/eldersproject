@@ -148,6 +148,13 @@
 
             padding-top: rem(17);
             margin-left: rem(-6);
+
+            .safari & {
+                span {
+                    padding-top: rem(20);
+                    margin-top: rem(-20);
+                }
+            }
         }
 
         @include breakpoint(tablet) {

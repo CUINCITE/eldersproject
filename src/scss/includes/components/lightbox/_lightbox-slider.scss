@@ -119,6 +119,10 @@
             @include breakpoint(phone) {
                 width: 100%;
             }
+
+            .safari & {
+                width: 100%;
+            }
         }
 
 

@@ -856,7 +856,7 @@
 
             &-tip {
                 @include full;
-        
+
                 display: inline-block;
                 transform: rotate(45deg);
                 background-color: var(--aside-body-color);
@@ -1388,7 +1388,7 @@
 
             picture,
             img {
-                max-height: vh(350);
+                max-height: var(--polaroid-height);
             }
         }
 
@@ -1409,7 +1409,7 @@
             }
         }
 
-         
+
         &--related {
             @include breakpoint(desktop) {
                 .lightbox__tab-dot:nth-of-type(2) {
@@ -1814,15 +1814,15 @@
             @include breakpoint(desktop) {
                 inset: rem(23) 100% auto auto;
                 margin-right: rem(7);
-    
+
                 .horizontal {
                     width: rem(35) !important;
                 }
-    
+
                 .vertical {
                     height: rem(14) !important;
                 }
-    
+
                 .triangle {
                     border-width: rem(15) 0 rem(15) rem(17) !important;
                 }
