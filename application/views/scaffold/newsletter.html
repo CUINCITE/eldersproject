@@ -58,10 +58,16 @@
                         </span>
 
                         <div class="newsletter__logo">
-                            {% include "subviews/subview_picture.html" with {
+                            <picture>
+
+                            </picture>
+                            {% include "subviews/subview_picture_no_retina_no_media.html" with {
                                 image: {
-                                    desktop: "/public/theme/images/baldwin_logo.png",
-                                    mobile: "/public/theme/images/baldwin_logo.png"
+                                    png: "/public/theme/images/baldwin_logo.png",
+                                    webp: "/public/theme/images/baldwin_logo.webp",
+                                    width: 196,
+                                    height: 196
+
                                     }
                                 }
                             %}

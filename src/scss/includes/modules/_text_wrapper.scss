@@ -63,6 +63,10 @@
         @include breakpoint(desktop) {
             padding-block: rem(20) rem(110);
             padding-right: rem(36.5);
+
+            .text:first-child {
+                padding-top: rem(2) !important;
+            }
         }
 
         @include breakpoint(tablet) {

@@ -20,10 +20,6 @@
             padding-bottom: rem(40);
             overflow-y: auto;
 
-            // @include breakpoint(desktop) {
-            //
-            // }
-
             @include breakpoint(tablet) {
                 height: calc(100vh - #{rem(146)});
                 padding-bottom: 0;
@@ -33,13 +29,9 @@
                 }
             }
 
-            // @include breakpoint(phone) {
-            //     height: calc(100vh - #{rem(100)});
-
-            //     @supports(height: 100dvh) {
-            //         height: calc(100dvh - #{rem(100)});
-            //     }
-            // }
+            @include breakpoint(phone) {
+                position: fixed;
+            }
         }
     }
 

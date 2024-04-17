@@ -1,6 +1,6 @@
 .results {
     &__label {
-        @include font-settings(400, 100);
+        @include font-settings(500, 100);
 
         background-color: var(--color-box);
         text-transform: uppercase;

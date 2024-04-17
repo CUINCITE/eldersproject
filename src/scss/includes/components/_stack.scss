@@ -34,6 +34,10 @@
         width: 100%;
         margin: rem(6) 0 rem(20);
         gap: rem(7);
+
+        @include breakpoint(phone) {
+            margin-top: rem(45) !important;
+        }
     }
 
 

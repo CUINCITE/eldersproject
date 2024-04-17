@@ -78,6 +78,15 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
         $m['items'] = $this->parent->getJsonModel('interviews_list', $filters, false, $m['sort']['sort_model'], [$startingPage, $numberOfItems]);
 
+        $c=$this->parent->getCollectionsIds();
+        // add colors
+        foreach ($m['items'] as $k=>$v)
+        {
+            $m['items'][$k]['color']=@$c[intval($v['interviewers'])]['color'];
+        }
+        
+
+
         // remove duplicated states
         $m['items'] = array_map(function ($item) {
             $item['type'] = 'single';

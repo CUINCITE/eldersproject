@@ -248,6 +248,10 @@
             padding-top: rem(21);
         }
 
+        .text_aside & {
+            padding-top: rem(26);
+        }
+
         @include breakpoint(not-desktop) {
             z-index: 1;
 
