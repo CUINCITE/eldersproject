@@ -87,6 +87,7 @@
 
         @include breakpoint(not-desktop) {
             @include font-size(14, 1.4);
+            @include font-settings(400, 100); 
 
             padding: 0;
             padding-left: 22px;
