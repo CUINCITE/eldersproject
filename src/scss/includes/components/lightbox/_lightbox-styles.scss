@@ -1151,7 +1151,11 @@
             padding-top: rem(14);
 
 
-            span { white-space: nowrap; }
+            span { 
+                @include breakpoint(not-phone) {
+                    white-space: nowrap; 
+                }
+            }
         }
 
         
@@ -1808,6 +1812,7 @@
 
             @include breakpoint(not-desktop) {
                 @include font-size(14, 19);
+                @include font-settings(400, 100); 
             }
         }
 

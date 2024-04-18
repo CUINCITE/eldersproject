@@ -399,8 +399,8 @@
                     @include flex(row-reverse, flex-end, flex-start);
 
 
-                    width: rem(304);
-                    padding: rem(9.5);
+                    width: rem(328);
+                    padding: rem(9.5) rem(25) rem(9.5) rem(9.5);
                 }
             }
 
@@ -475,6 +475,7 @@
 
             @include breakpoint(desktop) {
                 margin-block: trim-font(1);
+                flex-shrink: 0;
 
                 .map__interviews--long & {
                     @include font-size(26, 1);
@@ -661,6 +662,12 @@
         @include breakpoint(desktop) {
             width: rem(46);
             height: rem(46);
+
+            svg {
+                position: relative;
+                left: 50%;
+                translate: -50%;
+            }
         }
 
         @include breakpoint(tablet) {
