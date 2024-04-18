@@ -108,6 +108,10 @@ $background-colors: (
 
 
     &--wrapped {
+        @media(min-width: 1600px) {
+            --polaroid-width: #{rem(386)};
+            --polaroid-height: #{rem(471)};
+        }
         &::after {
             @include breakpoint(desktop) {
                 inset: rem(-20) rem(-20) rem(-30);
