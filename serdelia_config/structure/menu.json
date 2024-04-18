@@ -36,6 +36,7 @@
     {
         "label": "Pages",
         "submenu": [
+
             {"label":"Homepage","page":"pages_modules,1"},
             {"label":"Collections","page":"pages_modules,10"},
             {"label":"Interviews","page":"pages_modules,13"},
@@ -52,7 +53,11 @@
                     }        
                 ]
             },
-            {"label":"Contact","page":"pages_modules,15"}
+            {"label":"Contact","page":"pages_modules,15"},
+            {},
+            {
+                "label":"Intro Quotes","page":"intro_quotes"
+            }
         ]
     },
     {

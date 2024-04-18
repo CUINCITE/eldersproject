@@ -6,14 +6,14 @@
     ["orange", "orange", "purple"]
 ]) %}
 
-<div class="loader js-loader" style="--loader-color-1: {{loader_colors_set[0]}}; --loader-color-2: {{loader_colors_set[1]}}; --loader-color-3: {{loader_colors_set[2]}}; --loader-delay: 1500ms">
+<div class="loader js-loader" style="--loader-color-1: {{loader_colors_set[0]}}; --loader-color-2: {{loader_colors_set[1]}}; --loader-color-3: {{loader_colors_set[2]}}; --loader-delay: 4000ms">
     <div class="loader__bg"></div>
     <div class="loader__bg"></div>
     <div class="loader__bg"></div>
     <div class="loader__grid">
         <div class="loader__wrap">
-            <div class="loader__quote">‘I will use my power to impact you’</div>
-            <div class="loader__author">David Jackson</div>
+            <div class="loader__quote">‘{{scaffold.intro_quote.text|nl2br}}’</div>
+            <div class="loader__author">{{scaffold.intro_quote.author}}</div>
         </div>
     </div>
     <div class="loader__line"></div>

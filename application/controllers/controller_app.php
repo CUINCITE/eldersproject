@@ -18,6 +18,7 @@ class controller_app extends _uho_controller
         
         $this->data['development']=development;
         $this->data['scaffold']=array();
+        $this->data['scaffold']['intro_quote']=$this->model->getIntroQuote();
         $this->data['scaffold']['menu']=$this->model->getJsonModel('menu',array('type'=>'main','active'=>1),false,'nr');
         $this->data['scaffold']['footer']=$this->model->getJsonModel('menu',array('type'=>'footer','active'=>1),false,'nr');
         $this->data['scaffold']['social']=$this->model->getJsonModel('menu',array('type'=>'social','active'=>1),false,'nr');
