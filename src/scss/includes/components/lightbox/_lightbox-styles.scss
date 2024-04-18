@@ -1547,10 +1547,6 @@
 
             @include breakpoint(not-desktop) {
                 padding: 39px 26px 39px var(--grid-margin);
-
-                p {
-                    @include font-settings(400, 100); 
-                }
             }
 
 
@@ -1581,6 +1577,7 @@
 
                 @include breakpoint(not-desktop) {
                     @include font-size(15, 21);
+                    @include font-settings(400, 100); 
                 }
             }
 
