@@ -110,7 +110,7 @@
             }
 
             @include breakpoint(phone) {
-                margin-top: rem(25);
+                margin-top: rem(45);
             }
         }
 
@@ -488,7 +488,7 @@
         @include breakpoint(phone) {
             max-width: rem(244);
             padding-top: rem(16);
-            margin-top: rem(-6);
+            top: rem(10);
         }
 
 
