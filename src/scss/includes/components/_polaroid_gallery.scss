@@ -61,6 +61,10 @@
             transform: translateX(-100%) rotate(-11deg);
             opacity: 1;
             z-index: 3;
+
+            @include breakpoint(tablet) {
+                transform: translateX(-90%) rotate(-11deg);
+            }
         }
 
         &.is-second-visible {

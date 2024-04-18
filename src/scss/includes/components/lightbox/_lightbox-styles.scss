@@ -1038,6 +1038,7 @@
             inset: auto;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
+            max-width: 100%;
 
 
             // for caption with single image
@@ -1891,15 +1892,12 @@
         display: none;
         height: 100%;
 
-        @include breakpoint(tablet) {
-            display: flex;
-            opacity: 0;
-        }
 
-
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             display: flex;
-            opacity: 0;
+            opacity: 1;
+            position: absolute;
+            left: 75%;
         }
 
 

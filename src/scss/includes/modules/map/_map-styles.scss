@@ -346,7 +346,7 @@
 
         @include breakpoint(not-phone) {
             justify-content: flex-start;
-            
+
             overflow-y: scroll;
 
             @include breakpoint(desktop) {
@@ -394,7 +394,7 @@
                 width: rem(286);
                 padding: rem(13);
 
-                
+
                 .map__interviews--long & {
                     @include flex(row-reverse, flex-end, flex-start);
 
@@ -441,7 +441,7 @@
                 &::before {
                     content: "";
                     position: absolute;
-                    inset: rem(13) auto auto 0; 
+                    inset: rem(13) auto auto 0;
                     margin: auto;
                     height: 1px;
                     background: currentColor;
@@ -664,10 +664,14 @@
             height: rem(46);
 
             svg {
-                position: relative;
-                left: 50%;
-                translate: -50%;
+                width: 100%;
+                height: auto;
             }
+        }
+
+        @include breakpoint(hd) {
+            width: rem(30);
+            height: rem(30);
         }
 
         @include breakpoint(tablet) {
@@ -689,6 +693,10 @@
 
         &--single {
             width: rem(63);
+
+            @include breakpoint(hd) {
+                width: rem(50);
+            }
         }
 
 
