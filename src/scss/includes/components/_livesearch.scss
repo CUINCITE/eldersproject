@@ -13,7 +13,7 @@
     &__wrap {
         height: 0;
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             overscroll-behavior: none;
         }
 
@@ -23,18 +23,19 @@
             padding-bottom: rem(40);
             overflow-y: auto;
 
-            @include breakpoint(tablet) {
-                height: calc(100vh - #{rem(146)});
-                padding-bottom: 0;
-
-                @supports(height: 100dvh) {
-                    height: calc(100dvh - #{rem(146)});
-                }
-            }
-
-            @include breakpoint(phone) {
+            @include breakpoint(not-desktop) {
                 position: fixed;
-                overflow: hidden scroll;
+                overflow: hidden auto;
+
+                @include breakpoint(tablet) {
+                    height: calc(100vh - #{rem(146)});
+                    width: 100%;
+                    padding-bottom: 0;
+    
+                    @supports(height: 100dvh) {
+                        height: calc(100dvh - #{rem(146)});
+                    }
+                }
             }
         }
     }
