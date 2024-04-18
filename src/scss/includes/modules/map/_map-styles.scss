@@ -350,8 +350,8 @@
             overflow-y: scroll;
 
             @include breakpoint(desktop) {
-                @media (max-height: 700px) {
-                    max-height: calc(#{vw(3 * 75)} + 3px);;
+                @media (min-aspect-ratio: 1.7) and (max-height: 1000px) {
+                    max-height: calc(#{vw(2 * 75 + 40)} + 2px);
                 }
             }
         }

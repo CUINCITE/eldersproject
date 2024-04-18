@@ -1,11 +1,11 @@
 .loader {
-    // @include z-index(loader);
-    z-index: 0;
-    position: fixed;
-    inset: 0;
-    background-color: var(--color-box);
-    color: var(--color-black);
-    padding-left: rem(13);
+    background: none;
+    color: var(--loader-color-1);
+    padding-left: 20 / 1280 * 100vw;
+
+    body:not(.is-not-ready) & {
+        pointer-events: none;
+    }
 
 
 
@@ -19,173 +19,118 @@
 
 
     &__wrap {
-        @include flex(row, flex-start, center);
-
+        @include flex(column, center, flex-start);
         position: relative;
-
+        height: 100%;
+        transition: transform 0.3s $easing calc(var(--loader-delay) + 0.05s),
+            opacity 0.3s calc(var(--loader-delay) + 0.05s);
 
         @include breakpoint(not-desktop) {
             padding-top: var(--hamburgerbar-height);
         }
-    }
 
-
-
-    &__count {
-        @include font-family(compressed);
-
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        margin: 0;
-
-        @include breakpoint(desktop) {
-            @include font-size(216, 1);
-            @include letter-spacing(-9.72, 216);
-
-
-            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
-                @include font-size(170, 1);
-
-                letter-spacing: -0.045em;
-            }
-
-
-            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
-                @include font-size(204, 1);
-
-                letter-spacing: -0.045em;
-            }
-        }
-
-
-        @include breakpoint(tablet) {
-            @include font-size(220, .72);
-            @include letter-spacing(-9.5, 220);
-
-            padding-top: rem(30);
-        }
-
-
-        @include breakpoint(phone) {
-            @include font-size(118.8, 85.7);
-            @include letter-spacing(-10.8, 240);
-
-            padding-top: rem(13);
-        }
-
-
-        span {
-            grid-column: 1 / 1;
-            grid-row: 1 / 1;
+        body:not(.is-not-ready) & {
+            transform: translateX(10vw);
             opacity: 0;
-
-
-            html.wf-active & { opacity: 1; }
         }
     }
-
-
-
-    &__text {
-        @include font-family(normal);
-        @include font-settings(400, 100);
-        @include font-size(20, 32);
-        @include letter-spacing(-0.6, 20);
-
-        text-transform: uppercase;
-        position: absolute;
-        inset: auto auto rem(4) rem(4);
-        margin: 0;
-        opacity: 0;
-
-
-        html.wf-active & { opacity: 1; }
-
-        html.wf-active body.is-loader-hiding & { opacity: 0; }
-
-
-        @include breakpoint(phone) {
-            inset: auto auto rem(-22) rem(1);
-        }
-    }
-
-
-
-    &__aside {
-        @include flex(column, flex-end, flex-end);
-
-        height: 100%;
-        position: relative;
-
-        // padding: rem(13) 0 0;
-
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 1px;
-
-            // background-color: var(--color-grey800);
-            background-color: var(--color-white);
-        }
-    }
-
-
-
-    &__logo {
-        padding: 0 rem(6) rem(13); // like .header
-        position: relative;
-        width: 100%;
-
-        transition: height .1s $easing;
-        will-change: height;
-
-        // WHEN HIDDEN LOADER
-        height: 0;
-
-        // height: 99%;
-
-        // logo height + bottom padding
-        min-height: rem(60 + 12);
-
-        // aside padding-top + burger height + aside logo margin-top
-        max-height: calc(100% - #{rem(13 + 9 + 13)});
-
-        svg path { fill: currentColor; }
-    }
-
 
 
     &__line {
+        transition: opacity 0.1s calc(var(--loader-delay) + 0.35s);
+
+        body:not(.is-not-ready) & {
+            opacity: 0;
+        }
+    }
+
+
+
+    &__quote {
+        @include font-family(compressed, 400);
+
+        font-size: 50 / 1280 * 100vw;
+        line-height: 45 / 50 * 1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        opacity: 0;
+        animation: fade-in 2s forwards;
+
+        @include breakpoint(tablet) {
+            @include font-size(38, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 0.95); 
+        }
+    }
+
+
+
+    &__author {
+        @include font-family(normal, 400);
+        @include font-settings(400, 100);
+
+        font-size: 19 / 1280 * 100vw;
+        line-height: 30 / 19 * 1;
+        text-transform: uppercase;
+        align-items: center;
+        letter-spacing: -0.03em;
+        display: flex;
+        opacity: 0;
+        animation: fade-in-left 1.5s forwards 0.5s;
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(11, 0.95);
+        }
+
+        &::before {
+            content: "";
+            height: 1px;
+            width: rem(35);
+            background: currentColor;
+            display: inline-block;
+            margin-inline: rem(3) rem(8);
+
+            @include breakpoint(tablet) {
+                width: rem(40);
+            }
+
+            @include breakpoint(phone) {
+                width: rem(25);
+            }
+        }
+    }
+
+
+
+    &__bg {
         position: absolute;
-        inset: auto auto 0 0;
-        width: 1px;
-        background-color: var(--color-bg);
+        inset: 0;
+        transform-origin: right center;
+        transition: transform 0.7s $easing;
 
-        transition: height .1s $easing;
-        will-change: height;
+        &:nth-child(1) {
+            background: var(--loader-color-2, $color-pale-blue);
+            transition-delay: calc(var(--loader-delay) + 0.1s);
+        }
 
-        height: 100%;
-        transform: scaleY(0);
-        transform-origin: bottom center;
+        &:nth-child(2) {
+            background: var(--loader-color-3, $color-red);
+            transition-delay: calc(var(--loader-delay) + 0.05s);
+        }
 
-        animation: loader-line 2s $easing forwards;
+        &:nth-child(3) {
+            background-color: var(--color-black);
+            transition-delay: var(--loader-delay);
+        }
 
-        // logo height + bottom padding
-        // min-height: rem(60 + 12);
-    }
-
-
-
-    &__spacer {
-        flex-grow: 1;
-    }
-
-
-
-    &__body {
-        position: relative;
+        body:not(.is-not-ready) & {
+            transform: scaleX(0);
+        }
     }
 }
