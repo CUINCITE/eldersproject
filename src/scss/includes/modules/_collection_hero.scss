@@ -190,13 +190,13 @@
         text-transform: uppercase;
 
         @include breakpoint(tablet) {
-            @include font-size (25, 0.95);
+            @include font-size (20, 0.95);
             @include letter-spacing (-0.6, 25);
 
             margin-block: trim-font(0.95);
 
             position: absolute;
-            bottom: rem(12);
+            bottom: rem(14);
             left: 0;
         }
 

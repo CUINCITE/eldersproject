@@ -203,10 +203,10 @@
             margin-inline: rem(8);
 
             &--single {
-                min-height: rem(400);
+                // min-height: rem(400);
 
                 @media(min-width: 1600px) {
-                    min-height: rem(600);
+                    // min-height: rem(600);
                 }
             }
         }
@@ -291,6 +291,7 @@
 
                     @media(min-width: 1600px) {
                         --polaroid-width: #{rem(200)};
+
                         // --polaroid-height: unset;
                     }
 
