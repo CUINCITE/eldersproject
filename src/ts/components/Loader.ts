@@ -58,23 +58,26 @@ export class Loader extends Component {
 
 
     public hide = (): void => {
-        gsap.fromTo(this.view, { opacity: 1 }, {
-            opacity: 0,
-            duration: 0.5,
-            ease: 'sine',
-            onStart: () => {
-                document.body.classList.add('is-loader-hiding');
-            },
-            onComplete: () => {
-                document.body.classList.remove('is-loader-hiding');
-                document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
-                // this.view.style.display = 'none';
-                this.view.style.pointerEvents = 'none';
-                this.isHidden = true;
+        document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
+        setTimeout(() => {
+        }, 500);
+        // gsap.fromTo(this.view, { opacity: 1 }, {
+        //     opacity: 0,
+        //     duration: 0.5,
+        //     ease: 'sine',
+        //     onStart: () => {
+        //         document.body.classList.add('is-loader-hiding');
+        //     },
+        //     onComplete: () => {
+        //         document.body.classList.remove('is-loader-hiding');
+        //         document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
+        //         // this.view.style.display = 'none';
+        //         this.view.style.pointerEvents = 'none';
+        //         this.isHidden = true;
 
-                // Utils.setSessionStorageItem('loaded', '1');
-            },
-        });
+        //         // Utils.setSessionStorageItem('loaded', '1');
+        //     },
+        // });
     };
 
 
