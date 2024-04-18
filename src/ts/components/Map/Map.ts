@@ -341,14 +341,15 @@ export class Map extends Component {
             const id = props.cluster_id || props.id;
             let marker = this.markers[id];
 
-
             if (!marker) {
                 const el = document.createElement('div');
                 el.className = `map__marker map__marker--${props.cluster ? 'cluster' : 'single'}`;
                 if (!props.cluster) { el.dataset.marker = id; }
                 if (props.cluster_id) { el.dataset.cluster = props.cluster_id; }
+                const currentLocation = this.locations.filter(l => l.id === `${id}`)[0];
+                console.log(currentLocation, coords);
 
-                marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(coords[0], coords[1]));
+                marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(!props.cluster ? Number(currentLocation.gps_lng) : coords[0], !props.cluster ? Number(currentLocation.gps_lat) : coords[1]));
                 this.markers[id] = marker;
 
                 marker.getElement().addEventListener('click', () => {
