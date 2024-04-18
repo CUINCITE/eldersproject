@@ -30,7 +30,7 @@
             }
 
             @include breakpoint(phone) {
-                position: fixed;
+                overscroll-behavior: none;
             }
         }
     }
