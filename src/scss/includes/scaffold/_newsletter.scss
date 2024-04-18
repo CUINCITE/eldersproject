@@ -295,7 +295,7 @@
         }
 
         @include breakpoint(tablet) {
-            inset: calc(100% - #{rem(5)}) auto auto 0;
+            inset: calc(100% + #{rem(8)}) auto auto 0;
         }
 
         @include breakpoint(phone) {
