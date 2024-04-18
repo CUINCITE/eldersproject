@@ -1,5 +1,9 @@
 {
     "table": "intro_quotes",
+    "buttons_page":
+    [
+        {"label":"Export","plugin":"export"}
+    ],
     "order": "text",
     "fields": [
         {
@@ -17,7 +21,8 @@
             "label":"Publish",
             "field":"active",
             "type":"boolean",
-            "list":"edit"
+            "list":"edit",
+            "search":true
         }
     ]
 }
