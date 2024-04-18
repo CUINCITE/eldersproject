@@ -1,7 +1,7 @@
 .loader {
     background: none;
     color: var(--loader-color-1);
-    padding-left: rem(13);
+    padding-left: 20 / 1280 * 100vw;
 
     body:not(.is-not-ready) & {
         pointer-events: none;
@@ -48,8 +48,8 @@
 
     &__quote {
         @include font-family(compressed, 400);
-        font-size: 50px;
-        line-height: 1;
+        font-size: 50 / 1280 * 100vw;
+        line-height: 45 / 50 * 1;
         letter-spacing: -0.03em;
         text-transform: uppercase;
         opacity: 0;
@@ -61,8 +61,8 @@
     &__author {
         @include font-family(normal, 400);
         @include font-settings(400, 100);
-        font-size: 19px;
-        line-height: 1;
+        font-size: 19 / 1280 * 100vw;
+        line-height: 30 / 19 * 1;
         text-transform: uppercase;
         align-items: center;
         letter-spacing: -0.03em;
@@ -76,7 +76,7 @@
             width: rem(35);
             background: currentColor;
             display: inline-block;
-            margin-inline: rem(9);
+            margin-inline: rem(3) rem(8);
         }
     }
 
