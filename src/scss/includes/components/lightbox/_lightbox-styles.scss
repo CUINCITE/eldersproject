@@ -1545,10 +1545,10 @@
             padding: rem(53) rem(143) rem(25) rem(25);
 
 
-
             @include breakpoint(not-desktop) {
                 padding: 39px 26px 39px var(--grid-margin);
             }
+
 
 
             h3 {
@@ -1577,6 +1577,7 @@
 
                 @include breakpoint(not-desktop) {
                     @include font-size(15, 21);
+                    @include font-settings(400, 100); 
                 }
             }
 
