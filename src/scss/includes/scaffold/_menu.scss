@@ -333,10 +333,11 @@ $theme-colors: ("orange", "red", "blue", "pink", "pale-green");
             }
 
             @include breakpoint(phone) {
-                right: vw(16, phone);
-                top: vw(8, phone);
-                width: vw(14, phone);
-                height: vw(14, phone);
+                top: rem(2);
+                right: rem(6);
+                width: rem(32);
+                height: rem(32);
+                padding: rem(10);
             }
         }
     }
