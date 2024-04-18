@@ -48,12 +48,21 @@
 
     &__quote {
         @include font-family(compressed, 400);
+
         font-size: 50 / 1280 * 100vw;
         line-height: 45 / 50 * 1;
         letter-spacing: -0.03em;
         text-transform: uppercase;
         opacity: 0;
         animation: fade-in 2s forwards;
+
+        @include breakpoint(tablet) {
+            @include font-size(38, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(20, 0.95); 
+        }
     }
 
 
@@ -61,6 +70,7 @@
     &__author {
         @include font-family(normal, 400);
         @include font-settings(400, 100);
+
         font-size: 19 / 1280 * 100vw;
         line-height: 30 / 19 * 1;
         text-transform: uppercase;
@@ -70,6 +80,14 @@
         opacity: 0;
         animation: fade-in-left 1.5s forwards 0.5s;
 
+        @include breakpoint(tablet) {
+            @include font-size(16, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(11, 0.95);
+        }
+
         &::before {
             content: "";
             height: 1px;
@@ -77,6 +95,14 @@
             background: currentColor;
             display: inline-block;
             margin-inline: rem(3) rem(8);
+
+            @include breakpoint(tablet) {
+                width: rem(40);
+            }
+
+            @include breakpoint(phone) {
+                width: rem(25);
+            }
         }
     }
 

@@ -18,7 +18,7 @@
         height: auto;
         z-index: 9; // to be above the audioplayer cover
         overflow: hidden;
-
+        overscroll-behavior: none;
 
         .is-lightbox-open & {
             // position: relative;
@@ -458,6 +458,7 @@
         &-container {
             height: 100%;
             overflow-y: auto;
+            overscroll-behavior: none;
         }
 
 
@@ -1533,7 +1534,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
-
+        overscroll-behavior: none;
 
         @include breakpoint(not-desktop) {
             padding-left: 0;
@@ -1594,6 +1595,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
         @include breakpoint(not-desktop) {
             padding-left: 0;
@@ -1699,6 +1701,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
         @include breakpoint(phone) {
             padding-left: rem(65);
