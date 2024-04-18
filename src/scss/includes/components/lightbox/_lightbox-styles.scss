@@ -1482,7 +1482,7 @@
                         }
 
                         @include breakpoint(phone) {
-                            inset: 0 auto 0 calc(var(--aside-width) + 22px);
+                            inset: 0 auto 0 var(--aside-width);
                         }
                     }
                 }

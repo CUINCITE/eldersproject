@@ -18,13 +18,19 @@
         position: relative;
 
         @include breakpoint(desktop) {
-            padding-bottom: rem(70);
+            padding-bottom: rem(17);
             border-top: 1px solid $color-bg;
         }
 
 
         @include breakpoint(not-desktop) {
             padding-bottom: rem(20);
+
+            @include breakpoint(tablet) {
+                .grid > div {
+                    grid-column: 3 / span 6 !important;
+                }
+            }
         }
     }
 

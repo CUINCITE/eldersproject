@@ -11,16 +11,6 @@
         z-index: 2;
         inset: 0 0 auto;
         padding-left: var(--aside-width);
-
-
-        @include breakpoint(tablet) {
-            padding-left: var(--grid-margin);
-        }
-
-
-        @include breakpoint(phone) {
-            padding-left: calc(var(--aside-width) + 22px + var(--grid-margin));
-        }
     }
 
 
@@ -68,6 +58,10 @@
             padding-bottom: 6px;
         }
 
+        @include breakpoint(phone) {
+            grid-template-columns: calc(var(--aside-width) - var(--grid-margin)) 1fr;
+        }
+
 
         &:first-of-type {
             @include breakpoint(desktop) { padding-top: rem(7); }
@@ -97,6 +91,10 @@
             padding: 0;
             padding-left: 22px;
             letter-spacing: normal;
+
+            @include breakpoint(phone) {
+                padding-left: 9px;
+            }
         }
 
         strong {
@@ -104,6 +102,10 @@
 
             @include breakpoint(not-desktop) {
                 letter-spacing: -0.01em;
+                
+                @include breakpoint(phone) {
+                    font-weight: unset;
+                }
             }
         }
 
@@ -122,6 +124,10 @@
 
     &__btn {
         @include flex(row, flex-end, center);
+
+        @include breakpoint(phone) {
+            @include flex(row, flex-start, center);
+        }
     }
 
 
@@ -187,7 +193,8 @@
 
 
         @include breakpoint(phone) {
-            padding-left: 0;
+            padding-left: 10px;
+            padding-right: var(--grid-margin);
         }
     }
 
@@ -206,6 +213,8 @@
         overflow: hidden;
 
         @include breakpoint(phone) {
+            min-width: rem(65);
+
             &.has-value {
                 width: rem(120) !important;
             }
@@ -229,6 +238,10 @@
 
                 color: currentColor;
                 transform: translateX(#{rem(-2)});
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(14, 1);
             }
         }
     }

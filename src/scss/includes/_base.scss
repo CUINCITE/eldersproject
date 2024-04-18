@@ -48,12 +48,6 @@ body {
 
     // for collection's page
     counter-reset: collection-counter;
-
-    @include breakpoint(phone) {
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-text-stroke-width: 0;
-        -webkit-font-smoothing: none;
-    }
 }
 
 
