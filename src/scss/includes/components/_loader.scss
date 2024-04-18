@@ -23,7 +23,8 @@
         @include flex(column, center, flex-start);
         position: relative;
         height: 100%;
-        transition: transform 0.3s $easing 0.9s, opacity 0.3s 0.9s;
+        transition: transform 0.3s $easing calc(var(--loader-delay) + 0.05s),
+            opacity 0.3s calc(var(--loader-delay) + 0.05s);
 
         @include breakpoint(not-desktop) {
             padding-top: var(--hamburgerbar-height);
@@ -37,7 +38,7 @@
 
 
     &__line {
-        transition: opacity 0.1s 1.2s;
+        transition: opacity 0.1s calc(var(--loader-delay) + 0.35s);
 
         body:not(.is-not-ready) & {
             opacity: 0;
@@ -86,17 +87,17 @@
 
         &:nth-child(1) {
             background: var(--loader-color-2, $color-pale-blue);
-            transition-delay: 0.95s;
+            transition-delay: calc(var(--loader-delay) + 0.1s);
         }
 
         &:nth-child(2) {
             background: var(--loader-color-3, $color-red);
-            transition-delay: 0.9s;
+            transition-delay: calc(var(--loader-delay) + 0.05s);
         }
 
         &:nth-child(3) {
             background-color: var(--color-black);
-            transition-delay: 0.85s;
+            transition-delay: var(--loader-delay);
         }
 
         body:not(.is-not-ready) & {
