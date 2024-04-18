@@ -9,7 +9,7 @@
 
 @import "includes/fonts";
 
-@import "includes/components/loader";
+@import "includes/components/loader-critical";
 
 * { box-sizing: border-box; }
-body { background: var(--color-box); }
+body { background: var(--color-black); }

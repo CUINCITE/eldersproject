@@ -19,7 +19,7 @@
 
 
             body.is-fully-loaded & {
-                transition: transform .6s $ease-custom;
+                transition: transform .7s $ease-custom 1.2s;
                 transform: translateY(0);
             }
         }

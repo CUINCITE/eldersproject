@@ -1,17 +1,20 @@
-<div class="loader js-loader">
+{% set loader_colors_set = random([
+    ["red", "pale-blue", "red"],
+    ["pink", "pink", "purple"],
+    ["yellow", "pale-green", "yellow"],
+    ["pale-green", "pale-green", "red"],
+    ["orange", "orange", "purple"]
+]) %}
+
+<div class="loader js-loader" style="--loader-color-1: var(--color-{{loader_colors_set[0]}}); --loader-color-2: var(--color-{{loader_colors_set[1]}}); --loader-color-3: var(--color-{{loader_colors_set[2]}}); --loader-delay: 4000ms">
+    <div class="loader__bg"></div>
+    <div class="loader__bg"></div>
+    <div class="loader__bg"></div>
     <div class="loader__grid">
         <div class="loader__wrap">
-            {#<div class="loader__body">
-                <h2 class="loader__count js-loader-count"><span>1%</span></h2>
-                <p class="loader__text">Loading</p>
-            </div>#}
-        </div>
-        <div class="loader__aside">
-            <i class="loader__line js-loader-line"></i>
-            {#<div class="loader__logo desktop-only js-loader-logo">
-                [[svg::logo-new]]
-                <div class="loader__spacer"></div>
-            </div>#}
+            <div class="loader__quote">‘{{scaffold.intro_quote.text|nl2br}}’</div>
+            <div class="loader__author">{{scaffold.intro_quote.author}}</div>
         </div>
     </div>
+    <div class="loader__line"></div>
 </div>

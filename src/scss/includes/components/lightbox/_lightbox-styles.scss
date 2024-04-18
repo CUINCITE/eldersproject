@@ -559,7 +559,7 @@
                 flex-shrink: 0;
                 gap: 0;
                 order: 3;
-                overflow: auto;
+                overflow: auto hidden;
                 background: transparent;
                 position: sticky;
                 top: 0;
@@ -567,12 +567,12 @@
                 margin-top: -44px;
                 padding-bottom: 8px;
                 margin-bottom: -8px;
+                overscroll-behavior: none;
     
     
                 &::-webkit-scrollbar {
                     display: none;
                 }
-    
     
     
                 li {

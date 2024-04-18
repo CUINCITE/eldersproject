@@ -1,0 +1,16 @@
+.loader {
+    @include z-index(loader);
+    background-color: var(--color-black);
+    position: fixed;
+    inset: 0;
+
+
+    &__line {
+        background: $color-grey800;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        right: var(--GLOBAL-aside-width);
+    }
+}

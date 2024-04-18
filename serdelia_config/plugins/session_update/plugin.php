@@ -50,6 +50,10 @@ class serdelia_plugin_session_update
         }
 
         $f=['id'=>$session['id']];
+        //print_r($session);exit();
+        $output['label']=$session['parent']['label'].' ('.$session['parent']['interviewer_name'].')';
+        $output['label_sort']=$session['parent']['label_sort'].' ('.$session['parent']['interviewer_name'].')';
+        
         
         $this->cms->putJsonModel('sessions_simple',$output,$f);
 

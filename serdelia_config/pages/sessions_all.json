@@ -60,10 +60,10 @@
         },
         {
             "field":"label_sort",
-            "label":"Session Name",
+            "label":"Session Name Sort",
             "list":true,
             "search":true,
-            "hidden":true
+            "hhidden":true
         },
         {
             "field":"parent","type":"select",
