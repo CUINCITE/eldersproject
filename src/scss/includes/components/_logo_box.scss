@@ -11,14 +11,14 @@
 
     @include breakpoint(phone) {
         svg {
-            width: vw(78, phone);
+            width: vw(85, phone);
             height: auto;
         }
     }
 
     .box {
         @include flex(row, flex-start, flex-start);
-        
+
         height: 100%;
 
         @include breakpoint(tablet) {

@@ -1,3 +1,15 @@
+$background-colors: (
+    "pale_green": $color-pale-green,
+    "green": $color-green,
+    "light_blue": $color-light-blue,
+    "pale_blue": $color-pale-blue,
+    "pale_purple": $color-pale-purple,
+    "pink": $color-pink,
+    "yellow": $color-gold,
+    "orange": $color-orange,
+    "brown": $color-brown,
+);
+
 @keyframes polaroid {
     0% {
         filter: brightness(300%);
@@ -10,17 +22,7 @@
     }
 }
 
-$background-colors: (
-    "pale_green": $color-pale-green,
-    "green": $color-green,
-    "light_blue": $color-light-blue,
-    "pale_blue": $color-pale-blue,
-    "pale_purple": $color-pale-purple,
-    "pink": $color-pale-pink,
-    "yellow": $color-gold,
-    "orange": $color-orange,
-    "brown": $color-brown,
-);
+
 
 .polaroid {
     --polaroid-width: #{rem(386)};
@@ -33,7 +35,7 @@ $background-colors: (
 
     position: relative;
 
-    &:after {
+    &::after {
         content: "";
         position: absolute;
         inset: rem(-20) rem(-20) rem(-32);
@@ -65,6 +67,7 @@ $background-colors: (
     &--horizontal {
         @include breakpoint(desktop) {
             --polaroid-width: #{rem(481)};
+
             // --polaroid-height: #{rem(366)};
 
             @media(max-width: 1400px) {
@@ -91,6 +94,7 @@ $background-colors: (
 
         .polaroid__image {
             overflow: hidden;
+            height: 100%;
 
             img {
                 opacity: 1;
@@ -108,6 +112,11 @@ $background-colors: (
 
 
     &--wrapped {
+        @media(min-width: 1600px) {
+            --polaroid-width: #{rem(386)};
+            --polaroid-height: #{rem(471)};
+        }
+
         &::after {
             @include breakpoint(desktop) {
                 inset: rem(-20) rem(-20) rem(-30);
@@ -123,6 +132,7 @@ $background-colors: (
 
     &__image {
         width: 100%;
+
         // height: 100%;
 
         @each $name, $color in $background-colors {

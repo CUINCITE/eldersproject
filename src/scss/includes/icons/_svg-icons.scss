@@ -85,7 +85,7 @@
     @include breakpoint(tablet) {
         .player--video & {
             width: 40px;
-            height: 44px;
+            height: 30px;
         }
     }
 
@@ -324,7 +324,7 @@
         rect {
             fill: var(--color-black);
 
-            &:first-of-type { fill: var(--color-pale-pink); }
+            &:first-of-type { fill: var(--color-pink); }
         }
 
         @include breakpoint(desktop) {

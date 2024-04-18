@@ -18,7 +18,7 @@
         height: auto;
         z-index: 9; // to be above the audioplayer cover
         overflow: hidden;
-
+        overscroll-behavior: none;
 
         .is-lightbox-open & {
             // position: relative;
@@ -458,6 +458,7 @@
         &-container {
             height: 100%;
             overflow-y: auto;
+            overscroll-behavior: none;
         }
 
 
@@ -1481,7 +1482,7 @@
                         }
 
                         @include breakpoint(phone) {
-                            inset: 0 auto 0 calc(var(--aside-width) + 22px);
+                            inset: 0 auto 0 var(--aside-width);
                         }
                     }
                 }
@@ -1533,7 +1534,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
-
+        overscroll-behavior: none;
 
         @include breakpoint(not-desktop) {
             padding-left: 0;
@@ -1544,10 +1545,10 @@
             padding: rem(53) rem(143) rem(25) rem(25);
 
 
-
             @include breakpoint(not-desktop) {
                 padding: 39px 26px 39px var(--grid-margin);
             }
+
 
 
             h3 {
@@ -1576,6 +1577,7 @@
 
                 @include breakpoint(not-desktop) {
                     @include font-size(15, 21);
+                    @include font-settings(400, 100); 
                 }
             }
 
@@ -1594,6 +1596,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
         @include breakpoint(not-desktop) {
             padding-left: 0;
@@ -1699,6 +1702,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
         @include breakpoint(phone) {
             padding-left: rem(65);

@@ -78,14 +78,15 @@ export class Map extends Component {
     private geojson: mapboxgl.GeoJSONSourceRaw;
     private style: string;
     private scrolledContainer: HTMLElement;
+    private isGlobalMap: boolean;
 
 
     constructor(protected view: HTMLElement) {
         super(view);
 
         this.settings = {
-            lng: -122,
-            lat: 37,
+            lng: -100,
+            lat: 10,
             minZoom: 3.5,
             zoom: 10,
             maxZoom: 16,
@@ -107,6 +108,7 @@ export class Map extends Component {
         this.toggleButton = this.view.querySelector('.js-toggle-button');
         this.locations = JSON.parse(this.view.getAttribute('data-locations')) as IMapLocation[];
         this.scrolledContainer = this.view.querySelector('.js-scrolled');
+        this.isGlobalMap = this.view.classList.contains('map--global');
 
         // find style for given modifier (if exists)
         this.style = this.view.getAttribute('data-theme-color');
@@ -421,6 +423,12 @@ export class Map extends Component {
                 });
             });
         }
+
+        // scroll left panel to the active location
+        const locationEl = [...this.locationsElements].filter(l => l.getAttribute('data-id') === markerId)[0];
+        setTimeout(() => {
+            this.scrollToElement(locationEl, false);
+        }, 500);
     };
 
 
@@ -442,13 +450,20 @@ export class Map extends Component {
     private fitBounds = (fast?: boolean): void => {
         this.removeCurrentInterviews();
 
-        const bounds = new mapboxgl.LngLatBounds();
-
-        this.locations.forEach(l => {
-            // eslint-disable-next-line camelcase
-            const { gps_lat, gps_lng } = l;
-            bounds.extend([parseFloat(gps_lng), parseFloat(gps_lat)]);
-        });
+        let bounds;
+        if(this.isGlobalMap) {
+            bounds = [
+                [-124.697, 33.312],
+                [-68.317, 47.286]
+            ]
+        } else {
+            bounds = new mapboxgl.LngLatBounds();
+            this.locations.forEach(l => {
+                // eslint-disable-next-line camelcase
+                const { gps_lat, gps_lng } = l;
+                bounds.extend([parseFloat(gps_lng), parseFloat(gps_lat)]);
+            });
+        }
 
         this.map.fitBounds(bounds, {
             padding: 50,
@@ -594,7 +609,10 @@ export class Map extends Component {
         // empty existing list items first
         this.interviewsList.innerHTML = '';
 
+
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
+        this.interviewsList.classList.toggle('is-long', interviews.length > 3);
+
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">

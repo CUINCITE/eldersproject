@@ -13,6 +13,9 @@
     &__wrap {
         height: 0;
 
+        @include breakpoint(phone) {
+            overscroll-behavior: none;
+        }
 
         .has-value & {
             height: max-content;
@@ -31,6 +34,7 @@
 
             @include breakpoint(phone) {
                 position: fixed;
+                overflow: hidden scroll;
             }
         }
     }
