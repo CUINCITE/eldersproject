@@ -226,10 +226,6 @@
                 --polaroid-width: #{vw(220)};
                 --polaroid-height: #{vw(274)};
 
-                @media(min-width: 1600px) {
-                    // --polaroid-width: #{rem(200)};
-                }
-
                 margin-block: rem(38) rem(48);
                 left: 4%;
                 rotate: 7.216deg;
@@ -242,6 +238,10 @@
                 left: 50%;
                 translate: -50% 0;
                 margin-block: vw(38, tablet);
+
+                img {
+                    width: 100%;
+                }
             }
 
             @include breakpoint(phone) {
@@ -299,8 +299,8 @@
                 }
 
                 @include breakpoint(tablet) {
-                    --polaroid-width: #{vw(310, tablet)};
-                    --polaroid-height: #{vw(243, tablet)};
+                    --polaroid-width: #{vw(254, tablet)};
+                    --polaroid-height: #{vw(200, tablet)};
                 }
 
                 @include breakpoint(phone) {
@@ -372,8 +372,8 @@
 
             @include breakpoint(tablet) {
                 left: 50%;
-                translate: -50% 0;
-                height: vw(300, tablet);
+                translate: -50% -5%;
+                height: rem(280);
             }
 
             @include breakpoint(phone) {
@@ -381,6 +381,10 @@
                 translate: -50% 0;
                 height: vw(260, phone);
             }
+        }
+
+        @include breakpoint(tablet) {
+            margin-bottom: rem(70);
         }
 
         &[data-observe] img { transition: transform 0.7s $ease-out-back; }

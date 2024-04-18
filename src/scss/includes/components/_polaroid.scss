@@ -94,6 +94,7 @@ $background-colors: (
 
         .polaroid__image {
             overflow: hidden;
+            height: 100%;
 
             img {
                 opacity: 1;

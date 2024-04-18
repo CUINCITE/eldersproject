@@ -3,7 +3,13 @@
         position: relative;
     }
 
-
+    &.box {
+        .module--collections_images:last-child & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(65);
+            }
+        }
+    }
 
     &__content {
         position: relative;

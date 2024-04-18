@@ -360,8 +360,6 @@
         @include breakpoint(tablet) {
             @include font-size(34.545, 0.85);
             @include letter-spacing(-1.036, 34.545);
-
-            height: rem(39);
             padding: rem(7) rem(4) 0;
         }
 

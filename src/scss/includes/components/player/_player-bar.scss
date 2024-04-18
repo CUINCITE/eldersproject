@@ -212,6 +212,11 @@
         text-align: center;
         margin-top: 5px;
 
+        @include breakpoint(tablet) {
+            font-size: rem(42);
+            line-height: 1;
+        }
+
 
         @include breakpoint(phone) {
             @include font-size(25, 26.5);
@@ -281,6 +286,10 @@
                             stroke-width: 0.6px;
                         }
                     }
+                }
+
+                @include breakpoint(tablet) {
+                    margin-bottom: rem(10);
                 }
             }
         }
@@ -441,6 +450,7 @@
         @include breakpoint(tablet) {
             margin-left: var(--grid-margin);
             margin-right: vw(10, tablet);
+            height: rem(65);
         }
 
         > button {
