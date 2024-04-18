@@ -61,7 +61,11 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(20, 0.95); 
+            @include font-size(26, 0.95); 
+
+            br {
+                display: none;
+            }
         }
     }
 
@@ -85,7 +89,7 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(11, 0.95);
+            @include font-size(13, 0.95);
         }
 
         &::before {

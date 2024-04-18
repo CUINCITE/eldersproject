@@ -29,6 +29,12 @@
         @include breakpoint(not-desktop) {
             border-top: 1px solid var(--color-white);
         }
+        
+        body:not(.is-transition) & {
+            .grid {
+                opacity: 1 !important;
+            }
+        }
     }
 
 

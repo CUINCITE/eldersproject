@@ -603,7 +603,10 @@ export class Map extends Component {
         // empty existing list items first
         this.interviewsList.innerHTML = '';
 
+
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
+        this.interviewsList.classList.toggle('is-long', interviews.length > 3);
+
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
