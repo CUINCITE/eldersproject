@@ -149,15 +149,6 @@
             background-color: var(--color-box);
 
 
-            &::before {
-                content: "";
-                position: absolute;
-                inset: -7px 0 100%;
-                background-color: var(--cassette-bg-color);
-                border-bottom: 1px solid var(--color-bg);
-            }
-
-
             .is-expanded & {
                 transform: translateY(calc(-100vw + var(--GLOBAL-aside-width)));
             }

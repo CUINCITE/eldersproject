@@ -68,10 +68,10 @@
 
             .interviews & {
                 max-width: 75%;
+            }
 
-                @include breakpoint(phone) {
-                    max-width: 60%;
-                }
+            @include breakpoint(phone) {
+                max-width: 65%;
             }
         }
 
