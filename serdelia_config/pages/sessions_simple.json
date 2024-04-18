@@ -48,6 +48,12 @@
             "type": "date"
         },
         {
+            "field":"label"
+        },
+        {
+            "field":"label_sort"
+        },
+        {
             "field":"interviewer","label":"Interviewer","type":"select",
             "source":
             {
