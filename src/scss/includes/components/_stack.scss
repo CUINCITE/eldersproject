@@ -36,7 +36,11 @@
         gap: rem(7);
 
         @include breakpoint(phone) {
-            margin-top: rem(45) !important;
+            margin-top: rem(80) !important;
+
+            .collections_images & {
+                margin-top: rem(20) !important;
+            }
         }
     }
 
