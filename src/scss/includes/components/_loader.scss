@@ -14,7 +14,6 @@
         display: grid;
         grid-template-columns: 1fr var(--GLOBAL-aside-width);
         align-items: start;
-        animation: fade-in 2s forwards;
     }
 
 
@@ -53,6 +52,8 @@
         line-height: 1;
         letter-spacing: -0.03em;
         text-transform: uppercase;
+        opacity: 0;
+        animation: fade-in 2s forwards;
     }
 
 
@@ -66,6 +67,8 @@
         align-items: center;
         letter-spacing: -0.03em;
         display: flex;
+        opacity: 0;
+        animation: fade-in-left 1.5s forwards 0.5s;
 
         &::before {
             content: "";
