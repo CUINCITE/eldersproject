@@ -423,6 +423,12 @@ export class Map extends Component {
                 });
             });
         }
+
+        // scroll left panel to the active location
+        const locationEl = [...this.locationsElements].filter(l => l.getAttribute('data-id') === markerId)[0];
+        setTimeout(() => {
+            this.scrollToElement(locationEl, false);
+        }, 500);
     };
 
 
