@@ -348,6 +348,12 @@
             justify-content: flex-start;
             max-height: calc(#{vw(3 * 75 + 40)} + 3px);
             overflow-y: scroll;
+
+            @include breakpoint(desktop) {
+                @media (max-height: 700px) {
+                    max-height: calc(#{vw(3 * 75)} + 3px);;
+                }
+            }
         }
 
         @include breakpoint(phone) {
