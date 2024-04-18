@@ -150,6 +150,8 @@ export class Page extends Handler {
             const children = [...boxes].map(box => [...box.element.children]);
             const elementsToFade = [...illustrations, ...children];
 
+            console.log(...children);
+
 
             children.length && gsap.fromTo(elementsToFade, { opacity: 1 }, {
                 opacity: 0,
@@ -159,6 +161,13 @@ export class Page extends Handler {
                     document.body.classList.add('is-transition');
                     document.documentElement.classList.add('is-transition');
                 },
+            });
+
+            children.length && gsap.fromTo(elementsToFade, { opacity: 0 }, {
+                opacity: 1,
+                duration: isMenuOpen ? 0.001 : 0.3,
+                delay: 5,
+                ease: 'power2.out',
             });
 
             if (isMenuOpen) {
