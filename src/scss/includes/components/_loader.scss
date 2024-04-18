@@ -1,19 +1,33 @@
 .loader {
     background: none;
+    color: var(--loader-color-1);
+    padding-left: rem(13);
 
     body:not(.is-not-ready) & {
         pointer-events: none;
     }
 
 
+
     &__grid {
-        opacity: 1;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr var(--GLOBAL-aside-width);
+        align-items: start;
+        animation: fade-in 2s forwards;
     }
 
 
 
     &__wrap {
+        @include flex(column, center, flex-start);
+        position: relative;
+        height: 100%;
         transition: transform 0.3s $easing 0.9s, opacity 0.3s 0.9s;
+
+        @include breakpoint(not-desktop) {
+            padding-top: var(--hamburgerbar-height);
+        }
 
         body:not(.is-not-ready) & {
             transform: translateX(10vw);
@@ -27,6 +41,38 @@
 
         body:not(.is-not-ready) & {
             opacity: 0;
+        }
+    }
+
+
+
+    &__quote {
+        @include font-family(compressed, 400);
+        font-size: 50px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+    }
+
+
+
+    &__author {
+        @include font-family(normal, 400);
+        @include font-settings(400, 100);
+        font-size: 19px;
+        line-height: 1;
+        text-transform: uppercase;
+        align-items: center;
+        letter-spacing: -0.03em;
+        display: flex;
+
+        &::before {
+            content: "";
+            height: 1px;
+            width: rem(35);
+            background: currentColor;
+            display: inline-block;
+            margin-inline: rem(9);
         }
     }
 

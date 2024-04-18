@@ -1,31 +1,8 @@
 .loader {
     @include z-index(loader);
     background-color: var(--color-black);
-    color: var(--loader-color-1);
-    padding-left: rem(13);
     position: fixed;
     inset: 0;
-
-
-    &__grid {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 1fr var(--GLOBAL-aside-width);
-        align-items: start;
-        animation: fade-in 2s forwards;
-    }
-
-
-
-    &__wrap {
-        @include flex(column, center, flex-start);
-        position: relative;
-        height: 100%;
-
-        @include breakpoint(not-desktop) {
-            padding-top: var(--hamburgerbar-height);
-        }
-    }
 
 
     &__line {
@@ -36,41 +13,4 @@
         width: 1px;
         right: var(--GLOBAL-aside-width);
     }
-
-
-
-    &__quote {
-        @include font-family(compressed, 400);
-        font-size: 50px;
-        line-height: 1;
-        letter-spacing: -0.03em;
-        text-transform: uppercase;
-    }
-
-
-
-    &__author {
-        @include font-family(normal, 400);
-        @include font-settings(400, 100);
-        font-size: 19px;
-        line-height: 1;
-        text-transform: uppercase;
-        align-items: center;
-        letter-spacing: -0.03em;
-        display: flex;
-
-        &::before {
-            content: "";
-            height: 1px;
-            width: rem(35);
-            background: currentColor;
-            display: inline-block;
-            margin-inline: rem(9);
-        }
-    }
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
