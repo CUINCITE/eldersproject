@@ -200,7 +200,7 @@ class Site {
      * when current page is loaded:
      */
     private onPageLoaded = async(): Promise<void> => {
-        document.body.classList.remove('is-not-ready', 'is-rendering');
+        // document.body.classList.remove('is-not-ready', 'is-rendering');
         if (!this.isFirstTime) this.curtain.makeOverlay();
         // const isHome: boolean = !!document.body.querySelector('[data-home]');
         const isLightbox = document.body.classList.contains('is-loading-lightbox') || document.body.classList.contains('has-lightbox');
