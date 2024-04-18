@@ -18,6 +18,8 @@
                 @include flex(column, flex-start, flex-start);
 
                 &--single {
+                    min-height: rem(600);
+
                     .polaroid {
                         translate: rem(-28) 0;
                         margin-bottom: rem(32);
@@ -34,12 +36,16 @@
 
         .text_wrapper__info {
             @include breakpoint(desktop) {
-                @include flex(column, flex-start, flex-start)
-                    text-align: left;
+                @include flex(column, flex-start, flex-start);
+                text-align: left;
 
                 &::before {
                     left: 0;
                     right: unset;
+                }
+
+                &--collections {
+                    margin-top: rem(30);
                 }
             }
         }
@@ -56,7 +62,6 @@
             position: relative;
         }
     }
-
 
 
     &__content {
@@ -196,6 +201,14 @@
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end);
             margin-inline: rem(8);
+
+            &--single {
+                min-height: rem(400);
+
+                @media(min-width: 1600px) {
+                    min-height: rem(600);
+                }
+            }
         }
 
         &[data-observe] {
@@ -213,8 +226,9 @@
                 --polaroid-width: #{vw(220)};
                 --polaroid-height: #{vw(274)};
 
-                // --polaroid-width: #{rem(351)};
-                // --polaroid-height: #{rem(428)};
+                @media(min-width: 1600px) {
+                    // --polaroid-width: #{rem(200)};
+                }
 
                 margin-block: rem(38) rem(48);
                 left: 4%;
@@ -242,21 +256,43 @@
 
             &--big {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{rem(351)};
-                    --polaroid-height: #{rem(428)};
+                    --polaroid-width: #{rem(260)};
+                    --polaroid-height: #{rem(341)};
+                    min-height: var;
+                    left: 0;
+
+                    img,
+                    picture {
+                        max-height: var(--polaroid-height);
+                    }
 
                     margin-bottom: rem(52);
 
                     &:not(.polaroid--horizontal) {
                         rotate: 7.2deg;
                     }
+
+                    @media(min-width: 1600px) {
+                        --polaroid-width: #{rem(180)};
+                        --polaroid-height: #{rem(236)};
+                        left: 2%;
+
+                        &:not(.polaroid--horizontal) {
+                            rotate: 6deg;
+                        }
+                    }
                 }
             }
 
             &--horizontal {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{rem(320)};
-                    --polaroid-height: #{rem(250)};
+                    --polaroid-width: #{rem(280)};
+                    --polaroid-height: #{rem(358)};
+
+                    @media(min-width: 1600px) {
+                        --polaroid-width: #{rem(200)};
+                        // --polaroid-height: unset;
+                    }
 
                     rotate: 11deg;
                     margin-bottom: rem(52);

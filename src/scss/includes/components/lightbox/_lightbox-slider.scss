@@ -84,6 +84,10 @@
             left: rem(-74);
             right: 50%;
 
+            @include breakpoint(desktop) {
+                left: rem(-100);
+            }
+
             svg { transform: scaleX(-1); }
 
 
@@ -99,6 +103,10 @@
             align-items: flex-end;
             left: 50%;
             right: rem(-74);
+
+            @include breakpoint(desktop) {
+                right: rem(-100);
+            }
 
 
             @include breakpoint (not-desktop) {
