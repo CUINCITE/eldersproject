@@ -479,7 +479,8 @@
     &__interviews {
         z-index: 1;
         border-top: none !important;
-
+        margin-top: -2px;
+        
         @include breakpoint(not-desktop) {
             margin-top: -1px;
 

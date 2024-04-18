@@ -346,18 +346,24 @@
 
         @include breakpoint(not-phone) {
             justify-content: flex-start;
-            max-height: calc(#{vw(3 * 75 + 40)} + 3px);
+            
             overflow-y: scroll;
 
             @include breakpoint(desktop) {
+                max-height: calc(#{vw(260)} + 6px);
+
                 @media (min-aspect-ratio: 1.7) and (max-height: 1000px) {
-                    max-height: calc(#{vw(2 * 75 + 40)} + 2px);
+                    max-height: calc(#{vw(180)} + 4px);
                 }
+            }
+
+            @include breakpoint(tablet) {
+                max-height: calc(#{vw(200, tablet)} + 2px);
             }
         }
 
         @include breakpoint(phone) {
-            margin-top: 1px;
+            background-color: var(--color-bg);
         }
     }
 
@@ -367,10 +373,10 @@
         background-color: var(--color-box);
         position: relative;
 
-        @include breakpoint(phone) {
-            background-color: $color-black;
-            color: var(--color-box);
-        }
+        // @include breakpoint(phone) {
+        //     background-color: $color-black;
+        //     color: var(--color-box);
+        // }
 
 
         &-wrap {
@@ -387,6 +393,15 @@
                 gap: rem(5);
                 width: rem(286);
                 padding: rem(13);
+
+                
+                .map__interviews--long & {
+                    @include flex(row-reverse, flex-end, flex-start);
+
+
+                    width: rem(304);
+                    padding: rem(9.5);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -426,7 +441,7 @@
                 &::before {
                     content: "";
                     position: absolute;
-                    inset: rem(13) auto auto 0;
+                    inset: rem(13) auto auto 0; 
                     margin: auto;
                     height: 1px;
                     background: currentColor;
@@ -441,6 +456,14 @@
                     display: inline-block;
                     transition: transform .4s $ease-custom;
                 }
+
+                .map__interviews--long & {
+                    @include font-size(28, 1.03);
+                    @include letter-spacing(-0.7px, 28);
+
+                    margin-block: trim-font(1.03);
+                    padding-top: rem(1);
+                }
             }
         }
 
@@ -452,6 +475,14 @@
 
             @include breakpoint(desktop) {
                 margin-block: trim-font(1);
+
+                .map__interviews--long & {
+                    @include font-size(26, 1);
+                    @include letter-spacing(-0.65px, 26);
+
+                    width: rem(60);
+                    padding-top: rem(2);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -476,6 +507,13 @@
 
                 padding: rem(15) rem(13) rem(12);
                 align-self: stretch;
+
+                .map__interviews--long & {
+                    @include font-size(28, 1.03);
+                    @include letter-spacing(-0.7px, 28);
+
+                    padding: rem(8) rem(12) 0 rem(12);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -485,11 +523,20 @@
             }
 
             @include breakpoint(phone) {
-                @include flex;
+                @include flex(row, center, flex-start);
                 @include font-size(30, 24);
 
                 align-self: stretch;
+                padding-top: rem(17);
                 padding-inline: map-get($grid-offset, phone);
+            }
+        }
+
+        &-inter {
+            .map__interviews--long & {
+                @include breakpoint(desktop) {
+                    display: none;
+                }
             }
         }
 

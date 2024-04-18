@@ -4,14 +4,14 @@
 
     @include breakpoint(tablet) {
         svg {
-            width: vw(120, tablet);
+            width: vw(150, tablet);
             height: auto;
         }
     }
 
     @include breakpoint(phone) {
         svg {
-            width: vw(85, phone);
+            width: vw(110, phone);
             height: auto;
         }
     }

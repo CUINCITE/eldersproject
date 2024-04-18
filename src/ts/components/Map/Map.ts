@@ -451,11 +451,11 @@ export class Map extends Component {
         this.removeCurrentInterviews();
 
         let bounds;
-        if(this.isGlobalMap) {
+        if (this.isGlobalMap) {
             bounds = [
                 [-124.697, 33.312],
-                [-68.317, 47.286]
-            ]
+                [-68.317, 47.286],
+            ];
         } else {
             bounds = new mapboxgl.LngLatBounds();
             this.locations.forEach(l => {
@@ -611,7 +611,7 @@ export class Map extends Component {
 
 
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
-        this.interviewsList.classList.toggle('is-long', interviews.length > 3);
+        this.interviewsList.classList.toggle('map__interviews--long', interviews.length > 3);
 
         [...interviews].forEach(interview => {
             const interviewHtml = `
@@ -622,7 +622,7 @@ export class Map extends Component {
                         <div class="map__interview-title"><span>${interview.title}</span></div>
                         <div class="map__interview-duration">${interview.duration}</div>
                     </div>
-                    <div class="map__interview-button">Play <br> interview</div>
+                    <div class="map__interview-button"><span>Play <br> <span class='map__interview-inter'>interview</span></span></div>
                 </div>
             </li>`;
             this.interviewsList.insertAdjacentHTML('beforeend', interviewHtml);
