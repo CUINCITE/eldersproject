@@ -1,191 +1,60 @@
 .loader {
-    // @include z-index(loader);
-    z-index: 0;
-    position: fixed;
-    inset: 0;
-    background-color: var(--color-box);
-    color: var(--color-black);
-    padding-left: rem(13);
+    background: none;
 
+    body:not(.is-not-ready) & {
+        pointer-events: none;
+    }
 
 
     &__grid {
-        height: 100%;
-        display: grid;
-        grid-template-columns: 1fr var(--GLOBAL-aside-width);
-        align-items: start;
+        opacity: 1;
     }
 
 
 
     &__wrap {
-        @include flex(row, flex-start, center);
+        transition: transform 0.3s $easing 0.9s, opacity 0.3s 0.9s;
 
-        position: relative;
-
-
-        @include breakpoint(not-desktop) {
-            padding-top: var(--hamburgerbar-height);
-        }
-    }
-
-
-
-    &__count {
-        @include font-family(compressed);
-
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        margin: 0;
-
-        @include breakpoint(desktop) {
-            @include font-size(216, 1);
-            @include letter-spacing(-9.72, 216);
-
-
-            @media (max-height: 719px) and (max-aspect-ratio: 1440 / 700) {
-                @include font-size(170, 1);
-
-                letter-spacing: -0.045em;
-            }
-
-
-            @media (min-height: 720px) and (min-aspect-ratio: 1440 / 900) {
-                @include font-size(204, 1);
-
-                letter-spacing: -0.045em;
-            }
-        }
-
-
-        @include breakpoint(tablet) {
-            @include font-size(220, .72);
-            @include letter-spacing(-9.5, 220);
-
-            padding-top: rem(30);
-        }
-
-
-        @include breakpoint(phone) {
-            @include font-size(118.8, 85.7);
-            @include letter-spacing(-10.8, 240);
-
-            padding-top: rem(13);
-        }
-
-
-        span {
-            grid-column: 1 / 1;
-            grid-row: 1 / 1;
+        body:not(.is-not-ready) & {
+            transform: translateX(10vw);
             opacity: 0;
-
-
-            html.wf-active & { opacity: 1; }
         }
     }
-
-
-
-    &__text {
-        @include font-family(normal);
-        @include font-settings(400, 100);
-        @include font-size(20, 32);
-        @include letter-spacing(-0.6, 20);
-
-        text-transform: uppercase;
-        position: absolute;
-        inset: auto auto rem(4) rem(4);
-        margin: 0;
-        opacity: 0;
-
-
-        html.wf-active & { opacity: 1; }
-
-        html.wf-active body.is-loader-hiding & { opacity: 0; }
-
-
-        @include breakpoint(phone) {
-            inset: auto auto rem(-22) rem(1);
-        }
-    }
-
-
-
-    &__aside {
-        @include flex(column, flex-end, flex-end);
-
-        height: 100%;
-        position: relative;
-
-        // padding: rem(13) 0 0;
-
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 1px;
-
-            // background-color: var(--color-grey800);
-            background-color: var(--color-white);
-        }
-    }
-
-
-
-    &__logo {
-        padding: 0 rem(6) rem(13); // like .header
-        position: relative;
-        width: 100%;
-
-        transition: height .1s $easing;
-        will-change: height;
-
-        // WHEN HIDDEN LOADER
-        height: 0;
-
-        // height: 99%;
-
-        // logo height + bottom padding
-        min-height: rem(60 + 12);
-
-        // aside padding-top + burger height + aside logo margin-top
-        max-height: calc(100% - #{rem(13 + 9 + 13)});
-
-        svg path { fill: currentColor; }
-    }
-
 
 
     &__line {
+        transition: opacity 0.1s 1.2s;
+
+        body:not(.is-not-ready) & {
+            opacity: 0;
+        }
+    }
+
+
+
+    &__bg {
         position: absolute;
-        inset: auto auto 0 0;
-        width: 1px;
-        background-color: var(--color-bg);
+        inset: 0;
+        transform-origin: right center;
+        transition: transform 0.7s $easing;
 
-        transition: height .1s $easing;
-        will-change: height;
+        &:nth-child(1) {
+            background: var(--loader-color-2, $color-pale-blue);
+            transition-delay: 0.95s;
+        }
 
-        height: 100%;
-        transform: scaleY(0);
-        transform-origin: bottom center;
+        &:nth-child(2) {
+            background: var(--loader-color-3, $color-red);
+            transition-delay: 0.9s;
+        }
 
-        animation: loader-line 2s $easing forwards;
+        &:nth-child(3) {
+            background-color: var(--color-black);
+            transition-delay: 0.85s;
+        }
 
-        // logo height + bottom padding
-        // min-height: rem(60 + 12);
-    }
-
-
-
-    &__spacer {
-        flex-grow: 1;
-    }
-
-
-
-    &__body {
-        position: relative;
+        body:not(.is-not-ready) & {
+            transform: scaleX(0);
+        }
     }
 }

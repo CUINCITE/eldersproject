@@ -5,7 +5,7 @@
     {% include 'scaffold/gtag.html' %}
     {% include 'scaffold/meta.html' %}
     {% include 'scaffold/favicons.html' %}
-    {# {% include 'scaffold/critical.html' %} #}
+    {% include 'scaffold/critical.html' %}
 
     {% for item in scaffold.langs_alternate %}
     <link rel="alternate" href="{{item.url}}" hreflang="{{item.lang}}">
