@@ -347,7 +347,9 @@
         @include breakpoint(not-phone) {
             justify-content: flex-start;
 
-            overflow-y: scroll;
+            &.is-active {
+                overflow-y: scroll;
+            }
 
             @include breakpoint(desktop) {
                 max-height: calc(#{vw(260)} + 6px);
