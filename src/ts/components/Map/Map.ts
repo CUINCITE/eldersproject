@@ -604,7 +604,7 @@ export class Map extends Component {
                     if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
 
-                        if (!fast) {
+                        if (!fast && !this.isZoomingIn) {
                             this.interviewsList.innerHTML = '';
                             this.activeLocation = null;
                         }
