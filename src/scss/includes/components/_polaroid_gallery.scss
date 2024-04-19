@@ -63,7 +63,7 @@
             z-index: 3;
 
             @include breakpoint(tablet) {
-                transform: translateX(-90%) rotate(-11deg);
+                transform: translateX(-65%) rotate(-11deg);
             }
         }
 
