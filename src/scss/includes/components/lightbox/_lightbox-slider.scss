@@ -130,6 +130,10 @@
                 width: 100%;
             }
 
+            @include breakpoint(tablet-landscape) {
+                width: 100%;
+            }
+
             .safari &,
             .mac & {
                 width: 100%;
