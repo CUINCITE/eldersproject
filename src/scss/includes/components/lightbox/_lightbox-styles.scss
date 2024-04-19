@@ -1010,6 +1010,10 @@
         padding-top: rem(18);
         opacity: 0;
 
+        @include breakpoint(tablet-landscape) {
+            bottom: rem(120);
+        }
+
 
         &:first-of-type { opacity: 1; }
 
@@ -1362,6 +1366,10 @@
 
                 &__image {
                     max-width: 75vw;
+                }
+
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(300);
                 }
             }
 
@@ -1901,6 +1909,12 @@
         &-image {
             margin-top: vh(-20);
             transform: translateY(0) rotate(-7.5deg);
+
+            @include breakpoint(desktop) {
+                &.polaroid {
+                    max-width: rem(400);
+                }
+            }
 
 
             @include breakpoint(not-desktop) {

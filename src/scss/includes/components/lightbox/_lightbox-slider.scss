@@ -81,12 +81,8 @@
 
 
         &--prev {
-            left: rem(-74);
+            left: rem(-100);
             right: 50%;
-
-            @include breakpoint(desktop) {
-                left: rem(-100);
-            }
 
             @include breakpoint(phone) {
                 left: rem(25);
@@ -101,11 +97,7 @@
         &--next {
             align-items: flex-end;
             left: 50%;
-            right: rem(-74);
-
-            @include breakpoint(desktop) {
-                right: rem(-100);
-            }
+            right: rem(-100);
 
             @include breakpoint(phone) {
                 right: rem(25);
@@ -118,6 +110,10 @@
         span {
             opacity: 0;
             transition: opacity .25s $ease-custom;
+
+            @include breakpoint(tablet-landscape) {
+                opacity: 1;
+            }
         }
 
 
@@ -138,18 +134,34 @@
                     scale: 0;
                     transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
                     transform-origin: 60% center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
                 }
 
                 *:nth-child(2) {
                     scale: 1 0;
                     transition: scale 0.25s 0.05s $ease-custom;
                     transform-origin: left center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
                 }
 
                 *:nth-child(3) {
                     scale: 0 1;
                     transition: scale 0.25s 0.25s $ease-custom;
                     transform-origin: 10% center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
+                }
+
+                @include breakpoint(tablet-landscape) {
+
                 }
             }
         }
