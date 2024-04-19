@@ -112,6 +112,7 @@ $background-colors: (
 
 
     &--wrapped {
+
         @media(min-width: 1600px) {
             --polaroid-width: #{rem(386)};
             --polaroid-height: #{rem(471)};

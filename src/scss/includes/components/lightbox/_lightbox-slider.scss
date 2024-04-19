@@ -88,6 +88,10 @@
                 left: rem(25);
             }
 
+            @include breakpoint(tablet) {
+                right: rem(50);
+            }
+
             svg { transform: scaleX(-1); }
 
             .is-first & { display: none; }
@@ -98,6 +102,10 @@
             align-items: flex-end;
             left: 50%;
             right: rem(-100);
+
+            @include breakpoint(tablet) {
+                right: rem(-50);
+            }
 
             @include breakpoint(phone) {
                 right: rem(25);
@@ -118,11 +126,16 @@
 
 
         svg {
-            @include breakpoint(phone) {
+            @include breakpoint(not-desktop) {
                 width: 100%;
             }
 
-            .safari & {
+            @include breakpoint(tablet-landscape) {
+                width: 100%;
+            }
+
+            .safari &,
+            .mac & {
                 width: 100%;
             }
         }
