@@ -27,6 +27,10 @@
             margin-top: rem(46);
         }
 
+        @include breakpoint(tablet-landscape) {
+            padding-bottom: rem(80);
+        }
+
 
         @include breakpoint(not-desktop) {
             padding-top: 50px;
@@ -36,6 +40,7 @@
             @include breakpoint(tablet) {
                 padding-top: unset;
                 margin-top: 50px;
+                padding-bottom: 160px;
             }
 
             @include breakpoint(phone) {
@@ -189,7 +194,7 @@
 
         @include breakpoint(tablet) {
             width: 100%;
-            padding-left: rem(82);
+            padding-left: rem(50);
         }
 
 

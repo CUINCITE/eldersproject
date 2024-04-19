@@ -79,6 +79,7 @@ export class Map extends Component {
     private style: string;
     private scrolledContainer: HTMLElement;
     private isGlobalMap: boolean;
+    private selectedLocation: any;
 
 
     constructor(protected view: HTMLElement) {
@@ -347,7 +348,7 @@ export class Map extends Component {
                 if (!props.cluster) { el.dataset.marker = id; }
                 if (props.cluster_id) { el.dataset.cluster = props.cluster_id; }
                 const currentLocation = this.locations.filter(l => l.id === `${id}`)[0];
-                console.log(currentLocation, coords);
+                // console.log(currentLocation, coords);
 
                 marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(!props.cluster ? Number(currentLocation.gps_lng) : coords[0], !props.cluster ? Number(currentLocation.gps_lat) : coords[1]));
                 this.markers[id] = marker;
@@ -612,8 +613,9 @@ export class Map extends Component {
 
 
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
-        this.interviewsList.classList.toggle('map__interviews--long', interviews.length > 3);
 
+        this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
+        // console.log(this.activeLocation);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
