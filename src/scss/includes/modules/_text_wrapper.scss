@@ -233,6 +233,12 @@
                 img {
                     width: 100%;
                 }
+
+                img,
+                picture {
+                    max-height: #{vw(266, tablet)};
+                    object-fit: cover;
+                }
             }
 
             @include breakpoint(phone) {

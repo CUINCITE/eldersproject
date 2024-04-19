@@ -623,8 +623,9 @@ export class Map extends Component {
 
         if (!location) return;
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
-        this.interviewsList.classList.toggle('map__interviews--long', interviews.length > 3);
 
+        this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
+        // console.log(this.activeLocation);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
