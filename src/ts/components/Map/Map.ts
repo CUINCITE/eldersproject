@@ -484,7 +484,8 @@ export class Map extends Component {
 
         const foundLocation: IMapLocation = [...this.locations].filter(l => l.id === location.getAttribute('data-id'))[0];
 
-        if (foundLocation === this.activeLocation) return;
+        if (foundLocation === this.activeLocation || this.isRemovingItems) return;
+
         this.goToLocation(foundLocation);
 
         setTimeout(() => {
@@ -495,8 +496,6 @@ export class Map extends Component {
 
 
     private goToLocation = (location: IMapLocation): void => {
-        this.isZoomingIn = true;
-        this.isGlobalView = false;
         this.view.classList.add('is-zoomed');
 
         this.updateToggle();
@@ -521,12 +520,9 @@ export class Map extends Component {
             zoom,
             pitch: this.settings.pitch,
         });
+        this.isZoomingIn = true;
+        this.isGlobalView = false;
         this.activeLocation = location;
-
-        // Static images url here
-        // eslint-disable-next-line camelcase
-        // const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
-        // console.log(url);
     };
 
 
@@ -590,8 +586,6 @@ export class Map extends Component {
         this.isRemovingItems = true;
         if (fast) {
             this.interviewsList.innerHTML = '';
-            this.activeLocation = null;
-            this.isRemovingItems = false;
         }
         const isMany = interviews.length > 3;
         [...interviews].reverse().forEach((item, index) => {
@@ -603,13 +597,17 @@ export class Map extends Component {
                 ease: easing,
                 onComplete: () => {
                     if (!fast) {
+
                         item.remove();
                     }
                     // after all tweens
-                    if (index === interviews.length - 1 && !fast) {
-                        this.interviewsList.innerHTML = '';
-                        this.activeLocation = null;
+                    if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
+
+                        if (!fast) {
+                            this.interviewsList.innerHTML = '';
+                            this.activeLocation = null;
+                        }
                     }
                 },
             });
@@ -623,6 +621,7 @@ export class Map extends Component {
         this.interviewsList.innerHTML = '';
 
 
+        if (!location) return;
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
         this.interviewsList.classList.toggle('map__interviews--long', interviews.length > 3);
 
