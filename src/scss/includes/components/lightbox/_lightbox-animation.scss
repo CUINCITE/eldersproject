@@ -175,10 +175,11 @@
                 animation: show var(--animation-time) 0s both;
             }
     
-            .is-showing.is-not-default & {
-                translate: 0 0;
-                animation: hide 0.3s 0s both;
-            }
+            // Must be disabled and display none set somewhere else, due to ios safari bug
+            // .is-showing.is-not-default & {
+            //     translate: 0 0;
+            //     animation: hide 0.3s 0s both;
+            // }
         }
     }
     
