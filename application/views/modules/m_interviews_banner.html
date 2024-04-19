@@ -46,8 +46,12 @@
                                     <li class="names__name js-accordeon-item js-caption is-closed {% if loop.first %}is-current{% endif %}">
                                         <a href="{{ item.url }}" class="names__link"></a>
                                         <div class="names__author">
-                                            <div class="names__box">
-                                                <span>{{ item.label|raw }}</span>
+                                            {% set labelArray = item.label|split(',') %}
+                                            <div class="names__box{% if labelArray|length > 1 %} names__box--multiline{% endif %}">
+                                                {% for name in labelArray %}
+                                                    <span>{{name}}{% if not loop.last %}, {% if labelArray|length < 3 or loop.first %} <br>{% endif %}{% endif %}</span>
+                                                {% endfor %}
+                                                {# <span>{{ item.label|raw }}</span> #}
                                             </div>
                                         </div>
                                         <div class="names__expand">
