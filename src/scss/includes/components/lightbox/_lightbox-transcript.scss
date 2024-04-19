@@ -82,8 +82,8 @@
 
     &__text {
         @include font-family(normal, 300);
-        @include font-settings(200, 100);
-        @include font-size(18, 27);
+        @include font-settings(300, 100);
+        @include font-size(18, 1.28);
         @include letter-spacing(0.04, 18);
 
         // font-feature-settings: "ss02" on;
@@ -348,7 +348,7 @@
     &__button {
         @include flex;
         @include font-family(normal, 300);
-        @include font-settings(200, 100);
+        @include font-settings(300, 100);
         @include font-size(16, 11);
 
 
@@ -366,7 +366,7 @@
 
     &__hiddenspan {
         @include font-family(normal, 300);
-        @include font-settings(200, 100);
+        @include font-settings(300, 100);
         @include font-size(16, 11);
 
         position: fixed;

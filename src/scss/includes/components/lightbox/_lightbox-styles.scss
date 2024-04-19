@@ -1584,8 +1584,8 @@
 
             p {
                 @include font-family(normal, 300);
-                @include font-settings(200, 100);
-                @include font-size(18, 27);
+                @include font-settings(300, 100);
+                @include font-size(18, 1.28);
                 @include letter-spacing(0.04, 18);
 
                 // font-feature-settings: "ss02" on;
@@ -1816,8 +1816,8 @@
 
         &-text {
             @include font-family(normal, 300);
-            @include font-settings(200, 100);
-            @include font-size(18, 1.4);
+            @include font-settings(300, 100);
+            @include font-size(18, 1.28);
             @include letter-spacing(0.1, 18);
 
             grid-area: text;
