@@ -266,9 +266,9 @@
         @include breakpoint(phone) {
             height: auto;
 
-            .is-not-default & {
-                display: none;
-            }
+            // .is-not-default & {
+            //     display: none;
+            // }
         }
 
 
