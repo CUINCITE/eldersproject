@@ -604,10 +604,11 @@ export class Map extends Component {
                     if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
 
-                        if (!fast && !this.isZoomingIn) {
-                            this.interviewsList.innerHTML = '';
-                            this.activeLocation = null;
-                        }
+                        // Sometimes rendered empty list, when interrupted, by switching tabs when zooming, may cause other bugs tho...
+                        // if (!fast && !this.isZoomingIn) {
+                        //     this.interviewsList.innerHTML = '';
+                        //     this.activeLocation = null;
+                        // }
                     }
                 },
             });
@@ -625,7 +626,8 @@ export class Map extends Component {
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
 
         this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
-        // console.log(this.activeLocation);
+        this.interviewsList.classList.toggle('map__interviews--no-address', ((this.activeLocation.address.length === 0)));
+        console.log(interviews);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">

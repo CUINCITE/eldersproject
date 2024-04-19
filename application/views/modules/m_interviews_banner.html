@@ -49,7 +49,7 @@
                                             {% set labelArray = item.label|split(',') %}
                                             <div class="names__box{% if labelArray|length > 1 %} names__box--multiline{% endif %}">
                                                 {% for name in labelArray %}
-                                                    <span>{{name}}{% if not loop.last %}, {% if labelArray|length < 3 or loop.first %} <br>{% endif %}{% endif %}</span>
+                                                    <span>{{name}}{% if not loop.last %}, {% if loop.first %} <br>{% endif %}{% endif %}</span>
                                                 {% endfor %}
                                                 {# <span>{{ item.label|raw }}</span> #}
                                             </div>
