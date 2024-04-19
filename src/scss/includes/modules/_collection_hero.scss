@@ -93,8 +93,8 @@
             }
 
             @include breakpoint(tablet) {
-                width: vw(520, tablet);
-                height: vw(520, tablet);
+                width: vw(500, tablet);
+                height: vw(500, tablet);
                 left: vw(40, tablet);
             }
 
@@ -190,11 +190,10 @@
         text-transform: uppercase;
 
         @include breakpoint(tablet) {
-            @include font-size (20, 0.95);
-            @include letter-spacing (-0.6, 25);
+            @include font-size (18, 0.95);
 
             margin-block: trim-font(0.95);
-
+            letter-spacing: -0.02em;
             position: absolute;
             bottom: rem(14);
             left: 0;
