@@ -1373,7 +1373,11 @@
                 }
 
                 @include breakpoint(tablet-landscape) {
-                    max-width: rem(300);
+                    max-width: rem(300) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(300) !important;
                 }
             }
 
@@ -1382,8 +1386,16 @@
                 --polaroid-width: unset  !important;
                 --polaroid-height: var(--container-height) !important;
 
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(400) !important;
+                }
+
                 @include breakpoint(phone) {
-                    max-width: rem(200);
+                    max-width: rem(200) !important;
                 }
             }
 
