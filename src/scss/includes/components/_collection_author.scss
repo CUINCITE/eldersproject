@@ -12,8 +12,8 @@
             }
 
             @include breakpoint(tablet) {
-                @include font-size(120, 0.84);
-                @include letter-spacing(-4, 120);
+                @include font-size(110, 0.84);
+                @include letter-spacing(-4, 110);
 
                 margin-block: trim-font(0.84);
             }

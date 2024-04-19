@@ -1375,6 +1375,10 @@
                 @include breakpoint(tablet-landscape) {
                     max-width: rem(300) !important;
                 }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(300) !important;
+                }
             }
 
 
@@ -1383,6 +1387,10 @@
                 --polaroid-height: var(--container-height) !important;
 
                 @include breakpoint(tablet-landscape) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(tablet) {
                     max-width: rem(400) !important;
                 }
 
@@ -1588,8 +1596,8 @@
 
             p {
                 @include font-family(normal, 300);
-                @include font-settings(200, 100);
-                @include font-size(18, 27);
+                @include font-settings(300, 100);
+                @include font-size(18, 1.3);
                 @include letter-spacing(0.04, 18);
 
                 // font-feature-settings: "ss02" on;
@@ -1820,8 +1828,8 @@
 
         &-text {
             @include font-family(normal, 300);
-            @include font-settings(200, 100);
-            @include font-size(18, 1.4);
+            @include font-settings(300, 100);
+            @include font-size(18, 1.3);
             @include letter-spacing(0.1, 18);
 
             grid-area: text;
