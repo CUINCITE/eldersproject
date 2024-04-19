@@ -84,7 +84,14 @@
 
     @include breakpoint(tablet) {
         .player--video & {
-            width: 40px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    @include breakpoint(tablet-landscape) {
+        .player--video & {
+            width: 30px;
             height: 30px;
         }
     }
@@ -97,6 +104,7 @@
             height: 21px;
         }
     }
+
 
 
     path, rect { fill: currentColor; }

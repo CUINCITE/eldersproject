@@ -52,6 +52,9 @@ export class LightboxNav extends Component {
                 }
             });
         }));
+
+        // Temp fix for iphone intro overscroll, IT JUST WORKS!!!
+        breakpoint.phone && this.showTab([...this.navTabs].find(tab => tab.id === 'lightbox-intro'));
     };
 
 

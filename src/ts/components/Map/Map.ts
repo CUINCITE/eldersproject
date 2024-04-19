@@ -79,6 +79,7 @@ export class Map extends Component {
     private style: string;
     private scrolledContainer: HTMLElement;
     private isGlobalMap: boolean;
+    private isRemovingItems = false;
 
 
     constructor(protected view: HTMLElement) {
@@ -288,7 +289,6 @@ export class Map extends Component {
 
 
         this.map.on('movestart', () => {
-            this.popup?.remove();
             this.removeCurrentInterviews();
         });
 
@@ -341,17 +341,18 @@ export class Map extends Component {
             const id = props.cluster_id || props.id;
             let marker = this.markers[id];
 
-
             if (!marker) {
                 const el = document.createElement('div');
                 el.className = `map__marker map__marker--${props.cluster ? 'cluster' : 'single'}`;
                 if (!props.cluster) { el.dataset.marker = id; }
                 if (props.cluster_id) { el.dataset.cluster = props.cluster_id; }
+                const currentLocation = this.locations.filter(l => l.id === `${id}`)[0];
 
-                marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(coords[0], coords[1]));
+                marker = new mapboxgl.Marker(el, { anchor: 'bottom' }).setLngLat(new mapboxgl.LngLat(!props.cluster ? Number(currentLocation.gps_lng) : coords[0], !props.cluster ? Number(currentLocation.gps_lat) : coords[1]));
                 this.markers[id] = marker;
 
-                marker.getElement().addEventListener('click', () => {
+                marker.getElement().addEventListener('click', e => {
+                    e.stopPropagation();
                     this.onMarkerClick(marker.getElement());
                 });
             }
@@ -390,7 +391,7 @@ export class Map extends Component {
         // eslint-disable-next-line camelcase
         const { gps_lat, gps_lng, label, address } = location;
 
-        this.popup = new mapboxgl.Popup({ offset: 25 })
+        this.popup = new mapboxgl.Popup({ offset: 25, closeButton: false, closeOnClick: false, closeOnMove: true })
             .setLngLat([parseFloat(gps_lng), parseFloat(gps_lat)])
             .setHTML(`
                 <div class="map__tooltip map__tooltip--marker">${label}</div>
@@ -408,6 +409,7 @@ export class Map extends Component {
 
         if (markerId) {
             const location = [...this.locations].filter(loc => loc.id === markerId)[0];
+            if (location === this.activeLocation || this.isRemovingItems) return;
             this.goToLocation(location);
         } else if (clusterId) {
             (this.map.getSource(Map.SOURCE_NAME) as mapboxgl.GeoJSONSource).getClusterLeaves(parseInt(clusterId, 10), 10, 0, (error, features) => {
@@ -482,6 +484,8 @@ export class Map extends Component {
 
         const foundLocation: IMapLocation = [...this.locations].filter(l => l.id === location.getAttribute('data-id'))[0];
 
+        if (foundLocation === this.activeLocation || this.isRemovingItems) return;
+
         this.goToLocation(foundLocation);
 
         setTimeout(() => {
@@ -492,8 +496,6 @@ export class Map extends Component {
 
 
     private goToLocation = (location: IMapLocation): void => {
-        this.isZoomingIn = true;
-        this.isGlobalView = false;
         this.view.classList.add('is-zoomed');
 
         this.updateToggle();
@@ -506,7 +508,7 @@ export class Map extends Component {
         const locationEl: HTMLElement = [...this.locationsElements].filter(l => l.getAttribute('data-id') === location.id)[0];
         locationEl?.classList.add('is-active');
         locationEl?.parentElement.classList.add('is-active-location');
-        this.removeCurrentInterviews();
+        this.removeCurrentInterviews(true);
 
         // eslint-disable-next-line camelcase
         const { gps_lat, gps_lng } = location;
@@ -518,12 +520,9 @@ export class Map extends Component {
             zoom,
             pitch: this.settings.pitch,
         });
+        this.isZoomingIn = true;
+        this.isGlobalView = false;
         this.activeLocation = location;
-
-        // Static images url here
-        // eslint-disable-next-line camelcase
-        // const url = `https://api.mapbox.com/styles/v1/huncwoty/clomwmey400bl01pmhj6o5q61/static/${gps_lng},${gps_lat},${this.map.getZoom()},0,${this.map.getPitch()}}/400x400?access_token=${token}`;
-        // console.log(url);
     };
 
 
@@ -581,22 +580,36 @@ export class Map extends Component {
     };
 
 
-    private removeCurrentInterviews = (): void => {
+    private removeCurrentInterviews = (fast = false): void => {
         const interviews = this.interviewsList.querySelectorAll('li');
-        if (!interviews) return;
-
+        if (interviews.length === 0) return;
+        this.isRemovingItems = true;
+        this.interviewsList.classList.remove('is-active');
+        if (fast) {
+            this.interviewsList.innerHTML = '';
+        }
+        const isMany = interviews.length > 3;
         [...interviews].reverse().forEach((item, index) => {
             gsap.to(item, {
                 y: (item.clientHeight * 2) * interviews.length,
                 rotate: index % 2 === 0 ? 15 : -15,
-                duration: 0.8,
-                delay: index * 0.1,
+                duration: fast ? 0.01 : (isMany ? 0.5 : 0.8),
+                delay: fast ? 0 : index * (isMany ? 0.1 : 0.07),
                 ease: easing,
                 onComplete: () => {
-                    item.remove();
+                    if (!fast) {
+
+                        item.remove();
+                    }
                     // after all tweens
                     if (index === interviews.length - 1) {
-                        this.interviewsList.innerHTML = '';
+                        this.isRemovingItems = false;
+
+                        // Sometimes rendered empty list, when interrupted, by switching tabs when zooming, may cause other bugs tho...
+                        // if (!fast && !this.isZoomingIn) {
+                        //     this.interviewsList.innerHTML = '';
+                        //     this.activeLocation = null;
+                        // }
                     }
                 },
             });
@@ -610,9 +623,12 @@ export class Map extends Component {
         this.interviewsList.innerHTML = '';
 
 
+        if (!location) return;
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
-        this.interviewsList.classList.toggle('map__interviews--long', interviews.length > 3);
 
+        this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
+        this.interviewsList.classList.toggle('map__interviews--no-address', ((this.activeLocation.address.length === 0)));
+        console.log(interviews);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
@@ -627,7 +643,21 @@ export class Map extends Component {
             </li>`;
             this.interviewsList.insertAdjacentHTML('beforeend', interviewHtml);
         });
-
+        const interviewsEl = this.interviewsList.querySelectorAll('li');
+        const isMany = false;
+        [...interviewsEl].reverse().forEach((item, index) => {
+            gsap.from(item, {
+                y: (item.clientHeight) * interviews.length,
+                duration: (isMany ? 0.5 : 0.8),
+                delay: (isMany ? 0.1 : 0.07) * index,
+                ease: interviewsEl.length === 1 ? easing : 'back.out(1.2)',
+                onComplete: () => {
+                    if (index === interviews.length - 1) {
+                        this.interviewsList.classList.add('is-active');
+                    }
+                },
+            });
+        });
         AudioPlayer.instance.bindButtons();
     };
 }

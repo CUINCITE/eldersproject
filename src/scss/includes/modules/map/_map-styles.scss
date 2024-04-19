@@ -346,14 +346,51 @@
 
         @include breakpoint(not-phone) {
             justify-content: flex-start;
-            
-            overflow-y: scroll;
+
+            &.is-active {
+                overflow-y: scroll;
+            }
 
             @include breakpoint(desktop) {
                 max-height: calc(#{vw(260)} + 6px);
 
-                @media (min-aspect-ratio: 1.7) and (max-height: 1000px) {
-                    max-height: calc(#{vw(180)} + 4px);
+                &--no-address {
+                    max-height: calc(#{vw(290)} + 6px);
+                }
+
+                @media (min-aspect-ratio: 2.3) {
+                    max-height: 35vh;
+
+                    &--no-address {
+                        max-height: calc(35vh + #{vw(30)});
+                    }
+                }
+
+                @media (max-height: 1000px) {
+
+                    @media (min-aspect-ratio: 1.8) {
+                        max-height: vw(230);
+    
+                        &--no-address {
+                            max-height: vw(260);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2) {
+                        max-height: vw(180);
+    
+                        &--no-address {
+                            max-height: vw(210);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2.4) {
+                        max-height: vw(160);
+    
+                        &--no-address {
+                            max-height: vw(190);
+                        }
+                    }
                 }
             }
 
@@ -394,13 +431,13 @@
                 width: rem(286);
                 padding: rem(13);
 
-                
+
                 .map__interviews--long & {
                     @include flex(row-reverse, flex-end, flex-start);
 
 
-                    width: rem(304);
-                    padding: rem(9.5);
+                    width: rem(328);
+                    padding: rem(9.5) rem(25) rem(9.5) rem(9.5);
                 }
             }
 
@@ -441,7 +478,7 @@
                 &::before {
                     content: "";
                     position: absolute;
-                    inset: rem(13) auto auto 0; 
+                    inset: rem(13) auto auto 0;
                     margin: auto;
                     height: 1px;
                     background: currentColor;
@@ -475,6 +512,7 @@
 
             @include breakpoint(desktop) {
                 margin-block: trim-font(1);
+                flex-shrink: 0;
 
                 .map__interviews--long & {
                     @include font-size(26, 1);
@@ -661,6 +699,16 @@
         @include breakpoint(desktop) {
             width: rem(46);
             height: rem(46);
+
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @include breakpoint(hd) {
+            width: rem(30);
+            height: rem(30);
         }
 
         @include breakpoint(tablet) {
@@ -682,6 +730,10 @@
 
         &--single {
             width: rem(63);
+
+            @include breakpoint(hd) {
+                width: rem(50);
+            }
         }
 
 
