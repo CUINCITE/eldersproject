@@ -79,10 +79,6 @@
         bottom: 0;
         color: var(--color-black);
 
-        @include breakpoint (not-desktop) {
-            display: none;
-        }
-
 
         &--prev {
             left: rem(-74);
@@ -90,6 +86,10 @@
 
             @include breakpoint(desktop) {
                 left: rem(-100);
+            }
+
+            @include breakpoint(phone) {
+                left: rem(25);
             }
 
             svg { transform: scaleX(-1); }
@@ -105,6 +105,10 @@
 
             @include breakpoint(desktop) {
                 right: rem(-100);
+            }
+
+            @include breakpoint(phone) {
+                right: rem(25);
             }
 
             .is-last & { display: none; }

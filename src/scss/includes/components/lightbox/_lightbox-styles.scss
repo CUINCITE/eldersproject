@@ -1369,6 +1369,10 @@
             .polaroid--horizontal {
                 --polaroid-width: unset  !important;
                 --polaroid-height: var(--container-height) !important;
+
+                @include breakpoint(phone) {
+                    max-width: rem(200);
+                }
             }
 
 
@@ -1890,9 +1894,7 @@
 
         @include breakpoint(not-desktop) {
             display: flex;
-            opacity: 1;
-            position: absolute;
-            left: 75%;
+            opacity: 0;
         }
 
 
