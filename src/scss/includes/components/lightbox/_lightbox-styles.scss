@@ -265,10 +265,6 @@
 
         @include breakpoint(phone) {
             height: auto;
-
-            .is-not-default & {
-                display: none;
-            }
         }
 
 
