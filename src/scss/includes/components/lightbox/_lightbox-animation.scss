@@ -169,13 +169,14 @@
 
     &__intro-wrapper {
         @include breakpoint(phone) {
-            translate: 0 50%;
+            // Animate must be disabled and display set to none, due to bugs
 
-            .is-showing.is-default & {
-                animation: show var(--animation-time) 0s both;
-            }
+            // translate: 0 50%;
+
+            // .is-showing.is-default & {
+            //     animation: show var(--animation-time) 0s both;
+            // }
     
-            // AnimateOut must be disabled and display set to none, due to safari bug
             // .is-showing.is-not-default & {
             //     translate: 0 0;
             //     animation: hide 0.3s 0s both;
