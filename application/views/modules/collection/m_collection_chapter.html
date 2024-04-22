@@ -49,6 +49,11 @@
 
                             <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}" data-parallax="100" data-observe>
                                 {% include "subviews/subview_picture.html" with { image: module.value.image } %}
+                                {% if module.value.caption %}
+                                    <div class="text_wrapper__info text_wrapper__info--collections">
+                                        {% include "/subviews/subview_text.html" with {text: module.value.caption} %}
+                                    </div>
+                                 {% endif %}
                             </div>
 
                         {% elseif module.type == "image" %}
