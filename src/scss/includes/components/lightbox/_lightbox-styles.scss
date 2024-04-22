@@ -265,10 +265,6 @@
 
         @include breakpoint(phone) {
             height: auto;
-
-            .is-not-default & {
-                display: none;
-            }
         }
 
 
@@ -616,6 +612,7 @@
                     left: 0;
                     bottom: 100%;
                     background-color: var(--main-body-color);
+                    z-index: 2;
                 }
 
                 // &::after {
@@ -1015,7 +1012,9 @@
         }
 
 
-        &:first-of-type { opacity: 1; }
+        &:first-of-type {
+            opacity: 1 !important;
+        }
 
         &::before {
             content: "";
@@ -1156,14 +1155,14 @@
             padding-top: rem(14);
 
 
-            span { 
+            span {
                 @include breakpoint(not-phone) {
-                    white-space: nowrap; 
+                    white-space: nowrap;
                 }
             }
         }
 
-        
+
         &--accent {
             @include breakpoint(desktop) {
                 @include font-size(80, 0.78);
@@ -1395,7 +1394,7 @@
                 }
 
                 @include breakpoint(phone) {
-                    max-width: rem(200) !important;
+                    max-width: rem(180) !important;
                 }
             }
 
@@ -1919,7 +1918,11 @@
 
         @include breakpoint(not-desktop) {
             display: flex;
-            opacity: 0;
+            width: calc(100vw - 111px - 30vw);
+
+            @include breakpoint(phone) {
+                width: calc(100vw - 120px);
+            }
         }
 
 
