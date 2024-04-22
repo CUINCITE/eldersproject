@@ -102,7 +102,7 @@ export class LightboxSlider extends Component {
 
         this.isAnimating = true;
 
-        gsap.fromTo(slide, { x: 0 }, {
+        breakpoint.desktop && gsap.fromTo(slide, { x: 0 }, {
             x: xPosition,
             duration: fast ? 0 : 0.5,
             ease: easing,
@@ -128,6 +128,7 @@ export class LightboxSlider extends Component {
     private showSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
+        console.log(caption);
 
         const xPosition = direction * (window.innerWidth * (breakpoint.phone ? 1.5 : 0.75));
 
@@ -141,20 +142,35 @@ export class LightboxSlider extends Component {
             },
         });
 
-        gsap.fromTo(slide, { x: xPosition }, {
-            x: 0,
-            duration: fast ? 0.01 : 0.5,
-            ease: easing,
-            onStart: () => {
-                if (breakpoint.desktop) slide.style.display = 'flex';
-                else slide.style.opacity = '1';
-            },
-            onComplete: () => {
-                this.activeSlide = slide;
-                this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
-                this.updateArrows();
-            },
-        });
+        if(breakpoint.desktop) {
+            gsap.fromTo(slide, { x: xPosition }, {
+                x: 0,
+                duration: fast ? 0.01 : 0.5,
+                ease: easing,
+                onStart: () => {
+                    if (breakpoint.desktop) slide.style.display = 'flex';
+                    else slide.style.opacity = '1';
+                },
+                onComplete: () => {
+                    this.activeSlide = slide;
+                    this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+                    this.updateArrows();
+                },
+            });
+        } else {
+            console.log("slide", slide, direction);
+
+            const moveX = slide.clientWidth * direction * -1;
+
+            gsap.to(this.wrap, {
+                x: `+=${moveX}`,
+                duration: fast ? 0.01 : 0.5,
+                onComplete: () => {
+                    this.activeSlide = slide;
+                    this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+                },
+            })
+        }
     };
 
 
