@@ -584,6 +584,7 @@ export class Map extends Component {
         const interviews = this.interviewsList.querySelectorAll('li');
         if (interviews.length === 0) return;
         this.isRemovingItems = true;
+        this.interviewsList.classList.remove('is-active');
         if (fast) {
             this.interviewsList.innerHTML = '';
         }
@@ -604,10 +605,11 @@ export class Map extends Component {
                     if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
 
-                        if (!fast && !this.isZoomingIn) {
-                            this.interviewsList.innerHTML = '';
-                            this.activeLocation = null;
-                        }
+                        // Sometimes rendered empty list, when interrupted, by switching tabs when zooming, may cause other bugs tho...
+                        // if (!fast && !this.isZoomingIn) {
+                        //     this.interviewsList.innerHTML = '';
+                        //     this.activeLocation = null;
+                        // }
                     }
                 },
             });
@@ -625,7 +627,8 @@ export class Map extends Component {
         const interviews: IMapInterview[] = location.quotes as IMapInterview[];
 
         this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
-        // console.log(this.activeLocation);
+        this.interviewsList.classList.toggle('map__interviews--no-address', ((this.activeLocation.address.length === 0)));
+        console.log(interviews);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">
@@ -640,7 +643,21 @@ export class Map extends Component {
             </li>`;
             this.interviewsList.insertAdjacentHTML('beforeend', interviewHtml);
         });
-
+        const interviewsEl = this.interviewsList.querySelectorAll('li');
+        const isMany = false;
+        [...interviewsEl].reverse().forEach((item, index) => {
+            gsap.from(item, {
+                y: (item.clientHeight) * interviews.length,
+                duration: (isMany ? 0.5 : 0.8),
+                delay: (isMany ? 0.1 : 0.07) * index,
+                ease: interviewsEl.length === 1 ? easing : 'back.out(1.2)',
+                onComplete: () => {
+                    if (index === interviews.length - 1) {
+                        this.interviewsList.classList.add('is-active');
+                    }
+                },
+            });
+        });
         AudioPlayer.instance.bindButtons();
     };
 }

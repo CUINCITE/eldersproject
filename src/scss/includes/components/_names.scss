@@ -131,16 +131,14 @@
             @include font-size(59, 1);
 
             letter-spacing: -0.04em;
-            padding-top: rem(13);
-            padding-bottom: 0;
-            padding-right: rem(20);
+            padding: rem(13) var(--grid-margin) 0 rem(50);
             position: relative;
 
 
             &::before {
                 content: "";
                 position: absolute;
-                inset: calc(50% + 1px) rem(20) auto auto;
+                inset: calc(50% + 1px) var(--grid-margin) auto auto;
                 margin: auto;
                 height: 1px;
                 background: currentColor;
@@ -154,6 +152,15 @@
             span {
                 transition: transform .4s $ease-custom;
                 display: inline-block;
+            }
+
+            &--multiline {
+                line-height: 0.87;
+                padding: rem(15) var(--grid-margin) rem(4) rem(50);
+
+                &::before {
+                    inset: calc(27% + 1px) var(--grid-margin) auto auto;
+                }
             }
         }
 

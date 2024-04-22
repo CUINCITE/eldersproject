@@ -1924,7 +1924,7 @@
             width: calc(100vw - 111px - 30vw);
 
             @include breakpoint(phone) {
-                width: calc(100vw - 100px);
+                width: calc(100vw - 120px);
             }
         }
 
