@@ -605,11 +605,10 @@ export class Map extends Component {
                     if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
 
-                        // Sometimes rendered empty list, when interrupted, by switching tabs when zooming, may cause other bugs tho...
-                        // if (!fast && !this.isZoomingIn) {
-                        //     this.interviewsList.innerHTML = '';
-                        //     this.activeLocation = null;
-                        // }
+                        if (!fast && !this.isZoomingIn) {
+                            this.interviewsList.innerHTML = '';
+                            this.activeLocation = null;
+                        }
                     }
                 },
             });
