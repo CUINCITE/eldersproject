@@ -217,7 +217,7 @@ class model_app extends _uho_model
 
 
         if (isset($t['title']) && $t['title'] == 'Home') $t['title'] = '';
-        if (isset($t['title']) && $t['title']) $t['title'] = $this->head_title.' - ' . $this->head['title'];
+        if (isset($t['title']) && $t['title']) $t['title'] = $this->head['title'].' - '.$this->head_title;
           else $t['title'] = $this->head_title;
           
         return $t;
