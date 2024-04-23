@@ -167,7 +167,7 @@ export class LightboxSlider extends Component {
             });
 
             gsap.to(slide, {
-                duration: fast ? 0.01 : 0.5,
+                duration: fast ? 0.01 : 0.45,
                 rotate: activeSlideIndex % 2 === 0 ? -1 * rotation : rotation,
                 ease: 'power3.out',
                 delay: 0.2,
