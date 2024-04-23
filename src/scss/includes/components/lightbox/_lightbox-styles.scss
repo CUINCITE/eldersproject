@@ -1918,6 +1918,7 @@
 
         @include breakpoint(not-desktop) {
             display: flex;
+
             width: calc(100vw - 111px - 30vw);
 
             @include breakpoint(phone) {
@@ -1928,7 +1929,7 @@
 
         &-image {
             margin-top: vh(-20);
-            transform: translateY(0) rotate(-7.5deg);
+            transform: translateY(0);
 
             @include breakpoint(desktop) {
                 &.polaroid {
