@@ -1,3 +1,5 @@
+@import "../../components/player/player-variables";
+
 .map {
     --line-width: #{rem(10)};
     --line-offset: #{rem(4)};
@@ -354,6 +356,8 @@
             @include breakpoint(desktop) {
                 max-height: calc(#{vw(260)} + 6px);
 
+
+
                 &--no-address {
                     max-height: calc(#{vw(290)} + 6px);
                 }
@@ -370,7 +374,7 @@
 
                     @media (min-aspect-ratio: 1.8) {
                         max-height: vw(230);
-    
+
                         &--no-address {
                             max-height: vw(260);
                         }
@@ -378,7 +382,7 @@
 
                     @media (min-aspect-ratio: 2) {
                         max-height: vw(180);
-    
+
                         &--no-address {
                             max-height: vw(210);
                         }
@@ -386,7 +390,7 @@
 
                     @media (min-aspect-ratio: 2.4) {
                         max-height: vw(160);
-    
+
                         &--no-address {
                             max-height: vw(190);
                         }

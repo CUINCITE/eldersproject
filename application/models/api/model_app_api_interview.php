@@ -77,7 +77,14 @@ class model_app_api_interview
         ];
 
         // bios
-        $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
+        // error
+        // $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
+
+        $interview_info=[];
+        foreach ($item['narrators'] as $k=>$v)
+        if ($k==0 || '<p>'.$v['bio'].'</p>'!=$interview_info[0])
+            $interview_info[]='<p>'.$v['bio'].'</p>';
+        
         $label = (count($interview_info) > 1) ? 'Narrators bios' : $item['narrators'][0]['name'] . ' ' . $item['narrators'][0]['surname'] .' bio';
 
         $interview_info[] = "<h3>Interview Summary</h3><p>{$item['summary']}</p>";
