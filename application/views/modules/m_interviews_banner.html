@@ -17,6 +17,7 @@
             <div class="interviews__claim">
                 <div class="grid">
                     <div class="interviews__copy col-start-8 col-span-5">
+                        {% set text=text|nl2br %}
                         {% include "subviews/subview_text.html" with {
                         size: "larger",
                         text: text
