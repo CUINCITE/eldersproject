@@ -105,6 +105,7 @@ export class LightboxSlider extends Component {
         breakpoint.desktop && gsap.fromTo(slide, { x: 0 }, {
             x: xPosition,
             duration: fast ? 0 : 0.5,
+            rotate: 0,
             ease: easing,
             onComplete: () => {
                 if (breakpoint.desktop) slide.style.display = 'none';
@@ -128,7 +129,7 @@ export class LightboxSlider extends Component {
     private showSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
-        console.log(caption);
+        // console.log(caption);
 
         const xPosition = direction * (window.innerWidth * (breakpoint.phone ? 1.5 : 0.75));
 
@@ -142,23 +143,38 @@ export class LightboxSlider extends Component {
             },
         });
 
-        if(breakpoint.desktop) {
+        const activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+
+        if (breakpoint.desktop) {
+            const rotation = Math.random() * 3 + 6;
+
             gsap.fromTo(slide, { x: xPosition }, {
                 x: 0,
                 duration: fast ? 0.01 : 0.5,
+                // rotate: activeSlideIndex % 2 === 0 ? -1 * rotation : rotation,
                 ease: easing,
                 onStart: () => {
                     if (breakpoint.desktop) slide.style.display = 'flex';
                     else slide.style.opacity = '1';
+                    gsap.set(slide, { rotate: activeSlideIndex % 2 === 0 ? 10 : -10 });
                 },
                 onComplete: () => {
                     this.activeSlide = slide;
-                    this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+                    this.activeSlideIndex = activeSlideIndex;
+                    // console.log(this.activeSlideIndex);
                     this.updateArrows();
                 },
             });
+
+            gsap.to(slide, {
+                duration: fast ? 0.01 : 0.45,
+                rotate: activeSlideIndex % 2 === 0 ? -1 * rotation : rotation,
+                ease: 'power3.out',
+                delay: 0.2,
+            });
+
         } else {
-            console.log("slide", slide, direction);
+            console.log('slide', slide, direction);
 
             const moveX = slide.clientWidth * direction * -1;
 
@@ -167,9 +183,35 @@ export class LightboxSlider extends Component {
                 duration: fast ? 0.01 : 0.5,
                 onComplete: () => {
                     this.activeSlide = slide;
-                    this.activeSlideIndex = [...this.slides].findIndex(el => el === slide);
+                    this.activeSlideIndex = activeSlideIndex;
                 },
-            })
+            });
+
+            gsap.to(slide, {
+                duration: fast ? 0.01 : 0.5,
+                rotate: activeSlideIndex % 2 === 0 ? 9 : -9,
+                ease: 'power3.out',
+                delay: 0.2,
+            });
+
+            if (direction > 0) {
+                gsap.to(this.slides[activeSlideIndex - 1], {
+                    duration: fast ? 0.01 : 0.5,
+                    rotate: activeSlideIndex % 2 === 0 ? -6 : 6,
+                    ease: 'power3.out',
+                    onStart: () => {
+                        if (activeSlideIndex + 1 < this.slides.length) {
+                            gsap.set(this.slides[activeSlideIndex + 1], { rotate: activeSlideIndex % 2 === 0 ? -6 : 6 });
+                        }
+                    },
+                });
+            } else {
+                gsap.to(this.slides[activeSlideIndex + 1], {
+                    duration: fast ? 0.01 : 0.5,
+                    rotate: activeSlideIndex % 2 === 0 ? -6 : 6,
+                    ease: 'power3.out',
+                });
+            }
         }
     };
 

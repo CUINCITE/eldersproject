@@ -583,6 +583,7 @@ export class Map extends Component {
     private removeCurrentInterviews = (fast = false): void => {
         const interviews = this.interviewsList.querySelectorAll('li');
         if (interviews.length === 0) return;
+        const removingCurrent = this.activeLocation;
         this.isRemovingItems = true;
         this.interviewsList.classList.remove('is-active');
         if (fast) {
@@ -605,7 +606,7 @@ export class Map extends Component {
                     if (index === interviews.length - 1) {
                         this.isRemovingItems = false;
 
-                        if (!fast && !this.isZoomingIn) {
+                        if (!fast && !this.isZoomingIn && removingCurrent === this.activeLocation) {
                             this.interviewsList.innerHTML = '';
                             this.activeLocation = null;
                         }
@@ -627,7 +628,6 @@ export class Map extends Component {
 
         this.interviewsList.classList.toggle('map__interviews--long', (interviews.length > 3 || ['77', '70'].includes(this.activeLocation.id)));
         this.interviewsList.classList.toggle('map__interviews--no-address', ((this.activeLocation.address.length === 0)));
-        console.log(interviews);
         [...interviews].forEach(interview => {
             const interviewHtml = `
             <li class="map__interview">

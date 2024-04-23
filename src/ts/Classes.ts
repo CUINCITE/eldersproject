@@ -17,8 +17,8 @@ import { Map2 } from './components/Map/Map2';
 import { Collections } from './components/Collections';
 import { PolaroidGallery } from './components/PolaroidGallery';
 import { Dropdown } from './components/Dropdown';
-import { SmoothScroll } from './components/SmoothScroll';
 import { Circle } from './components/Circle/Circle';
+// import { SmoothScroll } from './components/SmoothScroll';
 
 export const components = {
     Accordeon,
@@ -27,7 +27,6 @@ export const components = {
     Circle,
     Collections,
     Dropdown,
-    SmoothScroll,
     FilterLetters,
     Load,
     Map,

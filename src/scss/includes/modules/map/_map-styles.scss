@@ -355,11 +355,6 @@
 
             @include breakpoint(desktop) {
                 max-height: calc(#{vw(260)} + 6px);
-                transition: transform .7s cubic-bezier(0.7, 0, 0.2, 1);
-
-                .has-audio-player-expanded & {
-                    transform: translateY(-82px); // player height
-                }
 
 
 
