@@ -129,7 +129,7 @@ export class LightboxSlider extends Component {
     private showSlide = (index: number, direction: number, fast?: boolean): void => {
         const slide = this.slides[index];
         const caption = this.captions[index];
-        console.log(caption);
+        // console.log(caption);
 
         const xPosition = direction * (window.innerWidth * (breakpoint.phone ? 1.5 : 0.75));
 
