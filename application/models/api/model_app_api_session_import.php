@@ -104,6 +104,8 @@ class model_app_api_session_import
 		//');
 
 		$txt=str_replace('ñ','ñ',$txt);	//Tufiño
+		if ($narrators[0]=='Pérez') $narrators[0]='D’Alerta'; // D’Alerta
+		
 		
 		if (!$tag) $tag='Q';
 		if (@$txt[0]!='[')

@@ -91,7 +91,8 @@ class InterviewsImporter extends model_app_api_import
             // updating & adding new narrators
 
             $r = false;
-            foreach ($n as $kk => $vv) {
+            foreach ($n as $kk => $vv)
+            {
                 $id = _uho_fx::array_filter($narrators, 'name', $vv, ['first' => true]);
                 if (!$id) {
                     $messages[] = 'Narrator added: ' . $vv;
@@ -195,6 +196,8 @@ class InterviewsImporter extends model_app_api_import
                     'active' => 1
                 ];
             } else {
+                //print_r($v);
+                //exit('narrator not found');
                 $unsetItems[] = $v['Interview ID'];
                 unset($items[$k]);
             }
