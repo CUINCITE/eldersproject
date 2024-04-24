@@ -56,7 +56,7 @@
         }
     }
 
-
+ 
 
     &__quote {
         @include font-family(compressed, 400);
@@ -67,6 +67,15 @@
         text-transform: uppercase;
         opacity: 0;
         animation: fade-in 2s forwards;
+
+        @include breakpoint(hd) {
+            max-width: calc((100vw - var(--GLOBAL-aside-width)) / 2);
+            text-wrap: balance;
+
+            br {
+                display: none;
+            }
+        }
 
         @include breakpoint(tablet) {
             @include font-size(38, 0.95);
