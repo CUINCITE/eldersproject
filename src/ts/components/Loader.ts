@@ -1,7 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
 import { easing, isActiveSession } from '../Site';
 import { Component } from './Component';
-import { Circle } from './Circle/Circle';
+// import { Circle } from './Circle/Circle';
 
 export class LoaderEvents {
     public static LOADED: string = 'loaded';
@@ -10,7 +10,11 @@ export class LoaderEvents {
 // TEMP for creating pseudo load progress
 const steps = [1, 12, 46, 99];
 
+declare const loaderStart: number;
+
 export class Loader extends Component {
+
+    private static MIN_DELAY = 2000;
 
     private countEl: HTMLElement;
     private logoWrap: HTMLElement;
@@ -59,8 +63,13 @@ export class Loader extends Component {
 
     public hide = (): void => {
         document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
-        setTimeout(() => {
-        }, 500);
+
+        const time = +new Date() - loaderStart;
+        const delay = Math.max(0, Loader.MIN_DELAY - time);
+        this.view.style.setProperty('--loader-delay', `${delay}ms`);
+
+        // setTimeout(() => {
+        // }, 500);
         // gsap.fromTo(this.view, { opacity: 1 }, {
         //     opacity: 0,
         //     duration: 0.5,
