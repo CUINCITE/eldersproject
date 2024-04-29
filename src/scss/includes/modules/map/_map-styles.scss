@@ -1,3 +1,5 @@
+@import "../../components/player/player-variables";
+
 .map {
     --line-width: #{rem(10)};
     --line-offset: #{rem(4)};
@@ -159,7 +161,7 @@
         counter-reset: map-locations;
 
         @include breakpoint(desktop) {
-            overflow-y: auto;
+            overflow: clip auto;
         }
 
         @include breakpoint(tablet) {
@@ -347,13 +349,52 @@
         @include breakpoint(not-phone) {
             justify-content: flex-start;
 
-            overflow-y: scroll;
+            &.is-active {
+                overflow-y: scroll;
+            }
 
             @include breakpoint(desktop) {
                 max-height: calc(#{vw(260)} + 6px);
 
-                @media (min-aspect-ratio: 1.7) and (max-height: 1000px) {
-                    max-height: calc(#{vw(180)} + 4px);
+
+
+                &--no-address {
+                    max-height: calc(#{vw(290)} + 6px);
+                }
+
+                @media (min-aspect-ratio: 2.3) {
+                    max-height: 35vh;
+
+                    &--no-address {
+                        max-height: calc(35vh + #{vw(30)});
+                    }
+                }
+
+                @media (max-height: 1000px) {
+
+                    @media (min-aspect-ratio: 1.8) {
+                        max-height: vw(230);
+
+                        &--no-address {
+                            max-height: vw(260);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2) {
+                        max-height: vw(180);
+
+                        &--no-address {
+                            max-height: vw(210);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2.4) {
+                        max-height: vw(160);
+
+                        &--no-address {
+                            max-height: vw(190);
+                        }
+                    }
                 }
             }
 

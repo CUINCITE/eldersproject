@@ -8,18 +8,22 @@
 
     @include breakpoint(not-desktop) {
         height: 100%;
-        padding-bottom: 0;
         padding: 30px 0;
+        width: 100vw;
+        display: flex;
+        justify-content: flex-start;
 
         @include breakpoint(tablet) {
             padding-top: 0;
             padding-bottom: vw(200, tablet);
+            width: calc(100vw - 111px);
         }
     }
 
 
     @include breakpoint(phone) {
         flex-direction: column-reverse;
+        align-items: flex-start;
     }
 
 
@@ -38,11 +42,12 @@
 
         @include breakpoint(not-desktop) {
             margin-top: 0;
-        }
+            width: fit-content;
+            margin-left: 15vw;
 
-
-        @include breakpoint(phone) {
-            width: 100%;
+            @include breakpoint(phone) {
+                margin-left: 60px;
+            }
         }
     }
 
@@ -57,7 +62,8 @@
         justify-items: center;
 
 
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
+            display: flex;
             width: 100%;
         }
     }
@@ -80,13 +86,15 @@
         color: var(--color-black);
 
 
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
+
+
         &--prev {
             left: rem(-100);
             right: 50%;
-
-            @include breakpoint(phone) {
-                left: rem(25);
-            }
 
             svg { transform: scaleX(-1); }
 
@@ -98,6 +106,10 @@
             align-items: flex-end;
             left: 50%;
             right: rem(-100);
+
+            @include breakpoint(tablet) {
+                right: rem(-50);
+            }
 
             @include breakpoint(phone) {
                 right: rem(25);
@@ -118,11 +130,16 @@
 
 
         svg {
-            @include breakpoint(phone) {
+            @include breakpoint(not-desktop) {
                 width: 100%;
             }
 
-            .safari & {
+            @include breakpoint(tablet-landscape) {
+                width: 100%;
+            }
+
+            .safari &,
+            .mac & {
                 width: 100%;
             }
         }

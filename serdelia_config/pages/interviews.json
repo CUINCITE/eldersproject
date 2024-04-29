@@ -119,7 +119,7 @@
       "field": "interviewer_name",
       "edit": false,
       "auto": {
-        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name}} {{interviewer.last_name}}{% endfor %}"
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name|raw}} {{interviewer.last_name|raw}}{% endfor %}"
       }
     },
     {
@@ -132,7 +132,7 @@
       "search":true,
       "edit": false,
       "auto": {
-        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name}} {{interviewer.first_name}}{% endfor %}"
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name|raw}} {{interviewer.first_name|raw}}{% endfor %}"
       }
     },
     {

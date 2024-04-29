@@ -1,5 +1,6 @@
 import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Button } from '../../components/Button';
 import { breakpoint } from '../../Site';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
@@ -262,6 +263,12 @@ export class Lightbox {
             this.shown = true;
             this.view.style.opacity = '1';
             this.view.style.display = 'block';
+
+            const buttons = this.view.querySelectorAll('.js-related-button');
+            buttons.forEach(button => {
+                // eslint-disable-next-line no-new
+                new Button(button as HTMLElement);
+            });
 
             gsap.to(this.view, {
                 duration: 0.1,

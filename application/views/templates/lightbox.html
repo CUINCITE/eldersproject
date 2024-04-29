@@ -31,7 +31,7 @@
                 {% set titleArray = title|split(',') %}
                 <h2 class="lightbox__title{% if title|length > 25 %} lightbox__title--long{% endif %}{% if titleArray|length > 2 %} lightbox__title--extra{% endif %}{% if title|lower matches '/\b\w*[ñéáíó]\w*\b/g' %} lightbox__title--accent{% endif %}">
                     {% for name in titleArray %}
-                        <span>{{name}}{% if not loop.last %},{% if titleArray|length < 3 or loop.first %} <br> {% else %} <br class="desktop-hide tablet-hide"> {% endif %}{% endif %}</span>
+                        <span>{{name}}{% if not loop.last %},{% if loop.first %} <br> {% else %} <br class="desktop-hide tablet-hide"> {% endif %}{% endif %}</span>
                     {% endfor %}
                 </h2>
                 <div class="lightbox__filters">
@@ -315,7 +315,7 @@
                         <div class="lightbox__related">
                             <ul class="lightbox__related-list">
                                 {% for item in related %}
-                                    <li class="lightbox__related-item button--draw" data-component="Button">
+                                    <li class="lightbox__related-item js-related-button button--draw" data-component="Button">
                                         <a class="lightbox__related-link" href="{{item.url}}" data-history="replace"></a>
                                         <span class="lightbox__related-arrow">
                                             <i class="icon-btn-arrow arrow arrow--reversed js-arrow">

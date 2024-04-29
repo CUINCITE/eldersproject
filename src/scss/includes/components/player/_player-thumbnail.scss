@@ -169,10 +169,10 @@
                 }
 
 
-                .player.is-expanded &,
-                .player-is-playing & {
-                    animation-play-state: paused;
-                }
+                // .player.is-expanded &,
+                // .player-is-playing & {
+                //     animation-play-state: paused;
+                // } 
 
 
                 .player.is-rewinding & {

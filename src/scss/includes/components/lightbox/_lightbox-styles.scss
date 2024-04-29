@@ -265,10 +265,6 @@
 
         @include breakpoint(phone) {
             height: auto;
-
-            .is-not-default & {
-                display: none;
-            }
         }
 
 
@@ -616,6 +612,7 @@
                     left: 0;
                     bottom: 100%;
                     background-color: var(--main-body-color);
+                    z-index: 2;
                 }
 
                 // &::after {
@@ -1015,7 +1012,9 @@
         }
 
 
-        &:first-of-type { opacity: 1; }
+        &:first-of-type {
+            opacity: 1 !important;
+        }
 
         &::before {
             content: "";
@@ -1156,14 +1155,14 @@
             padding-top: rem(14);
 
 
-            span { 
+            span {
                 @include breakpoint(not-phone) {
-                    white-space: nowrap; 
+                    white-space: nowrap;
                 }
             }
         }
 
-        
+
         &--accent {
             @include breakpoint(desktop) {
                 @include font-size(80, 0.78);
@@ -1373,7 +1372,11 @@
                 }
 
                 @include breakpoint(tablet-landscape) {
-                    max-width: rem(300);
+                    max-width: rem(300) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(300) !important;
                 }
             }
 
@@ -1382,8 +1385,16 @@
                 --polaroid-width: unset  !important;
                 --polaroid-height: var(--container-height) !important;
 
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(400) !important;
+                }
+
                 @include breakpoint(phone) {
-                    max-width: rem(200);
+                    max-width: rem(180) !important;
                 }
             }
 
@@ -1907,13 +1918,18 @@
 
         @include breakpoint(not-desktop) {
             display: flex;
-            opacity: 0;
+
+            width: calc(100vw - 111px - 30vw);
+
+            @include breakpoint(phone) {
+                width: calc(100vw - 120px);
+            }
         }
 
 
         &-image {
             margin-top: vh(-20);
-            transform: translateY(0) rotate(-7.5deg);
+            transform: translateY(0);
 
             @include breakpoint(desktop) {
                 &.polaroid {
