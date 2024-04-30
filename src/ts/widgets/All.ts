@@ -1,4 +1,5 @@
 import { Accessibility } from './Accessibility';
+import { Analytics } from './Analytics';
 import { API } from './Api';
 import { CSSAnimate } from './CSSAnimate';
 import { Expand } from './Expand';
@@ -12,6 +13,7 @@ export default class Widgets {
     public static bind(el?: HTMLElement): void {
 
         Accessibility.init();
+        Analytics.bind(el);
         API.bind(el);
         CSSAnimate.bind(el);
         Expand.bind(el);
