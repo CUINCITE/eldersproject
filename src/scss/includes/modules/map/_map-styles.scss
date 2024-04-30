@@ -161,7 +161,7 @@
         counter-reset: map-locations;
 
         @include breakpoint(desktop) {
-            overflow-y: auto;
+            overflow: clip auto;
         }
 
         @include breakpoint(tablet) {

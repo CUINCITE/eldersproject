@@ -19,7 +19,7 @@
 
 
             body.is-fully-loaded & {
-                transition: transform .7s $ease-custom 1.2s;
+                transition: transform .8s $ease-custom calc(2000ms + var(--loader-duration));
                 transform: translateY(0);
             }
         }
@@ -172,7 +172,7 @@
                 // .player.is-expanded &,
                 // .player-is-playing & {
                 //     animation-play-state: paused;
-                // } 
+                // }
 
 
                 .player.is-rewinding & {

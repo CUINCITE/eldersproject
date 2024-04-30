@@ -6,7 +6,9 @@
     ["orange", "orange", "purple"]
 ]) %}
 
-<div class="loader js-loader" style="--loader-color-1: var(--color-{{loader_colors_set[0]}}); --loader-color-2: var(--color-{{loader_colors_set[1]}}); --loader-color-3: var(--color-{{loader_colors_set[2]}}); --loader-delay: 3000ms">
+<script>const loaderStart = +new Date();</script>
+
+<div class="loader js-loader" style="--loader-color-1: var(--color-{{loader_colors_set[0]}}); --loader-color-2: var(--color-{{loader_colors_set[1]}}); --loader-color-3: var(--color-{{loader_colors_set[2]}}); --loader-duration: 2500ms">
     <div class="loader__bg"></div>
     <div class="loader__bg"></div>
     <div class="loader__bg"></div>
