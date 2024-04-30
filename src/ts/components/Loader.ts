@@ -14,8 +14,6 @@ declare const loaderStart: number;
 
 export class Loader extends Component {
 
-    private static MIN_DELAY = 2000;
-
     private countEl: HTMLElement;
     private logoWrap: HTMLElement;
     private lineEl: HTMLElement;
@@ -64,9 +62,11 @@ export class Loader extends Component {
     public hide = (): void => {
         document.body.classList.add('is-loader-hidden', 'is-fully-loaded');
 
+        const minimum = parseInt(this.view.style.getPropertyValue('--loader-duration'), 10);
         const time = +new Date() - loaderStart;
-        const delay = Math.max(0, Loader.MIN_DELAY - time);
-        this.view.style.setProperty('--loader-delay', `${delay}ms`);
+        const duration = Math.max(0, minimum - time);
+        this.view.style.setProperty('--loader-duration', `${duration}ms`);
+        document.body.style.setProperty('--loader-duration', `${duration}ms`);
 
         // setTimeout(() => {
         // }, 500);
