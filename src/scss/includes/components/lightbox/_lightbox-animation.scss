@@ -356,6 +356,18 @@
 
 
 
+    &__grid {
+        @include breakpoint(phone) {
+            translate: 0 120%;
+            transition: translate var(--animation-time) var(--easing);
+
+            .is-showing &, .is-closing & {
+                translate: 0 0;
+            }
+        }
+    }
+
+
     &__indicator {
         --animation-time: .4s;
 
