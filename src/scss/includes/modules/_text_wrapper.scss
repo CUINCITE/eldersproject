@@ -34,12 +34,16 @@
 
         .text_wrapper__info {
             @include breakpoint(desktop) {
-                @include flex(column, flex-start, flex-start)
-                    text-align: left;
+                @include flex(column, flex-start, flex-start);
+                text-align: left;
 
                 &::before {
                     left: 0;
                     right: unset;
+                }
+
+                &--collections {
+                    margin-top: rem(30);
                 }
             }
         }
@@ -58,11 +62,14 @@
     }
 
 
-
     &__content {
         @include breakpoint(desktop) {
             padding-block: rem(20) rem(110);
             padding-right: rem(36.5);
+
+            .text:first-child {
+                padding-top: rem(2) !important;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -91,7 +98,7 @@
             z-index: 1;
         }
 
-        & + &, .text + & {
+        & + & {
             @include breakpoint(desktop) {
                 margin-top: rem(25);
             }
@@ -101,7 +108,21 @@
             }
 
             @include breakpoint(phone) {
+                margin-top: rem(45);
+            }
+        }
+
+        .text + & {
+            @include breakpoint(desktop) {
                 margin-top: rem(25);
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(5);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: 0;
             }
         }
 
@@ -177,15 +198,14 @@
 
         @include breakpoint(desktop) {
             @include flex(column, flex-start, flex-end);
-
             margin-inline: rem(8);
+        }
 
-            &[data-observe] {
-                .polaroid { transition: rotate 0.8s; }
-                img { transition: opacity 1s 0.2s; }
-                &.is-below .polaroid { rotate: 0deg; }
-                &.is-below img { opacity: 0; }
-            }
+        &[data-observe] {
+            .polaroid { transition: rotate 0.8s; }
+            img { transition: opacity 1s 0.2s; }
+            &.is-below .polaroid { rotate: 0deg; }
+            &.is-below img { opacity: 0; }
         }
 
         .polaroid {
@@ -195,13 +215,17 @@
             @include breakpoint(desktop) {
                 --polaroid-width: #{vw(220)};
                 --polaroid-height: #{vw(274)};
-
-                // --polaroid-width: #{rem(351)};
-                // --polaroid-height: #{rem(428)};
+                width: var(--polaroid-width);
+                height: var(--polaroid-height);
 
                 margin-block: rem(38) rem(48);
                 left: 4%;
                 rotate: 7.216deg;
+
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                }
             }
 
             @include breakpoint(tablet) {
@@ -211,6 +235,16 @@
                 left: 50%;
                 translate: -50% 0;
                 margin-block: vw(38, tablet);
+
+                img {
+                    width: 100%;
+                }
+
+                img,
+                picture {
+                    max-height: #{vw(266, tablet)};
+                    object-fit: cover;
+                }
             }
 
             @include breakpoint(phone) {
@@ -225,29 +259,65 @@
 
             &--big {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{rem(351)};
-                    --polaroid-height: #{rem(428)};
+                    --polaroid-width: #{rem(260)};
+                    --polaroid-height: #{rem(341)};
+                    min-height: var;
+                    left: 0;
+
+                    img,
+                    picture {
+                        max-height: var(--polaroid-height);
+                    }
 
                     margin-bottom: rem(52);
 
                     &:not(.polaroid--horizontal) {
                         rotate: 7.2deg;
                     }
+
+                    @media(min-width: 1600px) {
+                        --polaroid-width: #{rem(180)};
+                        --polaroid-height: #{rem(236)};
+                        left: 2%;
+
+                        &:not(.polaroid--horizontal) {
+                            rotate: 6deg;
+                        }
+                    }
                 }
             }
 
             &--horizontal {
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{rem(320)};
-                    --polaroid-height: #{rem(250)};
+                    --polaroid-width: #{rem(255)};
+                    --polaroid-height: #{rem(220)};
+                    width: var(--polaroid-width);
+                    height: var(--polaroid-height);
+
+                    .polaroid__image {
+                        height: 100%;
+                    }
+
+                    img,
+                    picture {
+                        width: 100%;
+                        height: 100% !important;
+                        object-fit: cover;
+                    }
+
+                    @media(min-width: 1600px) {
+                        --polaroid-width: #{rem(200)};
+
+                        // --polaroid-height: unset;
+                    }
 
                     rotate: 11deg;
                     margin-bottom: rem(52);
                 }
 
                 @include breakpoint(tablet) {
-                    --polaroid-width: #{vw(310, tablet)};
-                    --polaroid-height: #{vw(243, tablet)};
+                    --polaroid-width: #{vw(254, tablet)};
+                    --polaroid-height: #{vw(200, tablet)};
                 }
 
                 @include breakpoint(phone) {
@@ -319,8 +389,8 @@
 
             @include breakpoint(tablet) {
                 left: 50%;
-                translate: -50% 0;
-                height: vw(300, tablet);
+                translate: -50% -5%;
+                height: rem(280);
             }
 
             @include breakpoint(phone) {
@@ -328,6 +398,10 @@
                 translate: -50% 0;
                 height: vw(260, phone);
             }
+        }
+
+        @include breakpoint(tablet) {
+            margin-bottom: rem(70);
         }
 
         &[data-observe] img { transition: transform 0.7s $ease-out-back; }
@@ -435,7 +509,7 @@
         @include breakpoint(phone) {
             max-width: rem(244);
             padding-top: rem(16);
-            margin-top: rem(-6);
+            top: rem(10);
         }
 
 
@@ -469,6 +543,20 @@
 
             @include breakpoint(not-desktop) {
                 @include font-size(12, 15.6);
+            }
+        }
+
+        .text_wrapper__illustration & {
+            @include breakpoint(desktop) {
+                margin-top: rem(20);
+            }
+
+            @include breakpoint(tablet) {
+                margin-top: rem(15);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(10);
             }
         }
     }

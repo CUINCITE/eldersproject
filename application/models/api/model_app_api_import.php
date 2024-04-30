@@ -52,6 +52,7 @@ class model_app_api_import
             'media' => 'FilesImporter',
             'mementos' => 'MementosImporter',
             'locations' => 'LocationsImporter',
+            'locations_global' => 'LocationsGlobalImporter',
             'pdf' => 'PDFImporter',
 
             "sessions_files_data" => "SessionsUpdater", // UPDATER

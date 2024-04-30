@@ -4,6 +4,36 @@
     transform: translateY(var(--distance));
 }
 
+@keyframes show {
+    0% {
+        display: none;
+        translate: 0 50%;
+    }
+
+    1% {
+        display: block;
+    }
+
+    100% {
+        display: block;
+        translate: 0 0;
+    }
+}
+
+@keyframes hide {
+    0% {
+        display: block;
+    }
+
+    99% {
+        display: block;
+    }
+
+    100% {
+        display: none;
+    }
+}
+
 .lightbox {
     $animation-stagger: 0s;
     $content-delay: .75s;
@@ -137,6 +167,29 @@
 
 
 
+    &__intro-wrapper {
+        @include breakpoint(phone) {
+            // Animate must be disabled and display set to none, due to bugs
+
+            // translate: 0 50%;
+
+            // .is-showing.is-default & {
+            //     animation: show var(--animation-time) 0s both;
+            // }
+    
+            // .is-showing.is-not-default & {
+            //     translate: 0 0;
+            //     animation: hide 0.3s 0s both;
+            // }
+
+            .is-not-default & {
+                display: none;
+            }
+        }
+    }
+    
+
+
     &__intro-description,
     &__intro-contents {
         transition: transform var(--animation-time) var(--easing);
@@ -224,12 +277,32 @@
 
 
 
+    &__line {
+        transition: transform var(--animation-time) var(--easing);
+        transform: translateY(var(--distance));
+
+        .is-showing & {
+            transform: translateY(0);
+            transition-delay: $animation-stagger * 2.5;
+        }
+
+        .is-closing & {
+            transform: translate(0, calc(var(--distance) - var(--lightbox-top-height)));
+            transition-delay: 0s;
+        }
+    }
+
+
     &__buttons {
         @include z-index(buttons, $lightbox-elements);
 
         transition: transform var(--animation-time) var(--easing);
         transform: translateY(var(--distance));
 
+        @include breakpoint(tablet) {
+            z-index: 5;
+        }
+        
 
         .is-showing & {
             transform: translateY(0);
@@ -258,7 +331,7 @@
 
             @include breakpoint(not-phone) {
                 transition: transform var(--animation-time) var(--easing);
-                transform: translateX(100%);
+                transform: translateX(120%);
 
                 .is-showing & {
                     transform: translateX(0);
@@ -283,21 +356,41 @@
 
 
 
-    &__indicator i {
+    &__indicator {
         --animation-time: .4s;
 
-        transition: transform var(--animation-time) var(--easing);
-        transform: translateX(100%) rotate(45deg);
-
-
-        .is-showing & {
-            transform: translateX(0) rotate(45deg);
-            transition-delay: 1.8s;
+        @include breakpoint(not-phone) {
+            &-inner {
+                transition: transform var(--animation-time) var(--easing);
+                transform: translateX(100%);
+    
+                .is-showing & {
+                    transform: translateX(0);
+                    transition-delay: 1.8s;
+                }
+        
+                .is-closing & {
+                    transform: translateX(100%);
+                    transition-delay: 0s;
+                }
+            }
         }
 
-        .is-closing & {
-            transform: translateX(100%) rotate(45deg);
-            transition-delay: 0s;
+        @include breakpoint(phone) {
+            &-inner {
+                translate: 0 -120%;
+                transition: translate var(--animation-time) var(--easing);
+    
+                .is-showing & {
+                    translate: 0 0;
+                    transition-delay: 1.6s;
+                }
+        
+                .is-closing & {
+                    translate: 0 -120%;
+                    transition-delay: 0s;
+                }
+            }
         }
     }
 

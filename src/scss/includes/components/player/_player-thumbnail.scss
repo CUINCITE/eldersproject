@@ -19,7 +19,7 @@
 
 
             body.is-fully-loaded & {
-                transition: transform .6s $ease-custom;
+                transition: transform .8s $ease-custom calc(2000ms + var(--loader-duration));
                 transform: translateY(0);
             }
         }
@@ -72,6 +72,7 @@
         overflow: hidden;
         width: 100%;
         transition: opacity .4s $ease-out;
+
 
 
         @include breakpoint(not-desktop) {
@@ -163,15 +164,6 @@
             background-color: var(--color-box);
 
 
-            &::before {
-                content: "";
-                position: absolute;
-                inset: -7px 0 100%;
-                background-color: var(--cassette-bg-color);
-                border-bottom: 1px solid var(--color-bg);
-            }
-
-
             .is-expanded & {
                 transform: translateY(calc(-100vw + var(--GLOBAL-aside-width)));
             }
@@ -192,10 +184,10 @@
                 }
 
 
-                .player.is-expanded &,
-                .player-is-playing & {
-                    animation-play-state: paused;
-                }
+                // .player.is-expanded &,
+                // .player-is-playing & {
+                //     animation-play-state: paused;
+                // }
 
 
                 .player.is-rewinding & {

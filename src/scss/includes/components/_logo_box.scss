@@ -4,21 +4,21 @@
 
     @include breakpoint(tablet) {
         svg {
-            width: vw(120, tablet);
+            width: vw(150, tablet);
             height: auto;
         }
     }
 
     @include breakpoint(phone) {
         svg {
-            width: vw(78, phone);
+            width: vw(110, phone);
             height: auto;
         }
     }
 
     .box {
         @include flex(row, flex-start, flex-start);
-        
+
         height: 100%;
 
         @include breakpoint(tablet) {

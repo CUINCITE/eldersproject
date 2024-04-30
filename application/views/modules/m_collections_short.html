@@ -7,7 +7,7 @@
                         <p>
                             <span>[[svg::books]]Ten writers</span>
                             <span>[[svg::pin-color]]Ten regions</span>
-                            <span>Hundreds of histories <br class="desktop-hide tablet-hide">[[svg::cassette]] preserved</span>
+                            <span>Hundreds of histories <br class="desktop-hide">[[svg::cassette]] preserved</span>
                         </p>
                     </div>
                 </div>
@@ -15,7 +15,6 @@
         </section>
 
         <div class="box box__wrapper" >
-
             <div class="collections_images__heading">
                 <div class="grid">
                     <div class="col-span-12">
@@ -26,7 +25,7 @@
             {% if text %}
                 <div class="collections_images__intro">
                     <div class="grid">
-                        <div class="col-span-7">
+                        <div class="col-start-8 col-span-5">
                             {% include "subviews/subview_text.html" with {
                                 size: "larger",
                                 text: text
@@ -37,8 +36,7 @@
             {% endif %}
         </div>
 
-        <div class="stack box" >
-
+        <div class="stack box">
             <div class="stack__gallery">
                 <div class="stack__content{% if params.simple %} stack__content--simple{% endif %}" data-component="Collections">
                     <div class="col-span-1 col-start-2 stack__container">
@@ -56,6 +54,10 @@
                                             <div class="names__expand">
                                                 <p class="names__claim">{{ item.collection_title }}</p>
                                             </div>
+                                        {% else %}
+                                        <div class="names__expand desktop-hide">
+                                            <p class="names__claim">{{ item.collection_title }}</p>
+                                        </div>
                                         {% endif %}
                                     </li>
                                 {% endfor %}

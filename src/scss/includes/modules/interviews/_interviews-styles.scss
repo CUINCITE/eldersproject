@@ -148,6 +148,13 @@
 
             padding-top: rem(17);
             margin-left: rem(-6);
+
+            .safari & {
+                span {
+                    padding-top: rem(20);
+                    margin-top: rem(-20);
+                }
+            }
         }
 
         @include breakpoint(tablet) {
@@ -510,15 +517,16 @@
 
         @include breakpoint(desktop) {
             @include font-size(20, 19);
-            @include letter-spacing(0.5, 20);
+            @include letter-spacing(-0.25, 20);
 
             padding-top: rem(15);
             padding-left: rem(1);
+            transition: transform 0.4s $easing;
 
 
             .is-grid-view & {
                 @include font-size(17, 19);
-                @include letter-spacing(0.4, 17);
+                @include letter-spacing(-0.4, 17);
 
                 padding-top: rem(4);
                 flex-direction: row;
@@ -538,6 +546,14 @@
 
             padding-left: 0.1em;
             padding-top: rem(3);
+        }
+    }
+
+
+
+    &__main {
+        @include breakpoint(desktop) {
+            padding-bottom: rem(14);
         }
     }
 
@@ -564,7 +580,6 @@
 
 
             &--overlay {
-                @include font-family(normal);
                 @include font-size(13, 15);
 
                 margin-top: 0;
@@ -578,6 +593,11 @@
 
             margin-block: trim-font(1.1);
             padding-top: rem(16);
+
+            &--overlay {
+                margin-top: rem(32);
+                line-height: 1.35;
+            }
         }
 
         @include breakpoint(phone) {
@@ -588,7 +608,12 @@
 
             &--overlay {
                 margin-top: rem(28);
+                line-height: 1.35;
             }
+        }
+
+        &--overlay {
+            @include font-family(normal);
         }
     }
 

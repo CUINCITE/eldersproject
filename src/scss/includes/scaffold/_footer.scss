@@ -29,6 +29,12 @@
         @include breakpoint(not-desktop) {
             border-top: 1px solid var(--color-white);
         }
+        
+        body:not(.is-transition) & {
+            .grid {
+                opacity: 1 !important;
+            }
+        }
     }
 
 
@@ -44,10 +50,10 @@
         }
 
         @include breakpoint(tablet) {
-            @include flex(row, space-between, center);
+            @include flex(column, flex-start, flex-start);
 
             padding-block: rem(22);
-            gap: rem(36) rem(18);
+            gap: rem(27);
             flex-wrap: wrap;
         }
 
@@ -62,8 +68,10 @@
         a { 
             @include hoverable-link; 
 
-            @include breakpoint(not-phone) {
-                &:last-child {
+
+
+            @include breakpoint(desktop) {
+                &:nth-last-child(2) {
                     margin-left: auto;
                 }
             }

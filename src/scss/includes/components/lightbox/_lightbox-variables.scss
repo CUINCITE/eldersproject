@@ -10,7 +10,7 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
     --main-body-color: var(--color-red, red);
 
     // header text color, tags bg
-    --main-text-color: var(--color-pale-pink, pink);
+    --main-text-color: var(--color-pink, pink);
 
     // aside area bg, logo area bg
     --aside-body-color: var(--color-green, green);
@@ -32,6 +32,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         --aside-width: #{vw(60, tablet)};
     }
 
+    @include breakpoint(phone) {
+        --aside-width: #{vw(65, phone)};
+    }
+
 
     &__item {
         --main-body-color: var(--theme-color);
@@ -48,7 +52,7 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
         // Caro De Robertis
 
         &--pink {
-            --theme-color: var(--color-pale-pink);
+            --theme-color: var(--color-pink);
             --main-text-color: var(--color-black);
             --aside-body-color: var(--color-purple);
             --aside-text-color: var(--color-grey200);
@@ -62,10 +66,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--green {
             --theme-color: var(--color-green);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
             --aside-body-color: var(--color-red);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
             --hover-color: var(--color-purple);
         }
@@ -75,9 +79,9 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--pale-purple {
             --theme-color: var(--color-pale-purple);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
-            --aside-body-color: var(--color-pale-pink);
+            --aside-body-color: var(--color-pink);
             --aside-text-color: var(--color-red);
             --alt-text-color: var(--color-grey200);
             --hover-color: var(--color-dark-green);
@@ -88,10 +92,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--orange {
             --theme-color: var(--color-orange);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
             --aside-body-color: var(--color-purple);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
             --description-color: var(--color-grey200);
             --hover-color: var(--color-red);
@@ -102,10 +106,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--pale-blue {
             --theme-color: var(--color-pale-blue);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
             --aside-body-color: var(--color-orange);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
             --hover-color: var(--color-purple);
         }
@@ -128,10 +132,10 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--dark-green {
             --theme-color: var(--color-dark-green);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
             --aside-body-color: var(--color-orange);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
             --hover-color: var(--color-purple);
         }
@@ -153,7 +157,7 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
 
         &--purple {
             --theme-color: var(--color-purple);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
             --tags-brightness: 50%;
             --aside-body-color: var(--color-yellow);
             --aside-text-color: var(--color-black);

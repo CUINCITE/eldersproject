@@ -1,3 +1,15 @@
+$background-colors: (
+    "pale_green": $color-pale-green,
+    "green": $color-green,
+    "light_blue": $color-light-blue,
+    "pale_blue": $color-pale-blue,
+    "pale_purple": $color-pale-purple,
+    "pink": $color-pink,
+    "yellow": $color-gold,
+    "orange": $color-orange,
+    "brown": $color-brown,
+);
+
 @keyframes polaroid {
     0% {
         filter: brightness(300%);
@@ -10,43 +22,41 @@
     }
 }
 
-$background-colors: (
-    "pale_green": $color-pale-green,
-    "green": $color-green,
-    "light_blue": $color-light-blue,
-    "pale_blue": $color-pale-blue,
-    "pale_purple": $color-pale-purple,
-    "pink": $color-pale-pink,
-    "yellow": $color-gold,
-    "orange": $color-orange,
-    "brown": $color-brown,
-);
+
 
 .polaroid {
     --polaroid-width: #{rem(386)};
     --polaroid-height: #{rem(471)};
 
 
-    width: var(--polaroid-width);
-    height: var(--polaroid-height);
+    max-width: var(--polaroid-width);
+    max-height: var(--polaroid-height);
     background-color: var(--color-grey200);
 
-    @include breakpoint(desktop) {
-        padding: rem(20) rem(20) rem(32);
+    position: relative;
 
+    &::after {
+        content: "";
+        position: absolute;
+        inset: rem(-20) rem(-20) rem(-32);
+        background-color: var(--color-grey200);
+        z-index: -1;
 
-        .stack__polaroids & {
-            --polaroid-width: #{rem(310)};
-            --polaroid-height: #{rem(420)};
+        @include breakpoint(not-desktop) {
+            inset: rem(-18) rem(-18) rem(-27);
         }
     }
 
-    @include breakpoint(tablet) {
-        padding: vw(18, tablet) vw(18, tablet) vw(27, tablet);
-    }
+    .stack__polaroids & {
+        --polaroid-width: #{rem(310)};
+        --polaroid-height: #{rem(420)};
 
-    @include breakpoint(phone) {
-        padding: vw(18, phone) vw(18, phone) vw(27, phone);
+        picture,
+        img {
+            width: 100%;
+            max-height: var(--polaroid-height);
+            object-fit: cover;
+        }
     }
 
     &--square {
@@ -57,8 +67,12 @@ $background-colors: (
     &--horizontal {
         @include breakpoint(desktop) {
             --polaroid-width: #{rem(481)};
-            --polaroid-height: #{rem(366)};
 
+            // --polaroid-height: #{rem(366)};
+
+            @media(max-width: 1400px) {
+                // --polaroid-width: #{rem(500)};
+            }
 
             .stack__polaroids & {
                 --polaroid-width: #{rem(420)};
@@ -67,7 +81,9 @@ $background-colors: (
         }
 
         @include breakpoint(phone) {
-            padding: vw(14, phone) vw(14, phone) vw(18, phone);
+            &::after {
+                inset: vw(-14, phone) vw(-14, phone) vw(-18, phone);
+            }
         }
     }
 
@@ -78,6 +94,7 @@ $background-colors: (
 
         .polaroid__image {
             overflow: hidden;
+            height: 100%;
 
             img {
                 opacity: 1;
@@ -88,31 +105,27 @@ $background-colors: (
 
 
     &--small_frame {
-        @include breakpoint(desktop) {
-            padding: rem(10);
-        }
-
-        @include breakpoint(tablet) {
-            padding: vw(10, tablet);
-        }
-
-        @include breakpoint(phone) {
-            padding: vw(10, phone);
+        &::after {
+            inset: rem(-10);
         }
     }
 
 
     &--wrapped {
-        @include breakpoint(desktop) {
-            padding: rem(20) rem(20) rem(30);
+
+        @media(min-width: 1600px) {
+            --polaroid-width: #{rem(386)};
+            --polaroid-height: #{rem(471)};
         }
 
-        @include breakpoint(tablet) {
-            padding: vw(12.75, tablet) vw(12.75, tablet) vw(20.25, tablet);
-        }
+        &::after {
+            @include breakpoint(desktop) {
+                inset: rem(-20) rem(-20) rem(-30);
+            }
 
-        @include breakpoint(phone) {
-            padding: vw(12.75, phone) vw(12.75, phone) vw(20.25, phone);
+            @include breakpoint(not-desktop) {
+                inset: rem(-12.75) rem(-12.75) rem(-20.25);
+            }
         }
     }
 
@@ -120,7 +133,8 @@ $background-colors: (
 
     &__image {
         width: 100%;
-        height: 100%;
+
+        // height: 100%;
 
         @each $name, $color in $background-colors {
 
@@ -135,17 +149,14 @@ $background-colors: (
         }
 
         picture, img {
-            width: 100%;
+            width: auto;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+
+            .polaroid--horizontal & {
+                width: 100%;
+                height: auto;
+            }
         }
     }
-
-
-    // maybe on scroll later
-    // @include hover {
-    //     img {
-    //         animation: polaroid 1.5s linear forwards;
-    //     }
-    // }
 }

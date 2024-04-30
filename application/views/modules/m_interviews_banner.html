@@ -17,6 +17,7 @@
             <div class="interviews__claim">
                 <div class="grid">
                     <div class="interviews__copy col-start-8 col-span-5">
+                        {% set text=text|nl2br %}
                         {% include "subviews/subview_text.html" with {
                         size: "larger",
                         text: text
@@ -24,10 +25,10 @@
                     </div>
                 </div>
                 <div class="interviews__image" data-parallax="-60" data-action="pause">
-                    {% include "subviews/subview_picture.html" with {
+                    {% include "subviews/subview_picture_no_retina_no_media.html" with {
                         image: {
-                                desktop: "/public/theme/images/flag.png",
-                                mobile: "/public/theme/images/flag.png"
+                                png: "/public/theme/images/flag.png",
+                                webp: "/public/theme/images/flag.webp"
                             }
                         }
                     %}
@@ -46,12 +47,16 @@
                                     <li class="names__name js-accordeon-item js-caption is-closed {% if loop.first %}is-current{% endif %}">
                                         <a href="{{ item.url }}" class="names__link"></a>
                                         <div class="names__author">
-                                            <div class="names__box">
-                                                <span>{{ item.label }}</span>
+                                            {% set labelArray = item.label|split(',') %}
+                                            <div class="names__box{% if labelArray|length > 1 %} names__box--multiline{% endif %}">
+                                                {% for name in labelArray %}
+                                                    <span>{{name}}{% if not loop.last %}, {% if loop.first %} <br>{% endif %}{% endif %}</span>
+                                                {% endfor %}
+                                                {# <span>{{ item.label|raw }}</span> #}
                                             </div>
                                         </div>
                                         <div class="names__expand">
-                                            <p class="names__claim">{{ item.narrator_occupation }}</p>
+                                            <p class="names__claim">{{ item.narrator_occupation|raw }}</p>
                                         </div>
                                     </li>
                                 {% endfor %}
@@ -92,7 +97,7 @@
                                 <span class="button__text button__text--duplicate js-button-duplicate-text">Explore</span>
                             </span>
 
-                            <span class="button__text button__text--extra"><i>241 interviews</i></span>
+                            <span class="button__text button__text--extra"><i>239 interviews</i></span>
                         </a>
                     </div>
                 </div>

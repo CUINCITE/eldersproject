@@ -98,6 +98,7 @@ class model_app extends _uho_model
             $this->dict['collections_all']=$this->dictLoad('interviewers',[],'label');
             $this->dict['states']=$this->dictLoad('s_states', ['active'=>1],'label');
             $this->dict['topics']=$this->dictLoad('topics', ['active'=>1],'label');
+            $this->dict['intro_quotes']=$this->dictLoad('intro_quotes', ['active'=>1],'label');
             
             // uncomment for multi-lang sites
             //$this->dict['lang'] = $this->lang;
@@ -114,7 +115,7 @@ class model_app extends _uho_model
 
         $r = array();
         foreach ($t as $k => $v)
-            if ($v['slug'])
+            if (!empty($v['slug']))
                 $r[$v['slug']] = $v;
             else $r[] = $v;
         
@@ -128,6 +129,15 @@ class model_app extends _uho_model
     {
         $r = @$_SESSION['dict'][$t];
         if (isset($r[$key])) $r = $r[$key];
+        return $r;
+    }
+
+    //============================================================================================
+    public function getCollectionsIds()
+    {
+        $r=[];
+        $c=$this->dictGet('collections');
+        foreach ($c as $k=>$v) $r[$v['id']]=$v;
         return $r;
     }
 
@@ -207,7 +217,7 @@ class model_app extends _uho_model
 
 
         if (isset($t['title']) && $t['title'] == 'Home') $t['title'] = '';
-        if (isset($t['title']) && $t['title']) $t['title'] = $this->head_title.' - ' . $this->head['title'];
+        if (isset($t['title']) && $t['title']) $t['title'] = $this->head['title'].' - '.$this->head_title;
           else $t['title'] = $this->head_title;
           
         return $t;
@@ -354,4 +364,14 @@ class model_app extends _uho_model
         //print_r($result);
         return $result;
     }
+
+    public function getIntroQuote()
+    {
+        $quotes=$this->dictGet('intro_quotes');
+        srand();
+        $r=rand(0,count($quotes)-1);
+        return $quotes[$r];
+        
+    }
+
 }

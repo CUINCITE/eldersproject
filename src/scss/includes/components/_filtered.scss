@@ -19,13 +19,16 @@
 
         @include breakpoint(phone) {
             gap: rem(4) rem(14);
-            padding-top: rem(12);
             padding-inline: map-get($grid-offset, phone);
         }
 
         &:has(li) {
             padding-bottom: rem(25);
             border-top: 1px solid var(--color-bg);
+
+            @include breakpoint(phone) {
+                padding-top: rem(12);
+            }
         }
     }
 
@@ -47,6 +50,7 @@
 
             @include breakpoint(phone) {
                 margin-top: rem(5);
+                gap: rem(7);
             }
 
 

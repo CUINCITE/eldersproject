@@ -13,26 +13,22 @@ class model_app_pages_modules_map extends model_app_pages_modules
 
     public function updateModel($m, $url)
     {
-        $m['map'] = $this->getMap();
+        
+        $m['map'] = $this->getMap($m['params']);
 
         return $m;
     }
 
-
-
-    private function time2seconds($t)
-    {
-        $t = explode(':', $t);
-        return $t[2] + $t[1] * 60 + $t[0] * 60 * 60;
-    }
-
-    private function getMap($collection=0)
+    private function getMap($params,$collection=0)
     {
         if ($collection) $f=['active' => 1, 'collection_hide' => 0, 'collection' => $collection];
             else $f=['active' => 1];
         $interviews = $this->parent->getJsonModel('interviews', ['active' => 1], false, null, null, ['fields' => ['label', 'slug', 'incite_id']]);
-        $items = $this->parent->getJsonModel('map_locations', $f);
-
+        
+        if (!empty($params['global2'])) $items = $this->parent->getJsonModel('map_locations_global', $f);
+        elseif (!empty($params['global'])) $items = $this->parent->getJsonModel('map_locations', $f);
+        else $items=[];
+        
         foreach ($items as $k => $v) {
 
             $quotes = [];
@@ -55,7 +51,7 @@ class model_app_pages_modules_map extends model_app_pages_modules
 
             }
 
-            $items[$k]['street'] = explode(',',$v['street'])[0];
+            $items[$k]['street'] = @explode(',',$v['street'])[0];
 
             $items[$k]['quotes'] = $quotes;
         }
@@ -63,6 +59,13 @@ class model_app_pages_modules_map extends model_app_pages_modules
 
         return $items;
     }
+
+    private function time2seconds($t)
+    {
+        $t = explode(':', $t);
+        return $t[2] + $t[1] * 60 + $t[0] * 60 * 60;
+    }
+
 
 }
 

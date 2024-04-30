@@ -5,17 +5,23 @@
       <div class="col-span-12">
         <div class="footer__links">
           {% for item in scaffold.footer %}
-          <a href="{{item.url}}" {% if item.url|slice(0,4)=='http' %}target="_blank"{% endif %}>
+          <a href="{{item.url}}" {% if item.url|slice(0,4)=='http' %}target="_blank"{% endif %} data-gtm='{"event": "footer-link-click"}'>
             <span>
               <span>{{item.label}}</span>
               <span>{{item.label}}</span>
             </span>
           </a>
           {% endfor %}
+          <a href="https://adabuchholc.pl" target="_blank">
+            <span>
+              <span>Illustrations by Ada Buchholc</span>
+              <span>Illustrations by Ada Buchholc</span>
+            </span>
+          </a>
           <a href="https://huncwot.com/" target="_blank">
             <span>
-              <span>Illustrations by Ada Buccholc &nbsp;<br class="desktop-hide tablet-hide"> Website by <strong>Huncwot</strong></span>
-              <span>Illustrations by Ada Buccholc &nbsp;<br class="desktop-hide tablet-hide"> Website by <strong>Huncwot</strong></span>
+              <span>Website by <strong>Huncwot</strong></span>
+              <span>Website by <strong>Huncwot</strong></span>
             </span>
           </a>
         </div>

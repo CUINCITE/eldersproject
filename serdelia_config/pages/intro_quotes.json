@@ -1,0 +1,28 @@
+{
+    "table": "intro_quotes",
+    "buttons_page":
+    [
+        {"label":"Export","plugin":"export"}
+    ],
+    "order": "text",
+    "fields": [
+        {
+            "field": "text",
+            "list": true,
+            "label": "Quote",
+            "type":"text"
+        },
+        {
+            "field": "author",
+            "list": true,
+            "label": "Author"
+        },
+        {
+            "label":"Publish",
+            "field":"active",
+            "type":"boolean",
+            "list":"edit",
+            "search":true
+        }
+    ]
+}

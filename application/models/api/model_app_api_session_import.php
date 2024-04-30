@@ -100,17 +100,23 @@ class model_app_api_session_import
 
 	private function getConvertLineTags($txt,$narrators=[],$tag='Q',$time_last='')
 	{
+		//echo($txt.'
+		//');
+
+		$txt=str_replace('ñ','ñ',$txt);	//Tufiño
+		if ($narrators[0]=='Pérez') $narrators[0]='D’Alerta'; // D’Alerta
+		
 		
 		if (!$tag) $tag='Q';
 		if (@$txt[0]!='[')
 		{
 			
-			$i1=strpos($txt,'[');
-			$i2=strpos($txt,']',$i1);
+			$i1=mb_strpos($txt,'[',0,'UTF-8');
+			$i2=mb_strpos($txt,']',$i1,'UTF-8');
 			if ($i1 && $i2>$i1 && $i2-$i1==9)
 			{				
-				$t=substr($txt,$i1+1,8);
-				$txt='['.$t.'] '.substr($txt,0,$i1).substr($txt,$i2+1);
+				$t=mb_substr($txt,$i1+1,8,'UTF-8');
+				$txt='['.$t.'] '.mb_substr($txt,0,$i1,'UTF-8').mb_substr($txt,$i2+1,'UTF-8');
 				
 			} else
 			{
@@ -120,9 +126,11 @@ class model_app_api_session_import
 			$txt=str_replace('  ',' ',$txt);				
 			
 		}
-		if (count($narrators)==1) $txt=str_replace($narrators[0],'A',$txt);
+
+		// THAT'S WRONG - WILL CONVERT ALL NAMES, ALSO THESE INSIDE THE SENTENCE!
+		//if (count($narrators)==1) $txt=str_replace($narrators[0],'A',$txt);
 				
-		$time=substr($txt,1,8);
+		$time=mb_substr($txt,1,8,'UTF-8');
 		if ($time[2]==':' && $time[5]==':'); else $time=$time_last;				
 		$text=substr($txt,11);
 		
@@ -137,15 +145,19 @@ class model_app_api_session_import
 			$tag='A';
 			$text=substr($text,3);
 		} else
-		{
+		{	
 			foreach ($narrators as $k=>$v)
-			if (substr($text,0,strlen($v))==$v)
 			{
-				$tag='A';
-				if (count($narrators)==1) $text=substr($text,strlen($v)+2);
-				break;
+				if (mb_substr($text,0,mb_strlen($v,'UTF-8'),'UTF-8')==$v)
+				{
+					$tag='A';
+					if (count($narrators)==1) $text=mb_substr($text,mb_strlen($v,'UTF-8')+2,null,'UTF-8');
+					break;
+				} else
+				{
+					//echo(' [['.mb_substr($text,0,mb_strlen($v,'UTF-8'),'UTF-8').' :: '.$v.' ]] ');
+				}
 			}
-
 		}
 
 		$txt='<'.$tag.' T="'.$time.'">'.$text;

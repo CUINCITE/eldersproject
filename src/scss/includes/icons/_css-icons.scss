@@ -577,6 +577,10 @@
     width: 19px;
     overflow: hidden;
 
+    @include breakpoint(phone) {
+        width: 17px;
+    }
+
     .row {
         @include flex(row, center, center);
 
@@ -601,6 +605,10 @@
         width: 11px;
         flex-shrink: 0;
         background-color: currentColor;
+
+        @include breakpoint(phone) {
+            width: 10px;
+        }
     }
 
     .bar {
@@ -608,6 +616,10 @@
         width: 3px;
         flex-shrink: 0;
         background-color: currentColor;
+
+        @include breakpoint(phone) {
+            height: 6px;
+        }
     }
 }
 
@@ -672,14 +684,17 @@
     span {
         width: 5px;
         background-color: currentColor;
-        height: 100%;
-        transition: height .25s $ease-custom, opacity .25s $ease-custom;
-        will-change: height, opacity;
+        height: 20px;
+        transition: transform .3s $ease-custom, opacity .3s $ease-custom;
+        will-change: transform, opacity;
+        transform-origin: bottom;
 
 
         @for $i from 1 through 5 {
             &:nth-child(#{$i}) {
-                height: calc(4 * #{$i}px);
+                // height: calc(4 * #{$i}px);
+                transition-delay: 0.02s * $i;
+                transform: scaleY(#{4 * $i / 20});
             }
         }
     }
@@ -687,8 +702,10 @@
 
     .is-muted & {
         span {
-            height: 6px;
             opacity: 0.5;
+
+            // height: 6px;
+            transform: scaleY(#{6 / 20 * 1});
         }
     }
 }

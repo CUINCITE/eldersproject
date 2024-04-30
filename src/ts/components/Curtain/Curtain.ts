@@ -32,7 +32,6 @@ export class Curtain {
         this.lead = view.querySelector('.js-curtain-lead');
 
         this.quotes = shuffle((options || JSON.parse(view.dataset.options)).quotes || []);
-        console.log(this.quotes);
 
         this.init();
     }
@@ -58,7 +57,6 @@ export class Curtain {
                 ease: easing,
                 delay: 0.2,
                 duration: 0.6,
-                onComplete: () => resolve(),
             });
 
             gsap.killTweensOf(this.circle);
@@ -68,6 +66,7 @@ export class Curtain {
                 duration: 0.8,
                 delay: 0.2,
                 ease: easing,
+                onComplete: () => resolve(),
             });
 
             gsap.killTweensOf(this.lead);

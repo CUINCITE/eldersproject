@@ -3,7 +3,13 @@
         position: relative;
     }
 
-
+    &.box {
+        .module--collections_images:last-child & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(65);
+            }
+        }
+    }
 
     &__content {
         position: relative;
@@ -34,6 +40,14 @@
         width: 100%;
         margin: rem(6) 0 rem(20);
         gap: rem(7);
+
+        @include breakpoint(phone) {
+            margin-top: rem(80) !important;
+
+            .collections_images & {
+                margin-top: rem(20) !important;
+            }
+        }
     }
 
 

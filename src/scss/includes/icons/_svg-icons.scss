@@ -84,8 +84,15 @@
 
     @include breakpoint(tablet) {
         .player--video & {
-            width: 40px;
-            height: 44px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    @include breakpoint(tablet-landscape) {
+        .player--video & {
+            width: 30px;
+            height: 30px;
         }
     }
 
@@ -97,6 +104,7 @@
             height: 21px;
         }
     }
+
 
 
     path, rect { fill: currentColor; }
@@ -324,7 +332,7 @@
         rect {
             fill: var(--color-black);
 
-            &:first-of-type { fill: var(--color-pale-pink); }
+            &:first-of-type { fill: var(--color-pink); }
         }
 
         @include breakpoint(desktop) {

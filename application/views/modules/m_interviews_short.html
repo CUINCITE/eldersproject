@@ -3,7 +3,7 @@
 <section class="module module--interviews{% if collection_page %} box{% endif %}" {% if collection_page %} id="interviews"{% endif %}>
 
     <div class="interviews">
-        <div class="box">
+        <div class="box box--negative">
             <div class="grid">
                 <div class="col-span-12">
 
@@ -26,7 +26,7 @@
                 <li class="interviews__item" data-observe>
 
                     <div class="grid">
-                        <a href="{{ item.url }}" class="interviews__link">
+                        <a href="{{ item.url }}" class="interviews__link" data-gtm='{"event": "interviews-tile-click"}'>
                             <span class="sr-only">Go to the interview</span>
                         </a>
 

@@ -8,6 +8,7 @@ export class Dropdown extends Component {
     private elWrap: HTMLElement;
     private elToggle: HTMLElement;
     private elValue: HTMLElement;
+    private elPanel: HTMLElement;
     // eslint-disable-next-line no-undef
     private elItems: NodeListOf<HTMLElement>;
     private isOpen = false;
@@ -21,6 +22,7 @@ export class Dropdown extends Component {
         this.elOptions = this.elSelect.querySelectorAll('option');
         this.elWrap = this.view.querySelector('.js-dropdown-wrap');
         this.elItems = this.view.querySelectorAll('.js-dropdown-option');
+        this.elPanel = document.querySelector('.js-panel');
 
         this.bind();
         this.setWrapSize();
@@ -53,6 +55,11 @@ export class Dropdown extends Component {
         if (this.elValue) {
             const customValue = this.elOptions[index].dataset.value;
             this.elValue.innerHTML = customValue || this.elSelect.value;
+            if (customValue === 'locations' || customValue === 'collections') {
+                this.elPanel.classList.add('hide-letters');
+            } else {
+                this.elPanel.classList.remove('hide-letters');
+            }
         }
         this.close();
     };

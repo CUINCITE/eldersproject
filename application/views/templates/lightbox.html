@@ -18,9 +18,9 @@
 
 {% endmacro %}
 
-
 {% import _self as macros %}
 
+{% set special_chars = ['ñ'] %}
 
 <div class="lightbox__item lightbox__item--{{modifier}} js-item" data-theme-color="{{modifier}}" data-lightbox-path="{{url}}">
     <div class="lightbox__overlay"></div>
@@ -28,10 +28,10 @@
         <div class="lightbox__header">
             <div class="lightbox__darken"></div>
             <div class="lightbox__header-info">
-                <h2 class="lightbox__title {% if title|length > 25 %}lightbox__title--long {% endif %}">
-                    {% set titleArray = title|split(',') %}
+                {% set titleArray = title|split(',') %}
+                <h2 class="lightbox__title{% if title|length > 25 %} lightbox__title--long{% endif %}{% if titleArray|length > 2 %} lightbox__title--extra{% endif %}{% if title|lower matches '/\b\w*[ñéáíó]\w*\b/g' %} lightbox__title--accent{% endif %}">
                     {% for name in titleArray %}
-                        <span>{{name}}{% if not loop.last %}, {% endif %}</span>
+                        <span>{{name}}{% if not loop.last %},{% if loop.first %} <br> {% else %} <br class="desktop-hide tablet-hide"> {% endif %}{% endif %}</span>
                     {% endfor %}
                 </h2>
                 <div class="lightbox__filters">
@@ -48,7 +48,7 @@
                 <div class="lightbox__footer">
                     <button class="lightbox__play js-player-btn" data-audio-player="{{id}}">
                         [[svg::play]]
-                        <span>
+                        <span class="lightbox__play-text">
                             <span>
                                 <span class="lightbox__play-mask">
                                     <span>Play</span>
@@ -109,7 +109,10 @@
                         <div class="lightbox__slider slider js-lightbox-slider">
                             <div class="slider__captions">
                                 {% for item in images %}
-                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">{{item.description}}</div>
+                                    <div class="lightbox__caption {% if not item.description %}lightbox__caption--empty{% endif %} js-caption">
+                                        <div class="lightbox__counter">{% if loop.index < 10 %}0{% endif %}{{loop.index}} / {% if images.length < 10 %}0{% endif %}{{images|length}}</div>
+                                        <p>{{item.description}}</p>
+                                    </div>
                                 {% endfor %}
                             </div>
                             <div class="slider__wrap js-slider-wrap js-rotate">
@@ -121,6 +124,7 @@
                                         <div class="lightbox__slide-image polaroid
                                         {% if image.original.width and image.original.height %}
                                         {% if image.original.width > image.original.height %} polaroid--horizontal
+                                        {% elseif image.original.width > image.original.height * 1.8 %} polaroid--full-width
                                         {% elseif image.original.width == image.original.height %} polaroid--square
                                         {% endif %}
                                         {% endif %}">
@@ -214,15 +218,25 @@
                                 <form class="transcript__search js-transcript-search">
                                     <div class="transcript__input js-transcript-input-wrap">
                                         <span class="transcript__hiddenspan js-transcript-span"></span>
-                                        <input type="search" name="transcript" id="" autocomplete="off" placeholder="Search">
+                                        <input type="search" name="transcript" id="" autocomplete="off" placeholder="Search" class="js-transcript-input">
                                     </div>
                                     <div class="transcript__nav js-transcript-nav">
                                         <span class="transcript__counters js-transcript-counters"></span>
                                         <button type="button" class="transcript__nav-button transcript__nav-button--prev js-transcript-prev">
-                                            [[svg::lightbox-arrow-small]]
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
                                         </button>
                                         <button type="button" class="transcript__nav-button transcript__nav-button--next js-transcript-next">
-                                            [[svg::lightbox-arrow-small]]
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
+                                            <span class="transcript__arrow">
+                                                [[svg::lightbox-arrow-small]]
+                                            </span>
                                         </button>
                                         <button type="button" class="js-transcript-close"><i class="icon-close"></i></button>
                                     </div>
@@ -281,12 +295,12 @@
                                     <li>
                                         <a href="{{item.url}}" data-history="false" download>
                                             <span class="lightbox__downloads-arrow">
-                                            [[svg::lightbox-arrow-small]]
+                                                [[svg::lightbox-arrow-small]]
                                             </span>
                                             <span class="lightbox__downloads-arrow">
                                                 [[svg::lightbox-arrow-small]]
                                             </span>
-                                            {{item.name}} &nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span>
+                                            {{item.name}} {% if item.name|length > 18 %}<br class="phone-only">{% endif %}<span class="size">&nbsp;<span class="bracket">(</span>{{item.ext}}{% if item.size %}, {{item.size}}{% endif %}<span class="bracket">)</span></span>
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -301,9 +315,9 @@
                         <div class="lightbox__related">
                             <ul class="lightbox__related-list">
                                 {% for item in related %}
-                                    <li class="lightbox__related-item button--draw" data-component="Button">
-                                        <a class="lightbox__related-link" href="{{item.url}}"></a>
-                                        <span class="lightbox__related-arrow desktop-only">
+                                    <li class="lightbox__related-item js-related-button button--draw" data-component="Button">
+                                        <a class="lightbox__related-link" href="{{item.url}}" data-history="replace"></a>
+                                        <span class="lightbox__related-arrow">
                                             <i class="icon-btn-arrow arrow arrow--reversed js-arrow">
                                                 <span class="vertical js-arrow-vertical"></span>
                                                 <span class="horizontal js-arrow-horizontal"></span>
@@ -329,9 +343,18 @@
             </a>
             <div class="phone-hide">[[svg::logo-new]]</div>
         </div>
+        <div class="lightbox__line desktop-hide tablet-hide"></div>
         <ul class="lightbox__buttons js-lightbox-nav">
             <div class="lightbox__buttons-scroller">
-                <span class="lightbox__indicator js-nav-indicator desktop-only"><i></i></span>
+                <span class="lightbox__indicator js-nav-indicator">
+                    <span class="lightbox__indicator-inner">
+                        <span class="lightbox__indicator-box js-nav-indicator-box tablet-hide desktop-hide"></span>
+                        <span class="lightbox__indicator-tip"></span>
+                    </span>
+                </span>
+
+
+
                 <li class=""><button role="tab" aria-selected="true" class="lightbox__button lightbox__button--intro is-active"><span><span>Intro</span><span>Intro</span></span></button></li>
                 {% if images %}
                 <li class=""><button role="tab" aria-selected="false" aria-controls="lightbox-mementos" class="lightbox__button lightbox__button--mementos"><span><span>Mementos</span><span>Mementos</span></span></button></li>

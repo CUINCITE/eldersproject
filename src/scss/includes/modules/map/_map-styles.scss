@@ -1,3 +1,5 @@
+@import "../../components/player/player-variables";
+
 .map {
     --line-width: #{rem(10)};
     --line-offset: #{rem(4)};
@@ -159,7 +161,7 @@
         counter-reset: map-locations;
 
         @include breakpoint(desktop) {
-            overflow-y: auto;
+            overflow: clip auto;
         }
 
         @include breakpoint(tablet) {
@@ -251,10 +253,10 @@
 
 
     &__title {
-        @include flex(row, flex-start, flex-end);
+        @include flex(row, flex-start, flex-start);
 
         @include breakpoint(tablet) {
-            @include flex(row, flex-start, flex-start); 
+            @include flex(row, flex-start, flex-start);
         }
 
         .map--global & {
@@ -344,8 +346,65 @@
 
         gap: 1px;
 
+        @include breakpoint(not-phone) {
+            justify-content: flex-start;
+
+            &.is-active {
+                overflow-y: scroll;
+            }
+
+            @include breakpoint(desktop) {
+                max-height: calc(#{vw(260)} + 6px);
+
+
+
+                &--no-address {
+                    max-height: calc(#{vw(290)} + 6px);
+                }
+
+                @media (min-aspect-ratio: 2.3) {
+                    max-height: 35vh;
+
+                    &--no-address {
+                        max-height: calc(35vh + #{vw(30)});
+                    }
+                }
+
+                @media (max-height: 1000px) {
+
+                    @media (min-aspect-ratio: 1.8) {
+                        max-height: vw(230);
+
+                        &--no-address {
+                            max-height: vw(260);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2) {
+                        max-height: vw(180);
+
+                        &--no-address {
+                            max-height: vw(210);
+                        }
+                    }
+
+                    @media (min-aspect-ratio: 2.4) {
+                        max-height: vw(160);
+
+                        &--no-address {
+                            max-height: vw(190);
+                        }
+                    }
+                }
+            }
+
+            @include breakpoint(tablet) {
+                max-height: calc(#{vw(200, tablet)} + 2px);
+            }
+        }
+
         @include breakpoint(phone) {
-            margin-top: 1px;
+            background-color: var(--color-bg);
         }
     }
 
@@ -355,10 +414,10 @@
         background-color: var(--color-box);
         position: relative;
 
-        @include breakpoint(phone) {
-            background-color: $color-black;
-            color: var(--color-box);
-        }
+        // @include breakpoint(phone) {
+        //     background-color: $color-black;
+        //     color: var(--color-box);
+        // }
 
 
         &-wrap {
@@ -375,6 +434,15 @@
                 gap: rem(5);
                 width: rem(286);
                 padding: rem(13);
+
+
+                .map__interviews--long & {
+                    @include flex(row-reverse, flex-end, flex-start);
+
+
+                    width: rem(328);
+                    padding: rem(9.5) rem(25) rem(9.5) rem(9.5);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -429,6 +497,14 @@
                     display: inline-block;
                     transition: transform .4s $ease-custom;
                 }
+
+                .map__interviews--long & {
+                    @include font-size(28, 1.03);
+                    @include letter-spacing(-0.7px, 28);
+
+                    margin-block: trim-font(1.03);
+                    padding-top: rem(1);
+                }
             }
         }
 
@@ -440,6 +516,15 @@
 
             @include breakpoint(desktop) {
                 margin-block: trim-font(1);
+                flex-shrink: 0;
+
+                .map__interviews--long & {
+                    @include font-size(26, 1);
+                    @include letter-spacing(-0.65px, 26);
+
+                    width: rem(60);
+                    padding-top: rem(2);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -462,8 +547,15 @@
                 @include font-size(30, 24);
                 @include flex(row, center, flex-start);
 
-                padding: rem(15) rem(15) rem(12);
+                padding: rem(15) rem(13) rem(12);
                 align-self: stretch;
+
+                .map__interviews--long & {
+                    @include font-size(28, 1.03);
+                    @include letter-spacing(-0.7px, 28);
+
+                    padding: rem(8) rem(12) 0 rem(12);
+                }
             }
 
             @include breakpoint(tablet) {
@@ -473,12 +565,30 @@
             }
 
             @include breakpoint(phone) {
-                @include flex;
+                @include flex(row, center, flex-start);
                 @include font-size(30, 24);
 
                 align-self: stretch;
+                padding-top: rem(17);
                 padding-inline: map-get($grid-offset, phone);
             }
+        }
+
+        &-inter {
+            .map__interviews--long & {
+                @include breakpoint(desktop) {
+                    display: none;
+                }
+            }
+        }
+
+        &--location {
+            @include font-family(normal);
+            @include font-settings(500, 100);
+            @include font-size(17, 18);
+            letter-spacing: normal;
+
+            padding: rem(17) rem(13) rem(13);
         }
     }
 
@@ -593,6 +703,16 @@
         @include breakpoint(desktop) {
             width: rem(46);
             height: rem(46);
+
+            svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @include breakpoint(hd) {
+            width: rem(30);
+            height: rem(30);
         }
 
         @include breakpoint(tablet) {
@@ -614,6 +734,10 @@
 
         &--single {
             width: rem(63);
+
+            @include breakpoint(hd) {
+                width: rem(50);
+            }
         }
 
 
@@ -717,5 +841,16 @@
         pointer-events: none;
         opacity: 0;
         transition: opacity .3s $ease-out;
+    }
+
+    .mapboxgl-marker {
+
+        @include breakpoint(desktop) {
+            top: vw(14);
+        }
+
+        @include breakpoint(tablet) {
+            top: vw(6, tablet);
+        }
     }
 }

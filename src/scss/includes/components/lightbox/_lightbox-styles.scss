@@ -18,7 +18,7 @@
         height: auto;
         z-index: 9; // to be above the audioplayer cover
         overflow: hidden;
-
+        overscroll-behavior: none;
 
         .is-lightbox-open & {
             // position: relative;
@@ -33,6 +33,13 @@
         position: relative;
         width: 100%;
         min-height: 100vh;
+    }
+
+
+
+    &__counter {
+        @include font-settings(700, 100);
+        display: block;
     }
 
 
@@ -258,10 +265,6 @@
 
         @include breakpoint(phone) {
             height: auto;
-
-            .is-not-default & {
-                display: none;
-            }
         }
 
 
@@ -428,7 +431,7 @@
             &::after {
                 content: "";
                 position: absolute;
-                inset: 1px auto 0 var(--aside-width);
+                inset: 0 auto 0 var(--aside-width);
                 width: 1px;
                 background-color: var(--theme-color);
                 z-index: 3;
@@ -451,6 +454,7 @@
         &-container {
             height: 100%;
             overflow-y: auto;
+            overscroll-behavior: none;
         }
 
 
@@ -530,46 +534,51 @@
 
         grid-area: buttons;
         background: var(--aside-body-color);
-
         border-top: 1px solid var(--color-box);
         position: relative;
 
 
         li { text-align: center; }
 
+
+
         @include breakpoint(not-desktop) {
             border-top: unset;
-        }
 
-
-        @include breakpoint(phone) {
-            @include flex;
-
-            z-index: 3 !important;
-            flex-shrink: 0;
-            gap: 0;
-            order: 3;
-            overflow: scroll visible;
-            background: transparent;
-            position: sticky;
-            top: 0;
-            padding-top: 44px;
-            margin-top: -44px;
-            padding-bottom: 8px;
-            margin-bottom: -8px;
-
-
-            &::-webkit-scrollbar {
-                display: none;
+            @include breakpoint(tablet) {
+                z-index: 5;
             }
 
-
-
-            li {
+            @include breakpoint(phone) {
+                @include flex;
+    
+                z-index: 3 !important;
                 flex-shrink: 0;
-                text-align: center;
+                gap: 0;
+                order: 3;
+                overflow: auto hidden;
+                background: transparent;
+                position: sticky;
+                top: 0;
+                padding-top: 44px;
+                margin-top: -44px;
+                padding-bottom: 8px;
+                margin-bottom: -8px;
+                overscroll-behavior: none;
+    
+    
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+    
+    
+                li {
+                    flex-shrink: 0;
+                    text-align: center;
+                }
             }
         }
+
 
 
         &-scroller {
@@ -590,8 +599,8 @@
                 @include flex;
 
                 width: auto;
-                gap: vw(56, phone);
-                padding-inline: vw(38, phone);
+                gap: vw(1, phone);
+                padding-inline: vw(15, phone);
                 background: var(--main-body-color);
 
                 &::before {
@@ -603,16 +612,20 @@
                     left: 0;
                     bottom: 100%;
                     background-color: var(--main-body-color);
+                    z-index: 2;
                 }
 
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset: 0 auto auto 0;
-                    width: 100%;
-                    height: 1px;
-                    background-color: var(--color-box);
-                }
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     width: calc(100% + 100px);
+                //     margin-inline: -100px;
+                //     height: 1px;
+                //     left: 0;
+                //     top: 0;
+                //     background-color: var(--color-box);
+                // }
             }
         }
 
@@ -639,45 +652,50 @@
                 pointer-events: none;
             }
 
-            @include breakpoint(phone) {
-                &::after, &::before {
-                    background-color: var(--hover-color);
-                }
-            }
+            // @include breakpoint(phone) {
+            //     &::after, &::before {
+            //         background-color: var(--hover-color);
+            //     }
+            // }
+        }
+
+        @include breakpoint(not-phone) {
+            padding-right: 2px;
+            margin-right: -2px;
         }
 
         @include breakpoint(phone) {
             @include font-size(30, 1);
             @include letter-spacing(-0.9, 30);
 
-            padding-block: rem(12) rem(7);
+            padding-block: rem(9) rem(5);
+            padding-inline: rem(18);
             overflow: visible !important;
             color: var(--main-text-color);
             text-align: center;
-            width: 100%;
             
-            &::after, &::before {
-                content: "";
-                display: block;
-                position: absolute;
-                left: 50%;
-                transition: .25s background-color $easing;
-            }
+            // &::after, &::before {
+            //     content: "";
+            //     display: block;
+            //     position: absolute;
+            //     left: 50%;
+            //     transition: .25s background-color $easing;
+            // }
 
-            &::before {
-                top: 0;
-                width: calc(100% + #{vw(22, phone)});
-                height: 100%;
-                translate: -50% 0;
-            }
+            // &::before {
+            //     top: 0;
+            //     width: calc(100% + #{vw(22, phone)});
+            //     height: 100%;
+            //     translate: -50% 0;
+            // }
 
-            &::after {
-                width: vw(8, phone);
-                aspect-ratio: 1/1;
-                top: 100%;
-                rotate: 45deg;
-                translate: -50% -50%;
-            }
+            // &::after {
+            //     width: vw(8, phone);
+            //     aspect-ratio: 1/1;
+            //     top: 100%;
+            //     rotate: 45deg;
+            //     translate: -50% -50%;
+            // }
         }
 
         @include breakpoint(not-phone) {
@@ -734,6 +752,7 @@
         &--info {
             @include breakpoint(desktop) {
                 margin-top: -1px;
+                margin-left: -1px;
             }
 
             span > span {
@@ -820,19 +839,53 @@
 
     &__indicator {
         position: absolute;
+        display: inline-block;
         z-index: 0;
-        inset: 0 auto auto -8px;
-        width: 15px;
-        height: 15px;
-        transform: translateY(20px);
 
-
-        i {
+        &-inner {
             @include full;
+        }
 
-            display: inline-block;
-            transform: rotate(45deg);
-            background-color: var(--aside-body-color);
+        @include breakpoint(not-phone) {
+            inset: 0 auto auto -8px;
+            width: 15px;
+            height: 15px;
+            transform: translateY(20px);
+
+            &-tip {
+                @include full;
+
+                display: inline-block;
+                transform: rotate(45deg);
+                background-color: var(--aside-body-color);
+            }
+        }
+
+        @include breakpoint(phone) {
+            height: 100%;
+            width: 10px;
+            left: 0;
+
+            &-tip {
+                position: absolute;
+                width: vw(8, phone);
+                aspect-ratio: 1/1;
+                rotate: 45deg;
+                top: 100%;
+                left: 50%;
+                translate: -50% -50%;
+                background-color: var(--hover-color);
+            }
+
+            &-box {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                translate: -50% 0;
+                width: 100px;
+                height: 100%;
+                background-color: var(--hover-color);
+            }
         }
     }
 
@@ -843,8 +896,10 @@
 
         grid-area: main;
         position: relative;
-        border-right: 1px solid var(--color-box);
-
+        
+        @include breakpoint(not-phone) {
+            border-right: 1px solid var(--color-box);
+        }
 
         @include breakpoint(phone) {
             order: 4;
@@ -898,6 +953,10 @@
         @include breakpoint(tablet) {
             @include flex(column, flex-start, flex-start);
         }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+        }
     }
 
 
@@ -914,7 +973,7 @@
         @include breakpoint(phone) {
             padding: 15px;
             margin: 0;
-            color: var(--aside-body-color);
+            color: var(--main-text-color);
         }
 
 
@@ -948,8 +1007,14 @@
         padding-top: rem(18);
         opacity: 0;
 
+        @include breakpoint(tablet-landscape) {
+            bottom: rem(120);
+        }
 
-        &:first-of-type { opacity: 1; }
+
+        &:first-of-type {
+            opacity: 1 !important;
+        }
 
         &::before {
             content: "";
@@ -976,6 +1041,7 @@
             inset: auto;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
+            max-width: 100%;
 
 
             // for caption with single image
@@ -1089,7 +1155,20 @@
             padding-top: rem(14);
 
 
-            span { white-space: nowrap; }
+            span {
+                @include breakpoint(not-phone) {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+
+        &--accent {
+            @include breakpoint(desktop) {
+                @include font-size(80, 0.78);
+
+                padding-top: rem(25);
+            }
         }
 
 
@@ -1099,12 +1178,17 @@
 
             margin-left: 0;
 
-
             &--long {
                 @include font-size(34, 28);
 
                 letter-spacing: -0.015em;
                 margin-bottom: rem(6);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(50, 0.82);
+
+                margin-bottom: rem(7);
             }
         }
     }
@@ -1286,12 +1370,38 @@
                 &__image {
                     max-width: 75vw;
                 }
+
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(300) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(300) !important;
+                }
             }
 
 
             .polaroid--horizontal {
                 --polaroid-width: unset  !important;
-                --polaroid-height: calc(var(--container-height) * .75) !important;
+                --polaroid-height: var(--container-height) !important;
+
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(phone) {
+                    max-width: rem(180) !important;
+                }
+            }
+
+
+            .polaroid--full-width {
+                --polaroid-width: unset  !important;
+                --polaroid-height: calc(var(--container-height) * 0.63) !important;
             }
 
 
@@ -1304,28 +1414,43 @@
             @include breakpoint(not-desktop) {
                 --container-height: 40vh;
             }
+
+            picture,
+            img {
+                max-height: var(--polaroid-height);
+            }
         }
 
         &--transcript {
             @include breakpoint(desktop) {
                 margin-inline: vw(260) auto;
-                height: calc(var(--app-height) - #{vw(26)});
+                height: calc(var(--app-height) - #{rem(26)});
                 max-height: unset;
+            }
+        }
+
+        &--related, &--info {
+            @include breakpoint(desktop) {
+                margin-inline: vw(260) auto;
+
+                height: calc(var(--app-height) - #{rem(138)});
+                max-height: unset;
+            }
+        }
+
+
+        &--related {
+            @include breakpoint(desktop) {
+                .lightbox__tab-dot:nth-of-type(2) {
+                    top: rem(494);
+                }
             }
         }
 
         &--downloads {
             @include breakpoint(desktop) {
                 margin-inline: vw(260) auto;
-                height: calc(var(--app-height) - var(--lightbox-top-height) - #{vw(20)});
-            }
-
-            .lightbox__tab-dot {
-                @include breakpoint(desktop) {
-                    &:first-of-type {
-                        top: rem(27);
-                    }
-                }
+                height: calc(var(--app-height) - var(--lightbox-top-height) - #{vw(46)});
             }
         }
 
@@ -1362,16 +1487,32 @@
             height: auto;
             position: relative;
 
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 var(--aside-width);
+                width: 1px;
+                background-color: var(--theme-color);
+                z-index: 3;
+                pointer-events: none;
 
-            @include breakpoint(desktop) {
-                &::after {
-                    content: "";
-                    position: absolute;
-                    inset: 1px auto 0 var(--aside-width);
-                    width: 1px;
-                    background-color: var(--theme-color);
-                    z-index: 3;
-                    pointer-events: none;
+                @include breakpoint(not-desktop) {
+                    display: none;
+
+                    .lightbox__tab--transcript &, .lightbox__tab--related & {
+                        display: block;
+                    }
+
+                    .lightbox__tab--transcript & {
+
+                        @include breakpoint(tablet) {
+                            inset: 0 auto 0 calc(var(--aside-width) + #{rem(35)});
+                        }
+
+                        @include breakpoint(phone) {
+                            inset: 0 auto 0 var(--aside-width);
+                        }
+                    }
                 }
             }
         }
@@ -1421,7 +1562,7 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
-
+        overscroll-behavior: none;
 
         @include breakpoint(not-desktop) {
             padding-left: 0;
@@ -1432,10 +1573,10 @@
             padding: rem(53) rem(143) rem(25) rem(25);
 
 
-
             @include breakpoint(not-desktop) {
                 padding: 39px 26px 39px var(--grid-margin);
             }
+
 
 
             h3 {
@@ -1454,8 +1595,8 @@
 
             p {
                 @include font-family(normal, 300);
-                @include font-settings(200, 100);
-                @include font-size(18, 27);
+                @include font-settings(300, 100);
+                @include font-size(18, 1.3);
                 @include letter-spacing(0.04, 18);
 
                 // font-feature-settings: "ss02" on;
@@ -1464,6 +1605,7 @@
 
                 @include breakpoint(not-desktop) {
                     @include font-size(15, 21);
+                    @include font-settings(400, 100); 
                 }
             }
 
@@ -1482,19 +1624,24 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
+        @include breakpoint(not-desktop) {
+            padding-left: 0;
+        }
 
         &-list {
             @include flex(column, flex-start, flex-start);
 
             width: 100%;
-            padding: rem(24) rem(143) 0 rem(14);
+            padding: rem(52) rem(143) 0 rem(14);
+
 
             @include breakpoint(not-desktop) {
-                padding: rem(24) 0 0 rem(14);
+                padding: rem(39) 0 rem(39) rem(28);
 
                 @include breakpoint(phone) {
-                    padding: rem(24) 0 0 0;
+                    padding: 39px 0 30px 16px;
                 }
             }
 
@@ -1505,10 +1652,12 @@
                 @include flex(row, flex-start, flex-start);
 
                 text-transform: uppercase;
-                margin-bottom: rem(19);
+                margin-bottom: rem(9);
 
                 overflow: hidden;
                 position: relative;
+                padding-top: rem(5);
+                margin-top: rem(-5);
 
                 @include breakpoint(desktop) {
                     @include hover {
@@ -1524,6 +1673,31 @@
                             }
                         }
                     }
+                }
+
+                @include breakpoint(phone) {
+                    display: block;
+                }
+            }
+
+            .bracket {
+                @include font-family(slim);
+
+                font-weight: 300;
+                font-size: 1.05em;
+                margin-bottom: -0.2em;
+                margin-top: -0.05em;
+                margin-right: 0.1em;
+
+                &:last-child {
+                    margin-right: unset;
+                    margin-left: 0.1em;
+                }
+            }
+
+            br + .size {
+                @include breakpoint(phone) {
+                    margin-left: rem(22);
                 }
             }
         }
@@ -1556,14 +1730,22 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
+        @include breakpoint(phone) {
+            padding-left: rem(65);
+        }
 
         &-list {
             @include flex(column, flex-start, flex-start);
 
             width: 100%;
 
-            padding-top: rem(34);
+            padding-top: rem(32);
+
+            @include breakpoint(not-desktop) {
+                padding-top: rem(20);
+            }
         }
 
 
@@ -1577,6 +1759,8 @@
 
             @include breakpoint(not-desktop) {
                 @include flex(column, flex-start, stretch);
+
+                padding: rem(19) rem(17) rem(40) rem(19);
             }
 
 
@@ -1602,7 +1786,7 @@
 
             text-transform: uppercase;
             grid-area: title;
-            padding-top: rem(7);
+            padding-top: rem(4);
 
 
             @include breakpoint(not-desktop) {
@@ -1618,9 +1802,10 @@
             @include font-size(17, 1);
             @include letter-spacing(-0.17, 17);
 
-            margin-top: rem(10);
+            margin-top: rem(2);
             grid-area: collection;
-            font-feature-settings: "ss03" on;
+
+            // font-feature-settings: "ss03" on;
 
             &::before {
                 content: "";
@@ -1642,8 +1827,8 @@
 
         &-text {
             @include font-family(normal, 300);
-            @include font-settings(200, 100);
-            @include font-size(18, 27.3);
+            @include font-settings(300, 100);
+            @include font-size(18, 1.3);
             @include letter-spacing(0.1, 18);
 
             grid-area: text;
@@ -1651,15 +1836,48 @@
 
             @include breakpoint(not-desktop) {
                 @include font-size(14, 19);
+                @include font-settings(400, 100); 
             }
         }
 
 
         &-arrow {
             position: absolute;
-            inset: rem(28) 100% auto auto;
 
-            margin-right: rem(7);
+            @include breakpoint(desktop) {
+                inset: rem(23) 100% auto auto;
+                margin-right: rem(7);
+
+                .horizontal {
+                    width: rem(35) !important;
+                }
+
+                .vertical {
+                    height: rem(14) !important;
+                }
+
+                .triangle {
+                    border-width: rem(15) 0 rem(15) rem(17) !important;
+                }
+            }
+
+
+            @include breakpoint(not-desktop) {
+                inset: rem(24) 100% auto auto;
+                margin-right: rem(9);
+    
+                .horizontal {
+                    width: rem(22) !important;
+                }
+    
+                .vertical {
+                    height: rem(11) !important;
+                }
+    
+                .triangle {
+                    border-width: rem(11) 0 rem(11) rem(12) !important;
+                }
+            }
 
             // // TEMP - todo animation on icon
             // opacity: 0;
@@ -1697,21 +1915,27 @@
         display: none;
         height: 100%;
 
-        @include breakpoint(tablet) {
-            display: flex;
-            opacity: 0;
-        }
 
-
-        @include breakpoint(phone) {
+        @include breakpoint(not-desktop) {
             display: flex;
-            opacity: 0;
+
+            width: calc(100vw - 111px - 30vw);
+
+            @include breakpoint(phone) {
+                width: calc(100vw - 120px);
+            }
         }
 
 
         &-image {
             margin-top: vh(-20);
-            transform: translateY(0) rotate(-7.5deg);
+            transform: translateY(0);
+
+            @include breakpoint(desktop) {
+                &.polaroid {
+                    max-width: rem(400);
+                }
+            }
 
 
             @include breakpoint(not-desktop) {
@@ -1752,12 +1976,15 @@
             letter-spacing: normal;
 
             @include breakpoint(phone) {
-                margin-top: 18px;
-                margin-bottom: 38px;
+                @include font-size(30, 1);
+                
+                letter-spacing: -0.025em;
+                margin-top: 30px;
+                margin-bottom: 6px; 
+                padding-right: 2px;
                 padding-top: 2px;
             }
         }
-
 
 
         &-mask {
@@ -1765,6 +1992,10 @@
             display: inline-flex;
             overflow: hidden;
 
+            @include breakpoint(phone) {
+                padding-top: 0.2em;
+                margin-top: -0.2em;
+            }
 
             span:last-of-type {
                 position: absolute;
@@ -1793,7 +2024,13 @@
 
 
             @include breakpoint(not-desktop) {
-                @include font-size(21, 19);
+                @include breakpoint(tablet) {
+                    @include font-size(21, 19);
+                }
+
+                @include breakpoint(phone) {
+                    margin-left: 0.15em;
+                }
             }
         }
 
@@ -1816,6 +2053,10 @@
                 width: auto;
                 margin-left: 5px;
             }
+
+            @include breakpoint(phone) {
+                @include flex(row, flex-start, center);
+            }
         }
 
 
@@ -1824,6 +2065,11 @@
                 width: 30px;
                 height: 35px;
                 margin-top: -4px;
+
+                @include breakpoint(phone) {
+                    width: 18px;
+                    height: 25px;
+                }
             }
 
 
@@ -1845,6 +2091,20 @@
                     animation: hover-link .5s $ease-custom forwards;
                 }
             }
+        }
+    }
+
+    &__line {
+        @include breakpoint(phone) {
+            display: flex;
+            height: 1px;
+            margin-bottom: -1px;
+            border-top: 1px solid var(--color-box);
+            position: sticky;
+            top: 44px;
+            order: 2;
+            z-index: 4;
+            pointer-events: none;
         }
     }
 }

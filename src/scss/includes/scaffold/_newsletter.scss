@@ -295,7 +295,7 @@
         }
 
         @include breakpoint(tablet) {
-            inset: calc(100% - #{rem(5)}) auto auto 0;
+            inset: calc(100% + #{rem(8)}) auto auto 0;
         }
 
         @include breakpoint(phone) {
@@ -400,6 +400,10 @@
     &__logo {
         aspect-ratio: 1/1;
         cursor: pointer;
+
+        img {
+            height: auto !important;
+        }
 
         @include breakpoint(desktop) {
             width: vw(98);
