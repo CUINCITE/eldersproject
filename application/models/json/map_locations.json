@@ -1,0 +1,117 @@
+{
+    "table": "map_locations",
+    "order": "label",
+    "label":
+    {
+      "page":"Map Locations",
+      "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
+    },
+    "layouts":
+    [
+      {
+        "type":"list"
+      }
+    ],
+    "fields": [
+      {
+        "field":"collection"
+      },
+      {
+        "label": "Location Name",
+        "field": "label",
+        "list": true
+      },
+      {
+        "label": "Location Description",
+        "field": "description",
+        "type": "text",
+        "settings": {
+          "rows": 4
+        }
+      },
+      {
+        "hr": true,"type":"float",
+        "label": "Latitude",
+        "field": "gps_lat"
+      },
+      {
+        "label": "Longitude","type":"float",
+        "field": "gps_lng"
+      },
+      {
+        "hr": true,
+        "field": "state"
+      },
+      {"field":"city"},
+      {"field":"street"},
+      {
+        "hr": true,
+        "field": "zoom_precision"
+      },
+      {
+        "hr": true,
+        "label": "Address (optional)",
+        "field": "address",
+        "type": "text",
+        "settings": {
+          "rows": 4
+        }
+      },
+      {
+        "label": "uid",
+        "field": "uid",
+        "hidden": true,
+        "type": "uid"
+      },
+      {
+        "label": "Image",
+        "type": "image",
+        "field":"image",
+        "folder": "/public/upload/locations",
+        "list":{"xposition_after":"","width":50,"height":50},
+        "images":
+        [
+          {
+            "folder": "desktop",
+            "label": "Desktop",
+            "width": 421,
+            "retina": true
+          },
+          {
+            "folder": "mobile",
+            "label": "Mobile",
+            "width": 349,
+            "retina": true
+          }
+        ],
+        "settings": {
+          "webp": true,
+          "sizes": "image_sizes"
+        }
+      },
+      {
+        "hr": true,
+        "field": "collection_hide",
+        "type": "boolean",
+        "label": "Hide on collection Page"
+      },
+  
+      {
+        "hr": true,
+        "field": "active",
+        "type": "boolean",
+        "label": "Active",
+        "list": "edit"
+      },
+      {
+        "field":"quotes","type":"json"
+      },
+      {
+        "field":"alt"
+      },
+      {
+        "field": "image_sizes",
+        "type": "json"
+      }
+    ]
+  }

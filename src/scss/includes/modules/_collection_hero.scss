@@ -1,12 +1,14 @@
 .collection_hero {
-    display: grid;
-    position: relative;
+    &__container {
+        display: grid;
+        position: relative;
 
-    @include breakpoint(desktop) {
-        height: var(--app-height);
-        grid-template-rows: 1fr auto;
+        @include breakpoint(desktop) {
+            height: var(--app-height);
+            grid-template-rows: 1fr auto;
+            overflow: hidden;
+        }
     }
-
 
 
     &__wrapper {
@@ -19,6 +21,12 @@
             display: grid;
             grid-template-rows: auto auto 1fr;
             height: var(--app-height);
+
+            @include breakpoint(phone) {
+                @media (max-height: 640px) {
+                    height: calc(var(--app-height) * 1.1);
+                }
+            }
         }
     }
 
@@ -26,11 +34,7 @@
 
     &__author {
         @include breakpoint(desktop) {
-            padding-bottom: rem(10);
-
-            h3 {
-                // padding-top: 0;
-            }
+            padding-bottom: rem(9);
         }
 
         @include breakpoint(tablet) {
@@ -61,17 +65,25 @@
         @include breakpoint(desktop) {
             position: absolute;
             z-index: 1;
-            width: calc(var(--app-height) * .87);
-            height: calc(var(--app-height) * .87);
-            right: vw(40);
-            bottom: rem(100);
-
-            // translate: 0 -50%;
+            width: calc(var(--app-height) * .82);
+            height: calc(var(--app-height) * .82);
+            right: vw(44);
+            bottom: rem(118);
+            opacity: 0;
+            will-change: transform;
 
             .illustration {
-                transform: rotate(-10.2deg);
+                transform: rotate(-10.11deg);
             }
         }
+
+        @include breakpoint(tablet-landscape) {
+            width: vw(400, tablet);
+            height: vw(400, tablet);
+            bottom: 50%;
+            translate: 0 50%;
+        }
+
 
         @include breakpoint(not-desktop) {
             position: relative;
@@ -81,12 +93,14 @@
             }
 
             @include breakpoint(tablet) {
-                width: vw(520, tablet);
+                width: vw(500, tablet);
+                height: vw(500, tablet);
                 left: vw(40, tablet);
             }
 
             @include breakpoint(phone) {
                 width: vw(290, phone);
+                height: vw(290, phone);
                 left: vw(8, phone);
             }
         }
@@ -101,6 +115,7 @@
 
             @include breakpoint(not-desktop) {
                 grid-row-start: 2;
+                z-index: 2;
             }
         }
     }
@@ -109,9 +124,9 @@
     &__copy {
 
         @include breakpoint(desktop) {
-            @include flex(row, flex-start, flex-end);
-
             gap: rem(12);
+            max-width: rem(388);
+            height: 100%;
         }
 
 
@@ -122,7 +137,8 @@
 
 
             @include breakpoint(phone) {
-                padding-block: rem(20);
+                padding-top: rem(20);
+                padding-bottom: rem(64);
             }
         }
 
@@ -171,38 +187,81 @@
 
 
     &__area {
-        @include font-family(reclined, 300);
-
         text-transform: uppercase;
 
-        @include breakpoint(desktop) {
-            @include font-size (30, 28);
-            @include letter-spacing (-0.75, 30);
-
-            margin-block: trim-font(0.95);
-            max-width: rem(370);
-        }
-
         @include breakpoint(tablet) {
-            @include font-size (25, 0.95);
-            @include letter-spacing (-0.6, 25);
+            @include font-size (18, 0.95);
 
             margin-block: trim-font(0.95);
-
+            letter-spacing: -0.02em;
             position: absolute;
-            bottom: rem(12);
+            bottom: rem(14);
             left: 0;
         }
 
         @include breakpoint(phone) {
-            @include font-size (20, 0.95);
-            @include letter-spacing (-0.5, 20);
+            @include font-size (16, 16.5);
+            @include font-settings(400, 100);
 
+            letter-spacing: -0.02em;
             margin-block: trim-font(0.95);
-
             position: absolute;
             bottom: rem(8);
             left: 0;
+        }
+    }
+
+
+    &__intro {
+        @include breakpoint(desktop) {
+            @include flex(column, space-between, flex-start);
+            width: 100%;
+            height: 100%;
+        }
+
+        .text p {
+            @include font-settings(400, 100);
+            max-width: 100%;
+            text-wrap: wrap;
+        }
+    }
+
+
+    &__sticker-wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+
+        .pin-spacer { pointer-events: none; }
+    }
+
+    .text--collection_hero-top {
+        text-transform: uppercase;
+
+        @include breakpoint(desktop) {
+            @include font-size (19, 19.57);
+
+            letter-spacing: -0.02em;
+            padding-top: rem(18);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(20);
+        }
+    }
+
+
+    .text--collection_hero-bottom {
+        @include breakpoint(desktop) {
+            @include font-size(21, 25.62);
+            @include letter-spacing (-0.1, 21);
+
+            padding-right: 0;
+        }
+
+        @include breakpoint(tablet) {
+            padding-bottom: rem(110);
         }
     }
 }

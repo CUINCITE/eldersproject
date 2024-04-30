@@ -1,0 +1,150 @@
+.playlist {
+    @include breakpoint(desktop) {
+        --element-side-padding: calc(10px + #{rem(11)}); // half of grid-gap + prev sibling padding (to align)
+    }
+
+
+    @include breakpoint(hd) {
+        --element-side-padding: calc(22.5px + #{rem(11)}); // half of grid-gap + prev sibling padding (to align)
+    }
+
+
+    @include breakpoint(not-desktop) {
+        --element-side-padding: 16px; // grid side margin
+    }
+
+
+    &__title {
+        @include font-size(19, 19.57);
+        @include font-settings(400, 100);
+
+        min-height: rem(97);
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        border-top: 1px solid var(--color-bg);
+        padding: rem(19) var(--element-side-padding) rem(35);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17.5);
+
+            min-height: rem(81);
+            padding: rem(13) var(--element-side-padding) rem(20);
+        }
+    }
+
+
+
+    &__item {
+        @include font-family(compressed);
+        @include font-size(62, 52);
+        @include flex(row, flex-start, flex-start);
+
+        letter-spacing: -0.02em;
+        padding: rem(14) var(--element-side-padding) 0;
+        text-transform: uppercase;
+        border-top: 1px solid var(--color-bg);
+
+        padding-left: calc(var(--element-side-padding) - #{rem(3)});
+        position: relative;
+        overflow: hidden;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(30, 30);
+
+            min-height: rem(47);
+            padding-top: rem(11);
+            margin-left: rem(-1);
+        }
+
+
+        &:first-of-type {
+            .playlist__expand & { border-top: none; }
+        }
+
+
+        &:last-of-type {
+            border-bottom: 1px solid var(--color-bg);
+        }
+    }
+
+
+
+    &__icon {
+        @include flex(row, center, center);
+
+        position: absolute;
+        width: rem(58);
+        height: rem(58);
+        inset: 0 0 0 auto;
+        margin: auto;
+        transition: transform .5s $ease-custom;
+        transform: translateX(100%);
+        pointer-events: none;
+
+
+        @include breakpoint(not-desktop) {
+            width: rem(28);
+            height: rem(28);
+        }
+
+
+        .is-playing ~ & {
+            transform: translateX(0);
+        }
+    }
+
+
+
+    &__button {
+        @include full;
+
+
+        @include hover {
+            ~ .playlist__icon { transform: translateX(0); }
+        }
+    }
+
+
+
+    &__duration {
+        @include font-family(slim);
+        @include font-size(28, 30);
+
+        letter-spacing: -0.025em;
+        margin-left: rem(7);
+        margin-top: rem(-2);
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17);
+
+            padding-top: 0.22em;
+            margin-left: rem(3.5);
+        }
+    }
+
+
+
+    &__expand {
+        overflow: hidden;
+        transition: max-height 0.6s $ease-custom;
+        will-change: max-height;
+
+
+        &:not(.is-expanded) {
+            max-height: 0 !important;
+        }
+    }
+
+
+
+    &__wrap {
+        @include flex(row, flex-start, flex-start);
+
+        padding: rem(13) var(--element-side-padding) rem(40);
+        height: rem(96);
+        border-bottom: 1px solid var(--color-bg);
+    }
+}

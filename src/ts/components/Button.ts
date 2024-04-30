@@ -1,11 +1,11 @@
 import { gsap } from 'gsap/dist/gsap';
 import { SplitText } from 'gsap/dist/SplitText';
+import { Accessibility } from '../widgets/Accessibility';
 import { Component } from './Component';
 import { breakpoint, easing } from '../Site';
 import { debounce } from '../Utils';
 
 gsap.registerPlugin(SplitText);
-
 
 interface IButtonSettings {
     sibling?: boolean; // If the button/link is a sibling of animated items (eg link it's empty itself)
@@ -21,6 +21,7 @@ export class Button extends Component {
     private arrow: HTMLElement;
     private tl: gsap.core.Timeline;
     private settings: IButtonSettings;
+    private duration: number;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -36,21 +37,44 @@ export class Button extends Component {
     private bind(): void {
 
 
-        this.splitText = new SplitText(this.button.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
         this.horizontal = this.button.querySelector('.js-arrow-horizontal');
         this.vertical = this.button.querySelector('.js-arrow-vertical');
         this.triangle = this.button.querySelector('.js-arrow-triangle');
         this.arrow = this.button.querySelector('.js-arrow');
 
+        this.button.addEventListener('click', () => {
+            this.onButtonClick();
+        });
+
+        this.setSplitText();
         this.setupTimeline();
         this.setupListeners();
     }
+
+
+
+    private onButtonClick(): void {
+        if (this.button.hasAttribute('aria-controls')) {
+            setTimeout(() => {
+                this.setSplitText();
+                this.setupTimeline();
+            }, 800);
+        }
+    }
+
+
+
+    private setSplitText(): void {
+        this.splitText = new SplitText(this.button.querySelector('.js-button-text'), { type: 'words', wordsClass: 'word' });
+    }
+
+
 
     private setupTimeline(): void {
         if ([this.vertical, this.horizontal, this.triangle, this.arrow].some(el => !el)) return;
 
         this.tl && this.tl.kill();
-        this.tl = gsap.timeline({ paused: true, defaults: { ease: easing } });
+        this.tl = gsap.timeline({ paused: true, ease: easing });
 
         if (this.button.classList.contains('button--simple')) {
 
@@ -60,17 +84,22 @@ export class Button extends Component {
                 this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.05,
+                        ease: easing,
                     }, 'arrow')
                     .to(this.arrow, {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        ease: easing,
                     }, 'arrow');
 
                 arrowExtra && this.tl
                     .to(arrowExtra, {
                         x: () => this.arrow.offsetWidth * 1.08,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.1,
+                        ease: easing,
                     }, 'arrow');
 
             } else {
@@ -79,46 +108,23 @@ export class Button extends Component {
                 this.splitText.words[0] && this.tl
                     .to(this.splitText.words[0], {
                         x: () => this.splitText.words[0].offsetWidth * 1.06,
-                        duration: 0.4,
+                        duration: 0.6,
+                        ease: easing,
                     }, 'arrow')
                     .to(this.arrow, {
                         transformOrigin: 'right center',
                         x: () => this.splitText.words[0].offsetWidth * 1.06,
-                        duration: 0.4,
+                        duration: 0.6,
+                        delay: 0.05,
+                        ease: easing,
                     }, 'arrow');
 
                 duplicateText && this.tl.to(duplicateText, {
                     x: () => this.splitText.words[0].offsetWidth * 1.06,
-                    duration: 0.4,
+                    duration: 0.6,
+                    delay: 0.1,
+                    ease: easing,
                 }, 'arrow');
-
-                // this.tl
-                //     .to(this.horizontal, {
-                //         transformOrigin: 'right center',
-                //         scaleX: ((wordsWidth * 1.06) / this.horizontal.offsetWidth) + 1,
-                //         duration: 0,
-                //     })
-                //     .to(this.splitText.words[0], {
-                //         x: wordsWidth * 1.06,
-                //         duration: 0.4,
-                //     }, 'arrow')
-                //     .to(this.arrow, {
-                //         transformOrigin: 'right center',
-                //         x: wordsWidth * 1.06,
-                //         duration: 0.4,
-                //     }, 'arrow')
-                //     .to(this.horizontal, {
-                //         transformOrigin: 'right center',
-                //         scaleX: 1,
-                //         duration: 0.4,
-                //         delay: -0.35,
-                //     }, 'shrink');
-
-                // duplicateText && this.tl.to(duplicateText, {
-                //     x: wordsWidth * 1.06,
-                //     duration: 0.4,
-                //     delay: -0.3,
-                // }, 'shrink');
             }
         } else if (this.button.classList.contains('button--draw')) {
 
@@ -141,7 +147,7 @@ export class Button extends Component {
                         scaleX: 1,
                         duration,
                         transformOrigin: 'left center',
-                    }, 'arrow')
+                    }, '-=.05')
                     .fromTo(
                         this.triangle,
                         { x: () => -this.horizontal.offsetWidth },
@@ -151,7 +157,7 @@ export class Button extends Component {
                             duration,
                             transformOrigin: 'left center',
                         },
-                        'arrow',
+                        '-=.3',
                     );
             });
 
@@ -161,18 +167,21 @@ export class Button extends Component {
                     yPercent: 150,
                     rotate: -15,
                     duration: 0.5,
+                    ease: easing,
                 })
                 .to(this.horizontal, {
                     transformOrigin: 'left center',
                     scaleX: () => (this.splitText.words[0].offsetWidth / this.horizontal.offsetWidth) + 1.01,
                     delay: -0.5,
                     duration: 0.65,
+                    ease: easing,
                 }, 'arrow')
                 .to(this.triangle, {
                     transformOrigin: 'left center',
                     x: () => this.splitText.words[0].offsetWidth,
                     delay: -0.5,
                     duration: 0.65,
+                    ease: easing,
                 }, 'arrow');
         }
 
@@ -180,6 +189,7 @@ export class Button extends Component {
 
     private setupListeners(): void {
         this.view.addEventListener('mouseenter', () => {
+            if (Accessibility.isOn) this.tl.play(1);
             breakpoint.desktop && this.tl.play();
         });
 
@@ -188,6 +198,7 @@ export class Button extends Component {
         });
 
         this.view.addEventListener('focus', () => {
+            if (Accessibility.isOn) this.tl.play(1);
             breakpoint.desktop && this.tl.play();
         });
 

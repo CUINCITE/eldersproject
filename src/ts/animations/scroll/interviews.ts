@@ -9,8 +9,7 @@ export const interviews = el => {
         const mm = gsap.matchMedia();
 
         mm.add('(orientation: landscape)', () => {
-
-            const tl = gsap.timeline({
+            gsap.timeline({
                 ease: 'none',
                 scrollTrigger: {
                     trigger: el,

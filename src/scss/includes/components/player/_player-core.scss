@@ -19,24 +19,69 @@
         overflow: visible;
         margin-bottom: $bar-height;
         padding-bottom: 56.25%;
+
+
+        @include breakpoint(not-desktop) {
+            margin-bottom: 32px;
+        }
+    }
+
+
+    &--collection {
+        @include breakpoint(desktop) {
+            margin-bottom: rem(89);
+        }
+
+
+        @include breakpoint(hd) {
+            margin-bottom: rem(80);
+        }
     }
 
 
     &--audio {
         @include flex;
+        @include z-index(audioplayer);
 
         padding-top: 0 !important;
         position: fixed;
         inset: auto 0 0;
-        z-index: 10;
         overflow: visible;
 
         pointer-events: none;
+        justify-content: flex-end;
 
         @include breakpoint(not-desktop) {
             @include menuShiftedElement;
 
-            z-index: 3;
+            transition-property: transform, opacity;
+            transition-duration: .7s, .1s;
+
+            body.is-not-ready & {
+                transform: translateX(100%);
+            }
+
+            body.is-not-ready.is-lightbox-open & {
+                @include breakpoint(phone) {
+                    transition-delay: 0.5s, 0s;
+                    transform: translateX(0);
+                }
+            }
+
+            body.has-open-modal & {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            inset: 0;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+
+            &.is-expanded { pointer-events: all; }
         }
 
         audio { display: none; }
@@ -66,27 +111,14 @@
 
     &__toggle {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 60px;
-        height: 60px;
-        margin: -30px;
-        line-height: 60px;
-        text-align: center;
         cursor: pointer;
         display: none;
         z-index: 1;
-        background: rgba($bar-color, $bar-opacity);
 
-        .player--video & { display: none; }
-
-        .icon-toggleplay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            vertical-align: top;
-            margin-left: 2px;
+        .player--video & {
+            inset: 0;
+            display: block;
+            margin: 0;
         }
     }
 

@@ -20,6 +20,11 @@
             "hidden":true,
             "plugin":"interviews_update"
         },
+        {
+            "label":"Check all",
+            "icon":"index",
+            "plugin":"sessions_check"
+        },
         {"plugin":"refresh"}
     ],
     "buttons_edit": [        
@@ -55,10 +60,10 @@
         },
         {
             "field":"label_sort",
-            "label":"Session Name",
+            "label":"Session Name Sort",
             "list":true,
             "search":true,
-            "hidden":true
+            "hhidden":true
         },
         {
             "field":"parent","type":"select",
@@ -113,7 +118,7 @@
         {
             "field": "uid",
             "type": "uid",
-            "list": "read"
+            "list": true
         },
         {
             "label": "Screenshot",
@@ -184,6 +189,9 @@
         {
             "field":"duration",
             "label":"Duration (seconds)"
+        },
+        {
+            "field":"mp3_size","label":"MP3 size"
         },
         {
             "header":"Video",

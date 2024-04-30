@@ -20,3 +20,9 @@
         height: 100%;
     }
 }
+
+
+.debug.local a:not([data-gtm]),
+.debug.local button:not([data-gtm]) {
+    outline: 1px solid blue;
+}

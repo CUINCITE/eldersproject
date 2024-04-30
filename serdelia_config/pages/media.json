@@ -31,6 +31,11 @@
       "list": true
     },
     {
+      "label": "Original Filename",
+      "field": "filename_original",
+      "list": true
+    },
+    {
       "label": "Model Id",
       "field": "model_id",
       "list": true
@@ -55,13 +60,15 @@
     {
       "field": "uid",
       "type": "uid",
-      "list": "read"
+      "list": true,"search":true,
+      "label":"uid"
     },
     {
+      "label":"Image",
       "type": "image",
       "field": "image",
       "folder": "/public/upload/media",
-      "folder_preview": "mobile",
+      "folder_preview": "original",
       "list": {
         "position_after": "",
         "height": 120,
@@ -108,6 +115,9 @@
       "field": "image_sizes",
       "type": "json",
       "label": "Image sizes"
+    },
+    {
+      "field":"status","type":"select","list":true,"search":true,"label":"Status"
     }
   ]
 }

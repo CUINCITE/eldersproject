@@ -4,15 +4,18 @@
         {% include "./components/c_logo_box.html" %}
     </div>
 
-    <div class="box page_404__error">
+    <div class="box page_404__error" >
+
         <div class="grid">
             <div class="col-span-12">
                 <div class="box__wrap">
                     <div class="page_404__image">
                         {% include "subviews/subview_picture.html" with {
                             image: {
-                                desktop: "/public/theme/images/megaphone.png",
-                                mobile: "/public/theme/images/megaphone_m.png"
+                                desktop: "/public/theme/images/megaphone_mobile.webp",
+                                desktop_x2: "/public/theme/images/megaphone.webp",
+                                mobile: "/public/theme/images/megaphone_mobile.webp",
+                                mobile_x2: "/public/theme/images/megaphone.webp"
                                 }
                             }
                         %}
@@ -23,7 +26,8 @@
         </div>
     </div>
 
-    <div class="box page_404__text">
+    <div class="box page_404__text" >
+
         <div class="grid">
             <div class="col-span-12">
                 {% include "components/c_claim.html" with {
@@ -38,7 +42,8 @@
         </div>
     </div>
 
-    <div class="box page_404__link">
+    <div class="box page_404__link" >
+
         <div class="grid">
             <div class="col-span-12">
                 {% include "components/c_link.html" with { url: "/", text: "Back to <i>Homepage</i>", modifiers: ["big", "overflow"], animate: true } %}

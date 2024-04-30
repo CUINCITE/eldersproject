@@ -6,13 +6,14 @@
                 @include font-size(100, 85);
                 @include letter-spacing(-3, 100);
 
+                padding-top: rem(24);
                 margin-bottom: rem(-5);
                 margin-left: 0;
             }
 
             @include breakpoint(tablet) {
-                @include font-size(120, 0.84);
-                @include letter-spacing(-4, 120);
+                @include font-size(110, 0.84);
+                @include letter-spacing(-4, 110);
 
                 margin-block: trim-font(0.84);
             }
@@ -68,6 +69,51 @@
         }
     }
 
+    &--hero {
+        .collection_author__collection {
+            @include font-family(normal);
+            @include font-settings(400, 100);
+
+            margin-left: 0;
+
+            @include breakpoint(desktop) {
+                @include font-size(21, 1);
+
+                &::before {
+                    width: vw(35);
+                    margin-right: vw(16);
+                    margin-top: rem(-3);
+                }
+
+                @media (min-aspect-ratio: 1450 / 820) {
+                    font-size: 3vh;
+                }
+            }
+
+            @include breakpoint(tablet) {
+                @include font-size(20, 1);
+
+
+                &::before {
+                    width: vw(32, tablet);
+                    margin-right: vw(10, tablet);
+                    margin-top: -0.2em;
+                }
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(16, 1);
+
+
+                &::before {
+                    width: vw(17, phone);
+                    margin-right: vw(10, phone);
+                    margin-top: -0.25em;
+                }
+            }
+        }
+    }
+
     &__name {
         @include font-family(compressed);
 
@@ -77,15 +123,16 @@
             @include font-size(58, 56);
             @include letter-spacing(-1.45, 58);
 
-            padding-top: rem(12);
+            padding-top: rem(13);
             margin-left: rem(-6);
         }
 
         @include breakpoint(tablet) {
-            @include font-size(49, 68);
+            @include font-size(49, 1);
             @include letter-spacing(-1.5, 60);
 
-            padding-top: rem(18);
+            padding-block: rem(18);
+            margin-block: trim-font(1);
         }
 
         @include breakpoint(phone) {
@@ -98,14 +145,22 @@
 
         .interviews__list--collection & {
             &::before {
-                @include font-family(compact);
-                @include font-settings(200, 100);
-                @include letter-spacing(-3, 58);
+                @include font-family(slim);
+                @include font-size(58, 30);
 
+                font-weight: 300;
+                letter-spacing: -0.03em;
                 content: counter(interviews, decimal-leading-zero) ". ";
                 counter-increment: interviews;
-                font-weight: 200;
                 font-feature-settings: "ss03" on;
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(40, 30);
+
+                    margin-right: rem(4);
+                    letter-spacing: -0.025em;
+                }
             }
         }
     }
@@ -149,7 +204,7 @@
             @include letter-spacing(-0.19, 19);
 
             max-width: unset;
-            margin-top: rem(-2);
+            margin-top: rem(0);
         }
 
         @include breakpoint(tablet) {

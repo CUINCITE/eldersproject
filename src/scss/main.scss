@@ -32,6 +32,7 @@
 @import "includes/scaffold/offscreen";
 @import "includes/scaffold/newsletter";
 @import "includes/scaffold/search";
+@import "includes/scaffold/accessibility";
 
 /* stylelint-disable-line */
 @import "includes/modules/page_404";
@@ -47,6 +48,8 @@
 @import "includes/modules/quote_panel";
 @import "includes/modules/faq";
 @import "includes/modules/hero";
+@import "includes/modules/home_text";
+@import "includes/modules/illustrations";
 @import "includes/modules/people";
 @import "includes/modules/interviews";
 @import "includes/modules/text_aside";
@@ -85,4 +88,11 @@
 @import "includes/components/expand";
 @import "includes/components/player";
 @import "includes/components/audioplayer";
+@import "includes/components/polaroid_gallery";
+@import "includes/components/dropdown";
+@import "includes/components/playlist";
+@import "includes/components/stack";
+@import "includes/components/curtain";
+@import "includes/components/circle";
 
+@import "includes/components/loader";

@@ -2,132 +2,118 @@
     <div id="interviews">
         <div class="interviews-grid">
 
-            <div class="interviews-grid__filtered filtered box">
+            <div class="interviews-grid__filtered filtered box" >
+
                 <ul class="filtered__list js-interviews-filtered"></ul>
             </div>
 
-            <div data-scroll="interviews">
+            <div class="js-panel-wrapper" data-scroll="interviews">
                 <div class="interviews-grid__panel js-panel">
 
-                <div class="interviews-grid__tabs">
-                    <div class="grid">
-                        <div class="col-span-12">
-                            <ul class="interviews-grid__letters" data-component="FilterLetters" data-options='{"contentSelector": "#interviews-grid"}'>
-                                {% set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
-                                {% for letter in letters %}
-                                    <li class="interviews-grid__letter">
-                                        <button
-                                            class="js-letter"
-                                            aria-label="scroll to letter {{ letter }}"
-                                            data-letter="{{ letter }}"
-                                            data-gtm='{"event": "{{ letter }}-letter-btn-click"}'
-                                            >{{ letter }}</button>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="interviews-grid__filters box" >
 
-                    <div class="interviews-grid__filters box">
-                        <div class="grid">
-                            <div class="col-span-12">
-                                <div class="interviews-grid__controls js-controls">
-
+                        <div class="interviews-grid__controls js-controls">
+                            <div class="grid">
+                                <div class="col-span-12">
                                     <div class="interviews-grid__header">
-                                        <button type="button js-modal" aria-controls="modal" data-gtm='{"event": "filters-btn-click"}'>
-                                            <span class="sr-only">show filters</span>
-                                            <i class="icon-filters">
-                                                <span class="row">
-                                                    <span class="line"></span>
-                                                    <span class="bar"></span>
-                                                    <span class="line"></span>
-                                                </span>
-                                                <span class="row">
-                                                    <span class="line"></span>
-                                                    <span class="bar"></span>
-                                                    <span class="line"></span>
-                                                </span>
-                                            </i>
-                                        </button>
                                         {% include "subviews/subview_interviews_modal.html" %}
-                                        <div class="interviews-grid__sort-button desktop-hide tablet-hide">
-                                            <legend>Sort by:</legend>
-                                            <button type="button" aria-controls="modal-sort" class="js-modal js-mobile-modal-button{% if '!' in sort.selected %} button--inversed{% endif %}">
-                                                <span class="sr-only">show sorting</span>
-                                                <i>[[svg::arrow-small]]</i>
-                                                <span class="js-current-sorting">
-                                                    {% if 'collections' in sort.selected %}
-                                                        collections
-                                                    {% elseif 'locations' in sort.selected %}
-                                                        locations
-                                                    {% else %}
-                                                        narrators
-                                                    {% endif %}
-                                                </span>
-                                            </button>
-                                        </div>
-                                        {% include "./subviews/subview_interviews_modal_sort.html" %}
                                     </div>
 
                                     <form action="" data-component="Load"
-                                        data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters", "scrollTo": ".js-interviews-filtered", "externalLinks": true, "filtered": ".js-interviews-filtered"}'
+                                        data-options='{"contentSelector": "#interviews-grid", "live": true, "extra": ".js-interviews-filters", "scrollTo": ".js-interviews-filtered", "externalLinks": true, "setStorage": true}'
                                         class="interviews-grid__form js-interviews-sort">
-                                        <fieldset class="interviews-grid__radios">
-                                            <legend class="phone-hide">Sort by:</legend>
-                                            <div class="phone-hide">
-                                                <input type="radio"  name="sort" id="narrators" value="narrators" {% if sort.selected == 'narrators' or not sort.selected %} checked{% endif %}>
-                                                <label for="narrators">
-                                                    <i>[[svg::arrow-small]]</i>
-                                                    <span>Narrators</span>
-                                                </label>
-                                            </div>
-                                            <div class="phone-hide">
-                                                <input type="radio"  name="sort" id="locations" value="locations" {% if sort.selected == 'locations' %} checked{% endif %}>
-                                                <label for="locations">
-                                                    <i>[[svg::arrow-small]]</i>
-                                                    <span>Locations</span>
-                                                </label>
-                                            </div>
-                                            <div class="phone-hide">
-                                                <input type="radio"  name="sort" id="collections" value="collections" {% if sort.selected == 'colections' %} checked{% endif %}>
-                                                <label for="collections">
-                                                    <i>[[svg::arrow-small]]</i>
-                                                    <span>Collections</span>
-                                                </label>
+                                        <div class="interviews-grid__trigger">
+                                            <button type="button js-modal" aria-controls="modal">
+                                                <span>Filters</span>
+                                                <i class="icon-filters">
+                                                    <span class="row">
+                                                        <span class="line"></span>
+                                                        <span class="bar"></span>
+                                                        <span class="line"></span>
+                                                    </span>
+                                                    <span class="row">
+                                                        <span class="line"></span>
+                                                        <span class="bar"></span>
+                                                        <span class="line"></span>
+                                                    </span>
+                                                </i>
+                                            </button>
+                                        </div>
+                                        <div class="interviews-grid__dropdown">
+                                            <div class="dropdown" data-component="Dropdown" data-options='{"isAnimation": false, "toggle": true}'>
+                                                <select required id="region" name="sort" class="sr-only">
+                                                    <option data-value="narrators" value="narrators">Narrators A-Z</option>
+                                                    <option data-value="narrators" value="!narrators">Narrators Z-A</option>
+                                                    <option data-value="locations" value="locations">Locations</option>
+                                                    <option data-value="collections" value="collections">Collections</option>
+                                                </select>
+                                                <button class="dropdown__button js-toggle" data-cssanimate="svg">Sort by:
+                                                    <i>[[svg::arrow-small]][[svg::arrow-small]]</i>
+                                                    <div class="dropdown__value js-value">Narrators</div>
+                                                </button>
+                                                <div class="dropdown__wrap js-dropdown-wrap">
+                                                    <div class="dropdown__list js-dropdown-list">
+                                                        <button class="dropdown__option js-dropdown-option is-selected">
+                                                            <i class="checkmark">[[svg::checkmark]]</i>
+                                                            <span>Narrators A-Z</span>
+                                                        </button>
+                                                        <button class="dropdown__option js-dropdown-option">
+                                                            <i class="checkmark">[[svg::checkmark]]</i>
+                                                            <span>Narrators Z-A</span>
+                                                        </button>
+                                                        <button class="dropdown__option js-dropdown-option">
+                                                            <i class="checkmark">[[svg::checkmark]]</i>
+                                                            <span>Locations</span>
+                                                        </button>
+                                                        <button class="dropdown__option js-dropdown-option">
+                                                            <i class="checkmark">[[svg::checkmark]]</i>
+                                                            <span>Collections</span>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <div class="desktop-only">
                                                 <div class="interviews-grid__buttons">
-                                                    <button
-                                                        type="button"
-                                                        aria-label="show grid view"
-                                                        data-view="grid"
-                                                        data-gtm='{"event": "show-grid-btn-click"}'
-                                                        >
+                                                    <button type="button" class="button--grid" aria-label="show grid view" data-view="grid">
                                                         <i class="icon-grid">
                                                             <span></span><span></span><span></span><span></span>
                                                         </i>
                                                     </button>
-                                                    <button
-                                                        type="button"
-                                                        aria-label="show list view"
-                                                        data-view="list"
-                                                        data-gtm='{"event": "show-list-btn-click"}'
-                                                        >
+                                                    <button type="button" class="button--list" aria-label="show list view" data-view="list">
                                                         <i class="icon-list">
                                                             <span></span><span></span><span></span>
                                                         </i>
                                                     </button>
                                                 </div>
                                             </div>
-                                        </fieldset>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="interviews-grid__tabs box" >
+
+                        <div class="grid">
+                            <div class="col-span-12">
+                                <ul class="interviews-grid__letters" data-component="FilterLetters" data-options='{"contentSelector": "#interviews-grid"}'>
+                                    {% set letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','Y','Z'] %}
+                                    {% for letter in letters %}
+                                        <li class="interviews-grid__letter">
+                                            <button class="js-letter" aria-label="scroll to letter {{ letter }}"
+                                                    data-letter="{{ letter }}">{{ letter }}</button>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="interviews-grid__interviews box">
+                <div class="interviews-grid__interviews box" >
+
                     <div id="interviews-grid" class="is-grid-view">
                         <div id="interviews-tiles" class="interviews-grid__tiles interviews interviews--grid">
                             {% for item in items %}

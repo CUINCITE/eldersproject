@@ -1,12 +1,13 @@
 {% set colors =['pink','pale_green','pale_purple','yellow','light_blue'] %}
 {% set i_color=-1 %}
 <section class="module module--people">
-    <div class="people">
-        <div class="box" data-scroll="box">
-            <div class="box__bg"></div>
+    <div class="box" >
+
+        <div class="people">
+            <i class="people__line desktop-only"></i>
             <div class="grid">
                 <div class="people__photos col-span-6 no-padding">
-                    <div class="text text--large">
+                    <div class="text text--large text--extra-wide">
                         {{text|raw}}
                     </div>
 
@@ -24,21 +25,29 @@
 
                             <div class="people_group__people">
                                 {% for person in section.people %}
+                                {% if person.alt %}
                                 {% set i_color=i_color+1 %}{% if i_color>=colors|length %}{% set i_color=0 %}{% endif %}
                                 <div class="person{% if reverse %} person--reversed{% endif %} js-person">
                                     <div class="person__photo">
                                         <div class="polaroid polaroid--fit polaroid--small_frame">
                                             <div class="polaroid__image polaroid__image--{{colors[i_color]}}">
-                                                {% include 'subviews/subview_picture_thumb.html' with {image:person.image} %}
+                                                {% include 'subviews/subview_picture_thumb.html' with {image:person.image,alt:person.alt} %}
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="person__details">
                                         <p class="person__name">{{person.name}} {{person.surname}}</p>
                                         <p class="person__title">{{person.function}}</p>
                                     </div>
                                 </div>
+                                {% else %}
+                                <div class="person">
+                                    <div class="person__details">
+                                        <p class="person__name">{{person.name}} {{person.surname}}</p>
+                                        <p class="person__title">{{person.function}}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
                                 {% endfor %}
                             </div>
 

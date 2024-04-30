@@ -1,17 +1,17 @@
-<form class="newsletter js-newsletter" action="/api/newsletter" data-api='{"beforeCall": "validate", "callback": "onSubscribe"}' data-scroll="box">
-    <div class="box__bg"></div>
+<form class="newsletter js-newsletter" action="/api/newsletter" data-api='{"beforeCall": "validate", "callback": "onSubscribe"}' >
+
     <input type="hidden" data-recaptcha data-recaptchakey="6LcHsOMoAAAAAJgIWp7B-XpDKBGk1_dpVXxXu_IT" name="token"
         required="required">
     <div class="newsletter__top">
         <h2 class="newsletter__heading">Newsletter:</h2>
 
         <fieldset class="newsletter__fields">
-            <legend>Join our mailing list to find out about Elder Project news, events, and more.</legend>
+            <legend>Join our mailing list to find out about Baldwin-Emerson Elders Project news, events, and more.</legend>
             <div class="newsletter__wrap">
                 <div class="newsletter__error js-error"></div>
                 <div class="newsletter__input">
                     <input id="email" type="email" name="email" required placeholder=" " autocomplete="off">
-                    <label class="newsletter__label" for="email">Enter your e-mail address</label>
+                    <label class="newsletter__label" for="email"><span>Enter your e-mail <span class="desktop-only">address</span></span></label>
                     <div class="newsletter__button">
                         <button class="button button--draw js-newsletter-button" type="submit" data-gtm='{"event":"newsletter-submit-btn-click"}'>
                             <i class="icon-btn-arrow arrow js-arrow">
@@ -22,10 +22,10 @@
                         </button>
                     </div>
                 </div>
-
+                {% set parallax=1 %}
                 <div class="newsletter__message">
-                    <div class="newsletter__sticker">
-                        <div class="sticker sticker--yellow" data-scroll="sticker">
+                    <div class="newsletter__sticker" data-observe>
+                        <div class="sticker sticker--blue" data-scroll="sticker" {% if parallax %}data-parallax="-50" data-action="pause"{% endif %}>
                             <div class="sticker__layer">
                                 <div class="sticker__front sticker__wrap">
                                     <div class="sticker__circle"></div>
@@ -47,7 +47,29 @@
     <div class="newsletter__bottom">
         <div class="grid">
             <div class="col-span-12">
-                <p class="newsletter__copy">&copy; Copyright {{ 'now' | date('Y') }}</p>
+                <div class="newsletter__credits">
+                    <p class="newsletter__copy">&copy; Copyright {{ 'now' | date('Y') }}</p>
+                    <a class="newsletter__link" href="https://www.baldwinforthearts.org/" target="_blank">
+                        <span class="newsletter__link-text">
+                            <span>
+                                <span>baldwinforthearts.org</span>
+                                <span>baldwinforthearts.org</span>
+                            </span>
+                        </span>
+
+                        <div class="newsletter__logo">
+                            {% include "subviews/subview_picture_no_retina_no_media.html" with {
+                                image: {
+                                    png: "/public/theme/images/baldwin_logo.png",
+                                    webp: "/public/theme/images/baldwin_logo.webp",
+                                    width: 196,
+                                    height: 196
+                                    }
+                                }
+                            %}
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

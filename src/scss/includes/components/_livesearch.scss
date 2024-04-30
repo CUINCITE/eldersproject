@@ -1,4 +1,9 @@
 .livesearch {
+    --line-width: #{rem(12)};
+    --line-offset: #{rem(4)};
+
+
+
     position: absolute;
     inset: 100% 0 auto;
     color: var(--color-black);
@@ -9,28 +14,27 @@
         height: 0;
 
         @include breakpoint(not-desktop) {
-            overflow-y: auto;
+            overscroll-behavior: none;
         }
 
         .has-value & {
-            @include breakpoint(desktop) {
-                height: max-content;
-                max-height: 80vh;
-            }
+            height: max-content;
+            max-height: calc(var(--app-height) - var(--search-height));
+            padding-bottom: rem(40);
+            overflow-y: auto;
 
-            @include breakpoint(tablet) {
-                height: calc(100vh - #{rem(146)});
+            @include breakpoint(not-desktop) {
+                position: fixed;
+                overflow: hidden auto;
 
-                @supports(height: 100dvh) {
-                    height: calc(100dvh - #{rem(146)});
-                }
-            }
-
-            @include breakpoint(phone) {
-                height: calc(100vh - #{rem(100)});
-
-                @supports(height: 100dvh) {
-                    height: calc(100dvh - #{rem(100)});
+                @include breakpoint(tablet) {
+                    height: calc(100vh - #{rem(146)});
+                    width: 100%;
+                    padding-bottom: 0;
+    
+                    @supports(height: 100dvh) {
+                        height: calc(100dvh - #{rem(146)});
+                    }
                 }
             }
         }
@@ -51,11 +55,13 @@
         }
 
         @include breakpoint(not-desktop) {
-            height: 100%;
+            // height: 100%;
 
             // overflow-y: auto;
 
             @include breakpoint(tablet) {
+                height: 100%;
+
                 // height: calc(100vh - #{rem(102)});
             }
 
@@ -217,24 +223,19 @@
 
 
         &--empty {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
 
             @include breakpoint(desktop) {
-                @include font-size(30, 1);
-                @include letter-spacing(-0.9, 30);
-
                 min-height: vw(128);
             }
+
 
             @include breakpoint(tablet) {
                 @include font-size(50, 1);
                 @include letter-spacing(-1.5, 50);
             }
-
-            @include breakpoint(phone) {
-                @include font-size(30, 1);
-                @include letter-spacing(-0.9, 30);
-            }
-
 
 
             p:last-of-type {
@@ -274,29 +275,101 @@
 
 
 
+    &__results {
+        &--simple {
+            a {
+                @include breakpoint(desktop) {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: rem(12) auto auto 0;
+                        margin: auto;
+                        height: 1px;
+                        background: currentColor;
+                        width: var(--line-width);
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: transform .4s $ease-custom;
+                    }
+
+
+                    span {
+                        transition: transform .4s $ease-custom;
+                        display: inline-block;
+                    }
+
+
+                    @include hover {
+                        span {
+                            transform: translateX(calc(var(--line-width) + var(--line-offset)));
+                        }
+
+
+                        &::before {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        &--transcripts {
+            li {
+                @include flex(column, flex-start, flex-start);
+
+
+                a {
+                    position: relative;
+
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background-color: lighten($color-yellow, 30);
+                        border-radius: rem(30);
+                        z-index: -1;
+                        opacity: 0;
+                        transition: opacity .15s ease-in-out;
+                    }
+
+
+                    @include hover {
+                        &::before { opacity: 1; }
+                    }
+                }
+            }
+        }
+    }
+
+
+
     &__fragment {
         @include font-family(normal);
 
         text-transform: none;
         display: block;
-        transition: background-color .3s $easing;
         letter-spacing: normal;
+
 
         @include breakpoint(desktop) {
             @include font-size(14, 18);
         }
 
+
         @include breakpoint(tablet) {
             @include font-size(20, 24);
         }
+
 
         @include breakpoint(phone) {
             @include font-size(14, 18.9);
         }
 
-        @include hover {
-            background-color: $color-white;
-        }
 
         // highlighted part
 
@@ -341,12 +414,15 @@
         color: var(--color-grey200);
 
         @include breakpoint(desktop) {
+            @include flex(row, flex-end, center);
             @include font-size(17.727, 13.636);
             @include letter-spacing(-0.532, 17.727);
 
-            inset: 100% 0 auto auto;
-            right: rem(9);
-            margin-top: rem(12);
+            inset: auto 0 0;
+            height: rem(40);
+            padding: 0 rem(9);
+            z-index: 2;
+            background-color: var(--color-black);
         }
 
         @include breakpoint(not-desktop) {

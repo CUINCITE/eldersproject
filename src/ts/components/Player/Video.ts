@@ -162,12 +162,23 @@ export class Video extends Player {
 
 
     public goRewind(): void {
+        this.view.classList.add('is-rewinding');
+
+        setTimeout(() => {
+            this.view.classList.remove('is-rewinding');
+        }, 1000);
+
         this.media.currentTime -= 15;
     }
 
 
 
     public goForward(): void {
+        this.view.classList.add('is-rewinding');
+
+        setTimeout(() => {
+            this.view.classList.remove('is-rewinding');
+        }, 1000);
         this.media.currentTime += 15;
     }
 

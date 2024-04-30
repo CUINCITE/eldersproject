@@ -5,7 +5,10 @@
   },
   "label": {
     "page": "Interview Illustrations",
-    "edit": "{% if not nr %}New Illustration{% else %}Edit Illustration{% endif %}"
+    "edit": "{% if not label %}New Illustration{% else %}{{label}}{% endif %}"
+  },
+  "model": {
+    "label": "{% if not label %}New Illustration{% else %}{{label}}{% endif %}"
   },
   "order": "id",
   "fields": [

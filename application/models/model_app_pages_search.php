@@ -156,7 +156,7 @@ class model_app_pages_search
 
                 $sort = $label = 'label';
                 unset($f['label']);
-                $fields_to_read=['label','narrators_states','uid','occupation','summary','slug', 'interviewers', 'narrators'];
+                $fields_to_read=['label','narrator_occupation','lead','slug', 'interviewers','narrator_location'];
 
                 break;
 
@@ -194,7 +194,7 @@ class model_app_pages_search
             ];
     }
 
-    public function getTranscripts($q, $live, $page = 1, $interviews_ids = [], $per_page = 10,$max_per_session=3,$interviews_filters=[])
+    public function getTranscripts($q, $live, $page = 1, $interviews_ids = [], $per_page = 10,$max_per_session=20,$interviews_filters=[])
     {
         if ($live) {
             if (is_numeric($live)) $per_page=$live;
@@ -339,7 +339,7 @@ class model_app_pages_search
                 $timestamp = $this->parent->getTimestamp($text, $i);
                 
                 $i2 = $i1 - $margin;
-                if ($i2 < 0) $i2 - 0;
+                if ($i2 < 0) $i2 = 0;
 
                 $val = $this->substr($text, $i2, $margin * 2 + $this->strlen($q));
 

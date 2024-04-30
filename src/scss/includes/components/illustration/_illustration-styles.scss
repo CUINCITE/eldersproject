@@ -14,16 +14,17 @@ $shadow-sizes: (
     &__front {
         position: relative;
         z-index: 1;
-        width: 100%; 
+        width: 100%;
         height: 100%;
         background-color: var(--color-main);
 
         img {
-            width: 100%; 
-            height: 100%; 
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
     }
+
 
 
     &__back {
@@ -49,7 +50,8 @@ $shadow-sizes: (
             }
         }
     }
-    
+
+
 
     &__shadow {
         position: absolute;
@@ -59,11 +61,30 @@ $shadow-sizes: (
             @include breakpoint($bp) {
                 @for $i from 1 through 10 {
                     &:nth-child(#{$i}) {
-                        inset: vw($value * $i, #{$bp}) vw(-$value  * $i, #{$bp}) vw(-$value  * $i, #{$bp}) vw($value  * $i, #{$bp});
+                        inset: vw($value * $i, #{$bp}) vw(-$value * $i, #{$bp}) vw(-$value * $i, #{$bp}) vw($value * $i, #{$bp});
                         z-index: -1 * $i;
                     }
                 }
             }
+        }
+    }
+
+
+    a  &__front,
+    a  &__back {
+        cursor: pointer;
+        transition: transform 0.45s $easing;
+    }
+}
+
+a {
+    @include hover {
+        .illustration__front {
+            transform: translate(-5px, -5px);
+        }
+
+        .illustration__back {
+            transform: translate(5px, 5px);
         }
     }
 }

@@ -12,15 +12,25 @@ import { WrappedText } from './components/WrappedText';
 import { Player } from './components/Player/Player';
 import { Video } from './components/Player/Video';
 import { FilterLetters } from './components/FilterLetters';
-import { Map } from './components/Map';
+import { Map } from './components/Map/Map';
+import { Map2 } from './components/Map/Map2';
+import { Collections } from './components/Collections';
+import { PolaroidGallery } from './components/PolaroidGallery';
+import { Dropdown } from './components/Dropdown';
+import { Circle } from './components/Circle/Circle';
+// import { SmoothScroll } from './components/SmoothScroll';
 
 export const components = {
     Accordeon,
     AccordeonList,
     Button,
+    Circle,
+    Collections,
+    Dropdown,
     FilterLetters,
     Load,
     Map,
+    Map2,
     Modal,
     More,
     Player,
@@ -29,6 +39,7 @@ export const components = {
     LightboxTranscript,
     LightboxSlider,
     WrappedText,
+    PolaroidGallery,
 };
 
 export const pages = { Page };

@@ -1,6 +1,6 @@
 {
     "name": "elder-project",
-    "version": "0.0.8",
+    "version": "0.0.176",
     "private": true,
     "description": "Elder Project",
     "homepage": "https://elder.sunship.one/",
@@ -10,7 +10,7 @@
         "build": "gulp",
         "dev": "gulp watch",
         "lint:scripts": "eslint --ext .ts,.js .",
-        "lint:styles": "stylelint \"**/*.{css,scss}\"",
+        "lint:styles": "stylelint \"src/**/*.scss\"",
         "lint": "npm-run-all lint:*",
         "fix:scripts": "eslint --ext .ts . --fix",
         "fix:styles": "stylelint \"**/*.scss\" --fix",
@@ -72,10 +72,12 @@
         "lodash": "^4.17.21",
         "mapbox-gl": "^2.6.1",
         "modernizr": "3.7.0",
+        "node-sass": "^9.0.0",
         "npm-run-all": "^4.1.5",
         "opn": "^6.0.0",
         "portfinder": "^1.0.28",
         "postcss": "8",
+        "sass": "^1.75.0",
         "screenfull": "^5.0.1",
         "semver": "^7.1.1",
         "stylelint": "^15.10.2",
@@ -92,10 +94,10 @@
         "yargs": "^15.1.0"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.14.0",
-        "@typescript-eslint/parser": "^5.14.0",
         "@types/geojson": "^7946.0.8",
         "@types/imagesloaded": "^4.1.2",
-        "@types/mapbox-gl": "^2.4.2"
+        "@types/mapbox-gl": "^2.4.2",
+        "@typescript-eslint/eslint-plugin": "^5.14.0",
+        "@typescript-eslint/parser": "^5.14.0"
     }
 }

@@ -1,0 +1,37 @@
+{% if errors %}
+<div class="alert alert-danger">
+	{% for item in errors %}{{item}}<br>{% endfor %}
+	
+</div><br><hr><br>
+{% endif %}
+{% if success %}
+<div class="alert alert-success">
+	{% for item in success %}{{item}}<br>{% endfor %}
+	
+</div><br><hr><br>
+{% endif %}
+{% if items %}
+<table class="table">
+	<tr style="background-color:white">
+		<td>Interview</td>
+		<td>Session nr</td>
+		<td>Session id</td>
+		<td>MP3</td>
+		<td>DOCX</td>
+		<td>PDF EN</td>
+		<td>PDF ES</td>
+	</tr>
+	{% for item in items %}
+	<tr>
+		<td><a href="/serdelia/edit/sessions,{{item.parent.id}}/{{item.id}}" target="_blank">{{item.parent.label}}</a></td>
+		<td>{{item.nr}}</td>
+		<td>{{item.incite_id}}</td>
+		{% if item.mp3 %}<td>✓</td>{% else %}<td style="background-color:#f00">🚫</td>{% endif %}
+		<td>{% if item.docx %}✓{% else %}🚫{% endif %}</td>
+		<td>{% if item.pdf_en %}✓{% else %}🚫{% endif %}</td>
+		<td>{% if item.pdf_es=='none' %}{% elseif item.pdf_es %}✓{% else %}🚫{% endif %}</td>
+	</tr>
+	{% endfor %}
+	
+</table>
+{% endif %}

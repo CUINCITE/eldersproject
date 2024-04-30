@@ -5,27 +5,44 @@
             {% include "components/c_logo_box.html" %}
         </div>
 
-        <section class="module">
-            <div class="box">
-                <div class="grid">
-                    <div class="col-span-12">
-                        {% include "components/c_heading.html" with {align: "right", label: label} %}
-                    </div>
+        <div class="box" >
+
+            <div class="grid">
+                <div class="collections_hero__heading col-span-12">
+                    {% include "components/c_heading.html" with {label: label, modifiers: ["title"]} %}
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="module module--claim box" data-scroll="box">
-            <div class="box__bg"></div>
+        <section class="module module--claim box" >
+
             <div class="grid">
-                <div class="col-span-12">
-                    <div class="claim {% if small %}claim--small {% endif %}" data-scroll="claim">
-                        <p>{{text | nl2br}}</p>
-                        <div class="claim__sticker">
-                            {% include "components/c_sticker.html" with {'text':'Discover the stories'}  %}
-                        </div>
+                <div class="col-span-12 claim__authors_wrapper">
+                    <div class="claim claim--authors-big{% if small %} claim--small{% endif %}" data-xxxscroll="claim" data-observe>
+                        <!--<p>{{sublabel | nl2br}}</p>-->
+                        <p>
+                            <span>[[svg::books]]Ten writers</span>
+                            <span>[[svg::pin-color]]Ten regions</span>
+                            <span>Hundreds of histories <br class="desktop-hide">[[svg::cassette]] preserved</span>
+                        </p>
                     </div>
                 </div>
+
+                {#
+                <div class="col-span-5 col-start-8">
+                    <div class="claim__copy">
+                        {% include "subviews/subview_text.html" with {
+                            size: "larger",
+                            text: text
+                          } %}
+                    </div>
+                </div>
+
+
+                <div class="claim__sticker">
+                    {% include "components/c_sticker.html" with {'text':'Discover more'}  %}
+                </div>
+                #}
             </div>
         </section>
 

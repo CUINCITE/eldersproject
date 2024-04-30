@@ -1,93 +1,83 @@
 {
-    "table": "topics",
-    "label": {
-        "page": "Topics",
-        "edit": "{% if not label %}New topic{% else %}Topic: <em>{{label}}</em>{% endif %}"
-    },
-    "data":
+  "table": "topics",
+  "label": {
+    "page": "Topics",
+    "edit": "{% if not label %}New topic{% else %}Topic: <em>{{label}}</em>{% endif %}"
+  },
+  "data": {
+    "chat_gpt": {
+      "lead": "One sentence, max 200 chars, about topic covering {{label}} policy during Obama presidency.",
+      "text": "Describe {{label}} policy during presidency of Barack Obama in 3-4 paragraphs. Do not use point marks. Do not summarize."
+    }
+  },
+  "model": {
+    "label": "{{label}}"
+  },
+  "buttons_edit": [
     {
-        "chat_gpt":
-        {
-            "lead":"One sentence, max 200 chars, about topic covering {{label}} policy during Obama presidency.",
-            "text":"Describe {{label}} policy during presidency of Barack Obama in 3-4 paragraphs. Do not use point marks. Do not summarize."
-        }
-        
+      "type": "plugin",
+      "plugin": "preview",
+      "params": {
+        "url": "/topics/{{slug}}?preview=true"
+      }
+    }
+  ],
+  "buttons_page": [
+    {
+      "type": "plugin",
+      "plugin": "refresh"
+    }
+  ],
+  "order": "label",
+  "fields": [
+    {
+      "tab": "Info",
+      "label": "Name",
+      "list": true,
+      "field": "label",
+      "required": true
     },
-    "model": {
-        "label": "{{label}}"
+    {
+      "hr": true,
+      "label": "Url",
+      "field": "slug",
+      "on_demand": true,
+      "auto": {
+        "on_null": true,
+        "unique": true,
+        "url": true,
+        "pattern": "{{label}}"
+      }
     },
-    "buttons_edit":
-    [
-        {"type":"plugin","plugin":"preview","params":{"url":"/topics/{{slug}}?preview=true"  }},
-        {
-            "label":"ChatGPT",
-            "type":"plugin","plugin":"chat_gpt",
-            "params":{"data":"chat_gpt"}
-        },
-        {"label":"Subtopics","type":"page","icon":"reorder","page":"subtopics,%id%"}
-    ],
-    "buttons_page":
-    [
-        {"type":"plugin","plugin":"refresh"}
-    ],
-
-
-    "order": "label",
-    "fields": [
-        {            
-            "tab": "Info",
-            "label": "Name",
-            "list": true,
-            "field": "label",
-            "required": true
-        },
-        
-        {
-            "field":"lead","type":"text","label":"Lead (max 200 chars)",
-            "settings":{"rows":4,"max":200}
-        },
-        {
-            "hr": true,
-            "label": "Url",
-            "field": "slug",
-            "on_demand": true,
-            "auto": {
-                "on_null": true,
-                "unique": true,
-                "url": true,
-                "pattern": "{{label}}"
-            }
-        },
-        {
-            "label":"Interviews count","field":"count_interviews","edit":false
-        },
-        {
-            "label":"Clips count","field":"count_clips","edit":false
-        },
-        {
-            "label": "Publish",
-            "field": "active",
-            "type": "boolean",
-            "list": "edit"            
-        },
-        {
-            "tab":"Article",
-            "type":"text",
-            "label":"Intro",
-            "field":"intro",
-            "settings":{"rows":5,"wide":true}
-        },
-        {
-            "xtab":"Article",
-            "type":"html",
-            "label":"Article",
-            "field":"text",
-            "settings":
-            {
-                "wide":true
-            }
-        }
-        
-    
-    ]
+    {
+      "label": "Interviews count",
+      "field": "count_interviews",
+      "edit": false
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit"
+    },
+    {
+      "hr": true,
+      "label": "Topic Color",
+      "field": "color",
+      "type": "select"
+    },
+    {
+      "label": "Illustration",
+      "field": "illustration",
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all"
+      },
+      "list": {
+        "position_after": "label",
+        "height": 140,
+        "src_blank": "blank.png"
+      }
+    }
+  ]
 }

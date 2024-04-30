@@ -1,0 +1,69 @@
+<section class="module module--map box"{% if bottomPadding %}style="padding-bottom:100px"{% endif %}>
+
+    <div class="map
+        {% if params.global or params.global2 %} map--global{% endif %}
+        {% if collectionColor %}map--{{collectionColor}}{% endif %}"
+        data-component="Map{% if params.global2 %}2{% endif %}"
+        data-options='{ {% if params.global or params.global2 %} "zoomOnScroll": true, "maxZoom": 15, "pitch": 0 {% else %} "lazyLoading": true {% endif %}}'
+        data-locations="{{items|json_encode}}" data-theme-color="{{ collectionColor }}">
+        <div class="map__aside" {% if params.global2 %}style="display:none"{% endif %}>
+            {% if params.global or params.global2 %}
+                <div class="map__count desktop-only"><b>Map</b> / {{items|length}} locations</div>
+            {% else %}
+            <div class="map__heading">
+                <h2 class="heading heading--map">Map</h2>
+            </div>
+            {% endif %}
+            <ul class="map__locations js-scrolled">
+                {% for item in items %}
+                <li class="map__location js-location-wrapper">
+                    <button class="map__location-button js-location" data-id="{{item.id}}" data-title="{{item.label}}"
+                        data-location="{{item.address}}" data-coords="{{item.gps_lat}}, {{item.gps_lng}}"
+                        data-interviews="{{item.quotes|json_encode}}"></button>
+                    <div class="map__place">
+                        <div class="map__title">
+                            {% if params.global %}
+                            <span class="map__address">{{item.street}}<br>{{item.city}}, {{item.state}}</span>
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                            {% elseif params.global2 %}
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                            {% else %}
+                            <div class="map__title-text">
+                                <span>{{item.label}}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="map__content">
+                        <div class="map__content-wrapper">
+                            {% if item.alt %}
+                            <div class="map__image {% if item.image.original.height >= item.image.original.width %} map__image--square {% endif %}">
+                                {% include "./subviews/subview_picture.html" with { image: item.image,alt:item.alt } %}
+                            </div>
+                            {% endif %}
+                            {% if item.description %}
+                            <div class="map__description">
+                                <p>{{item.description}}</p>
+                            </div>
+                            {% endif %}
+                            <div class="map__image_wrapper js-map-image-wrapper desktop-hide tablet-hide"></div>
+                            <ul class="map__interviews js-interviews-inner-list desktop-hide tablet-hide"></ul>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="map__wrap phone-hide">
+            <div id="map" class="map__container js-map"></div>
+            <ul class="map__interviews js-interviews-list"></ul>
+            <div class="map__controls">
+                <button class="map__control js-toggle-button">Zoom Out</button>
+            </div>
+        </div>
+    </div>
+</section>

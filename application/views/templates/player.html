@@ -1,4 +1,5 @@
 <div class="player__poster js-player-poster"></div>
+<button class="player__toggle js-player-toggle"></button>
 <div class="player__bar js-player-bar">{% spaceless %}
     <div class="player__header">
         <div class="player__scrubber-wrap">
@@ -10,7 +11,7 @@
     </div>
     <div class="player__controls">
         <div class="player__buttons">
-            <button class="player__playpause js-player-playpause">[[svg::play]]</button>
+            <button class="player__playpause js-player-playpause" data-sound-click="playerBtn">[[svg::play]]<span class="desktop-hide">Play</span></button>
         </div>
         <div class="player__time">
             <span class="player__played js-player-time">01:40</span>
@@ -27,9 +28,9 @@
             <button class="volume__button js-volume-btn" aria-label="Volume" data-sound-click><i class="icon-volume"><span></span><span></span><span></span><span></span><span></span></i></button>
         </div>
         -->
-        <button aria-label="Fullscreen" class="player__fullscreen js-player-fullscreen">
+        <button aria-label="Fullscreen" class="player__fullscreen js-player-fullscreen phone-hide">
             Fullscreen
-            <i class="player__icon">
+            <i class="player__icon player__icon--fullscreen">
                 [[svg::arrow-oblique]]
                 [[svg::arrow-oblique]]
             </i>
@@ -37,14 +38,5 @@
 
     </div>
 {% endspaceless %}</div>
-
-<div class="player__thumbnail js-player-thumbnail">
-    <div class="player__marquee js-player-marquee">
-        <span>Shuffle</span>
-        <span>Shuffle</span>
-        <span>Shuffle</span>
-    </div>
-    <div class="player__cassette" data-sound-click>[[svg::cassette]]</div>
-</div>
 
 

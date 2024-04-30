@@ -1,7 +1,8 @@
-<section class="module module--text_wrapper" data-component="WrappedText">
+<section class="module module--text_wrapper box" data-component="WrappedText" >
+
     <div class="text_wrapper{% if reversed %} text_wrapper--reversed{% endif %}">
         <i class="text_wrapper__line desktop-only" data-scroll="line"></i>
-        <div class="box">
+        <div>
             <div class="grid grid--row-start">
 
                 {% if title %}
@@ -38,7 +39,7 @@
 
                         {% if module.type == "photo" %}
                             <div
-                                class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">
+                                class="text_wrapper__module js-wrapped-image js-wrapped-photo text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">
                                 {% include "./components/c_polaroid.html" with module.photo|merge({modifiers: ["wrapped"]}) %}
                                 {% if module.text %}
                                 <div class="text_wrapper__info">

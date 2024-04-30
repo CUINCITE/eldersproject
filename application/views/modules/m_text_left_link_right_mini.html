@@ -1,5 +1,5 @@
-<section class="module module--home-text module--home-text--link box" data-scroll="box">
-    <div class="box__bg"></div>
+<section class="module module--home-text module--home-text--link box" >
+
     <div class="grid">
         <div class="col-span-9">
             <a href="{{url}}" class="button button--two_line button--overflow" data-gtm='{"event": "read-more-about-elder-project-btn-click"}' data-component="Button">
@@ -10,13 +10,17 @@
                 </i> <span class="button__text js-button-text">{{label|brackets2tag('i')|raw}}</span>
             </a>
         </div>
-        <div class="col-span-3 col-start-10">
+        <div class="home_text__copy col-span-3 col-start-10">
             <div class="text">
                 {{text|raw}}
             </div>
         </div>
     </div>
     {% if params.decor %}
-        <div class="boxes boxes--reversed">[[svg::boxes]]</div>
+        <div class="home_text__decorator">
+            <div class="boxes" data-animation="slideUp" data-delay="0.5" data-action="pause" >
+                [[svg::boxes]]
+            </div>
+        </div>
     {% endif %}
 </section>

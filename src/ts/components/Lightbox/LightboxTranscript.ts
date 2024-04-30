@@ -16,12 +16,19 @@ export class LightboxTranscript extends Component {
     private isMainLang = true;
     private activeLanguageWrap: HTMLElement;
     private foundElements: NodeListOf<HTMLElement>;
-    private transcriptNavigation: HTMLElement;
     private currentMarkIndex: number;
+    private transcriptNavigation: HTMLElement;
+
     private transcriptNavNextButton: HTMLButtonElement;
     private transcriptNavPrevButton: HTMLButtonElement;
     private transcriptNavCloseButton: HTMLButtonElement;
     private transcriptScrollContainer: HTMLElement;
+    private transcriptParts: NodeListOf<HTMLElement>;
+
+    private currentHighlightedPart: HTMLElement;
+
+    private livesearchTimer;
+    private livesearchTimeout = 1000;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -34,14 +41,51 @@ export class LightboxTranscript extends Component {
         this.langWrappers = this.view.querySelectorAll('.js-transcript-lang');
         this.activeLanguageWrap = this.view.querySelector('.js-transcript-lang.is-active');
         this.transcriptNavigation = this.view.querySelector('.js-transcript-nav');
+
         this.transcriptNavNextButton = this.view.querySelector('.js-transcript-next');
         this.transcriptNavPrevButton = this.view.querySelector('.js-transcript-prev');
         this.transcriptNavCloseButton = this.view.querySelector('.js-transcript-close');
         this.transcriptScrollContainer = this.view.querySelector('.js-scrolled');
+        this.transcriptParts = this.view.querySelectorAll('.js-transcript-part');
+
 
 
         this.bind();
     }
+
+
+
+    public update = (time: number): void => {
+        const currentPart = this.getCurrentPart(time);
+        this.highlightCurrentPart(currentPart);
+    };
+
+
+
+    private highlightCurrentPart = (currentPart: HTMLElement): void => {
+        if (!currentPart) return;
+        if (currentPart === this.currentHighlightedPart) return;
+
+        this.currentHighlightedPart = currentPart;
+        [...this.transcriptParts].forEach(part => part.classList.remove('is-current'));
+        currentPart.classList.add('is-current');
+        this.scrollToElement(currentPart, false);
+    };
+
+
+    private getCurrentPart = (time: number): HTMLElement => [...this.transcriptParts].filter(item => parseInt((item.querySelector('[data-start]') as HTMLElement).dataset.start, 10) <= time).pop();
+
+
+    private scrollToElement = (element: HTMLElement, fast: boolean): void => {
+        gsap.to(this.transcriptScrollContainer, {
+            scrollTo: {
+                y: element,
+                offsetY: this.searchForm.clientHeight,
+            },
+            duration: fast ? 0.01 : 1,
+            ease: 'power2.inOut',
+        });
+    };
 
 
 
@@ -60,6 +104,18 @@ export class LightboxTranscript extends Component {
         // fake span is created to measure its' width & update input's width dynamically
         const inputValue: string = this.searchInput.value;
         this.updateInput(inputValue);
+
+        clearTimeout(this.livesearchTimer);
+        this.livesearchTimer = setTimeout(() => {
+            this.clearMarkedElements();
+            if (inputValue.length > 0) {
+                this.findWordInTranscript();
+                this.inputWrap.classList.add('has-value');
+            } else {
+                this.closeNav();
+                this.inputWrap.classList.remove('has-value');
+            }
+        }, this.livesearchTimeout);
     };
 
 
@@ -73,6 +129,8 @@ export class LightboxTranscript extends Component {
 
 
     private goTo = (dir: number): void => {
+        if (!this.foundElements.length) return;
+
         this.currentMarkIndex += dir;
 
         if (this.currentMarkIndex > this.foundElements.length) this.currentMarkIndex = 1;
@@ -93,6 +151,10 @@ export class LightboxTranscript extends Component {
 
     private onSubmit = (e): void => {
         e.preventDefault();
+
+        // clear existing marks if any
+        this.clearMarkedElements();
+
         this.findWordInTranscript();
     };
 
@@ -112,11 +174,9 @@ export class LightboxTranscript extends Component {
         this.foundElements = this.activeLanguageWrap.querySelectorAll('mark');
 
         // if found any words, declare words' counter and show nav
-        if (this.foundElements.length) {
-            this.transcriptNavigation.classList.add('is-active');
-            this.currentMarkIndex = 1;
-            this.updateTranscriptNav();
-        }
+        this.transcriptNavigation.classList.add('is-active');
+        this.currentMarkIndex = this.foundElements.length ? 1 : 0;
+        this.updateTranscriptNav();
     };
 
 
@@ -127,14 +187,7 @@ export class LightboxTranscript extends Component {
 
         // find current selected item and scroll to it
         const selectedMark = this.foundElements[this.currentMarkIndex - 1];
-        gsap.to(this.transcriptScrollContainer, {
-            scrollTo: {
-                y: selectedMark,
-                offsetY: this.searchForm.clientHeight,
-            },
-            duration: 0.01,
-            ease: 'power3.inOut',
-        });
+        this.scrollToElement(selectedMark, true);
     };
 
 
@@ -161,7 +214,7 @@ export class LightboxTranscript extends Component {
 
 
     private clearMarkedElements = (): void => {
-        if (!this.foundElements.length) return;
+        if (!this.foundElements || !this.foundElements.length) return;
         [...this.foundElements].forEach(elem => {
             elem.replaceWith(Utils.removeTags(elem.innerHTML));
         });

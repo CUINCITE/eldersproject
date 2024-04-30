@@ -13,7 +13,6 @@
 
 
     &--404 {
-
         height: 100%;
 
         @include breakpoint(desktop) {
@@ -25,21 +24,36 @@
     &--text-aside, &--text_wrapper {
         position: relative;
 
-        @include breakpoint(desktop) {
-
-        }
-
         @include breakpoint(phone) {
             max-width: 100%;
         }
     }
 
-    &--text-aside {
-        z-index: 0;
 
-        .box:last-of-type {
-            @include breakpoint(desktop) {
+    &--text-aside {
+        @include breakpoint(desktop) {
+            z-index: 0;
+
+            .box:last-of-type {
                 padding-bottom: rem(67);
+            }
+
+            article[data-title="I See My Light Shining - Contact"] & {
+                .box {
+                    min-height: calc(100vh - #{rem(200)});
+                }
+            }
+        }
+
+        @include breakpoint(tablet) {
+            .box:last-of-type {
+                padding-bottom: rem(80);
+            }
+        }
+
+        @include breakpoint(phone) {
+            .box:last-of-type {
+                padding-bottom: rem(60);
             }
         }
     }
@@ -51,25 +65,9 @@
     }
 
 
-    &--quote_panel {
-        position: relative;
-
-        @include breakpoint(desktop) {
-            &::after {
-                content: "";
-                position: absolute;
-                inset: 0 auto 0 50%;
-                transform: translateX(-50%);
-                width: 1px;
-                background-color: var(--color-bg);
-            }
-        }
-    }
-
     &--faq {
         position: relative;
     }
-
 
 
     &--claim {
@@ -91,8 +89,7 @@
         }
 
         @include breakpoint(phone) {
-            padding-top: rem(12);
-            padding-bottom: rem(100);
+            padding-block: rem(12) rem(50);
         }
 
         &.no_padding_bottom_mobile {
@@ -120,39 +117,23 @@
             padding-block: 0 rem(42);
 
             .grid {
-                div {
-                    grid-column: 3 / span 6;
-                }
-
                 .text {
                     padding-top: rem(20);
                 }
             }
-
-
-
-            .boxes {
-                margin-top: rem(-130);
-            }
-        }
-
-        @include breakpoint(phone) {
-            padding-block: 0 rem(42);
         }
 
         &--link {
             justify-content: flex-start;
 
             @include breakpoint(desktop) {
-                padding-top: rem(20);
-
                 .text {
-                    padding: rem(5) 0 rem(5) 0;
+                    padding: rem(20) 0 rem(64) 0;
                 }
             }
 
             @include breakpoint(not-desktop) {
-                margin-top: 0 !important;
+                // margin-top: 0 !important;
 
                 .grid {
                     & div:first-child {
@@ -162,8 +143,6 @@
 
                 .button {
                     padding-top: 0 !important;
-
-                    // line-height: 0.88em;
                     z-index: 5;
                 }
 
@@ -174,7 +153,14 @@
                 }
             }
         }
+
+        .module--claim + & {
+            @include breakpoint(not-desktop) {
+                border-top: unset !important;
+            }
+        }
     }
+
 
     &--interviews + .module--claim {
         @include breakpoint(not-desktop) {
@@ -190,18 +176,18 @@
         }
     }
 
-    &:first-of-type:not(.module--hero) > .box:first-of-type,
 
-    // when first module is phone-only, add padding to second's box
+    &:first-of-type:not(.module--hero, .module--collections_images) > .box:first-of-type,
     &:first-of-type.desktop-hide + .module > .box:first-of-type {
         @include breakpoint(desktop) {
-            padding-top: rem(27);
+            padding-top: rem(26);
+            padding-bottom: rem(22);
         }
     }
 
+
     &--results {
         .collections__item {
-            border-bottom: unset;
 
             @include breakpoint(phone) {
                 padding-top: rem(10);
@@ -221,15 +207,10 @@
                 display: none;
             }
 
-            .interviews__locations {
-
-            }
-
             .interviews__description {
                 padding-bottom: rem(20);
             }
 
-            s
             .interviews__collection {
                 br {
                     display: none;
@@ -259,6 +240,30 @@
                 &:last-child {
                     border-bottom: unset;
                 }
+            }
+        }
+    }
+
+
+    &--collection_hero {
+        .grid {
+            height: 100%;
+        }
+    }
+
+    &--about_hero + &--text-aside {
+        @include breakpoint(desktop) {
+            .heading--medium {
+                @include font-size(122, 100);
+                @include letter-spacing(-3, 122);
+            }
+        }
+
+        @include breakpoint(phone) {
+            .text_aside__decorator--boxes {
+                left: calc(-1 * var(--grid-margin));
+                width: calc(100vw - var(--GLOBAL-aside-width));
+                border-bottom: 1px solid var(--color-bg);
             }
         }
     }

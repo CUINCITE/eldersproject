@@ -4,13 +4,17 @@ import { easing } from '../../Site';
 
 gsap.registerPlugin(SplitText);
 
-export const claim = el => {
-
+export const claim = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) {
+        gsap.set(el, { opacity: 1 });
+        return;
+    }
 
     const splittedText = new SplitText(el.querySelector('p'), { type: 'lines, words', linesClass: 'line' });
-    gsap.set(splittedText.words, { yPercent: 100 });
 
-    gsap.fromTo(splittedText.words, { yPercent: 100 }, {
+    gsap.set(splittedText.words, { yPercent: 105 });
+
+    gsap.fromTo(splittedText.words, { yPercent: 105 }, {
         yPercent: 0,
         duration: 0.85,
         ease: easing,
@@ -18,7 +22,9 @@ export const claim = el => {
         stagger: 0.03,
         onStart: () => {
             gsap.set(el, { opacity: 1 });
-            console.log('start');
+        },
+        onComplete: () => {
+            splittedText.revert();
         },
         scrollTrigger: {
             trigger: el,

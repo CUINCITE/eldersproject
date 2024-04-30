@@ -117,7 +117,7 @@ export class Search {
 
 
     private liveResponse(data, el, response): void {
-        if (response.results) {
+        if (response.results && document.body.classList.contains('has-menu-open')) {
             this.live.innerHTML = this.liveTemplate.render(response);
             // this.trigger(ComponentEvents.CHANGE, this.live);
             this.showLiveResults();
@@ -136,8 +136,6 @@ export class Search {
         this.liveLi = this.view.querySelectorAll('.js-livesearch-item');
         this.allLink = this.view.querySelector('.js-livesearch-all');
 
-        // set max-height of livesearch wrap - prevent growing outside viewport
-        const height = Math.min(this.liveList.clientHeight, window.innerHeight * 0.75);
         const tl = gsap.timeline();
 
         tl.to(this.liveList.parentElement, {
@@ -158,9 +156,13 @@ export class Search {
 
         this.allLink && tl.fromTo(
             this.allLink,
-            { opacity: this.isLiveShown ? 1 : 0 },
+            {
+                opacity: this.isLiveShown ? 1 : 0,
+                yPercent: this.isLiveShown ? 0 : 100,
+            },
             {
                 opacity: 1,
+                yPercent: 0,
                 duration: 0.5,
                 ease: easing,
             },
@@ -191,6 +193,7 @@ export class Search {
     private animationHide(): void {
         if (!this.isLiveShown) return;
 
+
         // hide 'all' link before hiding all li's
         gsap.to(this.allLink, {
             opacity: 0,
@@ -215,6 +218,11 @@ export class Search {
                 },
             });
         });
+
+        if (!this.liveLi.length) {
+            this.live.innerHTML = '';
+            this.view.classList.remove('is-livesearch-shown');
+        }
 
 
         this.isLiveShown = false;

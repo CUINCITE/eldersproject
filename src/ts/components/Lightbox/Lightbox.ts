@@ -1,12 +1,20 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Button } from '../../components/Button';
+import { breakpoint } from '../../Site';
 import { TemplateNames, Templates } from '../../templates/Templates';
 import { PushStates } from '../../PushStates';
 import { LightboxData } from './Lightbox.types';
-import { easing } from '../../Site';
 import { Component } from '../../components/Component';
-import { components } from '../../Classes';
 import { AudioPlayer } from '../../components/AudioPlayer';
+import { LightboxTranscript } from './LightboxTranscript';
+import { LightboxNav } from './LightboxNav';
+import { LightboxSlider } from './LightboxSlider';
+import { LightboxContents } from './LightboxContents';
+import { lightboxColors } from './Lightbox.colors';
 
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 export class Lightbox {
@@ -22,6 +30,11 @@ export class Lightbox {
     }
 
 
+    public static tryToUpdateTranscript(time: number): void {
+        Lightbox.instance.tryToUpdateTranscript(time);
+    }
+
+
     public static getId(): string {
         return Lightbox.currentId;
     }
@@ -31,17 +44,25 @@ export class Lightbox {
     private shown = true;
     private currentPath: string;
     private playerBtn: HTMLButtonElement;
-
     private animating: boolean;
     private controller: AbortController;
+    private transcriptComp: LightboxTranscript;
+    private navComp: LightboxNav;
+    private sliderComp: LightboxSlider;
+    private contentsComp: LightboxContents;
+    private loadingPromise: Promise<any>;
 
     constructor() {
         Lightbox.instance = this;
         this.view = document.getElementById('lightbox');
 
         this.hide(true);
+    }
 
-        this.bind();
+
+
+    public preload(): Promise<void> {
+        return this.loadingPromise;
     }
 
 
@@ -49,6 +70,8 @@ export class Lightbox {
     public async load(payload?: Object): Promise<LightboxData> {
         this.view.classList.add('is-fetching');
         this.controller = new AbortController();
+
+        document.body.classList.add('is-loading-lightbox');
 
         const isWorkspace = window.location.pathname.indexOf('/workspace/') >= 0;
         // const url = isWorkspace ? this.settings.api[type] : window.location.href + window.location.search;
@@ -117,62 +140,34 @@ export class Lightbox {
 
         Lightbox.currentId = data.id;
 
-        this.buildComponents(this.view.querySelectorAll('[data-component]'));
+        this.buildComponents();
 
         // find button connected to player
         this.playerBtn = this.view.querySelector('.js-player-btn');
 
         // check if player is playing audio for this lightbox
         this.checkPlayerState();
-
-        this.tryToSetColor();
-    };
-
-
-
-    private tryToSetColor = (): void => {
-        const lightboxItem: HTMLElement = this.view.firstElementChild as HTMLElement;
-        // for initial load, when lightbox is not rendered yet
-        if (!lightboxItem) return;
-
-        // get data-attribute from .lightbox__item and update color variable in audioplayer
-        const color: string = lightboxItem.getAttribute('data-theme-color');
-
-        if (color && (AudioPlayer.getId() === Lightbox.getId())) AudioPlayer.updateColors(color);
     };
 
 
 
     private bind = (): void => {
-        document.addEventListener('keydown', this.onKeyDown);
+        this.navComp.on('navUpdate', (tab: HTMLElement) => this.onTabsUpdate(tab));
     };
 
 
 
-    private onKeyDown = (e): void => {
-        // ONLY for testing
-        // if (e.key === 'r') this.shown ? this.hide() : this.show();
+    private onTabsUpdate = (tab: HTMLElement): void => {
+        if (this.sliderComp) this.sliderComp.isActive = (tab === null);
     };
 
 
 
-    private buildComponents(componentsList: NodeList): void {
-        this.components = [];
-
-        this.components = [...componentsList].map(el => {
-            const element = <HTMLElement>el;
-            const name = element.dataset.component;
-            if (name !== undefined && components[name]) {
-                let options: Object = {};
-                if (element.dataset.options) {
-                    options = JSON.parse(element.dataset.options);
-                }
-                const component = new components[name](element, options);
-                return component;
-            }
-            window.console.warn('There is no `%s` component!', name);
-            return null;
-        }).filter(Boolean);
+    private buildComponents(): void {
+        this.transcriptComp = new LightboxTranscript(this.view.querySelector('.js-lightbox-transcript'));
+        this.contentsComp = new LightboxContents(this.view.querySelector('.js-lightbox-contents'));
+        this.navComp = new LightboxNav(this.view.querySelector('.js-lightbox-nav'), this.view);
+        this.sliderComp = this.view.querySelector('.js-lightbox-slider') && new LightboxSlider(this.view.querySelector('.js-lightbox-slider'));
     }
 
 
@@ -182,9 +177,12 @@ export class Lightbox {
 
         if (patternFound) {
 
+            const hidingPromise = this.hide(); //
+            this.loadingPromise = this.load(); // load must be fired after hiding!
+
             Promise.all([
-                this.hide(),
-                this.load(),
+                hidingPromise,
+                this.loadingPromise,
             ]).then(results => {
                 const data = results.filter(Boolean).reduce((p, c) => ({ ...p, ...c })) as LightboxData;
 
@@ -196,7 +194,8 @@ export class Lightbox {
                 // show the interview lightbox (only when there's data to show)
                 if (!this.shown && data.result !== false) { this.show(); }
 
-                this.animateIn();
+                this.loadingPromise = null;
+
             }).catch(() => {
                 this.hide();
             });
@@ -205,11 +204,7 @@ export class Lightbox {
 
 
         // just hide:
-        if (this.shown) {
-            const animate = isRendered;
-            !!animate && this.animateOut();
-            this.hide(!animate);
-        }
+        if (this.shown) this.hide(!this.shown);
 
         return false;
     }
@@ -220,7 +215,13 @@ export class Lightbox {
         if (this.animating || !this.shown) return Promise.resolve();
         this.controller?.abort();
 
-        return new Promise<void>((resolve, reject) => {
+        // hide lightbox tab if any of them is active
+        this.navComp?.hide();
+
+
+        this.setThemeColor('black', false);
+
+        return new Promise<void>(resolve => {
             this.animating = true;
             this.view.classList.add('is-closing');
             gsap.to(this.view, {
@@ -228,14 +229,18 @@ export class Lightbox {
                 opacity: 0,
 
                 // CONNECTED WITH CSS - .is-closing
-                delay: fast ? 0 : 1,
+                delay: fast ? 0 : 0.8,
                 ease: 'none',
                 onStart: () => {
                     document.body.classList.remove('has-lightbox');
+                    AudioPlayer.view.classList.remove('has-active-lightbox');
+                    document.body.classList.remove('is-lightbox-open');
                     this.view.classList.remove('is-showing');
                 },
                 onComplete: (): void => {
                     this.view.style.display = 'none';
+                    // could be added in lightbox naivgation
+                    this.view.classList.remove('is-default', 'is-not-default', 'is-closing');
                     this.shown = false;
                     this.animating = false;
                     // empty the lightbox
@@ -250,29 +255,41 @@ export class Lightbox {
 
     private show(): void {
         if (this.animating) return;
-        if (this.shown) { return; }
+        if (this.shown) return;
 
 
         Promise.all([this.shown ? this.hide() : null]).then(() => {
             this.animating = true;
             this.shown = true;
+            this.view.style.opacity = '1';
+            this.view.style.display = 'block';
+
+            const buttons = this.view.querySelectorAll('.js-related-button');
+            buttons.forEach(button => {
+                // eslint-disable-next-line no-new
+                new Button(button as HTMLElement);
+            });
 
             gsap.to(this.view, {
-                duration: 0.05,
-                opacity: 1,
+                duration: 0.1,
                 ease: 'none',
                 onStart: () => {
                     document.body.classList.add('has-lightbox');
+                    document.body.classList.remove('is-loading-lightbox');
                     this.view.classList.remove('is-closing');
-                    this.view.style.display = 'block';
                 },
                 // that class runs CSS animation
                 onComplete: () => {
                     this.view.classList.add('is-showing');
+                    document.body.classList.add('is-lightbox-open');
                     // audioplayer should be always expanded when lightbox is open
                     AudioPlayer.openAudioPlayer(true);
                     this.animating = false;
                     Lightbox.isOpen = true;
+                    this.bind();
+                    setTimeout(() => {
+                        this.setThemeColor();
+                    }, 900);
                 },
             });
         });
@@ -280,13 +297,28 @@ export class Lightbox {
 
 
 
+    private setThemeColor(color?: string, lightboxBg = true): void {
+
+        const themeColor = color || this.view.firstElementChild.getAttribute('data-theme-color');
+        const newColor = lightboxColors[themeColor] || themeColor;
+        const lightboxBgColor = lightboxBg ? `var(--color-${themeColor})` : 'none';
+
+        if (themeColor) {
+            if (breakpoint.phone) this.view.style.background = lightboxBgColor;
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', newColor);
+        }
+    }
+
+
+
     private checkPlayerState(): void {
+        AudioPlayer.view.classList.toggle('has-active-lightbox', AudioPlayer.getId() === Lightbox.getId());
+
         if (AudioPlayer.getId() === Lightbox.getId() && !AudioPlayer.isAudioPlayerPaused()) {
             this.playerBtn?.classList.add('is-playing');
         } else {
             this.playerBtn?.classList.remove('is-playing');
         }
-        this.tryToSetColor();
     }
 
 
@@ -298,36 +330,11 @@ export class Lightbox {
 
 
 
-    private animateIn(fast?: boolean): Promise<void> {
-        return new Promise<void>(resolve => {
-            gsap.timeline({
-                onComplete: () => {
-                    this.view.classList.add('is-visible');
-                    resolve();
-                },
-                defaults: { ease: easing, duration: !fast ? 1 : 0 },
-            });
+    private tryToUpdateTranscript(time: number): void {
+        // update only when lightbox is open and audio player is connected to it
+        if (AudioPlayer.getId() !== Lightbox.getId()) return;
 
-            navigator.vibrate([1, 400, 1]);
-        });
-    }
-
-
-
-    private animateOut(fast?: boolean): Promise<void> {
-
-        if (!this.view.classList.contains('is-visible')) {
-            return Promise.resolve();
-        }
-
-        return new Promise<void>(resolve => {
-            gsap.timeline({
-                onComplete: () => {
-                    this.view.classList.remove('is-visible');
-                    resolve();
-                },
-                defaults: { ease: 'expo.inOut' },
-            });
-        });
+        this.transcriptComp.update(time);
+        this.contentsComp.update(time);
     }
 }

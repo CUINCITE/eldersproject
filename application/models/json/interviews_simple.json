@@ -10,8 +10,20 @@
       "field": "slug"
     },
     {
+      "field":"uid"
+    },
+    {
+      "field":"incite_id"
+    },
+    {
       "field":"active",
       "type": "boolean"
+    },
+    {
+      "field":"label"
+    },
+    {
+      "field":"lead"
     }
   ]
 }

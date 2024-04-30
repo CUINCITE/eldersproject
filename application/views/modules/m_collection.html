@@ -6,4 +6,10 @@
 
 {% endfor %}
 
-{% include 'modules/m_interviews_short.html' with {items:items, stickerLabel: 'From the Collection', reversed: true, collection_page:true} %}
+
+
+{% include 'modules/m_interviews_short.html' with {items:items, stickerLabel: 'From the Collection', parallax:true, reversed: true, collection_page:true, collectionColor: item.color} %}
+
+{% if map %}
+    {% include 'modules/collection/m_collection_map.html' with {items:map, collectionColor: item.color,temp_bottomPadding:true } %}
+{% endif %}

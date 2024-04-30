@@ -1,22 +1,49 @@
 .box {
     background-color: var(--color-box);
-    margin-top: 1px;
+    border-top: 1px solid var(--color-bg);
+    margin-top: 0;
+    position: relative;
 
+    &--nomargin { border-top: none !important; }
+
+    &--negative {
+        margin-top: -1px;
+    }
+
+
+    .is-transition & { background: none; border-top: none; }
+
+
+    &.footer__bottom {
+        background-color: var(--color-black);
+        border-top: 1px solid var(--color-white);
+
+        .is-transition & {
+            border-top: none;
+        }
+    }
 
     &[data-scroll="box"],
     [data-scroll="box"] & {
         background: none;
         position: relative;
 
-        @include breakpoint(not-desktop) {
-            z-index: 1;
+
+        &.is-animated:not(.footer__bottom) {
+            border-top: 1px solid var(--color-bg);
+            background-color: var(--color-box);
+        }
+
+
+
+        &:not(.is-animated) {
+            @include breakpoint(not-desktop) {
+                // z-index: 1;
+            }
         }
     }
 
-    [data-scroll="box"] & {
-        border-top: 1px solid var(--color-bg);
-        margin-top: 0;
-    }
+
 
     .is-404 &, .page_404 & {
 
@@ -28,18 +55,50 @@
     }
 
 
+
     &__bg {
         @include full;
+
         background-color: var(--color-box);
         z-index: -1;
         pointer-events: none;
         will-change: transform;
+        border-top: 1px solid var(--color-bg);
+
+
+
+        .is-animated & {
+            background: none;
+            border: none;
+        }
     }
+
 
 
     &__wrap {
         @include flex(row-reverse, flex-start, flex-start);
     }
+
+
+
+    &__wrapper {
+        position: relative;
+    }
+
+
+
+    &__placeholder {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: var(--color-box);
+        z-index: -1;
+        will-change: transform;
+        pointer-events: none;
+        border-top: 1px solid var(--color-bg);
+    }
+
 
     @include breakpoint(desktop) {
         .text {
@@ -55,6 +114,10 @@
                 padding-inline-start: rem(0);
             }
         }
+
+        .quote_panel__quote .text {
+            padding-inline-start: 0;
+        }
     };
 }
 
@@ -63,13 +126,5 @@
     @include breakpoint(not-desktop) {
         position: relative;
         z-index: 1;
-
-        // > div {
-        //     z-index: 1;
-        // }
-
-        // .box__bg {
-        //     z-index: unset;
-        // }
     }
 }

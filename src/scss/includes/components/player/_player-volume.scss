@@ -3,7 +3,10 @@
 
     position: relative;
     text-align: left;
-    padding-bottom: rem(6);
+    padding-bottom: 6px;
+
+
+    @include breakpoint(phone) { display: none; }
 
 
 
@@ -11,9 +14,9 @@
         height: 100%;
         aspect-ratio: 1;
 
-        svg {
+        i {
             position: relative;
-            top: -2px;
+            top: -4px;
         }
     }
 }

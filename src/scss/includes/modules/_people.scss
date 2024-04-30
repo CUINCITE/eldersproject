@@ -1,16 +1,29 @@
 .people {
-
-
     &__heading {
         @include breakpoint(not-desktop) {
             grid-row-start: 1;
             position: relative;
-            
+
             @include breakpoint(tablet) {
                 grid-column: 1 / span 8 !important;
             }
         }
     }
+
+
+
+    &__line {
+        display: inline-block;
+        position: absolute;
+        inset: 0 auto 0 50%;
+        z-index: 1;
+        transform: translateX(-50%);
+        width: 1px;
+        background-color: var(--color-bg);
+        will-change: transform;
+    }
+
+
 
     &__photos {
         @include breakpoint(tablet) {
@@ -18,14 +31,15 @@
         }
     }
 
+
     .text {
 
         @include breakpoint(tablet) {
-            padding-block: rem(15) rem(46);     
+            padding-block: rem(15) rem(46);
         }
 
         @include breakpoint(phone) {
-            padding-block: rem(12) rem(46);     
+            padding-block: rem(12) rem(46);
         }
     }
 }

@@ -1,8 +1,10 @@
-<section class="module">
-    <div class="box">
+<section class="module module--heading">
+    <div class="box" >
+
         <div class="grid">
             <div class="col-span-12">
-                {% include "components/c_heading.html" with {reclined: true, align: "right", label: label} %}
+                {% set alignment = params.left == true ? 'left' : 'right' %}
+                {% include "components/c_heading.html" with { reclined: true, align: alignment, label: label } %}
             </div>
         </div>
     </div>

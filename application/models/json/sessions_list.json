@@ -1,0 +1,109 @@
+{
+    "table": "sessions",
+    
+    "fields": [
+        {
+            "tab":"Info",
+            "label": "Session nr",
+            "list": true,
+            "field": "nr",
+            "required": true
+        },
+        {
+            "label": "Session date",
+            "list": true,
+            "field": "date",
+            "required": true,
+            "type": "date"
+        },
+        {
+            "field":"interviewer","label":"Interviewer","type":"select",
+            "source":
+            {
+                "model":"staff","list":true
+            }
+        },
+        {
+            "label":"Incite Session Id",
+            "field":"incite_id",
+            "list":true,
+            "settings":{"case":true,"code":true}
+        },
+        
+        {
+            "field":"parent","type":"select","hidden":true,
+            "edit":false,
+            "source":
+            {
+                "model":"interviews_simple"
+            },
+            "list":true
+        },
+        {
+            "field": "uid",
+            "type": "uid",
+            "list": "read"
+        },
+        {
+            
+            "field":"languages"
+        },
+        {
+            "label": "Publish",
+            "field": "active",
+            "type": "boolean",
+            "list": "edit",
+            "hr": true
+        },
+        {
+            "header":"Audio",
+            "hr":true,
+            "field": "audio",
+            "label": "Audio file (MP3)",
+            "type": "file",
+            "extension":"mp3",
+            "folder":"/public/upload/sessions/audio"
+        },
+        
+        
+        {
+            "tab":"Transcript",
+            "field":"transcript",
+            "type":"text",
+            "edit":false,            
+            "label":"Transcript data",
+            "settings":{"style":"json","wide":true,"rows":20}
+        },
+        {
+            "field": "doc",
+            "label": "DOCX Transcript file",
+            "type": "file",
+            "extension":"docx",
+            "folder":"/public/upload/sessions/transcripts"
+        },
+        {
+            "tab":"Transcript with Tags",
+            "field":"transcript_tags",
+            "edit":false,
+            "type":"text",
+            "label":"Transcript data with Tags",
+            "settings":{"style":"json","wide":true,"rows":20}
+        },
+        
+        {
+            "hr": true,
+            "label":"Status (media)",
+            "field":"status_media",
+            "type":"boolean",
+            "list":true,
+            "search":true
+        },
+        {
+            "label":"Status (transcript)",
+            "field":"status_transcript",
+            "type":"boolean",
+            "list":true,
+            "search":true
+        }
+    ]
+}

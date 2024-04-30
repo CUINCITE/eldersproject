@@ -28,13 +28,14 @@
 
         @include breakpoint(not-desktop) {
             position: relative;
+            order: 2;
         }
 
         &--boxes {
 
             @include breakpoint(desktop) {
                 left: -1 * map-get($grid-offset, desktop);
-                bottom: vw(51);
+                top: rem(324);
 
                 &.text_aside__decorator--contact {
                     top: vw(21);
@@ -42,32 +43,16 @@
                 }
             }
 
-            @include breakpoint(tablet) {
-                right: -1 * map-get($grid-offset, tablet);
+            @include breakpoint(not-desktop) {
+                // position: absolute;
+                left: -1 * map-get($grid-offset, tablet);
                 padding-bottom: vw(32, tablet);
-                padding-inline: map-get($grid-offset, tablet);
-                margin-top: rem(-20);
                 text-align: right;
+                transform: scaleX(-1);
 
                 &.text_aside__decorator--contact {
-                    margin-top: rem(-35);
-                }
-
-                svg {
-                    scale: -1 1;
-                }
-            }
-
-            @include breakpoint(phone) {
-                right: -1 * map-get($grid-offset, phone);
-                padding-bottom: vw(21, phone);
-                padding-inline: map-get($grid-offset, phone);
-                margin-top: rem(-40);
-                text-align: right;
-
-                &.text_aside__decorator--contact {
-                    margin-top: rem(-35);
-                    padding-inline: unset;
+                    bottom: 0;
+                    margin-top: unset;
                 }
 
                 svg {
@@ -126,7 +111,6 @@
 
 
             &.text_aside__decorator--medium {
-
                 img {
                     @include breakpoint(desktop) {
                         width: vw(493);
@@ -140,7 +124,6 @@
 
 
             &.text_aside__decorator--center {
-
                 img {
                     @include breakpoint(desktop) {
                         right: unset;
@@ -185,8 +168,8 @@
             .polaroid {
 
                 @include breakpoint(desktop) {
-                    --polaroid-width: #{vw(368)};
-                    --polaroid-height: #{vw(458)};
+                    --polaroid-width: #{rem(368)};
+                    --polaroid-height: #{rem(458)};
 
                     position: absolute;
                     rotate: 7.5deg;
@@ -194,8 +177,8 @@
                     bottom: calc(100% + #{rem(42)});
 
                     &--horizontal {
-                        --polaroid-width: #{vw(481)};
-                        --polaroid-height: #{vw(366)};
+                        --polaroid-width: #{rem(481)};
+                        --polaroid-height: #{rem(366)};
 
                         rotate: 12deg;
                         bottom: calc(100% + #{rem(68)});
@@ -225,7 +208,6 @@
                     opacity: 1;
                 }
             }
-
         }
 
         .text {
@@ -252,7 +234,7 @@
             @include breakpoint(desktop) {
                 @include flex(column, flex-start, flex-end)
 
-                text-align: right;
+                    text-align: right;
                 max-width: rem(182);
                 padding: rem(16) 0 0 0;
             }
@@ -272,7 +254,6 @@
         }
 
         &--reversed {
-
             &.text_aside__decorator--boxes {
                 @include breakpoint(desktop) {
                     left: unset;
@@ -293,10 +274,6 @@
                         right: unset;
                         left: rem(-35);
                     }
-
-                    @include breakpoint(phone) {
-
-                    }
                 }
             }
 
@@ -313,8 +290,7 @@
                 }
 
                 @include breakpoint(desktop) {
-                    @include flex(column, flex-start, flex-start)
-                }
+                    @include flex(column, flex-start, flex-start); }
             }
         }
     }
@@ -332,6 +308,12 @@
 
         @include breakpoint(phone) {
             position: relative;
+            order: 3;
+
+
+            &:first-of-type {
+                order: 1;
+            }
 
             .text {
                 padding-bottom: 0;

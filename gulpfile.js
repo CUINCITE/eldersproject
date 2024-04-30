@@ -30,6 +30,32 @@ function stylesDefault() {
 }
 
 
+function errorHandler() {
+    plugins.beeper();
+    console.log('\x07');
+    return true;
+}
+
+
+function stylesCritical() {
+    return gulp.src(paths.sass.critical)
+        .pipe(plugins.newer(paths.critical.app))
+        .pipe(plugins.plumber(errorHandler))
+        .pipe(plugins.sass({ outputStyle: 'compressed' }).on('error', plugins.sass.logError))
+        .pipe(plugins.autoprefixer())
+        .pipe(plugins.insert.prepend('<style>'))
+        .pipe(plugins.insert.append('</style>'))
+        .pipe(plugins.rename({
+            basename: 'critical',
+            extname: '.html',
+        }))
+        .pipe(gulp.dest(paths.critical.workspace))
+        .pipe(gulp.dest(paths.critical.app))
+        .pipe(browserSync.stream())
+        .pipe(plugins.notify('Critical styles ready!'));
+}
+
+
 // Copy fonts
 
 function fonts() {
@@ -180,6 +206,25 @@ function imagemin() {
 }
 
 
+// copy webp without minification
+// to destination folder:
+function webpCopy() {
+    return gulp.src(paths.webp.source)
+        .pipe(plugins.newer(paths.webp.dest))
+        .pipe(gulp.dest(paths.webp.dest))
+        .pipe
+        (plugins.notify({ message: 'WEBP no-min copied successfuly!', onLast: true }));
+}
+
+// png to webp
+function imagesToWebp() {
+    return gulp.src(paths.to_webp.source)
+        .pipe(plugins.webp())
+        .pipe(gulp.dest(paths.to_webp.dest))
+        .pipe(plugins.notify({ message: 'Images converted to webp successfuly!', onLast: true }));
+}
+
+
 // compress svg files:
 function svgmin() {
     return gulp.src(paths.svg.inline)
@@ -298,7 +343,7 @@ function watch() {
         browserSync.init({
             open: true,
             host: plugins.ip.address(),
-            startPath: '/workspace',
+            startPath: '/',
             ghostMode: false,
             proxy: config.proxyURL,
             port: 7000,
@@ -307,12 +352,13 @@ function watch() {
         });
     });
     gulp.watch(paths.styles.main, stylesDefault);
+    gulp.watch(paths.styles.critical, stylesCritical);
     gulp.watch(paths.images.source);
     watchBundle();
 }
 
 
-exports.styles = gulp.series(stylesDefault);
+exports.styles = gulp.series(stylesDefault, stylesCritical);
 exports.scripts = bundle;
 exports.test = test;
 exports.init = init;
@@ -322,7 +368,8 @@ exports.libs = libs;
 exports.fonts = fonts;
 exports.bump = bump;
 exports.favicons = favicons;
-exports.images = gulp.series(cleanImages, imagemin, svgnomin, svgmin, svgstore);
+exports.svg = gulp.series(svgnomin, svgmin, svgstore);
+exports.images = gulp.series(cleanImages, imagemin, webpCopy, imagesToWebp, svgnomin, svgmin, svgstore);
 // eslint-disable-next-line max-len
 exports.default = gulp.series(clean, exports.styles, exports.libs, exports.scripts, exports.images, fonts, mapdata, favicons, sounds, bump);
 exports.watch = watch;

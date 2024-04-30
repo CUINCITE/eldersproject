@@ -77,10 +77,6 @@ class model_app_pages_modules
 
 		];
 
-        if (empty($m['type']['slug'] && in_array($m['type']['slug'], ['hero_home', 'hero_about', 'hero_collections']) && $this->iModule == 0)) {
-            $this->parent->hide_mobile_logo = true;
-        }
-
         $m['module_index'] = $this->iModule - 1;
 
 
@@ -126,11 +122,11 @@ class model_app_pages_modules
         return $array[$keys[$random_index]];
     }
 
-    protected function articleUpdate($text,&$media)
+    protected function articleUpdate($text,&$media, $playlist)
     {
         require_once (__DIR__.'/model_app_pages_article.php');
         $article=new model_app_pages_article($this->parent);
-        $article=$article->convert($text,$media);
+        $article=$article->convert($text,$media, $playlist);
         return $article;
     }
 

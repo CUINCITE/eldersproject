@@ -1,42 +1,107 @@
-{% set colors=['green','red','yellow'] %}{% set c=random(colors|length) %}
+<section class="module module--interviews" >
+    <div class="interviews interviews--banner">
 
-<section class="module module--interviews" data-scroll="box" {% if collection_page %} id="interviews" {% endif %}>
-    <div class="box__bg"></div>
-    <div class="interviews">
-        <div class="box">
-            <div class="grid">
-                <div class="col-span-12">
+        <div class="box__wrapper box" >
 
-                    <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
-                        <div class="interviews__sticker">
-
-                            {% include 'subviews/subview_sticker.html' with {label:'Explore', modifier: "long_text"} %}
+            <div class="interviews__title">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="interviews__heading{% if reversed %} interviews__heading--reversed{% endif %}">
+                            <h2 class="heading heading--reclined">
+                                {% if heading %}{{ heading }}{% else %}Interviews{% endif %}
+                            </h2>
                         </div>
-                        <h2 class="heading heading--reclined">
-                            {% if heading %}{{ heading }}{% else %}Interviews{% endif %}{% if collection_page %} <span
-                                class="heading__counter">({{items|length}})</span>{% endif %}
-                        </h2>
                     </div>
-
                 </div>
             </div>
-            <div class="grid">
-                <div class="col-span-9">
-                    <div style="font-size:1.5rem;line-height:2rem">
-                    {{text|raw}}<br><br>
+            <div class="interviews__claim">
+                <div class="grid">
+                    <div class="interviews__copy col-start-8 col-span-5">
+                        {% set text=text|nl2br %}
+                        {% include "subviews/subview_text.html" with {
+                        size: "larger",
+                        text: text
+                        } %}
                     </div>
-                    <a href="/interviews" class="button button--two_line button--overflow" data-gtm='{"event": "explore-interviews-btn-click"}' data-component="Button">
-                        <i class="icon-btn-arrow arrow js-arrow">
-                            <span class="vertical js-arrow-vertical"></span>
-                            <span class="horizontal js-arrow-horizontal"></span>
-                            <span class="triangle js-arrow-triangle"></span>
-                        </i> <span class="button__text js-button-text">Explore <i>474 Interviews</i></span>
-                    </a>
-                    <br><br><br>
-                </div>        
+                </div>
+                <div class="interviews__image" data-parallax="-60" data-action="pause">
+                    {% include "subviews/subview_picture_no_retina_no_media.html" with {
+                        image: {
+                                png: "/public/theme/images/flag.png",
+                                webp: "/public/theme/images/flag.webp"
+                            }
+                        }
+                    %}
+                </div>
             </div>
         </div>
 
+        <div class="stack box" >
 
+            <div class="stack__gallery">
+                <div class="stack__content" data-component="Collections">
+                    <div class="col-span-1 col-start-2 stack__container">
+                        <div class="stack__names js-scroll-names">
+                            <ul class="names">
+                                {% for item in items %}
+                                    <li class="names__name js-accordeon-item js-caption is-closed {% if loop.first %}is-current{% endif %}">
+                                        <a href="{{ item.url }}" class="names__link"></a>
+                                        <div class="names__author">
+                                            {% set labelArray = item.label|split(',') %}
+                                            <div class="names__box{% if labelArray|length > 1 %} names__box--multiline{% endif %}">
+                                                {% for name in labelArray %}
+                                                    <span>{{name}}{% if not loop.last %}, {% if loop.first %} <br>{% endif %}{% endif %}</span>
+                                                {% endfor %}
+                                                {# <span>{{ item.label|raw }}</span> #}
+                                            </div>
+                                        </div>
+                                        <div class="names__expand">
+                                            <p class="names__claim">{{ item.narrator_occupation|raw }}</p>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <ul class="stack__dots desktop-hide">
+                            {% for item in items %}
+                            <li class="stack__dot js-dot {% if loop.first %}is-current{% endif %}"><span></span></li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="stack__polaroids js-scroll-cards">
+                            {% for item in items | reverse %}
+                                <li class="stack__polaroid js-card
+                                    {% if loop.first %}is-current{% endif %}
+                                    {% if loop.index == 2 %} is-next{% endif %}
+                                    {% if loop.index == 3 %} is-after-next{% endif %}
+                                ">
+                                    {% include "./components/c_polaroid.html" with {image: item.media[0].image} %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="stack__button col-start-1 col-span-2">
+                        <a href="/interviews" class="button button--simple button--reversed" data-component="Button">
+                            <span class="button__main">
+                                <i class="icon-btn-arrow arrow js-arrow">
+                                    <span class="vertical js-arrow-vertical"></span>
+                                    <span class="horizontal js-arrow-horizontal"></span>
+                                    <span class="triangle js-arrow-triangle"></span>
+                                </i>
+                                <span class="button__text js-button-text">Explore</span>
+                                <i class="icon-btn-arrow arrow arrow--extra js-arrow-extra">
+                                    <span class="vertical js-arrow-vertical"></span>
+                                    <span class="horizontal js-arrow-horizontal"></span>
+                                    <span class="triangle js-arrow-triangle"></span>
+                                </i>
+                                <span class="button__text button__text--duplicate js-button-duplicate-text">Explore</span>
+                            </span>
+
+                            <span class="button__text button__text--extra"><i>239 interviews</i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

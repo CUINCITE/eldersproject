@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { CustomEase } from 'gsap/dist/CustomEase';
 import Scroll from './Scroll';
 import { pages as Pages } from './Classes';
-import { stats, debounce, setAppHeight, setVwUnit } from './Utils';
+import { stats, debounce, setAppHeight, setVwUnit, getSessionStorageItem } from './Utils';
 import { IBrowser, getBrowser } from './Browser';
 import { IBreakpoint, getBreakpoint } from './Breakpoint';
 import { PushStates, PushStatesEvents } from './PushStates';
@@ -12,7 +12,9 @@ import { Menu } from './Menu';
 import { Button } from './components/Button';
 import { Search } from './Search';
 import { AudioPlayer } from './components/AudioPlayer';
+import { Loader } from './components/Loader';
 import { Lightbox } from './components/Lightbox/Lightbox';
+import { Curtain } from './components/Curtain/Curtain';
 
 import Widgets from './widgets/All';
 
@@ -24,6 +26,7 @@ export let pixelRatio: number;
 export let easing: string;
 export let browser: IBrowser;
 export let breakpoint: IBreakpoint;
+export let isActiveSession: boolean;
 
 gsap.registerPlugin(CustomEase);
 
@@ -38,8 +41,10 @@ class Site {
     private lightbox: Lightbox;
     private search: Search;
     private audioPlayer: AudioPlayer;
+    private loader: Loader;
+    private curtain: Curtain;
 
-    private isInitialized: boolean = false;
+    private isFirstTime: boolean = true;
     private resizingTimeout: ReturnType<typeof setTimeout>;
 
 
@@ -50,9 +55,11 @@ class Site {
 
         breakpoint = getBreakpoint();
         browser = getBrowser();
-        easing = CustomEase.create('custom', '0.5, 0, 0.1, 1');
+        easing = CustomEase.create('custom', '0.7, 0, 0.2, 1');
         lang = document.documentElement.getAttribute('lang');
         pixelRatio = Math.min(2, window.devicePixelRatio || 1);
+        // set in Loader after first page load in session
+        isActiveSession = !!getSessionStorageItem('loaded');
 
         this.bind();
         setVwUnit();
@@ -68,9 +75,11 @@ class Site {
         this.lightbox = new Lightbox();
         this.menu = new Menu(document.querySelector('.js-menu'));
         this.search = new Search(document.getElementById('search'));
+        this.loader = new Loader(document.querySelector('.js-loader'));
         this.newsletterButton = new Button(document.querySelector('.js-newsletter-button'));
 
         this.audioPlayer = new AudioPlayer(document.querySelector('.js-audioplayer'));
+        this.curtain = new Curtain(document.querySelector('.js-curtain'));
 
         if (browser.ie) {
             console.warn('This browser is outdated!');
@@ -81,6 +90,8 @@ class Site {
 
         Promise.all<void>([
             this.setCurrentPage(),
+            this.lightbox?.preload(),
+            // !isActiveSession && this.loader.animate(),
             // preload other components if needed
         ]).then(this.onPageLoaded);
     }
@@ -106,6 +117,12 @@ class Site {
         });
 
         window.addEventListener('orientationchange', debounce(() => this.onResize(true)));
+
+        window.addEventListener('keyup', e => {
+            const { key } = e;
+
+            if (key === 'Escape') this.setFocusOnFirstFocusableElement();
+        });
     }
 
 
@@ -129,6 +146,8 @@ class Site {
 
         this.currentPage?.resize(width, height, breakpoint, changed);
         (!browser.touch || changed) && Scroll?.resize();
+
+        this.loader?.resize();
     };
 
 
@@ -140,15 +159,18 @@ class Site {
         const isRendered = this.pushStates.isRendered();
         const pageChangedState = this.currentPage.onState();
         const lightboxChangedState = this.lightbox.onState(isRendered);
-        this.menu?.onState();
-        this.search?.onState();
 
         if (!isRendered && !pageChangedState && !lightboxChangedState) {
             Promise.all<void>([
+                this.curtain.show(),
                 this.pushStates.load(),
                 this.currentPage.animateOut(),
             ]).then(this.render);
         }
+
+        this.menu?.onState();
+        this.search?.onState();
+        this.loader?.onState();
     };
 
 
@@ -179,13 +201,23 @@ class Site {
      */
     private onPageLoaded = async(): Promise<void> => {
         document.body.classList.remove('is-not-ready', 'is-rendering');
-        this.currentPage.animateIn(0);
-        !this.isInitialized && Scroll.scrollToTop(true);
+        if (!this.isFirstTime) this.curtain.makeOverlay();
+        // const isHome: boolean = !!document.body.querySelector('[data-home]');
+        const isLightbox = document.body.classList.contains('is-loading-lightbox') || document.body.classList.contains('has-lightbox');
         this.scroll.load();
         Scroll.start();
+
+        this.currentPage.animateIn(this.isFirstTime, this.isFirstTime && !isLightbox, isLightbox ? 1 : 0).then(() => {
+            this.curtain.hide(this.isFirstTime);
+            this.loader.hide();
+            !this.isFirstTime && Scroll.scrollToTop(true);
+            // delay after animateIn
+            // setTimeout(() => this.loader.check(isHome), 50);
+            this.isFirstTime = false;
+        });
         PushStates.setTitle();
+        this.menu.resize();
         this.audioPlayer.bindButtons();
-        this.isInitialized = true;
     };
 
 
@@ -222,6 +254,7 @@ class Site {
 
         // set custom classes to body based on <article> parameters
         document.body.classList.toggle('is-404', Boolean(document.body.querySelector('[data-not-found]')));
+        document.body.classList.toggle('is-homepage', Boolean(document.body.querySelector('[data-home]')));
 
         // create Page object:
         const page: Page = new Pages[pageName](pageEl, pageOptions);
@@ -267,11 +300,18 @@ class Site {
 
         document.querySelectorAll(`a[href="${pathname}/"], a[href="${pathname}"]`).forEach(link => link?.classList.add('is-active'));
     }
+
+
+    private setFocusOnFirstFocusableElement(): void {
+        const focusable = document.querySelector('a, button, input, textarea, select') as HTMLElement;
+        focusable && focusable.focus();
+    }
 }
 
 
 
 window.addEventListener('load', () => {
+    console.log('██████████████████████████████');
     const site = new Site();
     site.init();
 });

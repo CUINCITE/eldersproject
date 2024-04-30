@@ -47,6 +47,7 @@ class model_app_api extends model_app
             case "slugify":
             case "download":
             case "narrators_categories":
+            case "import_map":
 
                 require_once("api/model_app_api_" . $action . ".php");
                 $class = 'model_app_api_' . $action;
@@ -116,9 +117,9 @@ class model_app_api extends model_app
     //------------------------------------------------------------------------------
     public function captcha($captcha)
     {
-        return true;
         if (!$captcha) return;
         $secret = $this->getApiKeys('google_recaptcha');
+
         if (!$secret) return;
 
 

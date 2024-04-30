@@ -1,94 +1,68 @@
 {
-    "table": "interviews",
-    "url":{
-        "type":"interview",
-        "slug":"%slug%"
+  "table": "interviews",
+  "url": {
+    "type": "interview",
+    "slug": "%slug%"
+  },
+  "order": "label_sort",
+  "fields": [
+    {
+      "label": "Narrators (full text)",
+      "field": "label"
     },
-
-    "order": "label_sort",
-
-    "fields": [
-
-        {
-            "label": "Narrators (full text)",
-            "field": "label"
-        },
-    
-        {
-            "label":"Interviewers (full text)",
-            "field":"interviewer_name"
-        },
-
-        {"field":"label_sort"},
-
-        {"field":"interviewer_name_sort"},
-        
-        {
-            "tab":"Metadata",
-            "field":"topics",
-            "label":"Topics",
-            "type":"checkboxes",
-            "settings":{"small":true},
-            "source":
-            {
-                "model":"topics"
-            }
-        },
-        {
-            "label": "Narrators",
-            "field": "narrators",
-            "required": true,
-            "type":"elements",
-            "source":
-            {
-                "model":"narrators"
-            }
-        },
-        {
-            "tab":"Status",
-            "label": "Url",
-            "field": "slug",
-            "on_demand": true,
-            "auto": {
-                "on_null": true,
-                "unique": true,
-                "url": true,
-                "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
-            }
-        },
-        
-        {"field":"locations"},
-        {"field":"summary"},
-        {"field":"interviewer_location"},
-        {"field":"narrator_location"},
-        {
-            "field":"narrators_states","label":"Narrators states",
-            "type":"elements",
-            "source":
-            {
-                "model":"s_states"
-            }
-        },
-        {
-            "hr":true,
-            "label":"Interviewers",
-            "field":"interviewers",
-            "type":"elements",
-            "source":
-            {
-                "model":"interviewers"
-            }
-        },
-        {
-            "label": "Publish",
-            "field": "active",
-            "type": "boolean",
-            "list": "edit",
-            "search":true,
-            "hr": true
-        }
-
-
-
-    ]
+    {
+      "label": "Interviewers (full text)",
+      "field": "interviewer_name"
+    },
+    {
+      "field": "label_sort"
+    },
+    {
+      "field": "interviewer_name_sort"
+    },
+    {
+      "field": "topics",
+      "type": "checkboxes"
+    },
+    {
+      "field": "slug"
+    },
+    {
+      "field": "locations"
+    },
+    {
+      "field": "summary"
+    },
+    {
+      "field": "interviewer_location"
+    },
+    {
+      "field": "narrator_location"
+    },
+    {
+      "field": "narrators_states",
+      "label": "Narrators states",
+      "type": "elements"
+    },
+    {
+      "hr": true,
+      "label": "Interviewers",
+      "field": "interviewers",
+      "type": "elements"
+    },
+    {
+      "field": "lead"
+    },
+    {
+      "field": "narrator_occupation"
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "search": true,
+      "hr": true
+    }
+  ]
 }

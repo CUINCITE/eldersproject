@@ -1,7 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { breakpoint } from '../Site';
-import Scroll from '../Scroll';
+import { interviews } from '../animations/scroll/interviews';
 import * as Utils from '../Utils';
 import { Component, ComponentEvents } from './Component';
 import { PushStates } from '../PushStates';
@@ -18,6 +17,7 @@ interface ILoadSettings {
     scrollTo?: string; // scroll to given element when reloading filters
     updateCurrentSorting?: boolean // manually updates currently selected sorting on mobile
     externalLinks?: string; // external links with [data-filters] attribute to reload filters
+    setStorage?: boolean; // set storage item with current view (grid/list view)
 }
 
 
@@ -38,6 +38,9 @@ export class Load extends Component {
     private filteredEl: HTMLElement;
     private resetButton: HTMLButtonElement;
     private components: Array<Component>;
+    private section: HTMLElement;
+    private content: HTMLElement;
+    private storageSlug = 'interviewsView';
 
 
 
@@ -57,15 +60,13 @@ export class Load extends Component {
         this.contentElement = document.querySelector(this.settings.contentSelector);
         this.viewsButtons = this.view.querySelectorAll('[data-view]');
         this.resetButton = this.view.querySelector('.js-reset');
-
-        if (!breakpoint.desktop) {
-            this.contentElement.classList.remove('is-grid-view');
-            this.contentElement.classList.add('is-list-view');
-        }
+        this.section = document.getElementById('interviews');
+        this.content = document.getElementById('interviews-grid');
 
         if (this.settings.total) this.totalElement = this.view.querySelector(this.settings.total);
         if (this.settings.filtered) this.filteredEl = document.querySelector(this.settings.filtered);
 
+        this.settings.setStorage && this.checkStorage();
         this.updateFiltered();
         this.bind();
 
@@ -103,7 +104,7 @@ export class Load extends Component {
             this.view.addEventListener('click', e => {
                 e.preventDefault();
                 const url = (this.view as HTMLAnchorElement).href;
-                this.reloadFilters(url);
+                this.reloadFilters(url, true);
             });
         }
 
@@ -152,7 +153,7 @@ export class Load extends Component {
 
         gsap.fromTo(this.contentElement, { opacity: 0 }, {
             opacity: 1,
-            duration: 0.45,
+            duration: 0.5,
             ease: 'sine',
         });
     };
@@ -162,10 +163,33 @@ export class Load extends Component {
     protected onViewBtnClick = (e): void => {
         const { currentTarget: button } = e;
         const { view } = button.dataset;
+
+        Utils.setStorageItem(this.storageSlug, view);
+
         this.hideContent().then(() => {
-            this.contentElement.classList.remove('is-list-view', 'is-grid-view');
-            this.contentElement.classList.add(`is-${view}-view`);
+            this.toggleView(view);
         }).then(this.showContent);
+    };
+
+
+
+    protected checkStorage = (): void => {
+        const view = Utils.getStorageItem(this.storageSlug);
+        view && this.toggleView(view);
+    };
+
+
+
+    protected toggleView = (view: string): void => {
+        this.contentElement.classList.remove('is-list-view', 'is-grid-view');
+        this.contentElement.classList.add(`is-${view}-view`, 'is-after-toggle');
+        this.section?.classList.remove('is-list', 'is-grid');
+        this.section?.classList.add(`is-${view}`);
+
+        setTimeout(() => {
+            // temp class to prevent transition on toggle
+            this.contentElement.classList.remove('is-after-toggle');
+        }, 100);
     };
 
 
@@ -179,7 +203,14 @@ export class Load extends Component {
         PushStates.changePath(url, true);
 
         if (this.settings.filtered) this.updateFiltered();
-        if (this.settings.scrollTo) this.scrollToContainer();
+
+
+        if (this.settings.scrollTo && this.view.hasAttribute('data-filters')) {
+            window.scrollTo({
+                top: document.body.getBoundingClientRect().top + window.scrollY,
+                behavior: 'smooth',
+            });
+        }
 
         // eslint-disable-next-line consistent-return
         return fetch(url, {
@@ -256,32 +287,7 @@ export class Load extends Component {
 
         let loadPath = this.view.getAttribute('action') || this.view.dataset.api || window.location.pathname;
 
-        let extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
-        const extraFormsMobile = this.settings.extraMobile
-            ? ([...document.querySelectorAll(this.settings.extraMobile)] as HTMLFormElement[])
-            : null;
-
-        if (extraFormsMobile && window.matchMedia('(orientation: portrait) and (max-width: 659px)').matches) {
-            extraForms = extraFormsMobile;
-        }
-
-        if (this.settings.updateCurrentSorting) {
-            const indicator = document.querySelector('.js-current-sorting');
-
-            if (indicator) {
-                const sorting = Utils.getQueryString([this.view as HTMLFormElement]).replace('sort=', '');
-                const arrow = document.querySelector('.js-mobile-modal-button');
-
-                if (sorting.includes('!') && arrow) {
-                    arrow.classList.add('button--inversed');
-                } else {
-                    arrow.classList.remove('button--inversed');
-                }
-
-                indicator.innerHTML = sorting.replace('!', '');
-            }
-        }
-
+        const extraForms = this.settings.extra ? ([...document.querySelectorAll(this.settings.extra)] as HTMLFormElement[]) : null;
         const formData = Utils.getQueryString([...extraForms, this.view as HTMLFormElement]);
 
         if (formData) {
@@ -294,9 +300,13 @@ export class Load extends Component {
 
 
 
-    private reloadFilters = (path: string): void => {
+    private reloadFilters = (path: string, reloadPin = false): void => {
         Promise.all([this.hideContent(), this.load(path)]).then(() => {
             this.showContent();
+            reloadPin && setTimeout(() => {
+                const panel = document.querySelector('.js-panel-wrapper');
+                panel && interviews(panel);
+            }, 1100);
         });
     };
 
@@ -309,12 +319,16 @@ export class Load extends Component {
 
         // always find inputs in main form with filters, sometimes it's executed in outer form
         const selectedInputs: HTMLInputElement[] = [...document.getElementById('main-form').querySelectorAll('input')].filter(input => input.checked);
-        const filteredItems = selectedInputs.map(input => `
-            <li class="filtered__label">
-                <label for="${input.id}">${input.dataset.name}<i class="icon-close"></i></label>
-            </li>`);
+        const filteredItems = selectedInputs.map(input => {
+            const count = input.dataset.count ? `<span>${input.dataset.count}</span>` : '';
+            // eslint-disable-next-line max-len
+            return `<li class="filtered__label"><label for="${input.id}">${input.dataset.name}${count} <i class="icon-close"></i></label></li>`;
+        });
         this.filteredEl.innerHTML = filteredItems.join('');
-        this.bindFiltered();
+
+        setTimeout(() => {
+            this.bindFiltered();
+        }, 50);
     };
 
 
@@ -324,27 +338,11 @@ export class Load extends Component {
         if (this.settings.live) return;
 
         // force form submit on each filtered label click
-        [...this.filteredEl.querySelectorAll('label')].forEach(label => label.addEventListener('click', () => {
-            // submit needs to be triggered manually for closing modal on submit event
-            setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
-        }));
-    };
-
-
-
-    private scrollToContainer = (): void => {
-        const elem = document.querySelector(this.settings.scrollTo) as HTMLElement;
-        if (!elem) {
-            console.error(`element ${this.settings.scrollTo} doesn't exist!`);
-            return;
-        }
-
-        Scroll.scrollTo({
-            el: elem,
-            duration: 1,
-            onComplete: (): void => {
-                ScrollTrigger.refresh();
-            },
+        [...this.filteredEl.querySelectorAll('label')].forEach(label => {
+            label.addEventListener('click', () => {
+                // submit needs to be triggered manually for closing modal on submit event
+                setTimeout(() => this.view.dispatchEvent(new Event('submit')), 10);
+            });
         });
     };
 

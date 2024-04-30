@@ -15,12 +15,16 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
     {
         
         // return 404 if a user hits single interview url and no interview is found
-        if (!empty($url[1])) {
-            $item = $this->parent->getJsonModel('interviews_simple', ['active' => 1, 'slug' => $url[1]], true);
+        if (!empty($url[1]))
+        {
+            $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $url[1]], true);
+
             if (!$item) {
                 $this->parent->set404();
                 return $m;
             }
+
+            else $this->parent->ogSet($item['label'], $item['lead']);
         }
 
         // Calculate pagination variables
@@ -56,6 +60,11 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             $m[$param] = $this->filterUpdate($this->parent->dictGet($dictionaries[0]), $filter);
 
         }
+
+
+        $m['states'] = array_filter($m['states'], function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 0;
+        });
         
         
         // define sort variables
@@ -65,7 +74,18 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
             Get Interviews and supplement it with Filters and Load More data
         */
 
+        
+
         $m['items'] = $this->parent->getJsonModel('interviews_list', $filters, false, $m['sort']['sort_model'], [$startingPage, $numberOfItems]);
+
+        $c=$this->parent->getCollectionsIds();
+        // add colors
+        foreach ($m['items'] as $k=>$v)
+        {
+            $m['items'][$k]['color']=@$c[intval($v['interviewers'])]['color'];
+        }
+        
+
 
         // remove duplicated states
         $m['items'] = array_map(function ($item) {
@@ -79,10 +99,9 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
         // Check if load more items
         $m['load_more'] = $this->checkForMoreItems(count($m['items']), $itemsPerPage, $page, $url, $filters, $m['sort']['sort_model']);
 
-        // Add filter tags to the interview list
-//        $m['items'] = $this->addFiltersToItems($m['items'], $m['topics'], $m['states'], 10, $itemsPerPage, 3, $startingPage);
-
+        // Add filter tags to the interview lists
         $m['items'] = $this->addTagsToInterviews($m['items'], $m['topics'], $m['states'], $itemsPerPage, $startingPage);
+
         
         return $m;
     }
@@ -218,18 +237,34 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
 
     private function addTagsToInterviews($items, $topics, $states) {
 
+        $states = array_filter($states, function ($state) {
+            return isset($state['count_interviews']) && $state['count_interviews'] > 10;
+        });
+
         $filters = array_merge(
             array_map(fn($topic) => ['filter_type' => 'topics', 'type' => 'filter'] + $topic, $topics),
             array_map(fn($state) => ['filter_type' => 'states', 'type' => 'filter'] + $state, $states)
         );
+
+        // Different seed every day
+        //$seed = date('z');
+        //mt_srand($seed);
         
+        shuffle($filters);
+        
+        //Remove already selected filters from the list
+        $filters = array_filter($filters, fn($item) => empty($item['selected']));
+        $filters = array_values($filters);
         $newItems = [];
         $lastLetter = null;
         $i = 0;
-
-        $modifiers = ['pink', 'pale-purple'];
         $minimum_distance=8;
         $last_index=-4;
+
+        $modifiers = ['default','pink','green','pale-purple','orange','pale-blue','brown','dark-green','pale-green','purple'];
+        //mt_srand($seed);
+        shuffle($modifiers);
+        $modifierIndex = 0;
 
         foreach ($items as $k=>$v) {
 
@@ -244,10 +279,11 @@ class model_app_pages_modules_interviews extends model_app_pages_modules
                     $filter = array_shift($filters);
                     if ($filter)
                     {
+                        if ($modifierIndex>=count($modifiers)) $modifierIndex = 0;
                         $filter['url'] = $this->getFilterUrl($filter);
-                        $k = array_rand($modifiers);
-                        $filter['modifier'] = $modifiers[$k];
+                        $filter['modifier'] = $modifiers[$modifierIndex];
                         $newItems[] = $filter;
+                        $modifierIndex++;
                     }
                 }
             }

@@ -11,7 +11,7 @@
         },
         "critical": {
             "app": "application/views/scaffold",
-            "workspace": "workspace/includes"
+            "workspace": "workspace/views/scaffold"
         },
         "scripts": {
             "ts": "src/ts/**/*.ts",
@@ -28,6 +28,14 @@
         },
         "images": {
             "source": "src/images/*.+(jpg|png|gif|jpeg)",
+            "dest": "public/theme/images"
+        },
+        "webp": {
+            "source": "src/images/*.webp",
+            "dest": "public/theme/images"
+        },
+        "to_webp": {
+            "source": "src/images/*.png",
             "dest": "public/theme/images"
         },
         "tinypng": {

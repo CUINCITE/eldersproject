@@ -1,82 +1,88 @@
 <section class="module module--collection_hero">
+
     <div class="collection_hero">
 
-        <div class="collection_hero__cover">
-            {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+        <div class="collection_hero__sticker-wrapper">
+            <div class="claim__sticker" data-scroll="sticky">
+                <a href="#interviews">
+                    {% include "components/c_sticker.html" with {'text':'Skip to interviews', parallax:true, modifiers: [item.color, 'long_text']}  %}
+                </a>
+            </div>
         </div>
 
-        <div class="collection_hero__wrapper">
+        <div class="collection_hero__container">
 
-            <div class="about_hero__logo desktop-hide">
-                {% include "./components/c_logo_box.html" %}
+            <div class="collection_hero__cover phone-hide tablet-hide js-illustration" data-scroll="collectionHero">
+                {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image, preload: true } %}
             </div>
 
-            <div class="box collection_hero__author_wrapper">
+            <div class="collection_hero__wrapper">
+
+                <div class="about_hero__logo desktop-hide">
+                    {% include "./components/c_logo_box.html" %}
+                </div>
+
+                <div class="box collection_hero__cover_wrapper desktop-hide" >
+
+                    <div class="collection_hero__cover">
+                        {% include "/subviews/subview_illustration.html" with { shadow: item.color, image: item.image } %}
+                    </div>
+                </div>
+
+                <div class="box collection_hero__author_wrapper" >
+
+                    <div class="grid">
+                        <div class="col-span-12">
+                            <div class="collection_hero__author">
+                                <div class="collection_author collection_author--huge">
+                                    <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
+
+                                    <h4 class="collection_author__collection">Collection</h4>
+                                </div>
+                            </div>
+
+                            <div class="collection_hero__area desktop-hide">
+                                {{item.collection_title}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box desktop-only" >
+
+                    <div class="grid">
+                        <div class="col-span-12">
+                            <div class="collection_hero__copy no-padding">
+                                <div class="collection_hero__intro">
+                                    <div class="text text--collection_hero-top">
+                                        <p>{{item.collection_title}}</p>
+                                    </div>
+                                    <div class="text text--collection_hero-bottom">
+                                        <p>{{item.lead|nl2br}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="box desktop-hide" >
+
                 <div class="grid">
                     <div class="col-span-12">
-                        <div class="collection_hero__author">
-                            <div class="collection_author collection_author--huge">
-                                <h3 class="collection_author__name">{{item.first_name}}</br>{{item.last_name}}</h3>
-
-                                <h4 class="collection_author__collection">Collection</h4>
+                        <div class="collection_hero__copy no-padding">
+                            <div class="collection_hero__intro">
+                                <div class="text text--collection_hero-bottom">
+                                    <p>{{item.lead|nl2br}}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="collection_hero__area desktop-hide">
-                            {{item.collection_title}}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="box collection_hero__cover_wrapper">
-                {#<div class="collection_hero__area desktop-only">
-                    {{item.locations}}
-                </div>#}
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="grid">
-                <div class="col-span-12">
-                    <div class="collection_hero__copy no-padding">
-                        <div class="collection_hero__intro">
-                            <div class="text">
-                                <p
-                                    style="max-width:30rem;font-family: Pangram Sans;font-size:28px;text-transform:uppercase;line-height:28px">
-                                    {{item.collection_title|nl2br}}</p>
-                            </div>
-                            {#{% include "/subviews/subview_text.html" with {text: "<p>#{item.collection_title}</p>" }
-                            %}#}
-                            {#{% include "components/c_link.html" with { url: "#interviews", text: "Go to interviews" }
-                            %}#}
-                        </div>
-                        {#<span class="collection_hero__scroll">OR SCROLL DOWN TO READ MORE</span>#}
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
- <section class="module module--collection_location">
-    <div class="collection_location">
-        <div class="collection_location__claim box" data-scroll="box">
-            <div class="box__bg"></div>
-            <div class="grid">
-                <div class="col-span-12">
-                    {% include "./components/c_claim.html" with { modifier: "collection", text: item.lead } %}
-                </div>
-            </div>
-        </div>
-        <div class="collection_location__pin box" data-scroll="box">
-            <div class="box__bg"></div>
-            <div class="grid">
-                <div class="col-span-12">
-                    <p class="collection_location__locations">[[svg::pin]]{{item.locations}}</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

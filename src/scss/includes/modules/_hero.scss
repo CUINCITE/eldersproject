@@ -1,15 +1,19 @@
 .hero {
-
-
-
     &__wrap {
         position: relative;
 
-        @include breakpoint(not-desktop) {
+        @include breakpoint(desktop) {
             @include flex(column, flex-start, stretch);
+
             min-height: var(--app-height);
         }
-    }  
+
+        @include breakpoint(not-desktop) {
+            @include flex(column, flex-start, stretch);
+
+            min-height: var(--app-height);
+        }
+    }
 
 
 
@@ -20,27 +24,65 @@
         text-transform: uppercase;
 
         @include breakpoint(desktop) {
-            @include font-size(240, 169);
-            @include letter-spacing(-10.8, 240);
+            @include font-size(216, 1);
+            @include letter-spacing(-9.72, 216);
+
+            position: relative;
+            z-index: 1;
+
+            @media (min-aspect-ratio: 1450 / 820) {
+                // font-size: 27vh;
+            }
         }
 
         @include breakpoint(tablet) {
-            @include font-size(220, .72); 
-            @include letter-spacing(-9.5, 220); 
+            @include font-size(220, .72);
+            @include letter-spacing(-9.5, 220);
         }
 
         @include breakpoint(phone) {
-            @include font-size(118.8, 85.7); 
-            @include letter-spacing(-10.8, 240); 
+            @include font-size(118.8, 85.7);
+            @include letter-spacing(-10.8, 240);
+        }
+    }
+
+
+
+    &__line {
+
+        @include breakpoint(desktop) {
+            display: block;
+            margin-block: trim-font(1);
+            padding-block: rem(12);
+            padding-left: rem(13);
+        }
+
+        @include breakpoint(not-desktop) {
+            display: inline-block;
+
+            @include breakpoint(tablet) {
+                padding-top: rem(30);
+                padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(8)});
+            }
+
+            @include breakpoint(phone) {
+                padding-top: rem(13);
+                padding-left: rem(13);
+            }
+        }
+
+
+        .circle {
+            left: 105%;
         }
     }
 
 
 
     &__subtitles {
-        @include breakpoint(not-desktop) {
-            flex-grow: 1;
-        }
+        position: relative;
+        z-index: 1;
+        flex-grow: 1;
     }
 
 
@@ -49,13 +91,13 @@
         text-transform: uppercase;
 
         @include breakpoint(desktop) {
-            @include font-size(20, 31.5);
-            @include letter-spacing(-0.6, 20);
+            @include font-size(24, 1.5);
+            @include letter-spacing(-0.75, 24);
         }
 
         @include breakpoint(tablet) {
             @include font-size(28, 1);
-            @include letter-spacing(-0.9, 28); 
+            @include letter-spacing(-0.9, 28);
 
             padding-top: rem(14);
         }
@@ -70,33 +112,23 @@
 
 
 
-    &__line {
-        display: inline-block;
-
-        @include breakpoint(desktop) {
-            padding-top: rem(27);
-            padding-left: rem(13);
-        }
-
-        @include breakpoint(tablet) {
-            padding-top: rem(30);
-            padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(8)});
-        }
-
-        @include breakpoint(phone) {
-            padding-top: rem(13);
-            padding-left: rem(13);
-        }
-    }
-
-
-
     &__bottom {
         @include flex(row, space-between, flex-start);
 
         @include breakpoint(desktop) {
-            padding-top: rem(10);
-            padding-bottom: rem(40);
+            padding-top: rem(17);
+            padding-left: rem(2);
+
+            .text {
+                padding-bottom: rem(18) !important;
+
+                @include font-size(21, 25.62);
+
+
+                @media (min-aspect-ratio: 1450 / 820) {
+                    // font-size: 3vh;
+                }
+            }
         }
 
         @include breakpoint(phone) {
@@ -111,7 +143,7 @@
         z-index: 5;
 
         @include breakpoint(desktop) {
-            bottom: rem(-23);
+            bottom: rem(-30);
             left: rem(20);
         }
 
@@ -123,19 +155,6 @@
         @include breakpoint(phone) {
             bottom: rem(-13);
             left: rem(18);
-        }
-    }
-
-
-
-    &__logo {
-        @include breakpoint(phone) {
-            
-            svg { 
-                width: vw(80, phone); 
-                margin: vw(12, phone) 0 vw(9, phone) vw(13, phone);
-                height: auto; 
-            }
         }
     }
 
@@ -168,7 +187,23 @@
         @include breakpoint(phone) {
             @include letter-spacing(-8.316, 118.8);
 
-            padding-left: rem(9);
+            padding-left: rem(10);
+            display: inline-block;
+            margin-top: 1px;
         }
-    } 
+    }
+
+    &__author {
+        @include breakpoint(desktop) {
+            padding-top: rem(17);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: vw(15, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding-top: vw(15, phone);
+        }
+    }
 }

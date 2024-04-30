@@ -48,6 +48,12 @@
             "type": "date"
         },
         {
+            "field":"label"
+        },
+        {
+            "field":"label_sort"
+        },
+        {
             "field":"interviewer","label":"Interviewer","type":"select",
             "source":
             {
@@ -76,6 +82,9 @@
                 "model":"interviews"
             },
             "list":true
+        },
+        {
+            "field":"mp3_size","label":"MP3 size"
         },
         {
             "field": "uid",

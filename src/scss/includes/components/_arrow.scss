@@ -54,7 +54,7 @@
 
             .button--small & {
                 @include breakpoint(desktop) {
-                    height: rem(8);
+                    height: rem(7);
                 }
 
                 @include breakpoint(tablet) {

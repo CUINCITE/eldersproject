@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+import { gsap } from 'gsap/dist/gsap';
 
 
 export function generateUID(): string {
@@ -334,6 +335,112 @@ export function setStorageItem(key: string, value: string): void {
 }
 
 
+export function setSessionStorageItem(key: string, value: string): void {
+    try {
+        sessionStorage.setItem(key, value);
+    } catch (error) {
+        console.warn(error);
+    }
+}
+
+
 export function getStorageItem(key: string): string {
     return localStorage.getItem(key);
+}
+
+
+export function getSessionStorageItem(key: string): string {
+    return sessionStorage.getItem(key);
+}
+
+
+export function findVisibleBoxes(boxes: NodeListOf<HTMLElement>): HTMLElement[] {
+    const visibleBoxes = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+
+        if (rect.top < (window.innerHeight + window.scrollY) && rect.bottom > window.scrollY) {
+            visibleBoxes.push(box);
+        }
+    });
+
+    return visibleBoxes;
+}
+
+
+export interface IBox {
+    element: HTMLElement;
+    visibleHeight: number;
+    isTopPart: boolean;
+    topOffset: number;
+}
+
+
+export function getVisibleItems(boxes: Element[]): IBox[] {
+    const visibleBoxes: IBox[] = [];
+
+    boxes.forEach(box => {
+        const rect = box.getBoundingClientRect();
+        const { scrollTop } = document.documentElement;
+
+        const topFromDocument = rect.top + scrollTop;
+        const bottomFromDocument = rect.bottom + scrollTop;
+
+        if (topFromDocument < (window.innerHeight + scrollTop) && bottomFromDocument > scrollTop) {
+            visibleBoxes.push({
+                element: box as HTMLElement,
+                visibleHeight: Math.min(bottomFromDocument, window.innerHeight + scrollTop) - Math.max(topFromDocument, scrollTop),
+                isTopPart: topFromDocument > scrollTop,
+                topOffset: topFromDocument - scrollTop,
+            });
+        }
+    });
+
+    return visibleBoxes;
+}
+
+
+export function createPlaceholders(elements: IBox[]): HTMLElement[] {
+    const placeholders = [];
+
+    elements.forEach(item => {
+        item.element.classList.remove('is-animated');
+        const placeholder = document.createElement('div');
+        placeholder.classList.add('box__placeholder');
+        placeholder.style.height = `${item.visibleHeight}px`;
+
+        // when box is higher than viewport, make it equal to viewport height
+        if (item.visibleHeight >= window.innerHeight) {
+            placeholder.style.top = `${Math.abs(item.topOffset)}px`;
+        } else {
+            const position = item.isTopPart ? 'top' : 'bottom';
+            placeholder.style[position] = '0px';
+        }
+        item.element.appendChild(placeholder);
+        placeholders.push(placeholder);
+    });
+    return placeholders;
+}
+
+
+
+export function shake(el): void {
+    gsap.fromTo(el, { x: -10 }, {
+        duration: 0.5,
+        x: 0,
+        clearProps: 'transform',
+        ease: 'elastic.out(2, 0.2)',
+    });
+    navigator.vibrate([40, 20, 40, 20, 40]);
+}
+
+
+
+export function shuffle(array: string[]): string[] {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }

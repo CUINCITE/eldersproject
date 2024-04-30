@@ -22,7 +22,7 @@ $cfg=array(
 			
 			'serdelia_base_url'       =>  "/serdelia/",           		//  folder with serdelia CORE files
     		'serdelia_languages_url'  =>	false,                        //  put language string in serdelia URL      		
-    		
+    		'serdelia_logout_time' => 0,
     		'serdelia_keys'=>[
 				getenv('CLIENT_KEY1'),
 				getenv('CLIENT_KEY2')

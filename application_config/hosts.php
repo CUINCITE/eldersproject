@@ -32,7 +32,10 @@ $cfg_domains = [
             'mailchimp' => [
                 'key' => getenv('MAILCHIMP_KEY'),
                 'list_id' => getenv('MAILCHIMP_LIST_ID')
-            ]
+			],
+			'mapbox'=> [
+                'token' => getenv('MAPBOX_TOKEN')
+			]
         ],
 		'clients' =>
 		[
@@ -48,11 +51,12 @@ if (getenv('S3_HOST'))
 $cfg_domains[getenv('DOMAIN')]['s3']=
 		[
 			'host' =>	getenv('S3_HOST'),
-			'key' =>	getenv('S3_KEY'),
-			'secret' =>	getenv('S3_SECRET'),
+			//'key' =>	getenv('S3_KEY'),
+			//'secret' =>	getenv('S3_SECRET'),
 			'bucket' =>	getenv('S3_BUCKET'),
-			'region' =>	getenv('S3_REGION'),
-			'folder' =>	getenv('S3_FOLDER'),
-			'cache' => '/cache/s3.files'			];
+			//'region' =>	getenv('S3_REGION'),
+			'folder' =>	getenv('S3_FOLDER')
+			//'cache' => '/cache/s3.files'			
+		];
 
 $cfg_domains['localhost']=$cfg_domains[getenv('DOMAIN')];

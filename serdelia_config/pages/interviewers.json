@@ -15,7 +15,6 @@
     "buttons_edit":
     [
         {"label":"Storytelling","type":"page","icon":"history-edu","page":"collection_modules,%id%"},
-        {"label":"Excerpts on Map","type":"page","icon":"history-edu","page":"map_excerpts,%id%"},
         {"label":"Illustrations","type":"page","icon":"image","page":"interview_illustrations,%id%"},
         {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }},
         {"type":"plugin","plugin":"interviewer_update","label":"Update" }
@@ -41,12 +40,8 @@
             "required": true
         },
         {
-            "field":"label",
-            "edit":false,
-            "hidden":true,
-            "auto": {
-                "pattern": "{{first_name}} {{last_name}}"
-            }
+            "field":"label","label":"Label"
+            
         },
         {
             "hr": true,
@@ -109,7 +104,7 @@
         {
             "field": "text",
             "type": "html",
-            "label": "Copy"
+            "label": "Bio"
         },
         
         {
@@ -127,7 +122,7 @@
             
             "list": {
                 "height": 160,
-                "folder": "desktop",
+                "folder": "mobile",
                 "temp-layout": "cover",
                 "src_blank": "blank.png"
             },
@@ -156,10 +151,17 @@
                 {
                     "folder": "big",
                     "label": "Big Tile",
-                    "width": 1346,
-                    "height": 1346,
+                    "width": 1540,
+                    "height": 1540,
                     "crop": true,
                     "retina": true
+                },
+                {
+                    "folder": "og",
+                    "label": "OG Image",
+                    "width": 1200,
+                    "height": 630,
+                    "crop": true
                 }
             ]
         },

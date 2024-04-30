@@ -14,13 +14,22 @@ html {
     position: relative;
     height: 100%;
     font-size: $base-font-size;
+    overflow-x: hidden;
+    overscroll-behavior: none;
 
     @include breakpoint(desktop) {
         font-size: vw($base-font-size);
+
+        // &.is-transition { overflow: hidden; } // causes page width flickering because of the scrollbar
     }
 
     @include breakpoint(hd) {
         font-size: $base-font-size * $size-hd / $size-design;
+    }
+
+
+    @include breakpoint(phone) {
+        // &.is-overflow-hidden { overflow: hidden; }
     }
 }
 
@@ -32,21 +41,36 @@ body {
     text-align: left;
     min-height: 100vh;
     color: var(--color-text);
+    background: var(--color-box);
+    overflow-x: hidden;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+    overflow-x: clip;
 
     // for collection's page
     counter-reset: collection-counter;
 }
 
+
 body,
 html {
-    overflow-x: hidden;
-
     &:has(.modal.is-open) { overflow: hidden; }
 
-    &:has(.has-menu-open) {
+    &:has(.has-menu-open, .is-transition),
+    &.has-menu-open,  &.is-transition {
         @include breakpoint(not-desktop) {
             overflow: hidden;
         }
+    }
+
+
+    @include breakpoint(not-desktop) {
+        &.is-transition { pointer-events: none; }
+    }
+
+
+    @include breakpoint(phone) {
+        &.has-audio-player-expanded,
+        &.is-overflow-hidden { overflow: hidden; }
     }
 }
 
@@ -57,24 +81,59 @@ html {
     min-height: var(--app-height);
     position: relative;
     z-index: 1;
-    background: var(--color-bg);
     display: grid;
     grid-template-columns: 1fr var(--GLOBAL-aside-width);
     grid-template-rows: 1fr;
     grid-template-areas: "main header"
         "newsletter header"
         "footer header";
-    gap: 1px;
+    column-gap: 1px;
     align-content: start;
     margin-top: -1px; // box margin-top fix
 
+
+    body.has-lightbox & { margin-top: 0; }
+
+
     @include breakpoint(not-desktop) {
-        z-index: unset;
+        // z-index: unset;
+        overflow-x: hidden;
+
+
+        body.is-lightbox-open & {
+            display: none;
+        }
     }
 
-    // @include breakpoint(not-desktop) {
-    //     grid-template-columns: 1fr;
-    // }
+
+    .has-lightbox & {
+        .accessibility & {
+            display: none;
+        }
+    }
+
+
+    body.is-loader-hidden & {
+        transition-property: transform, background;
+
+        // background: var(--color-bg);
+
+
+        @include breakpoint(phone) {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 0 0 auto;
+                width: var(--GLOBAL-aside-width);
+                background-color: var(--color-black);
+            }
+        }
+    }
+
+
+    html.is-transition & {
+        background: none;
+    }
 }
 
 
@@ -86,22 +145,8 @@ main {
 
 article {
     height: 100%;
-
-    &::before {
-        @include full;
-
-        content: "";
-        z-index: 4;
-        background-color: rgba($color-bg, .5);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .3s $ease-custom;
-    }
-
-    &:has(.modal.is-open)::before {
-        opacity: 1;
-        pointer-events: all;
-    }
+    opacity: 0;
+    transition: background-color .25s $ease-out;
 }
 
 
@@ -151,6 +196,8 @@ a {
 
 b,
 strong {
+    @include font-settings(700, 100);
+
     font-weight: 700;
 }
 

@@ -24,17 +24,9 @@ class controller_app_api extends controller_app
             case "interviews":
 
                 $slug=$this->route->e(1);
-                if (substr($slug,0,2)=='c-')
-                {
-                    $action='playlist';
-                    $object=null;
-                    $this->get=['id'=>$this->route->e(1)];    
-                } else
-                {
-                    $action='interview';
-                    $object=null;
-                    $this->get=['slug'=>$slug];
-                }
+                $action='interview';
+                $object=null;
+                $this->get=['slug'=>$slug];
                 break;
 
             case "api":

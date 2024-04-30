@@ -18,6 +18,7 @@ class controller_app extends _uho_controller
         
         $this->data['development']=development;
         $this->data['scaffold']=array();
+        $this->data['scaffold']['intro_quote']=$this->model->getIntroQuote();
         $this->data['scaffold']['menu']=$this->model->getJsonModel('menu',array('type'=>'main','active'=>1),false,'nr');
         $this->data['scaffold']['footer']=$this->model->getJsonModel('menu',array('type'=>'footer','active'=>1),false,'nr');
         $this->data['scaffold']['social']=$this->model->getJsonModel('menu',array('type'=>'social','active'=>1),false,'nr');
@@ -34,8 +35,11 @@ class controller_app extends _uho_controller
 
         $this->data['head']['url']=rtrim($this->route->getUrlNow(),'/');
 
-        $this->data['hide_mobile_logo'] = $this->model->hide_mobile_logo;
+        $this->data['content']['show_mobile_logo'] = false;
 
+        if (!empty($this->data['content']['slug'] && in_array($this->data['content']['slug'], ['contact', 'search']))) {
+            $this->data['content']['show_mobile_logo'] = true;
+        }
 
     }
 
@@ -119,6 +123,7 @@ class controller_app extends _uho_controller
                             if (@$vv['page']) $vv['filters']['page'] = $vv['page'];
                             if (@$vv['sort']) $vv['filters']['sort'] = $vv['sort'];
                             if (@$vv['topics']) $vv['filters']['topics'] = implode(',',$vv['topics']);
+                            if (@$vv['states']) $vv['filters']['states'] = implode(',',$vv['states']);
                             
                             if (!empty($vv['filters'])) $v .= '?' . http_build_query($vv['filters']);
                             break;

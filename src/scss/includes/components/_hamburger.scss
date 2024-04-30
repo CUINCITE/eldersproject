@@ -4,10 +4,8 @@
     overflow: hidden;
 
     @include breakpoint(desktop) {
-        gap: vw(3);
-        margin-left: vw(3);
+        gap: 4px;
     }
-
 
     @include breakpoint(not-desktop) {
         top: 22px;
@@ -18,7 +16,7 @@
             width: 100%;
             gap: 8px;
         }
-          
+
         @include breakpoint(phone) {
             gap: 4px;
         }
@@ -45,8 +43,8 @@
         position: relative;
         display: block;
         height: 1px;
-        width: 40px;
-        background: #444;
+        width: 32px;
+        background: $color-gray;
         margin-left: auto;
         margin-right: 0;
         transition: transform .4s $ease-custom, opacity .2s $ease-custom .1s;
@@ -61,7 +59,7 @@
 
         @include breakpoint(tablet) {
             width: 100%;
-        };
+        }
 
         @include breakpoint(phone) {
             width: 32px;
@@ -81,7 +79,7 @@ button {
     .hamburger__line {
         transform: translateX(-7px);
 
-        &:nth-of-type(2) {
+        &:nth-of-type(even) {
             transform: translateX(7px);
         }
     }

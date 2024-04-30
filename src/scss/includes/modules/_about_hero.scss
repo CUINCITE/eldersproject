@@ -2,26 +2,22 @@
     display: grid;
     position: relative;
 
-    @include breakpoint(desktop) {
-        grid-template-rows: auto 1fr;
-        min-height: var(--app-height);
-    }
+    // @include breakpoint(desktop) {
+    //     grid-template-rows: auto 1fr;
+    //     min-height: var(--app-height);
+    // }
 
     @include breakpoint(not-desktop) {
-        grid-template-rows: auto auto 1fr;
+        // grid-template-rows: auto auto 1fr;
 
-        @include breakpoint(tablet) { 
-            min-height: var(--app-height);
-
-            .heading { 
+        @include breakpoint(tablet) {
+            .heading {
                 padding-block: rem(15);
             }
         }
 
         @include breakpoint(phone) {
-            height: vw(517, phone);
-    
-            .heading { 
+            .heading {
                 padding-block: rem(8);
             }
         }
@@ -37,13 +33,18 @@
         }
     }
 
+
     .illustration {
         transform: unset;
+
+
+        &[data-scroll] { opacity: 0; }
     }
+
 
     &__cards {
         position: absolute;
-        
+
         @include breakpoint(desktop) {
             width: vw(927);
             height: vw(927);
@@ -57,10 +58,10 @@
         @include breakpoint(tablet) {
             width: vw(620, tablet);
             aspect-ratio: 1/1;
-            rotate: -7deg; 
-            top: 0; 
+            rotate: -7deg;
+            top: 0;
             left: vw(-8, tablet);
-        } 
+        }
 
         @include breakpoint(phone) {
             width: vw(289, phone);

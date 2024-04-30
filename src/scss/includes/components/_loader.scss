@@ -1,0 +1,158 @@
+.loader {
+    background: none;
+    color: var(--loader-color-1);
+    padding-left: 20 / 1280 * 100vw;
+
+    @include breakpoint(tablet) {
+        padding-inline: var(--grid-margin);
+    }
+
+    @include breakpoint(phone) {
+        padding-inline: var(--grid-margin);
+    }
+
+    body:not(.is-not-ready) & {
+        pointer-events: none;
+    }
+
+
+
+    &__grid {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr var(--GLOBAL-aside-width);
+        align-items: start;
+    }
+
+
+
+    &__wrap {
+        @include flex(column, center, flex-start);
+        position: relative;
+        height: 100%;
+        transition: transform 0.3s $easing calc(var(--loader-duration) + 0.05s),
+            opacity 0.3s calc(var(--loader-duration) + 0.05s);
+
+        @include breakpoint(not-desktop) {
+            padding-top: var(--hamburgerbar-height);
+
+            @include breakpoint(phone) {
+                padding-top: 0;
+            }
+        }
+
+        body:not(.is-not-ready) & {
+            transform: translateX(10vw);
+            opacity: 0;
+        }
+    }
+
+
+    &__line {
+        transition: opacity 0.1s calc(var(--loader-duration) + 0.35s);
+
+        body:not(.is-not-ready) & {
+            opacity: 0;
+        }
+    }
+
+
+
+    &__quote {
+        @include font-family(compressed, 400);
+
+        font-size: 50 / 1280 * 100vw;
+        line-height: 45 / 50 * 1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        opacity: 0;
+        animation: fade-in 2s forwards;
+
+        @include breakpoint(tablet) {
+            @include font-size(38, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 0.9);
+
+            font-feature-settings: "ss01" on;
+
+            br {
+                display: none;
+            }
+        }
+    }
+
+
+
+    &__author {
+        @include font-family(normal, 400);
+        @include font-settings(400, 100);
+
+        font-size: 19 / 1280 * 100vw;
+        line-height: 30 / 19 * 1;
+        text-transform: uppercase;
+        align-items: center;
+        letter-spacing: -0.03em;
+        display: flex;
+        opacity: 0;
+        animation: fade-in-left 1.5s forwards 0.5s;
+
+        @include breakpoint(tablet) {
+            @include font-size(16, 0.95);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(16, 0.9);
+
+            font-feature-settings: "ss02" on, "ss01" on;
+            margin-top: rem(3);
+        }
+
+        &::before {
+            content: "";
+            height: 1px;
+            width: rem(35);
+            background: currentColor;
+            display: inline-block;
+            margin-inline: rem(3) rem(8);
+
+            @include breakpoint(tablet) {
+                width: rem(40);
+            }
+
+            @include breakpoint(phone) {
+                width: rem(35);
+                margin-inline: rem(2) rem(8);
+            }
+        }
+    }
+
+
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        transform-origin: right center;
+        transition: transform 0.7s $easing;
+
+        &:nth-child(1) {
+            background: var(--loader-color-2, $color-pale-blue);
+            transition-delay: calc(var(--loader-duration) + 0.1s);
+        }
+
+        &:nth-child(2) {
+            background: var(--loader-color-3, $color-red);
+            transition-delay: calc(var(--loader-duration) + 0.05s);
+        }
+
+        &:nth-child(3) {
+            background-color: var(--color-black);
+            transition-delay: var(--loader-duration);
+        }
+
+        body:not(.is-not-ready) & {
+            transform: scaleX(0);
+        }
+    }
+}

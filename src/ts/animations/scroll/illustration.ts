@@ -1,17 +1,20 @@
 import { gsap } from 'gsap/dist/gsap';
 import { easing } from '../../Site';
 
-export const illustration = (el: HTMLElement) => {
+export const illustration = (el: HTMLElement, delay?: number, quick?: number) => {
+    if (quick) return;
+
+    const { subtle } = el.dataset;
 
     gsap.set(el, {
         transformOrigin: '50% 50%',
-        yPercent: 50,
+        yPercent: subtle ? 30 : 50,
         rotate: -15,
     });
 
 
     gsap.fromTo(el, {
-        yPercent: 50,
+        yPercent: subtle ? 30 : 50,
         rotate: -15,
     }, {
         yPercent: 0,

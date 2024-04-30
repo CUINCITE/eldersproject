@@ -2,28 +2,21 @@
     &__letters {
         @include flex;
 
-        transition: padding-top .25s $ease-custom;
+        transition: opacity .25s $ease-custom;
 
         @include breakpoint(desktop) {
-            padding-top: rem(36);
+            padding-top: rem(38);
+            margin: 0 rem(-8);
         }
 
         @include breakpoint(tablet) {
-            padding-top: rem(36);
             flex-wrap: wrap;
             column-gap: rem(42);
         }
 
         @include breakpoint(phone) {
             flex-wrap: wrap;
-            column-gap: rem(24);
-        }
-
-        .is-pinned & {
-
-            @include breakpoint(desktop) {
-                padding-top: rem(13);
-            }
+            column-gap: 0;
         }
     }
 
@@ -57,8 +50,8 @@
             }
 
             @include breakpoint(phone) {
-                flex-basis: rem(27);
-                margin-top: rem(14);
+                flex-basis: calc(100% / 6);
+                margin-top: rem(13);
             }
         }
 
@@ -96,19 +89,19 @@
 
 
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 inset: 100% 0 auto;
                 height: 1px;
                 background-color: var(--color-pure-black);
-                transform: scalex(0);
+                transform: scaleX(0);
                 transition: transform .3s $ease-custom;
                 transform-origin: center;
             }
 
 
             @include hover {
-                &:after {
+                &::after {
                     transform: scaleX(1);
                 }
             }
@@ -119,16 +112,26 @@
 
     &__tabs {
         background-color: var(--color-box);
+        margin-top: 0;
+        border-bottom: 1px solid var(--color-bg);
+
+
+        html.is-transition & { border-bottom-color: rgba($color-white, 0); }
 
         @include breakpoint(not-desktop) {
             overflow: hidden;
+            border-bottom: none;
+
+            .hide-letters & {
+                display: none;
+            }
         }
-    }
 
-
-
-    &__tabs {
-        background-color: var(--color-box);
+        @include breakpoint(phone) {
+            .grid {
+                margin: 0;
+            }
+        }
     }
 
 
@@ -146,13 +149,30 @@
                 padding-top: rem(68);
             }
         }
+
+
+        &::before {
+            @include full;
+
+            content: "";
+            z-index: 4;
+            background-color: rgba($background-light-offwhite, .8);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .3s $ease-custom;
+        }
+
+        body:has(.dropdown.is-open, .modal.is-open) &::before {
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 
 
 
     &__tile {
         position: relative;
-        border-bottom: 1px solid var(--color-bg);
+        border-top: 1px solid var(--color-bg);
         overflow: hidden;
         padding: 0 var(--grid-margin);
 
@@ -161,18 +181,29 @@
             display: grid;
             align-content: start;
             align-items: start;
-            grid-template-columns: 34% 23.5% 17% 1fr;
+            grid-template-columns: 43% 16% 17% 1fr;
         }
 
-        @include breakpoint(tablet) {
-            display: grid;
-            align-content: start;
-            align-items: start;
+        &:first-child {
+            border-top: none;
+        }
 
-            // grid-template-columns: repeat(8, 1fr);
-            grid-template-columns: 2.15fr 1fr 1fr;
-            column-gap: map-get($grid-gutter, tablet);
-            padding-block: rem(20);
+
+        .is-grid-view & {
+            @include breakpoint(desktop) {
+                &:nth-child(-n + 3) { border-top: none; }
+            }
+        }
+
+
+        @include breakpoint(tablet) {
+            @include flex(column, flex-start, stretch);
+
+            padding-top: rem(20);
+
+            .interviews__copy {
+                max-width: 75%;
+            }
         }
 
         @include breakpoint(phone) {
@@ -187,6 +218,8 @@
                 @include flex(column, center, center);
             }
 
+            @include breakpoint(not-desktop) { overflow: hidden; }
+
             @include breakpoint(tablet) {
                 @include flex(column, center, flex-start);
 
@@ -199,11 +232,9 @@
 
                     &--small {
                         @include font-size(26, 1);
-                        @include letter-spacing(-0.8, 26)
-                    }
+                        @include letter-spacing(-0.8, 26); }
 
                     .arrow {
-
                         .triangle {
                             border-width: rem(10) 0 rem(10) rem(11);
                         }
@@ -224,8 +255,7 @@
 
                     &--small {
                         @include font-size(30, 1);
-                        @include letter-spacing(-0.9, 30)
-                    }
+                        @include letter-spacing(-0.9, 30); }
 
                     .arrow {
                         span:nth-child(1) {
@@ -245,16 +275,16 @@
         }
 
 
-        .is-grid-view & {
-            @include flex(column, flex-start, flex-start);
+        @include breakpoint(desktop) {
+            .is-grid-view & {
+                @include flex(column, flex-start, flex-start);
 
-            min-height: vw(236);
-            padding: 0 rem(13);
+                min-height: vw(236);
 
-
-            &:nth-child(3n + 1),
-            &:nth-child(3n + 2) {
-                border-right: 1px solid var(--color-bg);
+                &:nth-child(3n + 1),
+                &:nth-child(3n + 2) {
+                    border-right: 1px solid var(--color-bg);
+                }
             }
         }
     }
@@ -266,8 +296,6 @@
         transition: margin-bottom .25s $ease-custom, padding-bottom .25s $ease-custom;
 
         @include breakpoint(desktop) {
-            margin-bottom: rem(35);
-            padding-bottom: rem(10);
             position: relative;
         }
 
@@ -352,16 +380,12 @@
 
 
     &__radios {
-        display: grid;
 
         @include breakpoint(desktop) {
-            grid-template-columns: 34% 23.5% 17% 1fr;
             padding-bottom: rem(4);
         }
 
         @include breakpoint(tablet) {
-            grid-template-columns: 2.15fr 1fr 1fr;
-            column-gap: map-get($grid-gutter, tablet);
             margin-top: rem(30);
             padding-bottom: rem(12);
 
@@ -373,6 +397,158 @@
 
         > div {
             @include flex(row, flex-start, center);
+        }
+    }
+
+
+
+    &__dropdown {
+        @include flex(row, space-between, flex-start);
+
+        position: relative;
+    }
+
+
+
+    &__buttons {
+        @include flex(row, flex-start, center);
+
+        position: relative;
+        width: rem(24);
+        height: rem(24);
+
+        @include breakpoint(desktop) {
+            margin: rem(-4) rem(-4) rem(4) auto;
+            gap: rem(4);
+        }
+
+        @include breakpoint(tablet) {
+            margin: rem(-4) rem(-13) rem(8) auto;
+            gap: rem(4);
+        }
+
+        button {
+            @include flex(row, center, center);
+
+            position: absolute;
+            inset: 0;
+            transition: opacity .5s $ease-out;
+
+
+            &.button--grid {
+                opacity: 0;
+                pointer-events: none;
+
+                .is-list & {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+            }
+
+
+            &.button--list {
+                .is-list & {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+
+
+    &__panel {
+        position: relative;
+        z-index: 4;
+        right: 0;
+
+        // trick for proper scrolltrigger's pin
+        top: -1px !important;
+        left: 0 !important;
+        height: auto !important;
+
+
+        html.is-transition & {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+
+
+    &__interviews {
+        z-index: 1;
+        border-top: none !important;
+        margin-top: -2px;
+        
+        @include breakpoint(not-desktop) {
+            margin-top: -1px;
+
+            .hide-letters + & {
+                border-top: 1px solid var(--color-bg) !important;
+            }
+        }
+    }
+
+
+
+    &__filters {
+        margin-top: 0;
+        border-top: none !important;
+    }
+
+
+    &__filters:not(:has(option[value$="narrators"]:checked)) ~ &__tabs &__letters {
+        opacity: 0;
+    }
+
+
+
+    &__controls {
+        background-color: var(--color-box);
+
+        // border-bottom: 1px solid $color-bg;
+        position: relative;
+        z-index: 1;
+    }
+
+
+
+    &__trigger {
+        margin-right: auto;
+        margin-left: -1px;
+
+
+        button {
+            @include flex;
+            @include font-family(normal);
+            @include font-settings(500, 100);
+            @include font-size(17, 18);
+
+            letter-spacing: normal;
+            text-transform: uppercase;
+            gap: rem(8);
+
+
+            i { margin-top: rem(-4); }
+
+            @include breakpoint(phone) {
+                @include font-size(15.3, 16.06);
+            }
+        }
+    }
+
+
+
+    &__form {
+        @include flex(row, flex-end, flex-start);
+
+        @include breakpoint(desktop) {
+            padding-top: rem(15);
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
         }
 
 
@@ -399,10 +575,6 @@
                 margin-block: trim-font(1);
             }
 
-            body:has(.is-grid-view) & {
-                opacity: 0;
-                pointer-events: none;
-            }
 
             span {
                 display: inline-block;
@@ -433,7 +605,7 @@
 
         legend {
             width: max-content;
-            
+
             @include breakpoint(desktop) {
                 @include font-size(17, 13);
             }
@@ -459,78 +631,15 @@
 
 
 
-    &__buttons {
-        @include flex(row, flex-start, center);
-
-        @include breakpoint(desktop) {
-            margin: rem(-4) rem(-13) rem(4) auto;
-            gap: rem(4);
-        }
-
-        @include breakpoint(tablet) {
-            margin: rem(-4) rem(-13) rem(8) auto;
-            gap: rem(4);
-        }
-
-        button {
-            @include flex(row, center, center);
-
-            width: rem(24);
-            height: rem(24);
-        }
-    }
-
-
-
-    &__panel {
-        position: relative;
-        z-index: 4;
-        right: 0;
-
-        // trick for proper scrolltrigger's pin
-        left: 0 !important;
-        height: auto !important;
-    }
-
-
-
-    &__interviews {
-        margin-top: 0;
-    }
-
-
-
-    &__filters {
-        margin-top: 0;
-        border-bottom: 1px solid $color-bg;
-
-        @include breakpoint(desktop) {
-            border-top: 1px solid $color-bg;
-        }
-    }
-
-
-
-    &__form {
-
-
-        @include breakpoint(desktop) {
-            padding-top: rem(3);
-        }
-
-        @include breakpoint(not-desktop) {
-            position: relative;
-        }
-    }
-
-
-
     &__modal {
 
         @include breakpoint(desktop) {
             position: absolute;
-            inset: 100% calc(var(--grid-margin) * -1) auto;
+            height: var(--app-height);
             z-index: 4;
+            top: 0;
+            left: calc(var(--grid-margin) * -1);
+            width: calc(100vw - var(--GLOBAL-aside-width));
         }
 
 
@@ -539,7 +648,9 @@
             left: 0;
             top: 0;
             width: 100vw;
-            height: 100vh;
+            height: var(--app-height);
+            /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
+            height: 100dvh;
             z-index: 99;
         }
     }
@@ -566,13 +677,24 @@
         }
 
         @include breakpoint(phone) {
-            max-width: rem(236);
-            inset: var(--grid-margin) var(--grid-margin) auto auto;
+            max-width: rem(230);
+            height: 60%;
+            inset: 0 0 auto auto;
+
+
+            picture, img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            // transform: translateY(-25%);
         }
     }
 
 
     .pin-spacer {
-        background-color: var(--color-box);
+        // background-color: var(--color-box);
     }
 }

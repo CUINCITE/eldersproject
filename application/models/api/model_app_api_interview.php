@@ -12,24 +12,31 @@ class model_app_api_interview
     public function rest($method, $params, $url)
     {
         if (empty($params['slug']) && empty($url[2])) return null;
-        $slug = (!empty($params['slug'])) ? $params['slug'] : $url[2];
 
+        $slug = (!empty($params['slug'])) ? $params['slug'] : $url[2];
         $item = $this->parent->getJsonModel('interviews', ['active' => 1, 'slug' => $slug], true);
 
-        if (!$item) return false; else {
-            $sessions = $this->parent->getJsonModel('sessions', ['active' => 1, 'parent' => $item['id']], false, 'nr');
-            if (!$sessions) return null;
-            $date1 = $sessions[0]['date'];
-            $date2 = $sessions[count($sessions) - 1]['date'];
-            if ($date1 == $date2) $item['date'] = _uho_fx::convertSingleDate($date1, 'en')['long_short_month'];
-            else $item['date'] = _uho_fx::getDate($date1, $date2, 'en')['long_no_time'];
+        if (!$item) {
+            return false;
         }
+
+        $sessions = $this->parent->getJsonModel('sessions', ['active' => 1, 'parent' => $item['id']], false, 'nr');
+
+        if (!$sessions) {
+            return null;
+        }
+
+        $date1 = $sessions[0]['date'];
+        $date2 = $sessions[count($sessions) - 1]['date'];
+        if ($date1 == $date2) $item['date'] = _uho_fx::convertSingleDate($date1, 'en')['long_short_month'];
+        else $item['date'] = _uho_fx::getDate($date1, $date2, 'en')['long_no_time'];
 
         return $this->getInterviewData($item, $sessions);
     }
 
     private function getInterviewData($item, $sessions)
     {
+        
         //collection image
         $collectionImage = !empty($item['interviewers'][0]['image']) ? $item['interviewers'][0]['image'] : [];
 
@@ -43,27 +50,6 @@ class model_app_api_interview
                     $media[] = $new_media;
                 }
             }
-        }
-
-        // if no mementos, display placeholder main image
-        $mainImage = false;
-        if (empty($media)) {
-
-            // this is only temporary image assignment
-            if (!empty($item['illustration']['image'])) $image = $item['illustration']['image'];
-            else $image = $this->parent->getJsonModel('interview_illustrations', ['active' => 1], true, 'rand()')['image'];
-
-            if (!$image) {
-                $image = [
-                    'desktop' => '/src/images/illu-1.png',
-                    'mobile' => '/src/images/illu-1.png'
-                ];
-            }
-
-            $mainImage = [
-                'type' => '',
-                'image' => $image
-            ];
         }
 
         // tags
@@ -86,12 +72,19 @@ class model_app_api_interview
         }
 
         $transcript = [
-            'english' => $this->formatMultipleTranscripts($raw_transcripts, $item['narrators'], $item['interviewers']),
+            'english' => $this->formatMultipleTranscripts($raw_transcripts, $item['narrators'], $item['interviewers'],$sessions),
 //            'spanish' => $this->formatTranscript($sessions)
         ];
 
         // bios
-        $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
+        // error
+        // $interview_info = array_map(static fn($narrator) => "<p>{$narrator['bio']}</p>", $item['narrators']);
+
+        $interview_info=[];
+        foreach ($item['narrators'] as $k=>$v)
+        if ($k==0 || '<p>'.$v['bio'].'</p>'!=$interview_info[0])
+            $interview_info[]='<p>'.$v['bio'].'</p>';
+        
         $label = (count($interview_info) > 1) ? 'Narrators bios' : $item['narrators'][0]['name'] . ' ' . $item['narrators'][0]['surname'] .' bio';
 
         $interview_info[] = "<h3>Interview Summary</h3><p>{$item['summary']}</p>";
@@ -99,16 +92,30 @@ class model_app_api_interview
 
         //downloads
         $downloads = [];
-        if (!empty($item['PDF']['src'])) {
+        $langs=['en','es'];
+        $langs2=['English','Spanish'];
+
+        foreach ($langs as $k=>$lang)        
+        if ($item['pdf_'.$lang.'_size'])
+        {
             $downloads[] =
                 [
-                    "url" => 'api/download?transcript=' . $item['id'],
-                    "name" => "Transcript",
+                    "url" => 'api/download?transcript=' . $item['incite_id'].'&lang='.$lang,
+                    "name" => $langs2[$k]." transcript",
                     "ext" => "pdf",
-                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript.pdf",
-                    "size" => $item['pdf_size'] ? number_format($item['pdf_size'] / 1000000, 1) . 'MB' : ''
+                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-transcript-".$lang.".pdf",
+                    "size" => $item['pdf_'.$lang.'_size'] ? number_format($item['pdf_'.$lang.'_size'] / 1000000, 2) . 'MB' : ''
                 ];
         }
+        foreach ($sessions as $k=>$v)
+        $downloads[] =
+                [
+                    "url" => 'api/download?mp3=' . $v['incite_id'],
+                    "name" => 'Audio file, Session #'.$v['nr'],
+                    "ext" => "mp3",
+                    "filename" => _uho_fx::charsetNormalize($item['label']) . "-".$v['nr']."audio.mp3",
+                    "size" => @$v['mp3_size'] ? number_format(@$v['mp3_size'] / 1000000, 2) . 'MB' : ''
+                ];
 
         // aggregate data
         $data = [
@@ -122,30 +129,20 @@ class model_app_api_interview
             'description' => $item['narrators'][0]['occupation'],
             'collection' => $item['interviewers'][0]['label'],
             'urlCollection' => ['type' => 'collection', 'slug' => $item['interviewers'][0]['slug']],
-            'text' => substr($item['summary'], 0, 240),
+            'text' => $item['lead'],
             'tags' => $tags,
             'state' => $item['narrator_location'],
             'transcript' => $transcript,
             'info' => $interview_info,
             'downloads' => $downloads,
-            'related' => [
-                ['url' => '',
-                    'title' => 'Related title',
-                    'collection' => 'Collection title',
-                    'test' => 'Lorem ipsum'
-                ]
-            ]
+            'related' => $this->getRelated($item),
+            'contentList' => $this->getTableOfContents($item, $sessions)
         ];
-
-        if ($mainImage) {
-            unset($data['images']);
-            $data['mainImage'] = $mainImage;
-        }
 
         return $data;
     }
 
-    private function formatMultipleTranscripts($raw_transcripts, $narrators, $interviewers): array
+    private function formatMultipleTranscripts($raw_transcripts, $narrators, $interviewers, $sessions): array
     {
         // Cumulative seconds of all previous transcripts
         $timeOffset = 0;
@@ -153,6 +150,7 @@ class model_app_api_interview
 
         $narrator = (count($narrators) == 1) ? $narrators[0]['name'].' '.$narrators[0]['surname'] : 'Answer';
         $interviewer = (count($interviewers) == 1) ? $interviewers[0]['first_name'].' '.$interviewers[0]['last_name'] : 'Question';
+        $session_nr=0;
 
         foreach ($raw_transcripts as $raw_transcript)
         {
@@ -161,7 +159,7 @@ class model_app_api_interview
 
             foreach ($lines as $line)
             {
-                preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s]*:)?)(.*)/", $line, $matches);
+                preg_match("/<([QA]) T=\"(\d\d:\d\d:\d\d)\">((?:[\w\s\-']*:)?)(.*)/", $line, $matches);
 
                 if (isset($matches[1], $matches[2], $matches[4]))
                 {
@@ -184,11 +182,103 @@ class model_app_api_interview
                 }
             }
 
-            // Update the time offset for the next transcript
-            $timeOffset += $max_transcript_seconds;
+            // WRONG! Update the time offset for the next transcript
+            // $timeOffset += $max_transcript_seconds;
+            $timeOffset+=$sessions[$session_nr]['duration'];
+            $session_nr++;
+
         }
 
         return $result;
+    }
+
+    private function getRelated($interview)
+    {
+        $collectionId = $interview['interviewers'][0]['id'];
+        $items =$this->parent->getJsonModel('interviews',['active'=>1, 'interviewers' => $collectionId],false,'RAND("'.date('Y-m-d').'")','0,3');
+
+        $related = [];
+            foreach ($items as $item) {
+
+                if ($item['id'] === $interview['id']) {
+                    continue;
+                }
+
+                $related[] = [
+                    'id' => $item['id'],
+                    'url' => ['type' => 'interview', 'slug' => $item['slug']],
+                    'title' => $item['label'],
+                    'collection' => $interview['interviewers'][0]['label'] . ' Collection',
+                    'urlCollection' => ['type' => 'collection', 'slug' => $interview['interviewers'][0]['slug']],
+                    'text' => $item['lead']
+                ];
+            }
+
+        return array_slice($related, 0, 2);
+    }
+
+    private function getTableOfContents($item, $sessions): array
+    {
+        $indexes = $this->parent->getJsonModel('interview_indexes', ['interview_incite_id' => $item['incite_id']], false, 'no');
+
+        // prepare simple table with sessions order for usort below
+        $sessionsOrder = [];
+        foreach ($sessions as $index => $session) {
+            $sessionsOrder[$session['incite_id']] = $index;
+        }
+
+        // some interviews have multiple sessions - sort the $indexes table (table of contents) according to the sessions they are in
+        usort($indexes, function ($a, $b) use ($sessionsOrder) {
+            $sessionDiff = $sessionsOrder[$a['session_incite_id']] <=> $sessionsOrder[$b['session_incite_id']];
+            if ($sessionDiff !== 0) {
+                return $sessionDiff;
+            }
+        });
+
+        $returnItems = [];
+        foreach ($indexes as $index) {
+
+            if (empty($index['label'])) {
+                continue;
+            }
+
+            if (isset($sessionsOrder[$index['session_incite_id']])) {
+
+                $sessionIndex = $sessionsOrder[$index['session_incite_id']];
+                $startTime = $this->timeToSeconds($index['start_time']);
+                
+                if ($sessionIndex > 0) {
+                    for ($i = 0; $i < $sessionIndex; $i++) {
+                        $startTime += $sessions[$i]['duration'];
+                    }
+                }
+
+                $returnItems[] = [
+                    'label' => $index['label'],
+                    'startTime' => $startTime,
+                ];
+            }
+        }
+
+        if (!empty($returnItems[0]) && $returnItems[0]['startTime'] != 0) {
+            $introduction = [
+                'label' => 'Introduction',
+                'startTime' => 0
+            ];
+
+            array_unshift($returnItems, $introduction);
+        }
+
+        return $returnItems;
+    }
+
+
+    private function timeToSeconds($timestamp)
+    {
+        list($hours, $minutes, $seconds) = explode(':', $timestamp);
+        $total_seconds = $hours*3600 + $minutes*60 + $seconds;
+
+        return $total_seconds;
     }
 
 }

@@ -20,7 +20,7 @@
         @include breakpoint(tablet) {
             @include font-size(40, 1);
             @include letter-spacing(-1.2, 40);
-            
+
             gap: vw(6, tablet);
         }
 
@@ -36,6 +36,8 @@
     &--overflow {
         @include breakpoint(desktop) {
             overflow: hidden;
+            display: inline-flex;
+            padding-right: rem(10);
         }
     }
 
@@ -78,6 +80,14 @@
 
         // text inside button
 
+
+        @include breakpoint(phone) {
+            width: rem(45);
+            height: rem(26);
+
+            .lightbox__close & { height: auto; }
+        }
+
         > span {
             position: absolute;
             right: rem(6);
@@ -95,7 +105,9 @@
     &--medium {
 
         @include breakpoint(desktop) {
-            @include font-size(40, 30);
+            @include font-size(40, 1);
+
+            margin-block: trim-font(1);
 
             --padding: #{rem(6)};
 
@@ -104,6 +116,7 @@
 
         @include breakpoint(tablet) {
             @include font-size(40, 30);
+
 
             gap: rem(7);
         }
@@ -141,6 +154,11 @@
             @include letter-spacing(-0.6, 20);
 
             gap: rem(3);
+        }
+
+
+        i {
+            margin-top: rem(-2);
         }
     }
 
@@ -181,8 +199,8 @@
         font-style: normal;
 
         @include breakpoint(desktop) {
-            @include letter-spacing(-1.75, 50);
             padding-left: var(--padding, rem(9));
+            letter-spacing: -0.025em;
         }
 
         @include breakpoint(tablet) {
@@ -198,11 +216,14 @@
         &--duplicate {
             position: absolute;
 
-            // margin-block: trim-font(1);
-
             @include breakpoint(not-desktop) {
                 display: none;
             }
+        }
+
+
+        .button--small & {
+            padding-top: rem(1);
         }
     }
 
@@ -217,6 +238,35 @@
 
     .interviews--grid & {
         color: inherit;
+    }
+
+    &__box {
+        border-top: 1px solid var(--color-bg);
+
+
+        @include breakpoint(desktop) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+        }
+
+        @include breakpoint(tablet) {
+            padding-top: rem(14);
+            padding-bottom: rem(108);
+            border-top: 1px solid $color-bg;
+        }
+
+        @include breakpoint(phone) {
+            padding-top: rem(14);
+            padding-bottom: rem(42);
+            border-top: 1px solid $color-bg;
+        }
+
+
+        .interviews--banner & {
+            @include breakpoint(not-desktop) {
+                padding-bottom: rem(167);
+            }
+        }
     }
 }
 

@@ -1,7 +1,8 @@
 .player {
 
     &.is-muted .svg-volume { @extend %svg-volume-muted !optional; }
-    &.is-started .player__toggle { display: none; }
+
+    // &.is-started .player__toggle { display: none; }
 
 
     &:not(.is-started),
@@ -45,6 +46,11 @@
     &.is-error {
         cursor: not-allowed;
         pointer-events: none;
+
+
+        @include breakpoint(not-desktop) {
+            &.player--audio { pointer-events: all; }
+        }
 
         .player__play,
         .player__pause,
@@ -105,7 +111,7 @@
 
 
     &.has-autoplay.should-play:not(.is-started, .is-ended) .player__poster {
-        opacity: 1 !important; display: block !important;
+        opacity: 1;
     }
 
     .modernizr-touchevents &.is-started:not(.is-playing) .player__bar,
@@ -193,7 +199,7 @@
         &.should-play:not(.is-started, .is-ended),
         &:not(.is-playing, .is-bgplayer, .is-native) {
             .player__toggle,
-            .player__poster { opacity: 1 !important; display: block !important; }
+            .player__poster { opacity: 1; }
         }
 
         &.is-playlist-open .playlist {

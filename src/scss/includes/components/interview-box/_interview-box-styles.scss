@@ -4,15 +4,21 @@
     position: relative;
 
     @include breakpoint(desktop) {
+        aspect-ratio: 1/1;
         width: vw(196);
-        height: vw(196);
     }
+
+
+    @include breakpoint(hd) {
+        max-width: 196px;
+    }
+
 
     @include breakpoint(not-desktop) {
         @include flex(row, center, center);
 
         @include breakpoint(tablet) {
-            width: vw(186, tablet);
+            width: vw(174, tablet);
             height: vw(100, tablet);
             margin-right: -1 * map-get($grid-offset, tablet);
         }
@@ -26,8 +32,8 @@
 
 
 
-    &--reversed &__wrap {
-        @include breakpoint(desktop) {
+    @include breakpoint(desktop) {
+        &--reversed &__wrap {
             transform: rotate(20deg);
         }
     }
@@ -45,12 +51,16 @@
         height: 100%;
         background-color: var(--interview-bg);
         position: relative;
-        transition: transform .35s $ease-out;
+        transition: transform .5s $ease-out;
         will-change: transform;
 
 
         @include breakpoint(desktop) {
             transform: rotate(-20deg);
+
+            [data-observe].is-below & {
+                transform: rotate(0deg) scale(0.7);
+            }
         }
 
 
@@ -117,6 +127,13 @@
             inset: 0;
         }
 
+
+        @include breakpoint(hd) {
+            @include font-size(40, 30);
+            @include letter-spacing(-1.25, 40);
+        }
+
+
         @include breakpoint(tablet) {
             @include font-size(40, 32);
             @include letter-spacing(-0.75, 30);
@@ -152,8 +169,8 @@
     .interview-box__layer { transform: scale(1); }
 
     .interview-box__text p {
-        transition-delay: .05s;
-        transition-duration: .25s;
+        transition-delay: .1s;
+        transition-duration: .45s;
         opacity: 1;
         transform: translateX(0);
     }

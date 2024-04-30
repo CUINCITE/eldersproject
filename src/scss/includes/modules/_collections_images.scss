@@ -1,40 +1,37 @@
 .collections_images {
     position: relative;
 
-    &__cards {
-        position: absolute;
-        pointer-events: none;
-        z-index: 2;
-
-        @include breakpoint(desktop) {
-            width: vw(585);
-            height: vw(585);
-            max-width: vh(585);
-            max-height: vh(585);
-            top: calc(#{rem(-80)} + 10 * 10px);
-            right: 29rem;
-        }
 
 
-        @include breakpoint(hd) {
-            right: 100%;
-        }
-    }
-
-    &__content {
+    &__heading {
         position: relative;
-        display: grid;
 
-        @include breakpoint(desktop) {
-            grid-template-rows: auto vw(270);
-            grid-template-columns: 1fr 1fr;
+
+        @include breakpoint(not-desktop) {
+            border-bottom: 1px solid var(--color-bg);
         }
     }
 
 
 
-    &__container {
+    &__intro {
         position: relative;
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(17);
+            border-top: 1px solid $color-bg;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            padding-bottom: rem(20);
+
+            @include breakpoint(tablet) {
+                .grid > div {
+                    grid-column: 3 / span 6 !important;
+                }
+            }
+        }
     }
 
 
@@ -44,52 +41,6 @@
             position: relative;
             right: 0;
             width: 50%;
-        }
-    }
-
-    &__filler {
-        @include breakpoint(desktop) {
-            border-top: 1px solid $color-bg;
-        }
-    }
-
-    @for $i from 1 through 10 {
-        &__names:has(li:nth-child(#{$i}):focus-within) + &__cards,
-        &__names:has(li:nth-child(#{$i}):focus-within) + div > &__cards, {
-            li:nth-last-child(-n + #{$i - 1} + 3) {
-                transform: rotate(-15deg) translate(-90%, -50%);
-            }
-        }
-
-        &__names:has(li:nth-child(#{$i}):hover) + &__cards,
-        &__names:has(li:nth-child(#{$i}):hover) + div > &__cards, {
-            li { transform: unset !important; }
-
-            @for $j from 1 through 4 {
-                li:nth-last-child(#{4 - $j + $i}) {
-                    transform: translate($j * -10px, $j * -10px) !important;
-                }
-            }
-
-            li:nth-last-child(-n + #{$i - 1}) {
-                transform: rotate(-15deg) translate(-90%, -50%) !important;
-            }
-        }
-
-
-
-        &__names:has(li:nth-child(#{$i}) a.is-visible) + div > &__cards, {
-            li { transform: unset !important; }
-
-            @for $j from 1 through 4 {
-                li:nth-last-child(#{4 - $j + $i}) {
-                    transform: translate($j * -10px, $j * -10px) !important;
-                }
-            }
-
-            li:nth-last-child(-n + #{$i - 1}) {
-                transform: rotate(-15deg) translate(-90%, -50%) !important;
-            }
         }
     }
 }

@@ -7,7 +7,7 @@
 
                 {% if item.category == "transcripts" %}
                     {# transcripts with highlighted search phrase #}
-                    <ul>
+                    <ul class="livesearch__results livesearch__results--transcripts">
                         {% for transcript in item.items %}
                             <li>
                                 <p>{{ transcript.label }}</p>
@@ -18,15 +18,15 @@
                         {% endfor %}
                     </ul>
                 {% elseif item.category == 'collections' %}
-                    <ul>
+                    <ul class="livesearch__results livesearch__results--simple">
                         {% for i in item.items %}
-                            <li><a href="{{ i.url }}">{{ i.first_name }} {{i.last_name}}</a></li>
+                            <li><a href="{{ i.url }}"><span>{{ i.first_name }} {{i.last_name}}</span></a></li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <ul>
+                    <ul class="livesearch__results livesearch__results--simple">
                         {% for i in item.items %}
-                            <li><a href="{{ i.url }}">{{ i.label }}</a></li>
+                            <li><a href="{{ i.url }}"><span>{{ i.label }}</span></a></li>
                         {% endfor %}
                     </ul>
                 {% endif %}

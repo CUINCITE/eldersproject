@@ -1,0 +1,90 @@
+.sticker {
+    // Caro De Robertis
+
+    &--pink {
+        --sticker-bg: var(--color-pink);
+        --sticker-back-bg: var(--color-purple);
+        --sticker-text-color: var(--color-black);
+    }
+
+
+    // Natalie Diaz
+
+    &--orange {
+        --sticker-bg: var(--color-orange);
+        --sticker-back-bg: var(--color-purple);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // Eve Ewing
+
+    &--pale-blue {
+        --sticker-bg: var(--color-pale-blue);
+        --sticker-back-bg: var(--color-purple);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+ 
+    // Denice Frohman
+
+    &--brown {
+        --sticker-bg: var(--color-brown);
+        --sticker-back-bg: var(--color-purple);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // Caleb Gayle
+
+    &--purple {
+        --sticker-bg: var(--color-purple);
+        --sticker-back-bg: var(--color-yellow);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // Robin Coste Lewis
+
+    &--green {
+        --sticker-bg: var(--color-green);
+        --sticker-back-bg: var(--color-red);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // April Reign
+
+    &--default {
+        --sticker-bg: var(--color-red);
+        --sticker-back-bg: var(--color-pink);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // Ellery Washington
+
+    &--dark-green {
+        --sticker-bg: var(--color-dark-green);
+        --sticker-back-bg: var(--color-orange);
+        --sticker-text-color: var(--color-grey200);
+    }
+
+
+    // Renee Watson
+
+    &--pale-green {
+        --sticker-bg: var(--color-pale-green);
+        --sticker-back-bg: var(--color-yellow);
+        --sticker-text-color: var(--color-black);
+    }
+
+
+    // Jenna Wortham
+
+    &--pale-purple {
+        --sticker-bg: var(--color-pale-purple);
+        --sticker-back-bg: var(--color-dark-green);
+        --sticker-text-color: var(--color-grey200);
+    }
+}

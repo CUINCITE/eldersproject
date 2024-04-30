@@ -13,6 +13,20 @@
     display: block;
 
 
+    @include breakpoint(phone) {
+        bottom: 106px; // audioplayer mobile height
+        height: auto;
+        z-index: 9; // to be above the audioplayer cover
+        overflow: hidden;
+        overscroll-behavior: none;
+
+        .is-lightbox-open & {
+            // position: relative;
+            overflow-y: scroll;
+        }
+    }
+
+
     &__wrap {
         @include v-center;
 
@@ -23,13 +37,32 @@
 
 
 
+    &__counter {
+        @include font-settings(700, 100);
+        display: block;
+    }
+
+
+
     &__grid {
         position: relative;
         width: 100%;
         height: 100%;
         display: grid;
-        grid-column-gap: 1px;
         grid-template: "header illu logo" var(--lightbox-top-height) "main main buttons" 1fr / 1fr rem(200) var(--GLOBAL-aside-width);
+
+
+        @include breakpoint(tablet) {
+            grid-column-gap: 0;
+        }
+
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, stretch);
+
+            flex-grow: 1;
+            height: auto;
+        }
     }
 
 
@@ -40,12 +73,45 @@
         grid-area: header;
         background: var(--main-body-color);
         padding-left: var(--grid-margin);
-        margin-left: rem(-5);
+
+
+        @include breakpoint(desktop) {
+            margin-left: rem(-5);
+        }
+
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+        }
+
+        @include breakpoint(phone) {
+            order: 2;
+            z-index: 5;
+            flex-basis: var(--flex-basis);
+            flex-shrink: 0;
+            overflow: hidden;
+
+
+            .is-expanded & {
+                // create a space for closer
+                height: 44px;
+                flex-basis: 44px;
+            }
+        }
 
 
         &-info {
             overflow: hidden;
-            padding-left: rem(5);
+
+
+            @include breakpoint(desktop) {
+                padding-left: rem(6);
+                padding-right: rem(8);
+            }
+
+
+            @include breakpoint(phone) {
+                .is-expanded & { opacity: 0; }
+            }
         }
     }
 
@@ -58,6 +124,21 @@
         background: var(--aside-body-color);
         padding: 0 rem(4);
         color: var(--aside-text-color);
+
+        @include breakpoint(desktop) {
+            padding-bottom: rem(10);
+        }
+
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+            padding-bottom: rem(11);
+        }
+
+        @include breakpoint(phone) {
+            position: fixed;
+            inset: 0 0 auto auto;
+            background: none;
+        }
 
 
         svg {
@@ -74,30 +155,78 @@
         grid-area: illu;
         background: var(--main-body-color);
         position: relative;
+
+
+        @include breakpoint(desktop) {
+            border-left: 1px solid var(--color-box);
+            border-right: 1px solid var(--color-box);
+        }
+
+
+        @include breakpoint(tablet) {
+            border-bottom: 1px solid var(--color-box);
+            border-left: 1px solid var(--color-box);
+            border-right: 1px solid var(--color-box);
+        }
+
+
+        @include breakpoint(phone) {
+            height: vw(130, phone);
+            flex-basis: vw(130, phone);
+            order: 1;
+            flex-shrink: 0;
+            transition: height .4s $ease-custom, flex-basis .4s $ease-custom;
+            overflow: hidden;
+            padding-top: 10px;
+
+
+            .is-expanded & {
+                height: 0;
+                flex-basis: 0;
+            }
+        }
     }
 
 
 
     &__picture {
+        @include flex(row, flex-start, flex-end);
+        @include font-family(compressed);
+        @include font-size(20, 19);
+
+        letter-spacing: -0.025em;
+        text-transform: uppercase;
         position: relative;
         z-index: 2;
         width: 100%;
         height: 100%;
-        transition: opacity .3s $ease-custom;
+        background-color: var(--aside-body-color);
+        color: var(--aside-text-color);
         pointer-events: none;
+        padding: rem(7) rem(10);
+        overflow: hidden;
+
 
 
         picture {
-            background: var(--main-body-color);
             position: absolute;
             inset: 0;
-            animation: lightbox-illu 6s linear infinite;
+            background: var(--main-body-color);
+            transition: transform .45s $ease-custom;
+            transform-origin: right bottom;
+
+
 
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
             }
+        }
+
+
+        span {
+            max-width: rem(120);
         }
     }
 
@@ -116,22 +245,390 @@
 
 
         @include hover {
-            & + .lightbox__picture { opacity: 0; }
-            & + .lightbox__picture picture { animation: none; opacity: 0; }
+            ~ .lightbox__picture picture {
+                transform: rotate(30deg);
+            }
+        }
+    }
+
+
+
+    &__intro {
+        position: relative;
+        height: calc(var(--app-height) - var(--lightbox-top-height));
+
+
+        @include breakpoint(desktop) {
+            padding: rem(29) 0 var(--GLOBAL-player-height);
+        }
+
+
+        @include breakpoint(phone) {
+            height: auto;
+        }
+
+
+        &-top {
+            h3 {
+                @include font-family(compressed);
+                @include font-size(22, 16);
+
+                padding-top: rem(29);
+                letter-spacing: -0.03em;
+                text-transform: uppercase;
+                margin-left: var(--aside-width);
+                margin-bottom: rem(14);
+                padding-left: rem(20);
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(30, 38);
+
+                    padding-left: rem(19);
+                    letter-spacing: -0.025em;
+                    margin-left: 65px;
+                    padding-top: rem(22);
+                    margin-bottom: rem(7);
+                }
+            }
+        }
+
+
+        &-wrapper {
+            @include flex(row, center, flex-end);
+
+            height: 100%;
+            position: relative;
+
+
+            @include breakpoint(not-desktop) {
+                display: grid;
+                grid-template-columns: 1fr;
+
+                @include breakpoint(tablet) {
+                    align-content: start;
+                    grid-template-rows: auto 1fr;
+                }
+            }
+        }
+
+
+        &-btn {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+
+
+            @include hover {
+                ~ .lightbox__intro-time,
+                ~ .lightbox__intro-text {
+                    opacity: 1;
+                }
+            }
+        }
+
+
+        &-description {
+            width: rem(350);
+            background-color: var(--aside-body-color);
+            color: var(--description-color, var(--color-black));
+            padding: rem(64) rem(16) rem(41);
+            position: relative;
+            z-index: 1;
+            margin-left: rem(-10);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset: rem(27) auto auto rem(12);
+                width: rem(20);
+                height: rem(20);
+                border-radius: 50%;
+                background-color: var(--main-body-color);
+            }
+
+
+            @include breakpoint(desktop) {
+                @media (max-height: 719px) and (max-aspect-ratio: 1440 / 600) {
+                    padding: rem(50) rem(16) rem(30);
+
+
+                    &::before {
+                        top: rem(22);
+                    }
+                }
+            }
+
+
+            @include breakpoint(not-desktop) {
+                width: 100%;
+                margin-left: 0;
+                padding-top: rem(59);
+                padding-right: rem(37);
+                position: sticky;
+                top: 88px;
+                z-index: 0;
+
+
+                &::before {
+                    width: 16px;
+                    height: 16px;
+                    inset: rem(28) auto auto rem(17);
+                }
+            }
+
+
+            p {
+                @include font-size(18, 23);
+
+                letter-spacing: normal;
+
+
+                @include breakpoint(desktop) {
+                    @media (max-height: 719px) and (max-aspect-ratio: 1440 / 600) {
+                        @include font-size(16, 21);
+                    }
+                }
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(15, 21);
+
+                    letter-spacing: -0.005em;
+                }
+            }
+        }
+
+
+        &-contentlist {
+            padding-bottom: rem(41);
+        }
+
+
+        &-contents {
+            width: rem(691);
+            background-color: var(--color-grey200);
+            color: var(--color-black);
+            height: 100%;
+            position: relative;
+            margin-left: rem(-45);
+
+
+            @include breakpoint(desktop) {
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: rem(27) auto auto rem(12);
+                    width: rem(20);
+                    height: rem(20);
+                    border-radius: 50%;
+                    background-color: var(--main-body-color);
+                }
+            }
+
+
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0 auto 0 var(--aside-width);
+                width: 1px;
+                background-color: var(--theme-color);
+                z-index: 3;
+                pointer-events: none;
+
+
+                @include breakpoint(not-desktop) {
+                    left: 65px;
+                }
+            }
+
+
+            @include breakpoint(not-desktop) {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+
+        &-container {
+            height: 100%;
+            overflow-y: auto;
+            overscroll-behavior: none;
+        }
+
+
+        &-part {
+            display: grid;
+            grid-template-columns: auto calc(100% - var(--aside-width));
+            place-content: center end;
+            align-items: start;
+            position: relative;
+
+
+            @include breakpoint(not-desktop) {
+                grid-template-columns: 65px 1fr;
+            }
+        }
+
+
+        &-time {
+            @include font-family(compressed);
+            @include font-size(16, 16);
+            @include flex(row, center, center);
+
+            letter-spacing: -0.02em;
+            text-align: right;
+            padding-right: rem(7);
+            opacity: 0.2;
+            transition: opacity .3s $ease-custom;
+            padding-top: rem(2);
+
+
+            .is-current & { opacity: 1; }
+
+
+            @include breakpoint(not-desktop) {
+                justify-content: flex-end;
+                padding-top: rem(1);
+            }
+
+
+            span {
+                display: inline-block;
+                width: rem(44);
+                text-align: left;
+
+
+                @include breakpoint(not-desktop) {
+                    text-align: right;
+                }
+            }
+        }
+
+
+        &-text {
+            @include font-size(16, 19.84);
+
+            padding: 0 rem(22);
+            opacity: 0.2;
+            transition: opacity .3s $ease-custom;
+
+
+            .is-current & { opacity: 1; }
+
+
+            @include breakpoint(not-desktop) {
+                @include font-size(14, 18.9);
+
+                padding-right: rem(20);
+                padding-left: rem(19);
+            }
         }
     }
 
 
 
     &__buttons {
-        @include flex(column, flex-start, center);
+        @include flex(column, flex-start, flex-start);
 
         grid-area: buttons;
         background: var(--aside-body-color);
-        padding-top: rem(12);
         border-top: 1px solid var(--color-box);
+        position: relative;
+
 
         li { text-align: center; }
+
+
+
+        @include breakpoint(not-desktop) {
+            border-top: unset;
+
+            @include breakpoint(tablet) {
+                z-index: 5;
+            }
+
+            @include breakpoint(phone) {
+                @include flex;
+    
+                z-index: 3 !important;
+                flex-shrink: 0;
+                gap: 0;
+                order: 3;
+                overflow: auto hidden;
+                background: transparent;
+                position: sticky;
+                top: 0;
+                padding-top: 44px;
+                margin-top: -44px;
+                padding-bottom: 8px;
+                margin-bottom: -8px;
+                overscroll-behavior: none;
+    
+    
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+    
+    
+                li {
+                    flex-shrink: 0;
+                    text-align: center;
+                }
+            }
+        }
+
+
+
+        &-scroller {
+            @include flex(column, flex-start, center);
+
+            width: 100%;
+            position: relative;
+
+            @include breakpoint(desktop) {
+                padding-top: rem(7);
+            }
+
+            @include breakpoint(tablet) {
+                padding-top: rem(9);
+            }
+
+            @include breakpoint(phone) {
+                @include flex;
+
+                width: auto;
+                gap: vw(1, phone);
+                padding-inline: vw(15, phone);
+                background: var(--main-body-color);
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 44px;
+                    left: 0;
+                    bottom: 100%;
+                    background-color: var(--main-body-color);
+                    z-index: 2;
+                }
+
+                // &::after {
+                //     content: "";
+                //     display: block;
+                //     position: absolute;
+                //     width: calc(100% + 100px);
+                //     margin-inline: -100px;
+                //     height: 1px;
+                //     left: 0;
+                //     top: 0;
+                //     background-color: var(--color-box);
+                // }
+            }
+        }
+
 
         button {
             @include hoverable-link;
@@ -149,19 +646,85 @@
         position: relative;
         display: block !important;
 
-        &.is-active { 
-            color: var(--aside-text-color);
-            pointer-events: none;
+        &.is-active {
+            @include breakpoint(not-phone) {
+                color: var(--aside-text-color);
+                pointer-events: none;
+            }
+
+            // @include breakpoint(phone) {
+            //     &::after, &::before {
+            //         background-color: var(--hover-color);
+            //     }
+            // }
         }
 
-        @include breakpoint(desktop) {
+        @include breakpoint(not-phone) {
+            padding-right: 2px;
+            margin-right: -2px;
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
+            padding-block: rem(9) rem(5);
+            padding-inline: rem(18);
+            overflow: visible !important;
+            color: var(--main-text-color);
+            text-align: center;
+            
+            // &::after, &::before {
+            //     content: "";
+            //     display: block;
+            //     position: absolute;
+            //     left: 50%;
+            //     transition: .25s background-color $easing;
+            // }
+
+            // &::before {
+            //     top: 0;
+            //     width: calc(100% + #{vw(22, phone)});
+            //     height: 100%;
+            //     translate: -50% 0;
+            // }
+
+            // &::after {
+            //     width: vw(8, phone);
+            //     aspect-ratio: 1/1;
+            //     top: 100%;
+            //     rotate: 45deg;
+            //     translate: -50% -50%;
+            // }
+        }
+
+        @include breakpoint(not-phone) {
             > span {
                 display: block !important;
+                line-height: 1;
 
                 span {
                     margin-block: trim-font(1);
-                    padding-block: rem(5);
+                    padding-block: 5px;
                     user-select: none;
+                }
+            }
+        }
+
+
+        &--intro {
+            span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
+                @include breakpoint(desktop) {
+                    font-size: 53px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 55px;
                 }
             }
         }
@@ -169,53 +732,159 @@
 
 
         &--mementos {
-            margin-top: rem(-5);
-
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
-                    @include font-size(29, 1); 
-                    @include letter-spacing(-0.87, 29); 
+                    font-size: 29px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 32px;
                 }
             }
         }
 
 
-        &--info { 
+        &--info {
+            @include breakpoint(desktop) {
+                margin-top: -1px;
+                margin-left: -1px;
+            }
+
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
-                    @include font-size(69, 1); 
-                    @include letter-spacing(-2.07, 69); 
+                    font-size: 69px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 72px;
                 }
             }
         }
 
 
-        &--transcript { 
+        &--transcript {
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
-                    @include font-size(26, 1); 
-                    @include letter-spacing(-0.78, 26); 
+                    font-size: 26px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 27.2px;
                 }
             }
         }
 
 
-        &--downloads { 
+        &--downloads {
+            @include breakpoint(desktop) {
+                margin-top: -1px;
+            }
+
             span > span {
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.03em;
+                }
+
                 @include breakpoint(desktop) {
-                    @include font-size(25, 1); 
-                    @include letter-spacing(-0.75, 25); 
+                    font-size: 25px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 26px;
                 }
             }
         }
 
 
-        &--related { 
+        &--related {
+            @include breakpoint(desktop) {
+                margin-top: -3px;
+            }
+
+
             span > span {
-                @include breakpoint(desktop) {
-                    @include font-size(38, 1); 
-                    @include letter-spacing(-0.76, 38); 
+
+                @include breakpoint(not-phone) {
+                    letter-spacing: -0.02em;
                 }
+
+                @include breakpoint(desktop) {
+                    font-size: 38px;
+                }
+
+                @include breakpoint(tablet) {
+                    font-size: 38.5px;
+                }
+            }
+        }
+    }
+
+
+
+    &__indicator {
+        position: absolute;
+        display: inline-block;
+        z-index: 0;
+
+        &-inner {
+            @include full;
+        }
+
+        @include breakpoint(not-phone) {
+            inset: 0 auto auto -8px;
+            width: 15px;
+            height: 15px;
+            transform: translateY(20px);
+
+            &-tip {
+                @include full;
+
+                display: inline-block;
+                transform: rotate(45deg);
+                background-color: var(--aside-body-color);
+            }
+        }
+
+        @include breakpoint(phone) {
+            height: 100%;
+            width: 10px;
+            left: 0;
+
+            &-tip {
+                position: absolute;
+                width: vw(8, phone);
+                aspect-ratio: 1/1;
+                rotate: 45deg;
+                top: 100%;
+                left: 50%;
+                translate: -50% -50%;
+                background-color: var(--hover-color);
+            }
+
+            &-box {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                translate: -50% 0;
+                width: 100px;
+                height: 100%;
+                background-color: var(--hover-color);
             }
         }
     }
@@ -227,13 +896,39 @@
 
         grid-area: main;
         position: relative;
+        
+        @include breakpoint(not-phone) {
+            border-right: 1px solid var(--color-box);
+        }
+
+        @include breakpoint(phone) {
+            order: 4;
+            flex: 1 0 auto;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            z-index: 1;
+
+
+            // min-height: 66vh;
+
+            // padding-bottom: vw(100, phone);
+
+            // padding-bottom: 106px;
+
+            // .is-sticky & { overflow-y: auto; }
+        }
 
 
         &-bg {
             @include full;
 
-            border-top: 1px solid var(--color-box);
             background: var(--main-body-color);
+
+
+            @include breakpoint(desktop) {
+                border-top: 1px solid var(--color-box);
+            }
         }
     }
 
@@ -241,9 +936,27 @@
 
     &__filters {
         @include flex(row, flex-start, center);
-        flex-wrap: nowrap;
 
-        margin-top: rem(-4);
+        margin-top: rem(-2);
+        flex-wrap: wrap;
+
+
+        @include breakpoint(desktop) {
+            flex-wrap: nowrap;
+
+
+            .lightbox__title--long ~ & {
+                margin-top: rem(2);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include flex(column, flex-start, flex-start);
+        }
+
+        @include breakpoint(phone) {
+            @include flex(column, flex-start, flex-start);
+        }
     }
 
 
@@ -255,6 +968,13 @@
         z-index: 2;
         margin: rem(13);
         color: var(--aside-text-color);
+
+
+        @include breakpoint(phone) {
+            padding: 15px;
+            margin: 0;
+            color: var(--main-text-color);
+        }
 
 
         .button { width: auto; }
@@ -287,8 +1007,14 @@
         padding-top: rem(18);
         opacity: 0;
 
+        @include breakpoint(tablet-landscape) {
+            bottom: rem(120);
+        }
 
-        &:first-of-type { opacity: 1; }
+
+        &:first-of-type {
+            opacity: 1 !important;
+        }
 
         &::before {
             content: "";
@@ -299,11 +1025,32 @@
             background-color: currentColor;
         }
 
+
+        &--empty::before { display: none; }
+
         strong {
             @include font-settings(700, 100);
 
             display: block;
             margin-bottom: 2px;
+        }
+
+
+        @include breakpoint(phone) {
+            position: relative;
+            inset: auto;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            max-width: 100%;
+
+
+            // for caption with single image
+
+            .lightbox__image & {
+                margin-top: rem(30);
+                margin-left: auto;
+                margin-right: var(--grid-margin);
+            }
         }
     }
 
@@ -315,6 +1062,9 @@
         z-index: 3;
         background-color: var(--color-black);
         pointer-events: none;
+
+
+        @include breakpoint(phone) { display: none; }
     }
 
 
@@ -325,25 +1075,40 @@
         justify-content: center;
         align-items: center;
         color: var(--main-text-color);
+
+
+        @include breakpoint(not-desktop) {
+            height: unset;
+            min-height: 100%;
+            align-items: stretch;
+        }
     }
 
 
 
     &__image {
-        --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
-        margin-bottom: var(--GLOBAL-player-height);
+        @include flex(row, center, flex-start);
 
-        height: var(--container-height);
+        width: 100%;
+        padding-bottom: var(--GLOBAL-player-height);
+
 
 
         @include breakpoint(not-desktop) {
             margin-bottom: auto;
+            flex-direction: column;
+            align-items: center;
         }
 
 
         &--polaroid {
-            height: 100%;
-            transform: rotate(-7.5deg);
+            position: relative;
+            height: calc(100% + var(--GLOBAL-player-height));
+
+
+            .polaroid {
+                transform: rotate(-7.5deg);
+            }
         }
 
 
@@ -379,6 +1144,53 @@
         text-transform: uppercase;
         padding-top: rem(13);
         margin-left: rem(-5);
+
+
+        &--long {
+            @include font-size(44, 35);
+
+            letter-spacing: -0.03em;
+            max-width: rem(680);
+            text-wrap: wrap;
+            padding-top: rem(14);
+
+
+            span {
+                @include breakpoint(not-phone) {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+
+        &--accent {
+            @include breakpoint(desktop) {
+                @include font-size(80, 0.78);
+
+                padding-top: rem(25);
+            }
+        }
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(50, 1);
+            @include letter-spacing(-1.5, 50);
+
+            margin-left: 0;
+
+            &--long {
+                @include font-size(34, 28);
+
+                letter-spacing: -0.015em;
+                margin-bottom: rem(6);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(50, 0.82);
+
+                margin-bottom: rem(7);
+            }
+        }
     }
 
 
@@ -389,18 +1201,28 @@
         @include letter-spacing(-0.17, 17);
 
         position: relative;
-        margin-right: rem(16);
+        margin-right: rem(15);
         flex-shrink: 0;
 
-        &::before {
-            content: "";
-            width: rem(35);
-            height: 1px;
-            display: inline-block;
-            background-color: currentColor;
-            vertical-align: middle;
-            margin-right: rem(10);
-            margin-top: rem(-3);
+
+        @include breakpoint(not-desktop) {
+            @include font-size(17, 17.85);
+
+            flex-shrink: 1;
+        }
+
+
+        @include breakpoint(desktop) {
+            &::before {
+                content: "";
+                width: rem(35);
+                height: 1px;
+                display: inline-block;
+                background-color: currentColor;
+                vertical-align: middle;
+                margin-right: rem(10);
+                margin-top: rem(-7);
+            }
         }
     }
 
@@ -412,7 +1234,7 @@
 
         gap: rem(5);
         text-transform: uppercase;
-        margin-top: rem(4);
+        margin-top: rem(3);
 
 
         li {
@@ -422,7 +1244,18 @@
             background-color: var(--main-text-color);
             color: var(--main-body-color);
             height: rem(19);
-            padding: rem(5) rem(3) 0;
+            padding: rem(4) rem(3) 0;
+            transition: background-color .25s $easing;
+
+
+            @include hover {
+                background-color: var(--tags-hover-color);
+            }
+
+
+            a {
+                color: currentColor;
+            }
         }
     }
 
@@ -431,17 +1264,28 @@
     &__state {
         @include font-family(reclined);
         @include font-size(17, 19);
-        @include letter-spacing(0.54, 17);
         @include flex(row, flex-start, center);
 
+        letter-spacing: -0.02em;
+        font-weight: 300;
         text-transform: uppercase;
-        margin-top: rem(2);
+        margin-top: rem(1);
         flex-shrink: 0;
 
 
+        @include breakpoint(not-desktop) {
+            margin-top: 4px;
+        }
+
+
         svg {
-            margin-top: rem(-4);
-            margin-right: rem(5);
+            margin-top: rem(-3);
+            margin-right: rem(4);
+
+
+            @include breakpoint(not-desktop) {
+                margin-top: -2px;
+            }
         }
     }
 
@@ -465,10 +1309,30 @@
 
     &__aside {
         position: absolute;
-        inset: auto var(--GLOBAL-aside-width) 0 0;
+        inset: auto 0 0;
         z-index: 3;
         margin: auto;
-        width: vw(749);
+
+        @include breakpoint(tablet) {
+            inset: 0;
+            border-right: 1px solid var(--color-box);
+        }
+
+
+        @include breakpoint(phone) {
+            // position: relative;
+
+            // inset: auto 0 0 0;
+            position: relative;
+            flex-grow: 1;
+
+            // top: 0;
+            // bottom: 104px;
+            width: 100%;
+
+            // height: 100%;
+            grid-area: main;
+        }
     }
 
 
@@ -481,15 +1345,141 @@
         background-color: var(--color-grey200);
         color: var(--color-black);
         pointer-events: none;
-        display: none;
+        transform: translateY(100%);
+        display: flex;
+        width: vw(749);
+        margin: auto;
 
         // player's height
         padding-bottom: var(--GLOBAL-player-height);
 
 
+        &--mementos {
+            --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
+
+
+            width: 100%;
+            background: none;
+            height: calc(var(--app-height) - var(--lightbox-top-height));
+
+
+            .polaroid {
+                --polaroid-width: unset !important;
+                --polaroid-height: var(--container-height) !important;
+
+                &__image {
+                    max-width: 75vw;
+                }
+
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(300) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(300) !important;
+                }
+            }
+
+
+            .polaroid--horizontal {
+                --polaroid-width: unset  !important;
+                --polaroid-height: var(--container-height) !important;
+
+                @include breakpoint(tablet-landscape) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(tablet) {
+                    max-width: rem(400) !important;
+                }
+
+                @include breakpoint(phone) {
+                    max-width: rem(180) !important;
+                }
+            }
+
+
+            .polaroid--full-width {
+                --polaroid-width: unset  !important;
+                --polaroid-height: calc(var(--container-height) * 0.63) !important;
+            }
+
+
+            .polaroid--square {
+                --polaroid-width: unset !important;
+                --polaroid-height: var(--container-height) !important;
+            }
+
+
+            @include breakpoint(not-desktop) {
+                --container-height: 40vh;
+            }
+
+            picture,
+            img {
+                max-height: var(--polaroid-height);
+            }
+        }
+
+        &--transcript {
+            @include breakpoint(desktop) {
+                margin-inline: vw(260) auto;
+                height: calc(var(--app-height) - #{rem(26)});
+                max-height: unset;
+            }
+        }
+
+        &--related, &--info {
+            @include breakpoint(desktop) {
+                margin-inline: vw(260) auto;
+
+                height: calc(var(--app-height) - #{rem(138)});
+                max-height: unset;
+            }
+        }
+
+
+        &--related {
+            @include breakpoint(desktop) {
+                .lightbox__tab-dot:nth-of-type(2) {
+                    top: rem(494);
+                }
+            }
+        }
+
+        &--downloads {
+            @include breakpoint(desktop) {
+                margin-inline: vw(260) auto;
+                height: calc(var(--app-height) - var(--lightbox-top-height) - #{vw(46)});
+            }
+        }
+
+        @include breakpoint(not-desktop) {
+            position: relative;
+            inset: auto;
+            padding-bottom: 0;
+            min-height: unset;
+            max-height: 100%;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            display: none;
+
+            @include breakpoint(phone) {
+                overflow: hidden;
+            }
+        }
+
+
         &.is-visible {
-            display: flex;
+            // display: flex;
             pointer-events: all;
+
+
+            @include breakpoint(not-desktop) {
+                display: flex;
+                opacity: 1;
+            }
         }
 
 
@@ -500,9 +1490,30 @@
             &::after {
                 content: "";
                 position: absolute;
-                inset: 1px auto 0 var(--aside-width);
+                inset: 0 auto 0 var(--aside-width);
                 width: 1px;
                 background-color: var(--theme-color);
+                z-index: 3;
+                pointer-events: none;
+
+                @include breakpoint(not-desktop) {
+                    display: none;
+
+                    .lightbox__tab--transcript &, .lightbox__tab--related & {
+                        display: block;
+                    }
+
+                    .lightbox__tab--transcript & {
+
+                        @include breakpoint(tablet) {
+                            inset: 0 auto 0 calc(var(--aside-width) + #{rem(35)});
+                        }
+
+                        @include breakpoint(phone) {
+                            inset: 0 auto 0 var(--aside-width);
+                        }
+                    }
+                }
             }
         }
 
@@ -525,6 +1536,21 @@
             &:nth-of-type(2) {
                 top: rem(460);
             }
+
+
+            @include breakpoint(not-desktop) {
+                display: none;
+            }
+        }
+    }
+
+
+
+    &__overlay {
+        @include breakpoint(not-desktop) {
+            position: sticky;
+            top: 0;
+            background-color: var(--main-body-color) !important;
         }
     }
 
@@ -536,10 +1562,21 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
+
+        @include breakpoint(not-desktop) {
+            padding-left: 0;
+        }
 
 
         &-text {
             padding: rem(53) rem(143) rem(25) rem(25);
+
+
+            @include breakpoint(not-desktop) {
+                padding: 39px 26px 39px var(--grid-margin);
+            }
+
 
 
             h3 {
@@ -548,17 +1585,28 @@
                 @include letter-spacing(-0.6, 30);
 
                 text-transform: uppercase;
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(30, 21);
+                }
             }
 
 
             p {
                 @include font-family(normal, 300);
-                @include font-settings(200, 100);
-                @include font-size(18, 27);
+                @include font-settings(300, 100);
+                @include font-size(18, 1.3);
                 @include letter-spacing(0.04, 18);
 
-                font-feature-settings: "ss02" on;
+                // font-feature-settings: "ss02" on;
                 margin-top: rem(8);
+
+
+                @include breakpoint(not-desktop) {
+                    @include font-size(15, 21);
+                    @include font-settings(400, 100); 
+                }
             }
 
 
@@ -576,47 +1624,87 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
+        @include breakpoint(not-desktop) {
+            padding-left: 0;
+        }
 
         &-list {
             @include flex(column, flex-start, flex-start);
 
             width: 100%;
-            padding: rem(47) rem(143) 0 rem(14);
+            padding: rem(52) rem(143) 0 rem(14);
 
+
+            @include breakpoint(not-desktop) {
+                padding: rem(39) 0 rem(39) rem(28);
+
+                @include breakpoint(phone) {
+                    padding: 39px 0 30px 16px;
+                }
+            }
 
             a {
                 @include font-family(compressed);
-                @include font-size(30, 1);
+                @include font-size(30, 0.9);
                 @include letter-spacing(-1.05, 30);
                 @include flex(row, flex-start, flex-start);
 
                 text-transform: uppercase;
-                margin-bottom: rem(13);
+                margin-bottom: rem(9);
+
                 overflow: hidden;
                 position: relative;
+                padding-top: rem(5);
+                margin-top: rem(-5);
 
                 @include breakpoint(desktop) {
                     @include hover {
-                       .lightbox__downloads-arrow {
+                        .lightbox__downloads-arrow {
                             transition: translate 0.3s ease;
 
                             &:nth-child(1) {
-                                translate: 0 100%;
+                                translate: 0 120%;
                             }
 
                             &:nth-child(2) {
                                 translate: 0 0;
-                            } 
-                       }
+                            }
+                        }
                     }
+                }
+
+                @include breakpoint(phone) {
+                    display: block;
+                }
+            }
+
+            .bracket {
+                @include font-family(slim);
+
+                font-weight: 300;
+                font-size: 1.05em;
+                margin-bottom: -0.2em;
+                margin-top: -0.05em;
+                margin-right: 0.1em;
+
+                &:last-child {
+                    margin-right: unset;
+                    margin-left: 0.1em;
+                }
+            }
+
+            br + .size {
+                @include breakpoint(phone) {
+                    margin-left: rem(22);
                 }
             }
         }
 
 
         &-arrow {
-            padding-top: 1px;
+            margin-top: -1px;
             margin-right: rem(8);
             transition: translate 0s;
 
@@ -624,7 +1712,8 @@
 
             & + & {
                 position: absolute;
-                translate: 0 -100%;
+
+                translate: 0 -120%;
 
                 @include breakpoint(not-desktop) {
                     display: none;
@@ -641,13 +1730,22 @@
         padding-left: var(--aside-width);
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: none;
 
+        @include breakpoint(phone) {
+            padding-left: rem(65);
+        }
 
         &-list {
             @include flex(column, flex-start, flex-start);
 
             width: 100%;
-            padding-top: rem(34);
+
+            padding-top: rem(32);
+
+            @include breakpoint(not-desktop) {
+                padding-top: rem(20);
+            }
         }
 
 
@@ -657,6 +1755,13 @@
             align-content: start;
             padding: rem(19) rem(48) rem(40) rem(25);
             position: relative;
+
+
+            @include breakpoint(not-desktop) {
+                @include flex(column, flex-start, stretch);
+
+                padding: rem(19) rem(17) rem(40) rem(19);
+            }
 
 
             &::before {
@@ -681,7 +1786,14 @@
 
             text-transform: uppercase;
             grid-area: title;
-            padding-top: rem(7);
+            padding-top: rem(4);
+
+
+            @include breakpoint(not-desktop) {
+                @include font-size(30, 30);
+
+                letter-spacing: -0.025em;
+            }
         }
 
 
@@ -690,9 +1802,10 @@
             @include font-size(17, 1);
             @include letter-spacing(-0.17, 17);
 
-            margin-top: rem(10);
+            margin-top: rem(2);
             grid-area: collection;
-            font-feature-settings: "ss03" on;
+
+            // font-feature-settings: "ss03" on;
 
             &::before {
                 content: "";
@@ -703,23 +1816,68 @@
                 vertical-align: middle;
                 margin-right: rem(8);
             }
+
+
+            @include breakpoint(not-desktop) {
+                margin-top: rem(2);
+                margin-bottom: rem(8);
+            }
         }
 
 
         &-text {
             @include font-family(normal, 300);
-            @include font-settings(200, 100);
-            @include font-size(18, 27.3);
+            @include font-settings(300, 100);
+            @include font-size(18, 1.3);
             @include letter-spacing(0.1, 18);
 
             grid-area: text;
+
+
+            @include breakpoint(not-desktop) {
+                @include font-size(14, 19);
+                @include font-settings(400, 100); 
+            }
         }
 
 
         &-arrow {
             position: absolute;
-            inset: rem(28) 100% auto auto;
-            margin-right: rem(7);
+
+            @include breakpoint(desktop) {
+                inset: rem(23) 100% auto auto;
+                margin-right: rem(7);
+
+                .horizontal {
+                    width: rem(35) !important;
+                }
+
+                .vertical {
+                    height: rem(14) !important;
+                }
+
+                .triangle {
+                    border-width: rem(15) 0 rem(15) rem(17) !important;
+                }
+            }
+
+
+            @include breakpoint(not-desktop) {
+                inset: rem(24) 100% auto auto;
+                margin-right: rem(9);
+    
+                .horizontal {
+                    width: rem(22) !important;
+                }
+    
+                .vertical {
+                    height: rem(11) !important;
+                }
+    
+                .triangle {
+                    border-width: rem(11) 0 rem(11) rem(12) !important;
+                }
+            }
 
             // // TEMP - todo animation on icon
             // opacity: 0;
@@ -729,6 +1887,15 @@
 
         &-link {
             @include full;
+
+            @include accessibility {
+                z-index: 0;
+
+                & ~ *:nth-child(n+3) {
+                    position: relative;
+                    color: yellow;
+                }
+            }
 
             // @include hover {
             //     ~ .lightbox__related-arrow {
@@ -749,14 +1916,31 @@
         height: 100%;
 
 
+        @include breakpoint(not-desktop) {
+            display: flex;
+
+            width: calc(100vw - 111px - 30vw);
+
+            @include breakpoint(phone) {
+                width: calc(100vw - 120px);
+            }
+        }
+
+
         &-image {
-            --container-height: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(45)});
-
             margin-top: vh(-20);
-            transform: translateY(0) rotate(-7.5deg);
+            transform: translateY(0);
 
-            --polaroid-width: calc(var(--container-height) * .75) !important;
-            --polaroid-height: var(--container-height) !important;
+            @include breakpoint(desktop) {
+                &.polaroid {
+                    max-width: rem(400);
+                }
+            }
+
+
+            @include breakpoint(not-desktop) {
+                margin-top: 0;
+            }
         }
     }
 
@@ -765,33 +1949,129 @@
     &__footer {
         @include flex(row, flex-start, center);
 
-        margin-top: rem(4);
+
+        @include breakpoint(desktop) { margin-top: rem(9); margin-left: rem(1); }
     }
 
 
 
     &__play {
         @include font-family(compressed);
-        @include font-size(62, 60);
-        @include letter-spacing(-1.24, 62);
+        @include font-size(29.73, 25);
         @include flex(row, flex-start, center);
 
+        letter-spacing: -0.02em;
         text-transform: uppercase;
-        margin-top: rem(4);
         overflow: hidden;
+        transition: color .25s $easing;
 
 
-        span {
+        @include breakpoint(desktop) { margin-top: rem(1); }
+
+        @include breakpoint(not-desktop) {
+            @include font-size(22, 20);
+
+            margin: 5px 0;
+            margin-top: 20px;
+            letter-spacing: normal;
+
+            @include breakpoint(phone) {
+                @include font-size(30, 1);
+                
+                letter-spacing: -0.025em;
+                margin-top: 30px;
+                margin-bottom: 6px; 
+                padding-right: 2px;
+                padding-top: 2px;
+            }
+        }
+
+
+        &-mask {
+            position: relative;
+            display: inline-flex;
+            overflow: hidden;
+
+            @include breakpoint(phone) {
+                padding-top: 0.2em;
+                margin-top: -0.2em;
+            }
+
+            span:last-of-type {
+                position: absolute;
+                inset: auto 0 100%;
+                width: 100%;
+                display: inline-block;
+
+                @include breakpoint(phone) {
+                    inset: auto 0 100%;
+                }
+            }
+        }
+
+
+        &-small {
+            @include breakpoint(desktop) {
+                @include font-size(27, 23);
+
+                margin-top: rem(-4);
+                padding-top: rem(4);
+                position: relative;
+
+                // to hide upper span under bg during hover
+                background-color: var(--theme-color);
+            }
+
+
+            @include breakpoint(not-desktop) {
+                @include breakpoint(tablet) {
+                    @include font-size(21, 19);
+                }
+
+                @include breakpoint(phone) {
+                    margin-left: 0.15em;
+                }
+            }
+        }
+
+
+        > span {
+            @include flex(column, flex-start, flex-start);
+
             width: var(--lightbox-play-width);
-            margin-left: rem(13);
+            margin-left: rem(11);
             height: 100%;
-            display: inline-block;
-            transition: transform .25s $ease-out;
+            transition: transform .35s $easing;
+
+
+            @include breakpoint(desktop) {
+                margin-top: rem(1);
+            }
+
+
+            @include breakpoint(not-desktop) {
+                width: auto;
+                margin-left: 5px;
+            }
+
+            @include breakpoint(phone) {
+                @include flex(row, flex-start, center);
+            }
         }
 
 
         svg {
-            margin-top: rem(-6);
+            @include breakpoint(not-desktop) {
+                width: 30px;
+                height: 35px;
+                margin-top: -4px;
+
+                @include breakpoint(phone) {
+                    width: 18px;
+                    height: 25px;
+                }
+            }
+
 
             path {
                 transition: fill 0.3s ease;
@@ -800,17 +2080,31 @@
 
 
         &.is-playing {
-            span {
-                transform: translateY(100%);
+            > span {
+                transform: translateY(105%);
             }
         }
 
         @include breakpoint(desktop) {
             @include hover {
-                path {
-                    fill: var(--alt-text-color);
+                .lightbox__play-mask span {
+                    animation: hover-link .5s $ease-custom forwards;
                 }
             }
+        }
+    }
+
+    &__line {
+        @include breakpoint(phone) {
+            display: flex;
+            height: 1px;
+            margin-bottom: -1px;
+            border-top: 1px solid var(--color-box);
+            position: sticky;
+            top: 44px;
+            order: 2;
+            z-index: 4;
+            pointer-events: none;
         }
     }
 }

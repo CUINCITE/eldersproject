@@ -1,7 +1,15 @@
 .filtered {
+    border-top: none !important;
+
+
+    &:has(li) {
+        border-top: 1px solid var(--color-bg);
+    }
+
     &__list {
         @include flex(row, flex-start, center);
-        padding-left: map-get($grid-offset, desktop);
+
+        padding-left: calc(var(--grid-margin) - 1px);
         gap: rem(16);
         flex-wrap: wrap;
 
@@ -10,14 +18,17 @@
         }
 
         @include breakpoint(phone) {
-            row-gap: rem(4);
-            column-gap: rem(14);
-            padding-top: rem(12);
+            gap: rem(4) rem(14);
             padding-inline: map-get($grid-offset, phone);
         }
 
         &:has(li) {
             padding-bottom: rem(25);
+            border-top: 1px solid var(--color-bg);
+
+            @include breakpoint(phone) {
+                padding-top: rem(12);
+            }
         }
     }
 
@@ -34,11 +45,28 @@
         label {
             @include flex(row, flex-start, center);
 
-            margin-top: rem(12);
-            gap: rem(8);
+            margin-top: rem(10);
+            gap: rem(4);
 
             @include breakpoint(phone) {
                 margin-top: rem(5);
+                gap: rem(7);
+            }
+
+
+            span {
+                @include flex(row, center, center);
+                @include font-family(normal);
+                @include font-size(12, 12);
+
+                letter-spacing: -0.01em;
+                width: rem(22);
+                height: rem(22);
+                background-color: var(--color-grey300);
+                border-radius: 50%;
+                position: relative;
+                top: rem(-1);
+                padding-top: rem(1);
             }
         }
 

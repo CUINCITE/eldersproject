@@ -1,23 +1,63 @@
-<If "%{HTTP_HOST} == 'elder.sunship.dev'">
-AuthType Basic
-AuthName "Access denied"
-AuthUserFile /home/huncwot7/domains/elder.sunship.dev/public_html/.htpasswd
-Require valid-user
-AddHandler application/x-httpd-php81 php
-</If>
 <If "%{HTTP_HOST} == 'elder.sunship.one'">
+AddHandler application/x-httpd-php81 php
 AuthType Basic
 AuthName "Access denied"
 AuthUserFile /home/huncwot8admin/domains/elder.sunship.one/public_html/.htpasswd
 Require valid-user
-AddHandler application/x-httpd-php81 php
 </If>
-<If "%{HTTP_HOST} == 'elder-stage.us-east-1.elasticbeanstalk.com'">
+<If "%{HTTP_HOST} == 'staging.eldersproject.incite.columbia.edu'">
 AuthType Basic
 AuthName "Access denied"
 AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 </If>
+<If "%{HTTP_HOST} == 'eldersproject.incite.columbia.edu'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
+<If "%{HTTP_HOST} == 'elder-prod-env.eba-3k57a8tv.us-east-1.elasticbeanstalk.com'">
+AuthType Basic
+AuthName "Access denied"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</If>
+
+AddEncoding gzip svgz
+AddType application/font-sfnt            otf ttf
+AddType application/font-woff            woff
+AddType application/font-woff2           woff2
+AddType application/vnd.ms-fontobject    eot
+AddType text/plain obj
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-opentype "access plus 1 year"
+  ExpiresByType application/x-font-woff "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  ExpiresByType application/x-font-woff2 "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresByType application/pdf "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/x-javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
+
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css image/svg+xml application/json application/x-javascript application/javascript text/javascript
+</ifmodule>
 
 RewriteEngine On
 Options -Indexes
@@ -25,7 +65,7 @@ Options -Indexes
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d [OR]
-RewriteCond %{REQUEST_FILENAME} \.(gif|jpg|png|jpeg|css|js)$ [NC]
+RewriteCond %{REQUEST_FILENAME} \.(gif|jpg|png|jpeg|css|js|vtt)$ [NC]
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^(.*)$ index.php?url=$1 [NC,L]
 

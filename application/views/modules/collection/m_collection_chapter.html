@@ -1,12 +1,22 @@
-<section class="module module--text_wrapper" data-component="WrappedText">
+<section class="module module--text_wrapper box module--text_wrapper--{{ color }}" data-component="WrappedText" >
+
     <div class="text_wrapper{% if reversed %} text_wrapper--reversed{% endif %}">
-        <i class="text_wrapper__line desktop-only"></i>
-        <div class="box">
+        <i class="text_wrapper__line desktop-only" data-scroll="line"></i>
+        <div>
             <div class="grid grid--row-start">
 
                 {% if label %}
+                    <!-- Check if the title has a long word and add a modifier -->
+                    {% set labelArray = label|split(' ') %}
+                    {% set isLongWord = false %}
+
+                    {% for word in labelArray %}
+                        {% if word|length > 13 %}
+                            {% set isLongWord = true %}
+                        {% endif %}
+                    {% endfor %}
                     <div class="text_wrapper__title js-wrapped-title text_wrapper__column col-span-6 col-start-{{ reversed ? '7' : '1' }}{{ reversed ? '' : ' no-padding' }}">
-                        {% include "/components/c_heading.html" with {label:label, aside:true, size:"small-plus", modifiers: ["collection"]} %}
+                        {% include "/components/c_heading.html" with {label:label, aside:true, isLongWord: isLongWord, size:"small-plus", modifiers: ["collection"]} %}
                     </div>
                 {% endif %}
 
@@ -21,22 +31,42 @@
                                 {% include "/subviews/subview_text.html" with {text:module.value, large:true, aisde:true} %}
                             </div>
 
+                        {% elseif module.type == "quote" %}
+
+                            <div class="text text--large text--aside">
+                                <blockquote class="quote quote--big">
+
+                                    <p>{{ module.value.text | raw }}</p>
+
+                                    {% if module.value.author %}
+                                        <footer>{{ module.value.author | raw }}</footer>
+                                    {% endif %}
+
+                                </blockquote>
+                            </div>
+
                         {% elseif module.type == "image" and module.value.variant == 'illustration' %}
 
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}">
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__illustration{% if module.value.image.desktop.width and module.value.image.desktop.height %}{% if module.value.image.desktop.width > module.value.image.desktop.height %} text_wrapper__illustration--horizontal{% elseif module.value.image.desktop.width == module.value.image.desktop.height %} text_wrapper__illustration--square{% endif %}{% endif %}" data-parallax="100" data-observe>
                                 {% include "subviews/subview_picture.html" with { image: module.value.image } %}
+                                {% if module.value.caption %}
+                                    <div class="text_wrapper__info text_wrapper__info--collections">
+                                        {% include "/subviews/subview_text.html" with {text: module.value.caption} %}
+                                    </div>
+                                 {% endif %}
                             </div>
 
                         {% elseif module.type == "image" %}
 
-                            <div class="text_wrapper__module js-wrapped-image text_wrapper__photo{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
+                            <div class="text_wrapper__module js-wrapped-image js-wrapped-photo text_wrapper__photo text_wrapper__photo--single{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}" data-observe>{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
                                 {% include "/components/c_polaroid.html" with {image: module.value.image, modifiers: ["wrapped"]} %}
                                 {% if module.value.caption %}
-                                    <div class="text_wrapper__info">
+                                    <div class="text_wrapper__info text_wrapper__info--collections">
                                         {% include "/subviews/subview_text.html" with {text: module.value.caption} %}
                                     </div>
                                 {% endif %}
                             </div>
+
                             {% set photoCounter = photoCounter + 1 %}
 
                         {% elseif module.type == 'read_more' %}
@@ -59,9 +89,56 @@
                                 </button>
                             </div>
 
+                        {% elseif module.type == 'slider' %}
+
+                            <div class="text_wrapper__module js-wrapped-image text_wrapper__photo text_wrapper__photo--slider{% if photoCounter % 2 != 0 %} text_wrapper__photo--reversed{% endif %}">{#                                {% include "/components/c_polaroid.html" with module.image|merge({modifiers: ["wrapped"]}) %} #}
+                                {% include "/components/c_polaroid_gallery.html" with {moduleValue: module.value, modifiers: ["wrapped"]} %}
+                            </div>
+
+                        {% elseif module.type == 'playlist' %}
+                            <div class="text_wrapper__module text_wrapper__playlist">
+                                <div class="playlist">
+                                    <div class="playlist__title">
+                                        Playlist: <br>
+                                        {{label}}
+                                    </div>
+                                    <ul class="playlist__items">
+                                        {% for item in module.value %}
+                                        <li class="playlist__item">
+                                            <button class="playlist__button" data-audio-player="{{item.id}}" data-start="{{ item.total_seconds }}" data-toggle><span class="sr-only">Play interview:</span></button>
+                                            {{item.label}} <span class="playlist__duration">{{item.start_time}}</span>
+                                            <i class="playlist__icon">[[svg::play]]</i>
+                                        </li>
+                                            {% if module.value|length > 5 and loop.index == 5 %}
+                                            </ul>
+                                            <div class="playlist__expand expand" data-expand id="playlist-items">
+                                                <ul class="playlist__items">
+                                            {% endif %}
+                                        {% endfor %}
+                                        </ul>
+
+                                    {% if module.value|length > 8 %}
+                                        </div>{# END of .playlist__expand #}
+                                        <div class="playlist__wrap">
+                                            <button class="playlist__trigger button button--small button--overflow" data-component="Button" aria-expanded="false" aria-controls="playlist-items" data-expanded-text="Show less" data-hidden-text="Load more">
+                                                {% include "./components/c_arrow_icon.html" with { reversed: false } %}
+                                                <span class="button__text js-button-text js-expand-text">Load more</span>
+                                            </button>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+
                         {% endif %}
 
                     {% endfor %}
+
+                    {% if show_location %}
+                        <div class="text_wrapper__location">
+                            <p class="">[[svg::pin-color]] Portland, Oregon and the Pacific Northwest</p>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

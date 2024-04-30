@@ -60,7 +60,7 @@
     {
       "type": "image",
       "field": "image",
-      "folder": "/public/upload/media",
+      "folder": "/public/upload/collection_media",
       "folder_preview": "mobile",
       "extensions": [
         "jpg",
@@ -81,7 +81,7 @@
         {
           "folder": "mobile",
           "width": 350,
-          "height": 180,
+          "height": 350,
           "label": "Mobile",
           "retina": true
         },

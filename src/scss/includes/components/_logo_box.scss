@@ -1,18 +1,34 @@
 .logo_box {
+    overflow: hidden;
+    height: var(--hamburgerbar-height);
 
     @include breakpoint(tablet) {
-        svg { 
-            width: vw(150, tablet); 
-            margin: vw(13, tablet) 0 vw(9, tablet) calc(#{map-get($grid-offset, tablet)} - #{vw(7, tablet)});
-            height: auto; 
+        svg {
+            width: vw(150, tablet);
+            height: auto;
         }
     }
 
     @include breakpoint(phone) {
-        svg { 
-            width: vw(80, phone); 
-            margin: vw(13, phone) 0 vw(9, phone) vw(13, phone);
-            height: auto; 
+        svg {
+            width: vw(110, phone);
+            height: auto;
+        }
+    }
+
+    .box {
+        @include flex(row, flex-start, flex-start);
+
+        height: 100%;
+
+        @include breakpoint(tablet) {
+            padding-left: vw(30, tablet);
+            padding-top: vw(13, tablet);
+        }
+
+        @include breakpoint(phone) {
+            padding-left: vw(18, phone);
+            padding-top: vw(13, phone);
         }
     }
 }

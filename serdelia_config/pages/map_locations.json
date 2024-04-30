@@ -6,13 +6,36 @@
     "page":"Map Locations",
     "edit":"{% if not label %}New Location{% else %}Location: <em>{{label}}</em>{% endif %}"
   },
-  "layouts":
+  "buttons_page":
+  [
+    {"type":"plugin","plugin":"refresh"}
+  ],
+  "buttons_edit":
+  [
+      {"label":"GPS Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"lat":"gps_lat","lng":"gps_lng","address":"address","name":"label"}
+      },
+      {"label":"City Finder","type":"plugin","icon":"globe","plugin":"gps_finder",
+        "params":{"action":"gps2name","lat":"gps_lat","lng":"gps_lng","city":"city"}
+      }
+  ],
+"layouts":
   [
     {
       "type":"list"
     }
   ],
   "fields": [
+    {
+      "tab":"Info",
+      "field":"collection","label":"Collection","list":true,
+      "type":"select",
+      "search":true,
+      "source":
+      {
+        "model":"interviewers"
+      }
+    },
     {
       "label": "Location Name",
       "field": "label",
@@ -29,11 +52,34 @@
     {
       "hr": true,
       "label": "Latitude",
-      "field": "latitude"
+      "field": "gps_lat",
+      
+      "list":true
     },
     {
       "label": "Longitude",
-      "field": "longitude"
+      "field": "gps_lng",
+      
+      "list":true
+    },
+    {
+      "hr": true,
+      "label": "State",
+      "field": "state","list":true
+    },
+    {
+      "label": "City",
+      "field": "city","list":true
+    },
+    {
+      "label": "Street",
+      "field": "street","list":true
+    },
+    {
+      "hr": true,
+      "label": "Zoom Precision",
+      "field": "zoom_precision",
+      "type": "select"
     },
     {
       "hr": true,
@@ -47,41 +93,62 @@
     {
       "label": "uid",
       "field": "uid",
+      "list":"read",
       "hidden": true,
       "type": "uid"
+    },    
+    {
+      "field":"quotes","type":"json","label":"Quotes"
     },
     {
+      "hr": true,
+      "field": "collection_hide",
+      "type": "boolean",
+      "label": "Hide on collection Page"
+    },
+    {
+      "field": "active",
+      "type": "boolean",
+      "label": "Active",
+      "search":true,
+      "list": "edit"
+    },
+    {
+      "tab":"Image",
       "label": "Image",
       "type": "image",
       "field":"image",
       "folder": "/public/upload/locations",
-      "list":{"xposition_after":"","width":50,"height":50},
+      "temp-list":{"xposition_after":"","width":50,"height":50},
+      "list":true,
       "images":
       [
         {
           "folder": "desktop",
           "label": "Desktop",
-          "width": 800,
-          "height": 800,
-          "crop": true,
+          "width": 421,
           "retina": true
         },
         {
           "folder": "mobile",
           "label": "Mobile",
-          "width": 375,
-          "height": 375,
-          "crop": true,
+          "width": 349,
           "retina": true
         }
-      ]
+      ],
+      "settings": {
+        "webp": true,
+        "sizes": "image_sizes"
+      }
     },
     {
-      "hr": true,
-      "field": "active",
-      "type": "boolean",
-      "label": "Active",
-      "list": "edit"
+      "field":"alt","label":"Alt (required)",
+      "type":"text"
+    },
+    {
+      "field": "image_sizes",
+      "type": "json",
+      "label": "Image sizes"
     }
   ]
 }

@@ -3,10 +3,11 @@
 
     text-transform: uppercase;
     padding-left: unset;
+    font-feature-settings: "ss01" on;
 
     @include breakpoint(desktop) {
-        @include font-size(204, 157);
-        @include letter-spacing(-6.12, 204);
+        @include font-size(216, 1);
+        @include letter-spacing(-6.48, 216);
 
         position: relative;
     }
@@ -37,9 +38,9 @@
 
             margin-block: trim-font(0.8);
         }
- 
+
         @include breakpoint(phone) {
-            @include font-size(80, 67.5);
+            @include font-size(80, 64);
             @include letter-spacing(-2.4, 80);
         }
 
@@ -61,9 +62,8 @@
             }
 
             @include breakpoint(phone) {
-                @include letter-spacing(-6, 80);
-
-                padding-left: rem(5);
+                letter-spacing: -0.07em;
+                padding-left: rem(7);
             }
         }
     }
@@ -99,6 +99,13 @@
             @include letter-spacing(-3.66, 122);
 
             margin-block: trim-font(100 / 122);
+
+
+            &.heading--longword {
+                @include font-size(80, 66);
+
+                letter-spacing: -0.03em;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -109,10 +116,17 @@
         }
 
         @include breakpoint(phone) {
-            @include font-size(70, 0.84);
-            @include letter-spacing(-2.45, 70);
+            @include font-size(70, 59);
 
+            letter-spacing: -0.035em;
             margin-block: trim-font(0.84);
+
+
+            &.heading--longword {
+                @include font-size(46, 40);
+
+                letter-spacing: -0.03em;
+            }
         }
     }
 
@@ -142,6 +156,16 @@
                 margin-top: vw(38);
             }
         }
+
+        p + & {
+            @include breakpoint(tablet) {
+                margin-top: rem(24);
+            }
+
+            @include breakpoint(phone) {
+                margin-top: rem(24);
+            }
+        }
     }
 
 
@@ -149,6 +173,7 @@
 
         @include breakpoint(desktop) {
             text-align: right;
+            margin-block: trim-font(1);
         }
 
         @include breakpoint(tablet) {
@@ -169,9 +194,62 @@
     }
 
 
+    &--left {
+        @include breakpoint(tablet) {
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            padding-block: rem(12);
+        }
+    }
+
+
+    &--title {
+        @include breakpoint(desktop) {
+            @include font-size(204, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(24);
+            letter-spacing: -0.03em;
+
+            @media (max-height: 719px) {
+                @include font-size(182, 1);
+                padding-block: rem(20);
+            }
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(160, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(20);
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(80, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(12);
+
+
+            .about_hero & {
+                @include font-size(132, 1);
+
+                letter-spacing: -0.045em;
+                padding-block: rem(8);
+            }
+        }
+    }
+
+
     &--aside {
         @include breakpoint(desktop) {
             padding-top: rem(21);
+        }
+
+        .text_aside & {
+            padding-top: rem(26);
         }
 
         @include breakpoint(not-desktop) {
@@ -205,6 +283,17 @@
                 }
             }
         }
+
+        &.heading--medium {
+            i {
+                display: inline-block;
+                text-wrap: pretty;
+
+                @include breakpoint(desktop) {
+                    padding-left: rem(12);
+                }
+            }
+        }
     }
 
 
@@ -214,6 +303,15 @@
         @include breakpoint(desktop) {
             @include font-size(204, 175);
             @include letter-spacing(-10.2, 204);
+
+            margin-block: trim-font(175/204);
+            padding-left: rem(12);
+        }
+
+        @include breakpoint(not-desktop) {
+            .interviews__heading & {
+                position: relative;
+            }
         }
 
         @include breakpoint(tablet) {
@@ -232,58 +330,135 @@
         }
     }
 
-
-    &--title {
-
-        @include breakpoint(tablet) {
-            @include font-size(230, 1);
-            @include letter-spacing(-5.94, 132);
-
-            margin-block: trim-font(1);
-        }
-
-        @include breakpoint(phone) {
-            @include font-size(132, 140.253);
-            @include letter-spacing(-5.94, 132);
-
-            margin-block: trim-font(140.253 / 132);
-        }
-    }
-
-
     &--collection {
-        position: relative;
-        padding-inline-start: rem(28);
-
-
-        @include breakpoint(desktop) {
-            padding-top: rem(26);
-        }
-
-        &::before {
+        &::after {
             @include font-size(17, 21);
             @include font-family(normal);
             @include font-settings(500, 100);
 
-            position: absolute;
-            inset: rem(22) auto auto 0;
-
             content: counter(collection-counter, decimal-leading-zero) ".";
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-left: rem(-6);
+            padding-top: rem(3);
+            padding-left: rem(3);
+            bottom: rem(63);
+            right: rem(-4);
+            width: rem(34);
+            height: rem(34);
+            border-radius: 50%;
+            background-color: var(--circle-color);
+            color: var(--circle-text-color, currentColor);
             font-weight: 500;
             font-feature-settings: "ss03" on;
             counter-increment: collection-counter;
             letter-spacing: normal;
+
+
+            @include breakpoint(tablet) {
+                @include font-size(20, 1);
+            }
+
+            @include breakpoint(phone) {
+                @include font-size(12, 1);
+
+                bottom: rem(35);
+                width: rem(22);
+                height: rem(22);
+                margin-left: -4px;
+                padding: 1px 0 0 1px;
+            }
+        }
+
+        &[data-observe]::after { transition: transform 0.7s $ease-out-back; }
+        &[data-observe]:not(.is-in-view)::after { transform: scale(0); }
+
+
+        @include breakpoint(desktop) {
+            padding-top: rem(26);
+            position: relative;
+        }
+
+
+        @include breakpoint(not-desktop) {
+            margin-right: rem(-20);
+        }
+
+
+        .col-start-7 & {
+            @include breakpoint(desktop) {
+                padding-left: rem(17);
+            }
+        }
+
+
+        &.heading--longword::after {
+            @include breakpoint(desktop) {
+                bottom: rem(34);
+                right: rem(-8);
+            }
+
+
+            @include breakpoint(phone) {
+                bottom: rem(16);
+            }
+        }
+    }
+
+
+    &--collections {
+        @include breakpoint(desktop) {
+            margin-bottom: rem(4);
+        }
+    }
+
+
+    &--map {
+        @include font-size(204, 157);
+
+        letter-spacing: -0.03em;
+
+
+        @include breakpoint(not-desktop) {
+            @include font-size(132, 140);
+
+            letter-spacing: -0.045em;
         }
     }
 
 
 
     &__counter {
-        @include font-size(50, 1);
-        @include letter-spacing(-1.75, 50);
+        @include font-family(slim);
 
+        font-weight: 300;
         position: absolute;
-        inset: auto auto rem(18) calc(100% + #{rem(22)});
+
+        @include breakpoint(desktop) {
+            @include font-size(50, 1);
+
+            letter-spacing: -0.035em;
+            inset: auto auto rem(24) calc(100% + #{rem(18)});
+        }
+
+        @include breakpoint(tablet) {
+            @include font-size(34, 1);
+            @include letter-spacing(-1, 30);
+
+            margin-block: trim-font(1);
+            inset: auto auto rem(44) calc(100% + #{rem(18)});
+        }
+
+        @include breakpoint(phone) {
+            @include font-size(30, 1);
+            @include letter-spacing(-1, 30);
+
+            margin-block: trim-font(1);
+            inset: auto auto rem(20) calc(100% + #{rem(10)});
+        }
     }
 
 
@@ -294,25 +469,30 @@
             padding-bottom: rem(80);
         }
 
+
+        @include breakpoint(not-desktop) {
+            &::before { display: none; }
+        }
+
         @include breakpoint(tablet) {
             padding-top: rem(20);
             padding-bottom: rem(98);
         }
 
         @include breakpoint(phone) {
-            padding-top: rem(20);
-            padding-bottom: rem(98);
+            padding-top: rem(14);
+            padding-bottom: rem(32);
         }
     }
 
 
 
-    .module--quote_panel + .module--text_wrapper & {
+    // .module--quote_panel + .module--text_wrapper & {
 
-        @include breakpoint(phone) {
-            padding-bottom: rem(70);
-        }
-    }
+    //     @include breakpoint(phone) {
+    //         padding-bottom: rem(70);
+    //     }
+    // }
 
 
 

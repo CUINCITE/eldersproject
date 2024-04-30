@@ -2,8 +2,29 @@
     @include flex(row, center, center);
 
     width: 100%;
-    height: 100%;
-    padding-bottom: rem(82);
+    height: calc(100% + var(--GLOBAL-player-height));
+    padding-bottom: var(--GLOBAL-player-height);
+    -webkit-tap-highlight-color: rgba(#776886, 0.3);
+
+    @include breakpoint(not-desktop) {
+        height: 100%;
+        padding: 30px 0;
+        width: 100vw;
+        display: flex;
+        justify-content: flex-start;
+
+        @include breakpoint(tablet) {
+            padding-top: 0;
+            padding-bottom: vw(200, tablet);
+            width: calc(100vw - 111px);
+        }
+    }
+
+
+    @include breakpoint(phone) {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
 
 
 
@@ -13,6 +34,21 @@
         position: relative;
         height: 100%;
         margin-top: rem(-41);
+
+        @include breakpoint(desktop) {
+            width: calc(100vh - var(--lightbox-top-height) - var(--GLOBAL-player-height) - #{vh(22)});
+            translate: vw(57) 0;
+        }
+
+        @include breakpoint(not-desktop) {
+            margin-top: 0;
+            width: fit-content;
+            margin-left: 15vw;
+
+            @include breakpoint(phone) {
+                margin-left: 60px;
+            }
+        }
     }
 
 
@@ -24,6 +60,12 @@
         grid-template-rows: 1fr;
         position: relative;
         justify-items: center;
+
+
+        @include breakpoint(not-desktop) {
+            display: flex;
+            width: 100%;
+        }
     }
 
 
@@ -44,8 +86,14 @@
         color: var(--color-black);
 
 
+
+        @include breakpoint(not-desktop) {
+            display: none;
+        }
+
+
         &--prev {
-            left: rem(-74);
+            left: rem(-100);
             right: 50%;
 
             svg { transform: scaleX(-1); }
@@ -57,7 +105,15 @@
         &--next {
             align-items: flex-end;
             left: 50%;
-            right: rem(-74);
+            right: rem(-100);
+
+            @include breakpoint(tablet) {
+                right: rem(-50);
+            }
+
+            @include breakpoint(phone) {
+                right: rem(25);
+            }
 
             .is-last & { display: none; }
         }
@@ -66,25 +122,64 @@
         span {
             opacity: 0;
             transition: opacity .25s $ease-custom;
+
+            @include breakpoint(tablet-landscape) {
+                opacity: 1;
+            }
         }
 
+
         svg {
-            *:nth-child(1) {
-                scale: 0;
-                transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
-                transform-origin: 60% center;
+            @include breakpoint(not-desktop) {
+                width: 100%;
             }
 
-            *:nth-child(2) {
-                scale: 1 0;
-                transition: scale 0.25s 0.05s $ease-custom;
-                transform-origin: left center;
-            } 
+            @include breakpoint(tablet-landscape) {
+                width: 100%;
+            }
 
-            *:nth-child(3) {
-                scale: 0 1;
-                transition: scale 0.25s 0.25s $ease-custom;
-                transform-origin: 10% center;
+            .safari &,
+            .mac & {
+                width: 100%;
+            }
+        }
+
+
+        @include breakpoint(desktop) {
+            svg {
+                *:nth-child(1) {
+                    scale: 0;
+                    transition: scale 0.25s $ease-custom, translate 0.2s $ease-custom;
+                    transform-origin: 60% center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
+                }
+
+                *:nth-child(2) {
+                    scale: 1 0;
+                    transition: scale 0.25s 0.05s $ease-custom;
+                    transform-origin: left center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
+                }
+
+                *:nth-child(3) {
+                    scale: 0 1;
+                    transition: scale 0.25s 0.25s $ease-custom;
+                    transform-origin: 10% center;
+
+                    @include breakpoint(tablet-landscape) {
+                        scale: none;
+                    }
+                }
+
+                @include breakpoint(tablet-landscape) {
+
+                }
             }
         }
 
@@ -112,18 +207,29 @@
                     scale: 1;
                     transition: scale 0.25s 0.25s $ease-custom, translate 0.2s $ease-custom;
                 }
-    
+
                 *:nth-child(2) {
                     scale: 1;
                     transition: scale 0.25s 0.2s $ease-custom;
                 }
-    
+
                 *:nth-child(3) {
                     scale: 1;
                     transition: scale 0.25s $ease-custom;
                 }
             }
+        }
+    }
 
+
+
+    &__captions {
+        @include breakpoint(phone) {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-top: rem(30);
+            margin-left: var(--grid-margin);
+            margin-right: var(--grid-margin);
         }
     }
 }

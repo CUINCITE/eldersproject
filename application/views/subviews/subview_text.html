@@ -1,7 +1,8 @@
 <div class="text
-{% if short %} text--short{% endif %}{% if large %} text--large{% endif %}{% if wide %} text--wide{% endif %}{% if aside  %} text--aside{% endif %}">
+{% if size %} text--{{size}}{% endif %}
+{% if modifiers %}{% for modifier in modifiers %} text--{{modifier}}{% endfor %}{% endif %}">
     {% if heading %}
-        {% include 'components/c_heading.html' with { text: heading.text, small: true } %}
+        {% include 'components/c_heading.html' with heading %}
     {% endif %}
-    {{text|raw}}
+    {{text|szewce|raw}}
 </div>

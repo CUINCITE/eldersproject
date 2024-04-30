@@ -7,7 +7,7 @@
   "layout": {
     "type": "grid",
     "count": 100,
-    "html": "{{html.image|raw}}{{html.name}}<br><small>{{html.occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
+    "html": "{{html.image|raw}}{{html.name}}<br><small>{{html.narrator_occupation}}</small> {{html.active|raw}}<br><small>{% if not record.values.status_media %}<span class='badge badge-danger'>NO MEDIA</span>{% endif %} {% if not record.values.status_transcripts %}<span class='badge badge-danger'>NO TRANSCRIPTS</span>{% endif %}</small>"
   },
   "url": {
     "type": "interview",
@@ -51,6 +51,9 @@
       "icon": "reorder",
       "page": "sessions,%id%"
     },
+    {
+      "field":"narrator_occupation"
+  },
     {
       "type": "plugin",
       "plugin": "preview",
@@ -199,15 +202,30 @@
     },
     {
       "tab": "Download",
-      "field": "PDF",
-      "label": "PDF",
+      "field": "pdf_en",
+      "label": "PDF (EN)",
       "type": "file",
+      "filename":"%uid%_EN.pdf",
       "extension": "pdf",
+      "settings":{"size":"pdf_en_size"},
       "folder": "/public/upload/interviews/transcripts"
     },
     {
-      "field": "pdf_size",
-      "label": "PDF Size"
+      "field": "pdf_en_size",
+      "label": "PDF Size (EN)"
+    },
+    {
+      "field": "pdf_es",
+      "label": "PDF (ES)",
+      "type": "file",
+      "filename":"%uid%_ES.pdf",
+      "extension": "pdf",
+      "settings":{"size":"pdf_es_size"},
+      "folder": "/public/upload/interviews/transcripts"
+    },
+    {
+      "field": "pdf_es_size",
+      "label": "PDF Size (ES)"
     },
     {
       "tab": "Index",
@@ -314,8 +332,22 @@
       "required": true,
       "type": "select",
       "source": {
-        "model": "interview_illustrations"
+        "model": "interview_illustrations_all"
       }
+    },
+    {
+      "field": "narrator_occupation"
+    },
+    {
+      "field": "lead"
+    },
+    {
+      "label": "Featured",
+      "field": "featured",
+      "type": "boolean",
+      "list": "edit",
+      "search": true,
+      "hr": true
     }
   ]
 }

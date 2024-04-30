@@ -1,12 +1,17 @@
 import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Accessibility } from './widgets/Accessibility';
 import { AudioPlayer } from './components/AudioPlayer';
 import { breakpoint, easing } from './Site';
 import { debounce } from './Utils';
 
+
+gsap.registerPlugin(ScrollTrigger);
+
 export class Menu {
     private isOpen = false;
 
-    private elToggle: HTMLElement;
+    private elToggle: NodeListOf<HTMLButtonElement>;
     private closeBtn: HTMLButtonElement;
     private wrapEl: HTMLElement;
     private isAnimating = false;
@@ -22,7 +27,7 @@ export class Menu {
 
     // eslint-disable-next-line no-unused-vars
     constructor(protected view: HTMLElement) {
-        this.elToggle = document.querySelector('.js-toggle-menu');
+        this.elToggle = document.querySelectorAll('.js-menu-toggle');
         this.closeBtn = this.view.querySelector('.js-menu-close');
         this.wrapEl = document.getElementById('wrapper');
         this.items = this.view.querySelectorAll('.js-menu-item');
@@ -44,9 +49,21 @@ export class Menu {
 
 
 
+    public resize(): void {
+        this.elToggle = document.querySelectorAll('.js-menu-toggle');
+        this.bindToggleButtons();
+    }
+
+
+
     private bind(): void {
-        this.elToggle && this.elToggle.addEventListener('click', this.onToggle);
         this.closeBtn && this.closeBtn.addEventListener('click', this.close);
+
+        window.addEventListener('keyup', e => {
+            const { key } = e;
+
+            if (key === 'Escape') this.close();
+        });
 
         this.setupHovers();
 
@@ -55,6 +72,12 @@ export class Menu {
             this.onAnimationEnd();
         });
         window.addEventListener('resize', debounce(() => this.timelines.forEach(tl => tl.invalidate())));
+    }
+
+
+
+    private bindToggleButtons(): void {
+        this.elToggle.length && [...this.elToggle].forEach(btn => btn.addEventListener('click', this.onToggle));
     }
 
 
@@ -102,6 +125,7 @@ export class Menu {
 
 
             item.addEventListener('mouseenter', () => {
+                if (Accessibility.isOn) tl.play(1);
                 breakpoint.desktop && tl.play();
             });
 
@@ -110,6 +134,7 @@ export class Menu {
             });
 
             link.addEventListener('focus', () => {
+                if (Accessibility.isOn) tl.play(1);
                 breakpoint.desktop && tl.play();
             });
 
@@ -130,13 +155,15 @@ export class Menu {
 
 
 
-    private onToggle = (): void => {
-        this.isOpen ? this.close() : this.open();
+    private onToggle = (e): void => {
+        const { currentTarget } = e;
+        const isSearchBtn = currentTarget.hasAttribute('data-search');
+        this.isOpen ? this.close() : this.open(isSearchBtn);
     };
 
 
 
-    private open = (): void => {
+    private open = (focusOnSearch?: boolean): void => {
         if (this.isAnimating) return;
 
         this.isAnimating = true;
@@ -144,7 +171,20 @@ export class Menu {
         this.view.style.display = 'flex';
         document.body.classList.add('has-menu-open');
 
-        gsap.timeline()
+        // TEMP - js animation later
+        if (Accessibility.isOn) {
+            this.isAnimating = false;
+            this.closeBtn.focus();
+        }
+
+        !Accessibility.isOn && gsap.timeline({
+            onComplete: () => {
+                if (focusOnSearch) {
+                    const input: HTMLInputElement = this.searchLabel.closest('form').querySelector('input[type="search"]');
+                    input && input.focus();
+                }
+            },
+        })
             .addLabel('init')
             .fromTo(this.labels, { yPercent: 120 }, {
                 yPercent: 0,
@@ -158,7 +198,7 @@ export class Menu {
                 stagger: 0.15,
                 ease: 'power2.out',
             }, 'init')
-            .fromTo(this.links, { xPercent: 100 }, {
+            .fromTo(this.links, { xPercent: (!breakpoint.desktop ? -100 : 100) }, {
                 xPercent: 0,
                 duration: 0.6,
                 stagger: 0.1,
@@ -169,7 +209,7 @@ export class Menu {
                 duration: 0.4,
                 ease: 'power2.out',
             }, '-=.6')
-            .fromTo(this.searchLabel, { xPercent: 100 }, {
+            .fromTo(this.searchLabel, { xPercent: (!breakpoint.desktop ? -100 : 100) }, {
                 xPercent: 0,
                 duration: 0.6,
                 clearProps: 'all',
@@ -187,5 +227,8 @@ export class Menu {
         this.isAnimating = true;
         this.isOpen = false;
         document.body.classList.remove('has-menu-open');
+
+        // TEMP - js animation later
+        if (Accessibility.isOn) this.isAnimating = false;
     };
 }

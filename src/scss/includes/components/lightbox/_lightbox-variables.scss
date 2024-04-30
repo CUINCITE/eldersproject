@@ -10,7 +10,7 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
     --main-body-color: var(--color-red, red);
 
     // header text color, tags bg
-    --main-text-color: var(--color-pale-pink, pink);
+    --main-text-color: var(--color-pink, pink);
 
     // aside area bg, logo area bg
     --aside-body-color: var(--color-green, green);
@@ -28,55 +28,94 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
     --aside-width: #{vw(123)};
     --lightbox-top-height: #{rem(195)};
 
+    @include breakpoint(tablet) {
+        --aside-width: #{vw(60, tablet)};
+    }
+
+    @include breakpoint(phone) {
+        --aside-width: #{vw(65, phone)};
+    }
+
 
     &__item {
         --main-body-color: var(--theme-color);
+        --tags-hover-color: color-mix(in sRGB, var(--main-text-color), #{$color-white} var(--tags-brightness, 25%));
+        --play-hover-color: color-mix(in sRGB, var(--main-text-color), #{$color-white} 25%);
 
+
+        &--default {
+            --description-color: var(--color-grey200);
+            --tags-brightness: 50%;
+            --hover-color: var(--color-blue);
+        }
+
+        // Caro De Robertis
 
         &--pink {
-            --theme-color: var(--color-pale-pink);
+            --theme-color: var(--color-pink);
             --main-text-color: var(--color-black);
             --aside-body-color: var(--color-purple);
             --aside-text-color: var(--color-grey200);
             --alt-text-color: var(--color-black);
+            --description-color: var(--color-grey200);
+            --hover-color: var(--color-dark-green);
         }
 
+
+        // Robin Coste Lewis
 
         &--green {
             --theme-color: var(--color-green);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
             --aside-body-color: var(--color-red);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
+            --hover-color: var(--color-purple);
         }
 
- 
+
+        // Jenna Wortham
+
         &--pale-purple {
             --theme-color: var(--color-pale-purple);
-            --main-text-color: var(--color-pale-pink);
-            --aside-body-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
+            --aside-body-color: var(--color-pink);
             --aside-text-color: var(--color-red);
             --alt-text-color: var(--color-grey200);
+            --hover-color: var(--color-dark-green);
         }
 
+
+        // Natalie Diaz
 
         &--orange {
             --theme-color: var(--color-orange);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
             --aside-body-color: var(--color-purple);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
+            --description-color: var(--color-grey200);
+            --hover-color: var(--color-red);
         }
 
+
+        // Eve Ewing
 
         &--pale-blue {
             --theme-color: var(--color-pale-blue);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
             --aside-body-color: var(--color-orange);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
+            --hover-color: var(--color-purple);
         }
 
+
+        // Denice Frohman
 
         &--brown {
             --theme-color: var(--color-brown);
@@ -84,17 +123,25 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
             --aside-body-color: var(--color-purple);
             --aside-text-color: var(--color-grey200);
             --alt-text-color: var(--color-black);
+            --description-color: var(--color-grey200);
+            --hover-color: var(--color-red);
         }
 
+
+        // Ellery Washington
 
         &--dark-green {
             --theme-color: var(--color-dark-green);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
             --aside-body-color: var(--color-orange);
-            --aside-text-color: var(--color-pale-pink);
+            --aside-text-color: var(--color-pink);
             --alt-text-color: var(--color-black);
+            --hover-color: var(--color-purple);
         }
 
+
+        // Renee Watson
 
         &--pale-green {
             --theme-color: var(--color-pale-green);
@@ -102,15 +149,20 @@ $lightbox-elements: buttons, footer, menu, hamburger, logo;
             --aside-body-color: var(--color-yellow);
             --aside-text-color: var(--color-black);
             --alt-text-color: var(--color-grey200);
+            --hover-color: var(--color-pink);
         }
 
 
+        // Caleb Gayle
+
         &--purple {
             --theme-color: var(--color-purple);
-            --main-text-color: var(--color-pale-pink);
+            --main-text-color: var(--color-pink);
+            --tags-brightness: 50%;
             --aside-body-color: var(--color-yellow);
             --aside-text-color: var(--color-black);
             --alt-text-color: var(--color-grey200);
+            --hover-color: var(--color-red);
         }
     }
 }
