@@ -78,7 +78,7 @@
             <span>Shuffle</span>
         {% endfor %}
     </div>
-    <div class="player__cassette" data-sound-click>
+    <div class="player__cassette phone-hide" data-sound-click>
         <div class="player__cassette-bg">
             <i class="icon-cassette"><span></span><span></span><span></span><span></span></i>
             <i class="icon-cassette"><span></span><span></span><span></span><span></span></i>
@@ -89,6 +89,18 @@
         <div class="player__cassette-wrap player__cassette-wrap--front js-player-cassette">
             [[svg::cassette]]
         </div>
+    </div>
+</div>
+<div class="player__cassette desktop-hide tablet-hide" data-sound-click>
+    <div class="player__cassette-bg">
+        <i class="icon-cassette"><span></span><span></span><span></span><span></span></i>
+        <i class="icon-cassette"><span></span><span></span><span></span><span></span></i>
+    </div>
+    <div class="player__cassette-wrap player__cassette-wrap--back">
+        [[svg::cassette]]
+    </div>
+    <div class="player__cassette-wrap player__cassette-wrap--front js-player-cassette">
+        [[svg::cassette]]
     </div>
 </div>
 <div class="player__cover desktop-hide tablet-hide js-player-cover">
