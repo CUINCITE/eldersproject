@@ -61,6 +61,9 @@ class Site {
         // set in Loader after first page load in session
         isActiveSession = !!getSessionStorageItem('loaded');
 
+        document.body.classList.toggle('local', local);
+        document.body.classList.toggle('debug', debug);
+
         this.bind();
         setVwUnit();
         setAppHeight();
