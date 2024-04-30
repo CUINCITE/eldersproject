@@ -30,7 +30,8 @@ class MementosImporter extends model_app_api_import
         $spreadsheet = ExcelIOFactory::load($xls);
         $sheets = $spreadsheet->getSheetNames();
         
-        $sheets=[$sheets[8]];
+        //$sheets=[$sheets[8]];
+
         $resultArray = [];
 
         foreach ($sheets as $k => $v) {
@@ -44,7 +45,7 @@ class MementosImporter extends model_app_api_import
 
         }
 
-        // update interviews.status_media
+        // update interviews.status_media to 1§
         $this->parent->sql->queryOut('UPDATE interviews,media SET interviews.status_assets=1 WHERE interviews.id=media.model_id && media.model="interviews"');
 
         /*
@@ -81,17 +82,18 @@ class MementosImporter extends model_app_api_import
     private function importMedia($items, $name)
     {
 
+        // hot-fix
         $dirs = ['Renee Watson' => 'Renée Watson'];
 
+
+        // stats
         $new = 0;
         $updated = 0;
         $skipped = 0;
         $intervews_media = [];
         $errors = [];
 
-
-
-        // fix missing Interview_ID
+        // fix missing Interview_ID by searching for a name
         foreach ($items as $k => $v)
             if (empty($v['Interview ID'])) {
                 $interview = $this->parent->getJsonModel('interviews', ['interviewer_name' => $name, 'label' => @$v['Narrator name']], true);
@@ -99,8 +101,12 @@ class MementosImporter extends model_app_api_import
                     $items[$k]['Interview ID'] = $interview['incite_id'];
             }
 
+        $dry_run=false;
+        $images_updated=0;
+
         foreach ($items as $k => $v)
-            if (!empty($v['Interview ID']) && !empty($v['Filename'])) {
+            if (!empty($v['Interview ID']) && !empty($v['Filename']))
+            {
                 $id = @$v['Interview ID'];
                 $interview = $this->parent->getJsonModel('interviews', ['incite_id' => $id], true);
                 if (!$interview)
@@ -136,40 +142,49 @@ class MementosImporter extends model_app_api_import
                     if ($exists)
                     {                        
                         $item['uid'] = $exists['uid'];
-                        $r = $this->parent->putJsonModel('media', $item, ['id' => $exists['id']]);
-                        if (!$r)
-                            return ['message' => 'postJsonModel error: ' . $this->parent->orm->getLastError()];
+                        if (!$dry_run)
+                        {
+                            $r = $this->parent->putJsonModel('media', $item, ['id' => $exists['id']]);
+                            if (!$r)
+                                return ['message' => 'putJsonModel error: ' . $this->parent->orm->getLastError()];
+                        }
                         $updated++;
                         if (empty($intervews_media[$interview['id']]))
                             $intervews_media[$interview['id']] = [];
                         $intervews_media[$interview['id']][] = $exists['id'];
-                    } else {
-                        
+                    } else {                        
                         $item['uid'] = uniqid();
-                        $r = $this->parent->postJsonModel('media', $item);
-                        if (!$r)
-                            return ['message' => 'putJsonModel error: ' . $this->parent->orm->getLastError()];
+                        if (!$dry_run)
+                        {
+                            $r = $this->parent->postJsonModel('media', $item);
+                            if (!$r)
+                                return ['message' => 'postJsonModel error: ' . $this->parent->orm->getLastError()];
+                        }
                         if (empty($intervews_media[$interview['id']]))
                             $intervews_media[$interview['id']] = [];
                         $intervews_media[$interview['id']][] = $this->parent->orm->getInsertId();
                         $new++;
                     }
 
-
-
                     $newFile = $_SERVER['DOCUMENT_ROOT'] . '/public/upload/media/original/' . $item['uid'] . '.jpg';
 
-                    if (file_exists($newFile))
-                        ;
+                    if ($dry_run || file_exists($newFile))
+                    {
+                        // skip
+                    }
                     elseif ($ext == "heic") {
+                        
+                        $errors[]='install heic class to conver: '.$oldFile;
+                        /*
+                        $images_updated++;
                         try {
                             HeicToJpg::convertOnMac($oldFile)->saveAs($newFile);
                         } catch (Exception $e) {
                             return ['message' => 'Image conversion to jpg using HeicToJpg not successful: ' . $v['Filename'] . '. Error: ' . $e->getMessage()];
-                        }
+                        }*/
                     } else {
                         $imagick = new Imagick($oldFile);
-
+                        $images_updated++;
                         try {
                             $imagick->setImageFormat('jpg');
                             $imagick->writeImage($newFile);
@@ -184,13 +199,13 @@ class MementosImporter extends model_app_api_import
             } else
                 $skipped++;
 
-        // remove non-existing images
+        // remove non-existing images - disabled NOW!
         foreach ($intervews_media as $k => $v) {
             $query = 'DELETE FROM media WHERE model="interviews" && model_id=' . $k . ' && id NOT IN (' . implode(',', $v) . ')';
             //$this->parent->sql->queryOut($query);
         }
 
-        return ['new' => $new, 'updated' => $updated, 'skipped' => $skipped, 'errors' => $errors];
+        return ['new' => $new, 'updated' => $updated, 'skipped' => $skipped, 'images_updated'=>$images_updated, 'errors' => $errors];
     }
 
 

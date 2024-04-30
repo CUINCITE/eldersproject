@@ -19,17 +19,11 @@ export class Analytics {
 
     public static bind(where?: HTMLElement): void {
         [...(where || document).querySelectorAll('[data-ga]')].forEach(el => {
-            el.addEventListener('click', e => {
-                const data = JSON.parse((e.currentTarget as HTMLElement).dataset.ga);
-                Analytics.sendEvent(data[0] || '', data[1] || '', data[2] || '', data[3] || -1);
-            });
+            el.addEventListener('click', this.sendGaData);
         });
 
         [...(where || document).querySelectorAll('[data-gtm]')].forEach(el => {
-            el.addEventListener('click', e => {
-                const data = JSON.parse((e.currentTarget as HTMLElement).dataset.gtm);
-                this.sendCustomEvent(data);
-            });
+            el.addEventListener('click', this.sendGtmData);
         });
     }
 
@@ -94,5 +88,16 @@ export class Analytics {
             });
             console.log('%cga tracking: pageview', 'background:#1a73e8;color:#fff', pathname || window.location.pathname, title || document.title);
         }
+    }
+
+    public static sendGtmData(e): void {
+        const data = JSON.parse((e.currentTarget as HTMLElement).dataset.gtm);
+        Analytics.sendCustomEvent(data);
+        console.log(data);
+    }
+
+    public static sendGaData(e): void {
+        const data = JSON.parse((e.currentTarget as HTMLElement).dataset.ga);
+        Analytics.sendEvent(data[0] || '', data[1] || '', data[2] || '', data[3] || -1);
     }
 }

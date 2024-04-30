@@ -40,15 +40,18 @@
 
         @include breakpoint(phone) {
             @include flex(row-reverse, space-between, stretch);
-
+ 
             position: fixed;
-            inset: auto auto 0 100%;
+            top: 0;
+
+            overflow: hidden;
+            right: var(--GLOBAL-aside-width);
             height: var(--GLOBAL-aside-width);
             width: 100vh;
             /* stylelint-disable-next-line declaration-block-no-duplicate-properties */
             width: 100dvh;
             transform: rotate(-90deg);
-            transform-origin: left bottom;
+            transform-origin: right top;
             border-left: none;
         }
     }
@@ -78,6 +81,10 @@
 
 
         @include breakpoint(phone) {
+            width: 100lvh;
+            flex-shrink: 0;
+            z-index: 1;
+
             .is-expanded & {
                 opacity: 0;
             }
@@ -142,7 +149,15 @@
 
 
         @include breakpoint(phone) {
-            flex-basis: var(--bar-height);
+            position: fixed;
+            bottom: var(--bar-height);
+            right: 0;
+            z-index: 5;
+
+            rotate: -90deg;
+            transform-origin: right bottom;
+            width: var(--bar-height);
+            height: var(--GLOBAL-aside-width);
             flex-shrink: 0;
             border-top: none;
             transition: transform .7s cubic-bezier(.5, 0, .1, 1);
