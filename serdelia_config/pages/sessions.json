@@ -4,14 +4,8 @@
         "parent": "%1%"
     },
     "label": {
-        "page": "Sessions",
-        "edit": "{% if not nr %}New session{% else %}Session: <em>{{parent.label}}, #{{nr}}</em>{% endif %}"
-    },
-    "layout-temp":
-    {
-        "type":"grid",
-        "count":100,
-        "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
+        "page": "Interview Sessions",
+        "edit": "{% if not nr %}New session{% else %}<em>{{parent.label}}</em> session #{{nr}}{% endif %}"
     },
     "order": "nr",
     "buttons_edit": [        
@@ -19,7 +13,7 @@
             "label":"Helper",
             "plugin":"session_update",
             "on_update":true,
-            "temp-hidden":true
+            "hidden":true
         },
         {
             "type": "plugin",
@@ -38,23 +32,22 @@
             "required": true
         },
         {
-            "label": "Session date",
-            "list": true,
-            "field": "date",
-            "required": true,
-            "type": "date"
-        },
-        
-        {
             "label":"Incite Session Id",
             "field":"incite_id",
             "list":true,
             "settings":{"case":true,"code":true}
         },
         {
+            "label": "Session date",
+            "list": true,
+            "field": "date",
+            "required": true,
+            "type": "date"
+        },                
+        {
+            "hr":true,
             "field":"narrator_location",
-            "label":"Location (narrator)",
-            "list":true
+            "label":"Location (narrator)"
         },
         {
             "field":"narrator_state",
@@ -67,8 +60,7 @@
         },
         {
             "field":"interviewer_location",
-            "label":"Location (interviewer)",
-            "list":true
+            "label":"Location (interviewer)"
         },
         {
             "field":"parent","type":"select",
@@ -87,6 +79,7 @@
         },
         
         {
+            "hr":true,
             "label":"Languages","type":"checkboxes",
             "field":"languages",
             "source":
@@ -108,6 +101,7 @@
             "list":true
         },
         {
+            "hr":true,
             "label": "Publish",
             "field": "active",
             "search":true,
@@ -162,6 +156,17 @@
             "type":"text",
             "label":"Transcript data with Tags",
             "settings":{"style":"json","wide":true,"rows":20}
+        },
+        {
+            "tab":"Auto-fields",
+            "field":"label",
+            "label":"Interview Name",
+            "edit":false
+        },
+        {
+            "field":"label_sort",
+            "label":"Interview Name (Sort)",
+            "edit":false
         }
     ]
 }

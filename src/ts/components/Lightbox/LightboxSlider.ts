@@ -146,17 +146,15 @@ export class LightboxSlider extends Component {
         const activeSlideIndex = [...this.slides].findIndex(el => el === slide);
 
         if (breakpoint.desktop) {
-            const rotation = Math.random() * 3 + 6;
+            const rotation = (Math.random() * 3 + 6) * (Math.random() < 0.5 ? -1 : 1);
 
             gsap.fromTo(slide, { x: xPosition }, {
                 x: 0,
-                duration: fast ? 0.01 : 0.5,
-                // rotate: activeSlideIndex % 2 === 0 ? -1 * rotation : rotation,
+                duration: fast ? 0.01 : 0.75,
                 ease: easing,
                 onStart: () => {
                     if (breakpoint.desktop) slide.style.display = 'flex';
                     else slide.style.opacity = '1';
-                    gsap.set(slide, { rotate: activeSlideIndex % 2 === 0 ? 10 : -10 });
                 },
                 onComplete: () => {
                     this.activeSlide = slide;
@@ -166,9 +164,9 @@ export class LightboxSlider extends Component {
                 },
             });
 
-            gsap.to(slide, {
-                duration: fast ? 0.01 : 0.45,
-                rotate: activeSlideIndex % 2 === 0 ? -1 * rotation : rotation,
+            gsap.fromTo(slide, { rotate: 0 }, {
+                duration: fast ? 0.01 : 0.7,
+                rotate: rotation,
                 ease: 'power3.out',
                 delay: 0.2,
             });

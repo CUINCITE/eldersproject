@@ -14,17 +14,16 @@
   },
   "order": "label_sort",
   "buttons_page": [
-    {
-      "plugin": "refresh"
-    }
+    
   ],
   "buttons_edit": [
     {
-      "label": "Interview auto-update",
+      "label": "Auto-update",
       "type": "plugin",
-      "plugin": "interview_update",
-      "hidden": true,
-      "on_update": true
+      "plugin": "interview_update",      
+      "on_update": true,
+      "hidden":true,
+      "icon":"refresh"
     },
     {
       "label": "Sessions",
@@ -48,13 +47,18 @@
   ],
   "fields": [
     {
-      "label": "CMS ID",
-      "edit": false,
       "tab": "Interview",
-      "field": "ID",
+      "field": "incite_id",
+      "label": "Incite ID",
+      "settings": {
+        "case": true,
+        "code": true
+      },
+      "search": true,
       "list": true
     },
     {
+      "hr":true,
       "label": "Narrators",
       "field": "narrators",
       "required": true,
@@ -65,39 +69,6 @@
           "name",
           "surname"
         ]
-      }
-    },
-    {
-      "label": "Narrators (full text)",
-      "edit": false,
-      "field": "label",
-      "auto": {
-        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
-      }
-    },
-    {
-      "label": {
-        "page": "Narrator",
-        "edit": "Narrators (full text, sort)"
-      },
-      "edit": false,
-      "search": true,
-      "hhidden": true,
-      "field": "label_sort",
-      "list": true,
-      "auto": {
-        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
-      }
-    },
-    {
-      "label": "Narrators (occupation)",
-      "type":"text",
-      "settings":{"rows":2},
-      "on_demand":true,
-      "field": "narrator_occupation",
-      "auto": {
-        
-        "pattern": "{% for item in narrators %}{% if loop.index>1 and item.occupation!=narrators[0].occupation and narrators[0].occupation %}, {% endif %}{% if loop.index==1 or item.occupation!=narrators[0].occupation %}{{item.occupation}}{% endif %}{% endfor %}"
       }
     },
    
@@ -115,33 +86,7 @@
       }
     },
     {
-      "label": "Interviewers (full text)",
-      "field": "interviewer_name",
-      "edit": false,
-      "auto": {
-        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name|raw}} {{interviewer.last_name|raw}}{% endfor %}"
-      }
-    },
-    {
-      "label": {
-        "edit": "Interviewers (full text, sort)",
-        "page": "Collection"
-      },
-      "field": "interviewer_name_sort",
-      "list": true,
-      "search":true,
-      "edit": false,
-      "auto": {
-        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name|raw}} {{interviewer.first_name|raw}}{% endfor %}"
-      }
-    },
-    {
-      "hr": true,
-      "field": "locations",
-      "label": "Location Source",
-      "edit": false
-    },
-    {
+      "hr":true,
       "field": "narrator_location",
       "label": "Location (narrator)"
     },
@@ -150,6 +95,16 @@
       "label": "Location (interviewer)"
     },
     {
+      "label": "Placeholder Illustration",
+      "field": "illustration",
+      "hr": true,
+      "type": "select",
+      "source": {
+        "model": "interview_illustrations_all"
+      }
+    },
+    {
+      "hr":true,
       "label": "Languages",
       "type": "checkboxes",
       "field": "languages",
@@ -157,18 +112,40 @@
         "model": "s_languages"
       }
     },
-    {
-      "tab": "Filters",
-      "field": "narrators_states",
-      "label": "Narrators states",
-      "type": "elements",
-      "search":true,
-      "list":"read",
-      "source": {
-        "model": "s_states"
+    
+    
+    {      
+      "hr":true,
+      "label": "Url",
+      "field": "slug",
+      "on_demand": true,
+      "auto": {
+        "on_null": true,
+        "unique": true,
+        "url": true,
+        "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
       }
     },
+
     {
+      "label": "Featured",
+      "field": "featured",
+      "type": "boolean",
+      
+      "list": "edit",
+      "search": true
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "search": true
+    },
+
+
+    {
+      "tab": "Topics",
       "field": "topics",
       "label": "Topics",
       "type": "checkboxes",
@@ -182,8 +159,34 @@
         ]
       }
     },
+    
     {
-      "tab": "Media",
+      "tab": "Copy",
+      "field": "lead",
+      "type": "text",
+      "label": "Lead",
+      "settings":{"rows":5}
+    },
+    {
+      "field": "summary",
+      "type": "text",
+      "label": "Interview Summary"
+    },
+    {
+      "field": "preface",
+      "type": "html",
+      "label": "Preface"
+    },
+    {
+      "field": "citation",
+      "type": "text",
+      "label": "Citation",
+      "settings": {
+        "rows": 5
+      }
+    },
+    {
+      "tab": "Mementos",
       "hidden": true,
       "label": "Thumbnail",
       "hr": true,
@@ -227,7 +230,7 @@
     },
     {
       "hr": true,
-      "label": "Mementos",
+      "label": "Images",
       "type": "media",
       "field": "media",
       "captions": [
@@ -251,15 +254,7 @@
         ]
       }
     },
-    {
-      "label": "Placeholder Illustration",
-      "field": "illustration",
-      "temp-required": true,
-      "type": "select",
-      "source": {
-        "model": "interview_illustrations_all"
-      }
-    },
+    
     {
       "field": "uid",
       "type": "uid",
@@ -268,32 +263,7 @@
       "label": "UID"
     },
     {
-      "tab": "Copy",
-      "field": "lead",
-      "type": "text",
-      "label": "Lead",
-      "settings":{"rows":5}
-    },
-    {
-      "field": "summary",
-      "type": "text",
-      "label": "Interview Summary"
-    },
-    {
-      "field": "preface",
-      "type": "html",
-      "label": "Preface"
-    },
-    {
-      "field": "citation",
-      "type": "text",
-      "label": "Citation",
-      "settings": {
-        "rows": 5
-      }
-    },
-    {
-      "tab": "Download",
+      "tab": "PDF Download",
       "field": "pdf_en",
       "label": "PDF (EN)",
       "type": "file",
@@ -320,84 +290,47 @@
       "label": "PDF Size (ES)"
     },
 
-    {
+        {
       "tab": "Status",
-      "label": "Url",
-      "field": "slug",
-      "on_demand": true,
-      "auto": {
-        "on_null": true,
-        "unique": true,
-        "url": true,
-        "pattern": "{% for item in narrators %}{{item.name}}-{{item.surname}} {% endfor %}"
-      }
-    },
-    {
-      "field": "duration",
-      "label": "Duration (seconds)",
-      "edit": false
-    },
-    {
-      "field": "incite_id",
-      "label": "Incite ID",
-      "settings": {
-        "case": true,
-        "code": true
-      },
-      "search": true,
-      "list": true
-    },
-    {
-      "hr": true,
-      "list": true,
+      "list": "read",
+      "edit":false,
       "field": "status_media",
       "label": "Status (media)",
       "type": "boolean",
       "search": true
     },
     {
-      "list": true,
+      "list": "read",
+      "edit":false,
       "field": "status_transcripts",
       "label": "Status (transcripts)",
       "type": "boolean",
       "search": true
     },
     {
-      "list": true,
+      "list": "read",
+      "edit":false,
       "field": "status_pdf",
       "label": "Status (PDF)",
       "type": "boolean",
       "search": true      
     },
     {
-      "list": true,
+      "list": "read",
+      "edit":false,
       "field": "status_assets",
       "label": "Status (assets)",
       "type": "boolean",
       "search": true      
     },
+    
+
+    
     {
-      "label": "Publish",
-      "field": "active",
-      "type": "boolean",
-      "list": "edit",
-      "search": true,
-      "hr": true
+      "field":"media_uid","list":"read","type":"uid"
     },
     {
-      "label": "Featured",
-      "field": "featured",
-      "type": "boolean",
-      
-      "list": "edit",
-      "search": true,
-      "hr": true
-    },
-    {
-      "field":"media_uid","list":"read"
-    },
-    {
-      "hhidden":true,
+      "hidden":true,
       "label":"Image",
       "type": "image",
       "field": "image",
@@ -405,7 +338,7 @@
       "folder": "/public/upload/media",
       "folder_preview": "desktop",
       
-      "list": {
+      "temp-list": {
         "position_after": "status_assets",
         "height": 120,
         "temp-layout": "cover",
@@ -423,7 +356,84 @@
           "label": "Mobile"
         }
       ]
+    },
+    {
+      "tab":"Auto-fields",
+      "label": "Narrators (full text)",
+      "edit": false,
+      "field": "label",
+      "auto": {
+        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.name}} {{item.surname}}{% endfor %}"
+      }
+    },
+    {
+      "label": {
+        "page": "Narrator",
+        "edit": "Narrators (full text, sort)"
+      },      
+      "edit": false,
+      "search": true,
+      "hhidden": true,
+      "field": "label_sort",
+      "list": true,
+      "auto": {
+        "pattern": "{% for item in narrators %}{% if loop.index>1 %}, {% endif %}{{item.surname}} {{item.name}}{% endfor %}"
+      }
+    },
+    {
+      "label": "Narrators (occupation)",
+      "type":"text",
+      "settings":{"rows":2},
+      "on_demand":true,
+      "field": "narrator_occupation",
+      "auto": {        
+        "pattern": "{% for item in narrators %}{% if loop.index>1 and item.occupation!=narrators[0].occupation and narrators[0].occupation %}, {% endif %}{% if loop.index==1 or item.occupation!=narrators[0].occupation %}{{item.occupation}}{% endif %}{% endfor %}"
+      }
+    },
+    {
+      "label": "Interviewers (full text)",
+      "field": "interviewer_name",
+      "edit": false,
+      "auto": {
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.first_name|raw}} {{interviewer.last_name|raw}}{% endfor %}"
+      }
+    },
+    {
+      "label": {
+        "edit": "Interviewers (full text, sort)",
+        "page": "Collection"
+      },
+      "field": "interviewer_name_sort",
+      "list": true,
+      "search":true,
+      "edit": false,
+      "auto": {
+        "pattern": "{% for interviewer in interviewers %}{% if loop.index>1 %}, {% endif %}{{interviewer.last_name|raw}} {{interviewer.first_name|raw}}{% endfor %}"
+      }
+    },
+    {
+      "hr": true,
+      "field": "narrators_states",
+      "label": "Location (state)",
+      "type": "elements",
+      "edit":false,
+      "search":true,
+      "list":"read",
+      "source": {
+        "model": "s_states"
+      }
+    },
+    {
+      "edit":false,      
+      "field": "locations",
+      "label": "Location (from session)"
+    },    
+    {
+      "field": "duration","hr":true,
+      "label": "Interview Duration (seconds)",
+      "edit": false
     }
+
 
   ]
 }

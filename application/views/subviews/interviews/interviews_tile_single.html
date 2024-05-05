@@ -1,5 +1,5 @@
 <div class="interviews-grid__tile js-tile" data-name="{{ item.label_sort|slice(0, 1) }}">
-    <a href="{{item.url}}" class="interviews__link"><span class="sr-only">Go to interview</span></a>
+    <a href="{{item.url}}" class="interviews__link" data-gtm='{"event": "interviews-link-tile-click"}'><span class="sr-only">Go to interview</span></a>
     <div class="interviews__main">
         <h3 class="interviews__name{% if item.label|length > 23 %} interviews__name--small {% endif %}"><span>{{item.label|replace({',': '<br>'})|raw}}</span></h3>
         <p class="interviews__description">

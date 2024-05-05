@@ -51,9 +51,7 @@ class serdelia_plugin_interview_update
         ];
         
         $this->cms->putJsonModel('interviews',$val,['id'=>$record['id']]);
-        
-        
-        
+                
         $duration=0;
         foreach ($items as $k=>$v)
             $duration+=$v['duration'];

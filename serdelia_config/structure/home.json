@@ -2,22 +2,29 @@
     "type":"widgets",
     "widgets":
     [
-        "hello",
+        "hello",        
         {
             "widget":"page",
             "params":
             {
-                "page":"interviews",
-                "icon":"videocam",
-                "image":"image"
+                "page":"interviewers",
+                "icon":"collections-bookmark"
             }
         },
         {
             "widget":"page",
             "params":
             {
-                "page":"interviewers",
-                "icon":"emoji-people"
+                "page":"interviews",
+                "icon":"mic"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"narrators",
+                "icon":"person-search"
             }
         },
         {
@@ -42,6 +49,14 @@
             {
                 "page":"map_locations",
                 "icon":"add-location "
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"intro_quotes",
+                "icon":"format-quote"
             }
         }
     ]

@@ -1,42 +1,11 @@
 [
-    {
-        "label": "Structure",
-        "submenu": [
-            {
-                "label": "Menu",
-                "page": "menu",
-                "submenu": [
-                    {
-                        "label": "Main menu",
-                        "auth": "scaffold",
-                        "page": "menu,main"
-                    },
-                    {
-                        "label": "Footer",
-                        "auth": "scaffold",
-                        "page": "menu,footer"
-                    },
-                    {
-                        "label": "Social channels",
-                        "auth": "scaffold",
-                        "page": "menu,social"
-                    }
-                ]
-            },
-            {
-                "label": "Pages",
-                "page": "pages"
-            },
-            {
-                "label": "Media",
-                "page": "media_interviews"
-            }
-        ]
-    },
+    
     {
         "label": "Pages",
         "submenu": [
-
+            {
+                "label":"Intro Quotes","page":"intro_quotes"
+            },
             {"label":"Homepage","page":"pages_modules,1"},
             {"label":"Collections","page":"pages_modules,10"},
             {"label":"Interviews","page":"pages_modules,13"},
@@ -56,8 +25,27 @@
             {"label":"Contact","page":"pages_modules,15"},
             {},
             {
-                "label":"Intro Quotes","page":"intro_quotes"
+                "label": "All Pages",
+                "page": "pages"
+            },
+            {
+                "label": "Menu",
+                "page": "menu",
+                "submenu": [
+                    {
+                        "label": "Main menu",
+                        "auth": "scaffold",
+                        "page": "menu,main"
+                    },
+                    {
+                        "label": "Footer",
+                        "auth": "scaffold",
+                        "page": "menu,footer"
+                    }
+                ]
             }
+            
+            
         ]
     },
     {
@@ -88,18 +76,20 @@
                 "label": "Narrators Categories",
                 "page": "narrators_categories"
             },
+            {
+                "label":"Narrators Locations","page":"s_states"
+            },
+
             {},
+            {
+                "label": "All Mementos",
+                "page": "media_interviews"
+            },
             {
                 "label":"Illustrations","page":"interview_illustrations_all"
             },
             {
-                "label":"Locations","page":"s_states"
-            },
-            {
                 "label":"Map Locations","page":"map_locations"
-            },
-            {
-                "label":"Map Locations GLOBAL","page":"map_locations_global"
             }
             
             
