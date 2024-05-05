@@ -14,11 +14,13 @@
             "label": "First name",
             "field": "name",
             "list":true,
+            "search":true,
             "required": true
         },
         {
             "label": "Last name",
             "field": "surname",
+            "search":true,
             "list":true,
             "required": true
         },
@@ -37,7 +39,7 @@
             "field":"narrators_categories",
             "label":"Narrators categories",
             "type":"checkboxes",
-            "hr":true,"list":true,
+            "hr":true,"hidden":true,
             "settings":{"small":true},
             "source":
             {
@@ -90,6 +92,8 @@
             "search":true,
             "hr": true
         }
+
+        
 
 
     ]

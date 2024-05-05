@@ -49,28 +49,25 @@ class serdelia_plugin_session_update
             if ($mp3_size) $output['mp3_size']=$mp3_size;
         }
 
+        /*
+        SET labels
+        */
+
         $f=['id'=>$session['id']];
-        //print_r($session);exit();
         $output['label']=$session['parent']['label'].' ('.$session['parent']['interviewer_name'].')';
         $output['label_sort']=$session['parent']['label_sort'].' ('.$session['parent']['interviewer_name'].')';
-        
-        
-        $this->cms->putJsonModel('sessions_simple',$output,$f);
+                
+        $r=$this->cms->putJsonModel('sessions_simple',$output,$f);
 
-        return['result'=>true,'error'=>$this->parent->orm->getLastError()];
+        if (!$r) return['result'=>true,'error'=>$this->parent->orm->getLastError()];
 
         $items=$this->cms->getJsonModel('sessions_simple',['parent'=>$session['parent']['id']]);
 
         /*
-            duration of all sessions
-        */
-        $duration=0;
-        foreach ($items as $k=>$v)
-            $duration+=$v['duration'];
-
-        /*
+            UPDATE PARENT INTERVIEW
             are all media available?
         */
+
         $media=1;
         foreach ($items as $k=>$v)
             if (empty($v['audio']['src'])) $media=0;
@@ -87,6 +84,7 @@ class serdelia_plugin_session_update
         /*
             locations
         */
+
         $locations=[];
         foreach ($items as $k=>$v)
         if ($v['narrator_location'])
