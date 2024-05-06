@@ -98,6 +98,8 @@
       "label": "Placeholder Illustration",
       "field": "illustration",
       "hr": true,
+      "search":true,
+      "list":true,
       "type": "select",
       "source": {
         "model": "interview_illustrations_all"

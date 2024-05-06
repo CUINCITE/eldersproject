@@ -9,7 +9,6 @@ export const CurtainData = {
         { id: 7, src: '/public/theme/images/curtain-image-7.webp', color: 'brown' },
         { id: 8, src: '/public/theme/images/curtain-image-8.webp', color: 'brown' },
         { id: 9, src: '/public/theme/images/curtain-image-9.webp', color: 'dark-green' },
-        { id: 10, src: '/public/theme/images/curtain-image-10.webp', color: 'dark-green' },
         { id: 11, src: '/public/theme/images/curtain-image-11.webp', color: 'pale-blue' },
         { id: 12, src: '/public/theme/images/curtain-image-12.webp', color: 'pale-blue' },
         { id: 13, src: '/public/theme/images/curtain-image-13.webp', color: 'pale-purple' },

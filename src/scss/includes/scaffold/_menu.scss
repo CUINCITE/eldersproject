@@ -174,6 +174,10 @@ $theme-colors: ("orange", "red", "blue", "pink", "pale-green");
     &__text {
         position: relative;
 
+        @include breakpoint(desktop) {
+            padding-top: 0.06em;
+        }
+
         &::before {
             @include font-family(normal);
 
