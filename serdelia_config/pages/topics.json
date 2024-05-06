@@ -58,6 +58,7 @@
       "label": "Illustration",
       "field": "illustration",
       "type": "select",
+      "search":true,
       "source": {
         "model": "interview_illustrations_all"
       },
