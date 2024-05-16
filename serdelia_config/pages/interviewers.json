@@ -2,12 +2,12 @@
     "table": "interviewers",
     "label": {
         "page": "Collections",
-        "edit": "{% if not last_name %}New person{% else %}Interviewers: <em>{{first_name}} {{last_name}}</em>{% endif %}"
+        "edit": "{% if not last_name %}New person{% else %}Collection: <em>{{first_name}} {{last_name}}</em>{% endif %}"
     },
     "layout": {
         "type": "grid",
         "count": 100,
-        "html": "{{html.image|raw}}<br>{{html.first_name}} <b>{{html.last_name}}</b><div style='float:right'>{{html.active|raw}}</div><small><br>{{html.collection_title|raw}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
+        "html": "{{html.image|raw}}<br>{{html.first_name|raw}} <b>{{html.last_name|raw}}</b><div style='float:right'>{{html.active|raw}}</div><small><br>{{html.collection_title|raw}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
     },
     "model": {
         "label": "{{last_name}}, {{first_name}}"
@@ -17,11 +17,11 @@
         {"label":"Storytelling","type":"page","icon":"history-edu","page":"collection_modules,%id%"},
         {"label":"Illustrations","type":"page","icon":"image","page":"interview_illustrations,%id%"},
         {"type":"plugin","plugin":"preview","params":{"url":"/about/{{slug}}?preview=true"  }},
-        {"type":"plugin","plugin":"interviewer_update","label":"Update" }
+        {"type":"plugin","plugin":"interviewer_update","hidden":true,"label":"Auto-update","on_update":true }
     ],
     "buttons_page":
     [
-        {"plugin":"refresh"}
+        
     ],
     "order": "last_name,first_name",
     
@@ -40,8 +40,7 @@
             "required": true
         },
         {
-            "field":"label","label":"Label"
-            
+            "field":"label","label":"Full name","on_demand":true            
         },
         {
             "hr": true,
@@ -77,15 +76,16 @@
                 "pattern": "{{first_name}} {{last_name}}"
             }
         },
-        {
-            "label": "Publish",
+        
+        {            
+            "label": "Publish Interviews",
             "field": "active",
             "type": "boolean",
             "list": "edit",
             "hr": true
         },
         {
-            "tab": "Texts",
+            "tab": "Copy",
             "field": "lead",
             "type": "text",
             "label": "Lead",
@@ -135,8 +135,8 @@
                 {
                     "folder": "desktop",
                     "label": "Desktop",
-                    "width": 969,
-                    "height": 969,
+                    "width": 968,
+                    "height": 968,
                     "crop": true,
                     "retina": true
                 },
@@ -167,11 +167,6 @@
         },
         {
             "field":"alt","label":"ALT"
-        },
-
-        {
-            "field": "image_author",
-            "label": "Photo author"
         }
     ]
 }

@@ -23,5 +23,4 @@
 <meta property="twitter:image" content="{{head.http}}{{head.image.src}}" />
 <meta property="twitter:url" content="{{head.http}}{{head.url}}" />
 
-<meta property="fb:app_id" content="266818357002385" />
-<!-- <meta property="fb:app_id" content="{{head.fb_app_id}}" />     -->
+{% if head.fb_app_id %}<meta property="fb:app_id" content="{{head.fb_app_id}}" />{% endif %}
