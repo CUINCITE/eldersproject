@@ -135,8 +135,8 @@
                 {
                     "folder": "desktop",
                     "label": "Desktop",
-                    "width": 969,
-                    "height": 969,
+                    "width": 968,
+                    "height": 968,
                     "crop": true,
                     "retina": true
                 },
