@@ -213,6 +213,12 @@ class model_app extends _uho_model
         } elseif (@$t['image']) $t['image'] = ['src' => $t['image']];
         else $t['image']=['src'=>'https://'.$_SERVER['HTTP_HOST'].$this->head_image];
 
+        if (!empty($t['image']['src']))
+        {
+            $t['image']['width']=1200;
+            $t['image']['height']=630;
+        }
+
         if (empty($t['description'])) $t['description']=$this->head_description;
 
 
