@@ -280,7 +280,10 @@ export class Lightbox {
                 },
                 // that class runs CSS animation
                 onComplete: () => {
-                    this.view.classList.add('is-showing');
+                    // slight delay to fix no animation bug
+                    setTimeout(() => {
+                        this.view.classList.add('is-showing');
+                    }, 50);
                     document.body.classList.add('is-lightbox-open');
                     // audioplayer should be always expanded when lightbox is open
                     AudioPlayer.openAudioPlayer(true);
