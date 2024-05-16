@@ -167,7 +167,7 @@ export class PlayerTimeline extends Handler {
 
 
     private getPosition(e: TouchEvent|MouseEvent): { x: number; width: number; seek: number } {
-        const pageX = (e as MouseEvent).pageX || (e as TouchEvent).touches[0]?.pageX || (e as TouchEvent).changedTouches[0]?.pageX;
+        const pageX = (e as MouseEvent).pageX || (e as TouchEvent).touches![0]?.pageX || (e as TouchEvent).changedTouches![0]?.pageX;
         const x = pageX - this.view.getBoundingClientRect().left;
         const width = this.view.clientWidth;
         const seek = Math.max(0, Math.min(1, x / width));

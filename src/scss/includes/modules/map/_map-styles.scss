@@ -351,6 +351,10 @@
 
             &.is-active {
                 overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
             }
 
             @include breakpoint(desktop) {
