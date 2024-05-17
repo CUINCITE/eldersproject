@@ -1,6 +1,6 @@
 <?php
 
-class serdelia_plugin_clear
+class serdelia_plugin_cache_clear
 {
     // ------------------------------------------------------------------------------
 
