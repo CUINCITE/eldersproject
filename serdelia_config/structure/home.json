@@ -78,6 +78,22 @@
                 "page":"intro_quotes",
                 "icon":"format-quote"
             }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"people",
+                "icon":"account-circle"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"people_sections",
+                "icon":"groups"
+            }
         }
     ]
 }

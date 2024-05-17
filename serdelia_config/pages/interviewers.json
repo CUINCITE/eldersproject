@@ -9,7 +9,11 @@
         "count": 100,
         "html": "{{html.image|raw}}<br>{{html.first_name|raw}} <b>{{html.last_name|raw}}</b><div style='float:right'>{{html.active|raw}}</div><small><br>{{html.collection_title|raw}}</small><br><span class='badge badge-secondary'>{{html.amount}} Interviews</span>"
     },
-    "model": {
+    "back":
+    {
+        "page":"/"
+    },
+      "model": {
         "label": "{{last_name}}, {{first_name}}"
     },
     "buttons_edit":

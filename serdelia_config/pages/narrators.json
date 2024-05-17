@@ -4,6 +4,10 @@
         "page": "Narrators",
         "edit": "{% if not name %}New Narrator{% else %}Narrator: <em>{{name}} {{surname}}</em>{% endif %}"
     },
+    "back":
+    {
+        "page":"/"
+    },
     
 
     "model":{"label":"{{surname}}, {{name}}"},
@@ -46,42 +50,6 @@
                 "model":"narrators_categories"
             }
         },
-        {   "field": "uid","type":"uid","list":"read"    ,"search":true,"label":"UID"
-        },
-        {   "label": "Portrait",
-            "hr":true,
-            "type": "image",
-            "field":"image",
-            "folder": "/public/upload/narrators",
-            "folder_preview": "thumb",
-            "temp-list": {
-                "height": 110,
-                "temp-layout": "cover",
-                "src_blank": "blank169.png"
-            },
-            "filename": "%uid%",
-            "settings":{"webp":true},
-            "images":
-            [
-              {  "folder" : "original","label":"Original image" },
-              {  "folder" : "desktop","label":"Desktop","width":520,"height":292,"crop":true,"retina":true },
-              {  "folder" : "mobile","label":"Mobile","width":320,"height":180,"crop":true,"retina":true },
-              {  "folder" : "square","label":"Square","width":512,"height":512,"crop":true }
-              
-            ]
-        },             
-        {
-            "label": "Url",
-            "field": "slug",
-            "on_demand": true,
-            "auto": {
-                "on_null": true,
-                "unique": true,
-                "url": true,
-                "pattern": "{{name}}-{{surname}}"
-            }
-        },
-        
         
         
         {
