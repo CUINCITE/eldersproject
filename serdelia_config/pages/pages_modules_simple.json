@@ -15,16 +15,10 @@
     },
     
     "page_update": "modules/m_{{type.slug}}",
-    "buttons_edit": [
+    "buttons_page": [
         {
-            "hidden":true,
-            "label": "Preview",
-            "icon": "eye",
-            "plugin": "preview",
-            "type": "serdelia",
-            "params": {
-                "url": "/pl/%url%?preview=true"
-            }
+            "plugin":"cache_clear",
+            "label":"Clear cache"
         }
     ],
     "help_PL":"Każda strona składa się z kilu modułów. W tym miejscu może je dodawać, edytować i zmieniać ich kolejnosć.",

@@ -2,7 +2,7 @@
     "icon":"download",
     "en":
     {
-        "title": "Cloudfront Cache clear",
+        "title": "Cache clear",
         "back":"Back"
     }    
 }
