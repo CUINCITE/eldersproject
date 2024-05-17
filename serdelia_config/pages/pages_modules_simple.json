@@ -1,0 +1,72 @@
+{
+    "table": "pages_modules",
+    "order": "level",
+    "back":
+    {
+        "page":"/"
+    },
+    "label_EN":
+    {
+        "page":"Page modules",
+        "edit":"{% if not type %}New module{% else %}Module: <em>{{type.label}}</em>{% endif %}"
+    },
+    "filters": {
+        "parent": "%1%"
+    },
+    
+    "page_update": "modules/m_{{type.slug}}",
+    "buttons_edit": [
+        {
+            "hidden":true,
+            "label": "Preview",
+            "icon": "eye",
+            "plugin": "preview",
+            "type": "serdelia",
+            "params": {
+                "url": "/pl/%url%?preview=true"
+            }
+        }
+    ],
+    "help_PL":"Każda strona składa się z kilu modułów. W tym miejscu może je dodawać, edytować i zmieniać ich kolejnosć.",
+    "help_EN":"Each page consists of several modules. Here you can add, edit or rearrange them.",
+    "fields": [
+        {
+            "field": "level",
+            "type": "order",
+            "list": "order",
+            "tab_EN": "Information",
+            "tab_PL": "Informacje"
+        },
+        {
+            "label_PL": "Opis modułu",
+            "label_EN": "Module description",
+            "list": true,
+            "field": "description"
+        },
+        {
+            "label_PL": "Typ modułu",
+            "label_EN": "Module Type",
+            "field": "type",
+            "list": true,
+            "type": "select",
+            "source": {
+                "model": "s_pages_modules"
+            }
+        },
+        {
+            "label_PL": "Parametetry",
+            "label_EN": "Parameters",
+            "hr":true,
+            "field": "params",
+            "position_after": "type"
+        },
+        {
+            "label_PL": "Publikacja",
+            "label_EN": "Publish",
+            "field": "active",
+            "position_after": "params",
+            "type": "boolean",
+            "list": "edit"
+        }
+    ]
+}

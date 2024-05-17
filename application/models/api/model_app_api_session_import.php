@@ -6,8 +6,6 @@ use PhpOffice\PhpWord\IOFactory as WordIOFactory;
 
 class model_app_api_session_import
 {
-
-
 	function __construct($parent, $settings)
 	{
 		$this->parent = $parent;

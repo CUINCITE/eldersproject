@@ -7,12 +7,17 @@
     {
         "id"   : "interviews",
         "label": "Interviews",
-        "models":["interviews","sessions","clips"]
+        "models":["interviews","sessions","clips","narrators","media_interviews"]
+    },    
+    {
+        "id"   : "map",
+        "label": "Map",
+        "models":["map_locations"]
     },    
     {
         "id"   : "pages",
         "label": "Pages",
-        "models":["pages","pages_modules","faq","people","people_sections","logotypes"]
+        "models":["pages","pages_modules","faq","people","people_sections","logotypes","intro_quotes","media"]
     },
     {
         "id"   : "topics",
