@@ -42,6 +42,11 @@ $theme-colors: ("orange", "red", "blue", "pink", "pale-green");
             height: var(--app-height);
             text-align: left;
         }
+
+
+        @include breakpoint(phone-landscape) {
+            overflow-y: auto;
+        }
     }
 
 
@@ -72,6 +77,13 @@ $theme-colors: ("orange", "red", "blue", "pink", "pale-green");
             @include font-size(120, 0.9);
             @include letter-spacing(-3.3, 120);
         }
+
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(80, 67.2);
+            @include letter-spacing(-2.4, 80);
+        }
+
 
         @include breakpoint(phone) {
             @include font-size(80, 67.2);
@@ -282,6 +294,14 @@ $theme-colors: ("orange", "red", "blue", "pink", "pale-green");
                     justify-content: space-between;
                 }
             }
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(14, 18.9);
+
+            overflow: visible;
+            gap: 10px;
         }
 
         a { @include hoverable-link; }

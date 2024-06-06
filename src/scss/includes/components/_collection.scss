@@ -77,7 +77,7 @@
             padding-bottom: rem(22);
 
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 bottom: 0;
                 width: 100vw;
@@ -306,6 +306,19 @@
             margin-top: vw(-16, tablet);
             margin-bottom: vw(75, tablet);
         }
+
+
+        @include breakpoint(phone-landscape) {
+            width: vw(180, phone);
+            margin-top: vw(-16, phone);
+            margin-left: vw(-8, phone);
+            margin-bottom: vw(35, phone);
+
+            .illustration {
+                transform: rotate(-6deg);
+            }
+        }
+
 
         @include breakpoint(phone) {
             width: vw(314, phone);

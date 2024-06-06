@@ -232,6 +232,15 @@
             line-height: 50px;
         }
 
+
+        @include breakpoint(phone-landscape) {
+            flex-direction: column-reverse;
+            gap: 0;
+            flex-shrink: 0;
+            align-items: flex-start;
+        }
+
+
         @include breakpoint(phone) {
             @include font-size(25, 26.5);
             @include letter-spacing(-0.5, 25);
@@ -263,6 +272,12 @@
         .audioplayer.has-active-lightbox & {
             opacity: 0 !important;
             pointer-events: none;
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            display: flex !important;
+            padding-bottom: 0 !important;
         }
 
 
@@ -315,7 +330,7 @@
                 }
             }
         }
-        
+
 
         @include hover {
             svg {
@@ -494,6 +509,11 @@
                 }
             }
 
+
+            @include breakpoint(phone-landscape) {
+                justify-content: center;
+            }
+
             @include breakpoint(phone) {
                 width: vw(58, phone);
 
@@ -523,9 +543,6 @@
             height: rem(24);
         }
     }
-
-
-    
 
 
 

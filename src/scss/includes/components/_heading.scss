@@ -240,6 +240,22 @@
                 padding-block: rem(8);
             }
         }
+
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(80, 1);
+
+            margin-block: trim-font(1);
+            padding-block: rem(12);
+
+
+            .about_hero & {
+                @include font-size(132, 1);
+
+                letter-spacing: -0.045em;
+                padding-block: rem(8);
+            }
+        }
     }
 
 
@@ -317,6 +333,14 @@
         @include breakpoint(tablet) {
             @include font-size(140, 1);
             @include letter-spacing(-6.5, 140);
+
+            margin-block: trim-font(1);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(80, 1);
+            @include letter-spacing(-2.8, 80);
 
             margin-block: trim-font(1);
         }
