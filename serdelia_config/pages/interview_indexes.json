@@ -1,10 +1,10 @@
 {
   "table": "interview_indexes",
   "filters": {
-    "parent": "%1%"
+    "session": "%1%"
   },
   "label": {
-    "page": "Interview Index",
+    "page": "Session Index",
     "edit": "{% if not no %}New Index Item{% else %}Index: <em>{{parent.label}}, #{{no}}</em>{% endif %}"
   },
   "layout-temp":
@@ -13,7 +13,7 @@
     "count":100,
     "html":"{{html.image|raw}}<b>{{html.parent}}</b><br>Session# {{html.nr}}<br>{{html.date}} {{html.active|raw}}<br><small><code>{{html.incite_id}}</code></small>"
   },
-  "order": "nr",
+  "order": "no",
   "buttons_edit": [
     {
       "label":"Helper",
@@ -35,28 +35,31 @@
       "label": "Index no",
       "list": true,
       "field": "no",
+      "temp-type":"order",
       "required": true
     },
     {
       "label":"Incite Interview Id",
       "field":"interview_incite_id",
-      "list":true,
+      
       "settings":{"case":true,"code":true}
     },
     {
       "label":"Incite Session Id",
       "field":"session_incite_id",
-      "list":true,
+      
       "settings":{"case":true,"code":true}
+    },
+    
+    {
+      "field":"start_time",
+      "label":"Timestamp",
+      "list":true
     },
     {
       "field":"label",
       "label":"Label",
       "list":true
-    },
-    {
-      "field":"start_time",
-      "label":"Timestamp"
     }
   ]
 }

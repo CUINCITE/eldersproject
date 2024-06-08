@@ -35,18 +35,13 @@
       "icon": "reorder",
       "page": "sessions,%id%"
     },
+      
     {
       "type": "plugin",
       "plugin": "preview",
       "params": {
         "url": "/interviews/{{slug}}?preview=true"
       }
-    },
-    {
-      "label": "Indexes",
-      "icon": "index",
-      "hidden": true,
-      "plugin": "interview_indexes"
     }
   ],
   "fields": [

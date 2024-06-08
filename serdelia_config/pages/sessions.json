@@ -16,12 +16,12 @@
             "hidden":true
         },
         {
-            "type": "plugin",
-            "plugin": "preview",
-            "params": {
-                "url": "/interviews/{{parent.slug}}?preview=true"
-            }
-        },
+            "label": "Indexes",
+            "icon": "timer",
+            "type": "page",
+            "page": "interview_indexes,%id%"      
+          },
+        
         {
             "label":"Convert Transcript",
             "plugin":"api_single",            
@@ -29,6 +29,13 @@
             "icon":"refresh",
             "params":{
                 "url":"/api/session_import?session={{id}}"
+            }
+        },
+        {
+            "type": "plugin",
+            "plugin": "preview",
+            "params": {
+                "url": "/interviews/{{parent.slug}}?preview=true"
             }
         }
     ],
