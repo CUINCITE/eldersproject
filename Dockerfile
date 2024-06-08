@@ -58,6 +58,11 @@ LABEL org.opencontainers.image.vendor="Huncwot"
 LABEL org.opencontainers.image.title="UHOMVC8 framework boilerplate"
 LABEL org.opencontainers.image.authors="huncwotdigital"
 
+# Setup PHP INI vars
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/post_max_size = 8M/post_max_size = 4096M/g' "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 4096M/g' "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/max_execution_time = 8M/max_execution_time = 600/g' "$PHP_INI_DIR/php.ini"
 
 EXPOSE 80
 CMD ["apache2-foreground"]
