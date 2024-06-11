@@ -89,6 +89,7 @@ export class AudioPlayer extends Videos {
     private swipeMargin = 10;
     private timeout: ReturnType<typeof setTimeout>;
     private audioWrapper: HTMLElement;
+    private isHorizontalPhone = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -232,6 +233,28 @@ export class AudioPlayer extends Videos {
         this.on(PlayerEvents.TIME_UPDATE, time => {
             Lightbox.isOpen && Lightbox.tryToUpdateTranscript(time);
         });
+
+
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.checkOrientation();
+            }, 150);
+        });
+    };
+
+
+
+    private checkOrientation = (): void => {
+        if (breakpoint.desktop) return;
+
+        if (window.innerWidth > window.innerHeight) {
+            this.isHorizontalPhone = true;
+            Lightbox.isOpen && this.minimize();
+        } else {
+            this.isHorizontalPhone = false;
+            Lightbox.isOpen && this.expand();
+        }
+
     };
 
 
@@ -439,7 +462,7 @@ export class AudioPlayer extends Videos {
 
     private minimize = (fast?: boolean): void => {
         // when lightbox is open, do not minimize the player - it should be always expanded
-        if (Lightbox.isOpen) return;
+        if (Lightbox.isOpen && !this.isHorizontalPhone) return;
 
         this.view.classList.remove('is-expanded');
         document.body.classList.remove('has-audio-player-expanded');

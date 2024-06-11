@@ -28,7 +28,7 @@
 
 
     @include breakpoint(phone-landscape) {
-        bottom: 80px; // audioplayer mobile height
+        bottom: 0;
         height: auto;
         z-index: 9; // to be above the audioplayer cover
         overflow: hidden;
@@ -217,11 +217,7 @@
 
 
         @include breakpoint(phone-landscape) {
-            height: vw(50, phone);
-            flex-basis: vw(50, phone);
-            order: 1;
-            flex-shrink: 0;
-            border: none;
+            display: none;
         }
 
 
@@ -315,6 +311,11 @@
 
         @include breakpoint(desktop) {
             padding: rem(29) 0 var(--GLOBAL-player-height);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            height: auto;
         }
 
 
@@ -431,6 +432,11 @@
                     height: 16px;
                     inset: rem(28) auto auto rem(17);
                 }
+            }
+
+
+            @include breakpoint(phone-landscape) {
+                padding: rem(30) rem(50);
             }
 
 
@@ -676,8 +682,9 @@
                 @include flex;
 
                 width: auto;
+                min-width: 100%;
                 gap: vw(1, phone);
-                padding-inline: vw(15, phone);
+                padding: 0 vw(15, phone);
                 background: var(--main-body-color);
 
                 &::before {
@@ -973,23 +980,32 @@
         }
 
 
+        @include breakpoint(tablet) {
+            &-box { display: none; }
+        }
+
+
         @include breakpoint(phone-landscape) {
             height: 100%;
             width: 10px;
-            left: 0;
+            inset: 0;
+            transform: none;
 
             &-tip {
                 position: absolute;
-                width: vw(8, phone);
+                width: rem(8);
+                height: auto;
                 aspect-ratio: 1/1;
                 rotate: 45deg;
                 top: 100%;
                 left: 50%;
                 translate: -50% -50%;
                 background-color: var(--hover-color);
+                transform: none;
             }
 
             &-box {
+                display: block;
                 position: absolute;
                 top: 0;
                 left: 50%;
@@ -1043,6 +1059,7 @@
 
 
         @include breakpoint(phone-landscape) {
+            border-right: none;
             order: 4;
             flex: 1 0 auto;
             flex-direction: column;
@@ -1180,6 +1197,24 @@
 
             display: block;
             margin-bottom: 2px;
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            position: relative;
+            inset: auto;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            max-width: 100%;
+
+
+            // for caption with single image
+
+            .lightbox__image & {
+                margin-top: rem(30);
+                margin-left: auto;
+                margin-right: var(--grid-margin);
+            }
         }
 
 
@@ -1468,6 +1503,7 @@
 
         @include breakpoint(phone-landscape) {
             position: relative;
+            inset: auto 0 0;
             flex-grow: 1;
             width: 100%;
             grid-area: main;

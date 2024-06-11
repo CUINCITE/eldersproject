@@ -21,6 +21,14 @@
     }
 
 
+    @include breakpoint(phone-landscape) {
+        padding: 30px 0;
+        width: 100vw;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+
     @include breakpoint(phone) {
         flex-direction: column-reverse;
         align-items: flex-start;
@@ -224,6 +232,15 @@
 
 
     &__captions {
+        @include breakpoint(phone-landscape) {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-top: rem(30);
+            margin-left: var(--grid-margin);
+            margin-right: var(--grid-margin);
+        }
+
+
         @include breakpoint(phone) {
             display: grid;
             grid-template-columns: 1fr;
