@@ -301,9 +301,10 @@
         }
 
         @include breakpoint(tablet) {
-            width: vw(600, tablet);
+            width: vw(500, tablet);
             aspect-ratio: 1/1;
             margin-top: vw(-16, tablet);
+            margin-left: vw(30, tablet);
             margin-bottom: vw(75, tablet);
         }
 

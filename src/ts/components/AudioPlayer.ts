@@ -248,7 +248,7 @@ export class AudioPlayer extends Videos {
     private checkOrientation = (): void => {
         if (breakpoint.desktop) return;
 
-        if (window.innerWidth > window.innerHeight) {
+        if (window.innerWidth > window.innerHeight && window.innerHeight < 550) {
             this.isHorizontalPhone = true;
             Lightbox.isOpen && this.minimize();
         } else {

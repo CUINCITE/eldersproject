@@ -74,10 +74,11 @@
                 padding: 0 rem(2);
                 padding-top: rem(2);
             }
+        }
 
-            @include breakpoint(tablet) {
-                justify-content: flex-end;
-            }
+        @include breakpoint(tablet) {
+            display: grid;
+            grid-template-columns: 25% 1fr 15%;
         }
 
 
@@ -225,6 +226,7 @@
             @include font-size(42, 1);
 
             line-height: 1;
+            flex-shrink: 0;
         }
 
         @include breakpoint(tablet-landscape) {
@@ -472,6 +474,11 @@
         }
 
 
+        @include breakpoint(tablet) {
+            padding-left: 5%;
+        }
+
+
         @include breakpoint(phone-landscape) {
             padding-left: 5%;
         }
@@ -496,8 +503,8 @@
 
         @include breakpoint(tablet) {
             margin-left: var(--grid-margin);
-            margin-right: vw(10, tablet);
-            height: rem(65);
+            margin-right: var(--grid-margin);
+            height: 100%;
         }
 
 
@@ -517,7 +524,11 @@
                 width: vw(130, tablet);
 
                 @include breakpoint(tablet) {
-                    @include flex(row, flex-start, center);
+                    @include flex(row, center, center);
+
+                    width: auto;
+                    height: 100%;
+                    aspect-ratio: 1;
                 }
             }
 

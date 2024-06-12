@@ -48,6 +48,12 @@
         }
 
 
+        @include breakpoint(tablet) {
+            width: vw(500, tablet);
+            left: vw(30, tablet);
+        }
+
+
         @include breakpoint(phone-landscape) {
             width: vw(180, phone);
         }
