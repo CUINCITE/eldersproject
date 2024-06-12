@@ -168,9 +168,11 @@
 
 
         @include breakpoint(phone-landscape) {
-            position: fixed;
+            position: absolute;
             inset: 0 0 auto auto;
             background: none;
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         @include breakpoint(phone) {
@@ -1130,6 +1132,8 @@
 
 
         @include breakpoint(phone-landscape) {
+            padding: 15px;
+            margin: 0;
             color: var(--main-text-color);
         }
 
@@ -1245,7 +1249,7 @@
         background-color: var(--color-black);
         pointer-events: none;
 
-
+        @include breakpoint(phone-landscape) { display: none; }
         @include breakpoint(phone) { display: none; }
     }
 

@@ -472,6 +472,11 @@
         }
 
 
+        @include breakpoint(phone-landscape) {
+            padding-left: 5%;
+        }
+
+
         @include breakpoint(phone) {
             .player.is-error & { color: red; }
 
@@ -493,6 +498,13 @@
             margin-left: var(--grid-margin);
             margin-right: vw(10, tablet);
             height: rem(65);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            margin-left: vw(10, tablet);
+            margin-right: var(--grid-margin);
+            height: 100%;
         }
 
         > button {

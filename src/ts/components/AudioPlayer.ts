@@ -116,6 +116,7 @@ export class AudioPlayer extends Videos {
 
         this.minimize(true);
         this.bindAudioPlayer();
+        this.checkOrientation();
     }
 
 
@@ -374,8 +375,8 @@ export class AudioPlayer extends Videos {
 
     private animateOutCassette = (): Promise<void> => new Promise(resolve => {
         gsap.to(this.cassetteEl, {
-            yPercent: breakpoint.desktop ? 130 : 0,
-            xPercent: breakpoint.desktop ? 0 : -130,
+            yPercent: breakpoint.desktop ? 130 : this.isHorizontalPhone ? 130 : 0,
+            xPercent: breakpoint.desktop ? 0 : this.isHorizontalPhone ? 0 : -130,
             rotate: -20,
             duration: 0.5,
             ease: 'power2.out',

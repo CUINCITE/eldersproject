@@ -78,6 +78,11 @@
         @include z-index(logo, $lightbox-elements);
         @include default-transition;
 
+
+        @include breakpoint(phone-landscape) {
+            z-index: 6;
+        }
+
         .is-showing & {
             transform: translateY(0);
 
@@ -332,6 +337,22 @@
                 }
             }
 
+
+            @include breakpoint(phone-landscape) {
+                transform: translateY(120%);
+                transition: transform .75s var(--easing);
+                transition-delay: 1.10s;
+
+                .is-showing & {
+                    transform: translateY(0);
+                }
+
+                span {
+                    position: relative;
+                }
+            }
+
+
             @include breakpoint(phone) {
                 transform: translateY(120%);
                 transition: transform .75s var(--easing);
@@ -381,6 +402,25 @@
                 }
             }
         }
+
+
+        @include breakpoint(phone-landscape) {
+            &-inner {
+                translate: 0 -120%;
+                transition: translate var(--animation-time) var(--easing);
+
+                .is-showing & {
+                    translate: 0 0;
+                    transition-delay: 1.6s;
+                }
+
+                .is-closing & {
+                    translate: 0 -120%;
+                    transition-delay: 0s;
+                }
+            }
+        }
+
 
         @include breakpoint(phone) {
             &-inner {
