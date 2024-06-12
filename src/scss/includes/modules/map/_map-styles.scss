@@ -25,6 +25,11 @@
     }
 
 
+    @include breakpoint(phone-landscape) {
+        height: var(--app-height);
+    }
+
+
     @include breakpoint(phone) {
         @include font-size(30, 1);
         @include letter-spacing(-0.75, 30);
@@ -225,6 +230,11 @@
 
         @include breakpoint(tablet) {
             padding: 0 rem(16) 0 rem(28);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            padding-left: 10px;
         }
 
 
@@ -652,6 +662,12 @@
         @include breakpoint(tablet) {
             @include font-size(14, 16);
         }
+
+
+        @include breakpoint(phone-landscape) {
+            padding: 0;
+        }
+
 
         @include breakpoint(phone) {
             @include font-size(14, 16);

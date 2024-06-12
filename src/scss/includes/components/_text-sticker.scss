@@ -18,4 +18,12 @@
             display: none;
         }
     }
+
+
+
+    .grid {
+        @include breakpoint(phone-landscape) {
+            @include flex(column, flex-start, flex-start);
+        }
+    }
 }

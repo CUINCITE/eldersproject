@@ -84,6 +84,7 @@ export class LightboxNav extends Component {
     private updateIndicator = (button: HTMLElement): void => {
         if (!button) return;
 
+        // portrait mobile
         this.mm.add('(orientation: portrait) and (max-width: 659px)', () => {
             const { offsetLeft, clientWidth } = button;
 
@@ -91,11 +92,20 @@ export class LightboxNav extends Component {
             gsap.to(this.indicatorBox, { duration: 0.5, ease: easing, scaleX: clientWidth / 100 });
         });
 
-        this.mm.add('(orientation: landscape), (min-width: 660px)', () => {
+        // landscape desktop
+        this.mm.add('(orientation: landscape) and (min-width: 660px) and (min-height: 451px)', () => {
             const { offsetTop, clientHeight } = button;
             const y = offsetTop + ((clientHeight - this.indicator.clientHeight) / 2);
 
             gsap.to(this.indicator, { y, duration: 0.3, ease: easing });
+        });
+
+        // landscape mobile
+        this.mm.add('(orientation: landscape) and (min-width: 600px) and (max-height: 450px)', () => {
+            const { offsetLeft, clientWidth } = button;
+
+            gsap.to(this.indicator, { duration: 0.5, ease: easing, x: offsetLeft - 5 + (clientWidth / 2) });
+            gsap.to(this.indicatorBox, { duration: 0.5, ease: easing, scaleX: clientWidth / 100 });
         });
     };
 

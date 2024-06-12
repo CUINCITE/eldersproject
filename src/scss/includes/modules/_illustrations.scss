@@ -9,7 +9,7 @@
         @include breakpoint(tablet) {
             padding-bottom: rem(84);
         }
-    
+
         @include breakpoint(phone) {
             padding-bottom: rem(46);
         }
@@ -45,6 +45,17 @@
             transform: rotate(-7deg);
             top: 0;
             left: vw(-8, tablet);
+        }
+
+
+        @include breakpoint(tablet) {
+            width: vw(500, tablet);
+            left: vw(30, tablet);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            width: vw(180, phone);
         }
 
 

@@ -152,19 +152,19 @@ export class PlayerFullscreen extends Handler {
 
 
     private onOrientationChange = e => {
-        if (browser.mobile) {
-            const mediaElement = this.playerEl.querySelector('video.is-current') as any;
-            if (e.matches) {
-                // landscape
-                this.playerEl.classList.add('is-fullscreen');
-                this.trigger(PlayerFullscreenEvents.ENTER);
-                mediaElement?.webkitEnterFullscreen && mediaElement?.webkitEnterFullscreen();
-                mediaElement?.enterFullscreen && mediaElement?.enterFullscreen();
-            } else {
-                // portrait
-                mediaElement?.webkitExitFullscreen && mediaElement?.webkitExitFullscreen();
-                mediaElement?.exitFullscreen && mediaElement?.exitFullscreen();
-            }
-        }
+        // if (browser.mobile) {
+        //     const mediaElement = this.playerEl.querySelector('video.is-current') as any;
+        //     if (e.matches) {
+        //         // landscape
+        //         this.playerEl.classList.add('is-fullscreen');
+        //         this.trigger(PlayerFullscreenEvents.ENTER);
+        //         mediaElement?.webkitEnterFullscreen && mediaElement?.webkitEnterFullscreen();
+        //         mediaElement?.enterFullscreen && mediaElement?.enterFullscreen();
+        //     } else {
+        //         // portrait
+        //         mediaElement?.webkitExitFullscreen && mediaElement?.webkitExitFullscreen();
+        //         mediaElement?.exitFullscreen && mediaElement?.exitFullscreen();
+        //     }
+        // }
     };
 }
