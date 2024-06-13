@@ -6,6 +6,16 @@
     padding-bottom: 6px;
 
 
+    @include breakpoint(tablet) {
+        flex-shrink: 0;
+    }
+
+
+    @include breakpoint(phone-landscape) {
+        flex-shrink: 0;
+    }
+
+
     @include breakpoint(phone) { display: none; }
 
 

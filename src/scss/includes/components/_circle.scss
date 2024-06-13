@@ -37,6 +37,12 @@ $circles-colors: "pale-green", "purple", "brown", "dark-green", "pale-blue", "pa
             height: rem(200);
         }
 
+        @include breakpoint(phone-landscape) {
+            top: calc(var(--hamburgerbar-height) - #{rem(60)});
+            width: rem(110);
+            height: rem(110);
+        }
+
         @include breakpoint(phone) {
             top: calc(var(--hamburgerbar-height) - #{rem(68)});
             width: rem(110);
