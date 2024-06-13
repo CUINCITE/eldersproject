@@ -78,6 +78,11 @@
         @include z-index(logo, $lightbox-elements);
         @include default-transition;
 
+
+        @include breakpoint(phone-landscape) {
+            z-index: 6;
+        }
+
         .is-showing & {
             transform: translateY(0);
 
@@ -168,26 +173,20 @@
 
 
     &__intro-wrapper {
+        @include breakpoint(phone-landscape) {
+            .is-not-default & {
+                display: none;
+            }
+        }
+
+
         @include breakpoint(phone) {
-            // Animate must be disabled and display set to none, due to bugs
-
-            // translate: 0 50%;
-
-            // .is-showing.is-default & {
-            //     animation: show var(--animation-time) 0s both;
-            // }
-    
-            // .is-showing.is-not-default & {
-            //     translate: 0 0;
-            //     animation: hide 0.3s 0s both;
-            // }
-
             .is-not-default & {
                 display: none;
             }
         }
     }
-    
+
 
 
     &__intro-description,
@@ -302,7 +301,7 @@
         @include breakpoint(tablet) {
             z-index: 5;
         }
-        
+
 
         .is-showing & {
             transform: translateY(0);
@@ -337,6 +336,22 @@
                     transform: translateX(0);
                 }
             }
+
+
+            @include breakpoint(phone-landscape) {
+                transform: translateY(120%);
+                transition: transform .75s var(--easing);
+                transition-delay: 1.10s;
+
+                .is-showing & {
+                    transform: translateY(0);
+                }
+
+                span {
+                    position: relative;
+                }
+            }
+
 
             @include breakpoint(phone) {
                 transform: translateY(120%);
@@ -375,12 +390,12 @@
             &-inner {
                 transition: transform var(--animation-time) var(--easing);
                 transform: translateX(100%);
-    
+
                 .is-showing & {
                     transform: translateX(0);
                     transition-delay: 1.8s;
                 }
-        
+
                 .is-closing & {
                     transform: translateX(100%);
                     transition-delay: 0s;
@@ -388,16 +403,35 @@
             }
         }
 
-        @include breakpoint(phone) {
+
+        @include breakpoint(phone-landscape) {
             &-inner {
                 translate: 0 -120%;
                 transition: translate var(--animation-time) var(--easing);
-    
+
                 .is-showing & {
                     translate: 0 0;
                     transition-delay: 1.6s;
                 }
-        
+
+                .is-closing & {
+                    translate: 0 -120%;
+                    transition-delay: 0s;
+                }
+            }
+        }
+
+
+        @include breakpoint(phone) {
+            &-inner {
+                translate: 0 -120%;
+                transition: translate var(--animation-time) var(--easing);
+
+                .is-showing & {
+                    translate: 0 0;
+                    transition-delay: 1.6s;
+                }
+
                 .is-closing & {
                     translate: 0 -120%;
                     transition-delay: 0s;

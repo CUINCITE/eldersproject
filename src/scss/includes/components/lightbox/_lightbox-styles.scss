@@ -27,6 +27,20 @@
     }
 
 
+    @include breakpoint(phone-landscape) {
+        bottom: 0;
+        height: auto;
+        z-index: 9; // to be above the audioplayer cover
+        overflow: hidden;
+        overscroll-behavior: none;
+
+        .is-lightbox-open & {
+            // position: relative;
+            overflow-y: scroll;
+        }
+    }
+
+
     &__wrap {
         @include v-center;
 
@@ -57,6 +71,14 @@
         }
 
 
+        @include breakpoint(phone-landscape) {
+            @include flex(column, flex-start, stretch);
+
+            flex-grow: 1;
+            height: auto;
+        }
+
+
         @include breakpoint(phone) {
             @include flex(column, flex-start, stretch);
 
@@ -82,6 +104,16 @@
         @include breakpoint(tablet) {
             border-bottom: 1px solid var(--color-box);
         }
+
+
+        @include breakpoint(phone-landscape) {
+            order: 2;
+            z-index: 5;
+            flex-basis: var(--flex-basis);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
 
         @include breakpoint(phone) {
             order: 2;
@@ -134,10 +166,26 @@
             padding-bottom: rem(11);
         }
 
+
+        @include breakpoint(phone-landscape) {
+            position: absolute;
+            inset: 0 0 auto auto;
+            background: none;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
         @include breakpoint(phone) {
             position: fixed;
             inset: 0 0 auto auto;
             background: none;
+        }
+
+
+        &-wrapper {
+            @include breakpoint(phone-landscape) {
+                display: none;
+            }
         }
 
 
@@ -167,6 +215,11 @@
             border-bottom: 1px solid var(--color-box);
             border-left: 1px solid var(--color-box);
             border-right: 1px solid var(--color-box);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            display: none;
         }
 
 
@@ -260,6 +313,11 @@
 
         @include breakpoint(desktop) {
             padding: rem(29) 0 var(--GLOBAL-player-height);
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            height: auto;
         }
 
 
@@ -376,6 +434,11 @@
                     height: 16px;
                     inset: rem(28) auto auto rem(17);
                 }
+            }
+
+
+            @include breakpoint(phone-landscape) {
+                padding: rem(30) rem(50);
             }
 
 
@@ -549,9 +612,31 @@
                 z-index: 5;
             }
 
+
+            @include breakpoint(phone-landscape) {
+                @include flex;
+
+                z-index: 3 !important;
+                flex-shrink: 0;
+                gap: 0;
+                order: 3;
+                overflow: auto hidden;
+                background: transparent;
+                position: sticky;
+                top: 0;
+                padding-bottom: 8px;
+                margin-bottom: -8px;
+                overscroll-behavior: none;
+
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+
             @include breakpoint(phone) {
                 @include flex;
-    
+
                 z-index: 3 !important;
                 flex-shrink: 0;
                 gap: 0;
@@ -565,13 +650,13 @@
                 padding-bottom: 8px;
                 margin-bottom: -8px;
                 overscroll-behavior: none;
-    
-    
+
+
                 &::-webkit-scrollbar {
                     display: none;
                 }
-    
-    
+
+
                 li {
                     flex-shrink: 0;
                     text-align: center;
@@ -593,6 +678,28 @@
 
             @include breakpoint(tablet) {
                 padding-top: rem(9);
+            }
+
+            @include breakpoint(phone-landscape) {
+                @include flex;
+
+                width: auto;
+                min-width: 100%;
+                gap: vw(1, phone);
+                padding: 0 vw(15, phone);
+                background: var(--main-body-color);
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 44px;
+                    left: 0;
+                    bottom: 100%;
+                    background-color: var(--main-body-color);
+                    z-index: 2;
+                }
             }
 
             @include breakpoint(phone) {
@@ -651,17 +758,23 @@
                 color: var(--aside-text-color);
                 pointer-events: none;
             }
-
-            // @include breakpoint(phone) {
-            //     &::after, &::before {
-            //         background-color: var(--hover-color);
-            //     }
-            // }
         }
 
         @include breakpoint(not-phone) {
             padding-right: 2px;
             margin-right: -2px;
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(30, 1);
+            @include letter-spacing(-0.9, 30);
+
+            padding-block: rem(9) rem(5);
+            padding-inline: rem(18);
+            overflow: visible !important;
+            color: var(--main-text-color);
+            text-align: center;
         }
 
         @include breakpoint(phone) {
@@ -673,29 +786,6 @@
             overflow: visible !important;
             color: var(--main-text-color);
             text-align: center;
-            
-            // &::after, &::before {
-            //     content: "";
-            //     display: block;
-            //     position: absolute;
-            //     left: 50%;
-            //     transition: .25s background-color $easing;
-            // }
-
-            // &::before {
-            //     top: 0;
-            //     width: calc(100% + #{vw(22, phone)});
-            //     height: 100%;
-            //     translate: -50% 0;
-            // }
-
-            // &::after {
-            //     width: vw(8, phone);
-            //     aspect-ratio: 1/1;
-            //     top: 100%;
-            //     rotate: 45deg;
-            //     translate: -50% -50%;
-            // }
         }
 
         @include breakpoint(not-phone) {
@@ -726,6 +816,11 @@
                 @include breakpoint(tablet) {
                     font-size: 55px;
                 }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
+                }
             }
         }
 
@@ -744,6 +839,11 @@
 
                 @include breakpoint(tablet) {
                     font-size: 32px;
+                }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
                 }
             }
         }
@@ -768,6 +868,11 @@
                 @include breakpoint(tablet) {
                     font-size: 72px;
                 }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
+                }
             }
         }
 
@@ -785,6 +890,11 @@
 
                 @include breakpoint(tablet) {
                     font-size: 27.2px;
+                }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
                 }
             }
         }
@@ -808,6 +918,11 @@
                 @include breakpoint(tablet) {
                     font-size: 26px;
                 }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
+                }
             }
         }
 
@@ -830,6 +945,11 @@
 
                 @include breakpoint(tablet) {
                     font-size: 38.5px;
+                }
+
+
+                @include breakpoint(phone-landscape) {
+                    font-size: inherit;
                 }
             }
         }
@@ -860,6 +980,44 @@
                 background-color: var(--aside-body-color);
             }
         }
+
+
+        @include breakpoint(tablet) {
+            &-box { display: none; }
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            height: 100%;
+            width: 10px;
+            inset: 0;
+            transform: none;
+
+            &-tip {
+                position: absolute;
+                width: rem(8);
+                height: auto;
+                aspect-ratio: 1/1;
+                rotate: 45deg;
+                top: 100%;
+                left: 50%;
+                translate: -50% -50%;
+                background-color: var(--hover-color);
+                transform: none;
+            }
+
+            &-box {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                translate: -50% 0;
+                width: 100px;
+                height: 100%;
+                background-color: var(--hover-color);
+            }
+        }
+
 
         @include breakpoint(phone) {
             height: 100%;
@@ -896,10 +1054,22 @@
 
         grid-area: main;
         position: relative;
-        
+
         @include breakpoint(not-phone) {
             border-right: 1px solid var(--color-box);
         }
+
+
+        @include breakpoint(phone-landscape) {
+            border-right: none;
+            order: 4;
+            flex: 1 0 auto;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            z-index: 1;
+        }
+
 
         @include breakpoint(phone) {
             order: 4;
@@ -908,15 +1078,6 @@
             align-items: flex-start;
             justify-content: flex-start;
             z-index: 1;
-
-
-            // min-height: 66vh;
-
-            // padding-bottom: vw(100, phone);
-
-            // padding-bottom: 106px;
-
-            // .is-sticky & { overflow-y: auto; }
         }
 
 
@@ -968,6 +1129,13 @@
         z-index: 2;
         margin: rem(13);
         color: var(--aside-text-color);
+
+
+        @include breakpoint(phone-landscape) {
+            padding: 15px;
+            margin: 0;
+            color: var(--main-text-color);
+        }
 
 
         @include breakpoint(phone) {
@@ -1036,6 +1204,24 @@
         }
 
 
+        @include breakpoint(phone-landscape) {
+            position: relative;
+            inset: auto;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            max-width: 100%;
+
+
+            // for caption with single image
+
+            .lightbox__image & {
+                margin-top: rem(30);
+                margin-left: auto;
+                margin-right: var(--grid-margin);
+            }
+        }
+
+
         @include breakpoint(phone) {
             position: relative;
             inset: auto;
@@ -1063,7 +1249,7 @@
         background-color: var(--color-black);
         pointer-events: none;
 
-
+        @include breakpoint(phone-landscape) { display: none; }
         @include breakpoint(phone) { display: none; }
     }
 
@@ -1319,18 +1505,19 @@
         }
 
 
-        @include breakpoint(phone) {
-            // position: relative;
+        @include breakpoint(phone-landscape) {
+            position: relative;
+            inset: auto 0 0;
+            flex-grow: 1;
+            width: 100%;
+            grid-area: main;
+        }
 
-            // inset: auto 0 0 0;
+
+        @include breakpoint(phone) {
             position: relative;
             flex-grow: 1;
-
-            // top: 0;
-            // bottom: 104px;
             width: 100%;
-
-            // height: 100%;
             grid-area: main;
         }
     }
@@ -1464,6 +1651,12 @@
             width: 100%;
             opacity: 0;
             display: none;
+
+
+            @include breakpoint(phone-landscape) {
+                overflow: hidden;
+            }
+
 
             @include breakpoint(phone) {
                 overflow: hidden;
@@ -1605,7 +1798,7 @@
 
                 @include breakpoint(not-desktop) {
                     @include font-size(15, 21);
-                    @include font-settings(400, 100); 
+                    @include font-settings(400, 100);
                 }
             }
 
@@ -1836,7 +2029,7 @@
 
             @include breakpoint(not-desktop) {
                 @include font-size(14, 19);
-                @include font-settings(400, 100); 
+                @include font-settings(400, 100);
             }
         }
 
@@ -1865,15 +2058,15 @@
             @include breakpoint(not-desktop) {
                 inset: rem(24) 100% auto auto;
                 margin-right: rem(9);
-    
+
                 .horizontal {
                     width: rem(22) !important;
                 }
-    
+
                 .vertical {
                     height: rem(11) !important;
                 }
-    
+
                 .triangle {
                     border-width: rem(11) 0 rem(11) rem(12) !important;
                 }
@@ -1975,12 +2168,23 @@
             margin-top: 20px;
             letter-spacing: normal;
 
+
+            @include breakpoint(phone-landscape) {
+                @include font-size(30, 1);
+
+                letter-spacing: -0.025em;
+                margin-bottom: 6px;
+                padding-right: 2px;
+                padding-top: 2px;
+            }
+
+
             @include breakpoint(phone) {
                 @include font-size(30, 1);
-                
+
                 letter-spacing: -0.025em;
                 margin-top: 30px;
-                margin-bottom: 6px; 
+                margin-bottom: 6px;
                 padding-right: 2px;
                 padding-top: 2px;
             }
@@ -2028,6 +2232,14 @@
                     @include font-size(21, 19);
                 }
 
+
+                @include breakpoint(phone-landscape) {
+                    margin-left: 0.15em;
+                    font-size: inherit;
+                    line-height: inherit;
+                }
+
+
                 @include breakpoint(phone) {
                     margin-left: 0.15em;
                 }
@@ -2054,6 +2266,11 @@
                 margin-left: 5px;
             }
 
+
+            @include breakpoint(phone-landscape) {
+                @include flex(row, flex-start, center);
+            }
+
             @include breakpoint(phone) {
                 @include flex(row, flex-start, center);
             }
@@ -2065,6 +2282,13 @@
                 width: 30px;
                 height: 35px;
                 margin-top: -4px;
+
+
+                @include breakpoint(phone-landscape) {
+                    width: 18px;
+                    height: 25px;
+                }
+
 
                 @include breakpoint(phone) {
                     width: 18px;

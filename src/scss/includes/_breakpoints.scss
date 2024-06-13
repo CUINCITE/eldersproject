@@ -9,6 +9,8 @@
         @media (max-width: $size-tablet - 1px) { @content; }
     } @else if $point == iphone5 {
         @media (max-width: $size-min) { @content; }
+    } @else if $point == phone-landscape {
+        @media (max-height: 550px) and (orientation: landscape) { @content; }
     } @else if $point == not-phone {
         @media (min-width: $size-tablet) { @content; }
     } @else if $point == tablet {

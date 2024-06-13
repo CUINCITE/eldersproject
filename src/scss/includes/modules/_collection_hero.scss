@@ -28,6 +28,11 @@
                 }
             }
         }
+
+
+        @include breakpoint(phone-landscape) {
+            height: auto;
+        }
     }
 
 
@@ -103,6 +108,13 @@
                 height: vw(290, phone);
                 left: vw(8, phone);
             }
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            width: vw(180, phone);
+            height: vw(180, phone);
+            left: vw(8, phone);
         }
 
         &_wrapper {
@@ -198,6 +210,15 @@
             bottom: rem(14);
             left: 0;
         }
+
+
+        @include breakpoint(phone-landscape) {
+            position: relative;
+            bottom: auto;
+            padding-top: rem(20);
+            padding-bottom: rem(20);
+        }
+
 
         @include breakpoint(phone) {
             @include font-size (16, 16.5);
