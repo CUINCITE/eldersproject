@@ -31,6 +31,13 @@
                     grid-column: 3 / span 6 !important;
                 }
             }
+
+
+            @include breakpoint(phone-landscape) {
+                .grid > div {
+                    grid-column: 1 / span 12 !important;
+                }
+            }
         }
     }
 

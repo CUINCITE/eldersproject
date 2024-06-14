@@ -2,15 +2,21 @@
     overflow: hidden;
     height: var(--hamburgerbar-height);
 
-    @include breakpoint(tablet) {
-        svg {
+
+    svg {
+        @include breakpoint(tablet) {
             width: vw(150, tablet);
             height: auto;
         }
-    }
 
-    @include breakpoint(phone) {
-        svg {
+
+        @include breakpoint(phone-landscape) {
+            width: vw(100, tablet);
+            height: auto;
+        }
+
+
+        @include breakpoint(phone) {
             width: vw(110, phone);
             height: auto;
         }

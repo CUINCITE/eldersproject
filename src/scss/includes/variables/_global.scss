@@ -23,15 +23,19 @@
     }
 
 
-    @include breakpoint(phone) {
-        --GLOBAL-aside-width: 40px;
-    }
-
     @include breakpoint(tablet) {
         --hamburgerbar-height: 82px;
     }
 
+
+    @include breakpoint(phone-landscape) {
+        --GLOBAL-aside-width: 80px;
+        --hamburgerbar-height: 60px;
+    }
+
+
     @include breakpoint(phone) {
+        --GLOBAL-aside-width: 40px;
         --hamburgerbar-height: 69px;
     }
 }

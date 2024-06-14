@@ -40,6 +40,13 @@
             @include letter-spacing(-9.5, 220);
         }
 
+
+        @include breakpoint(phone-landscape) {
+            @include font-size(118.8, .7);
+            @include letter-spacing(-6.5, 118);
+        }
+
+
         @include breakpoint(phone) {
             @include font-size(118.8, 85.7);
             @include letter-spacing(-10.8, 240);
@@ -69,6 +76,12 @@
                 padding-top: rem(13);
                 padding-left: rem(13);
             }
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            padding-top: rem(13);
+            padding-left: rem(13);
         }
 
 
@@ -152,6 +165,11 @@
             left: rem(18);
         }
 
+
+        @include breakpoint(phone-landscape) {
+            display: none;
+        }
+
         @include breakpoint(phone) {
             bottom: rem(-13);
             left: rem(18);
@@ -163,6 +181,11 @@
     &__text {
         @include breakpoint(tablet) {
             grid-column: 3 / span 6;
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            grid-column: 1 / span 12;
         }
     }
 
@@ -182,6 +205,15 @@
             @include letter-spacing(-16.8, 240);
 
             padding-left: calc(#{map-get($grid-offset, tablet)} - #{rem(9)});
+        }
+
+
+        @include breakpoint(phone-landscape) {
+            @include letter-spacing(-8.316, 118.8);
+
+            padding-left: rem(10);
+            display: inline-block;
+            margin-top: 1px;
         }
 
         @include breakpoint(phone) {

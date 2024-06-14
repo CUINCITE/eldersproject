@@ -48,6 +48,11 @@ body {
 
     // for collection's page
     counter-reset: collection-counter;
+
+
+    @include breakpoint(phone-landscape) {
+        &.is-overflow-hidden { overflow: hidden; }
+    }
 }
 
 
@@ -103,6 +108,11 @@ html {
         body.is-lightbox-open & {
             display: none;
         }
+    }
+
+
+    @include breakpoint(phone-landscape) {
+        body.is-lightbox-open & { display: grid; }
     }
 
 

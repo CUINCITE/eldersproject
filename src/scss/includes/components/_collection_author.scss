@@ -43,6 +43,12 @@
                 padding-top: rem(12);
             }
 
+
+            @include breakpoint(phone-landscape) {
+                padding-top: 0;
+            }
+
+
             @include breakpoint(phone) {
                 @include font-size(20, 21);
                 @include letter-spacing(-0.2, 20);

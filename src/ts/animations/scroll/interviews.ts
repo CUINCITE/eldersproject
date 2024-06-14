@@ -8,7 +8,7 @@ export const interviews = el => {
     if (controls) {
         const mm = gsap.matchMedia();
 
-        mm.add('(orientation: landscape)', () => {
+        mm.add('(orientation: landscape) and (min-height: 501px)', () => {
             gsap.timeline({
                 ease: 'none',
                 scrollTrigger: {
