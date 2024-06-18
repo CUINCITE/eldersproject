@@ -45,6 +45,7 @@ export interface IAudioPlayerResponseElements {
 export interface IAudioPlayerQueueItem {
     active: boolean;
     id: string;
+    timestamp?: number;
 }
 
 export class AudioPlayer extends Videos {
@@ -141,6 +142,7 @@ export class AudioPlayer extends Videos {
 
     protected onTimeupdate = (): void => {
         super.onTimeupdate();
+        this.updateQueueTimestamp();
     };
 
 
@@ -347,16 +349,17 @@ export class AudioPlayer extends Videos {
         this.animateOutIllustration(prevDirection);
         this.elements.title.innerText = 'Loading...';
 
-        const idFromQueue = this.getIdFromQueue(prevDirection);
-        console.log('idFromQueue', idFromQueue);
-
-        this.loadAudio(id || idFromQueue)
+        this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
                 this.updateQueue(data.id, prevDirection);
                 this.animateOutCassette();
                 this.updatePlayer(data);
                 this.updateColors(data.color);
-                Images.preload(this.mobileIllustration.querySelectorAll('img')).then(() => {
+                Promise.all(
+                    [breakpoint.desktop
+                        ? null
+                        : Images.preload(this.mobileIllustration.querySelectorAll('img'))],
+                ).then(() => {
                     this.animateInIllustration(prevDirection);
                     // eslint-disable-next-line max-len
                     this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
@@ -423,15 +426,25 @@ export class AudioPlayer extends Videos {
 
 
     private onNextClick = (): void => {
-        const { nextId } = this.elements.nextBtn.dataset;
-        this.setNewAudio(nextId, true, '', false);
+        const { id, timestamp }: IAudioPlayerQueueItem = this.getItemFromQueue(1);
+        this.setNewAudio(
+            id || '',
+            true,
+            timestamp ? Math.floor(timestamp).toString() : '',
+            false,
+        );
     };
 
 
 
     private onPrevClick = (): void => {
-        const { prevId } = this.elements.prevBtn.dataset;
-        this.setNewAudio(prevId, true, '', true);
+        const { id, timestamp }: IAudioPlayerQueueItem = this.getItemFromQueue(-1);
+        this.setNewAudio(
+            id || '',
+            true,
+            timestamp ? Math.floor(timestamp).toString() : '',
+            true,
+        );
     };
 
 
@@ -598,16 +611,21 @@ export class AudioPlayer extends Videos {
 
 
 
-    private getIdFromQueue = (isPrevious = false): string => {
-        const direction = isPrevious ? -1 : 1;
+    private updateQueueTimestamp = (): void => {
+        this.playerQueue[this.activeQueueIndex].timestamp = this.media.currentTime;
+    };
 
-        // find current active audio in queue
-        const currentAudioIndex = this.playerQueue.findIndex(item => item.active === true);
 
-        // move through the queue
-        const newAudio = this.playerQueue[currentAudioIndex + direction];
 
-        // if we get to the beginning or end of the queue, return empty string and load new random audio, otherwise return id from queue
-        return newAudio ? newAudio.id : '';
+    private getItemFromQueue = (direction: number): IAudioPlayerQueueItem => {
+        // find next/prev item in queue
+        const newActiveIndex = this.activeQueueIndex + direction;
+
+        // if there is no next/prev item in queue, return empty item and then draw random item to the player
+        if (newActiveIndex < 0 || newActiveIndex > this.playerQueue.length - 1) {
+            return { id: '', timestamp: 0, active: false };
+        }
+
+        return this.playerQueue[newActiveIndex];
     };
 }
