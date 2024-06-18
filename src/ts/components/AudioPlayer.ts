@@ -41,6 +41,12 @@ export interface IAudioPlayerResponseElements {
     title: HTMLElement;
 }
 
+
+export interface IAudioPlayerQueueItem {
+    active: boolean;
+    id: string;
+}
+
 export class AudioPlayer extends Videos {
 
     // eslint-disable-next-line no-use-before-define
@@ -90,6 +96,8 @@ export class AudioPlayer extends Videos {
     private timeout: ReturnType<typeof setTimeout>;
     private audioWrapper: HTMLElement;
     private isHorizontalPhone = false;
+    private playerQueue: IAudioPlayerQueueItem[] = [];
+    private activeQueueIndex: number = 0;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -291,12 +299,6 @@ export class AudioPlayer extends Videos {
                 case SwipeDirections.RIGHT:
                     this.onNextClick();
                     break;
-                // case SwipeDirections.UP:
-                //     PushStates.goTo(this.elements.urlLinks[0].getAttribute('href'), Lightbox.isOpen);
-                //     break;
-                // case SwipeDirections.DOWN:
-                //     this.minimize();
-                //     break;
                 default:
                     // resetted earlier to 0, center illu when no action
                     this.moveIllustration();
@@ -344,12 +346,16 @@ export class AudioPlayer extends Videos {
     private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean): void => {
         this.animateOutIllustration(prevDirection);
         this.elements.title.innerText = 'Loading...';
-        this.loadAudio(id)
+
+        const idFromQueue = this.getIdFromQueue(prevDirection);
+        console.log('idFromQueue', idFromQueue);
+
+        this.loadAudio(id || idFromQueue)
             .then((data: IAudioPlayerResponse) => {
+                this.updateQueue(data.id, prevDirection);
                 this.animateOutCassette();
                 this.updatePlayer(data);
                 this.updateColors(data.color);
-                // this.animateInCassette();
                 Images.preload(this.mobileIllustration.querySelectorAll('img')).then(() => {
                     this.animateInIllustration(prevDirection);
                     // eslint-disable-next-line max-len
@@ -411,21 +417,6 @@ export class AudioPlayer extends Videos {
             duration: 0.5,
             ease: 'power2.out',
             delay: this.isInitialized ? 0 : 0.5,
-        });
-    };
-
-
-
-    private animateInCassette = (): void => {
-        gsap.fromTo(this.cassetteEl, { yPercent: breakpoint.desktop ? 100 : 0, xPercent: breakpoint.desktop ? 0 : -100 }, {
-            yPercent: 0,
-            xPercent: 0,
-            duration: 0.5,
-            ease: 'power2.out',
-            clearProps: 'all',
-            onStart: () => {
-                this.cassetteEl.style.opacity = '1';
-            },
         });
     };
 
@@ -579,5 +570,44 @@ export class AudioPlayer extends Videos {
 
         // add new color modifier
         this.view.classList.add(`audioplayer--${color}`);
+    };
+
+
+
+    private updateQueue = (id: string, isPrevious = false): void => {
+        const direction = isPrevious ? -1 : 1;
+
+        // remove active flag from all items in queue
+        // eslint-disable-next-line no-return-assign
+        this.playerQueue.map(item => item.active = false);
+
+        const newActiveIndex = this.activeQueueIndex + direction;
+        // the 'oldest' edge
+        if (newActiveIndex < 0) {
+            this.playerQueue.unshift({ id, active: true });
+        } else if (newActiveIndex > this.playerQueue.length - 1) {
+            this.playerQueue.push({ id, active: true });
+        } else {
+            this.playerQueue[newActiveIndex].active = true;
+        }
+
+        this.activeQueueIndex = this.playerQueue.findIndex(item => item.active === true);
+        console.table(this.playerQueue);
+
+    };
+
+
+
+    private getIdFromQueue = (isPrevious = false): string => {
+        const direction = isPrevious ? -1 : 1;
+
+        // find current active audio in queue
+        const currentAudioIndex = this.playerQueue.findIndex(item => item.active === true);
+
+        // move through the queue
+        const newAudio = this.playerQueue[currentAudioIndex + direction];
+
+        // if we get to the beginning or end of the queue, return empty string and load new random audio, otherwise return id from queue
+        return newAudio ? newAudio.id : '';
     };
 }
