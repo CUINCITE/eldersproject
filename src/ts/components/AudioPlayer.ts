@@ -99,6 +99,7 @@ export class AudioPlayer extends Videos {
     private isHorizontalPhone = false;
     private playerQueue: IAudioPlayerQueueItem[] = [];
     private activeQueueIndex: number = 0;
+    private queueLimit = 50;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -159,7 +160,7 @@ export class AudioPlayer extends Videos {
 
         if (id !== AudioPlayer.currentAudioId) {
             // if button has different id than audio player, load new audio and play
-            this.setNewAudio(id, true, startTime);
+            this.setNewAudio(id, true, startTime, false, true);
         } else {
             // if button has the same id as current audio, only toggle player
             // eslint-disable-next-line no-lonely-if
@@ -345,13 +346,13 @@ export class AudioPlayer extends Videos {
 
 
 
-    private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean): void => {
+    private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean, fromExternalBtn?: boolean): void => {
         this.animateOutIllustration(prevDirection);
         this.elements.title.innerText = 'Loading...';
 
         this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
-                this.updateQueue(data.id, prevDirection);
+                this.updateQueue(fromExternalBtn, data.id, prevDirection);
                 this.animateOutCassette();
                 this.updatePlayer(data);
                 this.updateColors(data.color);
@@ -587,22 +588,30 @@ export class AudioPlayer extends Videos {
 
 
 
-    private updateQueue = (id: string, isPrevious = false): void => {
+    private updateQueue = (givenId: boolean, id: string, isPrevious = false): void => {
         const direction = isPrevious ? -1 : 1;
 
         // remove active flag from all items in queue
         // eslint-disable-next-line no-return-assign
         this.playerQueue.map(item => item.active = false);
 
-        const newActiveIndex = this.activeQueueIndex + direction;
-        // the 'oldest' edge
-        if (newActiveIndex < 0) {
-            this.playerQueue.unshift({ id, active: true });
-        } else if (newActiveIndex > this.playerQueue.length - 1) {
+        if (givenId) {
+            // if id is from external button (directly run given interview, neither random nor from queue), remove all items after currently playing
+            this.playerQueue.splice(this.activeQueueIndex + 1);
+            // and set new item at the beginning of the queue
             this.playerQueue.push({ id, active: true });
         } else {
-            this.playerQueue[newActiveIndex].active = true;
+            const newActiveIndex = this.activeQueueIndex + direction;
+            // the 'oldest' edge
+            if (newActiveIndex < 0) {
+                this.playerQueue.unshift({ id, active: true });
+            } else if (newActiveIndex > this.playerQueue.length - 1) {
+                this.playerQueue.push({ id, active: true });
+            } else {
+                this.playerQueue[newActiveIndex].active = true;
+            }
         }
+
 
         this.activeQueueIndex = this.playerQueue.findIndex(item => item.active === true);
         console.table(this.playerQueue);
