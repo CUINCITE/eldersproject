@@ -1,6 +1,7 @@
 import { gsap } from 'gsap/dist/gsap';
+import { getStorageItem, setStorageItem } from '../Utils';
 import { PushStates } from '../PushStates';
-import { breakpoint, easing } from '../Site';
+import { breakpoint, easing, local } from '../Site';
 import { Videos } from './Player/Videos';
 import { Lightbox } from './Lightbox/Lightbox';
 import { ISwipeCoordinates, Swipe, SwipeDirections, SwipeEvents } from './Swipe';
@@ -97,9 +98,9 @@ export class AudioPlayer extends Videos {
     private timeout: ReturnType<typeof setTimeout>;
     private audioWrapper: HTMLElement;
     private isHorizontalPhone = false;
-    private playerQueue: IAudioPlayerQueueItem[] = [];
+    private playerQueue: IAudioPlayerQueueItem[];
     private activeQueueIndex: number = 0;
-    private queueLimit = 50;
+    private queueLimit = 100;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -124,6 +125,8 @@ export class AudioPlayer extends Videos {
             title: this.view.querySelector('.js-player-title'),
         };
 
+
+        this.tryToGetQueue();
         this.minimize(true);
         this.bindAudioPlayer();
         this.checkOrientation();
@@ -160,7 +163,7 @@ export class AudioPlayer extends Videos {
 
         if (id !== AudioPlayer.currentAudioId) {
             // if button has different id than audio player, load new audio and play
-            this.setNewAudio(id, true, startTime, false, true);
+            this.setNewAudio(id, true, startTime, 1, true);
         } else {
             // if button has the same id as current audio, only toggle player
             // eslint-disable-next-line no-lonely-if
@@ -193,6 +196,33 @@ export class AudioPlayer extends Videos {
         this.setTitleInCassette(`${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}`);
         this.togglePlayerButtons(false);
     }
+
+
+
+    private tryToGetQueue = (): void => {
+        const queue = getStorageItem('audioQueue');
+        if (queue) {
+            // parse queue from local storage
+            this.playerQueue = JSON.parse(queue);
+
+            // find active item in queue and assign it to component's property
+            this.activeQueueIndex = this.playerQueue.findIndex(item => item.active === true);
+
+            // get data from active item in queue
+            const { id, timestamp }: IAudioPlayerQueueItem = this.getItemFromQueue(0);
+
+            // load audio from queue to player, but do not play it
+            this.setNewAudio(
+                id || '',
+                false,
+                timestamp ? Math.floor(timestamp).toString() : '',
+            );
+        } else {
+            console.warn('No queue in local storage');
+            // if there is no queue in local storage, load random audio and initialize player with empty queue
+            this.playerQueue = [];
+        }
+    };
 
 
 
@@ -346,13 +376,13 @@ export class AudioPlayer extends Videos {
 
 
 
-    private setNewAudio = (id?: string, play?: boolean, startTime?: string, prevDirection?: boolean, fromExternalBtn?: boolean): void => {
-        this.animateOutIllustration(prevDirection);
+    private setNewAudio = (id?: string, play?: boolean, startTime?: string, direction?: number, fromExternalBtn?: boolean): void => {
+        this.animateOutIllustration(direction);
         this.elements.title.innerText = 'Loading...';
 
         this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
-                this.updateQueue(fromExternalBtn, data.id, prevDirection);
+                this.updateQueue(fromExternalBtn, data.id, direction);
                 this.animateOutCassette();
                 this.updatePlayer(data);
                 this.updateColors(data.color);
@@ -361,7 +391,7 @@ export class AudioPlayer extends Videos {
                         ? null
                         : Images.preload(this.mobileIllustration.querySelectorAll('img'))],
                 ).then(() => {
-                    this.animateInIllustration(prevDirection);
+                    this.animateInIllustration(direction);
                     // eslint-disable-next-line max-len
                     this.setTitleInCassette(this.isPaused() ? `${AudioPlayerStatesText.PAUSED}: ${this.elements.title.innerText}` : `${AudioPlayerStatesText.PLAYING}: ${this.elements.title.innerText}`);
 
@@ -375,6 +405,8 @@ export class AudioPlayer extends Videos {
                         !this.isExpanded && this.expand();
                         if (!hasParams) this.seekToTime(startTime ? parseInt(startTime, 10) : 0);
                         this.play();
+                    } else if (startTime) {
+                        this.seekToTime(parseInt(startTime, 10));
                     }
                     this.isInitialized = true;
                 });
@@ -403,10 +435,10 @@ export class AudioPlayer extends Videos {
 
 
 
-    private animateOutIllustration = (left: boolean): void => {
+    private animateOutIllustration = (dir: number): void => {
 
         gsap.to(this.mobileIllustration, {
-            x: left ? -window.innerWidth : window.innerWidth,
+            x: dir * window.innerWidth,
             duration: 0.5,
             ease: 'power2.out',
         });
@@ -414,9 +446,9 @@ export class AudioPlayer extends Videos {
 
 
 
-    private animateInIllustration = (left: boolean): void => {
+    private animateInIllustration = (dir: number): void => {
 
-        gsap.fromTo(this.mobileIllustration, { x: left ? window.innerWidth / 2 : -window.innerWidth / 2 }, {
+        gsap.fromTo(this.mobileIllustration, { x: dir * (-window.innerWidth / 2) }, {
             x: 0,
             duration: 0.5,
             ease: 'power2.out',
@@ -432,7 +464,7 @@ export class AudioPlayer extends Videos {
             id || '',
             true,
             timestamp ? Math.floor(timestamp).toString() : '',
-            false,
+            1,
         );
     };
 
@@ -444,7 +476,7 @@ export class AudioPlayer extends Videos {
             id || '',
             true,
             timestamp ? Math.floor(timestamp).toString() : '',
-            true,
+            -1,
         );
     };
 
@@ -455,7 +487,7 @@ export class AudioPlayer extends Videos {
         if (Lightbox.isOpen) return;
 
         // if audio player is not initialized yet, load random audio
-        if (!this.isInitialized) this.setNewAudio(undefined, true);
+        if (!this.isInitialized) this.setNewAudio(undefined, true, '', 1);
 
         this.isExpanded ? this.minimize() : this.expand();
     };
@@ -588,8 +620,7 @@ export class AudioPlayer extends Videos {
 
 
 
-    private updateQueue = (givenId: boolean, id: string, isPrevious = false): void => {
-        const direction = isPrevious ? -1 : 1;
+    private updateQueue = (givenId: boolean, id: string, direction = 0): void => {
 
         // remove active flag from all items in queue
         // eslint-disable-next-line no-return-assign
@@ -613,15 +644,24 @@ export class AudioPlayer extends Videos {
         }
 
 
-        this.activeQueueIndex = this.playerQueue.findIndex(item => item.active === true);
-        console.table(this.playerQueue);
+        // remove last(or first, depending on direction) item in queue if it exceeds the limit
+        if (this.playerQueue.length > this.queueLimit) {
+            direction === -1 ? this.playerQueue.pop() : this.playerQueue.shift();
+        }
 
+
+        this.activeQueueIndex = this.playerQueue.findIndex(item => item.active === true);
+        local && console.table(this.playerQueue);
+
+        this.saveQueueToStorage();
     };
 
 
 
     private updateQueueTimestamp = (): void => {
         this.playerQueue[this.activeQueueIndex].timestamp = this.media.currentTime;
+
+        this.saveQueueToStorage();
     };
 
 
@@ -636,5 +676,12 @@ export class AudioPlayer extends Videos {
         }
 
         return this.playerQueue[newActiveIndex];
+    };
+
+
+
+    private saveQueueToStorage = (): void => {
+        const flattenedQueue = JSON.stringify(this.playerQueue);
+        setStorageItem('audioQueue', flattenedQueue);
     };
 }
