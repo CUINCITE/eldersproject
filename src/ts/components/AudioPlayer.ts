@@ -101,6 +101,7 @@ export class AudioPlayer extends Videos {
     private playerQueue: IAudioPlayerQueueItem[];
     private activeQueueIndex: number = 0;
     private queueLimit = 100;
+    private isFetching = false;
 
     constructor(protected view: HTMLElement) {
         super(view);
@@ -379,6 +380,7 @@ export class AudioPlayer extends Videos {
     private setNewAudio = (id?: string, play?: boolean, startTime?: string, direction?: number, fromExternalBtn?: boolean): void => {
         this.animateOutIllustration(direction);
         this.elements.title.innerText = 'Loading...';
+        this.isFetching = true;
 
         this.loadAudio(id)
             .then((data: IAudioPlayerResponse) => {
@@ -409,6 +411,7 @@ export class AudioPlayer extends Videos {
                         this.seekToTime(parseInt(startTime, 10));
                     }
                     this.isInitialized = true;
+                    this.isFetching = false;
                 });
             });
     };
@@ -459,6 +462,8 @@ export class AudioPlayer extends Videos {
 
 
     private onNextClick = (): void => {
+        if (this.isFetching) return;
+
         const { id, timestamp }: IAudioPlayerQueueItem = this.getItemFromQueue(1);
         this.setNewAudio(
             id || '',
@@ -471,6 +476,8 @@ export class AudioPlayer extends Videos {
 
 
     private onPrevClick = (): void => {
+        if (this.isFetching) return;
+
         const { id, timestamp }: IAudioPlayerQueueItem = this.getItemFromQueue(-1);
         this.setNewAudio(
             id || '',
