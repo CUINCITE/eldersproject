@@ -7,7 +7,7 @@
     {
         "id"   : "interviews",
         "label": "Interviews",
-        "models":["interviews","sessions","clips","narrators","media_interviews"]
+        "models":["interviews","sessions","clips","narrators","media_interviews","interview_indexes"]
     },    
     {
         "id"   : "map",
