@@ -36,6 +36,13 @@
             "type":"plugin"
         },
         {
+            "label": "Indexes",
+            "icon": "timer",
+            "type": "page",
+            "page": "interview_indexes,%id%"      
+          },
+            
+        {
             "label":"Doc2Txt",
             "plugin":"api_single",            
             "type":"plugin",
