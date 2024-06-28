@@ -5,6 +5,7 @@ ARG VERSION
 ARG REVISION
 
 # APACHE + PHP
+RUN apt-get install -y zlib1g-dev libicu-dev g++
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install exif && docker-php-ext-enable exif
 RUN docker-php-ext-install intl && docker-php-ext-enable intl
