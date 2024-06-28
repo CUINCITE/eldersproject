@@ -7,6 +7,7 @@ ARG REVISION
 # APACHE + PHP
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install exif && docker-php-ext-enable exif
+RUN docker-php-ext-install intl && docker-php-ext-enable intl
 RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev libzip-dev zip git
 RUN a2enmod rewrite
 RUN docker-php-ext-configure gd --with-webp \
