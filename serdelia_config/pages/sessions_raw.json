@@ -36,6 +36,13 @@
             }
         },
         {
+            "label": "Indexes",
+            "icon": "timer",
+            "type": "page",
+            "page": "interview_indexes,%id%"      
+          },
+            
+        {
             "plugin":"api_single",
             "type":"plugin",
             "label":"Transcript",

@@ -1,6 +1,10 @@
 {
   "table": "interviews",
-  "label": {
+  "back":
+  {
+      "page":"/"
+  },
+"label": {
     "page": "All Interviews",
     "edit": "{% if not label %}New interview{% else %}Interview: <em>{{label}}</em>{% endif %}"
   },
@@ -31,18 +35,13 @@
       "icon": "reorder",
       "page": "sessions,%id%"
     },
+      
     {
       "type": "plugin",
       "plugin": "preview",
       "params": {
         "url": "/interviews/{{slug}}?preview=true"
       }
-    },
-    {
-      "label": "Indexes",
-      "icon": "index",
-      "hidden": true,
-      "plugin": "interview_indexes"
     }
   ],
   "fields": [
@@ -98,8 +97,7 @@
       "label": "Placeholder Illustration",
       "field": "illustration",
       "hr": true,
-      "search":true,
-      "list":true,
+      
       "type": "select",
       "source": {
         "model": "interview_illustrations_all"
@@ -129,21 +127,7 @@
       }
     },
 
-    {
-      "label": "Featured",
-      "field": "featured",
-      "type": "boolean",
-      
-      "list": "edit",
-      "search": true
-    },
-    {
-      "label": "Publish",
-      "field": "active",
-      "type": "boolean",
-      "list": "edit",
-      "search": true
-    },
+    
 
 
     {
@@ -292,39 +276,7 @@
       "label": "PDF Size (ES)"
     },
 
-        {
-      "tab": "Status",
-      "list": "read",
-      "edit":false,
-      "field": "status_media",
-      "label": "Status (media)",
-      "type": "boolean",
-      "search": true
-    },
-    {
-      "list": "read",
-      "edit":false,
-      "field": "status_transcripts",
-      "label": "Status (transcripts)",
-      "type": "boolean",
-      "search": true
-    },
-    {
-      "list": "read",
-      "edit":false,
-      "field": "status_pdf",
-      "label": "Status (PDF)",
-      "type": "boolean",
-      "search": true      
-    },
-    {
-      "list": "read",
-      "edit":false,
-      "field": "status_assets",
-      "label": "Status (assets)",
-      "type": "boolean",
-      "search": true      
-    },
+        
     
 
     
@@ -434,6 +386,54 @@
       "field": "duration","hr":true,
       "label": "Interview Duration (seconds)",
       "edit": false
+    },
+    {
+      "tab": "Status",
+      "list": "read",
+      "edit":false,
+      "field": "status_media",
+      "label": "Status (media)",
+      "type": "boolean",
+      "search": true
+    },
+    {
+      "list": "read",
+      "edit":false,
+      "field": "status_transcripts",
+      "label": "Status (transcripts)",
+      "type": "boolean",
+      "search": true
+    },
+    {
+      "list": "read",
+      "edit":false,
+      "field": "status_pdf",
+      "label": "Status (PDF)",
+      "type": "boolean",
+      "search": true      
+    },
+    {
+      "list": "read",
+      "edit":false,
+      "field": "status_assets",
+      "label": "Status (assets)",
+      "type": "boolean",
+      "search": true      
+    },
+    {
+      "hr":true,
+      "label": "Featured",
+      "field": "featured",
+      "type": "boolean",      
+      "list": "edit",
+      "search": true
+    },
+    {
+      "label": "Publish",
+      "field": "active",
+      "type": "boolean",
+      "list": "edit",
+      "search": true
     }
 
 

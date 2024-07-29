@@ -95,8 +95,8 @@ class model_app_api extends model_app
               break;*/
 
             case "cache_kill":
-                $this->cache_kill();
-                $result = ['result' => true];
+                
+                $result = ['result' => true,'count'=>$this->cache_kill()];
 
                 break;
 
@@ -143,6 +143,7 @@ class model_app_api extends model_app
     //------------------------------------------------------
     public function cache_kill($dir = 'cache')
     {
+        $i=0;
         if ($dir) {
             $dir = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/' . trim($dir, '/');
             $scan = @scandir($dir);
@@ -150,9 +151,11 @@ class model_app_api extends model_app
                 foreach ($scan as $item) {
                     $path_parts = pathinfo($item);
                     if ($item == '.' || $item == '..' || $path_parts['extension'] != 'cache') continue;
+                    $i++;
                     unlink($dir . DIRECTORY_SEPARATOR . $item);
                 }
         }
+        return $i;
     }
 
 

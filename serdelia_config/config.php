@@ -28,7 +28,7 @@ $cfg=array(
 				getenv('CLIENT_KEY2')
 			],
 
-			'serdelia_cache_kill'      =>  '/cache',                    //  set cache folder of your website, so after any change in the CMS this folder will be cleared by the CMS (all files will be removed!)
+			'serdelia_cache_kill_plugin'      =>  'cache_clear',                 //  set cache folder of your website, so after any change in the CMS this folder will be cleared by the CMS (all files will be removed!)
 
 			'app_languages' 			=> 
 				[

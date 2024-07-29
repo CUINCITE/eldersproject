@@ -1,5 +1,9 @@
 {
     "table": "people_sections",
+    "back":
+    {
+        "page":"/"
+    },
     "order": "nr",
     "fields": [
         {

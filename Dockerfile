@@ -7,12 +7,15 @@ ARG REVISION
 # APACHE + PHP
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install exif && docker-php-ext-enable exif
-RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev git
+RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev libzip-dev zip git
 RUN a2enmod rewrite
 RUN docker-php-ext-configure gd --with-webp \
 --with-freetype=/usr/include/ \
 --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
+RUN docker-php-ext-install zip
+RUN apt-get install -y libicu-dev
+RUN docker-php-ext-install intl && docker-php-ext-enable intl
 
 # COPY APP FILES
 COPY ./application /var/www/html/application
@@ -58,6 +61,11 @@ LABEL org.opencontainers.image.vendor="Huncwot"
 LABEL org.opencontainers.image.title="UHOMVC8 framework boilerplate"
 LABEL org.opencontainers.image.authors="huncwotdigital"
 
+# Setup PHP INI vars
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/post_max_size = 8M/post_max_size = 4096M/g' "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 4096M/g' "$PHP_INI_DIR/php.ini"
+RUN sed -i 's/max_execution_time = 8M/max_execution_time = 600/g' "$PHP_INI_DIR/php.ini"
 
 EXPOSE 80
 CMD ["apache2-foreground"]

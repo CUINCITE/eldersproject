@@ -10,26 +10,22 @@
       "text": "Describe {{label}} policy during presidency of Barack Obama in 3-4 paragraphs. Do not use point marks. Do not summarize."
     }
   },
+  "back": {
+    "page": "/"
+  },
   "model": {
     "label": "{{label}}"
   },
   "buttons_edit": [
     {
-      "label":"Helper",
-      "type":"plugin",
-      "plugin":"topic_update",
-      "on_update":true,
-      "hidden":true
-  },
-    {
+      "label": "Helper",
       "type": "plugin",
-      "plugin": "preview",
-      "params": {
-        "url": "/topics/{{slug}}?preview=true"
-      }
+      "plugin": "topic_update",
+      "on_update": true,
+      "hidden": true
     }
   ],
-  "buttons_page": [
+  "temp_buttons_page": [
     {
       "type": "plugn",
       "plugin": "import"
@@ -58,7 +54,7 @@
       "label": "Illustration",
       "field": "illustration",
       "type": "select",
-      "search":true,
+      "search": true,
       "source": {
         "model": "interview_illustrations_all"
       },

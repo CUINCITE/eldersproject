@@ -1,0 +1,14 @@
+{% if errors %}
+<div class="alert alert-danger">
+	[[icon::warning]]
+	{% for error in errors %} {% if loop.index>1 %}<br>{% endif %}
+	{{error}} {% endfor %}
+</div>
+{% endif %}
+{% if success %}
+<div class="alert alert-success">
+	[[icon::warning]]
+	{% for success in success %} {% if loop.index>1 %}<br>{% endif %}
+	{{success}} {% endfor %}
+</div>
+{% endif %}

@@ -6,8 +6,6 @@ use PhpOffice\PhpWord\IOFactory as WordIOFactory;
 
 class model_app_api_session_import
 {
-
-
 	function __construct($parent, $settings)
 	{
 		$this->parent = $parent;
@@ -116,7 +114,7 @@ class model_app_api_session_import
 			if ($i1 && $i2>$i1 && $i2-$i1==9)
 			{				
 				$t=mb_substr($txt,$i1+1,8,'UTF-8');
-				$txt='['.$t.'] '.mb_substr($txt,0,$i1,'UTF-8').mb_substr($txt,$i2+1,'UTF-8');
+				$txt='['.$t.'] '.mb_substr($txt,0,$i1,'UTF-8').mb_substr($txt,$i2+1,NULL,'UTF-8');
 				
 			} else
 			{

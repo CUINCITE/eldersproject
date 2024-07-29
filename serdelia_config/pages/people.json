@@ -2,6 +2,10 @@
     "table": "people",
     "model":{"label":"{{surname}}, {{name}}","image":"image"},
     "order":"surname,name",
+    "back":
+    {
+        "page":"/"
+    },
     "fields": [
         {
             "field": "surname",

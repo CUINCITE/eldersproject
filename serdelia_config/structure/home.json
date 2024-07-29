@@ -7,6 +7,33 @@
             "widget":"page",
             "params":
             {
+                "label":"Homepage",
+                "page": "pages_modules_simple,1",
+                "icon":"bolt"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "label":"About",
+                "page": "pages_modules_simple,16",
+                "icon":"person-pin"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "label":"Contact",
+                "page": "pages_modules_simple,15",
+                "icon":"email"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
                 "page":"interviewers",
                 "icon":"collections-bookmark"
             }
@@ -15,6 +42,7 @@
             "widget":"page",
             "params":
             {
+                "label":"Interviews",
                 "page":"interviews",
                 "icon":"mic"
             }
@@ -34,15 +62,7 @@
                 "page":"topics",
                 "icon":"topic"
             }
-        },
-        {
-            "widget":"page",
-            "params":
-            {
-                "page":"pages",
-                "icon":"article "
-            }
-        },
+        },        
         {
             "widget":"page",
             "params":
@@ -57,6 +77,22 @@
             {
                 "page":"intro_quotes",
                 "icon":"format-quote"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"people",
+                "icon":"account-circle"
+            }
+        },
+        {
+            "widget":"page",
+            "params":
+            {
+                "page":"people_sections",
+                "icon":"groups"
             }
         }
     ]

@@ -28,6 +28,12 @@
             }
         },
         {
+            "label": "Indexes",
+            "icon": "timer",
+            "type": "page",
+            "page": "interview_indexes,%id%"      
+          },        
+        {
             "label":"Helper",
             "plugin":"session_update"
         }

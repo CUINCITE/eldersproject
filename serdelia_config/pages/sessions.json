@@ -16,6 +16,22 @@
             "hidden":true
         },
         {
+            "label": "Indexes",
+            "icon": "timer",
+            "type": "page",
+            "page": "interview_indexes,%id%"      
+          },
+        
+        {
+            "label":"Convert Transcript",
+            "plugin":"api_single",            
+            "type":"plugin",
+            "icon":"refresh",
+            "params":{
+                "url":"/api/session_import?session={{id}}"
+            }
+        },
+        {
             "type": "plugin",
             "plugin": "preview",
             "params": {
