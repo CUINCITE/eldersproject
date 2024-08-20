@@ -14,6 +14,8 @@ RUN docker-php-ext-configure gd --with-webp \
 --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install zip
+RUN apt-get install -y libicu-dev
+RUN docker-php-ext-install intl && docker-php-ext-enable intl
 
 # COPY APP FILES
 COPY ./application /var/www/html/application
@@ -32,7 +34,7 @@ COPY ./robots.txt /var/www/html/robots.txt
 
 # UHO8 FRAMEWORK
 RUN rm -rf ./application/_uho
-RUN git clone https://git:$PAT@github.com/huncwotdigital/uho8 --branch=master ./application/_uho
+RUN git clone https://git:$PAT@github.com/huncwotdigital/uho8 --branch=main ./application/_uho
 RUN mkdir /var/www/html/reports; exit 0
 RUN mkdir /var/www/html/cache; exit 0
 RUN chown www-data /var/www/html/reports
@@ -40,7 +42,7 @@ RUN chown www-data /var/www/html/cache
 
 # SERDELIA8 CMS
 RUN rm -rf ./serdelia
-RUN git clone https://git:$PAT@github.com/huncwotdigital/serdelia8 --branch=master ./serdelia
+RUN git clone https://git:$PAT@github.com/huncwotdigital/serdelia8 --branch=main ./serdelia
 RUN mkdir /var/www/html/serdelia/reports; exit 0
 RUN chown www-data /var/www/html/serdelia/reports
 RUN ln -s ../../application/_uho ./serdelia/application/_uho
