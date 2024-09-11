@@ -307,6 +307,7 @@
 
                     @media(min-width: 1600px) {
                         --polaroid-width: #{rem(200)};
+                        --polaroid-height: #{rem(170)};
 
                         // --polaroid-height: unset;
                     }
@@ -361,7 +362,6 @@
                 }
 
                 &--horizontal {
-
                     @include breakpoint(phone) {
                         margin-bottom: vw(44, phone);
                     }
