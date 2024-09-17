@@ -22,7 +22,7 @@
 .quick-access {
     @include z-index(quick-access);
     position: fixed;
-    bottom: 100vh;
+    bottom: 100lvh;
     left: 50%;
 
 
@@ -43,6 +43,7 @@
         position: absolute;
         transform: translateX(-50%);
         white-space: nowrap;
+
         // @include font-family(sans, 400);
 
         &:focus {
