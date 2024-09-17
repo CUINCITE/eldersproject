@@ -22,8 +22,8 @@
 .quick-access {
     @include z-index(quick-access);
     position: fixed;
-    bottom: 100lvh;
     left: 50%;
+    top: 0;
 
 
 
