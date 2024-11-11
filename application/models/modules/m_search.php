@@ -4,6 +4,7 @@ use Google\Service\Contentwarehouse\GoodocBreakLabel;
 
 class model_app_pages_modules_search extends model_app_pages_modules
 {
+    var $parent,$settings;
 
     function __construct($parent,$settings)
     {

@@ -2,6 +2,7 @@
 
 class model_app_pages_modules_illustration extends model_app_pages_modules
 {
+	var $parent,$settings;
 
 	function __construct($parent,$settings)
 	{

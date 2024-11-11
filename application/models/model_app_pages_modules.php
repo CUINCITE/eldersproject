@@ -6,6 +6,7 @@ class model_app_pages_modules
 
 	public $m,$lang,$lang_add;
 	private $iModule=0;
+	var $parent;
 	private $parentVars=[];
 	private $debug_hr='---------------------------------------------------------------------------------
 	';

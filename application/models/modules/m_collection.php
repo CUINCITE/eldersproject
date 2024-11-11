@@ -2,8 +2,7 @@
 
 class model_app_pages_modules_collection extends model_app_pages_modules
 {
-    public mixed $settings;
-    public mixed $parent;
+    var $parent,$settings;
 
     function __construct($parent, $settings)
     {
