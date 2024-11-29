@@ -25,7 +25,7 @@
 
         @include breakpoint(desktop) {
             @include font-size(100, 1);
-            @include letter-spacing(-4, 100);
+            @include letter-spacing(-3, 100);
 
             padding-block: rem(12);
             margin-block: trim-font(1);
@@ -33,7 +33,7 @@
 
         @include breakpoint(tablet) {
             @include font-size(100, 0.78);
-            @include letter-spacing(-4, 100);
+            @include letter-spacing(-3, 100);
 
             margin-block: trim-font(0.78);
             padding-block: rem(20);

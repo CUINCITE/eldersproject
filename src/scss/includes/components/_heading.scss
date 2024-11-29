@@ -27,7 +27,8 @@
 
         @include breakpoint(desktop) {
             @include font-size(128, 100);
-            @include letter-spacing(-3.9, 128);
+
+            letter-spacing: -0.03em;
 
             padding-top: rem(47);
         }

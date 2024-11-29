@@ -130,7 +130,7 @@
         @include breakpoint(desktop) {
             @include font-size(59, 1);
 
-            letter-spacing: -0.04em;
+            letter-spacing: -0.03em;
             padding: rem(13) var(--grid-margin) 0 rem(50);
             position: relative;
 

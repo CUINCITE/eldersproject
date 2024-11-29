@@ -255,7 +255,8 @@
         @include breakpoint(desktop) {
             .heading--medium {
                 @include font-size(122, 100);
-                @include letter-spacing(-3, 122);
+
+                letter-spacing: -0.03em;
             }
         }
 
