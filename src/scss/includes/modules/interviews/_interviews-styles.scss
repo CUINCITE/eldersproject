@@ -144,8 +144,8 @@
 
         @include breakpoint(desktop) {
             @include font-size(50, 38);
-            @include letter-spacing(-1.25, 50);
 
+            letter-spacing: -0.03em;
             padding-top: rem(17);
             margin-left: rem(-6);
 
@@ -230,7 +230,7 @@
             .is-list-view & { display: none; }
 
             @include breakpoint(not-desktop) {
-                display: none; 
+                display: none;
             }
         }
 

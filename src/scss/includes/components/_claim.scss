@@ -79,7 +79,7 @@
 
 
     &--authors-big {
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
 
         span {
             position: relative;
@@ -149,10 +149,10 @@
 
 
         @include breakpoint(not-desktop) {
-            
+
             @include breakpoint(tablet) {
                 @include font-size(80, 0.82);
-    
+
                 margin-bottom: rem(20);
                 padding-top: rem(4);
                 max-width: 75%;
@@ -166,22 +166,22 @@
                     margin-top: rem(-15);
                     margin-right: rem(2);
                 }
-    
+
                 .svg-books {
                     margin-top: rem(-16);
                     margin-left: rem(2);
                     margin-right: rem(6);
                 }
             }
-    
+
 
 
             @include breakpoint(phone) {
                 @include font-size(56, 46);
-    
+
                 margin-bottom: rem(43);
                 padding-top: rem(4);
-    
+
                 .svg-cassette {
                     margin-top: rem(10);
                     margin-right: rem(-3);
@@ -192,7 +192,7 @@
                     margin-right: rem(2);
                     margin-left: rem(2);
                 }
-    
+
                 .svg-books {
                     margin-top: rem(-10);
                     margin-right: rem(4);
@@ -201,8 +201,8 @@
         }
 
         .svg-cassette {
-            @extend %svg-cassette-spinning !optional; 
-            
+            @extend %svg-cassette-spinning !optional;
+
             right: unset;
         }
 
