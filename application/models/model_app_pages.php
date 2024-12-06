@@ -8,6 +8,7 @@ class model_app_pages extends model_app
 	public $is404;
 	public $lightbox=[];
 	private $parent_vars=[];
+	var $dict;
 	var $isError;
 
     public bool $show_mobile_logo = false;

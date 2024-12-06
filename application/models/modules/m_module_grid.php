@@ -2,6 +2,7 @@
 
 class model_app_pages_modules_module_grid extends model_app_pages_modules
 {
+	var $parent,$settings;
 
 	function __construct($parent,$settings)
 	{

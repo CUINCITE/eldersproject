@@ -135,12 +135,12 @@
             .text {
                 padding-bottom: rem(18) !important;
 
-                @include font-size(21, 25.62);
+                // @include font-size(21, 25.62);
 
 
-                @media (min-aspect-ratio: 1450 / 820) {
-                    // font-size: 3vh;
-                }
+                // @media (min-aspect-ratio: 1450 / 820) {
+                //     // font-size: 3vh;
+                // }
             }
         }
 
