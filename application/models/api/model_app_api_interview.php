@@ -3,6 +3,9 @@
 class model_app_api_interview
 {
 
+    private $parent;
+    private $settings;
+
     function __construct($parent, $settings)
     {
         $this->parent = $parent;

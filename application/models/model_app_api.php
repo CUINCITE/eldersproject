@@ -150,7 +150,7 @@ class model_app_api extends model_app
             if ($scan)
                 foreach ($scan as $item) {
                     $path_parts = pathinfo($item);
-                    if ($item == '.' || $item == '..' || $path_parts['extension'] != 'cache') continue;
+                    if ($item == '.' || $item == '..' || !in_array($path_parts['extension'],['cache','sql'])) continue;
                     $i++;
                     unlink($dir . DIRECTORY_SEPARATOR . $item);
                 }

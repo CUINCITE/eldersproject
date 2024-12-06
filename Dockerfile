@@ -7,7 +7,7 @@ ARG REVISION
 # APACHE + PHP
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN docker-php-ext-install exif && docker-php-ext-enable exif
-RUN apt-get update && apt-get upgrade -y && apt-get install -y libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev libzip-dev zip git
+RUN apt-get update && apt-get upgrade -y && apt-get install -y cron libpng-dev libfreetype6-dev libjpeg62-turbo-dev libgd-dev libpng-dev libwebp-dev libzip-dev zip git
 RUN a2enmod rewrite
 RUN docker-php-ext-configure gd --with-webp \
 --with-freetype=/usr/include/ \
@@ -51,6 +51,18 @@ RUN chown -R www-data ./serdelia/temp
 
 RUN rm ./serdelia/.htaccess
 RUN mv ./.htaccess_serdelia /var/www/html/serdelia/.htaccess
+
+# CRON
+COPY ./cron_daily.sh /var/www/cron_daily.sh
+COPY ./cron_weekly.sh /var/www/cron_weekly.sh
+COPY ./cron /etc/cron.d/cron
+
+RUN chmod +x /var/www/cron_daily.sh
+RUN chmod +x /var/www/cron_weekly.sh
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+RUN mkdir -p /var/log/cron
+RUN sed -i 's/^exec /service cron start\n\nexec /' /usr/local/bin/apache2-foreground
 
 LABEL org.opencontainers.image.created=$DATE
 LABEL org.opencontainers.image.url="https://github.com/huncwotdigital/uhomvc8"

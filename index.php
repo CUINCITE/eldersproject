@@ -43,11 +43,10 @@ if ($index['development'])
   ini_set('error_reporting', E_ALL ^ E_NOTICE);
 } else
 {
-  //if (substr($_SERVER['REQUEST_URI'],0,5)=='/api/') define("cache",false);
-  //  else define("cache",true);
-  define("cache",false);
-  define("debug",false);
-  ini_set('display_errors', 0);
+  if (substr($_SERVER['REQUEST_URI'],0,5)=='/api/') define("cache",false);
+    else define("cache",true);
+  //define("cache",false);
+  ini_set('display_errors', 1);
   ini_set('log_errors', 1);
   $s=sprintf('%s/php-errors-%s.txt', dirname(__FILE__).'/reports', date('Ymd'));
   ini_set('error_log', $s);
@@ -67,7 +66,7 @@ function dd($var, $pre=false)
 if (cache)
 {
   require($index["root_path"].'application/_uho/_uho_cache.php');
-  $cache = new _uho_cache($index["cache_salt"],true);
+  $cache = new _uho_cache($index["cache_salt"],true,null,null,['headers'=>['Elder-Api']]);
   $cache->eraseExpired();
 }
 
@@ -121,7 +120,5 @@ if ($header=='json' || $header=='rss');
 elseif (isset($cached) && $cached) echo('<!-- cached in '.(microtime_float()-$index['time_start']).' -->');
   else echo('<!-- rendered in '.(microtime_float()-$index['time_start']).' -->');
 
-if (debug && $output['count']) 
-  echo('<!-- UCR '.$output['count'].' : '.$output['stats'].' -->');
 
 ?>
