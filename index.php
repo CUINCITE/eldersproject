@@ -66,7 +66,7 @@ function dd($var, $pre=false)
 if (cache)
 {
   require($index["root_path"].'application/_uho/_uho_cache.php');
-  $cache = new _uho_cache($index["cache_salt"],true,null,null,['headers'=>['Elder-Api']]);
+  $cache = new _uho_cache($index["cache_salt"],true,null,null,['headers'=>['elder-api']]);
   $cache->eraseExpired();
 }
 
@@ -117,7 +117,10 @@ echo($output['html']);
 // output performance timers
 
 if ($header=='json' || $header=='rss');
-elseif (isset($cached) && $cached) echo('<!-- cached in '.(microtime_float()-$index['time_start']).' -->');
+elseif (isset($cached) && $cached)
+{
+  echo('<!-- cached in '.(microtime_float()-$index['time_start']).' from '.$cache->getKey(false).' -->');
+}
   else echo('<!-- rendered in '.(microtime_float()-$index['time_start']).' -->');
 
 
